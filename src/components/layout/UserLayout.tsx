@@ -3,10 +3,16 @@ import { ReactNode, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { 
   User, LogOut, FileText, 
-  Wallet, FileChartLine 
+  Wallet, FileChartLine, Bell
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface UserLayoutProps {
   children: ReactNode;
@@ -15,6 +21,20 @@ interface UserLayoutProps {
 const UserLayout = ({ children }: UserLayoutProps) => {
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [notifications] = useState([
+    {
+      id: 1,
+      title: "New Investment Opportunity",
+      message: "A new deal is available in the Property Impact Fund",
+      time: "2 hours ago"
+    },
+    {
+      id: 2,
+      title: "Statement Available",
+      message: "Your March 2024 statement is ready to view",
+      time: "1 day ago"
+    }
+  ]);
 
   const handleLogout = () => {
     localStorage.removeItem("userRole");
@@ -95,10 +115,37 @@ const UserLayout = ({ children }: UserLayoutProps) => {
       {/* Main Content */}
       <div className="flex-1 overflow-x-hidden">
         <header className="bg-white shadow-sm p-4">
-          <div className="max-w-7xl mx-auto flex justify-between">
+          <div className="max-w-7xl mx-auto flex justify-between items-center">
             <h1 className="text-xl font-semibold text-navyblue">
               Client Dashboard
             </h1>
+            <div className="flex items-center gap-4">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="relative">
+                    <Bell className="h-5 w-5" />
+                    {notifications.length > 0 && (
+                      <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500" />
+                    )}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-[300px]">
+                  {notifications.map((notification) => (
+                    <DropdownMenuItem key={notification.id} className="p-3">
+                      <div className="flex flex-col gap-1">
+                        <div className="font-medium">{notification.title}</div>
+                        <div className="text-sm text-muted-foreground">
+                          {notification.message}
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          {notification.time}
+                        </div>
+                      </div>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </div>
         </header>
         <main className="max-w-7xl mx-auto p-4">{children}</main>
@@ -108,3 +155,4 @@ const UserLayout = ({ children }: UserLayoutProps) => {
 };
 
 export default UserLayout;
+
