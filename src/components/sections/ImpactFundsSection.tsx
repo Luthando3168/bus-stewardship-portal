@@ -18,6 +18,11 @@ const ImpactFundsSection = () => {
       name: "Energy Impact Fund",
       description: "Financing renewable energy and sustainable infrastructure projects.",
       color: "from-amber-600 to-amber-800"
+    },
+    {
+      name: "Enterprise Impact Fund",
+      description: "Empowering small and medium enterprises with capital and business development support.",
+      color: "from-purple-700 to-purple-900"
     }
   ];
 
@@ -36,7 +41,7 @@ const ImpactFundsSection = () => {
           sustainable returns while contributing to socioeconomic development.
         </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {funds.map((fund, index) => (
             <div 
               key={index} 

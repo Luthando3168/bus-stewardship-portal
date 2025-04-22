@@ -10,6 +10,15 @@ import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 
+// Public pages
+import About from "./pages/About";
+import Bus from "./pages/Bus";
+import ImpactFunds from "./pages/ImpactFunds";
+import Foundation from "./pages/Foundation";
+import Contact from "./pages/Contact";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
+
 // Admin pages
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminUsers from "./pages/admin/AdminUsers";
@@ -20,19 +29,9 @@ import AdminNotifications from "./pages/admin/AdminNotifications";
 import UserDashboard from "./pages/user/UserDashboard";
 import UserWallet from "./pages/user/UserWallet";
 import UserProfile from "./pages/user/UserProfile";
-
-// Creating placeholders for the future/remaining pages
-const About = () => <div className="min-h-screen pt-16">About Page Coming Soon</div>;
-const Bus = () => <div className="min-h-screen pt-16">BUS Program Page Coming Soon</div>;
-const ImpactFunds = () => <div className="min-h-screen pt-16">Impact Funds Page Coming Soon</div>;
-const Foundation = () => <div className="min-h-screen pt-16">Foundation Page Coming Soon</div>;
-const Contact = () => <div className="min-h-screen pt-16">Contact Page Coming Soon</div>;
-const Privacy = () => <div className="min-h-screen pt-16">Privacy Policy Coming Soon</div>;
-const Terms = () => <div className="min-h-screen pt-16">Terms of Service Coming Soon</div>;
-const UserNewDeals = () => <div className="min-h-screen pt-16">User New Deals Coming Soon</div>;
-const UserInvestments = () => <div className="min-h-screen pt-16">User Investments Coming Soon</div>;
-const UserStatements = () => <div className="min-h-screen pt-16">User Financial Statements Coming Soon</div>;
-const AdminReports = () => <div className="min-h-screen pt-16">Admin Reports Coming Soon</div>;
+import UserNewDeals from "./pages/user/UserNewDeals";
+import UserInvestments from "./pages/user/UserInvestments";
+import UserStatements from "./pages/user/UserStatements";
 
 const queryClient = new QueryClient();
 
@@ -60,7 +59,9 @@ const App = () => (
           <Route path="/admin/users" element={<ProtectedRoute allowedRole="admin"><AdminUsers /></ProtectedRoute>} />
           <Route path="/admin/deals" element={<ProtectedRoute allowedRole="admin"><AdminDeals /></ProtectedRoute>} />
           <Route path="/admin/notifications" element={<ProtectedRoute allowedRole="admin"><AdminNotifications /></ProtectedRoute>} />
-          <Route path="/admin/reports" element={<ProtectedRoute allowedRole="admin"><AdminReports /></ProtectedRoute>} />
+          <Route path="/admin/reports" element={<ProtectedRoute allowedRole="admin">
+            <div className="min-h-screen pt-16">Admin Reports Coming Soon</div>
+          </ProtectedRoute>} />
 
           {/* User routes */}
           <Route path="/user/dashboard" element={<ProtectedRoute allowedRole="user"><UserDashboard /></ProtectedRoute>} />

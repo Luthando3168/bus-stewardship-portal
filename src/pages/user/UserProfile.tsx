@@ -15,6 +15,7 @@ const UserProfile = () => {
     email: "john.d@example.com",
     phone: "+27 62 123 4567",
     idNumber: "7801015387082",
+    taxNumber: "1234567890",
     address: "123 Main Street, Sandton, Johannesburg, 2031",
     occupation: "Business Owner",
     riskProfile: "Moderate",
@@ -111,6 +112,17 @@ const UserProfile = () => {
                       />
                       <p className="text-xs text-muted-foreground">
                         ID number cannot be changed
+                      </p>
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="taxNumber">Tax Number</Label>
+                      <Input
+                        id="taxNumber"
+                        value={userData.taxNumber}
+                        disabled
+                      />
+                      <p className="text-xs text-muted-foreground">
+                        Tax number cannot be changed
                       </p>
                     </div>
                     <div className="space-y-2 md:col-span-2">
@@ -256,6 +268,15 @@ const UserProfile = () => {
                         </div>
                         <Button variant="outline">View</Button>
                       </div>
+                      <div className="p-4 flex justify-between items-center">
+                        <div>
+                          <p className="font-medium">Tax Clearance Certificate</p>
+                          <p className="text-sm text-muted-foreground">
+                            Uploaded on February 10, 2023
+                          </p>
+                        </div>
+                        <Button variant="outline">View</Button>
+                      </div>
                     </div>
                   </div>
                   
@@ -276,6 +297,24 @@ const UserProfile = () => {
                           <p className="font-medium">Risk Disclosure</p>
                           <p className="text-sm text-muted-foreground">
                             Signed on February 1, 2023
+                          </p>
+                        </div>
+                        <Button variant="outline">View</Button>
+                      </div>
+                      <div className="p-4 flex justify-between items-center">
+                        <div>
+                          <p className="font-medium">Client Engagement Letter</p>
+                          <p className="text-sm text-muted-foreground">
+                            Signed on January 25, 2023
+                          </p>
+                        </div>
+                        <Button variant="outline">View</Button>
+                      </div>
+                      <div className="p-4 flex justify-between items-center">
+                        <div>
+                          <p className="font-medium">Bank Mandate Letter</p>
+                          <p className="text-sm text-muted-foreground">
+                            Signed on January 25, 2023
                           </p>
                         </div>
                         <Button variant="outline">View</Button>
