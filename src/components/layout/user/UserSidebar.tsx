@@ -1,5 +1,6 @@
+
 import { Link, useLocation } from "react-router-dom";
-import { User, LogOut, FileText, Wallet, FileChartLine, ArrowLeft } from "lucide-react";
+import { User, LogOut, FileText, Wallet, FileChartLine, ArrowLeft, Facebook, Linkedin, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface UserSidebarProps {
