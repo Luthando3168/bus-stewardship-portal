@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from "lucide-react";
@@ -44,7 +45,7 @@ const Header = () => {
 
   return (
     <header className="bg-white shadow-md fixed top-0 left-0 w-full z-30">
-      <nav className="container mx-auto flex items-center justify-between py-2 md:py-3 px-4 md:px-6 relative">
+      <nav className="container mx-auto flex items-center justify-between py-1 md:py-2 px-4 md:px-6 relative">
         {/* Logo (left side) */}
         {logo}
 
@@ -163,7 +164,7 @@ const Header = () => {
         )}
       </nav>
       {/* Reduced height spacer */}
-      <div className="h-12 md:h-14"></div>
+      <div className="h-10 md:h-12"></div>
     </header>
   );
 };
