@@ -1,6 +1,6 @@
-
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -144,6 +144,41 @@ const Footer = () => {
                 </a>
               </p>
             </address>
+          </div>
+        </div>
+
+        <div className="mt-12 pt-8 border-t border-gray-700">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 text-sm text-gray-300">
+            <div>
+              <h5 className="font-montserrat font-semibold mb-4 text-white">Client Verification</h5>
+              <p className="font-lato mb-3">
+                We exclusively work with thoroughly vetted and verified clients. All clients must complete:
+              </p>
+              <ul className="list-disc pl-5 space-y-2">
+                <li>Comprehensive KYC (Know Your Client) verification</li>
+                <li>Client Engagement Letter signature</li>
+                <li>Risk assessment and profiling</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h5 className="font-montserrat font-semibold mb-4 text-white">Fund Management</h5>
+              <p className="font-lato mb-3">
+                All client funds are managed through the Standard Bank Third Party Fund Administration Platform, ensuring:
+              </p>
+              <ul className="list-disc pl-5 space-y-2">
+                <li>Secure and transparent fund administration</li>
+                <li>Regular reporting and monitoring</li>
+                <li>Independent oversight and compliance</li>
+              </ul>
+            </div>
+
+            <div>
+              <h5 className="font-montserrat font-semibold mb-4 text-white">Investment Disclaimer</h5>
+              <p className="font-lato">
+                All investment opportunities undergo rigorous evaluation by our partner banks to mitigate risks. Past performance is not indicative of future results. Investments may be illiquid and carry significant risks. Please read all offering documents carefully.
+              </p>
+            </div>
           </div>
         </div>
 
