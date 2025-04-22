@@ -198,9 +198,9 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-4 mt-4 md:mt-0">
                 <img 
-                  src="/lovable-uploads/4f2d889e-ba23-463a-9efe-bc8453a5e5b2.png" 
+                  src="/lovable-uploads/98d6869e-a552-4731-9f0c-6dce07a2db48.png" 
                   alt="CAW Network Member" 
-                  className="h-12 w-auto"
+                  className="h-16 w-auto"
                 />
                 <img 
                   src="/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png" 
