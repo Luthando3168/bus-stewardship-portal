@@ -27,20 +27,19 @@ const UserSidebar = ({
 
   return (
     <div
-      className={`bg-navyblue text-white transition-all duration-300 ${
-        isSidebarOpen ? "w-64" : "w-20"
-      }`}
+      className="bg-navyblue text-white h-full flex-shrink-0"
+      style={{ width: isSidebarOpen ? '100%' : '80px' }}
     >
       <div className="p-4 flex flex-col h-full">
         <div className="flex items-center justify-between mb-8">
           {isSidebarOpen ? (
-            <h2 className="text-lg font-bold">Client Portal</h2>
+            <h2 className="text-base md:text-lg font-bold">Client Portal</h2>
           ) : (
             <h2 className="text-lg font-bold">CP</h2>
           )}
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="text-white p-2 rounded hover:bg-blue-900 transition"
+            className="text-white p-2 rounded hover:bg-blue-900 transition hidden md:block"
           >
             {isSidebarOpen ? "←" : "→"}
           </button>
@@ -55,7 +54,7 @@ const UserSidebar = ({
                   className="flex items-center p-3 rounded hover:bg-blue-900 transition"
                 >
                   <item.icon className="h-5 w-5" />
-                  {isSidebarOpen && <span className="ml-3">{item.label}</span>}
+                  {isSidebarOpen && <span className="ml-3 text-sm md:text-base">{item.label}</span>}
                 </Link>
               </li>
             ))}

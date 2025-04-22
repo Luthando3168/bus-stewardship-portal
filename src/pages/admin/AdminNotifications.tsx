@@ -8,8 +8,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const AdminNotifications = () => {
+  const isMobile = useIsMobile();
   const [emailSubject, setEmailSubject] = useState("");
   const [emailBody, setEmailBody] = useState("");
   const [whatsappMessage, setWhatsappMessage] = useState("");
@@ -42,27 +44,27 @@ const AdminNotifications = () => {
 
   return (
     <AdminLayout>
-      <div className="space-y-6">
-        <h2 className="text-2xl font-bold text-navyblue">Send Notifications</h2>
+      <div className="space-y-4 md:space-y-6">
+        <h2 className="text-xl md:text-2xl font-bold text-navyblue">Send Notifications</h2>
         
-        <Tabs defaultValue="email">
-          <TabsList className="grid w-full md:w-auto md:inline-grid grid-cols-2 md:grid-cols-2">
+        <Tabs defaultValue="email" className="w-full">
+          <TabsList className={`grid w-full grid-cols-2 ${isMobile ? "text-sm" : ""}`}>
             <TabsTrigger value="email">Email</TabsTrigger>
             <TabsTrigger value="whatsapp">WhatsApp</TabsTrigger>
           </TabsList>
           
           <TabsContent value="email">
             <Card>
-              <CardHeader>
-                <CardTitle>Send Email to Clients</CardTitle>
+              <CardHeader className={isMobile ? "p-3" : ""}>
+                <CardTitle className={`${isMobile ? "text-lg" : ""}`}>Send Email to Clients</CardTitle>
               </CardHeader>
-              <CardContent>
-                <form onSubmit={handleEmailSubmit} className="space-y-4">
+              <CardContent className={isMobile ? "p-3 pt-0" : ""}>
+                <form onSubmit={handleEmailSubmit} className="space-y-3 md:space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="recipients">Recipients</Label>
                     <select 
                       id="recipients" 
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                      className="flex h-9 md:h-10 w-full rounded-md border border-input bg-background px-3 py-1 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                     >
                       <option value="all">All Clients</option>
                       <option value="property">Property Fund Clients</option>
@@ -78,6 +80,7 @@ const AdminNotifications = () => {
                       placeholder="Email subject" 
                       value={emailSubject}
                       onChange={(e) => setEmailSubject(e.target.value)}
+                      className="h-9 md:h-10"
                     />
                   </div>
                   
@@ -86,7 +89,7 @@ const AdminNotifications = () => {
                     <Textarea 
                       id="message" 
                       placeholder="Compose your message here..." 
-                      className="min-h-[200px]"
+                      className="min-h-[150px] md:min-h-[200px]"
                       value={emailBody}
                       onChange={(e) => setEmailBody(e.target.value)}
                     />
@@ -94,7 +97,11 @@ const AdminNotifications = () => {
                   
                   <div className="space-y-2">
                     <Label htmlFor="attachment">Attachment (Optional)</Label>
-                    <Input id="attachment" type="file" />
+                    <Input 
+                      id="attachment" 
+                      type="file" 
+                      className="h-9 md:h-10"
+                    />
                   </div>
                   
                   <div className="flex justify-end">
@@ -112,16 +119,16 @@ const AdminNotifications = () => {
           
           <TabsContent value="whatsapp">
             <Card>
-              <CardHeader>
-                <CardTitle>Send WhatsApp to Clients</CardTitle>
+              <CardHeader className={isMobile ? "p-3" : ""}>
+                <CardTitle className={`${isMobile ? "text-lg" : ""}`}>Send WhatsApp to Clients</CardTitle>
               </CardHeader>
-              <CardContent>
-                <form onSubmit={handleWhatsappSubmit} className="space-y-4">
+              <CardContent className={isMobile ? "p-3 pt-0" : ""}>
+                <form onSubmit={handleWhatsappSubmit} className="space-y-3 md:space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="wa-recipients">Recipients</Label>
                     <select 
                       id="wa-recipients" 
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                      className="flex h-9 md:h-10 w-full rounded-md border border-input bg-background px-3 py-1 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                     >
                       <option value="all">All Clients</option>
                       <option value="property">Property Fund Clients</option>
@@ -135,7 +142,7 @@ const AdminNotifications = () => {
                     <Textarea 
                       id="wa-message" 
                       placeholder="Compose your WhatsApp message here..." 
-                      className="min-h-[200px]"
+                      className="min-h-[150px] md:min-h-[200px]"
                       value={whatsappMessage}
                       onChange={(e) => setWhatsappMessage(e.target.value)}
                     />

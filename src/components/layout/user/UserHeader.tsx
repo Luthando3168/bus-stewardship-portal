@@ -1,5 +1,5 @@
 
-import { Bell } from "lucide-react";
+import { Bell, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -7,6 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Link } from "react-router-dom";
 
 interface Notification {
   id: number;
@@ -17,15 +18,29 @@ interface Notification {
 
 interface UserHeaderProps {
   notifications: Notification[];
+  isMobile?: boolean;
+  onMenuClick?: () => void;
 }
 
-const UserHeader = ({ notifications }: UserHeaderProps) => {
+const UserHeader = ({ notifications, isMobile = false, onMenuClick }: UserHeaderProps) => {
   return (
-    <header className="bg-white shadow-sm p-4">
+    <header className="bg-white shadow-sm p-3 md:p-4">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <h1 className="text-xl font-semibold text-navyblue">
-          Client Dashboard
-        </h1>
+        <div className="flex items-center">
+          {isMobile && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onMenuClick}
+              className="mr-2"
+            >
+              <Menu className="h-5 w-5" />
+            </Button>
+          )}
+          <h1 className="text-lg md:text-xl font-semibold text-navyblue">
+            Client Dashboard
+          </h1>
+        </div>
         <div className="flex items-center gap-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -36,20 +51,31 @@ const UserHeader = ({ notifications }: UserHeaderProps) => {
                 )}
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-[300px]">
-              {notifications.map((notification) => (
-                <DropdownMenuItem key={notification.id} className="p-3">
-                  <div className="flex flex-col gap-1">
-                    <div className="font-medium">{notification.title}</div>
-                    <div className="text-sm text-muted-foreground">
-                      {notification.message}
+            <DropdownMenuContent align="end" className="w-[300px] max-w-[95vw]">
+              {notifications.length > 0 ? (
+                notifications.map((notification) => (
+                  <DropdownMenuItem key={notification.id} className="p-3">
+                    <div className="flex flex-col gap-1">
+                      <div className="font-medium">{notification.title}</div>
+                      <div className="text-sm text-muted-foreground">
+                        {notification.message}
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        {notification.time}
+                      </div>
                     </div>
-                    <div className="text-xs text-muted-foreground">
-                      {notification.time}
-                    </div>
-                  </div>
+                  </DropdownMenuItem>
+                ))
+              ) : (
+                <DropdownMenuItem className="p-3 text-center">
+                  No new notifications
                 </DropdownMenuItem>
-              ))}
+              )}
+              <DropdownMenuItem asChild className="p-2 justify-center border-t">
+                <Link to="/user/notifications" className="w-full text-center text-sm text-blue-600">
+                  View all
+                </Link>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
