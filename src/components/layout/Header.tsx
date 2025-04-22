@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from "lucide-react";
@@ -34,8 +33,8 @@ const Header = () => {
   const logo = (
     <Link to="/" className="flex flex-col items-start group cursor-pointer">
       <span className={`font-montserrat font-bold ${isMobile ? "text-lg" : "text-xl md:text-2xl"} tracking-tight group-hover:text-gold transition-colors`}>
-        <span className="text-gold border-b-2 border-gold pb-0.5">Luthando</span>
-        <span className="text-navyblue"> Maduna</span>
+        <span className="text-gold">Luthando</span>
+        <span className="text-navyblue border-b-2 border-gold pb-0.5 ml-1"> Maduna</span>
       </span>
       <span className={`font-montserrat text-xs text-navyblue tracking-wider group-hover:text-gold transition-colors ${isMobile ? "text-[0.6rem]" : ""}`}>
         CHARTERED ACCOUNTANTS

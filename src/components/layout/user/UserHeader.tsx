@@ -41,8 +41,8 @@ const UserHeader = ({ notifications, isMobile = false, onMenuClick, userName = "
           <div className="flex items-center">
             <Link to="/" className="flex items-center group cursor-pointer">
               <span className="font-montserrat font-bold text-lg tracking-tight group-hover:text-gold transition-colors">
-                <span className="text-gold border-b-2 border-gold pb-0.5">Luthando</span>
-                <span className="text-navyblue"> Maduna</span>
+                <span className="text-gold">Luthando</span>
+                <span className="text-navyblue border-b-2 border-gold pb-0.5 ml-1"> Maduna</span>
               </span>
               <span className="font-montserrat text-xs text-navyblue tracking-wider ml-1 group-hover:text-gold transition-colors">
                 CHARTERED ACCOUNTANTS
