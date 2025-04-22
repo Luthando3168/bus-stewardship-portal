@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "sonner";
@@ -7,6 +8,7 @@ import Services from "@/pages/Services";
 import Bus from "@/pages/Bus";
 import Foundation from "@/pages/Foundation";
 import ImpactFunds from "@/pages/ImpactFunds";
+import HowWeWork from "@/pages/HowWeWork";
 import Contact from "@/pages/Contact";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
@@ -80,6 +82,7 @@ function App() {
         <Route path="/bus" element={<Bus />} />
         <Route path="/foundation" element={<Foundation />} />
         <Route path="/impact-funds" element={<ImpactFunds />} />
+        <Route path="/how-we-work" element={<HowWeWork />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
