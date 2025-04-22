@@ -16,9 +16,15 @@ const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
           <div className="col-span-1">
-            <h3 className="font-montserrat font-bold text-xl mb-4">
-              <span className="text-gold">LM</span> Chartered Accountants
-            </h3>
+            <div className="flex flex-col items-start">
+              <span className="font-montserrat font-bold text-xl md:text-2xl tracking-tight">
+                <span className="text-gold border-b-2 border-gold pb-0.5">Luthando</span>
+                <span className="text-white"> Maduna</span>
+              </span>
+              <span className="font-montserrat text-xs text-gray-300 tracking-wider mt-1">
+                CHARTERED ACCOUNTANTS
+              </span>
+            </div>
             <p className="font-lato text-sm mt-4 text-gray-300">
               Professional chartered accountants providing accounting, business 
               management and investment services through the Business Under 

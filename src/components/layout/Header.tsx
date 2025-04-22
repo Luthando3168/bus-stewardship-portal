@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, Bell, Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
@@ -37,9 +38,15 @@ const Header = () => {
         <div className="flex justify-between items-center py-3 md:py-4">
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <span className="font-montserrat font-bold text-lg md:text-2xl text-navyblue">
-                <span className="text-gold">LM</span> Chartered Accountants
-              </span>
+              <div className="flex flex-col items-start">
+                <span className="font-montserrat font-bold text-2xl md:text-3xl text-navyblue tracking-tight">
+                  <span className="text-gold border-b-2 border-gold pb-0.5">Luthando</span>
+                  <span className="text-deepblue"> Maduna</span>
+                </span>
+                <span className="font-montserrat text-xs md:text-sm text-charcoal tracking-wider mt-1">
+                  CHARTERED ACCOUNTANTS
+                </span>
+              </div>
             </Link>
           </div>
 
