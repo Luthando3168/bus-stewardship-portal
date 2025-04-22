@@ -4,8 +4,10 @@ import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Foundation = () => {
+  const isMobile = useIsMobile();
   const programs = [
     {
       id: "youth",
@@ -137,13 +139,33 @@ const Foundation = () => {
               <h3 className="text-2xl font-bold text-navyblue mb-6">Key Programs</h3>
               
               <Tabs defaultValue="youth" className="space-y-6">
-                <TabsList className="grid w-full grid-cols-1 md:grid-cols-5">
-                  {programs.map(program => (
-                    <TabsTrigger key={program.id} value={program.id}>
-                      {program.title}
-                    </TabsTrigger>
-                  ))}
-                </TabsList>
+                {isMobile ? (
+                  <div className="mb-6">
+                    <select 
+                      className="w-full p-2 border border-gray-300 rounded bg-white text-charcoal"
+                      onChange={(e) => {
+                        // Find the tab trigger with this value and click it
+                        const tabTrigger = document.querySelector(`[data-state][value="${e.target.value}"]`) as HTMLButtonElement;
+                        if (tabTrigger) tabTrigger.click();
+                      }}
+                      defaultValue="youth"
+                    >
+                      {programs.map(program => (
+                        <option key={program.id} value={program.id}>
+                          {program.title}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                ) : (
+                  <TabsList className="grid w-full grid-cols-1 md:grid-cols-5">
+                    {programs.map(program => (
+                      <TabsTrigger key={program.id} value={program.id}>
+                        {program.title}
+                      </TabsTrigger>
+                    ))}
+                  </TabsList>
+                )}
 
                 {programs.map(program => (
                   <TabsContent key={program.id} value={program.id}>
