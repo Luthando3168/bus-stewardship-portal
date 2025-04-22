@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -287,7 +286,6 @@ const ImpactFunds = () => {
               </CardContent>
             </Card>
 
-            {/* Feature Investment Products Section */}
             <div className="mb-12">
               <h2 className="text-2xl font-bold text-navyblue mb-6 text-center">Featured Investment Products</h2>
               <div className="grid grid-cols-1 gap-8">
@@ -299,7 +297,7 @@ const ImpactFunds = () => {
                       </h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {fund.deals.map((deal) => (
-                          <Card key={deal.id} id={deal.id} className="overflow-hidden">
+                          <Card key={deal.id} id={deal.id} className="overflow-hidden flex flex-col">
                             <div className="aspect-video overflow-hidden">
                               <img 
                                 src={deal.image} 
@@ -311,33 +309,25 @@ const ImpactFunds = () => {
                               <CardTitle>{deal.title}</CardTitle>
                               <CardDescription>{deal.description}</CardDescription>
                             </CardHeader>
-                            <CardContent className="space-y-4">
-                              <div>
-                                <div className="flex justify-between text-sm mb-1">
-                                  <span className="font-medium">{deal.raisedAmount} raised</span>
-                                  <span className="text-gray-500">Goal: {deal.targetAmount}</span>
-                                </div>
-                                <Progress value={deal.currentProgress} className="h-2" />
-                                <div className="flex justify-between mt-1">
-                                  <span className="text-sm text-gray-600">{deal.currentProgress}% funded</span>
-                                </div>
-                              </div>
-                              
-                              <div className="grid grid-cols-3 gap-4 mt-2">
-                                <div className="p-3 bg-lightgray rounded-lg">
-                                  <h5 className="text-xs text-muted-foreground">Min Investment</h5>
-                                  <p className="font-bold">{deal.minInvestment}</p>
-                                </div>
-                                <div className="p-3 bg-lightgray rounded-lg">
-                                  <h5 className="text-xs text-muted-foreground">Target Return</h5>
-                                  <p className="font-bold">{deal.targetReturn}</p>
-                                </div>
-                                <div className="p-3 bg-lightgray rounded-lg">
-                                  <h5 className="text-xs text-muted-foreground">Term</h5>
-                                  <p className="font-bold">{deal.term}</p>
-                                </div>
-                              </div>
-                              
+                            <CardContent className="space-y-4 flex flex-col flex-grow">
+                              <a
+                                href={
+                                  deal.id === "ekasi-mix"
+                                    ? "https://kasi-impact-hub.lovable.app/"
+                                    : deal.id === "lifestyle-complex"
+                                    ? "https://franchise-flow-invest.lovable.app/"
+                                    : deal.id === "agrourban-oasis"
+                                    ? "https://preview--agro-urban-oasis-invest.lovable.app/"
+                                    : deal.id === "my-franchise"
+                                    ? "https://franchise-flow-invest.lovable.app/"
+                                    : "#"
+                                }
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1 text-gold hover:text-navyblue font-medium underline text-sm"
+                              >
+                                Visit Website
+                              </a>
                               <div>
                                 <h4 className="font-semibold mb-2 text-sm">Investment Highlights:</h4>
                                 <ul className="list-disc pl-5 space-y-1 text-sm">
@@ -364,7 +354,6 @@ const ImpactFunds = () => {
               </div>
             </div>
 
-            {/* Mobile: accordion, Desktop: tabs */}
             {isMobile ? (
               <div className="mb-12">
                 <Accordion type="single" collapsible className="w-full">
