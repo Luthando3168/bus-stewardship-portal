@@ -1,10 +1,13 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 import {
   Accordion,
   AccordionItem,
@@ -13,6 +16,7 @@ import {
 } from "@/components/ui/accordion";
 
 const ImpactFunds = () => {
+  const [selectedDealId, setSelectedDealId] = useState<string | null>(null);
   const isMobile = useIsMobile();
 
   const funds = [
@@ -38,6 +42,26 @@ const ImpactFunds = () => {
       ],
       targetReturn: "8-12% p.a.",
       minimumInvestment: "R 5,000",
+      deals: [
+        {
+          id: "agrourban-oasis",
+          title: "AgroUrban Oasis",
+          description: "Urban farming initiative combining agriculture with residential spaces. Invest in the entire farm operation or specific trading companies within the development.",
+          minInvestment: "R 5,000",
+          targetReturn: "10.5%",
+          term: "5 years",
+          currentProgress: 75,
+          targetAmount: "R 4,000,000",
+          raisedAmount: "R 3,000,000",
+          image: "/lovable-uploads/98d6869e-a552-4731-9f0c-6dce07a2db48.png",
+          highlights: [
+            "Urban farming with eco-friendly design",
+            "Multiple revenue streams from various produce",
+            "Training and employment opportunities for local youth",
+            "Direct supply to Lifestyle Fruits and Veg stores"
+          ]
+        }
+      ]
     },
     {
       id: "property",
@@ -61,6 +85,26 @@ const ImpactFunds = () => {
       ],
       targetReturn: "9-14% p.a.",
       minimumInvestment: "R 5,000",
+      deals: [
+        {
+          id: "ekasi-mix",
+          title: "eKasi Mix Use",
+          description: "Modern residential development in township areas offering affordable housing with commercial spaces. Invest by owning a unit outright or co-own with other clients.",
+          minInvestment: "R 5,000",
+          targetReturn: "12.5%",
+          term: "7 years",
+          currentProgress: 68,
+          targetAmount: "R 5,000,000",
+          raisedAmount: "R 3,400,000",
+          image: "/lovable-uploads/4f2d889e-ba23-463a-9efe-bc8453a5e5b2.png",
+          highlights: [
+            "Prime location in growing township area",
+            "Option for full ownership or co-ownership",
+            "Built-in commercial spaces for rental income",
+            "Flexible payment options through Standard Bank accounts"
+          ]
+        }
+      ]
     },
     {
       id: "energy",
@@ -84,6 +128,7 @@ const ImpactFunds = () => {
       ],
       targetReturn: "10-15% p.a.",
       minimumInvestment: "R 5,000",
+      deals: []
     },
     {
       id: "enterprise",
@@ -107,6 +152,44 @@ const ImpactFunds = () => {
       ],
       targetReturn: "12-18% p.a.",
       minimumInvestment: "R 5,000",
+      deals: [
+        {
+          id: "lifestyle-complex",
+          title: "Lifestyle Mini Complex",
+          description: "Commercial complex with three trading companies: Food Corner, Lifestyle Meat Co, and Lifestyle Fruits & Veg, sourcing produce from our Agri Impact Fund farms.",
+          minInvestment: "R 5,000",
+          targetReturn: "14.5%",
+          term: "6 years",
+          currentProgress: 42,
+          targetAmount: "R 3,500,000",
+          raisedAmount: "R 1,470,000",
+          image: "/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png",
+          highlights: [
+            "Three established businesses in one investment",
+            "Strong community presence and customer base",
+            "Vertically integrated supply chain with our Agri farms",
+            "Multiple revenue streams for stability"
+          ]
+        },
+        {
+          id: "my-franchise",
+          title: "MyFranchise",
+          description: "Investment opportunity across multiple franchise businesses. Select from various franchise options and build a diversified investment portfolio.",
+          minInvestment: "R 5,000",
+          targetReturn: "16.2%",
+          term: "5 years",
+          currentProgress: 32,
+          targetAmount: "R 7,500,000",
+          raisedAmount: "R 2,400,000",
+          image: "/lovable-uploads/aa792d14-7473-4673-89cf-c3f6e1d15711.png",
+          highlights: [
+            "Access to established franchise opportunities",
+            "Lower risk through diversification across multiple brands",
+            "Professional management of franchise operations",
+            "Flexible investment options to match risk appetite"
+          ]
+        }
+      ]
     },
   ];
 
@@ -137,6 +220,22 @@ const ImpactFunds = () => {
         "Regular reporting on both financial returns and social/environmental impact metrics.",
     },
   ];
+  
+  const handleInvestClick = (dealId: string) => {
+    // Check if user is logged in
+    const isLoggedIn = localStorage.getItem("token");
+    if (!isLoggedIn) {
+      toast.error("Please register or login to invest in this opportunity");
+      // Redirect to register page after a short delay
+      setTimeout(() => {
+        window.location.href = "/register";
+      }, 2000);
+      return;
+    }
+    
+    // If logged in, redirect to user dashboard
+    window.location.href = `/user/new-deals`;
+  };
 
   return (
     <Layout>
@@ -187,6 +286,83 @@ const ImpactFunds = () => {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Feature Investment Products Section */}
+            <div className="mb-12">
+              <h2 className="text-2xl font-bold text-navyblue mb-6 text-center">Featured Investment Products</h2>
+              <div className="grid grid-cols-1 gap-8">
+                {funds.map((fund) => (
+                  fund.deals.length > 0 && (
+                    <div key={fund.id} className="space-y-6">
+                      <h3 className={`text-xl font-bold text-white px-4 py-2 rounded-md ${fund.headerBg.replace('bg-gradient-to-r', '')}`}>
+                        {fund.fundTitle}
+                      </h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {fund.deals.map((deal) => (
+                          <Card key={deal.id} id={deal.id} className="overflow-hidden">
+                            <div className="aspect-video overflow-hidden">
+                              <img 
+                                src={deal.image} 
+                                alt={deal.title} 
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+                            <CardHeader>
+                              <CardTitle>{deal.title}</CardTitle>
+                              <CardDescription>{deal.description}</CardDescription>
+                            </CardHeader>
+                            <CardContent className="space-y-4">
+                              <div>
+                                <div className="flex justify-between text-sm mb-1">
+                                  <span className="font-medium">{deal.raisedAmount} raised</span>
+                                  <span className="text-gray-500">Goal: {deal.targetAmount}</span>
+                                </div>
+                                <Progress value={deal.currentProgress} className="h-2" />
+                                <div className="flex justify-between mt-1">
+                                  <span className="text-sm text-gray-600">{deal.currentProgress}% funded</span>
+                                </div>
+                              </div>
+                              
+                              <div className="grid grid-cols-3 gap-4 mt-2">
+                                <div className="p-3 bg-lightgray rounded-lg">
+                                  <h5 className="text-xs text-muted-foreground">Min Investment</h5>
+                                  <p className="font-bold">{deal.minInvestment}</p>
+                                </div>
+                                <div className="p-3 bg-lightgray rounded-lg">
+                                  <h5 className="text-xs text-muted-foreground">Target Return</h5>
+                                  <p className="font-bold">{deal.targetReturn}</p>
+                                </div>
+                                <div className="p-3 bg-lightgray rounded-lg">
+                                  <h5 className="text-xs text-muted-foreground">Term</h5>
+                                  <p className="font-bold">{deal.term}</p>
+                                </div>
+                              </div>
+                              
+                              <div>
+                                <h4 className="font-semibold mb-2 text-sm">Investment Highlights:</h4>
+                                <ul className="list-disc pl-5 space-y-1 text-sm">
+                                  {deal.highlights.map((highlight, idx) => (
+                                    <li key={idx}>{highlight}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </CardContent>
+                            <CardFooter>
+                              <Button 
+                                className="w-full bg-gold hover:bg-lightgold"
+                                onClick={() => handleInvestClick(deal.id)}
+                              >
+                                Invest Now
+                              </Button>
+                            </CardFooter>
+                          </Card>
+                        ))}
+                      </div>
+                    </div>
+                  )
+                ))}
+              </div>
+            </div>
 
             {/* Mobile: accordion, Desktop: tabs */}
             {isMobile ? (
