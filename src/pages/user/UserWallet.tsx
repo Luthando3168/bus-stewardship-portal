@@ -1,10 +1,11 @@
 
+import React from 'react';
 import UserLayout from "@/components/layout/UserLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Bank, CreditCard } from "lucide-react";
+import { DollarSign, CreditCard } from "lucide-react";
 
 const UserWallet = () => {
   return (
@@ -19,7 +20,7 @@ const UserWallet = () => {
                 <CardTitle>Standard Bank Account</CardTitle>
                 <CardDescription>Investment Account</CardDescription>
               </div>
-              <Bank className="h-6 w-6 text-gold" />
+              <DollarSign className="h-6 w-6 text-gold" />
             </CardHeader>
             <CardContent>
               <div className="space-y-2">

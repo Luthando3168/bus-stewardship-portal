@@ -1,8 +1,9 @@
 
+import React from 'react';
 import AdminLayout from "@/components/layout/AdminLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { UsersIcon, FileChartLine, Bank } from "lucide-react";
+import { UsersIcon, FileChartLine, DollarSign } from "lucide-react";
 
 const AdminDashboard = () => {
   return (
@@ -38,7 +39,7 @@ const AdminDashboard = () => {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Total AUM</CardTitle>
-              <Bank className="h-4 w-4 text-muted-foreground" />
+              <DollarSign className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">R 14.2M</div>
