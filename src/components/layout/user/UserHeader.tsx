@@ -1,4 +1,3 @@
-
 import { Bell, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -39,14 +38,16 @@ const UserHeader = ({ notifications, isMobile = false, onMenuClick, userName = "
             </Button>
           )}
           <div className="flex items-center">
-            <Link to="/" className="flex items-center group cursor-pointer">
-              <span className="font-montserrat font-bold text-lg tracking-tight group-hover:text-gold transition-colors">
-                <span className="text-gold">Luthando</span>
-                <span className="text-navyblue border-b-2 border-gold pb-0.5 ml-1"> Maduna</span>
-              </span>
-              <span className="font-montserrat text-xs text-navyblue tracking-wider ml-1 group-hover:text-gold transition-colors">
-                CHARTERED ACCOUNTANTS
-              </span>
+            <Link to="/" className="flex items-start group cursor-pointer">
+              <div className="flex flex-col">
+                <span className="font-montserrat font-bold text-lg tracking-tight">
+                  <span className="text-gold">Luthando</span>
+                  <span className="text-navyblue border-b-2 border-gold pb-0.5 ml-1"> Maduna</span>
+                </span>
+                <span className="font-montserrat text-xs text-navyblue tracking-wider mt-1">
+                  CHARTERED ACCOUNTANTS
+                </span>
+              </div>
             </Link>
           </div>
         </div>
