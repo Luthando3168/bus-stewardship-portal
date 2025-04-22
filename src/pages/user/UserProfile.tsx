@@ -1,4 +1,3 @@
-
 import UserLayout from "@/components/layout/UserLayout";
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -7,18 +6,71 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
+import FundAccordion from "@/components/FundAccordion";
+import { Star } from "lucide-react";
+
+const FUNDS = [
+  {
+    name: "Sankofa Property Impact Fund",
+    description: "A diversified fund investing in sustainable property projects across South Africa.",
+    currency: "ZAR",
+    minInvestment: "R 50,000",
+    term: "5 Years",
+    risk: "Moderate",
+  },
+  {
+    name: "Sankofa Agri Impact Fund",
+    description: "Focus on transforming African agriculture through impact-driven investments.",
+    currency: "ZAR",
+    minInvestment: "R 30,000",
+    term: "3 Years",
+    risk: "Moderate",
+  },
+  {
+    name: "Sankofa Private Credit Impact Fund",
+    description: "Africa-focused credit fund delivering blended value through innovative lending.",
+    currency: "USD",
+    minInvestment: "$10,000",
+    term: "2-5 Years",
+    risk: "Medium to High",
+  },
+  {
+    name: "Sankofa Energy Impact Fund",
+    description: "Direct investment into renewable and alternative energy projects.",
+    currency: "ZAR",
+    minInvestment: "R 75,000",
+    term: "4 Years",
+    risk: "High",
+  },
+];
+
+const RedStar = () => <Star size={14} className="text-red-500 inline ml-1" />;
+
+const REQUIRED_FIELDS = [
+  { key: "fullName", label: "Full Name" },
+  { key: "email", label: "Email Address" },
+  { key: "phone", label: "Phone Number" },
+  { key: "idNumber", label: "ID Number" },
+  { key: "taxNumber", label: "Tax Number" },
+  { key: "address", label: "Physical Address" },
+  { key: "occupation", label: "Occupation" },
+  { key: "riskProfile", label: "Risk Profile" },
+  { key: "sourceOfFunds", label: "Source of Funds" },
+  { key: "dob", label: "Date of Birth" }
+];
 
 const UserProfile = () => {
-  // Mock user data
   const [userData, setUserData] = useState({
     fullName: "John Dube",
-    email: "john.d@example.com",
+    email: "",
     phone: "+27 62 123 4567",
     idNumber: "7801015387082",
-    taxNumber: "1234567890",
+    taxNumber: "",
     address: "123 Main Street, Sandton, Johannesburg, 2031",
-    occupation: "Business Owner",
+    occupation: "",
     riskProfile: "Moderate",
+    sourceOfFunds: "",
+    dob: "",
     joinDate: "January 15, 2023"
   });
 
@@ -30,7 +82,6 @@ const UserProfile = () => {
 
   const handleProfileUpdate = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would send to a backend
     toast.success("Profile information updated successfully");
   };
 
@@ -44,124 +95,80 @@ const UserProfile = () => {
       toast.error("Password must be at least 8 characters");
       return;
     }
-    // In a real app, this would send to a backend
     toast.success("Password updated successfully");
     setPassword({ current: "", new: "", confirm: "" });
   };
 
+  const isMissing = (field: string) => !userData[field as keyof typeof userData];
+
   return (
     <UserLayout>
       <div className="space-y-6">
-        <h2 className="text-2xl font-bold text-navyblue">My Profile</h2>
-
+        <h2 className="text-2xl font-bold text-navyblue flex items-center">
+          My Profile
+          {REQUIRED_FIELDS.some(f => isMissing(f.key)) && <RedStar />}
+        </h2>
         <Tabs defaultValue="personal">
-          <TabsList className="grid w-full md:w-auto md:inline-grid grid-cols-2 md:grid-cols-3">
+          <TabsList className="grid w-full md:w-auto md:inline-grid grid-cols-3 md:grid-cols-3">
             <TabsTrigger value="personal">Personal Information</TabsTrigger>
             <TabsTrigger value="security">Security</TabsTrigger>
-            <TabsTrigger value="documents">Documents</TabsTrigger>
+            <TabsTrigger value="investment">Investment Profile</TabsTrigger>
           </TabsList>
-
           <TabsContent value="personal">
             <Card>
               <CardHeader>
                 <CardTitle>Personal Information</CardTitle>
                 <CardDescription>
-                  Your personal details as provided during onboarding
+                  Please complete all fields. <RedStar /> indicates required or missing info.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleProfileUpdate} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {REQUIRED_FIELDS.filter((f) => !["sourceOfFunds","dob"].includes(f.key)).map(({ key, label }) => (
+                      <div className="space-y-2" key={key}>
+                        <Label htmlFor={key}>
+                          {label} {isMissing(key) && <RedStar />}
+                        </Label>
+                        <Input
+                          id={key}
+                          value={userData[key as keyof typeof userData]}
+                          onChange={(e) =>
+                            setUserData({ ...userData, [key]: e.target.value })
+                          }
+                          disabled={["idNumber", "taxNumber"].includes(key)}
+                        />
+                        {["idNumber", "taxNumber"].includes(key) && (
+                          <p className="text-xs text-muted-foreground">{label} cannot be changed</p>
+                        )}
+                      </div>
+                    ))}
                     <div className="space-y-2">
-                      <Label htmlFor="fullName">Full Name</Label>
+                      <Label htmlFor="sourceOfFunds">
+                        Source of Funds {isMissing("sourceOfFunds") && <RedStar />}
+                      </Label>
                       <Input
-                        id="fullName"
-                        value={userData.fullName}
+                        id="sourceOfFunds"
+                        value={userData.sourceOfFunds}
                         onChange={(e) =>
-                          setUserData({ ...userData, fullName: e.target.value })
+                          setUserData({ ...userData, sourceOfFunds: e.target.value })
                         }
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email Address</Label>
+                      <Label htmlFor="dob">
+                        Date of Birth {isMissing("dob") && <RedStar />}
+                      </Label>
                       <Input
-                        id="email"
-                        type="email"
-                        value={userData.email}
+                        id="dob"
+                        type="date"
+                        value={userData.dob}
                         onChange={(e) =>
-                          setUserData({ ...userData, email: e.target.value })
+                          setUserData({ ...userData, dob: e.target.value })
                         }
                       />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Phone Number</Label>
-                      <Input
-                        id="phone"
-                        value={userData.phone}
-                        onChange={(e) =>
-                          setUserData({ ...userData, phone: e.target.value })
-                        }
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="idNumber">ID Number</Label>
-                      <Input
-                        id="idNumber"
-                        value={userData.idNumber}
-                        disabled
-                      />
-                      <p className="text-xs text-muted-foreground">
-                        ID number cannot be changed
-                      </p>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="taxNumber">Tax Number</Label>
-                      <Input
-                        id="taxNumber"
-                        value={userData.taxNumber}
-                        disabled
-                      />
-                      <p className="text-xs text-muted-foreground">
-                        Tax number cannot be changed
-                      </p>
-                    </div>
-                    <div className="space-y-2 md:col-span-2">
-                      <Label htmlFor="address">Physical Address</Label>
-                      <Input
-                        id="address"
-                        value={userData.address}
-                        onChange={(e) =>
-                          setUserData({ ...userData, address: e.target.value })
-                        }
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="occupation">Occupation</Label>
-                      <Input
-                        id="occupation"
-                        value={userData.occupation}
-                        onChange={(e) =>
-                          setUserData({ ...userData, occupation: e.target.value })
-                        }
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="riskProfile">Risk Profile</Label>
-                      <select
-                        id="riskProfile"
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                        value={userData.riskProfile}
-                        onChange={(e) =>
-                          setUserData({ ...userData, riskProfile: e.target.value })
-                        }
-                      >
-                        <option value="Conservative">Conservative</option>
-                        <option value="Moderate">Moderate</option>
-                        <option value="Aggressive">Aggressive</option>
-                      </select>
                     </div>
                   </div>
-                  
                   <div className="flex justify-end">
                     <Button type="submit" className="bg-gold hover:bg-lightgold text-white">
                       Update Profile
@@ -171,7 +178,6 @@ const UserProfile = () => {
               </CardContent>
             </Card>
           </TabsContent>
-
           <TabsContent value="security">
             <Card>
               <CardHeader>
@@ -227,101 +233,16 @@ const UserProfile = () => {
               </CardContent>
             </Card>
           </TabsContent>
-
-          <TabsContent value="documents">
+          <TabsContent value="investment">
             <Card>
               <CardHeader>
-                <CardTitle>Your Documents</CardTitle>
+                <CardTitle>Investment Fund Options</CardTitle>
                 <CardDescription>
-                  Important documents related to your account
+                  View details about available investment funds below. Click a fund to expand/collapse.
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="space-y-6">
-                  <div className="space-y-4">
-                    <h3 className="font-medium">KYC Documents</h3>
-                    <div className="rounded-md border divide-y">
-                      <div className="p-4 flex justify-between items-center">
-                        <div>
-                          <p className="font-medium">ID Document</p>
-                          <p className="text-sm text-muted-foreground">
-                            Uploaded on January 15, 2023
-                          </p>
-                        </div>
-                        <Button variant="outline">View</Button>
-                      </div>
-                      <div className="p-4 flex justify-between items-center">
-                        <div>
-                          <p className="font-medium">Proof of Address</p>
-                          <p className="text-sm text-muted-foreground">
-                            Uploaded on January 15, 2023
-                          </p>
-                        </div>
-                        <Button variant="outline">View</Button>
-                      </div>
-                      <div className="p-4 flex justify-between items-center">
-                        <div>
-                          <p className="font-medium">Bank Statement</p>
-                          <p className="text-sm text-muted-foreground">
-                            Uploaded on January 15, 2023
-                          </p>
-                        </div>
-                        <Button variant="outline">View</Button>
-                      </div>
-                      <div className="p-4 flex justify-between items-center">
-                        <div>
-                          <p className="font-medium">Tax Clearance Certificate</p>
-                          <p className="text-sm text-muted-foreground">
-                            Uploaded on February 10, 2023
-                          </p>
-                        </div>
-                        <Button variant="outline">View</Button>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-4">
-                    <h3 className="font-medium">Investment Documents</h3>
-                    <div className="rounded-md border divide-y">
-                      <div className="p-4 flex justify-between items-center">
-                        <div>
-                          <p className="font-medium">Investment Agreement</p>
-                          <p className="text-sm text-muted-foreground">
-                            Signed on February 1, 2023
-                          </p>
-                        </div>
-                        <Button variant="outline">View</Button>
-                      </div>
-                      <div className="p-4 flex justify-between items-center">
-                        <div>
-                          <p className="font-medium">Risk Disclosure</p>
-                          <p className="text-sm text-muted-foreground">
-                            Signed on February 1, 2023
-                          </p>
-                        </div>
-                        <Button variant="outline">View</Button>
-                      </div>
-                      <div className="p-4 flex justify-between items-center">
-                        <div>
-                          <p className="font-medium">Client Engagement Letter</p>
-                          <p className="text-sm text-muted-foreground">
-                            Signed on January 25, 2023
-                          </p>
-                        </div>
-                        <Button variant="outline">View</Button>
-                      </div>
-                      <div className="p-4 flex justify-between items-center">
-                        <div>
-                          <p className="font-medium">Bank Mandate Letter</p>
-                          <p className="text-sm text-muted-foreground">
-                            Signed on January 25, 2023
-                          </p>
-                        </div>
-                        <Button variant="outline">View</Button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <FundAccordion funds={FUNDS} />
               </CardContent>
             </Card>
           </TabsContent>

@@ -1,4 +1,3 @@
-
 import AdminLayout from "@/components/layout/AdminLayout";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -6,8 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { UserPlus } from "lucide-react";
+import { Star } from "lucide-react";
 
-// Mock user data
 const mockUsers = [
   { id: 1, name: "John Dube", email: "john.d@example.com", role: "Client", investmentCount: 3, lastLogin: "2023-04-21" },
   { id: 2, name: "Sarah Nkosi", email: "sarah.n@example.com", role: "Client", investmentCount: 5, lastLogin: "2023-04-20" },
@@ -17,11 +16,37 @@ const mockUsers = [
   { id: 6, name: "Maria Sithole", email: "maria.s@example.com", role: "Client", investmentCount: 4, lastLogin: "2023-04-16" },
 ];
 
+const REQUIRED_FIELDS = [
+  { key: "name", label: "Full Name" },
+  { key: "email", label: "Email Address" },
+  { key: "idNumber", label: "ID Number" },
+  { key: "taxNumber", label: "Tax Number" },
+  { key: "address", label: "Physical Address" },
+  { key: "occupation", label: "Occupation" },
+  { key: "riskProfile", label: "Risk Profile" },
+  { key: "sourceOfFunds", label: "Source of Funds" },
+  { key: "dob", label: "Date of Birth" }
+];
+
+const detailedUsers = mockUsers.map((user, idx) => ({
+  ...user,
+  idNumber: idx === 3 ? "" : "7801015387082",
+  taxNumber: idx % 2 === 0 ? "1234567890" : "",
+  address: idx % 2 === 1 ? "123 Main Street" : "",
+  occupation: "",
+  riskProfile: idx % 3 === 0 ? "" : "Moderate",
+  sourceOfFunds: "",
+  dob: ""
+}));
+
+const RedStar = () => <Star size={13} className="text-red-500 inline ml-1 align-text-bottom" />;
+
+const isMissing = (user: any, key: string) => !user[key];
+
 const AdminUsers = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  
-  // Filter users based on search term
-  const filteredUsers = mockUsers.filter(
+
+  const filteredUsers = detailedUsers.filter(
     (user) =>
       user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.email.toLowerCase().includes(searchTerm.toLowerCase())
@@ -37,7 +62,6 @@ const AdminUsers = () => {
             <span>Add New User</span>
           </Button>
         </div>
-
         <Card>
           <CardHeader>
             <CardTitle>All Users</CardTitle>
@@ -51,14 +75,19 @@ const AdminUsers = () => {
                 className="max-w-sm"
               />
             </div>
-            
             <div className="rounded-md border">
               <Table>
                 <TableHeader>
                   <TableRow>
                     <TableHead>Name</TableHead>
                     <TableHead>Email</TableHead>
-                    <TableHead>Role</TableHead>
+                    <TableHead>ID Number</TableHead>
+                    <TableHead>Tax Number</TableHead>
+                    <TableHead>Address</TableHead>
+                    <TableHead>Occupation</TableHead>
+                    <TableHead>Risk</TableHead>
+                    <TableHead>Source of Funds</TableHead>
+                    <TableHead>Date of Birth</TableHead>
                     <TableHead>Investments</TableHead>
                     <TableHead>Last Login</TableHead>
                     <TableHead>Actions</TableHead>
@@ -67,9 +96,12 @@ const AdminUsers = () => {
                 <TableBody>
                   {filteredUsers.map((user) => (
                     <TableRow key={user.id}>
-                      <TableCell className="font-medium">{user.name}</TableCell>
-                      <TableCell>{user.email}</TableCell>
-                      <TableCell>{user.role}</TableCell>
+                      {REQUIRED_FIELDS.map(({ key, label }) => (
+                        <TableCell key={key}>
+                          {user[key] || <span className="text-gray-400">-</span>}
+                          {isMissing(user, key) && <RedStar />}
+                        </TableCell>
+                      ))}
                       <TableCell>{user.investmentCount}</TableCell>
                       <TableCell>{user.lastLogin}</TableCell>
                       <TableCell>
