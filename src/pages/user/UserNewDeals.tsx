@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import UserLayout from "@/components/layout/UserLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
@@ -24,7 +23,7 @@ const UserNewDeals = () => {
       title: "Organic Farm Expansion",
       fund: "Agri Impact Fund",
       fundId: "agri",
-      minInvestment: "R 50,000",
+      minInvestment: "R 5,000",
       targetReturn: "8.5%",
       term: "5 years",
       closingDate: "May 30, 2025",
@@ -43,7 +42,7 @@ const UserNewDeals = () => {
       title: "Mixed-Use Development",
       fund: "Property Impact Fund",
       fundId: "property",
-      minInvestment: "R 100,000",
+      minInvestment: "R 5,000",
       targetReturn: "11.2%",
       term: "7 years",
       closingDate: "June 15, 2025",
@@ -62,7 +61,7 @@ const UserNewDeals = () => {
       title: "Solar Installation Network",
       fund: "Energy Impact Fund",
       fundId: "energy",
-      minInvestment: "R 75,000",
+      minInvestment: "R 5,000",
       targetReturn: "12.8%",
       term: "6 years",
       closingDate: "May 15, 2025",
@@ -81,7 +80,7 @@ const UserNewDeals = () => {
       title: "Tech Startup Accelerator",
       fund: "Enterprise Impact Fund",
       fundId: "enterprise",
-      minInvestment: "R 50,000",
+      minInvestment: "R 5,000",
       targetReturn: "15.5%",
       term: "5 years",
       closingDate: "July 1, 2025",
@@ -100,7 +99,7 @@ const UserNewDeals = () => {
       title: "Affordable Housing Project",
       fund: "Property Impact Fund",
       fundId: "property",
-      minInvestment: "R 100,000",
+      minInvestment: "R 5,000",
       targetReturn: "9.8%",
       term: "8 years",
       closingDate: "June 30, 2025",
@@ -119,7 +118,7 @@ const UserNewDeals = () => {
       title: "Wind Farm Project",
       fund: "Energy Impact Fund",
       fundId: "energy",
-      minInvestment: "R 100,000",
+      minInvestment: "R 5,000",
       targetReturn: "13.5%",
       term: "10 years",
       closingDate: "August 15, 2025",

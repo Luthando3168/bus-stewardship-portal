@@ -55,7 +55,6 @@ const ImpactFunds = () => {
               </p>
             </div>
 
-            {/* How Our Funds Work */}
             <Card className="mb-12">
               <CardHeader>
                 <CardTitle className="text-xl font-bold text-center">How Our Impact Funds Work</CardTitle>
@@ -82,7 +81,6 @@ const ImpactFunds = () => {
               </CardContent>
             </Card>
 
-            {/* Fund Details */}
             <Tabs defaultValue="agri" className="mb-12">
               {isMobile && (
                 <p className="text-sm text-muted-foreground mb-4 text-center">
@@ -136,7 +134,7 @@ const ImpactFunds = () => {
                       </div>
                       <div className="p-4 bg-lightgray rounded-lg">
                         <h5 className="font-medium text-sm text-muted-foreground">Minimum Investment</h5>
-                        <p className="text-xl font-bold text-navyblue">R 50,000</p>
+                        <p className="text-xl font-bold text-navyblue">R 5,000</p>
                       </div>
                     </div>
                   </CardContent>
@@ -182,7 +180,7 @@ const ImpactFunds = () => {
                       </div>
                       <div className="p-4 bg-lightgray rounded-lg">
                         <h5 className="font-medium text-sm text-muted-foreground">Minimum Investment</h5>
-                        <p className="text-xl font-bold text-navyblue">R 100,000</p>
+                        <p className="text-xl font-bold text-navyblue">R 5,000</p>
                       </div>
                     </div>
                   </CardContent>
@@ -228,7 +226,7 @@ const ImpactFunds = () => {
                       </div>
                       <div className="p-4 bg-lightgray rounded-lg">
                         <h5 className="font-medium text-sm text-muted-foreground">Minimum Investment</h5>
-                        <p className="text-xl font-bold text-navyblue">R 75,000</p>
+                        <p className="text-xl font-bold text-navyblue">R 5,000</p>
                       </div>
                     </div>
                   </CardContent>
@@ -274,7 +272,7 @@ const ImpactFunds = () => {
                       </div>
                       <div className="p-4 bg-lightgray rounded-lg">
                         <h5 className="font-medium text-sm text-muted-foreground">Minimum Investment</h5>
-                        <p className="text-xl font-bold text-navyblue">R 50,000</p>
+                        <p className="text-xl font-bold text-navyblue">R 5,000</p>
                       </div>
                     </div>
                   </CardContent>
@@ -282,7 +280,6 @@ const ImpactFunds = () => {
               </TabsContent>
             </Tabs>
 
-            {/* For Investors Section */}
             <div className="mt-16">
               <h3 className="text-2xl font-bold text-navyblue mb-6 text-center">For LMCA Clients</h3>
               <div className="space-y-6">

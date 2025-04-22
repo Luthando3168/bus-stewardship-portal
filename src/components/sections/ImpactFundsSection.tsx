@@ -7,22 +7,22 @@ const ImpactFundsSection = () => {
   const funds = [
     {
       name: "Agri Impact Fund",
-      description: "Supporting sustainable agricultural initiatives and rural development projects.",
+      description: "Supporting sustainable agricultural initiatives and rural development projects with a minimum investment of R 5,000.",
       color: "from-green-700 to-green-900"
     },
     {
       name: "Property Impact Fund",
-      description: "Investing in community-focused real estate and housing development projects.",
+      description: "Investing in community-focused real estate and housing development projects with a minimum investment of R 5,000.",
       color: "from-blue-700 to-blue-900"
     },
     {
       name: "Energy Impact Fund",
-      description: "Financing renewable energy and sustainable infrastructure projects.",
+      description: "Financing renewable energy and sustainable infrastructure projects with a minimum investment of R 5,000.",
       color: "from-amber-600 to-amber-800"
     },
     {
       name: "Enterprise Impact Fund",
-      description: "Empowering small and medium enterprises with capital and business development support.",
+      description: "Empowering small and medium enterprises with capital and business development support, with a minimum investment of R 5,000.",
       color: "from-purple-700 to-purple-900"
     }
   ];
