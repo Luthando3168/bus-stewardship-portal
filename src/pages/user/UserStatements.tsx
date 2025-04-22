@@ -5,9 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Download } from "lucide-react";
 import { toast } from "sonner";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 
+// Fund metadata
 const fundsData = {
   myfarm: {
     title: "MyFarm Impact Fund",
@@ -85,83 +85,88 @@ const periods = [
   "Annual 2023"
 ];
 
+// Keys for pill menu
+const fundKeys = Object.keys(fundsData);
+
 const UserStatements = () => {
   const [selectedFund, setSelectedFund] = useState<string>("myfarm");
-  
+
   const handleDownload = (fund: string, period: string) => {
     toast.success(`Downloading ${fund} statement for ${period}`);
-    // In a real app, this would trigger an actual download
+    // Real download logic would go here
   };
+
+  const fund = fundsData[selectedFund as keyof typeof fundsData];
 
   return (
     <UserLayout>
-      <div className="space-y-6">
+      <div className="space-y-4 md:space-y-6">
         <h2 className="text-2xl font-bold text-navyblue">Financial Statements</h2>
-        <p className="text-muted-foreground">
+        <p className="text-muted-foreground text-base">
           Access all your financial statements and documents related to your investments in our impact funds.
         </p>
-        
-        <div className="space-y-4">
-          <div className="max-w-xs">
-            <Select
-              value={selectedFund}
-              onValueChange={setSelectedFund}
-            >
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select a fund" />
-              </SelectTrigger>
-              <SelectContent>
-                {Object.entries(fundsData).map(([key, data]) => (
-                  <SelectItem key={key} value={key}>{data.title}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+        {/* Fund selector as pills - horizontally scrollable */}
+        <div className="w-full overflow-x-auto py-2">
+          <div className="flex space-x-2 min-w-max">
+            {fundKeys.map((key) => (
+              <button
+                key={key}
+                onClick={() => setSelectedFund(key)}
+                className={`whitespace-nowrap px-3 py-2 rounded-full transition 
+                  text-sm font-medium shadow-none 
+                  ${selectedFund === key 
+                    ? "bg-white border border-navyblue text-navyblue" 
+                    : "bg-muted text-gray-700 hover:bg-gray-200 border border-transparent"}`}
+                style={{ minWidth: 120 }}
+              >
+                {fundsData[key as keyof typeof fundsData].title}
+              </button>
+            ))}
           </div>
-          
-          <Card>
-            <CardHeader>
-              <CardTitle>{fundsData[selectedFund as keyof typeof fundsData].title}</CardTitle>
-              <CardDescription>
-                {fundsData[selectedFund as keyof typeof fundsData].description}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Period</TableHead>
-                    <TableHead>Reporting Accountant</TableHead>
-                    <TableHead>Company Name</TableHead>
-                    <TableHead>Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {periods.map((period, i) => {
-                    const fund = fundsData[selectedFund as keyof typeof fundsData];
-                    return (
-                      <TableRow key={i}>
-                        <TableCell>{period}</TableCell>
-                        <TableCell>{fund.accountant}</TableCell>
-                        <TableCell>{fund.company}</TableCell>
-                        <TableCell>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => handleDownload(fund.title, period)}
-                            className="flex items-center gap-1"
-                          >
-                            <Download className="h-4 w-4" />
-                            <span>Download</span>
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
         </div>
+
+        <Card className="p-0 w-full max-w-2xl mx-auto">
+          <CardHeader className="pb-2 pt-4 px-4">
+            <CardTitle className="!text-lg !font-bold">
+              {fund.title}
+            </CardTitle>
+            <CardDescription className="mt-1 text-sm">
+              {fund.description}
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="overflow-x-auto px-2 pb-4">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="min-w-[100px]">Period</TableHead>
+                  <TableHead className="min-w-[170px]">Reporting Accountant</TableHead>
+                  <TableHead className="min-w-[140px]">Company Name</TableHead>
+                  <TableHead className="min-w-[80px]">Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {periods.map((period, i) => (
+                  <TableRow key={i}>
+                    <TableCell>{period}</TableCell>
+                    <TableCell>{fund.accountant}</TableCell>
+                    <TableCell>{fund.company}</TableCell>
+                    <TableCell>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleDownload(fund.title, period)}
+                        className="flex items-center gap-1"
+                      >
+                        <Download className="h-4 w-4" />
+                        <span>Download</span>
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
       </div>
     </UserLayout>
   );
