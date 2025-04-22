@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import UserLayout from "@/components/layout/UserLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
@@ -7,136 +8,124 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { toast } from "sonner";
 
+// The following data is structured based on your provided form link.
+const impactFunds = [
+  {
+    id: "myfarm",
+    name: "MyFarm Impact Fund",
+    businesses: [
+      {
+        id: "urban-farming-ct",
+        title: "Urban Farming - AgroUrban Oasis (Cape Town)",
+        region: "Cape Town",
+        description: "Invest in a sustainable hydroponic farm producing fresh produce for local supermarkets, restaurants, and communities. Focus on water-efficient and high-yield methods.",
+        minInvestment: "R 5,000",
+      },
+      {
+        id: "organic-farm-kzn",
+        title: "Organic Expansion (KwaZulu-Natal)",
+        region: "KwaZulu-Natal",
+        description: "Expansion of existing organic farm focusing on vegetables and herbs for major grocery chains. Certified organic and regenerative methods.",
+        minInvestment: "R 5,000",
+      },
+      {
+        id: "mixed-crops-limpopo",
+        title: "Mixed Crops Cultivation (Limpopo)",
+        region: "Limpopo",
+        description: "A project to cultivate and process diverse crops, supporting food security and market supply across the Limpopo region.",
+        minInvestment: "R 5,000",
+      },
+      // Additional entries from your list can be easily added here
+    ],
+  },
+  {
+    id: "myproperty",
+    name: "MyProperty Impact Fund",
+    businesses: [
+      {
+        id: "affordable-housing-jhb",
+        title: "Affordable Housing - eKasi Mixed Use (Johannesburg)",
+        region: "Johannesburg",
+        description: "Modern residential and commercial development in township areas providing affordable apartments and retail opportunities.",
+        minInvestment: "R 10,000",
+      },
+      {
+        id: "student-accommodation-pta",
+        title: "Student Accommodation (Pretoria)",
+        region: "Pretoria",
+        description: "Purpose-built student accommodation near key tertiary institutions, with secure and modern facilities for young professionals.",
+        minInvestment: "R 10,000",
+      },
+    ],
+  },
+  {
+    id: "myfoodretail",
+    name: "MyFoodRetail Impact Fund",
+    businesses: [
+      {
+        id: "lifestyle-mini-complex",
+        title: "Lifestyle Mini Complex (Western Cape)",
+        region: "Western Cape",
+        description: "A hub offering groceries (Food Corner), meat products (Meat Co), and fresh produce (Fruits & Veg) sourced from MyFarm, targeting diverse communities.",
+        minInvestment: "R 5,000",
+      },
+      {
+        id: "myfranchise",
+        title: "MyFranchise (National)",
+        region: "National",
+        description: "Invest in selected franchises, add to your portfolio, and benefit from operational support and steady returns.",
+        minInvestment: "R 5,000",
+      },
+    ]
+  },
+  {
+    id: "myenergy",
+    name: "MyEnergy Impact Fund",
+    businesses: [
+      {
+        id: "solar-installation-network",
+        title: "Solar Installation Network (Cape Town)",
+        region: "Cape Town",
+        description: "Deploy commercial solar installations for businesses, including battery storage for energy consistency. Revenue from power purchase agreements.",
+        minInvestment: "R 5,000",
+      },
+      {
+        id: "wind-farm-project",
+        title: "Wind Farm Project (Eastern Cape)",
+        region: "Eastern Cape",
+        description: "Invest in the construction of a wind farm project, generating renewable power for over 15,000 homes.",
+        minInvestment: "R 5,000",
+      }
+    ]
+  },
+  {
+    id: "myenterprise",
+    name: "MyEnterprise Impact Fund",
+    businesses: [
+      {
+        id: "tech-accelerator",
+        title: "Tech Startup Accelerator (National)",
+        region: "National",
+        description: "Diversified portfolio of early-stage tech startups solving African challenges, offering investor exposure across sectors.",
+        minInvestment: "R 5,000",
+      },
+      {
+        id: "sme-advancement",
+        title: "SME Advancement (Gauteng)",
+        region: "Gauteng",
+        description: "Support for small and medium enterprises with capital investment and business incubation for sustainable impact.",
+        minInvestment: "R 5,000",
+      }
+    ]
+  }
+];
+
 const UserNewDeals = () => {
-  const [selectedDealId, setSelectedDealId] = useState<string | null>(null);
-  
-  const funds = [
-    { id: "agri", name: "Agri Impact Fund", color: "bg-green-600" },
-    { id: "property", name: "Property Impact Fund", color: "bg-blue-600" },
-    { id: "energy", name: "Energy Impact Fund", color: "bg-amber-600" },
-    { id: "enterprise", name: "Enterprise Impact Fund", color: "bg-purple-600" }
-  ];
-  
-  const deals = [
-    {
-      id: "deal1",
-      title: "Organic Farm Expansion",
-      fund: "Agri Impact Fund",
-      fundId: "agri",
-      minInvestment: "R 5,000",
-      targetReturn: "8.5%",
-      term: "5 years",
-      closingDate: "May 30, 2025",
-      status: "Open",
-      description: "Expansion of an existing organic farm in KwaZulu-Natal, focusing on vegetables and herbs for local markets.",
-      highlights: [
-        "Established operation with 3 years of profitable history",
-        "Expanding from 10 to 25 hectares of cultivated land",
-        "Supply contracts with major grocery chains",
-        "Certified organic practices and regenerative farming methods"
-      ],
-      riskLevel: "Moderate"
-    },
-    {
-      id: "deal2",
-      title: "Mixed-Use Development",
-      fund: "Property Impact Fund",
-      fundId: "property",
-      minInvestment: "R 5,000",
-      targetReturn: "11.2%",
-      term: "7 years",
-      closingDate: "June 15, 2025",
-      status: "Open",
-      description: "Urban renewal project in Johannesburg CBD, converting an old warehouse into affordable apartments with ground-floor retail spaces.",
-      highlights: [
-        "Prime location with excellent transport links",
-        "40 residential units and 8 retail spaces",
-        "Energy-efficient design and solar power integration",
-        "Community engagement plan for local employment"
-      ],
-      riskLevel: "Moderate-High"
-    },
-    {
-      id: "deal3",
-      title: "Solar Installation Network",
-      fund: "Energy Impact Fund",
-      fundId: "energy",
-      minInvestment: "R 5,000",
-      targetReturn: "12.8%",
-      term: "6 years",
-      closingDate: "May 15, 2025",
-      status: "Open",
-      description: "Deployment of solar installations across multiple commercial properties in Cape Town and surrounding areas.",
-      highlights: [
-        "Portfolio of 15 pre-secured commercial sites",
-        "Power purchase agreements already negotiated",
-        "Experienced installation and maintenance team",
-        "Battery storage component for consistent energy supply"
-      ],
-      riskLevel: "Moderate"
-    },
-    {
-      id: "deal4",
-      title: "Tech Startup Accelerator",
-      fund: "Enterprise Impact Fund",
-      fundId: "enterprise",
-      minInvestment: "R 5,000",
-      targetReturn: "15.5%",
-      term: "5 years",
-      closingDate: "July 1, 2025",
-      status: "Open",
-      description: "Investment in a portfolio of 10 early-stage technology startups focused on solving African challenges.",
-      highlights: [
-        "Diversified portfolio across multiple sectors",
-        "Experienced management team with prior exits",
-        "Comprehensive support structure for portfolio companies",
-        "Focus on solutions addressing African challenges"
-      ],
-      riskLevel: "High"
-    },
-    {
-      id: "deal5",
-      title: "Affordable Housing Project",
-      fund: "Property Impact Fund",
-      fundId: "property",
-      minInvestment: "R 5,000",
-      targetReturn: "9.8%",
-      term: "8 years",
-      closingDate: "June 30, 2025",
-      status: "Open",
-      description: "Development of 120 affordable housing units in growing township area with strong demand for quality housing.",
-      highlights: [
-        "Partnership with local government for land access",
-        "Innovative construction methods reducing costs",
-        "Community facilities including daycare and small business spaces",
-        "Sustainable water and energy systems"
-      ],
-      riskLevel: "Moderate"
-    },
-    {
-      id: "deal6",
-      title: "Wind Farm Project",
-      fund: "Energy Impact Fund",
-      fundId: "energy",
-      minInvestment: "R 5,000",
-      targetReturn: "13.5%",
-      term: "10 years",
-      closingDate: "August 15, 2025",
-      status: "Open",
-      description: "Construction of a new wind farm in the Eastern Cape with capacity to power 15,000 homes.",
-      highlights: [
-        "Environmental approvals already secured",
-        "Power purchase agreement with major utility",
-        "Latest turbine technology for maximum efficiency",
-        "Local community ownership component"
-      ],
-      riskLevel: "Moderate-High"
-    }
-  ];
+  const [selectedBusiness, setSelectedBusiness] = useState<any | null>(null);
 
   const handleInvestmentInterest = () => {
     toast.success("Your investment interest has been registered. An advisor will contact you shortly.");
-    setSelectedDealId(null);
+    setSelectedBusiness(null);
   };
 
   return (
@@ -144,94 +133,61 @@ const UserNewDeals = () => {
       <div className="space-y-6">
         <h2 className="text-2xl font-bold text-navyblue">New Investment Opportunities</h2>
         <p className="text-muted-foreground">
-          Explore our latest investment opportunities across different impact funds.
+          Explore our latest investment opportunities under each Impact Fund. Select a business to view details and express your interest.
         </p>
         
-        <Tabs defaultValue="all">
+        <Tabs defaultValue={impactFunds[0].id}>
           <TabsList className="grid w-full grid-cols-2 md:grid-cols-5">
-            <TabsTrigger value="all">All Deals</TabsTrigger>
-            {funds.map(fund => (
+            {impactFunds.map(fund => (
               <TabsTrigger key={fund.id} value={fund.id}>
                 {fund.name}
               </TabsTrigger>
             ))}
           </TabsList>
           
-          <TabsContent value="all" className="mt-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {deals.map((deal) => (
-                <DealCard key={deal.id} deal={deal} onClick={() => setSelectedDealId(deal.id)} />
-              ))}
-            </div>
-          </TabsContent>
-          
-          {funds.map(fund => (
+          {impactFunds.map(fund => (
             <TabsContent key={fund.id} value={fund.id} className="mt-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {deals
-                  .filter(deal => deal.fundId === fund.id)
-                  .map((deal) => (
-                    <DealCard key={deal.id} deal={deal} onClick={() => setSelectedDealId(deal.id)} />
-                  ))}
+                {fund.businesses.map(biz => (
+                  <BusinessCard business={biz} fundName={fund.name} onClick={() => setSelectedBusiness({ ...biz, fund: fund.name })} key={biz.id}/>
+                ))}
               </div>
             </TabsContent>
           ))}
         </Tabs>
         
-        {/* Deal Details Dialog */}
-        <Dialog open={!!selectedDealId} onOpenChange={(open) => !open && setSelectedDealId(null)}>
-          <DialogContent className="max-w-3xl">
-            {selectedDealId && (
+        {/* Business Details Dialog */}
+        <Dialog open={!!selectedBusiness} onOpenChange={(open) => !open && setSelectedBusiness(null)}>
+          <DialogContent className="max-w-2xl">
+            {selectedBusiness && (
               <>
                 <DialogHeader>
-                  <DialogTitle>{deals.find(d => d.id === selectedDealId)?.title}</DialogTitle>
+                  <DialogTitle>{selectedBusiness.title}</DialogTitle>
                   <DialogDescription>
-                    {deals.find(d => d.id === selectedDealId)?.description}
+                    {selectedBusiness.description}
                   </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-6">
-                  <div>
-                    <h4 className="font-semibold mb-2">Investment Highlights</h4>
-                    <ul className="list-disc pl-5 space-y-1">
-                      {deals.find(d => d.id === selectedDealId)?.highlights.map((highlight, i) => (
-                        <li key={i}>{highlight}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <div className="p-4 bg-lightgray rounded-lg">
-                      <h5 className="text-sm text-muted-foreground">Minimum Investment</h5>
-                      <p className="font-bold">{deals.find(d => d.id === selectedDealId)?.minInvestment}</p>
-                    </div>
-                    <div className="p-4 bg-lightgray rounded-lg">
-                      <h5 className="text-sm text-muted-foreground">Target Return</h5>
-                      <p className="font-bold">{deals.find(d => d.id === selectedDealId)?.targetReturn}</p>
-                    </div>
-                    <div className="p-4 bg-lightgray rounded-lg">
-                      <h5 className="text-sm text-muted-foreground">Investment Term</h5>
-                      <p className="font-bold">{deals.find(d => d.id === selectedDealId)?.term}</p>
-                    </div>
-                    <div className="p-4 bg-lightgray rounded-lg">
-                      <h5 className="text-sm text-muted-foreground">Closing Date</h5>
-                      <p className="font-bold">{deals.find(d => d.id === selectedDealId)?.closingDate}</p>
-                    </div>
-                    <div className="p-4 bg-lightgray rounded-lg">
-                      <h5 className="text-sm text-muted-foreground">Risk Level</h5>
-                      <p className="font-bold">{deals.find(d => d.id === selectedDealId)?.riskLevel}</p>
-                    </div>
+                  <div className="grid grid-cols-2 gap-4">
                     <div className="p-4 bg-lightgray rounded-lg">
                       <h5 className="text-sm text-muted-foreground">Fund</h5>
-                      <p className="font-bold">{deals.find(d => d.id === selectedDealId)?.fund}</p>
+                      <p className="font-bold">{selectedBusiness.fund}</p>
+                    </div>
+                    <div className="p-4 bg-lightgray rounded-lg">
+                      <h5 className="text-sm text-muted-foreground">Region</h5>
+                      <p className="font-bold">{selectedBusiness.region}</p>
+                    </div>
+                    <div className="p-4 bg-lightgray rounded-lg col-span-2">
+                      <h5 className="text-sm text-muted-foreground">Minimum Investment</h5>
+                      <p className="font-bold">{selectedBusiness.minInvestment}</p>
                     </div>
                   </div>
-                  
                   <div className="flex justify-between items-center border-t pt-4">
                     <p className="text-sm text-muted-foreground">
                       Review all documents carefully before investing
                     </p>
                     <div className="space-x-3">
-                      <Button variant="outline" onClick={() => setSelectedDealId(null)}>
+                      <Button variant="outline" onClick={() => setSelectedBusiness(null)}>
                         Close
                       </Button>
                       <Button className="bg-gold hover:bg-lightgold text-white" onClick={handleInvestmentInterest}>
@@ -249,60 +205,36 @@ const UserNewDeals = () => {
   );
 };
 
-interface DealCardProps {
-  deal: any;
+interface BusinessCardProps {
+  business: any;
+  fundName: string;
   onClick: () => void;
 }
-
-const DealCard = ({ deal, onClick }: DealCardProps) => {
-  const getFundColor = (fundId: string) => {
-    switch (fundId) {
-      case 'agri': return 'bg-green-600';
-      case 'property': return 'bg-blue-600';
-      case 'energy': return 'bg-amber-600';
-      case 'enterprise': return 'bg-purple-600';
-      default: return 'bg-gray-600';
-    }
-  };
-
-  return (
-    <Card className="h-full flex flex-col">
-      <CardHeader>
-        <div className="flex justify-between items-start">
-          <CardTitle className="text-lg">{deal.title}</CardTitle>
-          <Badge className={`${getFundColor(deal.fundId)} hover:opacity-90`}>{deal.fund}</Badge>
-        </div>
-        <CardDescription className="line-clamp-2">
-          {deal.description}
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="flex-grow">
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <p className="text-sm text-muted-foreground">Minimum</p>
-            <p className="font-medium">{deal.minInvestment}</p>
-          </div>
-          <div>
-            <p className="text-sm text-muted-foreground">Target Return</p>
-            <p className="font-medium">{deal.targetReturn}</p>
-          </div>
-          <div>
-            <p className="text-sm text-muted-foreground">Term</p>
-            <p className="font-medium">{deal.term}</p>
-          </div>
-          <div>
-            <p className="text-sm text-muted-foreground">Closing</p>
-            <p className="font-medium">{deal.closingDate}</p>
-          </div>
-        </div>
-      </CardContent>
-      <CardFooter>
-        <Button className="w-full bg-navyblue hover:bg-deepblue" onClick={onClick}>
-          View Details
-        </Button>
-      </CardFooter>
-    </Card>
-  );
-};
+const BusinessCard = ({ business, fundName, onClick }: BusinessCardProps) => (
+  <Card className="h-full flex flex-col">
+    <CardHeader>
+      <div className="flex justify-between items-start">
+        <CardTitle className="text-lg">{business.title}</CardTitle>
+        <Badge className="bg-blue-600">{fundName}</Badge>
+      </div>
+      <CardDescription>
+        <span className="block">{business.region}</span>
+        <span className="block line-clamp-2">{business.description}</span>
+      </CardDescription>
+    </CardHeader>
+    <CardContent className="flex-grow">
+      <div>
+        <p className="text-sm text-muted-foreground">Minimum Investment</p>
+        <p className="font-medium">{business.minInvestment}</p>
+      </div>
+    </CardContent>
+    <CardFooter>
+      <Button className="w-full bg-navyblue hover:bg-deepblue" onClick={onClick}>
+        View Details
+      </Button>
+    </CardFooter>
+  </Card>
+);
 
 export default UserNewDeals;
+
