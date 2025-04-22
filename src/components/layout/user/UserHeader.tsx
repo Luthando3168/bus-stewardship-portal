@@ -1,4 +1,3 @@
-
 import { Bell, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -39,14 +38,13 @@ const UserHeader = ({ notifications, isMobile = false, onMenuClick, userName = "
             </Button>
           )}
           <div className="flex items-center">
-            <Link to="/" className="flex items-center">
-              <img 
-                src="/placeholder.svg" 
-                alt="Luthando Maduna Chartered Accountants" 
-                className="h-8 mr-3"
-              />
-              <span className="text-navyblue font-semibold hidden md:block">
-                Luthando Maduna Chartered Accountants
+            <Link to="/" className="flex items-center group cursor-pointer">
+              <span className="font-montserrat font-bold text-lg tracking-tight group-hover:text-gold transition-colors">
+                <span className="text-gold border-b-2 border-gold pb-0.5">Luthando</span>
+                <span className="text-navyblue"> Maduna</span>
+              </span>
+              <span className="font-montserrat text-xs text-navyblue tracking-wider ml-1 group-hover:text-gold transition-colors">
+                CHARTERED ACCOUNTANTS
               </span>
             </Link>
           </div>
