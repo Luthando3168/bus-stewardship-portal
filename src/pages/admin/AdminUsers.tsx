@@ -1,54 +1,73 @@
+
 import AdminLayout from "@/components/layout/AdminLayout";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { UserPlus } from "lucide-react";
-import { Star } from "lucide-react";
+import { UserPlus, Star } from "lucide-react";
+
+// Profile fields based on Jaltech reference and user side
+const PROFILE_FIELDS = [
+  { key: "fullName", label: "Full Name", required: true },
+  { key: "email", label: "Email Address", required: true },
+  { key: "phone", label: "Phone Number", required: true },
+  { key: "dob", label: "Date of Birth", required: true },
+  { key: "idNumber", label: "ID Number", required: true },
+  { key: "nationality", label: "Nationality", required: true },
+  { key: "taxNumber", label: "Tax Number", required: true },
+  { key: "taxCountry", label: "Tax Country", required: true },
+  { key: "address", label: "Physical Address", required: true },
+  { key: "postalCode", label: "Postal Code", required: true },
+  { key: "city", label: "City", required: true },
+  { key: "province", label: "Province", required: true },
+  { key: "sourceOfFunds", label: "Source of Funds", required: true },
+  { key: "employmentStatus", label: "Employment Status", required: true },
+  { key: "employer", label: "Employer", required: false },
+  { key: "occupation", label: "Occupation", required: true },
+  { key: "riskProfile", label: "Risk Profile", required: true },
+  { key: "incomeBracket", label: "Annual Income Bracket", required: true },
+  { key: "pep", label: "Are you a PEP?", required: true }
+];
 
 const mockUsers = [
-  { id: 1, name: "John Dube", email: "john.d@example.com", role: "Client", investmentCount: 3, lastLogin: "2023-04-21" },
-  { id: 2, name: "Sarah Nkosi", email: "sarah.n@example.com", role: "Client", investmentCount: 5, lastLogin: "2023-04-20" },
-  { id: 3, name: "David Mokoena", email: "david.m@example.com", role: "Client", investmentCount: 2, lastLogin: "2023-04-19" },
-  { id: 4, name: "Linda Zulu", email: "linda.z@example.com", role: "Client", investmentCount: 6, lastLogin: "2023-04-18" },
-  { id: 5, name: "Robert Ndlovu", email: "robert.n@example.com", role: "Client", investmentCount: 1, lastLogin: "2023-04-17" },
-  { id: 6, name: "Maria Sithole", email: "maria.s@example.com", role: "Client", investmentCount: 4, lastLogin: "2023-04-16" },
+  {
+    id: 1,
+    fullName: "John Dube",
+    email: "john.d@example.com",
+    phone: "",
+    dob: "",
+    idNumber: "7801015387082",
+    nationality: "",
+    taxNumber: "",
+    taxCountry: "",
+    address: "",
+    postalCode: "",
+    city: "",
+    province: "",
+    sourceOfFunds: "",
+    employmentStatus: "",
+    employer: "",
+    occupation: "",
+    riskProfile: "",
+    incomeBracket: "",
+    pep: "",
+    investmentCount: 3,
+    lastLogin: "2023-04-21",
+  },
+  // ... add more mock users or fetch from your source
 ];
-
-const REQUIRED_FIELDS = [
-  { key: "name", label: "Full Name" },
-  { key: "email", label: "Email Address" },
-  { key: "idNumber", label: "ID Number" },
-  { key: "taxNumber", label: "Tax Number" },
-  { key: "address", label: "Physical Address" },
-  { key: "occupation", label: "Occupation" },
-  { key: "riskProfile", label: "Risk Profile" },
-  { key: "sourceOfFunds", label: "Source of Funds" },
-  { key: "dob", label: "Date of Birth" }
-];
-
-const detailedUsers = mockUsers.map((user, idx) => ({
-  ...user,
-  idNumber: idx === 3 ? "" : "7801015387082",
-  taxNumber: idx % 2 === 0 ? "1234567890" : "",
-  address: idx % 2 === 1 ? "123 Main Street" : "",
-  occupation: "",
-  riskProfile: idx % 3 === 0 ? "" : "Moderate",
-  sourceOfFunds: "",
-  dob: ""
-}));
 
 const RedStar = () => <Star size={13} className="text-red-500 inline ml-1 align-text-bottom" />;
 
-const isMissing = (user: any, key: string) => !user[key];
+const isMissing = (user: any, key: string, required?: boolean) => required && !user[key];
 
 const AdminUsers = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredUsers = detailedUsers.filter(
+  const filteredUsers = mockUsers.filter(
     (user) =>
-      user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -79,15 +98,9 @@ const AdminUsers = () => {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Email</TableHead>
-                    <TableHead>ID Number</TableHead>
-                    <TableHead>Tax Number</TableHead>
-                    <TableHead>Address</TableHead>
-                    <TableHead>Occupation</TableHead>
-                    <TableHead>Risk</TableHead>
-                    <TableHead>Source of Funds</TableHead>
-                    <TableHead>Date of Birth</TableHead>
+                    {PROFILE_FIELDS.map(({ key, label }) => (
+                      <TableHead key={key}>{label}</TableHead>
+                    ))}
                     <TableHead>Investments</TableHead>
                     <TableHead>Last Login</TableHead>
                     <TableHead>Actions</TableHead>
@@ -96,10 +109,10 @@ const AdminUsers = () => {
                 <TableBody>
                   {filteredUsers.map((user) => (
                     <TableRow key={user.id}>
-                      {REQUIRED_FIELDS.map(({ key, label }) => (
+                      {PROFILE_FIELDS.map(({ key, required }) => (
                         <TableCell key={key}>
                           {user[key] || <span className="text-gray-400">-</span>}
-                          {isMissing(user, key) && <RedStar />}
+                          {isMissing(user, key, required) && <RedStar />}
                         </TableCell>
                       ))}
                       <TableCell>{user.investmentCount}</TableCell>

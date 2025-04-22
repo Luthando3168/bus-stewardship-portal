@@ -9,6 +9,28 @@ import { toast } from "sonner";
 import FundAccordion from "@/components/FundAccordion";
 import { Star } from "lucide-react";
 
+const PROFILE_FIELDS = [
+  { key: "fullName", label: "Full Name", required: true },
+  { key: "email", label: "Email Address", required: true },
+  { key: "phone", label: "Phone Number", required: true },
+  { key: "dob", label: "Date of Birth", required: true },
+  { key: "idNumber", label: "ID Number", required: true },
+  { key: "nationality", label: "Nationality", required: true },
+  { key: "taxNumber", label: "Tax Number", required: true },
+  { key: "taxCountry", label: "Tax Country", required: true },
+  { key: "address", label: "Physical Address", required: true },
+  { key: "postalCode", label: "Postal Code", required: true },
+  { key: "city", label: "City", required: true },
+  { key: "province", label: "Province", required: true },
+  { key: "sourceOfFunds", label: "Source of Funds", required: true },
+  { key: "employmentStatus", label: "Employment Status", required: true },
+  { key: "employer", label: "Employer", required: false },
+  { key: "occupation", label: "Occupation", required: true },
+  { key: "riskProfile", label: "Risk Profile", required: true },
+  { key: "incomeBracket", label: "Annual Income Bracket", required: true },
+  { key: "pep", label: "Are you a PEP?", required: true }
+];
+
 const FUNDS = [
   {
     name: "Sankofa Property Impact Fund",
@@ -44,41 +66,34 @@ const FUNDS = [
   },
 ];
 
-const RedStar = () => <Star size={14} className="text-red-500 inline ml-1" />;
+const RedStar = () => <Star size={14} className="text-red-500 inline ml-1 align-text-bottom" />;
 
-const REQUIRED_FIELDS = [
-  { key: "fullName", label: "Full Name" },
-  { key: "email", label: "Email Address" },
-  { key: "phone", label: "Phone Number" },
-  { key: "idNumber", label: "ID Number" },
-  { key: "taxNumber", label: "Tax Number" },
-  { key: "address", label: "Physical Address" },
-  { key: "occupation", label: "Occupation" },
-  { key: "riskProfile", label: "Risk Profile" },
-  { key: "sourceOfFunds", label: "Source of Funds" },
-  { key: "dob", label: "Date of Birth" }
-];
+const INITIAL_USER_DATA = {
+  fullName: "John Dube",
+  email: "",
+  phone: "",
+  dob: "",
+  idNumber: "",
+  nationality: "",
+  taxNumber: "",
+  taxCountry: "",
+  address: "",
+  postalCode: "",
+  city: "",
+  province: "",
+  sourceOfFunds: "",
+  employmentStatus: "",
+  employer: "",
+  occupation: "",
+  riskProfile: "",
+  incomeBracket: "",
+  pep: "",
+  joinDate: "January 15, 2023"
+};
 
 const UserProfile = () => {
-  const [userData, setUserData] = useState({
-    fullName: "John Dube",
-    email: "",
-    phone: "+27 62 123 4567",
-    idNumber: "7801015387082",
-    taxNumber: "",
-    address: "123 Main Street, Sandton, Johannesburg, 2031",
-    occupation: "",
-    riskProfile: "Moderate",
-    sourceOfFunds: "",
-    dob: "",
-    joinDate: "January 15, 2023"
-  });
-
-  const [password, setPassword] = useState({
-    current: "",
-    new: "",
-    confirm: ""
-  });
+  const [userData, setUserData] = useState(INITIAL_USER_DATA);
+  const [password, setPassword] = useState({ current: "", new: "", confirm: "" });
 
   const handleProfileUpdate = (e: React.FormEvent) => {
     e.preventDefault();
@@ -99,18 +114,19 @@ const UserProfile = () => {
     setPassword({ current: "", new: "", confirm: "" });
   };
 
-  const isMissing = (field: string) => !userData[field as keyof typeof userData];
+  const isMissing = (key: string, required?: boolean) =>
+    required && !userData[key as keyof typeof userData];
 
   return (
     <UserLayout>
       <div className="space-y-6">
         <h2 className="text-2xl font-bold text-navyblue flex items-center">
           My Profile
-          {REQUIRED_FIELDS.some(f => isMissing(f.key)) && <RedStar />}
+          {PROFILE_FIELDS.some(f => isMissing(f.key, f.required)) && <RedStar />}
         </h2>
         <Tabs defaultValue="personal">
           <TabsList className="grid w-full md:w-auto md:inline-grid grid-cols-3 md:grid-cols-3">
-            <TabsTrigger value="personal">Personal Information</TabsTrigger>
+            <TabsTrigger value="personal">Personal Details</TabsTrigger>
             <TabsTrigger value="security">Security</TabsTrigger>
             <TabsTrigger value="investment">Investment Profile</TabsTrigger>
           </TabsList>
@@ -119,16 +135,16 @@ const UserProfile = () => {
               <CardHeader>
                 <CardTitle>Personal Information</CardTitle>
                 <CardDescription>
-                  Please complete all fields. <RedStar /> indicates required or missing info.
+                  Complete all required fields <RedStar /> indicates missing info.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleProfileUpdate} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {REQUIRED_FIELDS.filter((f) => !["sourceOfFunds","dob"].includes(f.key)).map(({ key, label }) => (
+                    {PROFILE_FIELDS.map(({ key, label, required }) => (
                       <div className="space-y-2" key={key}>
                         <Label htmlFor={key}>
-                          {label} {isMissing(key) && <RedStar />}
+                          {label} {isMissing(key, required) && <RedStar />}
                         </Label>
                         <Input
                           id={key}
@@ -136,6 +152,7 @@ const UserProfile = () => {
                           onChange={(e) =>
                             setUserData({ ...userData, [key]: e.target.value })
                           }
+                          type={["dob"].includes(key) ? "date" : "text"}
                           disabled={["idNumber", "taxNumber"].includes(key)}
                         />
                         {["idNumber", "taxNumber"].includes(key) && (
@@ -143,31 +160,6 @@ const UserProfile = () => {
                         )}
                       </div>
                     ))}
-                    <div className="space-y-2">
-                      <Label htmlFor="sourceOfFunds">
-                        Source of Funds {isMissing("sourceOfFunds") && <RedStar />}
-                      </Label>
-                      <Input
-                        id="sourceOfFunds"
-                        value={userData.sourceOfFunds}
-                        onChange={(e) =>
-                          setUserData({ ...userData, sourceOfFunds: e.target.value })
-                        }
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="dob">
-                        Date of Birth {isMissing("dob") && <RedStar />}
-                      </Label>
-                      <Input
-                        id="dob"
-                        type="date"
-                        value={userData.dob}
-                        onChange={(e) =>
-                          setUserData({ ...userData, dob: e.target.value })
-                        }
-                      />
-                    </div>
                   </div>
                   <div className="flex justify-end">
                     <Button type="submit" className="bg-gold hover:bg-lightgold text-white">
@@ -183,7 +175,7 @@ const UserProfile = () => {
               <CardHeader>
                 <CardTitle>Change Password</CardTitle>
                 <CardDescription>
-                  Update your password for enhanced security
+                  Update your password for enhanced security.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -223,7 +215,6 @@ const UserProfile = () => {
                       />
                     </div>
                   </div>
-                  
                   <div className="flex justify-end">
                     <Button type="submit" className="bg-gold hover:bg-lightgold text-white">
                       Change Password
@@ -238,7 +229,7 @@ const UserProfile = () => {
               <CardHeader>
                 <CardTitle>Investment Fund Options</CardTitle>
                 <CardDescription>
-                  View details about available investment funds below. Click a fund to expand/collapse.
+                  Click any fund to see details. All funds listed below.
                 </CardDescription>
               </CardHeader>
               <CardContent>
