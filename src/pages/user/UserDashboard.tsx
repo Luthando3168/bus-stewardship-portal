@@ -4,6 +4,33 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Wallet, FileText, ChartPie } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+
+// Simplified impact funds for the dashboard
+const impactFunds = [
+  {
+    id: "myfarm",
+    name: "MyFarm Impact Fund",
+    color: "bg-gradient-to-br from-green-700 to-green-900",
+    minInvestment: "R 5,000",
+    count: 3,
+  },
+  {
+    id: "myproperty",
+    name: "MyProperty Impact Fund",
+    color: "bg-gradient-to-br from-blue-700 to-blue-900",
+    minInvestment: "R 10,000",
+    count: 3,
+  },
+  {
+    id: "myfranchise",
+    name: "MyFranchise Impact Fund",
+    color: "bg-gradient-to-br from-red-600 to-red-800",
+    minInvestment: "R 5,000",
+    count: 3,
+  }
+];
 
 const UserDashboard = () => {
   const [userName, setUserName] = useState("");
@@ -63,10 +90,42 @@ const UserDashboard = () => {
           </Card>
         </div>
 
+        <div className="bg-blue-50 rounded-lg p-4 text-sm">
+          <p className="font-medium text-navyblue">How it works:</p>
+          <p className="text-muted-foreground">
+            Select business deals from any impact fund below. Your selections are linked to their respective funds
+            and consolidated at checkout. Payment is made through your Standard Bank wallet, and your investments
+            will appear in the Pending Deals section.
+          </p>
+        </div>
+        
+        <div>
+          <h3 className="text-lg font-semibold mb-4">Our Impact Funds</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {impactFunds.map((fund) => (
+              <div
+                key={fund.id}
+                className={`rounded-lg text-white overflow-hidden shadow-lg ${fund.color} hover:-translate-y-1 transition-transform duration-300`}
+              >
+                <div className="p-5">
+                  <h3 className="font-bold text-xl mb-2">{fund.name}</h3>
+                  <p className="text-sm mb-4">Min Investment: {fund.minInvestment}</p>
+                  <p className="text-sm text-white/80 mb-4">{fund.count} investment opportunities available</p>
+                  <Link to={`/user/new-deals?fund=${fund.id}`}>
+                    <Button className="w-full bg-white/20 hover:bg-white/30 text-white">
+                      Browse Opportunities
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <Tabs defaultValue="investments">
           <TabsList className="grid w-full md:w-auto md:inline-grid grid-cols-2 md:grid-cols-2">
             <TabsTrigger value="investments">My Investments</TabsTrigger>
-            <TabsTrigger value="opportunities">New Opportunities</TabsTrigger>
+            <TabsTrigger value="pending">Pending Deals</TabsTrigger>
           </TabsList>
           <TabsContent value="investments">
             <Card>
@@ -85,21 +144,21 @@ const UserDashboard = () => {
                   <div className="divide-y">
                     <div className="grid grid-cols-1 md:grid-cols-5 p-4">
                       <div>Downtown Office Building</div>
-                      <div>Sankofa Property Impact Fund</div>
+                      <div>MyProperty Impact Fund</div>
                       <div>R 120,000.00</div>
                       <div className="text-green-600">+8.5%</div>
                       <div>Active</div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-5 p-4">
                       <div>Solar Farm Project</div>
-                      <div>Sankofa Energy Impact Fund</div>
+                      <div>MyEnergy Impact Fund</div>
                       <div>R 85,000.00</div>
                       <div className="text-green-600">+11.2%</div>
                       <div>Active</div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-5 p-4">
                       <div>Organic Farm Expansion</div>
-                      <div>Sankofa Agri Impact Fund</div>
+                      <div>MyFarm Impact Fund</div>
                       <div>R 40,000.00</div>
                       <div className="text-green-600">+6.8%</div>
                       <div>Active</div>
@@ -109,44 +168,41 @@ const UserDashboard = () => {
               </CardContent>
             </Card>
           </TabsContent>
-          <TabsContent value="opportunities">
+          <TabsContent value="pending">
             <Card>
               <CardHeader>
-                <CardTitle>New Investment Opportunities</CardTitle>
+                <CardTitle>Pending Deals</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="space-y-2">
                 <div className="rounded-md border">
                   <div className="grid grid-cols-1 md:grid-cols-5 p-4 font-medium">
-                    <div>Opportunity</div>
+                    <div>Deal</div>
                     <div>Fund</div>
-                    <div>Min Investment</div>
-                    <div>Target Return</div>
-                    <div>Action</div>
+                    <div>Amount</div>
+                    <div>Order Number</div>
+                    <div>Status</div>
                   </div>
                   <div className="divide-y">
                     <div className="grid grid-cols-1 md:grid-cols-5 p-4">
-                      <div>Mixed-Use Development</div>
-                      <div>Sankofa Property Impact Fund</div>
-                      <div>R 5,000.00</div>
-                      <div>9.5%</div>
-                      <div>
-                        <button className="bg-gold hover:bg-lightgold text-white px-3 py-1 rounded">
-                          View Details
-                        </button>
-                      </div>
+                      <div>Urban Farming Project</div>
+                      <div>MyFarm Impact Fund</div>
+                      <div>R 10,000.00</div>
+                      <div className="font-mono text-sm">MCA-583921-0472</div>
+                      <div>Processing</div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-5 p-4">
-                      <div>Wind Turbine Installation</div>
-                      <div>Sankofa Energy Impact Fund</div>
-                      <div>R 5,000.00</div>
-                      <div>12.0%</div>
-                      <div>
-                        <button className="bg-gold hover:bg-lightgold text-white px-3 py-1 rounded">
-                          View Details
-                        </button>
-                      </div>
+                      <div>Student Accommodation</div>
+                      <div>MyProperty Impact Fund</div>
+                      <div>R 15,000.00</div>
+                      <div className="font-mono text-sm">MCA-583546-2187</div>
+                      <div>Pending Approval</div>
                     </div>
                   </div>
+                </div>
+                <div className="text-center pt-2">
+                  <Link to="/user/pending-deals">
+                    <Button variant="outline">View All Pending Deals</Button>
+                  </Link>
                 </div>
               </CardContent>
             </Card>

@@ -1,11 +1,17 @@
 
-import React from "react";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { ShoppingCart, Plus, Minus, X } from "lucide-react";
+import { Check } from "lucide-react";
+import { useState } from "react";
 
 interface CartItem {
   id: string;
@@ -14,6 +20,7 @@ interface CartItem {
   amount: number;
   minInvestment: number;
 }
+
 interface InvestmentCartProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -21,9 +28,11 @@ interface InvestmentCartProps {
   walletBalance: number;
   totalInvestmentAmount: number;
   onRemoveFromCart: (id: string) => void;
-  onUpdateCartItemAmount: (id: string, newAmount: number) => void;
+  onUpdateCartItemAmount: (id: string, amount: number) => void;
   onCheckout: () => void;
+  orderNumber: string | null;
 }
+
 const InvestmentCart = ({
   open,
   onOpenChange,
@@ -33,128 +42,137 @@ const InvestmentCart = ({
   onRemoveFromCart,
   onUpdateCartItemAmount,
   onCheckout,
-}: InvestmentCartProps) => (
-  <Sheet open={open} onOpenChange={onOpenChange}>
-    <SheetContent className="w-full sm:max-w-md">
-      <SheetHeader>
-        <SheetTitle className="flex items-center">
-          <ShoppingCart className="mr-2" size={18} />
-          Your Investment Cart
-        </SheetTitle>
-      </SheetHeader>
-      <div className="mt-6 space-y-5">
+  orderNumber,
+}: InvestmentCartProps) => {
+  const [paymentSuccessful, setPaymentSuccessful] = useState(false);
+  
+  // Group items by fund
+  const itemsByFund: Record<string, CartItem[]> = {};
+  cartItems.forEach(item => {
+    if (!itemsByFund[item.fund]) {
+      itemsByFund[item.fund] = [];
+    }
+    itemsByFund[item.fund].push(item);
+  });
+
+  const handleCheckout = () => {
+    setPaymentSuccessful(true);
+    onCheckout();
+    
+    // Reset success state after a few seconds
+    setTimeout(() => {
+      setPaymentSuccessful(false);
+    }, 3000);
+  };
+  
+  const insufficientFunds = totalInvestmentAmount > walletBalance;
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle>Investment Cart</DialogTitle>
+          <DialogDescription>
+            Review your selected investment opportunities before proceeding.
+          </DialogDescription>
+        </DialogHeader>
+
         {cartItems.length === 0 ? (
-          <p className="text-center text-muted-foreground py-8">
-            Your investment cart is empty.
-          </p>
+          <div className="py-8 text-center">
+            <p className="text-muted-foreground">Your investment cart is empty.</p>
+            <p className="text-sm mt-2">
+              Browse our investment opportunities and add items to your cart.
+            </p>
+          </div>
         ) : (
           <>
-            <div className="space-y-4">
-              {cartItems.map(item => (
-                <div key={item.id} className="flex flex-col border rounded-md p-3">
-                  <div className="flex justify-between">
-                    <div>
-                      <h4 className="font-medium">{item.title}</h4>
-                      <p className="text-sm text-muted-foreground">{item.fund}</p>
-                    </div>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="h-8 w-8 p-0"
-                      onClick={() => onRemoveFromCart(item.id)}
-                    >
-                      <X size={16} />
-                    </Button>
-                  </div>
-                  <div className="mt-2">
-                    <p className="text-xs text-muted-foreground">
-                      Minimum investment: R {item.minInvestment.toLocaleString()}
-                    </p>
-                    <div className="flex items-center mt-2">
-                      <Label htmlFor={`amount-${item.id}`} className="mr-2">
-                        Amount (R):
-                      </Label>
-                      <div className="flex items-center">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="h-8 w-8 p-0"
-                          onClick={() => {
-                            const newAmount = Math.max(item.minInvestment, (item.amount || 0) - 1000);
-                            onUpdateCartItemAmount(item.id, newAmount);
-                          }}
-                        >
-                          <Minus size={14} />
-                        </Button>
-                        <Input
-                          id={`amount-${item.id}`}
-                          type="number"
-                          value={item.amount}
-                          onChange={(e) => {
-                            const value = Number(e.target.value);
-                            if (value >= item.minInvestment) {
-                              onUpdateCartItemAmount(item.id, value);
-                            }
-                          }}
-                          className="w-24 mx-2 text-right"
-                          min={item.minInvestment}
-                          step={1000}
-                        />
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="h-8 w-8 p-0"
-                          onClick={() => {
-                            onUpdateCartItemAmount(item.id, (item.amount || 0) + 1000);
-                          }}
-                        >
-                          <Plus size={14} />
-                        </Button>
+            {Object.entries(itemsByFund).map(([fund, items]) => (
+              <div key={fund} className="mb-4">
+                <h3 className="font-semibold text-navyblue mb-2">{fund}</h3>
+                <div className="space-y-3">
+                  {items.map((item) => (
+                    <div key={item.id} className="flex items-start justify-between gap-2">
+                      <div className="flex-grow">
+                        <p className="font-medium text-sm">{item.title}</p>
+                        <div className="flex items-center mt-1">
+                          <span className="text-sm text-muted-foreground mr-2">Amount:</span>
+                          <Input
+                            type="number"
+                            min={item.minInvestment}
+                            value={item.amount}
+                            onChange={(e) => {
+                              const value = parseInt(e.target.value);
+                              if (!isNaN(value) && value >= item.minInvestment) {
+                                onUpdateCartItemAmount(item.id, value);
+                              }
+                            }}
+                            className="h-8 w-28"
+                          />
+                        </div>
                       </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => onRemoveFromCart(item.id)}
+                        className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                      >
+                        Remove
+                      </Button>
                     </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-            <Separator className="my-4" />
-            <div className="space-y-3">
-              <div className="flex justify-between">
-                <p>Total Investment:</p>
-                <p className="font-bold">R {totalInvestmentAmount.toLocaleString()}</p>
+                <Separator className="my-3" />
               </div>
+            ))}
+
+            <div className="space-y-4 pt-2">
               <div className="flex justify-between">
-                <p>Your Wallet Balance:</p>
-                <p className="font-bold">R {walletBalance.toLocaleString()}</p>
+                <span className="font-medium">Total Investment:</span>
+                <span className="font-bold">R {totalInvestmentAmount.toLocaleString()}</span>
               </div>
-              {totalInvestmentAmount > walletBalance && (
-                <p className="text-red-500 text-sm">
-                  Insufficient funds. Please add more funds to your wallet or reduce investment amount.
-                </p>
+              
+              <div className="flex justify-between">
+                <span className="font-medium">Wallet Balance:</span>
+                <span className={`font-bold ${insufficientFunds ? 'text-red-600' : 'text-green-600'}`}>
+                  R {walletBalance.toLocaleString()}
+                </span>
+              </div>
+              
+              {insufficientFunds && (
+                <div className="bg-red-50 text-red-800 p-3 rounded text-sm">
+                  Insufficient funds in your wallet. Please add funds before proceeding.
+                </div>
+              )}
+              
+              {orderNumber && (
+                <div className="bg-green-50 text-green-800 p-3 rounded text-sm">
+                  <p className="font-medium">Order completed successfully!</p>
+                  <p>Order Number: {orderNumber}</p>
+                </div>
               )}
             </div>
+
+            <DialogFooter>
+              <Button 
+                type="submit" 
+                onClick={handleCheckout}
+                disabled={cartItems.length === 0 || insufficientFunds || paymentSuccessful}
+                className="w-full bg-gold hover:bg-lightgold"
+              >
+                {paymentSuccessful ? (
+                  <span className="flex items-center">
+                    <Check className="mr-2 h-4 w-4" /> Payment Complete
+                  </span>
+                ) : (
+                  `Pay with Standard Bank Wallet - R ${totalInvestmentAmount.toLocaleString()}`
+                )}
+              </Button>
+            </DialogFooter>
           </>
         )}
-      </div>
-      <SheetFooter className="mt-6">
-        <div className="flex w-full flex-col space-y-3">
-          <Button
-            disabled={cartItems.length === 0 || totalInvestmentAmount > walletBalance}
-            className="w-full bg-gold hover:bg-lightgold"
-            onClick={onCheckout}
-          >
-            Checkout (R {totalInvestmentAmount.toLocaleString()})
-          </Button>
-          <Button
-            variant="outline"
-            className="w-full"
-            onClick={() => onOpenChange(false)}
-          >
-            Continue Shopping
-          </Button>
-        </div>
-      </SheetFooter>
-    </SheetContent>
-  </Sheet>
-);
+      </DialogContent>
+    </Dialog>
+  );
+};
 
 export default InvestmentCart;

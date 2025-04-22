@@ -91,6 +91,15 @@ const ImpactFundsSection = () => {
           Clients can customize their investment portfolio from various impact funds based on their interests and financial goals.
         </p>
         
+        <div className="bg-white/10 rounded-lg p-6 mb-8 text-center">
+          <h3 className="text-xl font-medium mb-2">How Our Investment Process Works</h3>
+          <p className="text-gray-200">
+            As you select business deals that interest you, they are automatically linked to their respective impact funds.
+            Your selections are consolidated at checkout where you'll receive a unique order number. 
+            You can conveniently pay using your Standard Bank wallet, which should be funded in advance.
+          </p>
+        </div>
+        
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {funds.map((fund, index) => (
             <div 
@@ -159,4 +168,3 @@ const ImpactFundsSection = () => {
 };
 
 export default ImpactFundsSection;
-

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import UserLayout from "@/components/layout/UserLayout";
 import { Button } from "@/components/ui/button";
@@ -93,6 +94,14 @@ const impactFunds = [
   }
 ];
 
+// Helper function to generate a unique order number
+const generateOrderNumber = () => {
+  const prefix = "MCA";
+  const timestamp = Date.now().toString().slice(-6);
+  const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+  return `${prefix}-${timestamp}-${random}`;
+};
+
 const UserNewDeals = () => {
   const [searchParams] = useSearchParams();
   const fundFromUrl = searchParams.get('fund');
@@ -110,6 +119,7 @@ const UserNewDeals = () => {
   }>>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [expandedBusinessId, setExpandedBusinessId] = useState<string | null>(null);
+  const [orderNumber, setOrderNumber] = useState<string | null>(null);
   
   const totalInvestmentAmount = cartItems.reduce((total, item) => total + item.amount, 0);
 
@@ -179,14 +189,27 @@ const UserNewDeals = () => {
       return;
     }
 
-    toast.success("Your investments have been processed successfully!");
+    // Generate a unique order number
+    const newOrderNumber = generateOrderNumber();
+    setOrderNumber(newOrderNumber);
     
+    toast.success(`Order #${newOrderNumber} has been processed successfully!`);
     setWalletBalance(walletBalance - totalInvestmentAmount);
+    
+    // Group cart items by fund for the success message
+    const fundGroups = cartItems.reduce((acc: Record<string, number>, item) => {
+      acc[item.fund] = (acc[item.fund] || 0) + 1;
+      return acc;
+    }, {});
+    
+    const fundSummary = Object.entries(fundGroups)
+      .map(([fund, count]) => `${count} deal${count > 1 ? 's' : ''} from ${fund}`)
+      .join(', ');
+    
+    toast.success(`Your investments (${fundSummary}) have been moved to Pending Deals`);
     
     setCartItems([]);
     setIsCartOpen(false);
-    
-    toast.success("Your investments have been moved to Pending Deals");
   };
 
   const currentFund = impactFunds.find(fund => fund.id === activeTab);
@@ -195,26 +218,40 @@ const UserNewDeals = () => {
     <UserLayout>
       <div className="space-y-6">
         <div className="flex justify-between items-center">
-          <h2 className="text-2xl font-bold text-navyblue">Investment Opportunities</h2>
-          <Button 
-            variant="outline" 
-            size="icon"
-            onClick={() => setIsCartOpen(true)}
-            className="relative"
-          >
-            <ShoppingCart size={20} />
-            {cartItems.length > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                {cartItems.length}
-              </span>
-            )}
-          </Button>
+          <div>
+            <h2 className="text-2xl font-bold text-navyblue">Investment Opportunities</h2>
+            <p className="text-sm text-muted-foreground mt-1">
+              Browse and select deals from our impact funds
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="text-right mr-2">
+              <p className="text-sm font-medium">Wallet Balance:</p>
+              <p className="font-bold text-navyblue">R {walletBalance.toLocaleString()}</p>
+            </div>
+            <Button 
+              variant="outline" 
+              size="icon"
+              onClick={() => setIsCartOpen(true)}
+              className="relative"
+            >
+              <ShoppingCart size={20} />
+              {cartItems.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                  {cartItems.length}
+                </span>
+              )}
+            </Button>
+          </div>
         </div>
 
-        <p className="text-muted-foreground">
-          Explore our diverse range of investment opportunities across various Impact Funds. 
-          Select the fund category below to view available businesses for investment.
-        </p>
+        <div className="bg-blue-50 rounded-lg p-4 text-sm">
+          <p className="font-medium text-navyblue">How it works:</p>
+          <p className="text-muted-foreground">
+            Select business deals that interest you from any impact fund. Your selections are linked to their respective funds
+            and consolidated at checkout. Payment is made through your Standard Bank wallet after you receive a unique order number.
+          </p>
+        </div>
         
         <ImpactFundTabs
           impactFunds={impactFunds}
@@ -244,6 +281,7 @@ const UserNewDeals = () => {
           onRemoveFromCart={handleRemoveFromCart}
           onUpdateCartItemAmount={handleUpdateCartItemAmount}
           onCheckout={handleCheckout}
+          orderNumber={orderNumber}
         />
       </div>
     </UserLayout>
