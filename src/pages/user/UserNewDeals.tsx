@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import UserLayout from "@/components/layout/UserLayout";
 import { Button } from "@/components/ui/button";
@@ -8,12 +7,15 @@ import BusinessCard from "@/components/user/new-deals/BusinessCard";
 import InvestmentCart from "@/components/user/new-deals/InvestmentCart";
 import { toast } from "sonner";
 import { useSearchParams } from "react-router-dom";
+import FundSelector from "@/components/user/new-deals/FundSelector";
+import { useIsMobile } from "@/hooks/use-mobile";
 
-// Updated impact funds array to match ImpactFundsSection
 const impactFunds = [
   {
     id: "myfarm",
     name: "MyFarm Impact Fund",
+    return: "15% p.a.",
+    minInvestment: 1000,
     businesses: [
       {
         id: "urban-farming-ct",
@@ -41,6 +43,8 @@ const impactFunds = [
   {
     id: "myproperty",
     name: "MyProperty Impact Fund",
+    return: "14% p.a.",
+    minInvestment: 2000,
     businesses: [
       {
         id: "affordable-housing-jhb",
@@ -68,6 +72,8 @@ const impactFunds = [
   {
     id: "myfranchise",
     name: "MyFranchise Impact Fund",
+    return: "13% p.a.",
+    minInvestment: 1500,
     businesses: [
       {
         id: "food-franchises-national",
@@ -94,7 +100,6 @@ const impactFunds = [
   }
 ];
 
-// Helper function to generate a unique order number
 const generateOrderNumber = () => {
   const prefix = "MCA";
   const timestamp = Date.now().toString().slice(-6);
@@ -108,7 +113,7 @@ const UserNewDeals = () => {
   
   const [selectedBusiness, setSelectedBusiness] = useState<any | null>(null);
   const [investmentAmount, setInvestmentAmount] = useState<number | ''>('');
-  const [walletBalance, setWalletBalance] = useState(245000); // Mock wallet balance
+  const [walletBalance, setWalletBalance] = useState(245000);
   const [activeTab, setActiveTab] = useState(fundFromUrl || impactFunds[0].id);
   const [cartItems, setCartItems] = useState<Array<{
     id: string;
@@ -189,14 +194,12 @@ const UserNewDeals = () => {
       return;
     }
 
-    // Generate a unique order number
     const newOrderNumber = generateOrderNumber();
     setOrderNumber(newOrderNumber);
     
     toast.success(`Order #${newOrderNumber} has been processed successfully!`);
     setWalletBalance(walletBalance - totalInvestmentAmount);
     
-    // Group cart items by fund for the success message
     const fundGroups = cartItems.reduce((acc: Record<string, number>, item) => {
       acc[item.fund] = (acc[item.fund] || 0) + 1;
       return acc;
@@ -212,52 +215,89 @@ const UserNewDeals = () => {
     setIsCartOpen(false);
   };
 
+  const isMobile = useIsMobile();
+
   const currentFund = impactFunds.find(fund => fund.id === activeTab);
 
   return (
     <UserLayout>
-      <div className="space-y-6">
-        <div className="flex justify-between items-center">
-          <div>
-            <h2 className="text-2xl font-bold text-navyblue">Investment Opportunities</h2>
-            <p className="text-sm text-muted-foreground mt-1">
+      <div className="max-w-3xl mx-auto space-y-6 px-0 sm:px-4 py-0">
+        <div className="rounded-t-xl overflow-hidden border-b">
+          <div className="bg-white shadow-sm px-4 py-3 flex flex-col gap-2">
+            <div className="flex items-center justify-between mb-1">
+              <h2 className="text-2xl font-bold text-navyblue">Investment Opportunities</h2>
+              <div className="flex items-center">
+                <span className="text-sm font-semibold mr-1">Wallet Balance:</span>
+                <span className="font-bold text-navyblue mr-2">R {walletBalance.toLocaleString()}</span>
+                <Button 
+                  variant="outline" 
+                  size="icon"
+                  onClick={() => setIsCartOpen(true)}
+                  className="relative"
+                >
+                  <ShoppingCart size={20}/>
+                  {cartItems.length > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                      {cartItems.length}
+                    </span>
+                  )}  
+                </Button>
+              </div>
+            </div>
+            <p className="text-base text-muted-foreground">
               Browse and select deals from our impact funds
             </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="text-right mr-2">
-              <p className="text-sm font-medium">Wallet Balance:</p>
-              <p className="font-bold text-navyblue">R {walletBalance.toLocaleString()}</p>
-            </div>
-            <Button 
-              variant="outline" 
-              size="icon"
-              onClick={() => setIsCartOpen(true)}
-              className="relative"
-            >
-              <ShoppingCart size={20} />
-              {cartItems.length > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                  {cartItems.length}
-                </span>
-              )}
-            </Button>
           </div>
         </div>
 
         <div className="bg-blue-50 rounded-lg p-4 text-sm">
           <p className="font-medium text-navyblue">How it works:</p>
           <p className="text-muted-foreground">
-            Select business deals that interest you from any impact fund. Your selections are linked to their respective funds
-            and consolidated at checkout. Payment is made through your Standard Bank wallet after you receive a unique order number.
+            Select business deals that interest you from any impact fund. Your selections are linked to their respective funds and consolidated at checkout. Payment is made through your Standard Bank wallet after you receive a unique order number.
           </p>
         </div>
-        
-        <ImpactFundTabs
-          impactFunds={impactFunds}
-          activeTab={activeTab}
-          onTabChange={handleTabChange}
-        />
+
+        <div>
+          {isMobile ? (
+            <>
+              <div className="my-2">
+                <FundSelector
+                  funds={impactFunds}
+                  value={activeTab}
+                  onChange={handleTabChange}
+                />
+              </div>
+              {currentFund && (
+                <div className="mt-2 mb-4 px-3 py-2 rounded border border-navyblue bg-white flex flex-col gap-2">
+                  <div className="flex justify-between items-center">
+                    <span className="text-base font-semibold text-navyblue">{currentFund.name.replace(" Impact Fund","")}</span>
+                    <span className="badge bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">{currentFund.return}</span>
+                  </div>
+                  <span className="text-xs text-muted-foreground">
+                    Minimum Investment: <span className="font-medium text-navyblue">R {currentFund.minInvestment.toLocaleString()}</span>
+                  </span>
+                </div>
+              )}
+            </>
+          ) : (
+            <>
+              <ImpactFundTabs
+                impactFunds={impactFunds}
+                activeTab={activeTab}
+                onTabChange={handleTabChange}
+              />
+              {currentFund && (
+                <div className="mt-2 mb-4 px-3 py-2 rounded border border-navyblue bg-white flex flex-row justify-between gap-2 max-w-xl mx-auto">
+                  <span className="text-base font-semibold text-navyblue">{currentFund.name.replace(" Impact Fund","")}</span>
+                  <span className="badge bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">{currentFund.return}</span>
+                  <span className="text-xs text-muted-foreground">
+                    Min: <span className="font-medium text-navyblue">R {currentFund.minInvestment.toLocaleString()}</span>
+                  </span>
+                </div>
+              )}
+            </>
+          )}
+        </div>
 
         <div className="space-y-4">
           {currentFund?.businesses.map(business => (
@@ -265,7 +305,7 @@ const UserNewDeals = () => {
               key={business.id}
               business={business}
               expanded={expandedBusinessId === business.id}
-              fundName={currentFund.name}
+              fundName={currentFund.name.replace(" Impact Fund","")}
               onToggle={toggleBusinessExpansion}
               onAddToCart={(biz, fname) => handleAddToCart(biz, fname)}
             />
