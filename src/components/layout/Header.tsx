@@ -43,7 +43,7 @@ const Header = () => {
                   <span className="text-gold border-b-2 border-gold pb-0.5">Luthando</span>
                   <span className="text-deepblue"> Maduna</span>
                 </span>
-                <span className="font-montserrat text-xs md:text-sm text-charcoal tracking-wider mt-1">
+                <span className="font-montserrat text-xs md:text-sm text-deepblue tracking-wider mt-1">
                   CHARTERED ACCOUNTANTS
                 </span>
               </div>

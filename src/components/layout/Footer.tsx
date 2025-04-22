@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 
@@ -21,7 +22,7 @@ const Footer = () => {
                 <span className="text-gold border-b-2 border-gold pb-0.5">Luthando</span>
                 <span className="text-white"> Maduna</span>
               </span>
-              <span className="font-montserrat text-xs text-gray-300 tracking-wider mt-1">
+              <span className="font-montserrat text-xs text-deepblue tracking-wider mt-1">
                 CHARTERED ACCOUNTANTS
               </span>
             </div>
