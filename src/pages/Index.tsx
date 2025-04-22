@@ -10,7 +10,6 @@ const Index = () => {
     <Layout>
       <Hero />
       <ServicesSection />
-      {/* <FeaturedInvestmentsSection /> -- No longer needed, content merged with ImpactFundsSection */}
       <BusSection />
       <ImpactFundsSection />
     </Layout>

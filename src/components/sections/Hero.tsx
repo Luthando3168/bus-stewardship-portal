@@ -16,15 +16,16 @@ const Hero = () => {
             <span className="text-gold">Growing Your Wealth</span>
           </h1>
           <p className="font-lato text-lg md:text-xl mb-8 text-gray-300 max-w-2xl">
-            Professional chartered accountants providing comprehensive accounting, business management, and investment services through our Business Under Stewardship program.
+            Luthando Maduna Chartered Accountants assists clients to own multiple businesses through our impact funds, 
+            which we then professionally manage to grow your wealth through our Business Under Stewardship program.
           </p>
           
           <div className="flex flex-wrap gap-4">
             <Link 
-              to="/contact" 
+              to="/register" 
               className="font-montserrat inline-block px-8 py-4 bg-gold text-navyblue rounded font-medium hover:bg-lightgold transition-colors"
             >
-              Get Started
+              Join MCA Direct
             </Link>
             <Link 
               to="/bus" 
