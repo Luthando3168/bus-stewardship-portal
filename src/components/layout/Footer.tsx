@@ -195,7 +195,7 @@ const Footer = () => {
                 </Link>
               </div>
               <div className="flex items-center space-x-4 mt-4 md:mt-0">
-                <img src="/lovable-uploads/98d6869e-a552-4731-9f0c-6dce07a2db48.png" alt="CAW Network Member" className="h-22 w-auto" />
+                <img src="/lovable-uploads/98d6869e-a552-4731-9f0c-6dce07a2db48.png" alt="CAW Network Member" className="h-17 w-auto" />
                 <img src="/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png" alt="SAICA Member" className="h-12 w-auto" />
               </div>
             </div>
