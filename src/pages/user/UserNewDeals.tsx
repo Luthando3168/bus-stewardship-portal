@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import UserLayout from "@/components/layout/UserLayout";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { ShoppingCart } from "lucide-react";
+import ImpactFundTabs from "@/components/user/new-deals/ImpactFundTabs";
+import BusinessCard from "@/components/user/new-deals/BusinessCard";
+import InvestmentCart from "@/components/user/new-deals/InvestmentCart";
 import { toast } from "sonner";
-import { useSearchParams } from "react-router-dom";
-import { ChevronDown, ChevronUp, ShoppingCart, Plus, Minus, X } from "lucide-react";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/components/ui/sheet";
-import { Separator } from "@/components/ui/separator";
 
 // Investment opportunities data organized by impact funds as per the form
 const impactFunds = [
@@ -411,6 +406,8 @@ const UserNewDeals = () => {
     toast.success("Your investments have been moved to Pending Deals");
   };
 
+  const currentFund = impactFunds.find(fund => fund.id === activeTab);
+
   return (
     <UserLayout>
       <div className="space-y-6">
@@ -436,203 +433,35 @@ const UserNewDeals = () => {
           Select the fund category below to view available businesses for investment.
         </p>
         
-        <div className="w-full overflow-x-auto py-2">
-          <div className="flex space-x-2 min-w-max">
-            {impactFunds.map((fund) => (
-              <button
-                key={fund.id}
-                onClick={() => handleTabChange(fund.id)}
-                className={`whitespace-nowrap px-3 py-2 rounded-full transition 
-                  text-sm font-medium shadow-none 
-                  ${activeTab === fund.id 
-                    ? "bg-white border border-navyblue text-navyblue" 
-                    : "bg-muted text-gray-700 hover:bg-gray-200 border border-transparent"}`}
-                style={{ minWidth: 120 }}
-              >
-                {fund.name.replace(" Impact Fund", "")}
-              </button>
-            ))}
-          </div>
-        </div>
+        <ImpactFundTabs
+          impactFunds={impactFunds}
+          activeTab={activeTab}
+          onTabChange={handleTabChange}
+        />
 
         <div className="space-y-4">
-          {impactFunds
-            .find(fund => fund.id === activeTab)
-            ?.businesses.map(business => (
-              <Card key={business.id} className="overflow-hidden">
-                <CardHeader className="pb-3">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <CardTitle className="text-lg">{business.title}</CardTitle>
-                      <CardDescription className="text-sm">{business.region}</CardDescription>
-                    </div>
-                    <Badge className="bg-blue-600">
-                      {impactFunds.find(fund => fund.id === activeTab)?.name.replace(" Impact Fund", "")}
-                    </Badge>
-                  </div>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => toggleBusinessExpansion(business.id)}
-                    className="p-0 h-8 hover:bg-transparent"
-                  >
-                    {expandedBusinessId === business.id ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-                  </Button>
-                </CardHeader>
-
-                {expandedBusinessId === business.id && (
-                  <>
-                    <CardContent className="pt-2">
-                      <p className="text-sm">{business.description}</p>
-                      
-                      <div className="mt-4">
-                        <p className="text-sm text-muted-foreground">Minimum Investment</p>
-                        <p className="font-medium text-lg">R {business.minInvestment.toLocaleString()}</p>
-                      </div>
-                    </CardContent>
-                    
-                    <CardFooter className="flex justify-end pt-2">
-                      <Button 
-                        className="w-full sm:w-auto bg-gold hover:bg-lightgold"
-                        onClick={() => handleAddToCart(
-                          business, 
-                          impactFunds.find(fund => fund.id === activeTab)?.name || "Impact Fund"
-                        )}
-                      >
-                        <Plus size={16} className="mr-1" />
-                        Add to Investment Cart
-                      </Button>
-                    </CardFooter>
-                  </>
-                )}
-              </Card>
-            ))}
+          {currentFund?.businesses.map(business => (
+            <BusinessCard
+              key={business.id}
+              business={business}
+              expanded={expandedBusinessId === business.id}
+              fundName={currentFund.name}
+              onToggle={toggleBusinessExpansion}
+              onAddToCart={(biz, fname) => handleAddToCart(biz, fname)}
+            />
+          ))}
         </div>
-        
-        <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
-          <SheetContent className="w-full sm:max-w-md">
-            <SheetHeader>
-              <SheetTitle className="flex items-center">
-                <ShoppingCart className="mr-2" size={18} /> 
-                Your Investment Cart
-              </SheetTitle>
-            </SheetHeader>
-            
-            <div className="mt-6 space-y-5">
-              {cartItems.length === 0 ? (
-                <p className="text-center text-muted-foreground py-8">
-                  Your investment cart is empty.
-                </p>
-              ) : (
-                <>
-                  <div className="space-y-4">
-                    {cartItems.map(item => (
-                      <div key={item.id} className="flex flex-col border rounded-md p-3">
-                        <div className="flex justify-between">
-                          <div>
-                            <h4 className="font-medium">{item.title}</h4>
-                            <p className="text-sm text-muted-foreground">{item.fund}</p>
-                          </div>
-                          <Button 
-                            variant="ghost" 
-                            size="sm" 
-                            className="h-8 w-8 p-0"
-                            onClick={() => handleRemoveFromCart(item.id)}
-                          >
-                            <X size={16} />
-                          </Button>
-                        </div>
-                        
-                        <div className="mt-2">
-                          <p className="text-xs text-muted-foreground">
-                            Minimum investment: R {item.minInvestment.toLocaleString()}
-                          </p>
-                          <div className="flex items-center mt-2">
-                            <Label htmlFor={`amount-${item.id}`} className="mr-2">Amount (R):</Label>
-                            <div className="flex items-center">
-                              <Button 
-                                variant="outline" 
-                                size="sm" 
-                                className="h-8 w-8 p-0"
-                                onClick={() => {
-                                  const newAmount = Math.max(item.minInvestment, (item.amount || 0) - 1000);
-                                  handleUpdateCartItemAmount(item.id, newAmount);
-                                }}
-                              >
-                                <Minus size={14} />
-                              </Button>
-                              <Input
-                                id={`amount-${item.id}`}
-                                type="number"
-                                value={item.amount}
-                                onChange={(e) => {
-                                  const value = Number(e.target.value);
-                                  if (value >= item.minInvestment) {
-                                    handleUpdateCartItemAmount(item.id, value);
-                                  }
-                                }}
-                                className="w-24 mx-2 text-right"
-                                min={item.minInvestment}
-                                step={1000}
-                              />
-                              <Button 
-                                variant="outline" 
-                                size="sm" 
-                                className="h-8 w-8 p-0"
-                                onClick={() => {
-                                  handleUpdateCartItemAmount(item.id, (item.amount || 0) + 1000);
-                                }}
-                              >
-                                <Plus size={14} />
-                              </Button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
 
-                  <Separator className="my-4" />
-                  
-                  <div className="space-y-3">
-                    <div className="flex justify-between">
-                      <p>Total Investment:</p>
-                      <p className="font-bold">R {totalInvestmentAmount.toLocaleString()}</p>
-                    </div>
-                    <div className="flex justify-between">
-                      <p>Your Wallet Balance:</p>
-                      <p className="font-bold">R {walletBalance.toLocaleString()}</p>
-                    </div>
-                    {totalInvestmentAmount > walletBalance && (
-                      <p className="text-red-500 text-sm">
-                        Insufficient funds. Please add more funds to your wallet or reduce investment amount.
-                      </p>
-                    )}
-                  </div>
-                </>
-              )}
-            </div>
-
-            <SheetFooter className="mt-6">
-              <div className="flex w-full flex-col space-y-3">
-                <Button 
-                  disabled={cartItems.length === 0 || totalInvestmentAmount > walletBalance} 
-                  className="w-full bg-gold hover:bg-lightgold"
-                  onClick={handleCheckout}
-                >
-                  Checkout (R {totalInvestmentAmount.toLocaleString()})
-                </Button>
-                <Button 
-                  variant="outline" 
-                  className="w-full" 
-                  onClick={() => setIsCartOpen(false)}
-                >
-                  Continue Shopping
-                </Button>
-              </div>
-            </SheetFooter>
-          </SheetContent>
-        </Sheet>
+        <InvestmentCart
+          open={isCartOpen}
+          onOpenChange={setIsCartOpen}
+          cartItems={cartItems}
+          walletBalance={walletBalance}
+          totalInvestmentAmount={totalInvestmentAmount}
+          onRemoveFromCart={handleRemoveFromCart}
+          onUpdateCartItemAmount={handleUpdateCartItemAmount}
+          onCheckout={handleCheckout}
+        />
       </div>
     </UserLayout>
   );
