@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,7 +7,7 @@ import Index from "./pages/Index";
 import Services from "./pages/Services";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
-import ProtectedRoute from "./components/auth/ProtectedRoute";
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 
 // Public pages
 import About from "./pages/About";
@@ -32,6 +31,7 @@ import UserProfile from "./pages/user/UserProfile";
 import UserNewDeals from "./pages/user/UserNewDeals";
 import UserInvestments from "./pages/user/UserInvestments";
 import UserStatements from "./pages/user/UserStatements";
+import AdminReports from "./pages/admin/AdminReports";
 
 const queryClient = new QueryClient();
 
@@ -60,7 +60,7 @@ const App = () => (
           <Route path="/admin/deals" element={<ProtectedRoute allowedRole="admin"><AdminDeals /></ProtectedRoute>} />
           <Route path="/admin/notifications" element={<ProtectedRoute allowedRole="admin"><AdminNotifications /></ProtectedRoute>} />
           <Route path="/admin/reports" element={<ProtectedRoute allowedRole="admin">
-            <div className="min-h-screen pt-16">Admin Reports Coming Soon</div>
+            <AdminReports />
           </ProtectedRoute>} />
 
           {/* User routes */}
