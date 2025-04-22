@@ -8,6 +8,29 @@ import { useIsMobile } from "@/hooks/use-mobile";
 const ImpactFunds = () => {
   const isMobile = useIsMobile();
   
+  const investmentProcess = [
+    {
+      step: "Capital Pooling",
+      description: "We pool capital from multiple investors to achieve scale and diversification."
+    },
+    {
+      step: "Deal Sourcing & Due Diligence",
+      description: "Our team identifies and thoroughly vets investment opportunities using rigorous criteria."
+    },
+    {
+      step: "Structured Investments",
+      description: "We design investment structures that align financial returns with measurable impact outcomes."
+    },
+    {
+      step: "Active Management",
+      description: "We provide ongoing support and oversight to portfolio companies to enhance performance."
+    },
+    {
+      step: "Impact & Financial Reporting",
+      description: "Regular reporting on both financial returns and social/environmental impact metrics."
+    }
+  ];
+  
   return (
     <Layout>
       <section className="py-16 bg-white">
