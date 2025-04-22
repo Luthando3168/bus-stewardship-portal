@@ -155,7 +155,8 @@ const UserStatements = () => {
                           </Button>
                         </TableCell>
                       </TableRow>
-                    ))}
+                    );
+                  })}
                 </TableBody>
               </Table>
             </CardContent>
