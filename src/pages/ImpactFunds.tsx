@@ -4,6 +4,7 @@ import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const ImpactFunds = () => {
   const investmentProcess = [
@@ -40,6 +41,8 @@ const ImpactFunds = () => {
       description: "We plan for responsible exits that preserve the impact mission while delivering financial returns to investors."
     }
   ];
+
+  const isMobile = useIsMobile();
 
   return (
     <Layout>
@@ -94,7 +97,7 @@ const ImpactFunds = () => {
 
             {/* Fund Details */}
             <Tabs defaultValue="agri" className="mb-12">
-              <TabsList className="grid w-full grid-cols-4">
+              <TabsList className={isMobile ? "flex flex-col w-full space-y-1" : "grid w-full grid-cols-4"}>
                 <TabsTrigger value="agri">Agri Fund</TabsTrigger>
                 <TabsTrigger value="property">Property Fund</TabsTrigger>
                 <TabsTrigger value="energy">Energy Fund</TabsTrigger>
@@ -133,7 +136,7 @@ const ImpactFunds = () => {
                       </div>
                     </div>
                     
-                    <div className="grid grid-cols-2 gap-4 pt-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
                       <div className="p-4 bg-lightgray rounded-lg">
                         <h5 className="font-medium text-sm text-muted-foreground">Target Return</h5>
                         <p className="text-xl font-bold text-navyblue">8-12% p.a.</p>
@@ -179,7 +182,7 @@ const ImpactFunds = () => {
                       </div>
                     </div>
                     
-                    <div className="grid grid-cols-2 gap-4 pt-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
                       <div className="p-4 bg-lightgray rounded-lg">
                         <h5 className="font-medium text-sm text-muted-foreground">Target Return</h5>
                         <p className="text-xl font-bold text-navyblue">9-14% p.a.</p>
@@ -225,7 +228,7 @@ const ImpactFunds = () => {
                       </div>
                     </div>
                     
-                    <div className="grid grid-cols-2 gap-4 pt-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
                       <div className="p-4 bg-lightgray rounded-lg">
                         <h5 className="font-medium text-sm text-muted-foreground">Target Return</h5>
                         <p className="text-xl font-bold text-navyblue">10-15% p.a.</p>
@@ -271,7 +274,7 @@ const ImpactFunds = () => {
                       </div>
                     </div>
                     
-                    <div className="grid grid-cols-2 gap-4 pt-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
                       <div className="p-4 bg-lightgray rounded-lg">
                         <h5 className="font-medium text-sm text-muted-foreground">Target Return</h5>
                         <p className="text-xl font-bold text-navyblue">12-18% p.a.</p>

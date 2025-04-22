@@ -1,6 +1,7 @@
 
 import SectionTitle from "../ui/SectionTitle";
 import { Link } from "react-router-dom";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const ImpactFundsSection = () => {
   const funds = [
@@ -26,6 +27,8 @@ const ImpactFundsSection = () => {
     }
   ];
 
+  const isMobile = useIsMobile();
+
   return (
     <section className="py-20 bg-navyblue text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,20 +44,20 @@ const ImpactFundsSection = () => {
           sustainable returns while contributing to socioeconomic development.
         </p>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {funds.map((fund, index) => (
             <div 
               key={index} 
-              className={`rounded-lg overflow-hidden shadow-lg bg-gradient-to-br ${fund.color} p-8 flex flex-col justify-between hover:-translate-y-2 transition-transform duration-300`}
+              className={`rounded-lg overflow-hidden shadow-lg bg-gradient-to-br ${fund.color} p-6 sm:p-8 flex flex-col justify-between hover:-translate-y-2 transition-transform duration-300`}
             >
               <div>
-                <h3 className="font-montserrat font-bold text-2xl mb-4">Sankofa {fund.name}</h3>
+                <h3 className="font-montserrat font-bold text-xl sm:text-2xl mb-4">Sankofa {fund.name}</h3>
                 <p className="font-lato text-gray-200 mb-6">{fund.description}</p>
               </div>
               
               <Link 
                 to={`/impact-funds#${fund.name.toLowerCase().split(" ")[0]}`}
-                className="font-montserrat inline-block px-6 py-2 bg-white/10 text-white rounded font-medium hover:bg-white/20 transition-colors mt-auto"
+                className="font-montserrat inline-block px-4 sm:px-6 py-2 bg-white/10 text-white rounded font-medium hover:bg-white/20 transition-colors mt-auto text-center"
               >
                 Learn More
               </Link>
@@ -65,7 +68,7 @@ const ImpactFundsSection = () => {
         <div className="mt-16 text-center">
           <Link
             to="/foundation"
-            className="font-montserrat inline-block px-8 py-4 border border-gold text-gold rounded font-medium hover:bg-gold/10 transition-colors"
+            className="font-montserrat inline-block px-6 sm:px-8 py-3 sm:py-4 border border-gold text-gold rounded font-medium hover:bg-gold/10 transition-colors"
           >
             Learn About Our Foundation
           </Link>
