@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
 import { Toaster } from "sonner";
 import Index from "@/pages/Index";
 import About from "@/pages/About";
@@ -32,26 +32,7 @@ import AdminNotifications from "@/pages/admin/AdminNotifications";
 import UserNewDeals from "@/pages/user/UserNewDeals";
 import UserPendingDeals from "@/pages/user/UserPendingDeals";
 import UserMyInvestments from "@/pages/user/UserMyInvestments";
-
-interface ProtectedRouteProps {
-  children?: React.ReactNode;
-  allowedRole: string;
-}
-
-const ProtectedRoute = ({ allowedRole, children }: ProtectedRouteProps) => {
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-  const userRole = localStorage.getItem("userRole");
-
-  if (!isLoggedIn) {
-    return <Navigate to="/login" />;
-  }
-
-  if (allowedRole !== userRole) {
-    return <Navigate to="/not-authorized" />;
-  }
-
-  return children ? <>{children}</> : null;
-};
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -88,30 +69,30 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
-
+        
         {/* User Routes */}
-        <Route element={<ProtectedRoute allowedRole="user" />}>
-          <Route path="/user/dashboard" element={<UserDashboard />} />
-          <Route path="/user/wallet" element={<UserWallet />} />
-          <Route path="/user/beneficiaries" element={<UserBeneficiaries />} />
-          <Route path="/user/statements" element={<UserStatements />} />
-          <Route path="/user/profile" element={<UserProfile />} />
-          <Route path="/user/investments" element={<UserInvestments />} />
-          <Route path="/user/new-deals" element={<UserNewDeals />} />
-          <Route path="/user/pending-deals" element={<UserPendingDeals />} />
-          <Route path="/user/my-investments" element={<UserMyInvestments />} />
+        <Route path="/user" element={<ProtectedRoute allowedRole="user"><Outlet /></ProtectedRoute>}>
+          <Route path="dashboard" element={<UserDashboard />} />
+          <Route path="wallet" element={<UserWallet />} />
+          <Route path="beneficiaries" element={<UserBeneficiaries />} />
+          <Route path="statements" element={<UserStatements />} />
+          <Route path="profile" element={<UserProfile />} />
+          <Route path="investments" element={<UserInvestments />} />
+          <Route path="new-deals" element={<UserNewDeals />} />
+          <Route path="pending-deals" element={<UserPendingDeals />} />
+          <Route path="my-investments" element={<UserMyInvestments />} />
         </Route>
         
         {/* Admin Routes */}
-        <Route element={<ProtectedRoute allowedRole="admin" />}>
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/users" element={<AdminUsers />} />
-          <Route path="/admin/deals" element={<AdminDeals />} />
-          <Route path="/admin/reports" element={<AdminReports />} />
-          <Route path="/admin/consultations" element={<AdminConsultations />} />
-          <Route path="/admin/bank-accounts" element={<AdminBankAccounts />} />
-          <Route path="/admin/beneficiaries" element={<AdminBeneficiaries />} />
-          <Route path="/admin/notifications" element={<AdminNotifications />} />
+        <Route path="/admin" element={<ProtectedRoute allowedRole="admin"><Outlet /></ProtectedRoute>}>
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="users" element={<AdminUsers />} />
+          <Route path="deals" element={<AdminDeals />} />
+          <Route path="reports" element={<AdminReports />} />
+          <Route path="consultations" element={<AdminConsultations />} />
+          <Route path="bank-accounts" element={<AdminBankAccounts />} />
+          <Route path="beneficiaries" element={<AdminBeneficiaries />} />
+          <Route path="notifications" element={<AdminNotifications />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

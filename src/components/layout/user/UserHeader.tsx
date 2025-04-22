@@ -1,3 +1,4 @@
+
 import { Bell, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -22,7 +23,12 @@ interface UserHeaderProps {
   userName?: string;
 }
 
-const UserHeader = ({ notifications, isMobile = false, onMenuClick, userName = "Client" }: UserHeaderProps) => {
+const UserHeader = ({ 
+  notifications, 
+  isMobile = false, 
+  onMenuClick, 
+  userName = "Client" 
+}: UserHeaderProps) => {
   return (
     <header className="bg-white shadow-sm p-3 md:p-4">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -33,6 +39,7 @@ const UserHeader = ({ notifications, isMobile = false, onMenuClick, userName = "
               size="icon"
               onClick={onMenuClick}
               className="mr-2"
+              aria-label="Toggle menu"
             >
               <Menu className="h-5 w-5" />
             </Button>

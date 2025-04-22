@@ -6,7 +6,6 @@ import UserSidebar from "./user/UserSidebar";
 import UserHeader from "./user/UserHeader";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
 
 interface UserLayoutProps {
   children: ReactNode;
@@ -35,6 +34,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
   const handleLogout = () => {
     localStorage.removeItem("userRole");
     localStorage.removeItem("userName");
+    localStorage.removeItem("userSurname");
     localStorage.removeItem("isLoggedIn");
     toast.success("Logged out successfully");
     navigate("/login");
