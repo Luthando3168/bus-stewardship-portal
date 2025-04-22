@@ -41,45 +41,77 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     
     <style>
-      /* Hide the Lovable edit toast */
-      .lovable-toast, .lovable-edit-toast, [class*="lovable-toast"] {
+      /* Comprehensive rules to hide all Lovable edit toasts */
+      .lovable-toast, 
+      .lovable-edit-toast, 
+      [class*="lovable-toast"],
+      [class*="lovable-edit"],
+      [data-lovable-toast],
+      [id*="lovable-toast"],
+      [id*="lovable-edit"] {
         display: none !important;
         visibility: hidden !important;
         opacity: 0 !important;
         pointer-events: none !important;
+        position: absolute !important;
+        left: -9999px !important;
+        height: 0 !important;
+        width: 0 !important;
+        max-height: 0 !important;
+        max-width: 0 !important;
+        overflow: hidden !important;
+        clip: rect(0 0 0 0) !important;
+        -webkit-clip-path: inset(50%) !important;
+        clip-path: inset(50%) !important;
+        border: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
       }
     </style>
   </head>
 
   <body>
     <div id="root"></div>
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module">
+      // Completely disable GPT Engineer functionality
       window.GPT_ENGINEER_CONFIG = {
-        hideEditToast: true
+        hideEditToast: true,
+        disableEditing: true
       };
       
-      // Additional script to ensure toast is hidden
-      window.addEventListener('DOMContentLoaded', (event) => {
-        // Function to hide toast elements
-        const hideToasts = () => {
-          const toasts = document.querySelectorAll('[class*="lovable-toast"], [class*="lovable-edit"], .lovable-toast, .lovable-edit-toast');
-          toasts.forEach(toast => {
-            toast.style.display = 'none';
-            toast.style.visibility = 'hidden';
-            toast.style.opacity = '0';
-            toast.style.pointerEvents = 'none';
-          });
-        };
+      // Function to remove any Lovable elements that might appear
+      const removeEditElements = () => {
+        // Find all elements with Lovable classes or attributes
+        const elements = document.querySelectorAll('[class*="lovable-"], [id*="lovable-"], [data-lovable]');
+        elements.forEach(el => el.remove());
         
-        // Run immediately
-        hideToasts();
-        
-        // Run again after a delay and periodically
-        setTimeout(hideToasts, 500);
-        setInterval(hideToasts, 2000);
+        // Remove any specific edit toast that might be injected
+        const editToasts = document.querySelectorAll('.lovable-toast, .lovable-edit-toast');
+        editToasts.forEach(toast => toast.remove());
+      };
+      
+      // Run on load and periodically
+      window.addEventListener('DOMContentLoaded', removeEditElements);
+      document.addEventListener('DOMContentLoaded', removeEditElements);
+      
+      // Run periodically to catch dynamically added elements
+      setInterval(removeEditElements, 500);
+      
+      // Observe DOM changes to immediately remove any injected elements
+      const observer = new MutationObserver(mutations => {
+        for (const mutation of mutations) {
+          if (mutation.addedNodes.length) {
+            removeEditElements();
+          }
+        }
+      });
+      
+      // Start observing the document body for added nodes
+      window.addEventListener('load', () => {
+        observer.observe(document.body, { childList: true, subtree: true });
       });
     </script>
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
