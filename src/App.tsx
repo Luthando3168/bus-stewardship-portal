@@ -10,7 +10,6 @@ import NotFound from "./pages/NotFound";
 
 // Creating placeholders for the future pages
 const About = () => <div className="min-h-screen pt-16">About Page Coming Soon</div>;
-const Services = () => <div className="min-h-screen pt-16">Services Page Coming Soon</div>;
 const Bus = () => <div className="min-h-screen pt-16">BUS Program Page Coming Soon</div>;
 const ImpactFunds = () => <div className="min-h-screen pt-16">Impact Funds Page Coming Soon</div>;
 const Foundation = () => <div className="min-h-screen pt-16">Foundation Page Coming Soon</div>;
@@ -45,3 +44,4 @@ const App = () => (
 );
 
 export default App;
+
