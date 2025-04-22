@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -82,7 +81,6 @@ const Foundation = () => {
           />
 
           <div className="max-w-4xl mx-auto mt-12 space-y-10">
-            {/* Foundation Overview */}
             <div className="text-charcoal space-y-6">
               <p className="text-lg">
                 The Luthando Maduna Foundation is the philanthropic arm of our organization, dedicated to 
@@ -97,7 +95,6 @@ const Foundation = () => {
               </p>
             </div>
 
-            {/* Our Approach */}
             <div>
               <h3 className="text-2xl font-bold text-navyblue mb-6">Our Approach</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -134,9 +131,14 @@ const Foundation = () => {
               </div>
             </div>
 
-            {/* Key Programs */}
             <div>
               <h3 className="text-2xl font-bold text-navyblue mb-6">Key Programs</h3>
+              
+              {isMobile && (
+                <p className="text-sm text-muted-foreground mb-4 text-center">
+                  (Click dropdown to see programs)
+                </p>
+              )}
               
               <Tabs defaultValue="youth" className="space-y-6">
                 {isMobile ? (
@@ -144,7 +146,6 @@ const Foundation = () => {
                     <select 
                       className="w-full p-2 border border-gray-300 rounded bg-white text-charcoal"
                       onChange={(e) => {
-                        // Find the tab trigger with this value and click it
                         const tabTrigger = document.querySelector(`[data-state][value="${e.target.value}"]`) as HTMLButtonElement;
                         if (tabTrigger) tabTrigger.click();
                       }}
@@ -191,7 +192,6 @@ const Foundation = () => {
               </Tabs>
             </div>
 
-            {/* Impact Report */}
             <div>
               <h3 className="text-2xl font-bold text-navyblue mb-6">Our Impact</h3>
               <Card>
@@ -219,7 +219,6 @@ const Foundation = () => {
               </Card>
             </div>
 
-            {/* Get Involved */}
             <div className="bg-lightgray p-8 rounded-lg text-center">
               <h3 className="text-2xl font-bold text-navyblue mb-4">Get Involved</h3>
               <p className="mb-6">

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -7,43 +6,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const ImpactFunds = () => {
-  const investmentProcess = [
-    {
-      step: "Deal Sourcing",
-      description: "We identify potential investment opportunities through our network, industry research, and direct outreach."
-    },
-    {
-      step: "Initial Screening",
-      description: "Each opportunity undergoes a preliminary assessment to evaluate alignment with our impact criteria and financial objectives."
-    },
-    {
-      step: "Due Diligence",
-      description: "We conduct comprehensive financial, legal, operational, and impact analyses of promising opportunities."
-    },
-    {
-      step: "Investment Committee Review",
-      description: "Our experienced committee evaluates the opportunity against stringent criteria for both financial returns and impact potential."
-    },
-    {
-      step: "Deal Structuring",
-      description: "We structure the investment to protect investor interests while supporting the success of the portfolio company or project."
-    },
-    {
-      step: "Investment Monitoring",
-      description: "We actively monitor performance, provide support, and implement strategic interventions as needed."
-    },
-    {
-      step: "Impact Measurement",
-      description: "We track and report on both financial returns and social/environmental impact outcomes."
-    },
-    {
-      step: "Exit Strategy",
-      description: "We plan for responsible exits that preserve the impact mission while delivering financial returns to investors."
-    }
-  ];
-
   const isMobile = useIsMobile();
-
+  
   return (
     <Layout>
       <section className="py-16 bg-white">
@@ -97,6 +61,12 @@ const ImpactFunds = () => {
 
             {/* Fund Details */}
             <Tabs defaultValue="agri" className="mb-12">
+              {isMobile && (
+                <p className="text-sm text-muted-foreground mb-4 text-center">
+                  (Click dropdown to see funds)
+                </p>
+              )}
+              
               <TabsList className={isMobile ? "flex flex-col w-full space-y-1" : "grid w-full grid-cols-4"}>
                 <TabsTrigger value="agri">Agri Fund</TabsTrigger>
                 <TabsTrigger value="property">Property Fund</TabsTrigger>
