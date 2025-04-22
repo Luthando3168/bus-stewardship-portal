@@ -100,13 +100,6 @@ const Contact = () => {
                 </div>
               </div>
             </div>
-
-            <div className="mt-12 border rounded-lg overflow-hidden h-96">
-              {/* Replace with an actual Google Maps embed in production */}
-              <div className="w-full h-full bg-lightgray flex items-center justify-center">
-                <p className="text-muted-foreground">Google Maps would be embedded here</p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
