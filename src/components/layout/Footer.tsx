@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 
@@ -85,6 +84,11 @@ const Footer = () => {
               <li>
                 <Link to="/impact-funds#energy" className="font-lato text-sm text-gray-300 hover:text-gold transition-colors">
                   Sankofa Energy Impact Fund
+                </Link>
+              </li>
+              <li>
+                <Link to="/impact-funds#enterprise" className="font-lato text-sm text-gray-300 hover:text-gold transition-colors">
+                  Sankofa Enterprise Impact Fund
                 </Link>
               </li>
               <li>
