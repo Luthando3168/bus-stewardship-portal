@@ -200,12 +200,12 @@ const Footer = () => {
                 <img 
                   src="/lovable-uploads/98d6869e-a552-4731-9f0c-6dce07a2db48.png" 
                   alt="CAW Network Member" 
-                  className="h-16 w-auto"
+                  className="h-20 w-auto"
                 />
                 <img 
                   src="/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png" 
                   alt="SAICA Member" 
-                  className="h-12 w-auto"
+                  className="h-20 w-auto"
                 />
               </div>
             </div>
