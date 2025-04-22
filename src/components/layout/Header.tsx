@@ -37,7 +37,7 @@ const Header = () => {
         <span className="text-gold border-b-2 border-gold pb-0.5">Luthando</span>
         <span className="text-navyblue"> Maduna</span>
       </span>
-      <span className={`font-montserrat text-xs text-navyblue tracking-wider mt-0.5 group-hover:text-gold transition-colors ${isMobile ? "text-[0.6rem]" : ""}`}>
+      <span className={`font-montserrat text-xs text-navyblue tracking-wider group-hover:text-gold transition-colors ${isMobile ? "text-[0.6rem]" : ""}`}>
         CHARTERED ACCOUNTANTS
       </span>
     </Link>
@@ -45,7 +45,7 @@ const Header = () => {
 
   return (
     <header className="bg-white shadow-md fixed top-0 left-0 w-full z-30">
-      <nav className="container mx-auto flex items-center justify-between py-0.5 px-4 md:px-6 relative">
+      <nav className="container mx-auto flex items-center justify-between py-0 px-4 md:px-6 relative">
         {/* Logo (left side) */}
         {logo}
 
@@ -75,7 +75,7 @@ const Header = () => {
               className={`fixed top-0 right-0 h-full w-64 max-w-[80vw] bg-white shadow-lg z-50 transition-transform duration-300 ease-in-out
                   ${menuOpen ? "translate-x-0" : "translate-x-full"}`}
             >
-              <div className="flex items-center justify-between px-5 py-3 border-b border-lightgray">
+              <div className="flex items-center justify-between px-5 py-2 border-b border-lightgray">
                 {/* Logo inside menu (smaller) */}
                 <span>{logo}</span>
                 <button
@@ -87,7 +87,7 @@ const Header = () => {
                 </button>
               </div>
 
-              <div className="flex flex-col gap-1 px-5 py-4">
+              <div className="flex flex-col gap-1 px-5 py-3">
                 {navLinks.map(link => (
                   <Link
                     key={link.to}
@@ -160,8 +160,8 @@ const Header = () => {
           </div>
         )}
       </nav>
-      {/* Smaller spacer */}
-      <div className="h-8 md:h-10"></div>
+      {/* Minimal spacer to avoid content being hidden under header */}
+      <div className="h-7 md:h-8"></div>
     </header>
   );
 };
