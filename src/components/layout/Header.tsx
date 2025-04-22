@@ -37,7 +37,7 @@ const Header = () => {
         <span className="text-gold border-b-2 border-gold pb-0.5">Luthando</span>
         <span className="text-navyblue"> Maduna</span>
       </span>
-      <span className={`font-montserrat text-xs text-navyblue tracking-wider mt-1 group-hover:text-gold transition-colors ${isMobile ? "text-[0.6rem]" : ""}`}>
+      <span className={`font-montserrat text-xs text-navyblue tracking-wider mt-0.5 group-hover:text-gold transition-colors ${isMobile ? "text-[0.6rem]" : ""}`}>
         CHARTERED ACCOUNTANTS
       </span>
     </Link>
@@ -45,7 +45,7 @@ const Header = () => {
 
   return (
     <header className="bg-white shadow-md fixed top-0 left-0 w-full z-30">
-      <nav className="container mx-auto flex items-center justify-between py-1 md:py-2 px-4 md:px-6 relative">
+      <nav className="container mx-auto flex items-center justify-between py-0.5 px-4 md:px-6 relative">
         {/* Logo (left side) */}
         {logo}
 
@@ -56,7 +56,7 @@ const Header = () => {
             <button
               className="inline-flex items-center justify-center p-2 rounded hover:bg-lightgray focus:outline-none focus:bg-lightgray"
               aria-label="Open menu"
-              onClick={() => setMenuOpen(true)}
+              onClick={() => setMenuOpen(!menuOpen)}
             >
               <Menu size={28} className="text-navyblue" />
             </button>
@@ -64,21 +64,18 @@ const Header = () => {
             {/* Backdrop overlay when menu is open */}
             {menuOpen && (
               <div
-                className="fixed inset-0 z-40 bg-black bg-opacity-30 backdrop-blur-sm transition-opacity"
+                className="fixed inset-0 z-40 bg-black bg-opacity-50 backdrop-blur-sm transition-opacity"
                 onClick={() => setMenuOpen(false)}
                 aria-label="Close menu overlay"
               />
             )}
 
-            {/* Slide-in mobile menu */}
+            {/* Slide-in mobile menu - Modified for better visibility and UX */}
             <div
-              className={`fixed top-0 right-0 h-full w-64 max-w-[80vw] bg-white shadow-lg z-50 transition-transform duration-300
+              className={`fixed top-0 right-0 h-full w-64 max-w-[80vw] bg-white shadow-lg z-50 transition-transform duration-300 ease-in-out
                   ${menuOpen ? "translate-x-0" : "translate-x-full"}`}
-              style={{ transitionProperty: "transform" }}
-              aria-hidden={!menuOpen}
-              role="dialog"
             >
-              <div className="flex items-center justify-between px-5 py-4 border-b border-lightgray">
+              <div className="flex items-center justify-between px-5 py-3 border-b border-lightgray">
                 {/* Logo inside menu (smaller) */}
                 <span>{logo}</span>
                 <button
@@ -90,7 +87,7 @@ const Header = () => {
                 </button>
               </div>
 
-              <div className="flex flex-col gap-2 px-5 py-6">
+              <div className="flex flex-col gap-1 px-5 py-4">
                 {navLinks.map(link => (
                   <Link
                     key={link.to}
@@ -163,8 +160,8 @@ const Header = () => {
           </div>
         )}
       </nav>
-      {/* Reduced height spacer */}
-      <div className="h-10 md:h-12"></div>
+      {/* Smaller spacer */}
+      <div className="h-8 md:h-10"></div>
     </header>
   );
 };
