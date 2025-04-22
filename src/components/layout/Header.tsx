@@ -77,7 +77,7 @@ const Header = () => {
             >
               <div className="flex items-center justify-between px-5 py-2 border-b border-lightgray">
                 {/* Logo inside menu (smaller) */}
-                <span>{logo}</span>
+                <span className="scale-90 origin-left">{logo}</span>
                 <button
                   className="ml-2 p-2 rounded hover:bg-lightgray"
                   aria-label="Close menu"
@@ -160,8 +160,8 @@ const Header = () => {
           </div>
         )}
       </nav>
-      {/* Minimal spacer to avoid content being hidden under header */}
-      <div className="h-7 md:h-8"></div>
+      {/* Spacer to prevent content from being hidden under header */}
+      <div className="h-5 md:h-6"></div>
     </header>
   );
 };
