@@ -1,19 +1,26 @@
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-
-  const socialLinks = [
-    { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
-    { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
-    { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-    { icon: Youtube, href: "https://youtube.com", label: "Youtube" }
-  ];
-
-  return (
-    <footer className="bg-navyblue text-white">
+  const socialLinks = [{
+    icon: Facebook,
+    href: "https://facebook.com",
+    label: "Facebook"
+  }, {
+    icon: Instagram,
+    href: "https://instagram.com",
+    label: "Instagram"
+  }, {
+    icon: Linkedin,
+    href: "https://linkedin.com",
+    label: "LinkedIn"
+  }, {
+    icon: Youtube,
+    href: "https://youtube.com",
+    label: "Youtube"
+  }];
+  return <footer className="bg-navyblue text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
           <div className="col-span-1">
@@ -109,18 +116,9 @@ const Footer = () => {
           <div className="col-span-1">
             <h4 className="font-montserrat font-semibold text-md mb-4">Connect With Us</h4>
             <div className="flex items-center space-x-4 mb-4">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-gold transition-colors"
-                  aria-label={social.label}
-                >
+              {socialLinks.map(social => <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gold transition-colors" aria-label={social.label}>
                   <social.icon className="h-6 w-6" />
-                </a>
-              ))}
+                </a>)}
             </div>
           </div>
 
@@ -197,23 +195,13 @@ const Footer = () => {
                 </Link>
               </div>
               <div className="flex items-center space-x-4 mt-4 md:mt-0">
-                <img 
-                  src="/lovable-uploads/98d6869e-a552-4731-9f0c-6dce07a2db48.png" 
-                  alt="CAW Network Member" 
-                  className="h-16 w-auto"
-                />
-                <img 
-                  src="/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png" 
-                  alt="SAICA Member" 
-                  className="h-12 w-auto"
-                />
+                <img src="/lovable-uploads/98d6869e-a552-4731-9f0c-6dce07a2db48.png" alt="CAW Network Member" className="h-22 w-auto" />
+                <img src="/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png" alt="SAICA Member" className="h-12 w-auto" />
               </div>
             </div>
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
