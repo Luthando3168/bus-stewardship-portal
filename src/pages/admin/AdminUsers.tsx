@@ -1,12 +1,17 @@
+
 import AdminLayout from "@/components/layout/AdminLayout";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { UserPlus, Star } from "lucide-react";
+import { UserPlus, Star, Search } from "lucide-react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import { useForm } from "react-hook-form";
 
-// Profile fields should match user profile page — fields updated!
+// Profile fields should match user profile page — fields updated!
 const PROFILE_FIELDS = [
   { key: "fullName", label: "Full Name", required: true },
   { key: "email", label: "Email Address", required: true },
@@ -34,101 +39,248 @@ const mockUsers = [
     id: 1,
     fullName: "John Dube",
     email: "john.d@example.com",
-    phone: "",
-    dob: "",
+    phone: "+27 73 123 4567",
+    dob: "1978-01-01",
     idNumber: "7801015387082",
-    nationality: "",
-    taxNumber: "",
-    taxCountry: "",
-    address: "",
-    postalCode: "",
-    city: "",
-    province: "",
-    sourceOfFunds: "",
-    employmentStatus: "",
-    employer: "",
-    occupation: "",
-    riskProfile: "",
-    incomeBracket: "",
-    pep: "",
+    nationality: "South African",
+    taxNumber: "12345678901",
+    taxCountry: "South Africa",
+    address: "123 Main Street, Sandton",
+    postalCode: "2031",
+    city: "Johannesburg",
+    province: "Gauteng",
+    sourceOfFunds: "Employment",
+    employmentStatus: "Employed",
+    employer: "ABC Corporation",
+    occupation: "Financial Analyst",
+    riskProfile: "Moderate",
+    incomeBracket: "R500,000 - R750,000",
+    pep: "No",
     investmentCount: 3,
     lastLogin: "2023-04-21",
   },
-  // ... add more mock users or fetch from your source
+  {
+    id: 2,
+    fullName: "Sarah Nkosi",
+    email: "sarah.n@example.com",
+    phone: "+27 82 987 6543",
+    dob: "1985-05-15",
+    idNumber: "8505155387083",
+    nationality: "South African",
+    taxNumber: "98765432109",
+    taxCountry: "South Africa",
+    address: "456 Oak Avenue, Rosebank",
+    postalCode: "2196",
+    city: "Johannesburg",
+    province: "Gauteng",
+    sourceOfFunds: "Business",
+    employmentStatus: "Self-Employed",
+    employer: "",
+    occupation: "Business Owner",
+    riskProfile: "Aggressive",
+    incomeBracket: "R750,000 - R1,000,000",
+    pep: "No",
+    investmentCount: 2,
+    lastLogin: "2023-04-18",
+  },
 ];
 
 const RedStar = () => <Star size={13} className="text-red-500 inline ml-1 align-text-bottom" />;
 
 const isMissing = (user: any, key: string, required?: boolean) => required && !user[key];
 
+type SearchFormValues = {
+  searchType: 'name' | 'email' | 'id';
+  searchValue: string;
+};
+
 const AdminUsers = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
+  
+  const form = useForm<SearchFormValues>({
+    defaultValues: {
+      searchType: 'name',
+      searchValue: '',
+    },
+  });
 
-  const filteredUsers = mockUsers.filter(
-    (user) =>
+  const filteredUsers = mockUsers.filter((user) => {
+    if (!searchTerm) return true;
+    
+    return (
       user.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+      user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.idNumber.includes(searchTerm)
+    );
+  });
+
+  const onSubmitAdvancedSearch = (data: SearchFormValues) => {
+    if (data.searchType === 'name') {
+      setSearchTerm(data.searchValue);
+    } else if (data.searchType === 'email') {
+      setSearchTerm(data.searchValue);
+    } else if (data.searchType === 'id') {
+      setSearchTerm(data.searchValue);
+    }
+  };
 
   return (
     <AdminLayout>
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <h2 className="text-2xl font-bold text-navyblue">User Management</h2>
-          <Button className="bg-gold hover:bg-lightgold flex gap-2">
-            <UserPlus className="h-4 w-4" />
-            <span>Add New User</span>
-          </Button>
+          <div className="flex gap-2">
+            <Button 
+              variant="outline" 
+              onClick={() => setShowAdvancedSearch(!showAdvancedSearch)}
+            >
+              Advanced Search
+            </Button>
+            <Button className="bg-gold hover:bg-lightgold flex gap-2">
+              <UserPlus className="h-4 w-4" />
+              <span>Add New User</span>
+            </Button>
+          </div>
         </div>
-        <Card>
-          <CardHeader>
-            <CardTitle>All Users</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex justify-between mb-4">
-              <Input
-                placeholder="Search users..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="max-w-sm"
-              />
-            </div>
-            <div className="rounded-md border">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    {PROFILE_FIELDS.map(({ key, label }) => (
-                      <TableHead key={key}>{label}</TableHead>
-                    ))}
-                    <TableHead>Investments</TableHead>
-                    <TableHead>Last Login</TableHead>
-                    <TableHead>Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {filteredUsers.map((user) => (
-                    <TableRow key={user.id}>
-                      {PROFILE_FIELDS.map(({ key, required }) => (
-                        <TableCell key={key}>
-                          {user[key] || <span className="text-gray-400">-</span>}
-                          {isMissing(user, key, required) && <RedStar />}
-                        </TableCell>
+        
+        {showAdvancedSearch ? (
+          <Card>
+            <CardHeader>
+              <CardTitle>Advanced Search</CardTitle>
+              <CardDescription>
+                Search for users by name, email, or ID/Passport number
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmitAdvancedSearch)} className="space-y-4">
+                  <FormField
+                    control={form.control}
+                    name="searchType"
+                    render={({ field }) => (
+                      <FormItem className="space-y-3">
+                        <FormLabel>Search By</FormLabel>
+                        <FormControl>
+                          <RadioGroup
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                            className="flex flex-col space-y-1"
+                          >
+                            <div className="flex items-center space-x-2">
+                              <RadioGroupItem value="name" id="name" />
+                              <Label htmlFor="name">Name</Label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <RadioGroupItem value="email" id="email" />
+                              <Label htmlFor="email">Email</Label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <RadioGroupItem value="id" id="id" />
+                              <Label htmlFor="id">ID/Passport Number</Label>
+                            </div>
+                          </RadioGroup>
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="searchValue"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Search Term</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter search term..." {...field} />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <div className="flex justify-end gap-2">
+                    <Button 
+                      type="button" 
+                      variant="outline"
+                      onClick={() => {
+                        form.reset({
+                          searchType: 'name',
+                          searchValue: '',
+                        });
+                        setSearchTerm("");
+                      }}
+                    >
+                      Clear
+                    </Button>
+                    <Button type="submit" className="bg-navyblue hover:bg-blue-800">
+                      Search
+                    </Button>
+                  </div>
+                </form>
+              </Form>
+            </CardContent>
+          </Card>
+        ) : (
+          <Card>
+            <CardHeader>
+              <CardTitle>All Users</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex justify-between mb-4">
+                <div className="relative max-w-sm">
+                  <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    placeholder="Search by name, email or ID number..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="pl-8 w-80"
+                  />
+                </div>
+              </div>
+              <div className="rounded-md border overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      {PROFILE_FIELDS.map(({ key, label }) => (
+                        <TableHead key={key}>{label}</TableHead>
                       ))}
-                      <TableCell>{user.investmentCount}</TableCell>
-                      <TableCell>{user.lastLogin}</TableCell>
-                      <TableCell>
-                        <div className="flex space-x-2">
-                          <Button variant="outline" size="sm">View</Button>
-                          <Button variant="outline" size="sm">Edit</Button>
-                        </div>
-                      </TableCell>
+                      <TableHead>Investments</TableHead>
+                      <TableHead>Last Login</TableHead>
+                      <TableHead>Actions</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </CardContent>
-        </Card>
+                  </TableHeader>
+                  <TableBody>
+                    {filteredUsers.map((user) => (
+                      <TableRow key={user.id}>
+                        {PROFILE_FIELDS.map(({ key, required }) => (
+                          <TableCell key={key}>
+                            {user[key as keyof typeof user] || <span className="text-gray-400">-</span>}
+                            {isMissing(user, key, required) && <RedStar />}
+                          </TableCell>
+                        ))}
+                        <TableCell>{user.investmentCount}</TableCell>
+                        <TableCell>{user.lastLogin}</TableCell>
+                        <TableCell>
+                          <div className="flex space-x-2">
+                            <Button variant="outline" size="sm">View</Button>
+                            <Button variant="outline" size="sm">Edit</Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                    {filteredUsers.length === 0 && (
+                      <TableRow>
+                        <TableCell colSpan={PROFILE_FIELDS.length + 3} className="text-center py-4">
+                          No users found matching your search criteria
+                        </TableCell>
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              </div>
+            </CardContent>
+          </Card>
+        )}
       </div>
     </AdminLayout>
   );

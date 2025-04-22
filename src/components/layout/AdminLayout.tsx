@@ -3,7 +3,8 @@ import { ReactNode, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { 
   Users, LayoutDashboard, FileText, 
-  Bell, LogOut, FileChartLine, Menu
+  Bell, LogOut, FileChartLine, Menu,
+  CreditCard, CalendarClock, UserCheck
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -34,6 +35,9 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
     { icon: LayoutDashboard, label: "Dashboard", path: "/admin/dashboard" },
     { icon: Users, label: "Users", path: "/admin/users" },
     { icon: FileChartLine, label: "Deals", path: "/admin/deals" },
+    { icon: CreditCard, label: "Bank Accounts", path: "/admin/bank-accounts" },
+    { icon: CalendarClock, label: "Consultations", path: "/admin/consultations" },
+    { icon: UserCheck, label: "Beneficiaries", path: "/admin/beneficiaries" },
     { icon: Bell, label: "Notifications", path: "/admin/notifications" },
     { icon: FileText, label: "Reports", path: "/admin/reports" },
   ];
@@ -45,9 +49,20 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       <div className="p-4 flex flex-col h-full">
         <div className="flex items-center justify-between mb-8">
           {(fullWidth || isSidebarOpen) ? (
-            <h2 className="text-lg font-bold">Admin Panel</h2>
+            <div className="flex items-center">
+              <img 
+                src="/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png" 
+                alt="Luthando Maduna CA" 
+                className="h-8 mr-2" 
+              />
+              <h2 className="text-lg font-bold">Admin Panel</h2>
+            </div>
           ) : (
-            <h2 className="text-lg font-bold">AP</h2>
+            <img 
+              src="/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png" 
+              alt="LM" 
+              className="h-8" 
+            />
           )}
           {!fullWidth && (
             <button
@@ -109,6 +124,11 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
               >
                 <Menu className="h-5 w-5" />
               </Button>
+              <img 
+                src="/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png" 
+                alt="Luthando Maduna CA" 
+                className="h-8 mr-2" 
+              />
               <h1 className="text-lg font-semibold text-navyblue">
                 Admin
               </h1>
@@ -144,10 +164,30 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       {/* Main Content */}
       <div className="flex-1 overflow-x-hidden">
         <header className="bg-white shadow-sm p-4">
-          <div className="max-w-7xl mx-auto flex justify-between">
-            <h1 className="text-xl font-semibold text-navyblue">
-              Admin Dashboard
-            </h1>
+          <div className="max-w-7xl mx-auto flex justify-between items-center">
+            <div className="flex items-center">
+              <img 
+                src="/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png" 
+                alt="Luthando Maduna CA" 
+                className="h-8 mr-3" 
+              />
+              <h1 className="text-xl font-semibold text-navyblue">
+                Admin Dashboard
+              </h1>
+            </div>
+            <div className="relative">
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-navyblue text-navyblue"
+                asChild
+              >
+                <Link to="/admin/users">
+                  <Users className="h-4 w-4 mr-2" />
+                  Search Users
+                </Link>
+              </Button>
+            </div>
           </div>
         </header>
         <main className="max-w-7xl mx-auto p-4">{children}</main>

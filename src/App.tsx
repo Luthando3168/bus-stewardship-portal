@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -25,6 +24,9 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminDeals from "./pages/admin/AdminDeals";
 import AdminNotifications from "./pages/admin/AdminNotifications";
+import AdminBankAccounts from "./pages/admin/AdminBankAccounts";
+import AdminConsultations from "./pages/admin/AdminConsultations";
+import AdminBeneficiaries from "./pages/admin/AdminBeneficiaries";
 
 // User pages
 import UserDashboard from "./pages/user/UserDashboard";
@@ -63,6 +65,9 @@ const App = () => (
           <Route path="/admin/users" element={<ProtectedRoute allowedRole="admin"><AdminUsers /></ProtectedRoute>} />
           <Route path="/admin/deals" element={<ProtectedRoute allowedRole="admin"><AdminDeals /></ProtectedRoute>} />
           <Route path="/admin/notifications" element={<ProtectedRoute allowedRole="admin"><AdminNotifications /></ProtectedRoute>} />
+          <Route path="/admin/bank-accounts" element={<AdminBankAccounts />} />
+          <Route path="/admin/consultations" element={<AdminConsultations />} />
+          <Route path="/admin/beneficiaries" element={<AdminBeneficiaries />} />
           <Route path="/admin/reports" element={<ProtectedRoute allowedRole="admin">
             <AdminReports />
           </ProtectedRoute>} />
