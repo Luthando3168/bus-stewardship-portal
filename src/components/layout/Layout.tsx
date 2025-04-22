@@ -13,6 +13,7 @@ const Layout = ({ children }: LayoutProps) => {
       <Header />
       <main className="flex-grow mt-6">{children}</main>
       <Footer />
+      <div className="bg-navyblue py-12"></div> {/* Added spacer */}
     </div>
   );
 };
