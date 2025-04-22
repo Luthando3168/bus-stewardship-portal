@@ -1,36 +1,143 @@
+
 import React from 'react';
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useIsMobile } from "@/hooks/use-mobile";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
 
 const ImpactFunds = () => {
   const isMobile = useIsMobile();
-  
+
+  const funds = [
+    {
+      id: "agri",
+      name: "Agri Impact Fund",
+      gradient: "from-green-700 to-green-900",
+      headerBg: "bg-gradient-to-r from-green-700 to-green-900 text-white",
+      fundTitle: "Sankofa Agri Impact Fund",
+      description:
+        "The Sankofa Agri Impact Fund invests in sustainable agricultural ventures across South Africa, focusing on food security, rural development, and environmentally responsible farming practices.",
+      focus: [
+        "Sustainable farming operations",
+        "Agricultural technology innovations",
+        "Food processing and distribution",
+        "Rural agricultural infrastructure",
+      ],
+      impact: [
+        "Enhance food security",
+        "Create rural employment",
+        "Promote sustainable practices",
+        "Support smallholder farmers",
+      ],
+      targetReturn: "8-12% p.a.",
+      minimumInvestment: "R 5,000",
+    },
+    {
+      id: "property",
+      name: "Property Impact Fund",
+      gradient: "from-blue-700 to-blue-900",
+      headerBg: "bg-gradient-to-r from-blue-700 to-blue-900 text-white",
+      fundTitle: "Sankofa Property Impact Fund",
+      description:
+        "The Sankofa Property Impact Fund invests in residential and commercial property developments that address housing needs while generating sustainable returns for investors.",
+      focus: [
+        "Affordable housing developments",
+        "Mixed-use community projects",
+        "Energy-efficient building retrofits",
+        "Community-centered commercial spaces",
+      ],
+      impact: [
+        "Increase housing access",
+        "Revitalize communities",
+        "Reduce building environmental footprint",
+        "Support local economic development",
+      ],
+      targetReturn: "9-14% p.a.",
+      minimumInvestment: "R 5,000",
+    },
+    {
+      id: "energy",
+      name: "Energy Impact Fund",
+      gradient: "from-amber-600 to-amber-800",
+      headerBg: "bg-gradient-to-r from-amber-600 to-amber-800 text-white",
+      fundTitle: "Sankofa Energy Impact Fund",
+      description:
+        "The Sankofa Energy Impact Fund invests in renewable energy projects and clean technology initiatives that promote sustainable energy solutions while delivering competitive financial returns.",
+      focus: [
+        "Solar energy installations",
+        "Wind power projects",
+        "Energy storage solutions",
+        "Energy efficiency technologies",
+      ],
+      impact: [
+        "Reduce carbon emissions",
+        "Expand renewable energy access",
+        "Support energy independence",
+        "Create green jobs",
+      ],
+      targetReturn: "10-15% p.a.",
+      minimumInvestment: "R 5,000",
+    },
+    {
+      id: "enterprise",
+      name: "Enterprise Impact Fund",
+      gradient: "from-purple-700 to-purple-900",
+      headerBg: "bg-gradient-to-r from-purple-700 to-purple-900 text-white",
+      fundTitle: "Sankofa Enterprise Impact Fund",
+      description:
+        "The Sankofa Enterprise Impact Fund invests in small and medium-sized enterprises (SMEs) with high growth potential and positive social impact, focusing on job creation and economic development.",
+      focus: [
+        "Growth-stage SMEs",
+        "Social enterprises",
+        "Township businesses",
+        "Women and youth-led enterprises",
+      ],
+      impact: [
+        "Create quality employment",
+        "Support entrepreneurship",
+        "Drive inclusive growth",
+        "Build sustainable businesses",
+      ],
+      targetReturn: "12-18% p.a.",
+      minimumInvestment: "R 5,000",
+    },
+  ];
+
   const investmentProcess = [
     {
       step: "Capital Pooling",
-      description: "We pool capital from multiple investors to achieve scale and diversification."
+      description:
+        "We pool capital from multiple investors to achieve scale and diversification.",
     },
     {
       step: "Deal Sourcing & Due Diligence",
-      description: "Our team identifies and thoroughly vets investment opportunities using rigorous criteria."
+      description:
+        "Our team identifies and thoroughly vets investment opportunities using rigorous criteria.",
     },
     {
       step: "Structured Investments",
-      description: "We design investment structures that align financial returns with measurable impact outcomes."
+      description:
+        "We design investment structures that align financial returns with measurable impact outcomes.",
     },
     {
       step: "Active Management",
-      description: "We provide ongoing support and oversight to portfolio companies to enhance performance."
+      description:
+        "We provide ongoing support and oversight to portfolio companies to enhance performance.",
     },
     {
       step: "Impact & Financial Reporting",
-      description: "Regular reporting on both financial returns and social/environmental impact metrics."
-    }
+      description:
+        "Regular reporting on both financial returns and social/environmental impact metrics.",
+    },
   ];
-  
+
   return (
     <Layout>
       <section className="py-16 bg-white">
@@ -81,204 +188,106 @@ const ImpactFunds = () => {
               </CardContent>
             </Card>
 
-            <Tabs defaultValue="agri" className="mb-12">
-              {isMobile && (
-                <p className="text-sm text-muted-foreground mb-4 text-center">
-                  (Click dropdown to see funds)
-                </p>
-              )}
-              
-              <TabsList className={isMobile ? "flex flex-col w-full space-y-1" : "grid w-full grid-cols-4"}>
-                <TabsTrigger value="agri">Agri Fund</TabsTrigger>
-                <TabsTrigger value="property">Property Fund</TabsTrigger>
-                <TabsTrigger value="energy">Energy Fund</TabsTrigger>
-                <TabsTrigger value="enterprise">Enterprise Fund</TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="agri">
-                <Card>
-                  <CardHeader className="bg-gradient-to-r from-green-700 to-green-900 text-white">
-                    <CardTitle>Sankofa Agri Impact Fund</CardTitle>
-                  </CardHeader>
-                  <CardContent className="pt-6 space-y-6">
-                    <p>
-                      The Sankofa Agri Impact Fund invests in sustainable agricultural ventures across South Africa, focusing on food 
-                      security, rural development, and environmentally responsible farming practices.
-                    </p>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <h4 className="font-semibold text-navyblue mb-2">Investment Focus:</h4>
-                        <ul className="list-disc pl-5 space-y-1">
-                          <li>Sustainable farming operations</li>
-                          <li>Agricultural technology innovations</li>
-                          <li>Food processing and distribution</li>
-                          <li>Rural agricultural infrastructure</li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-navyblue mb-2">Impact Objectives:</h4>
-                        <ul className="list-disc pl-5 space-y-1">
-                          <li>Enhance food security</li>
-                          <li>Create rural employment</li>
-                          <li>Promote sustainable practices</li>
-                          <li>Support smallholder farmers</li>
-                        </ul>
-                      </div>
-                    </div>
-                    
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-                      <div className="p-4 bg-lightgray rounded-lg">
-                        <h5 className="font-medium text-sm text-muted-foreground">Target Return</h5>
-                        <p className="text-xl font-bold text-navyblue">8-12% p.a.</p>
-                      </div>
-                      <div className="p-4 bg-lightgray rounded-lg">
-                        <h5 className="font-medium text-sm text-muted-foreground">Minimum Investment</h5>
-                        <p className="text-xl font-bold text-navyblue">R 5,000</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-              
-              <TabsContent value="property">
-                <Card>
-                  <CardHeader className="bg-gradient-to-r from-blue-700 to-blue-900 text-white">
-                    <CardTitle>Sankofa Property Impact Fund</CardTitle>
-                  </CardHeader>
-                  <CardContent className="pt-6 space-y-6">
-                    <p>
-                      The Sankofa Property Impact Fund invests in residential and commercial property developments that address 
-                      housing needs while generating sustainable returns for investors.
-                    </p>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <h4 className="font-semibold text-navyblue mb-2">Investment Focus:</h4>
-                        <ul className="list-disc pl-5 space-y-1">
-                          <li>Affordable housing developments</li>
-                          <li>Mixed-use community projects</li>
-                          <li>Energy-efficient building retrofits</li>
-                          <li>Community-centered commercial spaces</li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-navyblue mb-2">Impact Objectives:</h4>
-                        <ul className="list-disc pl-5 space-y-1">
-                          <li>Increase housing access</li>
-                          <li>Revitalize communities</li>
-                          <li>Reduce building environmental footprint</li>
-                          <li>Support local economic development</li>
-                        </ul>
-                      </div>
-                    </div>
-                    
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-                      <div className="p-4 bg-lightgray rounded-lg">
-                        <h5 className="font-medium text-sm text-muted-foreground">Target Return</h5>
-                        <p className="text-xl font-bold text-navyblue">9-14% p.a.</p>
-                      </div>
-                      <div className="p-4 bg-lightgray rounded-lg">
-                        <h5 className="font-medium text-sm text-muted-foreground">Minimum Investment</h5>
-                        <p className="text-xl font-bold text-navyblue">R 5,000</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-              
-              <TabsContent value="energy">
-                <Card>
-                  <CardHeader className="bg-gradient-to-r from-amber-600 to-amber-800 text-white">
-                    <CardTitle>Sankofa Energy Impact Fund</CardTitle>
-                  </CardHeader>
-                  <CardContent className="pt-6 space-y-6">
-                    <p>
-                      The Sankofa Energy Impact Fund invests in renewable energy projects and clean technology initiatives that 
-                      promote sustainable energy solutions while delivering competitive financial returns.
-                    </p>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <h4 className="font-semibold text-navyblue mb-2">Investment Focus:</h4>
-                        <ul className="list-disc pl-5 space-y-1">
-                          <li>Solar energy installations</li>
-                          <li>Wind power projects</li>
-                          <li>Energy storage solutions</li>
-                          <li>Energy efficiency technologies</li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-navyblue mb-2">Impact Objectives:</h4>
-                        <ul className="list-disc pl-5 space-y-1">
-                          <li>Reduce carbon emissions</li>
-                          <li>Expand renewable energy access</li>
-                          <li>Support energy independence</li>
-                          <li>Create green jobs</li>
-                        </ul>
-                      </div>
-                    </div>
-                    
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-                      <div className="p-4 bg-lightgray rounded-lg">
-                        <h5 className="font-medium text-sm text-muted-foreground">Target Return</h5>
-                        <p className="text-xl font-bold text-navyblue">10-15% p.a.</p>
-                      </div>
-                      <div className="p-4 bg-lightgray rounded-lg">
-                        <h5 className="font-medium text-sm text-muted-foreground">Minimum Investment</h5>
-                        <p className="text-xl font-bold text-navyblue">R 5,000</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-              
-              <TabsContent value="enterprise">
-                <Card>
-                  <CardHeader className="bg-gradient-to-r from-purple-700 to-purple-900 text-white">
-                    <CardTitle>Sankofa Enterprise Impact Fund</CardTitle>
-                  </CardHeader>
-                  <CardContent className="pt-6 space-y-6">
-                    <p>
-                      The Sankofa Enterprise Impact Fund invests in small and medium-sized enterprises (SMEs) with high growth potential
-                      and positive social impact, focusing on job creation and economic development.
-                    </p>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <h4 className="font-semibold text-navyblue mb-2">Investment Focus:</h4>
-                        <ul className="list-disc pl-5 space-y-1">
-                          <li>Growth-stage SMEs</li>
-                          <li>Social enterprises</li>
-                          <li>Township businesses</li>
-                          <li>Women and youth-led enterprises</li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-navyblue mb-2">Impact Objectives:</h4>
-                        <ul className="list-disc pl-5 space-y-1">
-                          <li>Create quality employment</li>
-                          <li>Support entrepreneurship</li>
-                          <li>Drive inclusive growth</li>
-                          <li>Build sustainable businesses</li>
-                        </ul>
-                      </div>
-                    </div>
-                    
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-                      <div className="p-4 bg-lightgray rounded-lg">
-                        <h5 className="font-medium text-sm text-muted-foreground">Target Return</h5>
-                        <p className="text-xl font-bold text-navyblue">12-18% p.a.</p>
-                      </div>
-                      <div className="p-4 bg-lightgray rounded-lg">
-                        <h5 className="font-medium text-sm text-muted-foreground">Minimum Investment</h5>
-                        <p className="text-xl font-bold text-navyblue">R 5,000</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-            </Tabs>
+            {/* Mobile: accordion, Desktop: tabs */}
+            {isMobile ? (
+              <div className="mb-12">
+                <Accordion type="single" collapsible className="w-full">
+                  {funds.map((fund) => (
+                    <AccordionItem value={fund.id} key={fund.id}>
+                      <AccordionTrigger className="font-montserrat text-lg font-bold px-4 bg-lightgray rounded hover:bg-gray-200 transition-all mb-2">
+                        {fund.name}
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <Card>
+                          <CardHeader className={fund.headerBg}>
+                            <CardTitle>{fund.fundTitle}</CardTitle>
+                          </CardHeader>
+                          <CardContent className="pt-6 space-y-6">
+                            <p>{fund.description}</p>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div>
+                                <h4 className="font-semibold text-navyblue mb-2">Investment Focus:</h4>
+                                <ul className="list-disc pl-5 space-y-1">
+                                  {fund.focus.map((f, idx) => (
+                                    <li key={idx}>{f}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                              <div>
+                                <h4 className="font-semibold text-navyblue mb-2">Impact Objectives:</h4>
+                                <ul className="list-disc pl-5 space-y-1">
+                                  {fund.impact.map((item, idx) => (
+                                    <li key={idx}>{item}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                              <div className="p-4 bg-lightgray rounded-lg">
+                                <h5 className="font-medium text-sm text-muted-foreground">Target Return</h5>
+                                <p className="text-xl font-bold text-navyblue">{fund.targetReturn}</p>
+                              </div>
+                              <div className="p-4 bg-lightgray rounded-lg">
+                                <h5 className="font-medium text-sm text-muted-foreground">Minimum Investment</h5>
+                                <p className="text-xl font-bold text-navyblue">{fund.minimumInvestment}</p>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </div>
+            ) : (
+              <Tabs defaultValue="agri" className="mb-12">
+                <TabsList className="grid w-full grid-cols-4">
+                  {funds.map(fund => (
+                    <TabsTrigger key={fund.id} value={fund.id}>{fund.name.replace(" Impact Fund", " Fund")}</TabsTrigger>
+                  ))}
+                </TabsList>
+                {funds.map(fund => (
+                  <TabsContent value={fund.id} key={fund.id}>
+                    <Card>
+                      <CardHeader className={fund.headerBg}>
+                        <CardTitle>{fund.fundTitle}</CardTitle>
+                      </CardHeader>
+                      <CardContent className="pt-6 space-y-6">
+                        <p>{fund.description}</p>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <h4 className="font-semibold text-navyblue mb-2">Investment Focus:</h4>
+                            <ul className="list-disc pl-5 space-y-1">
+                              {fund.focus.map((f, idx) => (
+                                <li key={idx}>{f}</li>
+                              ))}
+                            </ul>
+                          </div>
+                          <div>
+                            <h4 className="font-semibold text-navyblue mb-2">Impact Objectives:</h4>
+                            <ul className="list-disc pl-5 space-y-1">
+                              {fund.impact.map((item, idx) => (
+                                <li key={idx}>{item}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                          <div className="p-4 bg-lightgray rounded-lg">
+                            <h5 className="font-medium text-sm text-muted-foreground">Target Return</h5>
+                            <p className="text-xl font-bold text-navyblue">{fund.targetReturn}</p>
+                          </div>
+                          <div className="p-4 bg-lightgray rounded-lg">
+                            <h5 className="font-medium text-sm text-muted-foreground">Minimum Investment</h5>
+                            <p className="text-xl font-bold text-navyblue">{fund.minimumInvestment}</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+                ))}
+              </Tabs>
+            )}
 
             <div className="mt-16">
               <h3 className="text-2xl font-bold text-navyblue mb-6 text-center">For LMCA Clients</h3>
