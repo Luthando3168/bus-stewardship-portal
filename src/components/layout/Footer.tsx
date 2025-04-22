@@ -1,8 +1,16 @@
 
 import { Link } from "react-router-dom";
+import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+
+  const socialLinks = [
+    { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
+    { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
+    { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
+    { icon: Youtube, href: "https://youtube.com", label: "Youtube" }
+  ];
 
   return (
     <footer className="bg-navyblue text-white">
@@ -115,7 +123,19 @@ const Footer = () => {
             <p className="font-lato text-sm text-gray-400">
               &copy; {currentYear} Luthando Maduna Chartered Accountants. All rights reserved.
             </p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
+            <div className="flex items-center space-x-6 mt-4 md:mt-0">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-gold transition-colors"
+                  aria-label={social.label}
+                >
+                  <social.icon className="h-5 w-5" />
+                </a>
+              ))}
               <Link to="/privacy" className="font-lato text-sm text-gray-400 hover:text-gold transition-colors">
                 Privacy Policy
               </Link>
