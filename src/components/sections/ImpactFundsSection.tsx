@@ -1,9 +1,8 @@
-
 import SectionTitle from "../ui/SectionTitle";
 import { Link } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-// Each fund's details as per the form
+// Updated funds array with only MyFarm, MyProperty, and MyFranchise
 const funds = [
   {
     name: "MyFarm Impact Fund",
@@ -23,16 +22,6 @@ const funds = [
       {
         title: "Mixed Crops Cultivation (Limpopo)",
         description: "A project to cultivate and process diverse crops, supporting food security and market supply across the Limpopo region.",
-        minInvestment: "R 5,000",
-      },
-      {
-        title: "Urban Poultry Expansion (Gauteng)",
-        description: "A commercial poultry operation in urban areas, specializing in ethical practices and supplying to shops and restaurants.",
-        minInvestment: "R 5,000",
-      },
-      {
-        title: "Agri Processing Plant (Free State)",
-        description: "A food processing facility focused on value-adding to raw agricultural products, creating shelf-stable food items.",
         minInvestment: "R 5,000",
       }
     ],
@@ -56,48 +45,6 @@ const funds = [
         title: "Traditional Housing (Eastern Cape)",
         description: "Development of culturally appropriate housing solutions that blend traditional designs with modern amenities and efficiency.",
         minInvestment: "R 10,000",
-      },
-      {
-        title: "Back-up Power Solutions (Western Cape)",
-        description: "Installation of backup power systems for residential and commercial properties, focusing on reliable power during outages.",
-        minInvestment: "R 10,000",
-      },
-      {
-        title: "Security Systems (National)",
-        description: "Implementation of comprehensive security solutions for properties nationwide, including monitoring and response services.",
-        minInvestment: "R 10,000",
-      }
-    ],
-  },
-  {
-    name: "MyFoodRetail Impact Fund",
-    description: "Investing in food retail businesses that provide access to quality nutrition. Minimum investment of R5,000.",
-    color: "from-amber-500 to-amber-700",
-    businesses: [
-      {
-        title: "Lifestyle Mini Complex (Western Cape)",
-        description: "A hub offering groceries (Food Corner), meat products (Meat Co), and fresh produce (Fruits & Veg) sourced from MyFarm, targeting diverse communities.",
-        minInvestment: "R 5,000",
-      },
-      {
-        title: "MyFranchise (National)",
-        description: "Invest in selected franchises, add to your portfolio, and benefit from operational support and steady returns.",
-        minInvestment: "R 5,000",
-      },
-      {
-        title: "Community Markets (Gauteng)",
-        description: "Pop-up and permanent market spaces offering local produce and goods directly to consumers in community settings.",
-        minInvestment: "R 5,000",
-      },
-      {
-        title: "Healthy Fast Food Outlet (KZN)",
-        description: "Quick-service restaurant focusing on nutritious, locally-sourced food options with affordable pricing for health-conscious consumers.",
-        minInvestment: "R 5,000",
-      },
-      {
-        title: "Food Delivery Services (Urban Hubs)",
-        description: "Specialized food delivery network focusing on fresh, local foods delivered quickly within urban areas.",
-        minInvestment: "R 5,000",
       }
     ],
   },
@@ -122,127 +69,7 @@ const funds = [
         minInvestment: "R 5,000",
       }
     ],
-  },
-  {
-    name: "MyFuel Impact Fund",
-    description: "Financing fuel retail and related energy distribution businesses. Minimum investment of R10,000.",
-    color: "from-blue-600 to-blue-800",
-    businesses: [
-      {
-        title: "Fuel Station Network (National)",
-        description: "Investment in strategically located fuel stations across South Africa.",
-        minInvestment: "R 10,000",
-      },
-      {
-        title: "Alternative Fuel Distribution (Urban Centers)",
-        description: "Distribution networks for alternative and environmentally friendly fuel options.",
-        minInvestment: "R 10,000",
-      },
-      {
-        title: "Convenience Store Integration (National)",
-        description: "Development of modern convenience stores integrated with fuel stations.",
-        minInvestment: "R 10,000",
-      }
-    ],
-  },
-  {
-    name: "MySchool Impact Fund",
-    description: "Supporting educational facilities and infrastructure. Minimum investment of R5,000.",
-    color: "from-purple-600 to-purple-800",
-    businesses: [
-      {
-        title: "Pre-primary Schools (Urban Areas)",
-        description: "Development of quality pre-primary educational facilities in urban communities.",
-        minInvestment: "R 5,000",
-      },
-      {
-        title: "Primary School Facilities (National)",
-        description: "Investment in primary school infrastructure and educational resources.",
-        minInvestment: "R 5,000",
-      },
-      {
-        title: "Educational Technology (National)",
-        description: "Implementation of educational technology solutions in schools across South Africa.",
-        minInvestment: "R 5,000",
-      }
-    ],
-  },
-  {
-    name: "MyHealth Impact Fund",
-    description: "Investing in healthcare facilities and services. Minimum investment of R5,000.",
-    color: "from-green-600 to-green-800",
-    businesses: [
-      {
-        title: "Community Clinics (Underserved Areas)",
-        description: "Establishment of accessible healthcare facilities in underserved communities.",
-        minInvestment: "R 5,000",
-      },
-      {
-        title: "Specialized Medical Services (Urban Centers)",
-        description: "Investment in specialized medical service providers in urban locations.",
-        minInvestment: "R 5,000",
-      },
-      {
-        title: "Mobile Health Solutions (National)",
-        description: "Development of mobile healthcare services reaching remote areas.",
-        minInvestment: "R 5,000",
-      }
-    ],
-  },
-  {
-    name: "MyEducation Impact Fund",
-    description: "Financing educational initiatives beyond traditional schooling. Minimum investment of R5,000.",
-    color: "from-indigo-600 to-indigo-800",
-    businesses: [
-      {
-        title: "Skills Development Centers (National)",
-        description: "Establishment of centers focusing on practical skills training and development.",
-        minInvestment: "R 5,000",
-      },
-      {
-        title: "Educational Publishing (National)",
-        description: "Production and distribution of educational materials across South Africa.",
-        minInvestment: "R 5,000",
-      },
-      {
-        title: "Online Learning Platforms (National)",
-        description: "Development of accessible online learning resources and platforms.",
-        minInvestment: "R 5,000",
-      }
-    ],
-  },
-  {
-    name: "MyTelco Impact Fund",
-    description: "Investing in telecommunications infrastructure and digital inclusion projects. Minimum investment of R5,000.",
-    color: "from-indigo-600 to-indigo-800",
-    businesses: [
-      {
-        title: "Rural Connectivity Project (National)",
-        description: "Expanding internet and telecommunications access to underserved rural areas through innovative and cost-effective technologies.",
-        minInvestment: "R 5,000",
-      },
-      {
-        title: "5G Urban Networks (Gauteng)",
-        description: "Development of high-speed 5G network infrastructure in urban centers, enabling advanced digital services and applications.",
-        minInvestment: "R 5,000",
-      },
-      {
-        title: "Telecom Equipment Production (Western Cape)",
-        description: "Manufacturing and assembly of telecommunications equipment and components for domestic and export markets.",
-        minInvestment: "R 5,000",
-      },
-      {
-        title: "Digital Inclusion Initiative (Eastern Cape)",
-        description: "Comprehensive program combining hardware, connectivity, and digital skills training for underserved communities.",
-        minInvestment: "R 5,000",
-      },
-      {
-        title: "Satellite Broadband Services (National)",
-        description: "Deployment of satellite-based internet services to reach remote locations where traditional infrastructure is impractical.",
-        minInvestment: "R 5,000",
-      }
-    ],
-  },
+  }
 ];
 
 const ImpactFundsSection = () => {

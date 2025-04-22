@@ -6,8 +6,9 @@ import ImpactFundTabs from "@/components/user/new-deals/ImpactFundTabs";
 import BusinessCard from "@/components/user/new-deals/BusinessCard";
 import InvestmentCart from "@/components/user/new-deals/InvestmentCart";
 import { toast } from "sonner";
+import { useSearchParams } from "react-router-dom";
 
-// Investment opportunities data organized by impact funds as per the form
+// Updated impact funds array to match ImpactFundsSection
 const impactFunds = [
   {
     id: "myfarm",
@@ -32,20 +33,6 @@ const impactFunds = [
         title: "Mixed Crops Cultivation (Limpopo)",
         region: "Limpopo",
         description: "A project to cultivate and process diverse crops, supporting food security and market supply across the Limpopo region.",
-        minInvestment: 5000,
-      },
-      {
-        id: "urban-poultry-gauteng",
-        title: "Urban Poultry Expansion (Gauteng)",
-        region: "Gauteng",
-        description: "A commercial poultry operation in urban areas, specializing in ethical practices and supplying to shops and restaurants.",
-        minInvestment: 5000,
-      },
-      {
-        id: "agri-processing-fs",
-        title: "Agri Processing Plant (Free State)",
-        region: "Free State",
-        description: "A food processing facility focused on value-adding to raw agricultural products, creating shelf-stable food items.",
         minInvestment: 5000,
       }
     ],
@@ -74,63 +61,8 @@ const impactFunds = [
         region: "Eastern Cape",
         description: "Development of culturally appropriate housing solutions that blend traditional designs with modern amenities and efficiency.",
         minInvestment: 10000,
-      },
-      {
-        id: "backup-power-wc",
-        title: "Back-up Power Solutions (Western Cape)",
-        region: "Western Cape",
-        description: "Installation of backup power systems for residential and commercial properties, focusing on reliable power during outages.",
-        minInvestment: 10000,
-      },
-      {
-        id: "security-systems-national",
-        title: "Security Systems (National)",
-        region: "National",
-        description: "Implementation of comprehensive security solutions for properties nationwide, including monitoring and response services.",
-        minInvestment: 10000,
       }
     ],
-  },
-  {
-    id: "myfoodretail",
-    name: "MyFoodRetail Impact Fund",
-    businesses: [
-      {
-        id: "lifestyle-mini-complex",
-        title: "Lifestyle Mini Complex (Western Cape)",
-        region: "Western Cape",
-        description: "A hub offering groceries (Food Corner), meat products (Meat Co), and fresh produce (Fruits & Veg) sourced from MyFarm, targeting diverse communities.",
-        minInvestment: 5000,
-      },
-      {
-        id: "myfranchise",
-        title: "MyFranchise (National)",
-        region: "National",
-        description: "Invest in selected franchises, add to your portfolio, and benefit from operational support and steady returns.",
-        minInvestment: 5000,
-      },
-      {
-        id: "community-markets-gauteng",
-        title: "Community Markets (Gauteng)",
-        region: "Gauteng",
-        description: "Pop-up and permanent market spaces offering local produce and goods directly to consumers in community settings.",
-        minInvestment: 5000,
-      },
-      {
-        id: "healthy-fast-food-kzn",
-        title: "Healthy Fast Food Outlet (KZN)",
-        region: "KwaZulu-Natal",
-        description: "Quick-service restaurant focusing on nutritious, locally-sourced food options with affordable pricing for health-conscious consumers.",
-        minInvestment: 5000,
-      },
-      {
-        id: "food-delivery-urban",
-        title: "Food Delivery Services (Urban Hubs)",
-        region: "Urban Centers",
-        description: "Specialized food delivery network focusing on fresh, local foods delivered quickly within urban areas.",
-        minInvestment: 5000,
-      }
-    ]
   },
   {
     id: "myfranchise",
@@ -158,160 +90,11 @@ const impactFunds = [
         minInvestment: 5000,
       }
     ],
-  },
-  {
-    id: "myfuel",
-    name: "MyFuel Impact Fund",
-    businesses: [
-      {
-        id: "fuel-station-network",
-        title: "Fuel Station Network (National)",
-        region: "National",
-        description: "Investment in strategically located fuel stations across South Africa.",
-        minInvestment: 10000,
-      },
-      {
-        id: "alternative-fuel-distribution",
-        title: "Alternative Fuel Distribution (Urban Centers)",
-        region: "Urban Centers",
-        description: "Distribution networks for alternative and environmentally friendly fuel options.",
-        minInvestment: 10000,
-      },
-      {
-        id: "convenience-store-integration",
-        title: "Convenience Store Integration (National)",
-        region: "National",
-        description: "Development of modern convenience stores integrated with fuel stations.",
-        minInvestment: 10000,
-      }
-    ],
-  },
-  {
-    id: "myschool",
-    name: "MySchool Impact Fund",
-    businesses: [
-      {
-        id: "pre-primary-schools",
-        title: "Pre-primary Schools (Urban Areas)",
-        region: "Urban Areas",
-        description: "Development of quality pre-primary educational facilities in urban communities.",
-        minInvestment: 5000,
-      },
-      {
-        id: "primary-school-facilities",
-        title: "Primary School Facilities (National)",
-        region: "National",
-        description: "Investment in primary school infrastructure and educational resources.",
-        minInvestment: 5000,
-      },
-      {
-        id: "educational-technology",
-        title: "Educational Technology (National)",
-        region: "National",
-        description: "Implementation of educational technology solutions in schools across South Africa.",
-        minInvestment: 5000,
-      }
-    ],
-  },
-  {
-    id: "myhealth",
-    name: "MyHealth Impact Fund",
-    businesses: [
-      {
-        id: "community-clinics",
-        title: "Community Clinics (Underserved Areas)",
-        region: "Underserved Areas",
-        description: "Establishment of accessible healthcare facilities in underserved communities.",
-        minInvestment: 5000,
-      },
-      {
-        id: "specialized-medical-services",
-        title: "Specialized Medical Services (Urban Centers)",
-        region: "Urban Centers",
-        description: "Investment in specialized medical service providers in urban locations.",
-        minInvestment: 5000,
-      },
-      {
-        id: "mobile-health-solutions",
-        title: "Mobile Health Solutions (National)",
-        region: "National",
-        description: "Development of mobile healthcare services reaching remote areas.",
-        minInvestment: 5000,
-      }
-    ],
-  },
-  {
-    id: "myeducation",
-    name: "MyEducation Impact Fund",
-    businesses: [
-      {
-        id: "skills-development-centers",
-        title: "Skills Development Centers (National)",
-        region: "National",
-        description: "Establishment of centers focusing on practical skills training and development.",
-        minInvestment: 5000,
-      },
-      {
-        id: "educational-publishing",
-        title: "Educational Publishing (National)",
-        region: "National",
-        description: "Production and distribution of educational materials across South Africa.",
-        minInvestment: 5000,
-      },
-      {
-        id: "online-learning-platforms",
-        title: "Online Learning Platforms (National)",
-        region: "National",
-        description: "Development of accessible online learning resources and platforms.",
-        minInvestment: 5000,
-      }
-    ],
-  },
-  {
-    id: "mytelco",
-    name: "MyTelco Impact Fund",
-    businesses: [
-      {
-        id: "rural-connectivity",
-        title: "Rural Connectivity Project (National)",
-        region: "National",
-        description: "Expanding internet and telecommunications access to underserved rural areas through innovative and cost-effective technologies.",
-        minInvestment: 5000,
-      },
-      {
-        id: "5g-urban-gauteng",
-        title: "5G Urban Networks (Gauteng)",
-        region: "Gauteng",
-        description: "Development of high-speed 5G network infrastructure in urban centers, enabling advanced digital services and applications.",
-        minInvestment: 5000,
-      },
-      {
-        id: "telco-equipment-wc",
-        title: "Telecom Equipment Production (Western Cape)",
-        region: "Western Cape",
-        description: "Manufacturing and assembly of telecommunications equipment and components for domestic and export markets.",
-        minInvestment: 5000,
-      },
-      {
-        id: "digital-inclusion-ec",
-        title: "Digital Inclusion Initiative (Eastern Cape)",
-        region: "Eastern Cape",
-        description: "Comprehensive program combining hardware, connectivity, and digital skills training for underserved communities.",
-        minInvestment: 5000,
-      },
-      {
-        id: "satellite-broadband-national",
-        title: "Satellite Broadband Services (National)",
-        region: "National",
-        description: "Deployment of satellite-based internet services to reach remote locations where traditional infrastructure is impractical.",
-        minInvestment: 5000,
-      }
-    ]
   }
 ];
 
 const UserNewDeals = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const fundFromUrl = searchParams.get('fund');
   
   const [selectedBusiness, setSelectedBusiness] = useState<any | null>(null);
