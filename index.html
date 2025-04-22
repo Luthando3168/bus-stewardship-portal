@@ -20,6 +20,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+      /* Hide the Lovable edit toast */
+      .lovable-toast, .lovable-edit-toast, [class*="lovable-toast"] {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+    </style>
   </head>
 
   <body>
@@ -29,6 +39,27 @@
       window.GPT_ENGINEER_CONFIG = {
         hideEditToast: true
       };
+      
+      // Additional script to ensure toast is hidden
+      window.addEventListener('DOMContentLoaded', (event) => {
+        // Function to hide toast elements
+        const hideToasts = () => {
+          const toasts = document.querySelectorAll('[class*="lovable-toast"], [class*="lovable-edit"], .lovable-toast, .lovable-edit-toast');
+          toasts.forEach(toast => {
+            toast.style.display = 'none';
+            toast.style.visibility = 'hidden';
+            toast.style.opacity = '0';
+            toast.style.pointerEvents = 'none';
+          });
+        };
+        
+        // Run immediately
+        hideToasts();
+        
+        // Run again after a delay and periodically
+        setTimeout(hideToasts, 500);
+        setInterval(hideToasts, 2000);
+      });
     </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
