@@ -81,6 +81,12 @@ const Header = () => {
             >
               Impact Funds
             </Link>
+            <Link
+              to="/foundation"
+              className="font-montserrat text-sm font-medium text-charcoal hover:text-gold transition-colors"
+            >
+              Foundation
+            </Link>
             <div className="flex items-center space-x-4">
               <Button variant="ghost" size="icon" className="relative">
                 <Bell className="h-5 w-5" />
@@ -97,6 +103,7 @@ const Header = () => {
             </div>
           </nav>
 
+          {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-4">
             <Button variant="ghost" size="icon" className="relative">
               <Bell className="h-5 w-5" />
@@ -115,6 +122,7 @@ const Header = () => {
         </div>
       </div>
 
+      {/* Mobile menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-white border-t border-gray-200 animate-fade-in">
           <div className="container mx-auto px-4 py-2">
@@ -153,6 +161,13 @@ const Header = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Impact Funds
+              </Link>
+              <Link
+                to="/foundation"
+                className="font-montserrat text-base font-medium text-charcoal hover:text-gold transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Foundation
               </Link>
               <Link
                 to="/contact"
