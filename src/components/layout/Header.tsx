@@ -152,21 +152,21 @@ const Header = () => {
               </Link>
               <Link
                 to="/login"
-                className="font-montserrat text-base font-medium text-charcoal hover:text-gold transition-colors py-2"
+                className="font-montserrat text-base font-medium px-4 py-2 rounded bg-navyblue text-white hover:bg-deepblue transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Login
               </Link>
               <Link
                 to="/register"
-                className="font-montserrat text-base font-medium text-charcoal hover:text-gold transition-colors py-2"
+                className="font-montserrat text-base font-medium px-4 py-2 rounded bg-navyblue text-white hover:bg-deepblue transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Register
               </Link>
               <Link
                 to="/contact"
-                className="font-montserrat text-base font-medium px-4 py-2 rounded bg-navyblue text-white hover:bg-deepblue transition-colors"
+                className="font-montserrat text-base font-medium text-charcoal hover:text-gold transition-colors py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact Us
