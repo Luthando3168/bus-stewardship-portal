@@ -1,3 +1,4 @@
+
 import SectionTitle from "../ui/SectionTitle";
 import { Link } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -158,3 +159,4 @@ const ImpactFundsSection = () => {
 };
 
 export default ImpactFundsSection;
+
