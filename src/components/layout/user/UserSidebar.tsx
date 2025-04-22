@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { User, LogOut, FileText, Wallet, FileChartLine, ArrowLeft, Facebook, Linkedin, Mail } from "lucide-react";
+import { User, LogOut, FileText, Wallet, FileChartLine, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface UserSidebarProps {
@@ -31,15 +31,7 @@ const UserSidebar = ({
     <aside className="bg-navyblue min-h-screen w-64 flex flex-col justify-between py-6 px-3 text-white border-r border-blue-900">
       <div>
         <div className="flex justify-between items-center mb-8 px-2">
-          <Link to="/" className="flex flex-col items-start group cursor-pointer">
-            <span className="font-montserrat font-bold text-lg tracking-tight group-hover:text-gold transition-colors">
-              <span className="text-gold border-b-2 border-gold pb-0.5">Luthando</span>
-              <span className="text-white"> Maduna</span>
-            </span>
-            <span className="font-montserrat text-xs text-white tracking-wider group-hover:text-gold transition-colors">
-              CHARTERED ACCOUNTANTS
-            </span>
-          </Link>
+          <h2 className="text-lg font-bold">Client Portal</h2>
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             className="text-white p-1 rounded hover:bg-blue-900 transition md:hidden"
