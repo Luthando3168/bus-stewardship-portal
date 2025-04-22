@@ -96,9 +96,21 @@ const Header = () => {
               </Button>
               <Link
                 to="/contact"
-                className="font-montserrat text-sm font-medium px-4 py-2 rounded bg-navyblue text-white hover:bg-deepblue transition-colors"
+                className="font-montserrat text-sm font-medium px-4 py-2 rounded bg-gold text-white hover:bg-lightgold transition-colors"
               >
                 Contact Us
+              </Link>
+              <Link
+                to="/login"
+                className="font-montserrat text-sm font-medium px-4 py-2 rounded bg-[#1EAEDB] text-white hover:bg-[#0FA0CE] transition-colors"
+              >
+                LOGIN
+              </Link>
+              <Link
+                to="/register"
+                className="font-montserrat text-sm font-medium px-4 py-2 rounded bg-[#1EAEDB] text-white hover:bg-[#0FA0CE] transition-colors"
+              >
+                REGISTER
               </Link>
             </div>
           </nav>
@@ -121,7 +133,6 @@ const Header = () => {
           </div>
         </div>
       </div>
-
       {/* Mobile menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-white border-t border-gray-200 animate-fade-in">
