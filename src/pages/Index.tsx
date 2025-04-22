@@ -12,6 +12,7 @@ const Index = () => {
       <ServicesSection />
       <BusSection />
       <ImpactFundsSection />
+      <div className="bg-white py-16"></div> {/* Added white spacer */}
     </Layout>
   );
 };
