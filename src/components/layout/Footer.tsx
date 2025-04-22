@@ -22,7 +22,7 @@ const Footer = () => {
                 <span className="text-gold border-b-2 border-gold pb-0.5">Luthando</span>
                 <span className="text-white"> Maduna</span>
               </span>
-              <span className="font-montserrat text-xs text-deepblue tracking-wider mt-1">
+              <span className="font-montserrat text-xs text-white tracking-wider mt-1">
                 CHARTERED ACCOUNTANTS
               </span>
             </div>
@@ -187,13 +187,27 @@ const Footer = () => {
             <p className="font-lato text-sm text-gray-400">
               &copy; {currentYear} Luthando Maduna Chartered Accountants. All rights reserved.
             </p>
-            <div className="flex items-center space-x-6 mt-4 md:mt-0">
-              <Link to="/privacy" className="font-lato text-sm text-gray-400 hover:text-gold transition-colors">
-                Privacy Policy
-              </Link>
-              <Link to="/terms" className="font-lato text-sm text-gray-400 hover:text-gold transition-colors">
-                Terms of Service
-              </Link>
+            <div className="flex flex-col md:flex-row items-center gap-4 mt-4 md:mt-0">
+              <div className="flex items-center space-x-6">
+                <Link to="/privacy" className="font-lato text-sm text-gray-400 hover:text-gold transition-colors">
+                  Privacy Policy
+                </Link>
+                <Link to="/terms" className="font-lato text-sm text-gray-400 hover:text-gold transition-colors">
+                  Terms of Service
+                </Link>
+              </div>
+              <div className="flex items-center space-x-4 mt-4 md:mt-0">
+                <img 
+                  src="/lovable-uploads/4f2d889e-ba23-463a-9efe-bc8453a5e5b2.png" 
+                  alt="CAW Network Member" 
+                  className="h-12 w-auto"
+                />
+                <img 
+                  src="/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png" 
+                  alt="SAICA Member" 
+                  className="h-12 w-auto"
+                />
+              </div>
             </div>
           </div>
         </div>
