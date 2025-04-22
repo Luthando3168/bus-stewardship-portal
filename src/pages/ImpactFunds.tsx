@@ -14,183 +14,173 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 
+const funds = [
+  {
+    id: "myfarm",
+    name: "MyFarm Impact Fund",
+    gradient: "from-green-700 to-green-900",
+    headerBg: "bg-gradient-to-r from-green-700 to-green-900 text-white",
+    fundTitle: "MyFarm Impact Fund",
+    description:
+      "The MyFarm Impact Fund invests in sustainable agricultural businesses and ventures, driving positive change in food security and rural economy.",
+    focus: [
+      "Sustainable farming operations",
+      "Agricultural technology innovations",
+      "Food processing and distribution",
+      "Rural agricultural infrastructure",
+    ],
+    impact: [
+      "Enhance food security",
+      "Create rural employment",
+      "Promote sustainable practices",
+      "Support smallholder farmers",
+    ],
+    targetReturn: "8-12% p.a.",
+    minimumInvestment: "R 5,000",
+    deals: [
+      {
+        id: "agrourban-oasis",
+        title: "AgroUrban Oasis",
+        description: "Urban farming initiative where clients can own trading companies or invest in the farm as a whole to earn profits. Minimum investment is R5,000.",
+        minInvestment: "R 5,000",
+        targetReturn: "10.5%",
+        term: "5 years",
+        image: "/lovable-uploads/98d6869e-a552-4731-9f0c-6dce07a2db48.png",
+        highlights: [
+          "Urban farming with eco-friendly design",
+          "Multiple revenue streams from various produce",
+          "Training and employment opportunities for local youth",
+          "Direct supply to Lifestyle Fruits and Veg stores"
+        ]
+      }
+    ]
+  },
+  {
+    id: "myproperty",
+    name: "MyProperty Impact Fund",
+    gradient: "from-blue-700 to-blue-900",
+    headerBg: "bg-gradient-to-r from-blue-700 to-blue-900 text-white",
+    fundTitle: "MyProperty Impact Fund",
+    description:
+      "The MyProperty Impact Fund invests in property businesses and developments focused on affordable housing and community growth.",
+    focus: [
+      "Affordable housing developments",
+      "Mixed-use community projects",
+      "Energy-efficient building retrofits",
+      "Community-centered commercial spaces",
+    ],
+    impact: [
+      "Increase housing access",
+      "Revitalize communities",
+      "Reduce building environmental footprint",
+      "Support local economic development",
+    ],
+    targetReturn: "9-14% p.a.",
+    minimumInvestment: "R 5,000",
+    deals: [
+      {
+        id: "ekasi-mix",
+        title: "eKasi Mix Use",
+        description: "Modern residential development in township areas with affordable housing and commercial spaces. Invest by owning a unit outright or co-own. Minimum investment R5,000.",
+        minInvestment: "R 5,000",
+        targetReturn: "12.5%",
+        term: "7 years",
+        image: "/lovable-uploads/4f2d889e-ba23-463a-9efe-bc8453a5e5b2.png",
+        highlights: [
+          "Prime location in growing township area",
+          "Option for full ownership or co-ownership",
+          "Built-in commercial spaces for rental income",
+          "Flexible payment options through Standard Bank accounts"
+        ]
+      }
+    ]
+  },
+  {
+    id: "myenergy",
+    name: "MyEnergy Impact Fund",
+    gradient: "from-amber-600 to-amber-800",
+    headerBg: "bg-gradient-to-r from-amber-600 to-amber-800 text-white",
+    fundTitle: "MyEnergy Impact Fund",
+    description:
+      "The MyEnergy Impact Fund invests in renewable energy projects and clean technology initiatives for a greener future.",
+    focus: [
+      "Solar energy installations",
+      "Wind power projects",
+      "Energy storage solutions",
+      "Energy efficiency technologies",
+    ],
+    impact: [
+      "Reduce carbon emissions",
+      "Expand renewable energy access",
+      "Support energy independence",
+      "Create green jobs",
+    ],
+    targetReturn: "10-15% p.a.",
+    minimumInvestment: "R 5,000",
+    deals: [
+      // No featured business profiles yet
+    ]
+  },
+  {
+    id: "myenterprise",
+    name: "MyEnterprise Impact Fund",
+    gradient: "from-purple-700 to-purple-900",
+    headerBg: "bg-gradient-to-r from-purple-700 to-purple-900 text-white",
+    fundTitle: "MyEnterprise Impact Fund",
+    description:
+      "The MyEnterprise Impact Fund invests in SMEs and franchises making a positive impact in communities.",
+    focus: [
+      "Growth-stage SMEs",
+      "Social enterprises",
+      "Township businesses",
+      "Women and youth-led enterprises",
+    ],
+    impact: [
+      "Create quality employment",
+      "Support entrepreneurship",
+      "Drive inclusive growth",
+      "Build sustainable businesses",
+    ],
+    targetReturn: "12-18% p.a.",
+    minimumInvestment: "R 5,000",
+    deals: [
+      {
+        id: "lifestyle-complex",
+        title: "Lifestyle Mini Complex",
+        description: "Own the Lifestyle Mini Complex and three trading companies: Food Corner (groceries), Lifestyle Meat Co (meat & products), and Lifestyle Fruits & Veg (produce from MyFarm Impact Fund). Minimum investment of R5,000.",
+        minInvestment: "R 5,000",
+        targetReturn: "14.5%",
+        term: "6 years",
+        image: "/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png",
+        highlights: [
+          "Three established businesses in one investment",
+          "Strong community presence and customer base",
+          "Vertically integrated supply chain with MyFarm Impact Fund",
+          "Multiple revenue streams for stability"
+        ]
+      },
+      {
+        id: "my-franchise",
+        title: "MyFranchise",
+        description: "Invest into multiple franchises. Select various franchises as advertised on the MyFranchise website and build your portfolio. Minimum investment of R5,000.",
+        minInvestment: "R 5,000",
+        targetReturn: "16.2%",
+        term: "5 years",
+        image: "/lovable-uploads/aa792d14-7473-4673-89cf-c3f6e1d15711.png",
+        highlights: [
+          "Access to established franchise opportunities",
+          "Lower risk through diversification across multiple brands",
+          "Professional management of franchise operations",
+          "Flexible investment options to match risk appetite"
+        ]
+      }
+    ]
+  },
+];
+
 const ImpactFunds = () => {
   const [selectedDealId, setSelectedDealId] = useState<string | null>(null);
   const isMobile = useIsMobile();
-
-  const funds = [
-    {
-      id: "agri",
-      name: "Agri Impact Fund",
-      gradient: "from-green-700 to-green-900",
-      headerBg: "bg-gradient-to-r from-green-700 to-green-900 text-white",
-      fundTitle: "Sankofa Agri Impact Fund",
-      description:
-        "The Sankofa Agri Impact Fund invests in sustainable agricultural ventures across South Africa, focusing on food security, rural development, and environmentally responsible farming practices.",
-      focus: [
-        "Sustainable farming operations",
-        "Agricultural technology innovations",
-        "Food processing and distribution",
-        "Rural agricultural infrastructure",
-      ],
-      impact: [
-        "Enhance food security",
-        "Create rural employment",
-        "Promote sustainable practices",
-        "Support smallholder farmers",
-      ],
-      targetReturn: "8-12% p.a.",
-      minimumInvestment: "R 5,000",
-      deals: [
-        {
-          id: "agrourban-oasis",
-          title: "AgroUrban Oasis",
-          description: "Urban farming initiative combining agriculture with residential spaces. Invest in the entire farm operation or specific trading companies within the development.",
-          minInvestment: "R 5,000",
-          targetReturn: "10.5%",
-          term: "5 years",
-          currentProgress: 75,
-          targetAmount: "R 4,000,000",
-          raisedAmount: "R 3,000,000",
-          image: "/lovable-uploads/98d6869e-a552-4731-9f0c-6dce07a2db48.png",
-          highlights: [
-            "Urban farming with eco-friendly design",
-            "Multiple revenue streams from various produce",
-            "Training and employment opportunities for local youth",
-            "Direct supply to Lifestyle Fruits and Veg stores"
-          ]
-        }
-      ]
-    },
-    {
-      id: "property",
-      name: "Property Impact Fund",
-      gradient: "from-blue-700 to-blue-900",
-      headerBg: "bg-gradient-to-r from-blue-700 to-blue-900 text-white",
-      fundTitle: "Sankofa Property Impact Fund",
-      description:
-        "The Sankofa Property Impact Fund invests in residential and commercial property developments that address housing needs while generating sustainable returns for investors.",
-      focus: [
-        "Affordable housing developments",
-        "Mixed-use community projects",
-        "Energy-efficient building retrofits",
-        "Community-centered commercial spaces",
-      ],
-      impact: [
-        "Increase housing access",
-        "Revitalize communities",
-        "Reduce building environmental footprint",
-        "Support local economic development",
-      ],
-      targetReturn: "9-14% p.a.",
-      minimumInvestment: "R 5,000",
-      deals: [
-        {
-          id: "ekasi-mix",
-          title: "eKasi Mix Use",
-          description: "Modern residential development in township areas offering affordable housing with commercial spaces. Invest by owning a unit outright or co-own with other clients.",
-          minInvestment: "R 5,000",
-          targetReturn: "12.5%",
-          term: "7 years",
-          currentProgress: 68,
-          targetAmount: "R 5,000,000",
-          raisedAmount: "R 3,400,000",
-          image: "/lovable-uploads/4f2d889e-ba23-463a-9efe-bc8453a5e5b2.png",
-          highlights: [
-            "Prime location in growing township area",
-            "Option for full ownership or co-ownership",
-            "Built-in commercial spaces for rental income",
-            "Flexible payment options through Standard Bank accounts"
-          ]
-        }
-      ]
-    },
-    {
-      id: "energy",
-      name: "Energy Impact Fund",
-      gradient: "from-amber-600 to-amber-800",
-      headerBg: "bg-gradient-to-r from-amber-600 to-amber-800 text-white",
-      fundTitle: "Sankofa Energy Impact Fund",
-      description:
-        "The Sankofa Energy Impact Fund invests in renewable energy projects and clean technology initiatives that promote sustainable energy solutions while delivering competitive financial returns.",
-      focus: [
-        "Solar energy installations",
-        "Wind power projects",
-        "Energy storage solutions",
-        "Energy efficiency technologies",
-      ],
-      impact: [
-        "Reduce carbon emissions",
-        "Expand renewable energy access",
-        "Support energy independence",
-        "Create green jobs",
-      ],
-      targetReturn: "10-15% p.a.",
-      minimumInvestment: "R 5,000",
-      deals: []
-    },
-    {
-      id: "enterprise",
-      name: "Enterprise Impact Fund",
-      gradient: "from-purple-700 to-purple-900",
-      headerBg: "bg-gradient-to-r from-purple-700 to-purple-900 text-white",
-      fundTitle: "Sankofa Enterprise Impact Fund",
-      description:
-        "The Sankofa Enterprise Impact Fund invests in small and medium-sized enterprises (SMEs) with high growth potential and positive social impact, focusing on job creation and economic development.",
-      focus: [
-        "Growth-stage SMEs",
-        "Social enterprises",
-        "Township businesses",
-        "Women and youth-led enterprises",
-      ],
-      impact: [
-        "Create quality employment",
-        "Support entrepreneurship",
-        "Drive inclusive growth",
-        "Build sustainable businesses",
-      ],
-      targetReturn: "12-18% p.a.",
-      minimumInvestment: "R 5,000",
-      deals: [
-        {
-          id: "lifestyle-complex",
-          title: "Lifestyle Mini Complex",
-          description: "Commercial complex with three trading companies: Food Corner, Lifestyle Meat Co, and Lifestyle Fruits & Veg, sourcing produce from our Agri Impact Fund farms.",
-          minInvestment: "R 5,000",
-          targetReturn: "14.5%",
-          term: "6 years",
-          currentProgress: 42,
-          targetAmount: "R 3,500,000",
-          raisedAmount: "R 1,470,000",
-          image: "/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png",
-          highlights: [
-            "Three established businesses in one investment",
-            "Strong community presence and customer base",
-            "Vertically integrated supply chain with our Agri farms",
-            "Multiple revenue streams for stability"
-          ]
-        },
-        {
-          id: "my-franchise",
-          title: "MyFranchise",
-          description: "Investment opportunity across multiple franchise businesses. Select from various franchise options and build a diversified investment portfolio.",
-          minInvestment: "R 5,000",
-          targetReturn: "16.2%",
-          term: "5 years",
-          currentProgress: 32,
-          targetAmount: "R 7,500,000",
-          raisedAmount: "R 2,400,000",
-          image: "/lovable-uploads/aa792d14-7473-4673-89cf-c3f6e1d15711.png",
-          highlights: [
-            "Access to established franchise opportunities",
-            "Lower risk through diversification across multiple brands",
-            "Professional management of franchise operations",
-            "Flexible investment options to match risk appetite"
-          ]
-        }
-      ]
-    },
-  ];
 
   const investmentProcess = [
     {
