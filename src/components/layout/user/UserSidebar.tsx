@@ -1,7 +1,22 @@
 
-import { Link, useLocation } from "react-router-dom";
-import { User, LogOut, FileText, Wallet, FileChartLine, ArrowLeft, Facebook, Linkedin, Mail } from "lucide-react";
+import React from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import {
+  Home,
+  User,
+  Wallet,
+  Users,
+  FileText,
+  Settings,
+  LogOut,
+  Building,
+  ChevronLeft,
+  ChevronRight,
+  ShoppingBag,
+  BarChart3,
+} from "lucide-react";
 
 interface UserSidebarProps {
   isSidebarOpen: boolean;
@@ -9,16 +24,6 @@ interface UserSidebarProps {
   userName: string;
   onLogout: () => void;
 }
-
-const menuItems = [
-  { icon: FileChartLine, label: "Dashboard", path: "/user/dashboard" },
-  { icon: FileText, label: "New Deals", path: "/user/new-deals" },
-  { icon: FileText, label: "Current Investments", path: "/user/investments" },
-  { icon: FileText, label: "Financial Statements", path: "/user/statements" },
-  { icon: FileText, label: "Beneficiaries", path: "/user/beneficiaries" },
-  { icon: Wallet, label: "My Wallet", path: "/user/wallet" },
-  { icon: User, label: "My Profile", path: "/user/profile" },
-];
 
 const UserSidebar = ({
   isSidebarOpen,
@@ -28,67 +33,147 @@ const UserSidebar = ({
 }: UserSidebarProps) => {
   const location = useLocation();
 
+  const sidebarLinks = [
+    {
+      name: "Dashboard",
+      icon: <Home size={20} />,
+      path: "/user/dashboard",
+    },
+    {
+      name: "Investment Opportunities",
+      icon: <ShoppingBag size={20} />,
+      path: "/user/new-deals",
+    },
+    {
+      name: "Pending Deals",
+      icon: <BarChart3 size={20} />,
+      path: "/user/pending-deals",
+    },
+    {
+      name: "My Investments",
+      icon: <Building size={20} />,
+      path: "/user/my-investments",
+    },
+    {
+      name: "Financial Statements",
+      icon: <FileText size={20} />,
+      path: "/user/statements",
+    },
+    {
+      name: "Wallet",
+      icon: <Wallet size={20} />,
+      path: "/user/wallet",
+    },
+    {
+      name: "Beneficiaries",
+      icon: <Users size={20} />,
+      path: "/user/beneficiaries",
+    },
+    {
+      name: "Profile",
+      icon: <User size={20} />,
+      path: "/user/profile",
+    },
+  ];
+
+  const isActive = (path: string) => {
+    return location.pathname === path;
+  };
+
   return (
-    <aside className="bg-navyblue min-h-screen w-64 flex flex-col justify-between py-6 px-3 text-white border-r border-blue-900">
-      <div>
-        <div className="flex justify-between items-center mb-8 px-2">
-          <h2 className="text-lg font-bold">Client Portal</h2>
-          <button
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="text-white p-1 rounded hover:bg-blue-900 transition md:hidden"
-            aria-label="Toggle sidebar"
-          >
-            <ArrowLeft className="h-5 w-5" />
-          </button>
+    <aside
+      className={cn(
+        "min-h-screen bg-navyblue text-white transition-all duration-300 ease-in-out flex flex-col relative",
+        isSidebarOpen ? "w-64" : "w-20"
+      )}
+    >
+      <button
+        className="absolute -right-3 top-10 bg-gold text-navyblue rounded-full p-1 z-10 hidden md:block"
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+      >
+        {isSidebarOpen ? (
+          <ChevronLeft className="h-4 w-4" />
+        ) : (
+          <ChevronRight className="h-4 w-4" />
+        )}
+      </button>
+
+      <div className="p-4 border-b border-navyblue/20">
+        <div
+          className={cn(
+            "font-bold text-xl transition-all",
+            isSidebarOpen ? "opacity-100" : "opacity-0"
+          )}
+        >
+          MCA Direct
         </div>
-        <nav>
-          <ul className="space-y-2">
-            {menuItems.map((item) => (
-              <li key={item.label}>
-                <Link
-                  to={item.path}
-                  className={`flex items-center px-3 py-2 rounded hover:bg-blue-900 transition ${
-                    location.pathname === item.path ? "bg-blue-900 font-bold" : ""
-                  }`}
-                >
-                  <item.icon className="h-5 w-5" />
-                  <span className="ml-3 text-base">{item.label}</span>
-                </Link>
-              </li>
-            ))}
-            <li className="mt-4">
-              <Link
-                to="/contact"
-                className="flex items-center px-3 py-2 rounded bg-gold hover:bg-lightgold text-white font-semibold transition"
-              >
-                <span className="ml-0 text-base">Request A Consultation</span>
-              </Link>
-            </li>
-          </ul>
-        </nav>
+        {!isSidebarOpen && <div className="text-xl font-bold text-center">MCA</div>}
       </div>
-      <div>
-        <div className="border-t border-blue-900 pt-4 mb-2 text-xs text-gray-300 px-2">
-          <div className="mb-2">Signed in as {userName}</div>
-          <div className="flex gap-3 mb-3">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gold">
-              <Facebook className="h-5 w-5" />
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gold">
-              <Linkedin className="h-5 w-5" />
-            </a>
-            <a href="mailto:info@luthandoms.co.za" className="text-white hover:text-gold">
-              <Mail className="h-5 w-5" />
-            </a>
-          </div>
+
+      <div className="p-4 border-b border-navyblue/20">
+        <div
+          className={cn(
+            "transition-all",
+            isSidebarOpen ? "block" : "hidden"
+          )}
+        >
+          <p className="text-sm text-gray-300">Welcome,</p>
+          <p className="font-semibold truncate">{userName}</p>
         </div>
+        {!isSidebarOpen && (
+          <div className="flex justify-center">
+            <div className="h-8 w-8 rounded-full bg-gold text-navyblue flex items-center justify-center font-bold">
+              {userName.charAt(0)}
+            </div>
+          </div>
+        )}
+      </div>
+
+      <nav className="flex-1 p-4 space-y-1.5">
+        {sidebarLinks.map((link) => (
+          <NavLink
+            key={link.path}
+            to={link.path}
+            className={({ isActive }) =>
+              cn(
+                "flex items-center gap-3 p-2.5 rounded-md transition-all",
+                isActive
+                  ? "bg-white/10 text-white"
+                  : "hover:bg-white/5 text-gray-300"
+              )
+            }
+          >
+            <span>{link.icon}</span>
+            <span
+              className={cn(
+                "transition-all whitespace-nowrap",
+                isSidebarOpen ? "opacity-100" : "opacity-0 w-0 hidden"
+              )}
+            >
+              {link.name}
+            </span>
+            {!isSidebarOpen && (
+              <span className="sr-only">{link.name}</span>
+            )}
+          </NavLink>
+        ))}
+      </nav>
+
+      <div className="p-4 border-t border-navyblue/20">
         <Button
-          variant="outline"
-          className="w-full bg-white text-navyblue hover:bg-gray-100 flex items-center justify-center border-white"
+          variant="ghost"
+          className="w-full justify-start text-gray-300 hover:text-white hover:bg-white/5"
           onClick={onLogout}
         >
-          <LogOut className="h-4 w-4 mr-2" />
-          Logout
+          <LogOut size={20} className="mr-2" />
+          <span
+            className={cn(
+              "transition-all",
+              isSidebarOpen ? "opacity-100" : "opacity-0 w-0 hidden"
+            )}
+          >
+            Logout
+          </span>
         </Button>
       </div>
     </aside>
