@@ -1,4 +1,3 @@
-
 import AdminLayout from "@/components/layout/AdminLayout";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -7,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { UserPlus, Star } from "lucide-react";
 
-// Profile fields based on Jaltech reference and user side
+// Profile fields should match user profile page — fields updated!
 const PROFILE_FIELDS = [
   { key: "fullName", label: "Full Name", required: true },
   { key: "email", label: "Email Address", required: true },

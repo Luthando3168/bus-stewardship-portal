@@ -1,3 +1,4 @@
+
 import UserLayout from "@/components/layout/UserLayout";
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -6,9 +7,45 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import FundAccordion from "@/components/FundAccordion";
 import { Star } from "lucide-react";
 
+// Updated list of funds with Enterprise Impact Fund and R5000 minimum
+const FUNDS = [
+  {
+    name: "Sankofa Property Impact Fund",
+    description: "A diversified fund investing in sustainable property projects across South Africa.",
+    currency: "ZAR",
+    minInvestment: "R 5,000",
+    term: "5 Years",
+    risk: "Moderate",
+  },
+  {
+    name: "Sankofa Agri Impact Fund",
+    description: "Focus on transforming African agriculture through impact-driven investments.",
+    currency: "ZAR",
+    minInvestment: "R 5,000",
+    term: "3 Years",
+    risk: "Moderate",
+  },
+  {
+    name: "Sankofa Enterprise Impact Fund",
+    description: "Empowering high-impact SMEs, focusing on social and economic development.",
+    currency: "ZAR",
+    minInvestment: "R 5,000",
+    term: "3-6 Years",
+    risk: "Medium to High",
+  },
+  {
+    name: "Sankofa Energy Impact Fund",
+    description: "Direct investment into renewable and alternative energy projects.",
+    currency: "ZAR",
+    minInvestment: "R 5,000",
+    term: "4 Years",
+    risk: "High",
+  },
+];
+
+// Profile fields, matching jaltech sample (update as per your version if you want to add more fields)
 const PROFILE_FIELDS = [
   { key: "fullName", label: "Full Name", required: true },
   { key: "email", label: "Email Address", required: true },
@@ -31,45 +68,10 @@ const PROFILE_FIELDS = [
   { key: "pep", label: "Are you a PEP?", required: true }
 ];
 
-const FUNDS = [
-  {
-    name: "Sankofa Property Impact Fund",
-    description: "A diversified fund investing in sustainable property projects across South Africa.",
-    currency: "ZAR",
-    minInvestment: "R 50,000",
-    term: "5 Years",
-    risk: "Moderate",
-  },
-  {
-    name: "Sankofa Agri Impact Fund",
-    description: "Focus on transforming African agriculture through impact-driven investments.",
-    currency: "ZAR",
-    minInvestment: "R 30,000",
-    term: "3 Years",
-    risk: "Moderate",
-  },
-  {
-    name: "Sankofa Private Credit Impact Fund",
-    description: "Africa-focused credit fund delivering blended value through innovative lending.",
-    currency: "USD",
-    minInvestment: "$10,000",
-    term: "2-5 Years",
-    risk: "Medium to High",
-  },
-  {
-    name: "Sankofa Energy Impact Fund",
-    description: "Direct investment into renewable and alternative energy projects.",
-    currency: "ZAR",
-    minInvestment: "R 75,000",
-    term: "4 Years",
-    risk: "High",
-  },
-];
-
 const RedStar = () => <Star size={14} className="text-red-500 inline ml-1 align-text-bottom" />;
 
 const INITIAL_USER_DATA = {
-  fullName: "John Dube",
+  fullName: "",
   email: "",
   phone: "",
   dob: "",
@@ -88,8 +90,10 @@ const INITIAL_USER_DATA = {
   riskProfile: "",
   incomeBracket: "",
   pep: "",
-  joinDate: "January 15, 2023"
+  joinDate: ""
 };
+
+import FundAccordion from "@/components/FundAccordion";
 
 const UserProfile = () => {
   const [userData, setUserData] = useState(INITIAL_USER_DATA);

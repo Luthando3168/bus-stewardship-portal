@@ -1,7 +1,8 @@
 
-import { Link } from "react-router-dom";
-import { User, LogOut, FileText, Wallet, FileChartLine } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { User, LogOut, FileText, Wallet, FileChartLine, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 interface UserSidebarProps {
   isSidebarOpen: boolean;
@@ -10,74 +11,68 @@ interface UserSidebarProps {
   onLogout: () => void;
 }
 
-const UserSidebar = ({ 
-  isSidebarOpen, 
-  setIsSidebarOpen, 
-  userName, 
-  onLogout 
+const menuItems = [
+  { icon: FileChartLine, label: "Dashboard", path: "/user/dashboard" },
+  { icon: FileText, label: "New Deals", path: "/user/new-deals" },
+  { icon: FileText, label: "Current Investments", path: "/user/investments" },
+  { icon: FileText, label: "Financial Statements", path: "/user/statements" },
+  { icon: Wallet, label: "My Wallet", path: "/user/wallet" },
+  { icon: User, label: "My Profile", path: "/user/profile" },
+];
+
+const UserSidebar = ({
+  isSidebarOpen,
+  setIsSidebarOpen,
+  userName,
+  onLogout,
 }: UserSidebarProps) => {
-  const menuItems = [
-    { icon: FileChartLine, label: "Dashboard", path: "/user/dashboard" },
-    { icon: FileText, label: "New Deals", path: "/user/new-deals" },
-    { icon: FileText, label: "Current Investments", path: "/user/investments" },
-    { icon: FileText, label: "Financial Statements", path: "/user/statements" },
-    { icon: Wallet, label: "My Wallet", path: "/user/wallet" },
-    { icon: User, label: "My Profile", path: "/user/profile" },
-  ];
+  const location = useLocation();
 
   return (
-    <div
-      className="bg-navyblue text-white h-full flex-shrink-0"
-      style={{ width: isSidebarOpen ? '100%' : '80px' }}
-    >
-      <div className="p-4 flex flex-col h-full">
-        <div className="flex items-center justify-between mb-8">
-          {isSidebarOpen ? (
-            <h2 className="text-base md:text-lg font-bold">Client Portal</h2>
-          ) : (
-            <h2 className="text-lg font-bold">CP</h2>
-          )}
+    <aside className="bg-navyblue min-h-screen w-64 flex flex-col justify-between py-6 px-3 text-white border-r border-blue-900">
+      <div>
+        <div className="flex justify-between items-center mb-8 px-2">
+          <h2 className="text-lg font-bold">Client Portal</h2>
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="text-white p-2 rounded hover:bg-blue-900 transition hidden md:block"
+            className="text-white p-1 rounded hover:bg-blue-900 transition md:hidden"
+            aria-label="Toggle sidebar"
           >
-            {isSidebarOpen ? "←" : "→"}
+            <ArrowLeft className="h-5 w-5" />
           </button>
         </div>
-
-        <nav className="flex-1">
+        <nav>
           <ul className="space-y-2">
             {menuItems.map((item) => (
               <li key={item.label}>
                 <Link
                   to={item.path}
-                  className="flex items-center p-3 rounded hover:bg-blue-900 transition"
+                  className={`flex items-center px-3 py-2 rounded hover:bg-blue-900 transition ${
+                    location.pathname === item.path ? "bg-blue-900 font-bold" : ""
+                  }`}
                 >
                   <item.icon className="h-5 w-5" />
-                  {isSidebarOpen && <span className="ml-3 text-sm md:text-base">{item.label}</span>}
+                  <span className="ml-3 text-base">{item.label}</span>
                 </Link>
               </li>
             ))}
           </ul>
         </nav>
-
-        <div className="mt-auto">
-          <div className="border-t border-blue-900 pt-4 mb-4">
-            {isSidebarOpen && (
-              <div className="text-sm mb-2">Signed in as {userName}</div>
-            )}
-            <Button
-              variant="outline"
-              className="flex items-center justify-center w-full border-white text-white hover:bg-blue-900"
-              onClick={onLogout}
-            >
-              <LogOut className="h-4 w-4 mr-2" />
-              {isSidebarOpen ? "Logout" : ""}
-            </Button>
-          </div>
-        </div>
       </div>
-    </div>
+      <div>
+        <div className="border-t border-blue-900 pt-4 mb-2 text-xs text-gray-300 px-2">
+          Signed in as {userName}
+        </div>
+        <Button
+          variant="outline"
+          className="w-full border-white text-white hover:bg-blue-900 flex items-center justify-center"
+          onClick={onLogout}
+        >
+          <LogOut className="h-4 w-4 mr-2" />
+          Logout
+        </Button>
+      </div>
+    </aside>
   );
 };
 
