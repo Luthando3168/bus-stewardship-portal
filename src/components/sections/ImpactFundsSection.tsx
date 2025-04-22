@@ -3,7 +3,6 @@ import SectionTitle from "../ui/SectionTitle";
 import { Link } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-// Updated funds array with only MyFarm, MyProperty, and MyFranchise
 const funds = [
   {
     name: "MyFarm Impact Fund",
@@ -87,18 +86,8 @@ const ImpactFundsSection = () => {
         />
         
         <p className="font-lato text-center text-gray-300 max-w-3xl mx-auto mb-12">
-          Luthando Maduna Chartered Accountants assists clients to own multiple businesses, which we then manage for them. 
-          Clients can customize their investment portfolio from various impact funds based on their interests and financial goals.
+          At Luthando Maduna Chartered Accountants, we assist clients to own multiple businesses using the in-house MCA Direct where the actual business deals are linked to impact funds. See some of the funds below.
         </p>
-        
-        <div className="bg-white/10 rounded-lg p-6 mb-8 text-center">
-          <h3 className="text-xl font-medium mb-2">How Our Investment Process Works</h3>
-          <p className="text-gray-200">
-            As you select business deals that interest you, they are automatically linked to their respective impact funds.
-            Your selections are consolidated at checkout where you'll receive a unique order number. 
-            You can conveniently pay using your Standard Bank wallet, which should be funded in advance.
-          </p>
-        </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {funds.map((fund, index) => (
@@ -130,37 +119,13 @@ const ImpactFundsSection = () => {
               </div>
               
               <Link 
-                to={`/user/new-deals?fund=${fund.name.toLowerCase().split(" ")[0]}`}
+                to={`/impact-funds`}
                 className="font-montserrat inline-block px-4 sm:px-6 py-2 bg-white/10 text-white rounded font-medium hover:bg-white/20 transition-colors mt-auto text-center mt-4"
               >
                 View Opportunities
               </Link>
             </div>
           ))}
-        </div>
-        
-        <div className="mt-16 text-center">
-          <div className="p-6 bg-navyblue/40 rounded-lg max-w-3xl mx-auto">
-            <h3 className="font-bold text-xl mb-4">MCA Direct</h3>
-            <p className="mb-4 text-gray-300">
-              MCA Direct is our in-house platform that we use to assist clients in managing their investment portfolio and business holdings. 
-              Register and login to get updates on your investments and available opportunities.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4 mt-6">
-              <Link
-                to="/register"
-                className="font-montserrat inline-block px-6 sm:px-8 py-3 sm:py-4 bg-gold text-navyblue rounded font-medium hover:bg-lightgold transition-colors"
-              >
-                Register Now
-              </Link>
-              <Link
-                to="/login" 
-                className="font-montserrat inline-block px-6 sm:px-8 py-3 sm:py-4 border border-gold text-gold rounded font-medium hover:bg-gold/10 transition-colors"
-              >
-                Login
-              </Link>
-            </div>
-          </div>
         </div>
       </div>
     </section>
