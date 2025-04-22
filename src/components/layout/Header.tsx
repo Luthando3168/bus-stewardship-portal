@@ -43,7 +43,6 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* Desktop menu */}
           <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
             <Link
               to="/"
@@ -91,7 +90,6 @@ const Header = () => {
             </div>
           </nav>
 
-          {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-4">
             <Button variant="ghost" size="icon" className="relative">
               <Bell className="h-5 w-5" />
@@ -110,7 +108,6 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-white border-t border-gray-200 animate-fade-in">
           <div className="container mx-auto px-4 py-2">
@@ -151,6 +148,32 @@ const Header = () => {
                 Impact Funds
               </Link>
               <Link
+                to="/contact"
+                className="font-montserrat text-base font-medium text-charcoal hover:text-gold transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact Us
+              </Link>
+              
+              <div className="pt-2 pb-3">
+                <h3 className="font-montserrat text-base font-semibold text-charcoal mb-2">Connect With Us</h3>
+                <div className="flex items-center space-x-4">
+                  {socialLinks.map((social) => (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-charcoal hover:text-gold transition-colors"
+                      aria-label={social.label}
+                    >
+                      <social.icon className="h-5 w-5" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              <Link
                 to="/login"
                 className="font-montserrat text-base font-medium px-4 py-2 rounded bg-navyblue text-white hover:bg-deepblue transition-colors"
                 onClick={() => setIsMenuOpen(false)}
@@ -164,28 +187,6 @@ const Header = () => {
               >
                 Register
               </Link>
-              <Link
-                to="/contact"
-                className="font-montserrat text-base font-medium text-charcoal hover:text-gold transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Contact Us
-              </Link>
-              
-              <div className="flex items-center space-x-4 py-2">
-                {socialLinks.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-charcoal hover:text-gold transition-colors"
-                    aria-label={social.label}
-                  >
-                    <social.icon className="h-5 w-5" />
-                  </a>
-                ))}
-              </div>
             </nav>
           </div>
         </div>
