@@ -1,8 +1,7 @@
 
 import { Link, useLocation } from "react-router-dom";
-import { User, LogOut, FileText, Wallet, FileChartLine, ArrowLeft } from "lucide-react";
+import { User, LogOut, FileText, Wallet, FileChartLine, ArrowLeft, Facebook, Linkedin, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 
 interface UserSidebarProps {
   isSidebarOpen: boolean;
@@ -16,6 +15,7 @@ const menuItems = [
   { icon: FileText, label: "New Deals", path: "/user/new-deals" },
   { icon: FileText, label: "Current Investments", path: "/user/investments" },
   { icon: FileText, label: "Financial Statements", path: "/user/statements" },
+  { icon: FileText, label: "Beneficiaries", path: "/user/beneficiaries" },
   { icon: Wallet, label: "My Wallet", path: "/user/wallet" },
   { icon: User, label: "My Profile", path: "/user/profile" },
 ];
@@ -56,16 +56,35 @@ const UserSidebar = ({
                 </Link>
               </li>
             ))}
+            <li className="mt-4">
+              <Link
+                to="/contact"
+                className="flex items-center px-3 py-2 rounded bg-gold hover:bg-lightgold text-white font-semibold transition"
+              >
+                <span className="ml-0 text-base">Request A Consultation</span>
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>
       <div>
         <div className="border-t border-blue-900 pt-4 mb-2 text-xs text-gray-300 px-2">
-          Signed in as {userName}
+          <div className="mb-2">Signed in as {userName}</div>
+          <div className="flex gap-3 mb-3">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gold">
+              <Facebook className="h-5 w-5" />
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gold">
+              <Linkedin className="h-5 w-5" />
+            </a>
+            <a href="mailto:info@luthandoms.co.za" className="text-white hover:text-gold">
+              <Mail className="h-5 w-5" />
+            </a>
+          </div>
         </div>
         <Button
           variant="outline"
-          className="w-full border-white text-white hover:bg-blue-900 flex items-center justify-center"
+          className="w-full bg-white text-navyblue hover:bg-gray-100 flex items-center justify-center border-white"
           onClick={onLogout}
         >
           <LogOut className="h-4 w-4 mr-2" />

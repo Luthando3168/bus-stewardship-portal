@@ -40,7 +40,10 @@ const UserLayout = ({ children }: UserLayoutProps) => {
     navigate("/login");
   };
 
+  // Get full name from localStorage for user greeting
   const userName = localStorage.getItem("userName") || "User";
+  const userSurname = localStorage.getItem("userSurname") || "";
+  const fullName = `${userName} ${userSurname}`.trim();
 
   return (
     <div className="flex min-h-screen bg-lightgray">
@@ -51,7 +54,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
               <UserSidebar
                 isSidebarOpen={true}
                 setIsSidebarOpen={() => {}}
-                userName={userName}
+                userName={fullName}
                 onLogout={handleLogout}
               />
             </SheetContent>
@@ -61,6 +64,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
               notifications={notifications} 
               isMobile={true}
               onMenuClick={() => setMobileMenuOpen(true)}
+              userName={fullName}
             />
             <main className="px-4 py-3 mx-auto">{children}</main>
           </div>
@@ -70,11 +74,11 @@ const UserLayout = ({ children }: UserLayoutProps) => {
           <UserSidebar
             isSidebarOpen={isSidebarOpen}
             setIsSidebarOpen={setIsSidebarOpen}
-            userName={userName}
+            userName={fullName}
             onLogout={handleLogout}
           />
           <div className="flex-1 overflow-x-hidden">
-            <UserHeader notifications={notifications} />
+            <UserHeader notifications={notifications} userName={fullName} />
             <main className="max-w-7xl mx-auto p-4">{children}</main>
           </div>
         </>

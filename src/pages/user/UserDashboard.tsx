@@ -3,12 +3,26 @@ import UserLayout from "@/components/layout/UserLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Wallet, FileText, ChartPie } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const UserDashboard = () => {
+  const [userName, setUserName] = useState("");
+  const [userSurname, setUserSurname] = useState("");
+  
+  useEffect(() => {
+    // Get user details from localStorage
+    const storedName = localStorage.getItem("userName") || "";
+    const storedSurname = localStorage.getItem("userSurname") || "";
+    setUserName(storedName);
+    setUserSurname(storedSurname);
+  }, []);
+
   return (
     <UserLayout>
       <div className="space-y-6">
-        <h2 className="text-2xl font-bold text-navyblue">Welcome, Client User</h2>
+        <h2 className="text-2xl font-bold text-navyblue">
+          Welcome, {userName} {userSurname}
+        </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card>
@@ -71,21 +85,21 @@ const UserDashboard = () => {
                   <div className="divide-y">
                     <div className="grid grid-cols-1 md:grid-cols-5 p-4">
                       <div>Downtown Office Building</div>
-                      <div>Property Impact Fund</div>
+                      <div>Sankofa Property Impact Fund</div>
                       <div>R 120,000.00</div>
                       <div className="text-green-600">+8.5%</div>
                       <div>Active</div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-5 p-4">
                       <div>Solar Farm Project</div>
-                      <div>Energy Impact Fund</div>
+                      <div>Sankofa Energy Impact Fund</div>
                       <div>R 85,000.00</div>
                       <div className="text-green-600">+11.2%</div>
                       <div>Active</div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-5 p-4">
                       <div>Organic Farm Expansion</div>
-                      <div>Agri Impact Fund</div>
+                      <div>Sankofa Agri Impact Fund</div>
                       <div>R 40,000.00</div>
                       <div className="text-green-600">+6.8%</div>
                       <div>Active</div>
@@ -112,8 +126,8 @@ const UserDashboard = () => {
                   <div className="divide-y">
                     <div className="grid grid-cols-1 md:grid-cols-5 p-4">
                       <div>Mixed-Use Development</div>
-                      <div>Property Impact Fund</div>
-                      <div>R 50,000.00</div>
+                      <div>Sankofa Property Impact Fund</div>
+                      <div>R 5,000.00</div>
                       <div>9.5%</div>
                       <div>
                         <button className="bg-gold hover:bg-lightgold text-white px-3 py-1 rounded">
@@ -123,8 +137,8 @@ const UserDashboard = () => {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-5 p-4">
                       <div>Wind Turbine Installation</div>
-                      <div>Energy Impact Fund</div>
-                      <div>R 75,000.00</div>
+                      <div>Sankofa Energy Impact Fund</div>
+                      <div>R 5,000.00</div>
                       <div>12.0%</div>
                       <div>
                         <button className="bg-gold hover:bg-lightgold text-white px-3 py-1 rounded">

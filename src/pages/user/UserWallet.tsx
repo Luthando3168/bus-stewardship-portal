@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { DollarSign, CreditCard } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const UserWallet = () => {
   return (
@@ -53,59 +54,18 @@ const UserWallet = () => {
 
         <Card>
           <CardHeader>
-            <CardTitle>Beneficiary Details</CardTitle>
+            <CardTitle>Manage Your Beneficiaries</CardTitle>
             <CardDescription>
-              In case of emergency, these details will be used to contact your beneficiaries
+              Review and update your beneficiary information
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              <div className="rounded-md border p-4">
-                <h3 className="font-medium mb-2">Primary Beneficiary</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <p className="text-sm text-muted-foreground">Name</p>
-                    <p>Sarah Dlamini</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Relationship</p>
-                    <p>Spouse</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Phone</p>
-                    <p>073 123 4567</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Email</p>
-                    <p>sarah.d@example.com</p>
-                  </div>
-                </div>
-                <Button variant="outline" className="mt-4">Edit Details</Button>
-              </div>
-              
-              <div className="rounded-md border p-4">
-                <h3 className="font-medium mb-2">Secondary Beneficiary</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <p className="text-sm text-muted-foreground">Name</p>
-                    <p>Thabo Dlamini</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Relationship</p>
-                    <p>Son</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Phone</p>
-                    <p>082 987 6543</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Email</p>
-                    <p>thabo.d@example.com</p>
-                  </div>
-                </div>
-                <Button variant="outline" className="mt-4">Edit Details</Button>
-              </div>
-            </div>
+            <p className="mb-4">Your beneficiary details are important for your investment accounts. Please keep them updated.</p>
+            <Link to="/user/beneficiaries">
+              <Button className="bg-navyblue hover:bg-blue-800 text-white">
+                View & Manage Beneficiaries
+              </Button>
+            </Link>
           </CardContent>
         </Card>
 

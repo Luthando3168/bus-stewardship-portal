@@ -33,6 +33,7 @@ import UserProfile from "./pages/user/UserProfile";
 import UserNewDeals from "./pages/user/UserNewDeals";
 import UserInvestments from "./pages/user/UserInvestments";
 import UserStatements from "./pages/user/UserStatements";
+import UserBeneficiaries from "./pages/user/UserBeneficiaries";
 import AdminReports from "./pages/admin/AdminReports";
 
 const queryClient = new QueryClient();
@@ -71,6 +72,7 @@ const App = () => (
           <Route path="/user/new-deals" element={<ProtectedRoute allowedRole="user"><UserNewDeals /></ProtectedRoute>} />
           <Route path="/user/investments" element={<ProtectedRoute allowedRole="user"><UserInvestments /></ProtectedRoute>} />
           <Route path="/user/statements" element={<ProtectedRoute allowedRole="user"><UserStatements /></ProtectedRoute>} />
+          <Route path="/user/beneficiaries" element={<ProtectedRoute allowedRole="user"><UserBeneficiaries /></ProtectedRoute>} />
           <Route path="/user/wallet" element={<ProtectedRoute allowedRole="user"><UserWallet /></ProtectedRoute>} />
           <Route path="/user/profile" element={<ProtectedRoute allowedRole="user"><UserProfile /></ProtectedRoute>} />
           

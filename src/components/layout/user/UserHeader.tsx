@@ -20,9 +20,10 @@ interface UserHeaderProps {
   notifications: Notification[];
   isMobile?: boolean;
   onMenuClick?: () => void;
+  userName?: string;
 }
 
-const UserHeader = ({ notifications, isMobile = false, onMenuClick }: UserHeaderProps) => {
+const UserHeader = ({ notifications, isMobile = false, onMenuClick, userName = "Client" }: UserHeaderProps) => {
   return (
     <header className="bg-white shadow-sm p-3 md:p-4">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -37,9 +38,18 @@ const UserHeader = ({ notifications, isMobile = false, onMenuClick }: UserHeader
               <Menu className="h-5 w-5" />
             </Button>
           )}
-          <h1 className="text-lg md:text-xl font-semibold text-navyblue">
-            Client Dashboard
-          </h1>
+          <div className="flex items-center">
+            <Link to="/" className="flex items-center">
+              <img 
+                src="/placeholder.svg" 
+                alt="Luthando Maduna Chartered Accountants" 
+                className="h-8 mr-3"
+              />
+              <span className="text-navyblue font-semibold hidden md:block">
+                Luthando Maduna Chartered Accountants
+              </span>
+            </Link>
+          </div>
         </div>
         <div className="flex items-center gap-4">
           <DropdownMenu>
