@@ -100,6 +100,24 @@ const Footer = () => {
           </div>
 
           <div className="col-span-1">
+            <h4 className="font-montserrat font-semibold text-md mb-4">Connect With Us</h4>
+            <div className="flex items-center space-x-4 mb-4">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-gold transition-colors"
+                  aria-label={social.label}
+                >
+                  <social.icon className="h-6 w-6" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div className="col-span-1">
             <h4 className="font-montserrat font-semibold text-md mb-4">Contact Us</h4>
             <address className="not-italic">
               <p className="font-lato text-sm text-gray-300 mb-2">
@@ -128,18 +146,6 @@ const Footer = () => {
               &copy; {currentYear} Luthando Maduna Chartered Accountants. All rights reserved.
             </p>
             <div className="flex items-center space-x-6 mt-4 md:mt-0">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-gold transition-colors"
-                  aria-label={social.label}
-                >
-                  <social.icon className="h-5 w-5" />
-                </a>
-              ))}
               <Link to="/privacy" className="font-lato text-sm text-gray-400 hover:text-gold transition-colors">
                 Privacy Policy
               </Link>
