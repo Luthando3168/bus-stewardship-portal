@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -40,8 +41,8 @@ const funds = [
     deals: [
       {
         id: "agrourban-oasis",
-        title: "AgroUrban Oasis",
-        description: "Urban farming initiative where clients can own trading companies or invest in the farm as a whole to earn profits. Minimum investment is R5,000.",
+        title: "Urban Farming - AgroUrban Oasis",
+        description: "Invest in a sustainable hydroponic farm producing fresh produce for local supermarkets, restaurants, and communities. Focus on water-efficient and high-yield methods.",
         minInvestment: "R 5,000",
         targetReturn: "10.5%",
         term: "5 years",
@@ -51,6 +52,21 @@ const funds = [
           "Multiple revenue streams from various produce",
           "Training and employment opportunities for local youth",
           "Direct supply to Lifestyle Fruits and Veg stores"
+        ]
+      },
+      {
+        id: "organic-farm",
+        title: "Organic Expansion",
+        description: "Expansion of existing organic farm focusing on vegetables and herbs for major grocery chains. Certified organic and regenerative methods.",
+        minInvestment: "R 5,000",
+        targetReturn: "9.8%",
+        term: "4 years",
+        image: "/lovable-uploads/98d6869e-a552-4731-9f0c-6dce07a2db48.png",
+        highlights: [
+          "Certified organic production methods",
+          "Established relationships with major retailers",
+          "Expansion into specialty herbs and microgreens",
+          "Value-added processing facility included"
         ]
       }
     ]
@@ -76,13 +92,13 @@ const funds = [
       "Support local economic development",
     ],
     targetReturn: "9-14% p.a.",
-    minimumInvestment: "R 5,000",
+    minimumInvestment: "R 10,000",
     deals: [
       {
         id: "ekasi-mix",
-        title: "eKasi Mix Use",
-        description: "Modern residential development in township areas with affordable housing and commercial spaces. Invest by owning a unit outright or co-own. Minimum investment R5,000.",
-        minInvestment: "R 5,000",
+        title: "Affordable Housing - eKasi Mixed Use",
+        description: "Modern residential and commercial development in township areas providing affordable apartments and retail opportunities.",
+        minInvestment: "R 10,000",
         targetReturn: "12.5%",
         term: "7 years",
         image: "/lovable-uploads/4f2d889e-ba23-463a-9efe-bc8453a5e5b2.png",
@@ -92,62 +108,51 @@ const funds = [
           "Built-in commercial spaces for rental income",
           "Flexible payment options through Standard Bank accounts"
         ]
+      },
+      {
+        id: "student-accom",
+        title: "Student Accommodation",
+        description: "Purpose-built student accommodation near key tertiary institutions, with secure and modern facilities for young professionals.",
+        minInvestment: "R 10,000",
+        targetReturn: "11.2%",
+        term: "6 years",
+        image: "/lovable-uploads/4f2d889e-ba23-463a-9efe-bc8453a5e5b2.png",
+        highlights: [
+          "Multiple locations near major universities",
+          "High occupancy rates throughout academic year",
+          "All-inclusive rental packages for students",
+          "Modern amenities and security features"
+        ]
       }
     ]
   },
   {
-    id: "myenergy",
-    name: "MyEnergy Impact Fund",
-    gradient: "from-amber-600 to-amber-800",
-    headerBg: "bg-gradient-to-r from-amber-600 to-amber-800 text-white",
-    fundTitle: "MyEnergy Impact Fund",
+    id: "myfoodretail",
+    name: "MyFoodRetail Impact Fund",
+    gradient: "from-amber-500 to-amber-700",
+    headerBg: "bg-gradient-to-r from-amber-500 to-amber-700 text-white",
+    fundTitle: "MyFoodRetail Impact Fund",
     description:
-      "The MyEnergy Impact Fund invests in renewable energy projects and clean technology initiatives for a greener future.",
+      "The MyFoodRetail Impact Fund invests in food retail businesses and ventures that provide quality nutrition to communities.",
     focus: [
-      "Solar energy installations",
-      "Wind power projects",
-      "Energy storage solutions",
-      "Energy efficiency technologies",
+      "Community grocery outlets",
+      "Local food market spaces",
+      "Food service franchises",
+      "Fresh produce retail networks",
     ],
     impact: [
-      "Reduce carbon emissions",
-      "Expand renewable energy access",
-      "Support energy independence",
-      "Create green jobs",
+      "Improve access to quality food",
+      "Support local food systems",
+      "Create retail employment",
+      "Reduce food wastage",
     ],
     targetReturn: "10-15% p.a.",
-    minimumInvestment: "R 5,000",
-    deals: [
-      // No featured business profiles yet
-    ]
-  },
-  {
-    id: "myenterprise",
-    name: "MyEnterprise Impact Fund",
-    gradient: "from-purple-700 to-purple-900",
-    headerBg: "bg-gradient-to-r from-purple-700 to-purple-900 text-white",
-    fundTitle: "MyEnterprise Impact Fund",
-    description:
-      "The MyEnterprise Impact Fund invests in SMEs and franchises making a positive impact in communities.",
-    focus: [
-      "Growth-stage SMEs",
-      "Social enterprises",
-      "Township businesses",
-      "Women and youth-led enterprises",
-    ],
-    impact: [
-      "Create quality employment",
-      "Support entrepreneurship",
-      "Drive inclusive growth",
-      "Build sustainable businesses",
-    ],
-    targetReturn: "12-18% p.a.",
     minimumInvestment: "R 5,000",
     deals: [
       {
         id: "lifestyle-complex",
         title: "Lifestyle Mini Complex",
-        description: "Own the Lifestyle Mini Complex and three trading companies: Food Corner (groceries), Lifestyle Meat Co (meat & products), and Lifestyle Fruits & Veg (produce from MyFarm Impact Fund). Minimum investment of R5,000.",
+        description: "A hub offering groceries (Food Corner), meat products (Meat Co), and fresh produce (Fruits & Veg) sourced from MyFarm, targeting diverse communities.",
         minInvestment: "R 5,000",
         targetReturn: "14.5%",
         term: "6 years",
@@ -176,6 +181,171 @@ const funds = [
       }
     ]
   },
+  {
+    id: "myenergy",
+    name: "MyEnergy Impact Fund",
+    gradient: "from-amber-600 to-amber-800",
+    headerBg: "bg-gradient-to-r from-amber-600 to-amber-800 text-white",
+    fundTitle: "MyEnergy Impact Fund",
+    description:
+      "The MyEnergy Impact Fund invests in renewable energy projects and clean technology initiatives for a greener future.",
+    focus: [
+      "Solar energy installations",
+      "Wind power projects",
+      "Energy storage solutions",
+      "Energy efficiency technologies",
+    ],
+    impact: [
+      "Reduce carbon emissions",
+      "Expand renewable energy access",
+      "Support energy independence",
+      "Create green jobs",
+    ],
+    targetReturn: "10-15% p.a.",
+    minimumInvestment: "R 5,000",
+    deals: [
+      {
+        id: "solar-installation",
+        title: "Solar Installation Network",
+        description: "Deploy commercial solar installations for businesses, including battery storage for energy consistency. Revenue from power purchase agreements.",
+        minInvestment: "R 5,000",
+        targetReturn: "13.5%",
+        term: "7 years",
+        image: "/placeholder.svg",
+        highlights: [
+          "Network of solar installations across multiple businesses",
+          "Long-term power purchase agreements in place",
+          "Battery storage components ensure reliable supply",
+          "Experienced technical team for maintenance"
+        ]
+      },
+      {
+        id: "wind-farm",
+        title: "Wind Farm Project",
+        description: "Invest in the construction of a wind farm project, generating renewable power for over 15,000 homes.",
+        minInvestment: "R 5,000",
+        targetReturn: "12.8%",
+        term: "8 years",
+        image: "/placeholder.svg",
+        highlights: [
+          "Strategic location with optimal wind conditions",
+          "Grid connection agreements already secured",
+          "State-of-the-art turbine technology",
+          "Environmental impact studies completed"
+        ]
+      }
+    ]
+  },
+  {
+    id: "myenterprise",
+    name: "MyEnterprise Impact Fund",
+    gradient: "from-purple-700 to-purple-900",
+    headerBg: "bg-gradient-to-r from-purple-700 to-purple-900 text-white",
+    fundTitle: "MyEnterprise Impact Fund",
+    description:
+      "The MyEnterprise Impact Fund invests in SMEs and startups making a positive impact in communities.",
+    focus: [
+      "Growth-stage SMEs",
+      "Social enterprises",
+      "Township businesses",
+      "Women and youth-led enterprises",
+    ],
+    impact: [
+      "Create quality employment",
+      "Support entrepreneurship",
+      "Drive inclusive growth",
+      "Build sustainable businesses",
+    ],
+    targetReturn: "12-18% p.a.",
+    minimumInvestment: "R 5,000",
+    deals: [
+      {
+        id: "tech-accelerator",
+        title: "Tech Startup Accelerator",
+        description: "Diversified portfolio of early-stage tech startups solving African challenges, offering investor exposure across sectors.",
+        minInvestment: "R 5,000",
+        targetReturn: "17.5%",
+        term: "5 years",
+        image: "/placeholder.svg",
+        highlights: [
+          "Portfolio of 10+ early-stage tech startups",
+          "Hands-on management and mentorship program",
+          "Focus on solutions for African challenges",
+          "Strong exit strategy for each portfolio company"
+        ]
+      },
+      {
+        id: "sme-advancement",
+        title: "SME Advancement",
+        description: "Support for small and medium enterprises with capital investment and business incubation for sustainable impact.",
+        minInvestment: "R 5,000",
+        targetReturn: "15.2%",
+        term: "4 years",
+        image: "/placeholder.svg",
+        highlights: [
+          "Diversified investment across multiple SMEs",
+          "Comprehensive business development support",
+          "Focus on businesses with proven revenue models",
+          "Job creation potential in underserved communities"
+        ]
+      }
+    ]
+  },
+  {
+    id: "mytelco",
+    name: "MyTelco Impact Fund",
+    gradient: "from-indigo-600 to-indigo-800",
+    headerBg: "bg-gradient-to-r from-indigo-600 to-indigo-800 text-white",
+    fundTitle: "MyTelco Impact Fund",
+    description:
+      "The MyTelco Impact Fund invests in telecommunications infrastructure and digital inclusion initiatives.",
+    focus: [
+      "Rural connectivity projects",
+      "Digital inclusion initiatives",
+      "Telecom equipment production",
+      "Network infrastructure development",
+    ],
+    impact: [
+      "Bridge the digital divide",
+      "Enable digital economic participation",
+      "Support remote education and healthcare",
+      "Create tech-based employment",
+    ],
+    targetReturn: "11-16% p.a.",
+    minimumInvestment: "R 5,000",
+    deals: [
+      {
+        id: "rural-connectivity",
+        title: "Rural Connectivity Project",
+        description: "Expanding internet and telecommunications access to underserved rural areas through innovative and cost-effective technologies.",
+        minInvestment: "R 5,000",
+        targetReturn: "14.5%",
+        term: "6 years",
+        image: "/placeholder.svg",
+        highlights: [
+          "Infrastructure serving multiple rural communities",
+          "Combination of fiber and wireless technologies",
+          "Partnership with local entrepreneurs for maintenance",
+          "Government support through digital access programs"
+        ]
+      },
+      {
+        id: "5g-urban",
+        title: "5G Urban Networks",
+        description: "Development of high-speed 5G network infrastructure in urban centers, enabling advanced digital services and applications.",
+        minInvestment: "R 5,000",
+        targetReturn: "15.8%",
+        term: "7 years",
+        image: "/placeholder.svg",
+        highlights: [
+          "Strategic urban locations for optimal coverage",
+          "Multiple revenue streams from business and consumer services",
+          "Cutting-edge network equipment with long lifespan",
+          "Strong partnerships with content and application providers"
+        ]
+      }
+    ]
+  }
 ];
 
 const ImpactFunds = () => {
@@ -212,7 +382,7 @@ const ImpactFunds = () => {
   
   const handleInvestClick = (dealId: string) => {
     // Check if user is logged in
-    const isLoggedIn = localStorage.getItem("token");
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
     if (!isLoggedIn) {
       toast.error("Please register or login to invest in this opportunity");
       // Redirect to register page after a short delay
@@ -231,7 +401,7 @@ const ImpactFunds = () => {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <SectionTitle
-            title="Sankofa Capital Partners Impact Funds"
+            title="Impact Funds"
             subtitle="Investment vehicles driving positive social and environmental impact while generating competitive returns"
             centered
           />
@@ -239,12 +409,11 @@ const ImpactFunds = () => {
           <div className="max-w-4xl mx-auto mt-12">
             <div className="text-charcoal space-y-6 mb-12">
               <p className="text-lg">
-                Through our investment management arm, Sankofa Capital Partners, we operate specialized impact funds that 
-                channel capital into businesses and projects that address critical social and environmental challenges while 
+                We operate specialized impact funds that channel capital into businesses and projects that address critical social and environmental challenges while 
                 generating attractive financial returns for investors.
               </p>
               <p>
-                Our funds serve as investment vehicles that connect LMCA clients with carefully vetted opportunities 
+                Our funds serve as investment vehicles that connect clients with carefully vetted opportunities 
                 that align with both their financial goals and values. Each fund focuses on a specific sector 
                 where we've developed expertise and a strong network of partners.
               </p>
@@ -300,24 +469,6 @@ const ImpactFunds = () => {
                               <CardDescription>{deal.description}</CardDescription>
                             </CardHeader>
                             <CardContent className="space-y-4 flex flex-col flex-grow">
-                              <a
-                                href={
-                                  deal.id === "ekasi-mix"
-                                    ? "https://kasi-impact-hub.lovable.app/"
-                                    : deal.id === "lifestyle-complex"
-                                    ? "https://franchise-flow-invest.lovable.app/"
-                                    : deal.id === "agrourban-oasis"
-                                    ? "https://preview--agro-urban-oasis-invest.lovable.app/"
-                                    : deal.id === "my-franchise"
-                                    ? "https://franchise-flow-invest.lovable.app/"
-                                    : "#"
-                                }
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1 text-gold hover:text-navyblue font-medium underline text-sm"
-                              >
-                                Visit Website
-                              </a>
                               <div>
                                 <h4 className="font-semibold mb-2 text-sm">Investment Highlights:</h4>
                                 <ul className="list-disc pl-5 space-y-1 text-sm">
@@ -395,10 +546,10 @@ const ImpactFunds = () => {
                 </Accordion>
               </div>
             ) : (
-              <Tabs defaultValue="agri" className="mb-12">
-                <TabsList className="grid w-full grid-cols-4">
+              <Tabs defaultValue={funds[0].id} className="mb-12">
+                <TabsList className="grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
                   {funds.map(fund => (
-                    <TabsTrigger key={fund.id} value={fund.id}>{fund.name.replace(" Impact Fund", " Fund")}</TabsTrigger>
+                    <TabsTrigger key={fund.id} value={fund.id}>{fund.name.replace(" Impact Fund", "")}</TabsTrigger>
                   ))}
                 </TabsList>
                 {funds.map(fund => (
@@ -445,10 +596,10 @@ const ImpactFunds = () => {
             )}
 
             <div className="mt-16">
-              <h3 className="text-2xl font-bold text-navyblue mb-6 text-center">For LMCA Clients</h3>
+              <h3 className="text-2xl font-bold text-navyblue mb-6 text-center">For Our Clients</h3>
               <div className="space-y-6">
                 <p>
-                  As an LMCA client, you have privileged access to our impact fund investment opportunities. Our funds provide:
+                  As a client, you have privileged access to our impact fund investment opportunities. Our funds provide:
                 </p>
                 <ul className="list-disc pl-5 space-y-2">
                   <li><strong>Professional Management:</strong> Our experienced team handles all aspects of deal sourcing, due diligence, and investment management.</li>

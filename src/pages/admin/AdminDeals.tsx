@@ -13,7 +13,7 @@ const mockDeals = [
   { 
     id: 1, 
     name: "Downtown Office Building", 
-    fund: "Property Impact Fund", 
+    fund: "MyProperty Impact Fund", 
     value: 3500000, 
     investors: 12, 
     status: "Active", 
@@ -22,7 +22,7 @@ const mockDeals = [
   { 
     id: 2, 
     name: "Solar Farm Project", 
-    fund: "Energy Impact Fund", 
+    fund: "MyEnergy Impact Fund", 
     value: 2800000, 
     investors: 8, 
     status: "Active", 
@@ -31,7 +31,7 @@ const mockDeals = [
   { 
     id: 3, 
     name: "Organic Farm Expansion", 
-    fund: "Agri Impact Fund", 
+    fund: "MyFarm Impact Fund", 
     value: 1750000, 
     investors: 14, 
     status: "Active", 
@@ -40,7 +40,7 @@ const mockDeals = [
   { 
     id: 4, 
     name: "Mixed-Use Development", 
-    fund: "Property Impact Fund", 
+    fund: "MyProperty Impact Fund", 
     value: 5200000, 
     investors: 23, 
     status: "Pending", 
@@ -49,12 +49,39 @@ const mockDeals = [
   { 
     id: 5, 
     name: "Wind Turbine Installation", 
-    fund: "Energy Impact Fund", 
+    fund: "MyEnergy Impact Fund", 
     value: 3100000, 
     investors: 19, 
     status: "Active", 
     location: "Western Cape" 
   },
+  {
+    id: 6,
+    name: "Lifestyle Mini Complex",
+    fund: "MyFoodRetail Impact Fund",
+    value: 2500000,
+    investors: 16,
+    status: "Active",
+    location: "Western Cape"
+  },
+  {
+    id: 7,
+    name: "Tech Startup Accelerator",
+    fund: "MyEnterprise Impact Fund",
+    value: 1800000,
+    investors: 25,
+    status: "Active",
+    location: "National"
+  },
+  {
+    id: 8,
+    name: "Rural Connectivity Project",
+    fund: "MyTelco Impact Fund",
+    value: 3200000,
+    investors: 18,
+    status: "Pending",
+    location: "National"
+  }
 ];
 
 const AdminDeals = () => {
@@ -95,9 +122,12 @@ const AdminDeals = () => {
             <Tabs defaultValue="all">
               <TabsList>
                 <TabsTrigger value="all">All Deals</TabsTrigger>
-                <TabsTrigger value="property">Property</TabsTrigger>
-                <TabsTrigger value="energy">Energy</TabsTrigger>
-                <TabsTrigger value="agri">Agriculture</TabsTrigger>
+                <TabsTrigger value="farm">MyFarm</TabsTrigger>
+                <TabsTrigger value="property">MyProperty</TabsTrigger>
+                <TabsTrigger value="foodretail">MyFoodRetail</TabsTrigger>
+                <TabsTrigger value="energy">MyEnergy</TabsTrigger>
+                <TabsTrigger value="enterprise">MyEnterprise</TabsTrigger>
+                <TabsTrigger value="telco">MyTelco</TabsTrigger>
               </TabsList>
               <TabsContent value="all">
                 <div className="rounded-md border">
@@ -140,22 +170,40 @@ const AdminDeals = () => {
                   </Table>
                 </div>
               </TabsContent>
-              <TabsContent value="property">
-                {/* Property-specific content */}
+              <TabsContent value="farm">
+                {/* MyFarm-specific content */}
                 <div className="rounded-md border p-4">
-                  <p>Property fund deals will be displayed here.</p>
+                  <p>MyFarm Impact Fund deals will be displayed here.</p>
+                </div>
+              </TabsContent>
+              <TabsContent value="property">
+                {/* MyProperty-specific content */}
+                <div className="rounded-md border p-4">
+                  <p>MyProperty Impact Fund deals will be displayed here.</p>
+                </div>
+              </TabsContent>
+              <TabsContent value="foodretail">
+                {/* MyFoodRetail-specific content */}
+                <div className="rounded-md border p-4">
+                  <p>MyFoodRetail Impact Fund deals will be displayed here.</p>
                 </div>
               </TabsContent>
               <TabsContent value="energy">
-                {/* Energy-specific content */}
+                {/* MyEnergy-specific content */}
                 <div className="rounded-md border p-4">
-                  <p>Energy fund deals will be displayed here.</p>
+                  <p>MyEnergy Impact Fund deals will be displayed here.</p>
                 </div>
               </TabsContent>
-              <TabsContent value="agri">
-                {/* Agriculture-specific content */}
+              <TabsContent value="enterprise">
+                {/* MyEnterprise-specific content */}
                 <div className="rounded-md border p-4">
-                  <p>Agriculture fund deals will be displayed here.</p>
+                  <p>MyEnterprise Impact Fund deals will be displayed here.</p>
+                </div>
+              </TabsContent>
+              <TabsContent value="telco">
+                {/* MyTelco-specific content */}
+                <div className="rounded-md border p-4">
+                  <p>MyTelco Impact Fund deals will be displayed here.</p>
                 </div>
               </TabsContent>
             </Tabs>

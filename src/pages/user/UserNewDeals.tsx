@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { toast } from "sonner";
 
-// The following data is structured based on your provided form link.
+// Investment opportunities data organized by impact funds as per the form
 const impactFunds = [
   {
     id: "myfarm",
@@ -35,7 +35,20 @@ const impactFunds = [
         description: "A project to cultivate and process diverse crops, supporting food security and market supply across the Limpopo region.",
         minInvestment: "R 5,000",
       },
-      // Additional entries from your list can be easily added here
+      {
+        id: "urban-poultry-gauteng",
+        title: "Urban Poultry Expansion (Gauteng)",
+        region: "Gauteng",
+        description: "A commercial poultry operation in urban areas, specializing in ethical practices and supplying to shops and restaurants.",
+        minInvestment: "R 5,000",
+      },
+      {
+        id: "agri-processing-fs",
+        title: "Agri Processing Plant (Free State)",
+        region: "Free State",
+        description: "A food processing facility focused on value-adding to raw agricultural products, creating shelf-stable food items.",
+        minInvestment: "R 5,000",
+      }
     ],
   },
   {
@@ -56,6 +69,27 @@ const impactFunds = [
         description: "Purpose-built student accommodation near key tertiary institutions, with secure and modern facilities for young professionals.",
         minInvestment: "R 10,000",
       },
+      {
+        id: "traditional-housing-ec",
+        title: "Traditional Housing (Eastern Cape)",
+        region: "Eastern Cape",
+        description: "Development of culturally appropriate housing solutions that blend traditional designs with modern amenities and efficiency.",
+        minInvestment: "R 10,000",
+      },
+      {
+        id: "backup-power-wc",
+        title: "Back-up Power Solutions (Western Cape)",
+        region: "Western Cape",
+        description: "Installation of backup power systems for residential and commercial properties, focusing on reliable power during outages.",
+        minInvestment: "R 10,000",
+      },
+      {
+        id: "security-systems-national",
+        title: "Security Systems (National)",
+        region: "National",
+        description: "Implementation of comprehensive security solutions for properties nationwide, including monitoring and response services.",
+        minInvestment: "R 10,000",
+      }
     ],
   },
   {
@@ -76,6 +110,27 @@ const impactFunds = [
         description: "Invest in selected franchises, add to your portfolio, and benefit from operational support and steady returns.",
         minInvestment: "R 5,000",
       },
+      {
+        id: "community-markets-gauteng",
+        title: "Community Markets (Gauteng)",
+        region: "Gauteng",
+        description: "Pop-up and permanent market spaces offering local produce and goods directly to consumers in community settings.",
+        minInvestment: "R 5,000",
+      },
+      {
+        id: "healthy-fast-food-kzn",
+        title: "Healthy Fast Food Outlet (KZN)",
+        region: "KwaZulu-Natal",
+        description: "Quick-service restaurant focusing on nutritious, locally-sourced food options with affordable pricing for health-conscious consumers.",
+        minInvestment: "R 5,000",
+      },
+      {
+        id: "food-delivery-urban",
+        title: "Food Delivery Services (Urban Hubs)",
+        region: "Urban Centers",
+        description: "Specialized food delivery network focusing on fresh, local foods delivered quickly within urban areas.",
+        minInvestment: "R 5,000",
+      }
     ]
   },
   {
@@ -94,6 +149,27 @@ const impactFunds = [
         title: "Wind Farm Project (Eastern Cape)",
         region: "Eastern Cape",
         description: "Invest in the construction of a wind farm project, generating renewable power for over 15,000 homes.",
+        minInvestment: "R 5,000",
+      },
+      {
+        id: "energy-storage-gauteng",
+        title: "Energy Storage Solutions (Gauteng)",
+        region: "Gauteng",
+        description: "Development of battery and alternative storage technologies to improve energy reliability and efficiency for businesses.",
+        minInvestment: "R 5,000",
+      },
+      {
+        id: "hydro-power-kzn",
+        title: "Small-scale Hydro Power (KwaZulu-Natal)",
+        region: "KwaZulu-Natal",
+        description: "Implementation of small-scale hydroelectric systems in suitable water-rich locations, providing local power generation.",
+        minInvestment: "R 5,000",
+      },
+      {
+        id: "solar-maintenance-national",
+        title: "Solar Maintenance Services (National)",
+        region: "National",
+        description: "Providing maintenance, monitoring, and optimization services for existing solar installations across the country.",
         minInvestment: "R 5,000",
       }
     ]
@@ -114,6 +190,68 @@ const impactFunds = [
         title: "SME Advancement (Gauteng)",
         region: "Gauteng",
         description: "Support for small and medium enterprises with capital investment and business incubation for sustainable impact.",
+        minInvestment: "R 5,000",
+      },
+      {
+        id: "artisan-development",
+        title: "Artisan Development (Western Cape)",
+        region: "Western Cape",
+        description: "Training and business support for skilled artisans, helping them establish sustainable businesses and create employment.",
+        minInvestment: "R 5,000",
+      },
+      {
+        id: "rural-entrepreneurship-ec",
+        title: "Rural Entrepreneurship (Eastern Cape)",
+        region: "Eastern Cape",
+        description: "Focused support for rural entrepreneurs developing businesses that address local needs and create community wealth.",
+        minInvestment: "R 5,000",
+      },
+      {
+        id: "youth-business-kzn",
+        title: "Youth Business Network (KZN)",
+        region: "KwaZulu-Natal",
+        description: "Mentoring and funding platform specifically for young entrepreneurs building innovative businesses with growth potential.",
+        minInvestment: "R 5,000",
+      }
+    ]
+  },
+  {
+    id: "mytelco",
+    name: "MyTelco Impact Fund",
+    businesses: [
+      {
+        id: "rural-connectivity",
+        title: "Rural Connectivity Project (National)",
+        region: "National",
+        description: "Expanding internet and telecommunications access to underserved rural areas through innovative and cost-effective technologies.",
+        minInvestment: "R 5,000",
+      },
+      {
+        id: "5g-urban-gauteng",
+        title: "5G Urban Networks (Gauteng)",
+        region: "Gauteng",
+        description: "Development of high-speed 5G network infrastructure in urban centers, enabling advanced digital services and applications.",
+        minInvestment: "R 5,000",
+      },
+      {
+        id: "telco-equipment-wc",
+        title: "Telecom Equipment Production (Western Cape)",
+        region: "Western Cape",
+        description: "Manufacturing and assembly of telecommunications equipment and components for domestic and export markets.",
+        minInvestment: "R 5,000",
+      },
+      {
+        id: "digital-inclusion-ec",
+        title: "Digital Inclusion Initiative (Eastern Cape)",
+        region: "Eastern Cape",
+        description: "Comprehensive program combining hardware, connectivity, and digital skills training for underserved communities.",
+        minInvestment: "R 5,000",
+      },
+      {
+        id: "satellite-broadband-national",
+        title: "Satellite Broadband Services (National)",
+        region: "National",
+        description: "Deployment of satellite-based internet services to reach remote locations where traditional infrastructure is impractical.",
         minInvestment: "R 5,000",
       }
     ]
@@ -137,7 +275,7 @@ const UserNewDeals = () => {
         </p>
         
         <Tabs defaultValue={impactFunds[0].id}>
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-5">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-6">
             {impactFunds.map(fund => (
               <TabsTrigger key={fund.id} value={fund.id}>
                 {fund.name}
@@ -237,4 +375,3 @@ const BusinessCard = ({ business, fundName, onClick }: BusinessCardProps) => (
 );
 
 export default UserNewDeals;
-

@@ -23,7 +23,7 @@ const UserInvestments = () => {
     {
       id: "inv1",
       name: "Downtown Office Building",
-      fund: "Property Impact Fund",
+      fund: "MyProperty Impact Fund",
       amount: "R 120,000.00",
       investmentDate: "2023-05-15",
       term: "5 years",
@@ -50,8 +50,8 @@ const UserInvestments = () => {
     },
     {
       id: "inv2",
-      name: "Solar Farm Project",
-      fund: "Energy Impact Fund",
+      name: "Solar Installation Network",
+      fund: "MyEnergy Impact Fund",
       amount: "R 85,000.00",
       investmentDate: "2023-07-20",
       term: "7 years",
@@ -63,8 +63,8 @@ const UserInvestments = () => {
         { date: "2024-01-20", amount: "R 2,125.00" }
       ],
       details: {
-        description: "A 5 MW solar installation providing clean energy to approximately 3,000 households.",
-        location: "Northern Cape",
+        description: "A commercial solar installation providing clean energy to multiple businesses in Cape Town.",
+        location: "Cape Town",
         projectManager: "David Mokoena",
         performanceRatio: "98.5%",
         lastInspection: "2024-02-10",
@@ -78,7 +78,7 @@ const UserInvestments = () => {
     {
       id: "inv3",
       name: "Organic Farm Expansion",
-      fund: "Agri Impact Fund",
+      fund: "MyFarm Impact Fund",
       amount: "R 40,000.00",
       investmentDate: "2023-09-05",
       term: "4 years",

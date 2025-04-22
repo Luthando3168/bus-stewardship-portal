@@ -22,14 +22,34 @@ const funds = [
   {
     name: "MyProperty Impact Fund",
     description:
-      "Investing in community-focused real estate and property businesses. Minimum investment of R5,000.",
+      "Investing in community-focused real estate and property businesses. Minimum investment of R10,000.",
     color: "from-blue-700 to-blue-900",
     businesses: [
       {
         title: "eKasi Mix Use",
         description:
-          "Modern residential development in township areas with affordable housing and commercial spaces. Invest by owning a unit outright or co-own. Minimum investment R5,000.",
+          "Modern residential development in township areas with affordable housing and commercial spaces. Invest by owning a unit outright or co-own. Minimum investment R10,000.",
         link: "https://kasi-impact-hub.lovable.app/",
+      },
+    ],
+  },
+  {
+    name: "MyFoodRetail Impact Fund",
+    description:
+      "Investing in food retail businesses that provide access to quality nutrition. Minimum investment of R5,000.",
+    color: "from-amber-500 to-amber-700",
+    businesses: [
+      {
+        title: "Lifestyle Mini Complex",
+        description:
+          "Own the Lifestyle Mini Complex and three trading companies: Food Corner (groceries), Lifestyle Meat Co (meat & products), and Lifestyle Fruits & Veg (produce from MyFarm Impact Fund). Minimum investment of R5,000.",
+        link: "https://franchise-flow-invest.lovable.app/",
+      },
+      {
+        title: "MyFranchise",
+        description:
+          "Invest into multiple franchises. Select as advertised on the MyFranchise website and add to your portfolio. Minimum investment of R5,000.",
+        link: "https://franchise-flow-invest.lovable.app/",
       },
     ],
   },
@@ -45,20 +65,14 @@ const funds = [
     description:
       "Empowering small and medium enterprises with capital and business development support. Minimum investment of R5,000.",
     color: "from-purple-700 to-purple-900",
-    businesses: [
-      {
-        title: "Lifestyle Mini Complex",
-        description:
-          "Own the Lifestyle Mini Complex and three trading companies: Food Corner (groceries), Lifestyle Meat Co (meat & products), and Lifestyle Fruits & Veg (produce from MyFarm Impact Fund). Minimum investment of R5,000.",
-        link: "https://franchise-flow-invest.lovable.app/",
-      },
-      {
-        title: "MyFranchise",
-        description:
-          "Invest into multiple franchises. Select as advertised on the MyFranchise website and add to your portfolio. Minimum investment of R5,000.",
-        link: "https://franchise-flow-invest.lovable.app/",
-      },
-    ],
+    businesses: [],
+  },
+  {
+    name: "MyTelco Impact Fund",
+    description:
+      "Investing in telecommunications infrastructure and digital inclusion projects. Minimum investment of R5,000.",
+    color: "from-indigo-600 to-indigo-800",
+    businesses: [],
   },
 ];
 
@@ -79,7 +93,7 @@ const ImpactFundsSection = () => {
           Explore our impact funds, each dedicated to specific sectors and featuring unique businesses you can invest in as a client.
         </p>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {funds.map((fund, index) => (
             <div 
               key={index} 
