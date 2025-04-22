@@ -10,7 +10,7 @@ const FeaturedInvestmentsSection = () => {
       id: "ekasi-mix",
       title: "eKasi Mix Use",
       fund: "Sankofa Property Impact Fund",
-      website: "https://your-ekasi-mix-website.com", // <-- Placeholder, replace with actual URL
+      website: "https://kasi-impact-hub.lovable.app/", 
       description: "Modern residential development in township areas offering affordable housing with commercial spaces. Invest by owning a unit outright or co-own with other clients. Minimum investment is R5,000, and clients can pay in instalments in their Standard Bank accounts.",
       image: "/lovable-uploads/4f2d889e-ba23-463a-9efe-bc8453a5e5b2.png",
       color: "from-blue-700 to-blue-900"
@@ -19,7 +19,7 @@ const FeaturedInvestmentsSection = () => {
       id: "lifestyle-complex",
       title: "Lifestyle Mini Complex",
       fund: "Sankofa Enterprise Impact Fund",
-      website: "https://your-lifestyle-mini-complex-website.com", // <-- Placeholder
+      website: "https://franchise-flow-invest.lovable.app/", 
       description: "Own the Lifestyle Mini Complex and three trading companies: Food Corner (groceries), Lifestyle Meat Co (meat & products), and Lifestyle Fruits & Veg (produce from client-owned farms under the Agri Impact Fund). Minimum investment of R5,000. Clients can pay in instalments.",
       image: "/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png",
       color: "from-purple-700 to-purple-900"
@@ -28,7 +28,7 @@ const FeaturedInvestmentsSection = () => {
       id: "agrourban-oasis",
       title: "AgroUrban Oasis",
       fund: "Sankofa Agri Impact Fund",
-      website: "https://your-agrourban-oasis-website.com", // <-- Placeholder
+      website: "https://preview--agro-urban-oasis-invest.lovable.app/", 
       description: "Urban farming initiative where clients can own trading companies on the AgroUrban Oasis or invest in the farm as a whole to earn profits. Minimum investment is R5,000.",
       image: "/lovable-uploads/98d6869e-a552-4731-9f0c-6dce07a2db48.png",
       color: "from-green-700 to-green-900"
@@ -37,7 +37,7 @@ const FeaturedInvestmentsSection = () => {
       id: "my-franchise",
       title: "MyFranchise",
       fund: "Sankofa Enterprise Impact Fund",
-      website: "https://your-myfranchise-website.com", // <-- Placeholder
+      website: "https://franchise-flow-invest.lovable.app/", 
       description: "Invest into multiple franchises under the Sankofa Enterprise Impact Fund. Select various franchises as advertised on the MyFranchise website and easily add to your portfolio.",
       image: "/lovable-uploads/aa792d14-7473-4673-89cf-c3f6e1d15711.png",
       color: "from-purple-700 to-purple-900"
