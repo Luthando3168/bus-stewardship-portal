@@ -1,3 +1,4 @@
+
 import { ReactNode, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { 
@@ -52,19 +53,19 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
         <div className="flex items-center justify-between mb-8">
           {(fullWidth || isSidebarOpen) ? (
             <div className="flex items-center">
-              <img 
-                src="/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png" 
-                alt="Luthando Maduna CA" 
-                className="h-8 mr-2" 
-              />
-              <h2 className="text-lg font-bold">Admin Panel</h2>
+              <div className="flex flex-col">
+                <span className="font-montserrat font-bold text-lg tracking-tight">
+                  <span className="text-gold border-b-2 border-gold pb-0.5">Luthando</span>
+                  <span className="text-white ml-1">Maduna</span>
+                </span>
+                <span className="font-montserrat text-[10px] text-white tracking-wider mt-1">
+                  CHARTERED ACCOUNTANTS
+                </span>
+              </div>
+              <h2 className="text-lg font-bold ml-2">MCA Direct Admin</h2>
             </div>
           ) : (
-            <img 
-              src="/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png" 
-              alt="LM" 
-              className="h-8" 
-            />
+            <div className="font-montserrat font-bold text-lg">MCA</div>
           )}
           {!fullWidth && (
             <button

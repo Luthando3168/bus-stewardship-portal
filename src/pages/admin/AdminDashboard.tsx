@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import AdminLayout from "@/components/layout/AdminLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -122,7 +123,7 @@ const AdminDashboard = () => {
   return (
     <AdminLayout>
       <div className="space-y-6">
-        <h2 className="text-2xl font-bold text-navyblue">Dashboard Overview</h2>
+        <h2 className="text-2xl font-bold text-navyblue">MCA Direct Admin</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card>
