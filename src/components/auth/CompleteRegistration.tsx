@@ -68,11 +68,24 @@ const CompleteRegistration = () => {
           .single();
 
         if (!error && client) {
+          // Get user email from auth
+          const userEmail = user.email || "";
+          
+          // Get profile information for name
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('full_name, phone')
+            .eq('id', user.id)
+            .single();
+            
+          const fullName = profile?.full_name || user.user_metadata?.full_name || "";
+          const phoneNumber = profile?.phone || "";
+          
           // Populate form with existing data
           form.reset({
-            fullName: user.user_metadata?.full_name || "",
-            email: user.email || "",
-            phone: client.phone || "",
+            fullName: fullName,
+            email: userEmail,
+            phone: phoneNumber,
             dob: client.dob || "",
             idNumber: client.id_number || "",
             nationality: client.nationality || "",
@@ -123,19 +136,44 @@ const CompleteRegistration = () => {
       }
 
       setIsLoading(true);
+      
+      // Update client data
       const { error: clientError } = await supabase
         .from('clients')
         .update({
-          ...data,
-          pep: data.pep === "yes",
           status: 'verification_pending',
+          id_number: data.idNumber,
+          address: data.address,
+          postal_code: data.postalCode,
+          city: data.city,
+          province: data.province,
+          nationality: data.nationality,
+          tax_number: data.taxNumber,
+          tax_country: data.taxCountry,
+          source_of_funds: data.sourceOfFunds,
+          employment_status: data.employmentStatus,
+          occupation: data.occupation,
+          employer: data.employer,
+          risk_profile: data.riskProfile,
+          income_bracket: data.incomeBracket,
+          pep: data.pep === "yes",
+          dob: data.dob
+        })
+        .eq('id', userData.id);
+
+      if (clientError) throw clientError;
+      
+      // Update profile data
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .update({
           full_name: data.fullName,
           email: data.email,
           phone: data.phone
         })
         .eq('id', userData.id);
-
-      if (clientError) throw clientError;
+        
+      if (profileError) throw profileError;
 
       // Store name in localStorage
       localStorage.setItem("userName", data.fullName.split(' ')[0] || "");

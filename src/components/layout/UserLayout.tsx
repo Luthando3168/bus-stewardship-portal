@@ -56,13 +56,19 @@ const UserLayout = ({ children }: UserLayoutProps) => {
           
           // If no client record, create one with pending_registration status
           if (error.code === 'PGRST116') {
-            const fullName = user.user_metadata?.full_name || 'New User';
+            const { data: profile } = await supabase
+              .from('profiles')
+              .select('full_name')
+              .eq('id', user.id)
+              .single();
+              
+            const fullName = profile?.full_name || user.user_metadata?.full_name || 'New User';
+            
             const { error: insertError } = await supabase
               .from('clients')
               .insert([{ 
                 id: user.id, 
-                status: 'pending_registration',
-                full_name: fullName
+                status: 'pending_registration'
               }]);
             
             if (insertError) {
