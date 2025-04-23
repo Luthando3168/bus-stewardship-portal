@@ -1,5 +1,6 @@
 
 import { ReactNode, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import Header from "./Header";
 import Footer from "./Footer";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -7,9 +8,17 @@ import { useLocation } from "react-router-dom";
 
 interface LayoutProps {
   children: ReactNode;
+  title?: string;
+  description?: string;
+  schema?: Record<string, any>;
 }
 
-const Layout = ({ children }: LayoutProps) => {
+const Layout = ({ 
+  children, 
+  title = "Luthando Maduna Chartered Accountants", 
+  description = "Professional accounting, business management, and investment services by LMCA.",
+  schema
+}: LayoutProps) => {
   const isMobile = useIsMobile();
   const location = useLocation();
 
@@ -20,6 +29,17 @@ const Layout = ({ children }: LayoutProps) => {
   
   return (
     <div className="flex flex-col min-h-screen">
+      <Helmet>
+        {title && <title>{title}</title>}
+        {description && <meta name="description" content={description} />}
+        <link rel="canonical" href={`https://www.madunacas.com${location.pathname}`} />
+        {schema && (
+          <script type="application/ld+json">
+            {JSON.stringify(schema)}
+          </script>
+        )}
+      </Helmet>
+      
       <Header />
       <main className="flex-grow pt-16 md:pt-20">
         {children}
