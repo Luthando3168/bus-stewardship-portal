@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import AdminLayout from "@/components/layout/AdminLayout";
 import { Button } from "@/components/ui/button";
@@ -10,7 +9,6 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-// List of major South African banks
 const saBanks = [
   "ABSA Bank",
   "Capitec Bank",
@@ -23,7 +21,6 @@ const saBanks = [
   "TymeBank"
 ];
 
-// Mock bank accounts with client numbers
 const mockBankAccounts = [
   {
     id: 1,
@@ -90,6 +87,10 @@ const AdminBankAccounts = () => {
       branch: "",
       branchCode: "",
     });
+  };
+
+  const handleAccountUpdate = () => {
+    window.location.reload();
   };
 
   return (
@@ -266,8 +267,18 @@ const AdminBankAccounts = () => {
                       <TableCell>{account.balance}</TableCell>
                       <TableCell>
                         <div className="flex space-x-2">
-                          <Button variant="outline" size="sm">View</Button>
-                          <Button variant="outline" size="sm">Edit</Button>
+                          <EditAccountDialog
+                            accountNumber={account.accountNumber}
+                            clientNumber={account.clientNumber}
+                            userName={account.userName}
+                            onEdit={handleAccountUpdate}
+                          />
+                          <ManualTransactionDialog
+                            accountNumber={account.accountNumber}
+                            clientNumber={account.clientNumber}
+                            userName={account.userName}
+                            onTransactionComplete={handleAccountUpdate}
+                          />
                         </div>
                       </TableCell>
                     </TableRow>
