@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Checkbox } from "@/components/ui/checkbox";
+import { sendNotification, NotificationRecipient } from "@/utils/notificationService";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -34,10 +35,23 @@ const Register = () => {
     
     try {
       // This is a mock registration - in a real app, you would register with a backend
-      setTimeout(() => {
-        toast.success("Registration successful! Please log in.");
-        navigate("/login");
-      }, 1500);
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Send welcome notification
+      const recipient: NotificationRecipient = {
+        fullName,
+        email,
+      };
+      
+      await sendNotification(
+        recipient,
+        'welcome',
+        ['email'],
+        {}
+      );
+      
+      toast.success("Registration successful! Please log in.");
+      navigate("/login");
     } catch (error) {
       console.error("Registration error:", error);
       toast.error("Registration failed");

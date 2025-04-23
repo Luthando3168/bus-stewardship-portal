@@ -10,6 +10,7 @@ import { Star, Plus } from "lucide-react";
 import FundAccordion from "@/components/FundAccordion";
 import FundOpportunities, { Opportunity } from "@/components/user/FundOpportunities";
 import { Link } from "react-router-dom";
+import { useNotifications } from "@/hooks/useNotifications";
 
 const FUNDS = [
   {
@@ -138,10 +139,28 @@ const UserProfile = () => {
   const [password, setPassword] = useState({ current: "", new: "", confirm: "" });
   const [activeFundTab, setActiveFundTab] = useState(FUNDS[0].name);
   const [userInvestments, setUserInvestments] = useState<Opportunity[]>([]);
+  const { notifyProfileUpdate } = useNotifications();
 
-  const handleProfileUpdate = (e: React.FormEvent) => {
+  const handleProfileUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Profile information updated successfully");
+    
+    try {
+      // In a real app, this would save to a backend API
+      // Simulate successful update
+      await new Promise(resolve => setTimeout(resolve, 800));
+      
+      // Send notification about profile update
+      await notifyProfileUpdate({
+        fullName: userData.fullName,
+        email: userData.email,
+        phone: userData.phone
+      });
+      
+      toast.success("Profile information updated successfully");
+    } catch (error) {
+      console.error("Profile update error:", error);
+      toast.error("Failed to update profile");
+    }
   };
 
   const handlePasswordChange = (e: React.FormEvent) => {

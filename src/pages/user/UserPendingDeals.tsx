@@ -1,10 +1,19 @@
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import UserLayout from "@/components/layout/UserLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
+import { useNotifications } from "@/hooks/useNotifications";
+import { toast } from "sonner";
+
+// Mock user data
+const currentUser = {
+  fullName: "John Smith",
+  email: "john.smith@example.com",
+  phone: "+27123456789"
+};
 
 // Mock pending deals data
 const pendingDeals = [
@@ -41,6 +50,52 @@ const pendingDeals = [
 ];
 
 const UserPendingDeals = () => {
+  const [deals, setDeals] = useState(pendingDeals);
+  const { notifyDealStatus } = useNotifications();
+  
+  // Simulate a deal status update
+  const handleDealUpdate = async (dealId: number, newStatus: "Awaiting Prospectus" | "Prospectus Issued" | "Completed") => {
+    // Update the deal in the UI
+    setDeals(prevDeals => 
+      prevDeals.map(deal => 
+        deal.id === dealId 
+          ? { ...deal, status: newStatus } 
+          : deal
+      )
+    );
+    
+    // Get the deal info for the notification
+    const deal = deals.find(d => d.id === dealId);
+    if (!deal) return;
+    
+    // Determine notification type based on status
+    let statusType: "pending" | "approved" | "completed";
+    
+    switch (newStatus) {
+      case "Prospectus Issued":
+        statusType = "approved";
+        break;
+      case "Completed":
+        statusType = "completed";
+        break;
+      default:
+        statusType = "pending";
+    }
+    
+    // Send notification
+    try {
+      await notifyDealStatus(
+        currentUser,
+        statusType,
+        deal.title
+      );
+      toast.success(`Deal status updated and notification sent`);
+    } catch (error) {
+      console.error("Failed to send notification:", error);
+      toast.error("Deal status updated but failed to send notification");
+    }
+  };
+
   return (
     <UserLayout>
       <div className="space-y-6">
@@ -50,7 +105,7 @@ const UserPendingDeals = () => {
           Once a deal reaches 100% funding, it will move to the My Investments section.
         </p>
         
-        {pendingDeals.length === 0 ? (
+        {deals.length === 0 ? (
           <Card>
             <CardContent className="py-10 text-center">
               <p className="text-muted-foreground">You have no pending investment deals at this time.</p>
@@ -58,7 +113,7 @@ const UserPendingDeals = () => {
           </Card>
         ) : (
           <div className="space-y-5">
-            {pendingDeals.map(deal => (
+            {deals.map(deal => (
               <Card key={deal.id}>
                 <CardHeader className="pb-3">
                   <div className="flex justify-between items-start">
@@ -91,6 +146,30 @@ const UserPendingDeals = () => {
                         <p className="font-medium">{new Date(deal.date).toLocaleDateString()}</p>
                       </div>
                     </div>
+                    
+                    {deal.status === "Awaiting Prospectus" && (
+                      <div className="pt-2">
+                        <Button 
+                          size="sm" 
+                          variant="outline" 
+                          onClick={() => handleDealUpdate(deal.id, "Prospectus Issued")}
+                        >
+                          Demo: Issue Prospectus
+                        </Button>
+                      </div>
+                    )}
+                    
+                    {deal.status === "Prospectus Issued" && deal.percentage >= 80 && (
+                      <div className="pt-2">
+                        <Button 
+                          size="sm" 
+                          variant="outline" 
+                          onClick={() => handleDealUpdate(deal.id, "Completed")}
+                        >
+                          Demo: Mark as Completed
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 </CardContent>
                 <CardFooter className="pt-2 text-sm text-muted-foreground">
