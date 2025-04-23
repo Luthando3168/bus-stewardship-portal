@@ -54,11 +54,6 @@ const ConsultationBookingDialog = () => {
       <DialogContent className="sm:max-w-[525px] font-montserrat">
         <DialogHeader>
           <div className="flex flex-col items-center gap-4">
-            <img 
-              src="/lovable-uploads/c21dd704-6d94-4ce9-8e09-1d26da6a0503.png" 
-              alt="Luthando Maduna Chartered Accountants" 
-              className="h-16 object-contain"
-            />
             <DialogTitle className="text-2xl font-bold tracking-tight">Schedule a Consultation</DialogTitle>
             <DialogDescription className="text-center text-gray-600">
               Book a consultation with our experts. You'll receive a Google Calendar invite with Google Meet link.

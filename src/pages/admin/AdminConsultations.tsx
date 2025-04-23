@@ -92,11 +92,7 @@ const AdminConsultations = () => {
       <div className="space-y-6">
         <div className="flex flex-col gap-6">
           <div className="flex justify-center">
-            <img 
-              src="/public/lovable-uploads/c21dd704-6d94-4ce9-8e09-1d26da6a0503.png" 
-              alt="Luthando Maduna Chartered Accountants" 
-              className="h-20 object-contain"
-            />
+            {/* Removed the image here */}
           </div>
           
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
