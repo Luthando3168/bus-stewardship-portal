@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import AdminLayout from "@/components/layout/AdminLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -96,29 +95,30 @@ const AdminShareCertificates = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [selectedFund, setSelectedFund] = useState<string>("all");
+  const [selectedCompany, setSelectedCompany] = useState<string>("all");
   const [viewingCertificate, setViewingCertificate] = useState<string | null>(null);
   
   const allCertificates = Object.values(fundCertificatesData).flat();
-  
   const fundsList = Object.keys(fundCertificatesData);
+  
+  // Get unique companies across all funds
+  const companiesList = Array.from(new Set(allCertificates.map(cert => cert.companyName)));
   
   const filteredCertificates = allCertificates.filter(cert => {
     const matchesSearch = 
       cert.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
       cert.userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      cert.clientNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      cert.investmentName.toLowerCase().includes(searchTerm.toLowerCase());
+      cert.clientNumber.toLowerCase().includes(searchTerm.toLowerCase());
       
     const matchesStatus = statusFilter === "all" || cert.status === statusFilter;
     const matchesFund = selectedFund === "all" || 
       Object.entries(fundCertificatesData).some(([fund, certs]) => 
         fund === selectedFund && certs.some(c => c.id === cert.id)
       );
+    const matchesCompany = selectedCompany === "all" || cert.companyName === selectedCompany;
     
-    return matchesSearch && matchesStatus && matchesFund;
+    return matchesSearch && matchesStatus && matchesFund && matchesCompany;
   });
-  
-  const selectedCertificate = allCertificates.find(cert => cert.id === viewingCertificate);
 
   const handleStatusChange = (certificateId: string, newStatus: string) => {
     const updatedCertificates = allCertificates.map(cert => 
@@ -157,222 +157,150 @@ const AdminShareCertificates = () => {
           </Button>
         </div>
         
-        <Tabs defaultValue="all" className="space-y-4">
-          <TabsList>
-            <TabsTrigger value="all">All Certificates</TabsTrigger>
-            <TabsTrigger value="by-fund">By Impact Fund</TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="all">
-            <Card>
-              <CardHeader>
-                <CardTitle>All Share Certificates</CardTitle>
-                <CardDescription>
-                  View and manage all share certificates issued to clients
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-col md:flex-row justify-between mb-4 gap-4">
-                  <div className="relative w-full md:w-auto flex-grow md:max-w-md">
-                    <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                    <Input
-                      placeholder="Search by certificate ID, client name or number..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-8 w-full"
-                    />
-                  </div>
-                  
-                  <div className="flex gap-2">
-                    <Select value={statusFilter} onValueChange={setStatusFilter}>
-                      <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="Filter by status" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">All Statuses</SelectItem>
-                        <SelectItem value="active">Active</SelectItem>
-                        <SelectItem value="revoked">Revoked</SelectItem>
-                        <SelectItem value="transferred">Transferred</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    
-                    <Button variant="outline">
-                      Export List
-                    </Button>
-                  </div>
+        <Card>
+          <CardHeader>
+            <CardTitle>Share Certificates</CardTitle>
+            <CardDescription>
+              Filter and view share certificates by fund and company
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col md:flex-row gap-4 mb-6">
+              <div className="flex-1 space-y-4">
+                <Select value={selectedFund} onValueChange={setSelectedFund}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select Impact Fund" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Impact Funds</SelectItem>
+                    {fundsList.map((fund) => (
+                      <SelectItem key={fund} value={fund}>
+                        {fund}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <Select 
+                  value={selectedCompany} 
+                  onValueChange={setSelectedCompany}
+                  disabled={selectedFund === "all"}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select Company" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Companies</SelectItem>
+                    {companiesList.map((company) => (
+                      <SelectItem key={company} value={company}>
+                        {company}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="flex-1 space-y-4">
+                <div className="relative">
+                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    placeholder="Search certificates..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="pl-8"
+                  />
                 </div>
-                
-                <div className="rounded-md border overflow-x-auto">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Certificate ID</TableHead>
-                        <TableHead>Client Name</TableHead>
-                        <TableHead>Client Number</TableHead>
-                        <TableHead>Investment</TableHead>
-                        <TableHead>Shares</TableHead>
-                        <TableHead>Issue Date</TableHead>
-                        <TableHead>Status</TableHead>
-                        <TableHead>Actions</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {filteredCertificates.length > 0 ? (
-                        filteredCertificates.map((cert) => (
-                          <TableRow key={cert.id}>
-                            <TableCell className="font-mono text-sm">{cert.id}</TableCell>
-                            <TableCell>{cert.userName}</TableCell>
-                            <TableCell>{cert.clientNumber}</TableCell>
-                            <TableCell>{cert.investmentName}</TableCell>
-                            <TableCell>{cert.shares} @ R{cert.sharePrice}</TableCell>
-                            <TableCell>{new Date(cert.issueDate).toLocaleDateString()}</TableCell>
-                            <TableCell>
-                              <Badge className={
-                                cert.status === "active" ? "bg-green-600" :
-                                cert.status === "revoked" ? "bg-red-600" :
-                                "bg-amber-600"
-                              }>
-                                {cert.status.charAt(0).toUpperCase() + cert.status.slice(1)}
-                              </Badge>
-                            </TableCell>
-                            <TableCell>
-                              <div className="flex space-x-2">
-                                <CertificateActions
-                                  certificateId={cert.id}
-                                  status={cert.status}
-                                  onStatusChange={handleStatusChange}
-                                />
-                                <Button 
-                                  variant="outline" 
-                                  size="sm"
-                                  onClick={() => setViewingCertificate(cert.id)}
-                                >
-                                  <Eye size={14} />
-                                  <span className="hidden sm:inline">View</span>
-                                </Button>
-                                <Button 
-                                  variant="outline" 
-                                  size="sm"
-                                >
-                                  <Download size={14} />
-                                  <span className="hidden sm:inline">PDF</span>
-                                </Button>
-                              </div>
-                            </TableCell>
-                          </TableRow>
-                        ))
-                      ) : (
-                        <TableRow>
-                          <TableCell colSpan={8} className="text-center py-8 text-muted-foreground">
-                            No certificates found matching your search criteria
-                          </TableCell>
-                        </TableRow>
-                      )}
-                    </TableBody>
-                  </Table>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-          
-          <TabsContent value="by-fund">
-            <div className="space-y-6">
-              {fundsList.map(fund => (
-                <Card key={fund}>
-                  <CardHeader>
-                    <CardTitle>{fund}</CardTitle>
-                    <CardDescription>
-                      Share certificates issued under {fund}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-8">
-                      {Object.entries(certificatesByCompany[fund]).map(([companyName, certificates]) => (
-                        <div key={companyName} className="border rounded-lg p-4">
-                          <div className="mb-4">
-                            <h3 className="text-lg font-semibold">{companyName}</h3>
-                            <p className="text-sm text-muted-foreground">
-                              Total Certificates: {certificates.length}
-                            </p>
-                          </div>
-                          <div className="rounded-md border overflow-x-auto">
-                            <Table>
-                              <TableHeader>
-                                <TableRow>
-                                  <TableHead>Certificate Number</TableHead>
-                                  <TableHead>Sequential #</TableHead>
-                                  <TableHead>Shareholder</TableHead>
-                                  <TableHead>Shares</TableHead>
-                                  <TableHead>Issue Date</TableHead>
-                                  <TableHead>Status</TableHead>
-                                  <TableHead>Actions</TableHead>
-                                </TableRow>
-                              </TableHeader>
-                              <TableBody>
-                                {certificates.map((cert) => (
-                                  <TableRow key={cert.id}>
-                                    <TableCell className="font-mono text-sm">
-                                      {cert.id}
-                                    </TableCell>
-                                    <TableCell className="font-mono">
-                                      #{cert.sequentialNumber}
-                                    </TableCell>
-                                    <TableCell>
-                                      <div>
-                                        <p className="font-medium">{cert.userName}</p>
-                                        <p className="text-sm text-muted-foreground">{cert.clientNumber}</p>
-                                      </div>
-                                    </TableCell>
-                                    <TableCell>{cert.shares} @ R{cert.sharePrice}</TableCell>
-                                    <TableCell>{new Date(cert.issueDate).toLocaleDateString()}</TableCell>
-                                    <TableCell>
-                                      <Badge className={
-                                        cert.status === "active" ? "bg-green-600" :
-                                        cert.status === "revoked" ? "bg-red-600" :
-                                        "bg-amber-600"
-                                      }>
-                                        {cert.status.charAt(0).toUpperCase() + cert.status.slice(1)}
-                                      </Badge>
-                                    </TableCell>
-                                    <TableCell>
-                                      <div className="flex space-x-2">
-                                        <CertificateActions
-                                          certificateId={cert.id}
-                                          status={cert.status}
-                                          onStatusChange={handleStatusChange}
-                                        />
-                                        <Button 
-                                          variant="outline" 
-                                          size="sm"
-                                          onClick={() => setViewingCertificate(cert.id)}
-                                        >
-                                          <Eye size={14} />
-                                          <span className="hidden sm:inline">View</span>
-                                        </Button>
-                                        <Button 
-                                          variant="outline" 
-                                          size="sm"
-                                        >
-                                          <Download size={14} />
-                                          <span className="hidden sm:inline">PDF</span>
-                                        </Button>
-                                      </div>
-                                    </TableCell>
-                                  </TableRow>
-                                ))}
-                              </TableBody>
-                            </Table>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+
+                <Select value={statusFilter} onValueChange={setStatusFilter}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Filter by status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Statuses</SelectItem>
+                    <SelectItem value="active">Active</SelectItem>
+                    <SelectItem value="revoked">Revoked</SelectItem>
+                    <SelectItem value="transferred">Transferred</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
-          </TabsContent>
-        </Tabs>
-        
+
+            <div className="rounded-md border overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Certificate ID</TableHead>
+                    <TableHead>Client Name</TableHead>
+                    <TableHead>Company</TableHead>
+                    <TableHead>Fund</TableHead>
+                    <TableHead>Shares</TableHead>
+                    <TableHead>Issue Date</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead>Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {filteredCertificates.length > 0 ? (
+                    filteredCertificates.map((cert) => (
+                      <TableRow key={cert.id}>
+                        <TableCell className="font-mono text-sm">{cert.id}</TableCell>
+                        <TableCell>{cert.userName}</TableCell>
+                        <TableCell>{cert.companyName}</TableCell>
+                        <TableCell>
+                          {Object.entries(fundCertificatesData).find(([_, certs]) =>
+                            certs.some(c => c.id === cert.id)
+                          )?.[0]}
+                        </TableCell>
+                        <TableCell>{cert.shares} @ R{cert.sharePrice}</TableCell>
+                        <TableCell>{new Date(cert.issueDate).toLocaleDateString()}</TableCell>
+                        <TableCell>
+                          <Badge className={
+                            cert.status === "active" ? "bg-green-600" :
+                            cert.status === "revoked" ? "bg-red-600" :
+                            "bg-amber-600"
+                          }>
+                            {cert.status.charAt(0).toUpperCase() + cert.status.slice(1)}
+                          </Badge>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex space-x-2">
+                            <CertificateActions
+                              certificateId={cert.id}
+                              status={cert.status}
+                              onStatusChange={handleStatusChange}
+                            />
+                            <Button 
+                              variant="outline" 
+                              size="sm"
+                              onClick={() => setViewingCertificate(cert.id)}
+                            >
+                              <Eye size={14} />
+                              <span className="hidden sm:inline">View</span>
+                            </Button>
+                            <Button 
+                              variant="outline" 
+                              size="sm"
+                            >
+                              <Download size={14} />
+                              <span className="hidden sm:inline">PDF</span>
+                            </Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={8} className="text-center py-8 text-muted-foreground">
+                        No certificates found matching your search criteria
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </div>
+          </CardContent>
+        </Card>
+
         <Dialog open={viewingCertificate !== null} onOpenChange={() => setViewingCertificate(null)}>
           <DialogContent className="max-w-3xl">
             <DialogHeader>
