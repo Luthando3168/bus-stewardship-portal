@@ -185,39 +185,64 @@ const impactFunds = [
     id: "myfranchise",
     name: "MyFranchise Impact Fund",
     return: "13% p.a.",
-    minInvestment: 1500, // Use the lowest, or refer to each franchise item individually
+    minInvestment: 1500,
     businesses: [
-      // Example franchises as per your attachment (update with actual data and accurate descriptions)
       {
-        id: "mcdonalds-sa",
-        title: "McDonald's South Africa",
+        id: "steers",
+        title: "Steers",
         region: "National",
-        description: "McDonald's is a global leader in quick service restaurants, serving millions daily. Franchisees benefit from a globally recognized brand, robust support, and proven business model. (Source: mcdonalds.co.za/franchising)",
-        minInvestment: 4000000, // Example minimum, replace with attachment value
+        description: "Steers is one of South Africa’s leading fast food brands, famous for flame-grilled burgers and chips. Franchisees benefit from a well-established brand, award-winning meals, and national reach. (Source: steers.co.za/franchising)",
+        minInvestment: 1500,
       },
       {
-        id: "chicken-licken",
-        title: "Chicken Licken",
+        id: "debonairs",
+        title: "Debonairs",
         region: "National",
-        description: "Chicken Licken is a proudly South African fast-food franchise specializing in fried chicken. It's known for flavorful meals and an energetic brand. (Source: chickenlicken.co.za/franchise)",
-        minInvestment: 6500000, // Example minimum, replace with attachment value
+        description: "Debonairs Pizza is a popular South African pizza franchise known for fresh, innovative pizzas and quick delivery. Franchisees enjoy brand support and an established loyal customer base. (Source: debonairspizza.co.za/franchising)",
+        minInvestment: 3000,
       },
       {
-        id: "sorbet-group",
-        title: "Sorbet Group",
+        id: "wimpy",
+        title: "Wimpy",
         region: "National",
-        description: "Sorbet is a professional beauty therapy franchise offering treatments, products, and a community-driven retail experience across South Africa. (Source: sorbet.co.za/franchising)",
-        minInvestment: 1800000, // Example minimum, replace with attachment value
+        description: "Wimpy is a well-known South African family restaurant and fast-food brand. The franchise offers a friendly dining experience with a wide menu—including breakfast—all supported by strong marketing and operational support. (Source: wimpy.co.za/franchising)",
+        minInvestment: 5000,
       },
       {
-        id: "oosdoos-fish-and-chips",
-        title: "Oosdoos Fish & Chips",
-        region: "Various",
-        description: "Oosdoos Fish & Chips franchise offers traditional fish and chips in a welcoming environment, supporting franchisees with start-to-finish guidance. (Source: oosdoos.co.za/franchise)",
-        minInvestment: 350000, // Example minimum, replace with attachment value
-      }
-      // Add or remove franchises based on your attached document,
-      // ensuring each description is based on the official website and investment is accurate.
+        id: "burger-king",
+        title: "Burger King",
+        region: "National",
+        description: "Burger King is a globally recognized fast-food hamburger chain, offering flame-grilled burgers and signature sides. South African franchisees gain backing from international operations and strong national recognition. (Source: burgerking.co.za/franchising)",
+        minInvestment: 6000,
+      },
+      {
+        id: "pedros",
+        title: "Pedros",
+        region: "National",
+        description: "Pedros is a dynamic South African flame-grilled chicken franchise known for fresh and affordable flame-grilled chicken and growing national footprint. Franchisees enjoy support in site selection and operations. (Source: pedroschicken.co.za/franchises)",
+        minInvestment: 2500,
+      },
+      {
+        id: "fish-and-co",
+        title: "The Fish and Co",
+        region: "National",
+        description: "The Fish and Co. is a South African fast-food franchise specializing in a variety of delicious fresh seafood meals in a relaxed environment. Franchisees receive extensive support in business setup and daily operations. (Source: thefishco.co.za/franchise)",
+        minInvestment: 2000,
+      },
+      {
+        id: "spur",
+        title: "Spur",
+        region: "National",
+        description: "Spur is South Africa’s very popular family restaurant franchise, known for great steaks, platters and a unique kids-friendly atmosphere. Franchisees benefit from national recognition and extensive franchise support. (Source: spurfranchise.co.za)",
+        minInvestment: 5000,
+      },
+      {
+        id: "tigermilk",
+        title: "Tiger Milk",
+        region: "National",
+        description: "Tiger Milk is a leading restaurant and bar franchise brand offering a unique experience combining gourmet burgers, pizza, and signature cocktails, with trendy décor and urban atmosphere. Franchisees receive site selection and operational guidance. (Source: tigermilk.co.za/franchise)",
+        minInvestment: 5000,
+      },
     ],
   },
   {
