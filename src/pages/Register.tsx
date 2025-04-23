@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "@/components/ui/card";
 import RegisterForm from "@/components/auth/registration/RegisterForm";
 import Logo from "@/components/ui/Logo";
+import { Info } from "lucide-react";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -20,16 +21,17 @@ const Register = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
-              <p className="text-blue-700 text-sm">
-                Welcome to our client onboarding process. To access our website and services:
-              </p>
-              <ul className="list-disc list-inside text-blue-700 text-sm mt-2 space-y-1">
-                <li>Complete this initial registration form</li>
-                <li>You will receive an email with further instructions</li>
-                <li>Follow the email link to complete your full client registration</li>
-                <li>Our team will review and approve your registration</li>
-              </ul>
+            <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4 flex items-start space-x-3">
+              <Info className="text-blue-700 mt-1 flex-shrink-0" size={20} />
+              <div>
+                <p className="text-blue-900 font-medium mb-2">
+                  Client Onboarding Information
+                </p>
+                <p className="text-blue-700 text-sm">
+                  To become a client, please complete our initial registration process. 
+                  We'll guide you through the necessary steps to access our services.
+                </p>
+              </div>
             </div>
             <RegisterForm />
           </CardContent>
@@ -55,3 +57,4 @@ const Register = () => {
 };
 
 export default Register;
+
