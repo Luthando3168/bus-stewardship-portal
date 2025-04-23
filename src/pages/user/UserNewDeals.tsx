@@ -423,6 +423,21 @@ const impactFunds = [
     return: "10% p.a.",
     minInvestment: 1500,
     businesses: []
+  },
+  {
+    id: "mytelco",
+    name: "MyTelco",
+    return: "16% p.a.",
+    minInvestment: 2500,
+    businesses: [
+      {
+        id: "our-own-mvno",
+        title: "Our Own MVNO",
+        region: "National",
+        description: "An MVNO (Mobile Virtual Network Operator) lets a company offer mobile services using another network's infrastructure. This unique opportunity allows clients to co-own an MVNO in partnership with MTN and share in profits from the sale of data and airtime nationwide.",
+        minInvestment: 1000,
+      },
+    ],
   }
 ];
 

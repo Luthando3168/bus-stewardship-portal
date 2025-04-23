@@ -1,4 +1,3 @@
-
 export const impactFunds = [
   {
     id: "myfarm",

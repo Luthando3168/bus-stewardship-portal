@@ -68,6 +68,15 @@ const funds = [
     returnPercentage: 10,
     minInvestment: 1500,
     bgGradient: "from-indigo-700 to-indigo-900",
+  },
+  {
+    id: "mytelco",
+    name: "MyTelco Impact Fund",
+    brief: "Innovative telecommunications solutions driving digital connectivity.",
+    image: "https://images.unsplash.com/photo-1562408590-e32931084e23?auto=format&fit=crop&w=1200&q=80",
+    returnPercentage: 16,
+    minInvestment: 2500,
+    bgGradient: "from-blue-500 to-blue-800",
   }
 ];
 
