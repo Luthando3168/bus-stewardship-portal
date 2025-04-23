@@ -8,13 +8,28 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { CreditCard, Plus, Search } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-// Mock bank accounts
+// List of major South African banks
+const saBanks = [
+  "ABSA Bank",
+  "Capitec Bank",
+  "First National Bank",
+  "Investec Bank",
+  "Nedbank",
+  "Standard Bank",
+  "African Bank",
+  "Discovery Bank",
+  "TymeBank"
+];
+
+// Mock bank accounts with client numbers
 const mockBankAccounts = [
   {
     id: 1,
     userId: 1,
     userName: "John Dube",
+    clientNumber: "LM202412345",
     accountNumber: "123456789012",
     bankName: "Standard Bank",
     accountType: "Investment Account",
@@ -28,8 +43,9 @@ const mockBankAccounts = [
     id: 2,
     userId: 2,
     userName: "Sarah Nkosi",
+    clientNumber: "LM202467890",
     accountNumber: "987654321098",
-    bankName: "Standard Bank",
+    bankName: "ABSA Bank",
     accountType: "Investment Account",
     branch: "Rosebank",
     branchCode: "051002",
@@ -45,8 +61,9 @@ const AdminBankAccounts = () => {
   const [newAccount, setNewAccount] = useState({
     userId: "",
     userName: "",
+    clientNumber: "",
     accountNumber: "",
-    bankName: "Standard Bank",
+    bankName: "",
     accountType: "Investment Account",
     branch: "",
     branchCode: "",
@@ -55,7 +72,8 @@ const AdminBankAccounts = () => {
   const filteredAccounts = mockBankAccounts.filter(
     (account) =>
       account.userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      account.accountNumber.includes(searchTerm)
+      account.accountNumber.includes(searchTerm) ||
+      account.clientNumber.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -65,8 +83,9 @@ const AdminBankAccounts = () => {
     setNewAccount({
       userId: "",
       userName: "",
+      clientNumber: "",
       accountNumber: "",
-      bankName: "Standard Bank",
+      bankName: "",
       accountType: "Investment Account",
       branch: "",
       branchCode: "",
@@ -92,7 +111,7 @@ const AdminBankAccounts = () => {
             <CardHeader>
               <CardTitle>Assign New Bank Account</CardTitle>
               <CardDescription>
-                Create a new Standard Bank account for a verified user
+                Create a new bank account for a verified user
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -117,6 +136,15 @@ const AdminBankAccounts = () => {
                     />
                   </div>
                   <div className="space-y-2">
+                    <Label htmlFor="clientNumber">Client Number</Label>
+                    <Input 
+                      id="clientNumber" 
+                      value={newAccount.clientNumber}
+                      onChange={(e) => setNewAccount({...newAccount, clientNumber: e.target.value})}
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
                     <Label htmlFor="accountNumber">Account Number</Label>
                     <Input 
                       id="accountNumber" 
@@ -127,11 +155,21 @@ const AdminBankAccounts = () => {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="bankName">Bank Name</Label>
-                    <Input 
-                      id="bankName" 
+                    <Select
                       value={newAccount.bankName}
-                      disabled
-                    />
+                      onValueChange={(value) => setNewAccount({...newAccount, bankName: value})}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a bank" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {saBanks.map((bank) => (
+                          <SelectItem key={bank} value={bank}>
+                            {bank}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="accountType">Account Type</Label>
@@ -177,7 +215,7 @@ const AdminBankAccounts = () => {
           <CardHeader>
             <CardTitle>All Bank Accounts</CardTitle>
             <CardDescription>
-              View and manage all assigned Standard Bank accounts
+              View and manage all assigned bank accounts
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -197,6 +235,7 @@ const AdminBankAccounts = () => {
                 <TableHeader>
                   <TableRow>
                     <TableHead>User Name</TableHead>
+                    <TableHead>Client Number</TableHead>
                     <TableHead>Account Number</TableHead>
                     <TableHead>Bank</TableHead>
                     <TableHead>Type</TableHead>
@@ -211,6 +250,7 @@ const AdminBankAccounts = () => {
                   {filteredAccounts.map((account) => (
                     <TableRow key={account.id}>
                       <TableCell>{account.userName}</TableCell>
+                      <TableCell>{account.clientNumber}</TableCell>
                       <TableCell>{account.accountNumber}</TableCell>
                       <TableCell>{account.bankName}</TableCell>
                       <TableCell>{account.accountType}</TableCell>
