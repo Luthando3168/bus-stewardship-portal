@@ -1,10 +1,11 @@
+
 import React, { useRef } from 'react';
 import UserLayout from "@/components/layout/UserLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { FileText, Shield } from "lucide-react";
+import { FileText, Shield, Download } from "lucide-react";
 import { toast } from "sonner";
 import html2pdf from 'html2pdf.js';
 
