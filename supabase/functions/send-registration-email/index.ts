@@ -2,7 +2,9 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts"
 import { Resend } from "npm:resend@2.0.0"
 import { renderAsync } from 'npm:@react-email/components@0.0.12'
-import { RegistrationApprovedEmail } from "./_templates/registration-approved.tsx"
+import { RegistrationConfirmEmail } from "./_templates/registration-confirm.tsx"
+import { DealApprovalEmail } from "./_templates/deal-approval.tsx"
+import { ShareCertificateEmail } from "./_templates/share-certificate.tsx"
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"))
 
@@ -12,7 +14,6 @@ const corsHeaders = {
 }
 
 serve(async (req) => {
-  // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, { 
       headers: {
@@ -25,26 +26,63 @@ serve(async (req) => {
 
   try {
     const { 
+      type,
       fullName, 
-      email, 
-      clientNumber, 
-      bankAccountNumber, 
-      bankAccountBranch 
+      email,
+      confirmationLink,
+      dealName,
+      investmentAmount,
+      approvalLink,
+      certificateNumber,
+      viewLink
     } = await req.json()
 
-    const html = await renderAsync(
-      RegistrationApprovedEmail({ 
-        fullName, 
-        clientNumber, 
-        bankAccountNumber, 
-        bankAccountBranch 
-      })
-    )
+    let html;
+    let subject;
+
+    switch (type) {
+      case 'registration':
+        html = await renderAsync(
+          RegistrationConfirmEmail({ 
+            fullName, 
+            confirmationLink 
+          })
+        )
+        subject = "Complete Your MCA Direct Registration"
+        break;
+      
+      case 'deal_approval':
+        html = await renderAsync(
+          DealApprovalEmail({ 
+            fullName, 
+            dealName, 
+            investmentAmount, 
+            approvalLink 
+          })
+        )
+        subject = "Your MCA Direct Investment is Ready for Approval"
+        break;
+      
+      case 'share_certificate':
+        html = await renderAsync(
+          ShareCertificateEmail({ 
+            fullName, 
+            dealName, 
+            certificateNumber, 
+            viewLink 
+          })
+        )
+        subject = "Your MCA Direct Share Certificate is Ready"
+        break;
+      
+      default:
+        throw new Error("Invalid email type")
+    }
     
     const data = await resend.emails.send({
       from: "Luthando Maduna Chartered Accountants <info@madunacas.com>",
       to: [email],
-      subject: "Your MCA Direct Registration is Approved!",
+      subject: subject,
       html: html,
       reply_to: "info@madunacas.com",
     })
@@ -57,7 +95,7 @@ serve(async (req) => {
       status: 200,
     })
   } catch (error) {
-    console.error("Error sending registration approval email:", error)
+    console.error("Error sending email:", error)
     return new Response(
       JSON.stringify({ error: error.message }),
       {
