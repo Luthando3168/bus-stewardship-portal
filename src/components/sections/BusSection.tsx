@@ -5,20 +5,20 @@ import SectionTitle from "../ui/SectionTitle";
 const BusSection = () => {
   const features = [
     {
-      title: "Professional Management",
-      description: "Our team of chartered accountants manages daily operations, ensuring your business runs efficiently."
+      title: "Complete Business Management",
+      description: "We take full responsibility for managing your businesses day-to-day operations, letting you focus on other priorities."
     },
     {
-      title: "Financial Oversight",
-      description: "Comprehensive financial management including accounting, bookkeeping, and tax compliance."
+      title: "Professional Team",
+      description: "Our chartered accountants handle everything from accounting and tax compliance to business strategy."
     },
     {
-      title: "Regular Reporting",
-      description: "Quarterly financial statements delivered via MCA Direct and bi-annual profit sharing distributions."
+      title: "Digital Platform",
+      description: "Access financial reports and track your business performance through our MCA Direct platform."
     },
     {
-      title: "Business Development",
-      description: "Strategic guidance to help your business grow and expand into new markets."
+      title: "Regular Updates",
+      description: "Receive quarterly financial statements and twice-yearly profit distributions directly to your account."
     }
   ];
 
@@ -28,19 +28,19 @@ const BusSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <SectionTitle
-              title="Business Under Stewardship Program"
-              subtitle="Our innovative program to help you own and grow multiple businesses with professional management"
+              title="Let Us Manage Your Business"
+              subtitle="Professional management services through our Business Under Stewardship program"
             />
 
-            <p className="font-lato text-charcoal mb-6">
-              The Business Under Stewardship (BUS) program is our flagship service where we professionally manage businesses that you select to own, while providing you with regular financial updates and profit distributions.
-            </p>
-
-            <div className="bg-lightgray rounded-lg p-5 mb-6 text-center">
-              <p className="font-semibold text-navyblue">
-                Once you select businesses to own, our team manages these on your behalf. You'll receive quarterly financial statements via MCA Direct and profit sharing occurs twice a year.
+            <div className="bg-lightgray rounded-lg p-6 mb-8">
+              <p className="font-semibold text-lg text-navyblue text-center">
+                "Simply select the businesses you want to own through MCA Direct, and our team of chartered accountants will professionally manage them on your behalf."
               </p>
             </div>
+
+            <p className="font-lato text-charcoal mb-8 text-lg">
+              Through our Business Under Stewardship (BUS) program, you can own multiple businesses without the hassle of day-to-day management. We handle everything from operations and accounting to strategy and growth, while you receive regular updates and profit distributions through MCA Direct.
+            </p>
 
             <ul className="space-y-6 mb-8">
               {features.map((feature, index) => (
@@ -59,9 +59,9 @@ const BusSection = () => {
             <div className="text-center">
               <Link
                 to="/bus"
-                className="font-montserrat inline-block px-6 py-3 bg-navyblue text-white rounded font-medium hover:bg-deepblue transition-colors"
+                className="font-montserrat inline-block px-8 py-4 bg-gold text-white rounded-lg font-medium hover:bg-lightgold transition-colors"
               >
-                Learn More About BUS Program
+                Learn More About Business Management
               </Link>
             </div>
           </div>
