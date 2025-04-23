@@ -31,14 +31,14 @@ const Hero = () => (
       <div className="hidden md:block flex-1 relative px-4 md:px-0">
         <div className="relative max-w-[350px] md:max-w-none mx-auto">
           {/* Decorative frames */}
-          <div className="absolute inset-0 border-2 border-gold/30 rounded-2xl transform rotate-3 scale-105"></div>
-          <div className="absolute inset-0 border-2 border-gold/20 rounded-2xl transform -rotate-2"></div>
+          <div className="absolute inset-0 border-2 border-gold/50 rounded-2xl transform rotate-3 scale-105"></div>
+          <div className="absolute inset-0 border-2 border-gold/40 rounded-2xl transform -rotate-2"></div>
           
           {/* Main image */}
           <img
             src="/lovable-uploads/cefab7d3-58a2-43a5-a136-7cac22b5c286.png"
             alt="Joyful person with natural hair surrounded by yellow flowers"
-            className="w-full md:w-[500px] h-auto md:h-[500px] object-cover rounded-2xl animate-fade-in-slow"
+            className="w-full md:w-[500px] h-auto md:h-[500px] object-cover rounded-2xl animate-fade-in-slow brightness-110 contrast-105 saturate-105"
             style={{
               filter: 'drop-shadow(0 0 20px rgba(0,0,0,0.2))',
             }}

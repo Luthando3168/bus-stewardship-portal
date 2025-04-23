@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -64,8 +63,8 @@ const Bus = () => {
       <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <SectionTitle
-            title={<span className="text-mobile-2xl md:text-2xl lg:text-3xl">Business Under Stewardship Program</span>}
-            subtitle={<span className="text-mobile-base md:text-lg">Professional management solutions for business owners</span>}
+            title="Business Under Stewardship Program"
+            subtitle="Professional management solutions for business owners"
             centered
           />
 
@@ -79,7 +78,7 @@ const Bus = () => {
           </div>
 
           <div className="max-w-4xl mx-auto mt-8 md:mt-12 space-y-12 md:space-y-16">
-            {/* Introduction with Professional Image */}
+            {/* Introduction with Professional Images */}
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="text-charcoal space-y-4">
                 <p className="text-mobile-base md:text-lg">
@@ -87,8 +86,8 @@ const Bus = () => {
                   benefit from professional management while maintaining ownership of their companies.
                 </p>
                 <img
-                  src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40"
-                  alt="Professional business meeting"
+                  src="https://images.unsplash.com/photo-1542744094-24638eff58bb"
+                  alt="Professional business meeting with diverse team"
                   className="rounded-lg shadow-lg w-full h-48 md:h-64 object-cover"
                 />
               </div>
@@ -98,8 +97,8 @@ const Bus = () => {
                   allowing you to focus on strategic growth or pursue other ventures.
                 </p>
                 <img
-                  src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf"
-                  alt="Financial analysis"
+                  src="https://images.unsplash.com/photo-1573496527892-904f897eb114"
+                  alt="Professional accountant working"
                   className="rounded-lg shadow-lg w-full h-48 md:h-64 object-cover"
                 />
               </div>
@@ -125,7 +124,7 @@ const Bus = () => {
               <h3 className="text-mobile-xl md:text-2xl font-bold text-navyblue mb-6 text-center">How It Works</h3>
               <div className="grid md:grid-cols-2 gap-8 items-center mb-8">
                 <img
-                  src="https://images.unsplash.com/photo-1553729459-efe14ef6055d"
+                  src="https://images.unsplash.com/photo-1573497161161-c3e73707e25c"
                   alt="Professional team collaboration"
                   className="rounded-lg shadow-lg w-full h-48 md:h-64 object-cover"
                 />

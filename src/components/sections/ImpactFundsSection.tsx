@@ -7,7 +7,7 @@ const funds = [
     name: "MyFarm Impact Fund",
     description: "Focus: Supporting sustainable agriculture and farming businesses across South Africa.",
     color: "from-green-700 to-green-900",
-    image: "https://images.unsplash.com/photo-1628352081506-83c43123ed6d?auto=format&fit=crop&w=2000&q=80",
+    image: "https://images.unsplash.com/photo-1593113646773-028c64a8f1b8",
     focus: [
       "Sustainable farming operations",
       "Food security projects",
@@ -19,7 +19,7 @@ const funds = [
     name: "MyProperty Impact Fund",
     description: "Focus: Investing in community-focused real estate, affordable housing and property businesses.",
     color: "from-blue-700 to-blue-900",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=80",
+    image: "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11",
     focus: [
       "Affordable & mixed-use housing",
       "Community property projects",
@@ -31,7 +31,7 @@ const funds = [
     name: "MyFranchise Impact Fund",
     description: "Focus: Investing in franchise businesses with proven operational models, creating jobs and business skills.",
     color: "from-red-600 to-red-800",
-    image: "https://images.unsplash.com/photo-1532452119098-a3650b3c46d3?auto=format&fit=crop&w=2000&q=80",
+    image: "https://images.unsplash.com/photo-1577962917302-cd874c4e31d2",
     focus: [
       "Food franchise outlets",
       "Retail and service franchises",
@@ -64,9 +64,9 @@ const ImpactFundsSection = () => {
                 <img
                   src={fund.image}
                   alt={fund.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
                 />
-                <div className={`absolute inset-0 bg-gradient-to-br ${fund.color} opacity-60`}></div>
+                <div className={`absolute inset-0 bg-gradient-to-br ${fund.color} opacity-40`}></div>
                 <h3 className="absolute bottom-0 left-0 right-0 p-4 font-montserrat font-bold text-xl sm:text-2xl text-white">
                   {fund.name}
                 </h3>
