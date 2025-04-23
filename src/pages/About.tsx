@@ -77,7 +77,7 @@ const About = () => {
             <div className="mt-12">
               <h3 className="text-2xl font-bold text-navyblue mb-6">Our Team</h3>
               <p className="mb-6">
-                Our team consists of qualified professionals with extensive experience in accounting, tax, business management,
+                Our team consists of a qualified professional with extensive experience in accounting, tax, business management,
                 and impact investing. Led by our founder, we bring a wealth of knowledge and expertise to help our clients
                 navigate complex financial landscapes and achieve their goals.
               </p>
@@ -85,9 +85,10 @@ const About = () => {
               <div className="mt-8 p-6 bg-lightgray rounded-lg">
                 <h4 className="text-xl font-bold text-navyblue mb-4">Professional Credentials</h4>
                 <ul className="list-disc pl-5 space-y-2">
+                  <li>Sole Proprietor trading as Luthando Maduna Chartered Accountants</li>
                   <li>Registered with the South African Institute of Chartered Accountants (SAICA)</li>
                   <li>SAICA Registration Number: 20055210</li>
-                  <li>Company Registration: 2019/621826/07</li>
+                  <li>Individual Registration: 2019/621826/07</li>
                 </ul>
               </div>
             </div>
