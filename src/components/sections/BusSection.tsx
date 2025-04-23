@@ -34,12 +34,12 @@ const BusSection = () => {
 
             <div className="bg-lightgray rounded-lg p-6 mb-8">
               <p className="font-semibold text-lg text-navyblue text-center">
-                "Simply select the businesses you want to own through MCA Direct, and our team of chartered accountants will professionally manage them on your behalf."
+                "Simply browse our Impact Funds section to view available businesses, then register through MCA Direct to access investment opportunities."
               </p>
             </div>
 
             <p className="font-lato text-charcoal mb-8 text-lg">
-              Through our Business Under Stewardship (BUS) program, you can own multiple businesses without the hassle of day-to-day management. We handle everything from operations and accounting to strategy and growth, while you receive regular updates and profit distributions through MCA Direct.
+              Through our Business Under Stewardship (BUS) program, you can own multiple businesses without the hassle of day-to-day management. Our digital platform enables you to browse, select, and manage businesses entirely online. We handle everything from operations and accounting to strategy and growth, while you receive regular updates and profit distributions through MCA Direct.
             </p>
 
             <ul className="space-y-6 mb-8">
@@ -58,26 +58,20 @@ const BusSection = () => {
 
             <div className="text-center">
               <Link
-                to="/bus"
+                to="/impact-funds"
                 className="font-montserrat inline-block px-8 py-4 bg-gold text-white rounded-lg font-medium hover:bg-lightgold transition-colors"
               >
-                Learn More About Business Management
+                Browse Available Businesses
               </Link>
             </div>
           </div>
 
           <div className="relative">
             <div className="aspect-w-4 aspect-h-3 relative z-10">
-              <div className="w-full h-full rounded-lg overflow-hidden shadow-lg bg-gray-100">
-                <img
-                  src="/lovable-uploads/aa792d14-7473-4673-89cf-c3f6e1d15711.png"
-                  alt="Business Under Stewardship"
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.currentTarget.onerror = null;
-                    e.currentTarget.src = "/lovable-uploads/4f2d889e-ba23-463a-9efe-bc8453a5e5b2.png";
-                  }}
-                />
+              <div className="w-full h-full bg-navyblue rounded-lg overflow-hidden shadow-lg flex items-center justify-center">
+                <div className="text-gold text-8xl font-bold tracking-wider">
+                  BUS
+                </div>
               </div>
             </div>
             {/* Decorative elements */}
