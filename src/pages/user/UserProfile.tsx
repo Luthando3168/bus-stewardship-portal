@@ -1,4 +1,3 @@
-
 import UserLayout from "@/components/layout/UserLayout";
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -8,6 +7,9 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { Star } from "lucide-react";
+import FundAccordion from "@/components/FundAccordion";
+import FundOpportunities, { Opportunity } from "@/components/user/FundOpportunities";
+import { useEffect } from "react";
 
 // Updated list of funds with Enterprise Impact Fund and R5000 minimum
 const FUNDS = [
@@ -93,11 +95,10 @@ const INITIAL_USER_DATA = {
   joinDate: ""
 };
 
-import FundAccordion from "@/components/FundAccordion";
-
 const UserProfile = () => {
   const [userData, setUserData] = useState(INITIAL_USER_DATA);
   const [password, setPassword] = useState({ current: "", new: "", confirm: "" });
+  const [activeFundTab, setActiveFundTab] = useState(FUNDS[0].name);
 
   const handleProfileUpdate = (e: React.FormEvent) => {
     e.preventDefault();
@@ -120,6 +121,68 @@ const UserProfile = () => {
 
   const isMissing = (key: string, required?: boolean) =>
     required && !userData[key as keyof typeof userData];
+
+  const opportunities: Opportunity[] = [
+    {
+      id: "opp1",
+      fundId: "Sankofa Property Impact Fund",
+      title: "Downtown Office Building",
+      summary: "10-story CBD building, green retrofit completed.",
+      minInvestment: "R 20,000",
+      projectedReturn: "8.5% p.a.",
+      status: "Open",
+    },
+    {
+      id: "opp2",
+      fundId: "Sankofa Property Impact Fund",
+      title: "Student Housing Project",
+      summary: "Affordable student living in Cape Town.",
+      minInvestment: "R 10,000",
+      projectedReturn: "7.8% p.a.",
+      status: "Open",
+    },
+    {
+      id: "opp3",
+      fundId: "Sankofa Agri Impact Fund",
+      title: "Organic Farm Expansion",
+      summary: "Certified organic vegetables for export markets.",
+      minInvestment: "R 5,000",
+      projectedReturn: "6.8% p.a.",
+      status: "Open",
+    },
+    {
+      id: "opp4",
+      fundId: "Sankofa Energy Impact Fund",
+      title: "Solar Installation Network",
+      summary: "Commercial solar panels, Cape Town businesses.",
+      minInvestment: "R 8,000",
+      projectedReturn: "11.2% p.a.",
+      status: "Open",
+    },
+    {
+      id: "opp5",
+      fundId: "Sankofa Enterprise Impact Fund",
+      title: "Franchise Rollout - Bakery Chain",
+      summary: "Expansion of local franchise into three provinces.",
+      minInvestment: "R 15,000",
+      projectedReturn: "12.4% p.a.",
+      status: "Open",
+    },
+    {
+      id: "opp6",
+      fundId: "Sankofa Enterprise Impact Fund",
+      title: "Tech SME Scale-up",
+      summary: "Support for a black-owned app development company.",
+      minInvestment: "R 10,000",
+      projectedReturn: "15.0% p.a.",
+      status: "Open",
+    },
+  ];
+
+  useEffect(() => {
+    const section = document.getElementById("fund-opportunity-list");
+    if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [activeFundTab]);
 
   return (
     <UserLayout>
@@ -233,11 +296,36 @@ const UserProfile = () => {
               <CardHeader>
                 <CardTitle>Investment Fund Options</CardTitle>
                 <CardDescription>
-                  Click any fund to see details. All funds listed below.
+                  Click any fund to see details &amp; opportunities.
                 </CardDescription>
+                <div className="flex flex-wrap gap-2 mt-4">
+                  {FUNDS.map((fund) => (
+                    <button
+                      key={fund.name}
+                      className={`px-4 py-1 rounded-full text-sm font-medium border transition
+                        ${
+                          activeFundTab === fund.name
+                            ? "bg-navyblue text-white border-navyblue shadow"
+                            : "bg-muted text-navyblue border-gray-300 hover:bg-blue-100"
+                        }`}
+                      onClick={() => setActiveFundTab(fund.name)}
+                      type="button"
+                      tabIndex={0}
+                      aria-pressed={activeFundTab === fund.name}
+                    >
+                      {fund.name.replace("Sankofa ", "")}
+                    </button>
+                  ))}
+                </div>
               </CardHeader>
               <CardContent>
                 <FundAccordion funds={FUNDS} />
+                <div id="fund-opportunity-list" className="pt-6">
+                  <FundOpportunities
+                    fundId={activeFundTab}
+                    opportunities={opportunities}
+                  />
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
