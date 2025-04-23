@@ -59,15 +59,34 @@ export const useRegister = () => {
       console.log("Registration response:", authData);
 
       if (authData.user) {
-        // Send welcome notification
-        await sendUserNotification(
-          { 
-            fullName, 
-            email 
-          }, 
-          'welcome', 
-          ['email', 'whatsapp']
-        );
+        try {
+          // First try the direct edge function call
+          console.log("Attempting to send welcome email via edge function...");
+          
+          const { data, error: welcomeError } = await supabase.functions.invoke('send-welcome', {
+            body: { fullName, email }
+          });
+
+          if (welcomeError) {
+            console.error("Failed to send welcome email via edge function:", welcomeError);
+            // Fall back to notification service
+            console.log("Falling back to notification service...");
+            
+            await sendUserNotification(
+              { 
+                fullName, 
+                email 
+              }, 
+              'welcome', 
+              ['email']  // Remove WhatsApp to avoid errors if phone is missing
+            );
+          } else {
+            console.log("Welcome email sent successfully via edge function:", data);
+          }
+        } catch (emailError) {
+          console.error("Error sending welcome email:", emailError);
+          toast.error("There was an issue sending your welcome email, but your account was created successfully.");
+        }
       }
       
       toast.success("Registration successful! Please check your email.");

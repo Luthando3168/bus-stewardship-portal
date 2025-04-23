@@ -79,12 +79,16 @@ const Login = () => {
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <Label htmlFor="password">Password</Label>
-                <a 
-                  href="/forgot-password" 
-                  className="text-sm text-gold hover:text-lightgold"
+                <Button 
+                  variant="link" 
+                  className="text-sm text-gold hover:text-lightgold p-0 h-auto font-normal"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate("/forgot-password");
+                  }}
                 >
                   Forgot password?
-                </a>
+                </Button>
               </div>
               <Input
                 id="password"
