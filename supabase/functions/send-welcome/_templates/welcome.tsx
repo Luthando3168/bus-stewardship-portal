@@ -31,6 +31,7 @@ export const WelcomeEmail = ({
             width="200"
             height="auto"
             alt="Luthando Maduna CA Logo"
+            style={{margin: '0 auto'}}
           />
         </Section>
 

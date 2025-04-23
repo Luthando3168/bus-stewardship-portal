@@ -31,12 +31,14 @@ serve(async (req) => {
     
     console.log("Email HTML rendered successfully")
 
-    // Use info@madunacas.com as the sending address since this domain is verified
+    // Make sure to use info@madunacas.com with a proper display name
     const data = await resend.emails.send({
-      from: "Luthando Maduna CA <info@madunacas.com>",
+      from: "Luthando Maduna Chartered Accountants <info@madunacas.com>",
       to: [email],
       subject: "Welcome to Luthando Maduna Chartered Accountants",
       html: html,
+      // Add a reply-to to ensure replies go to the right place
+      reply_to: "info@madunacas.com"
     })
 
     console.log("Email sending response:", data)
