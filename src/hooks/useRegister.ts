@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -10,10 +11,32 @@ export const useRegister = () => {
   const navigate = useNavigate();
   const { sendUserNotification } = useNotifications();
 
-  const validatePassword = (password: string): boolean => {
-    // At least 8 characters, with a mix of letters, numbers, and special characters
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-    return passwordRegex.test(password);
+  const validatePassword = (password: string): { isValid: boolean; message: string } => {
+    if (password.length < 12) {
+      return { isValid: false, message: "Password must be at least 12 characters long" };
+    }
+    
+    // Check for at least one uppercase letter
+    if (!/[A-Z]/.test(password)) {
+      return { isValid: false, message: "Password must contain at least one uppercase letter" };
+    }
+    
+    // Check for at least one lowercase letter
+    if (!/[a-z]/.test(password)) {
+      return { isValid: false, message: "Password must contain at least one lowercase letter" };
+    }
+    
+    // Check for at least one number
+    if (!/\d/.test(password)) {
+      return { isValid: false, message: "Password must contain at least one number" };
+    }
+    
+    // Check for at least one special character
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+      return { isValid: false, message: "Password must contain at least one special character" };
+    }
+
+    return { isValid: true, message: "" };
   };
 
   const handleRegister = async (
@@ -37,9 +60,10 @@ export const useRegister = () => {
       return;
     }
     
-    if (!validatePassword(password)) {
-      setErrorMessage("Password must be at least 8 characters and include letters, numbers, and special characters");
-      toast.error("Password must be at least 8 characters and include letters, numbers, and special characters");
+    const passwordValidation = validatePassword(password);
+    if (!passwordValidation.isValid) {
+      setErrorMessage(passwordValidation.message);
+      toast.error(passwordValidation.message);
       return;
     }
     
@@ -86,7 +110,6 @@ export const useRegister = () => {
 
             if (welcomeError) {
               console.error("Failed to send welcome email via edge function:", welcomeError);
-              // Fall back to notification service
               console.log("Falling back to notification service...");
               await sendUserNotification(
                 { fullName, email }, 
@@ -101,7 +124,6 @@ export const useRegister = () => {
           }
         } catch (emailError) {
           console.error("Error sending welcome email:", emailError);
-          // Don't show this error to the user as it's not critical to registration
         }
       }
       
@@ -111,7 +133,6 @@ export const useRegister = () => {
       console.error("Registration error:", error);
       
       if (error.message.includes("already registered")) {
-        // Generic error to prevent email enumeration
         setErrorMessage("Registration failed. Please try again or contact support.");
         toast.error("Registration failed. Please try again or contact support.");
       } else if (error.message.includes("password")) {
