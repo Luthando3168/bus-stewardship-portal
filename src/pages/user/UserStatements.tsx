@@ -6,75 +6,47 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Download } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 
-// Fund metadata
+// Modified fund metadata with display names without 'Impact Fund'
 const fundsData = {
   myfarm: {
-    title: "MyFarm Impact Fund",
+    title: "MyFarm",
     description: "Financial statements for your investments in the agricultural sector",
     accountant: "James Smith CA(SA)",
     company: "MyFarm Investments"
   },
   myproperty: {
-    title: "MyProperty Impact Fund",
+    title: "MyProperty",
     description: "Financial statements for your investments in the property sector",
     accountant: "Linda Johnson CA(SA)",
     company: "MyProperty Investments"
   },
   myfoodretail: {
-    title: "MyFoodRetail Impact Fund",
+    title: "MyFoodRetail",
     description: "Financial statements for your investments in food retail development",
     accountant: "Michael Thompson CA(SA)",
     company: "MyFoodRetail Fund"
   },
   myenergy: {
-    title: "MyEnergy Impact Fund",
+    title: "MyEnergy",
     description: "Financial statements for your investments in renewable energy",
     accountant: "Sarah Davis CA(SA)",
     company: "MyEnergy Solutions"
   },
   myenterprise: {
-    title: "MyEnterprise Impact Fund",
+    title: "MyEnterprise",
     description: "Financial statements for your investments in enterprise development",
     accountant: "Daniel Ndlovu CA(SA)",
     company: "MyEnterprise Fund"
   },
   mytelco: {
-    title: "MyTelco Impact Fund",
+    title: "MyTelco",
     description: "Financial statements for your investments in telecommunications",
     accountant: "Priya Patel CA(SA)",
     company: "MyTelco Investments"
-  },
-  myfranchise: {
-    title: "MyFranchise Impact Fund",
-    description: "Financial statements for your franchise investments",
-    accountant: "Chris Williams CA(SA)",
-    company: "MyFranchise Investments"
-  },
-  myfuel: {
-    title: "MyFuel Impact Fund",
-    description: "Financial statements for your investments in fuel stations",
-    accountant: "Thabo Molefe CA(SA)",
-    company: "MyFuel Stations"
-  },
-  myschool: {
-    title: "MySchool Impact Fund",
-    description: "Financial statements for your investments in education facilities",
-    accountant: "Emily Johnson CA(SA)",
-    company: "MySchool Investments"
-  },
-  myhealth: {
-    title: "MyHealth Impact Fund",
-    description: "Financial statements for your investments in healthcare sector",
-    accountant: "Dr. Samuel Motau CA(SA)",
-    company: "MyHealth Solutions"
-  },
-  myeducation: {
-    title: "MyEducation Impact Fund",
-    description: "Financial statements for your investments in educational development",
-    accountant: "Rose Naidoo CA(SA)",
-    company: "MyEducation Fund"
   }
+  // Funds beyond MyTelco removed for dropdown (per user request)
 };
 
 const periods = [
@@ -85,7 +57,6 @@ const periods = [
   "Annual 2023"
 ];
 
-// Keys for pill menu
 const fundKeys = Object.keys(fundsData);
 
 const UserStatements = () => {
@@ -103,28 +74,23 @@ const UserStatements = () => {
       <div className="space-y-4 md:space-y-6">
         <h2 className="text-2xl font-bold text-navyblue">Financial Statements</h2>
         <p className="text-muted-foreground text-base">
-          Access all your financial statements and documents related to your investments in our impact funds.
+          Access all your financial statements and documents related to your investments in our funds.
         </p>
-        {/* Fund selector as pills - horizontally scrollable */}
-        <div className="w-full overflow-x-auto py-2">
-          <div className="flex space-x-2 min-w-max">
-            {fundKeys.map((key) => (
-              <button
-                key={key}
-                onClick={() => setSelectedFund(key)}
-                className={`whitespace-nowrap px-3 py-2 rounded-full transition 
-                  text-sm font-medium shadow-none 
-                  ${selectedFund === key 
-                    ? "bg-white border border-navyblue text-navyblue" 
-                    : "bg-muted text-gray-700 hover:bg-gray-200 border border-transparent"}`}
-                style={{ minWidth: 120 }}
-              >
-                {fundsData[key as keyof typeof fundsData].title}
-              </button>
-            ))}
-          </div>
+        {/* Dropdown menu for fund selection */}
+        <div className="w-full max-w-xs py-2">
+          <Select value={selectedFund} onValueChange={setSelectedFund}>
+            <SelectTrigger>
+              <SelectValue placeholder="Select Fund" />
+            </SelectTrigger>
+            <SelectContent>
+              {fundKeys.map((key) => (
+                <SelectItem key={key} value={key}>
+                  {fundsData[key as keyof typeof fundsData].title}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
-
         <Card className="p-0 w-full max-w-2xl mx-auto">
           <CardHeader className="pb-2 pt-4 px-4">
             <CardTitle className="!text-lg !font-bold">
@@ -173,3 +139,4 @@ const UserStatements = () => {
 };
 
 export default UserStatements;
+
