@@ -97,6 +97,34 @@ const impactFunds = [
         minInvestment: 5000,
       }
     ],
+  },
+  {
+    id: "myenergy",
+    name: "MyEnergy Impact Fund",
+    return: "13% p.a.",
+    minInvestment: 3000,
+    businesses: []
+  },
+  {
+    id: "myhealth",
+    name: "MyHealth Impact Fund",
+    return: "11% p.a.",
+    minInvestment: 2500,
+    businesses: []
+  },
+  {
+    id: "mytech",
+    name: "MyTech Impact Fund",
+    return: "16% p.a.",
+    minInvestment: 4000,
+    businesses: []
+  },
+  {
+    id: "myeducation",
+    name: "MyEducation Impact Fund",
+    return: "10% p.a.",
+    minInvestment: 1500,
+    businesses: []
   }
 ];
 
@@ -145,11 +173,7 @@ const UserNewDeals = () => {
   };
 
   const toggleBusinessExpansion = (businessId: string) => {
-    if (expandedBusinessId === businessId) {
-      setExpandedBusinessId(null);
-    } else {
-      setExpandedBusinessId(businessId);
-    }
+    setExpandedBusinessId(expandedBusinessId === businessId ? null : businessId);
   };
 
   const handleAddToCart = (business: any, fundName: string, amount = business.minInvestment) => {
@@ -217,12 +241,9 @@ const UserNewDeals = () => {
 
   const isMobile = useIsMobile();
 
-  const currentFund = impactFunds.find(fund => fund.id === activeTab);
-
   return (
     <UserLayout>
       <div className="max-w-4xl mx-auto px-4 py-6 space-y-8">
-        {/* Header with wallet and cart */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <h2 className="text-2xl font-bold text-navyblue">Business Opportunities</h2>
@@ -251,7 +272,6 @@ const UserNewDeals = () => {
           </div>
         </div>
         
-        {/* How it works explanation */}
         <div className="bg-blue-50 rounded-lg p-5 max-w-2xl mx-auto">
           <p className="font-medium text-navyblue mb-1">How it works:</p>
           <p className="text-muted-foreground">
@@ -261,7 +281,6 @@ const UserNewDeals = () => {
           </p>
         </div>
 
-        {/* Fund Selection */}
         <div className="max-w-2xl mx-auto">
           {isMobile ? (
             <div className="mb-6">
@@ -280,37 +299,43 @@ const UserNewDeals = () => {
             />
           )}
           
-          {/* Fund Info Box */}
-          {currentFund && (
-            <div className="mb-8 p-4 rounded-lg border border-navyblue/20 bg-white flex flex-col sm:flex-row sm:justify-between gap-3">
-              <div>
-                <h3 className="text-lg font-semibold text-navyblue">{currentFund.name}</h3>
-                <p className="text-sm text-muted-foreground">
-                  Min. Investment: <span className="font-medium">R {currentFund.minInvestment.toLocaleString()}</span>
-                </p>
+          <div className="space-y-10 max-w-3xl mx-auto">
+            {impactFunds.map((fund) => (
+              <div key={fund.id} className="border border-navyblue/10 rounded-lg p-4 bg-white">
+                <div className="flex flex-col sm:flex-row sm:justify-between gap-3 mb-3">
+                  <div>
+                    <h3 className="text-lg font-semibold text-navyblue">{fund.name}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Min. Investment: <span className="font-medium">R {fund.minInvestment.toLocaleString()}</span>
+                    </p>
+                  </div>
+                  <div className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium self-start">
+                    {fund.return}
+                  </div>
+                </div>
+                {fund.businesses.length > 0 ? (
+                  <div className="grid gap-6">
+                    {fund.businesses.map(business => (
+                      <BusinessCard
+                        key={business.id}
+                        business={business}
+                        expanded={expandedBusinessId === business.id}
+                        fundName={fund.name}
+                        onToggle={toggleBusinessExpansion}
+                        onAddToCart={(biz, fname) => handleAddToCart(biz, fname)}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="px-2 py-6 text-gray-400 text-center italic border border-dashed border-gray-200 bg-gray-50 rounded">
+                    Currently No Opportunities
+                  </div>
+                )}
               </div>
-              <div className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium self-start">
-                {currentFund.return}
-              </div>
-            </div>
-          )}
+            ))}
+          </div>
         </div>
 
-        {/* Business Cards */}
-        <div className="grid gap-6 max-w-3xl mx-auto">
-          {currentFund?.businesses.map(business => (
-            <BusinessCard
-              key={business.id}
-              business={business}
-              expanded={expandedBusinessId === business.id}
-              fundName={currentFund.name}
-              onToggle={toggleBusinessExpansion}
-              onAddToCart={(biz, fname) => handleAddToCart(biz, fname)}
-            />
-          ))}
-        </div>
-
-        {/* Investment Cart Dialog */}
         <InvestmentCart
           open={isCartOpen}
           onOpenChange={setIsCartOpen}
