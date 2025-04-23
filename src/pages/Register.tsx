@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Checkbox } from "@/components/ui/checkbox";
+import { supabase } from "@/integrations/supabase/client";
 import { sendNotification, NotificationRecipient } from "@/utils/notificationService";
 
 const Register = () => {
@@ -34,27 +35,44 @@ const Register = () => {
     setIsLoading(true);
     
     try {
-      // This is a mock registration - in a real app, you would register with a backend
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Send welcome notification
-      const recipient: NotificationRecipient = {
-        fullName,
+      // Register with Supabase
+      const { data: authData, error: authError } = await supabase.auth.signUp({
         email,
-      };
+        password,
+        options: {
+          data: {
+            full_name: fullName,
+          }
+        }
+      });
       
-      await sendNotification(
-        recipient,
-        'welcome',
-        ['email'],
-        {}
-      );
+      if (authError) throw authError;
+
+      if (authData.user) {
+        // Send welcome notification
+        const recipient: NotificationRecipient = {
+          fullName,
+          email,
+        };
+        
+        try {
+          await sendNotification(
+            recipient,
+            'welcome',
+            ['email'],
+            {}
+          );
+        } catch (notificationError) {
+          console.error("Failed to send welcome notification:", notificationError);
+          // Don't throw here - we still want to complete registration even if notification fails
+        }
+      }
       
-      toast.success("Registration successful! Please log in.");
+      toast.success("Registration successful! Please check your email to verify your account.");
       navigate("/login");
-    } catch (error) {
+    } catch (error: any) {
       console.error("Registration error:", error);
-      toast.error("Registration failed");
+      toast.error(error.message);
     } finally {
       setIsLoading(false);
     }
