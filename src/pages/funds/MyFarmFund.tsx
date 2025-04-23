@@ -1,7 +1,6 @@
-
 import React from "react";
 import FundEducationalPage from "@/components/funds/FundEducationalPage";
-import { users, briefcase, banknote, fileText, chartBar } from "lucide-react";
+import { Users, Briefcase, Banknote, FileText, ChartBar } from "lucide-react";
 
 const MyFarmFund = () => {
   return (
@@ -67,4 +66,3 @@ const MyFarmFund = () => {
 };
 
 export default MyFarmFund;
-
