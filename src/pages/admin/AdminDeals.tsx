@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import AdminLayout from "@/components/layout/AdminLayout";
 import { Button } from "@/components/ui/button";
@@ -13,7 +12,6 @@ import { Label } from "@/components/ui/label";
 import { FilePlus, FileText, Users, Check, AlertCircle, ChevronDown, ChevronUp } from "lucide-react";
 import { toast } from "sonner";
 
-// Mock deal data
 const mockDeals = [
   { 
     id: 1, 
@@ -113,7 +111,6 @@ const mockDeals = [
   }
 ];
 
-// Funds for dropdown
 const funds = [
   "MyFarm Impact Fund",
   "MyProperty Impact Fund",
@@ -137,7 +134,6 @@ const AdminDeals = () => {
   const [showProspectusDialog, setShowProspectusDialog] = useState(false);
   const [expandedDealId, setExpandedDealId] = useState<number | null>(null);
   
-  // New deal form state
   const [newDeal, setNewDeal] = useState({
     name: "",
     fund: "",
@@ -146,7 +142,6 @@ const AdminDeals = () => {
     description: ""
   });
   
-  // Company registration form state
   const [companyRegistration, setCompanyRegistration] = useState({
     companyName: "",
     regNumber: "",
@@ -155,7 +150,6 @@ const AdminDeals = () => {
     sharePrice: ""
   });
   
-  // Prospectus form state
   const [prospectus, setProspectus] = useState({
     title: "",
     summary: "",
@@ -163,7 +157,6 @@ const AdminDeals = () => {
     financialProjections: ""
   });
   
-  // Filter deals based on search term
   const filteredDeals = deals.filter(
     (deal) =>
       deal.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -171,14 +164,25 @@ const AdminDeals = () => {
       deal.location.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const checkDealProgress = (deal) => {
+    if (deal.progress === 100 && (!deal.companyRegistered || !deal.prospectusIssued)) {
+      const emailContent = `Deal "${deal.name}" has reached 100% completion and requires further processing:
+      ${!deal.companyRegistered ? '- Company registration needed\n' : ''}
+      ${!deal.prospectusIssued ? '- Prospectus lodgement needed\n' : ''}`;
+
+      toast.info("Notification emails will be sent to administrators and users");
+      console.log("Would send email to:", "info@madunacas.com");
+      console.log("Would send email to user accounts");
+      console.log("Email content:", emailContent);
+    }
+  };
+
   const handleNewDealSubmit = () => {
-    // Validation
     if (!newDeal.name || !newDeal.fund || !newDeal.value || !newDeal.location || !newDeal.description) {
       toast.error("Please fill all fields");
       return;
     }
 
-    // Add new deal
     const id = deals.length > 0 ? Math.max(...deals.map(d => d.id)) + 1 : 1;
     const deal = {
       id,
@@ -195,9 +199,10 @@ const AdminDeals = () => {
     
     setDeals([...deals, deal]);
     setShowNewDealDialog(false);
-    toast.success("New investment opportunity created");
+    toast.success("New business opportunity created");
     
-    // Reset form
+    checkDealProgress(deal);
+    
     setNewDeal({
       name: "",
       fund: "",
@@ -208,7 +213,6 @@ const AdminDeals = () => {
   };
 
   const handleRegisterCompany = () => {
-    // Validation
     if (!companyRegistration.companyName || !companyRegistration.regNumber || 
         !companyRegistration.directors || !companyRegistration.shareCount || 
         !companyRegistration.sharePrice) {
@@ -216,7 +220,6 @@ const AdminDeals = () => {
       return;
     }
     
-    // Update deal with company registration
     if (selectedDeal) {
       const updatedDeals = deals.map(deal => {
         if (deal.id === selectedDeal.id) {
@@ -229,7 +232,6 @@ const AdminDeals = () => {
       setShowCompanyRegistrationDialog(false);
       toast.success(`Company "${companyRegistration.companyName}" registered for ${selectedDeal.name}`);
       
-      // Reset form
       setCompanyRegistration({
         companyName: "",
         regNumber: "",
@@ -242,13 +244,11 @@ const AdminDeals = () => {
   };
 
   const handleIssueProspectus = () => {
-    // Validation
     if (!prospectus.title || !prospectus.summary || !prospectus.riskDisclosures) {
       toast.error("Please fill all required fields");
       return;
     }
     
-    // Update deal with prospectus
     if (selectedDeal) {
       const updatedDeals = deals.map(deal => {
         if (deal.id === selectedDeal.id) {
@@ -262,7 +262,6 @@ const AdminDeals = () => {
       toast.success(`Prospectus issued for ${selectedDeal.name}`);
       toast.success("Investors notified about the prospectus");
       
-      // Reset form
       setProspectus({
         title: "",
         summary: "",
@@ -285,19 +284,19 @@ const AdminDeals = () => {
     <AdminLayout>
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <h2 className="text-2xl font-bold text-navyblue">Deal Management</h2>
+          <h2 className="text-2xl font-bold text-navyblue">Business Management</h2>
           <Button 
             className="bg-gold hover:bg-lightgold flex gap-2"
             onClick={() => setShowNewDealDialog(true)}
           >
             <FilePlus className="h-4 w-4" />
-            <span>Create New Deal</span>
+            <span>Create New Business</span>
           </Button>
         </div>
 
         <Card>
           <CardHeader>
-            <CardTitle>All Deals</CardTitle>
+            <CardTitle>All Business Opportunities</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex justify-between mb-4">
@@ -311,9 +310,9 @@ const AdminDeals = () => {
             
             <Tabs defaultValue="all">
               <TabsList>
-                <TabsTrigger value="all">All Deals</TabsTrigger>
-                <TabsTrigger value="pending">Pending</TabsTrigger>
-                <TabsTrigger value="active">Active</TabsTrigger>
+                <TabsTrigger value="all">All Business Opportunities</TabsTrigger>
+                <TabsTrigger value="pending">Pending Businesses</TabsTrigger>
+                <TabsTrigger value="active">Active Businesses</TabsTrigger>
                 <TabsTrigger value="needsAction">Needs Action</TabsTrigger>
               </TabsList>
               
@@ -444,7 +443,6 @@ const AdminDeals = () => {
               <TabsContent value="pending">
                 <div className="rounded-md border">
                   <Table>
-                    {/* Similar table structure filtered for pending deals */}
                     <TableHeader>
                       <TableRow>
                         <TableHead>Name</TableHead>
@@ -490,7 +488,6 @@ const AdminDeals = () => {
               <TabsContent value="active">
                 <div className="rounded-md border">
                   <Table>
-                    {/* Similar table structure filtered for active deals */}
                     <TableHeader>
                       <TableRow>
                         <TableHead>Name</TableHead>
@@ -575,11 +572,10 @@ const AdminDeals = () => {
         </Card>
       </div>
       
-      {/* New Deal Dialog */}
       <Dialog open={showNewDealDialog} onOpenChange={setShowNewDealDialog}>
         <DialogContent className="max-w-md">
           <DialogHeader>
-            <DialogTitle>Create New Investment Opportunity</DialogTitle>
+            <DialogTitle>Create New Business Opportunity</DialogTitle>
           </DialogHeader>
           
           <div className="space-y-4 py-2">
@@ -650,7 +646,6 @@ const AdminDeals = () => {
         </DialogContent>
       </Dialog>
       
-      {/* Company Registration Dialog */}
       <Dialog open={showCompanyRegistrationDialog} onOpenChange={setShowCompanyRegistrationDialog}>
         <DialogContent className="max-w-lg">
           <DialogHeader>
@@ -725,7 +720,6 @@ const AdminDeals = () => {
         </DialogContent>
       </Dialog>
       
-      {/* Prospectus Issuance Dialog */}
       <Dialog open={showProspectusDialog} onOpenChange={setShowProspectusDialog}>
         <DialogContent className="max-w-lg">
           <DialogHeader>
