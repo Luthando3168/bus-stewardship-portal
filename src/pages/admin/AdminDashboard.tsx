@@ -29,20 +29,63 @@ const AdminDashboard = () => {
       investorsList: [
         { name: "John Dube", shares: 150, percentage: "15%" },
         { name: "Sarah Smith", shares: 100, percentage: "10%" },
-        // ... additional investors would be fetched from actual data
       ]
     },
-    // ... keep existing code (additional businesses)
+    {
+      name: "Urban Farming Initiative",
+      fund: "MyFarm Impact Fund",
+      nav: 1800000,
+      investors: 12,
+      status: "Active",
+      investorsList: [
+        { name: "Peter Jones", shares: 120, percentage: "12%" },
+        { name: "Mary Johnson", shares: 80, percentage: "8%" },
+      ]
+    },
+    {
+      name: "Solar Power Plant",
+      fund: "MyEnergy Impact Fund",
+      nav: 3200000,
+      investors: 22,
+      status: "Active",
+      investorsList: [
+        { name: "David Brown", shares: 200, percentage: "20%" },
+        { name: "Lisa Anderson", shares: 150, percentage: "15%" },
+      ]
+    }
+  ];
+
+  const impactFunds = [
+    {
+      name: "MyFarm Impact Fund",
+      aum: 1800000,
+      yield: "8.2%",
+      activeBusinesses: 1
+    },
+    {
+      name: "MyProperty Impact Fund",
+      aum: 2400000,
+      yield: "9.5%",
+      activeBusinesses: 1
+    },
+    {
+      name: "MyEnergy Impact Fund",
+      aum: 3200000,
+      yield: "11.2%",
+      activeBusinesses: 1
+    }
   ];
   
-  // Calculate total NAV
-  const totalNAV = useMemo(() => {
+  // Calculate total NAV/AUM
+  const totalAUM = useMemo(() => {
     return businesses.reduce((sum, business) => sum + business.nav, 0);
   }, [businesses]);
   
-  // Format NAV to millions with one decimal place
-  const formatNAVInMillions = (nav: number) => {
-    return `R ${(nav / 1000000).toFixed(1)}M`;
+  const totalActiveBusinesses = businesses.length;
+  
+  // Format currency to millions with one decimal place
+  const formatInMillions = (amount: number) => {
+    return `R ${(amount / 1000000).toFixed(1)}M`;
   };
 
   // Function to export investors list in PDF or Excel format
@@ -153,9 +196,9 @@ const AdminDashboard = () => {
               <FileChartLine className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">32</div>
+              <div className="text-2xl font-bold">{totalActiveBusinesses}</div>
               <p className="text-xs text-muted-foreground">
-                +4 businesses added this week
+                Across {impactFunds.length} impact funds
               </p>
             </CardContent>
           </Card>
@@ -165,7 +208,7 @@ const AdminDashboard = () => {
               <DollarSign className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{formatNAVInMillions(totalNAV)}</div>
+              <div className="text-2xl font-bold">{formatInMillions(totalAUM)}</div>
               <p className="text-xs text-muted-foreground">
                 +5.2% from last month
               </p>
@@ -203,7 +246,7 @@ const AdminDashboard = () => {
                           >
                             <div>{business.name}</div>
                             <div>{business.fund}</div>
-                            <div>{formatNAVInMillions(business.nav)}</div>
+                            <div>{formatInMillions(business.nav)}</div>
                             <div>{business.investors}</div>
                             <div className="text-green-600">{business.status}</div>
                           </div>
@@ -269,27 +312,17 @@ const AdminDashboard = () => {
                     <div>Fund Name</div>
                     <div>AUM</div>
                     <div>Current Yield</div>
-                    <div>Active Deals</div>
+                    <div>Active Businesses</div>
                   </div>
                   <div className="divide-y">
-                    <div className="grid grid-cols-1 md:grid-cols-4 p-4">
-                      <div>Sankofa Agri Impact Fund</div>
-                      <div>R 3.8M</div>
-                      <div>8.2%</div>
-                      <div>8</div>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-4 p-4">
-                      <div>Sankofa Property Impact Fund</div>
-                      <div>R 6.2M</div>
-                      <div>9.5%</div>
-                      <div>12</div>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-4 p-4">
-                      <div>Sankofa Energy Impact Fund</div>
-                      <div>R 4.2M</div>
-                      <div>11.2%</div>
-                      <div>12</div>
-                    </div>
+                    {impactFunds.map((fund) => (
+                      <div key={fund.name} className="grid grid-cols-1 md:grid-cols-4 p-4">
+                        <div>{fund.name}</div>
+                        <div>{formatInMillions(fund.aum)}</div>
+                        <div>{fund.yield}</div>
+                        <div>{fund.activeBusinesses}</div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </CardContent>
