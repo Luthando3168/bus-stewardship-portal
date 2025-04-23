@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
@@ -79,23 +80,23 @@ const Footer = () => {
             <h4 className="font-montserrat font-semibold text-md mb-4">Impact Funds</h4>
             <ul className="space-y-2">
               <li>
-                <Link to="/impact-funds#agri" className="font-lato text-sm text-gray-300 hover:text-gold transition-colors">
-                  Sankofa Agri Impact Fund
+                <Link to="/impact-funds#myfarm" className="font-lato text-sm text-gray-300 hover:text-gold transition-colors">
+                  MyFarm Impact Fund
                 </Link>
               </li>
               <li>
-                <Link to="/impact-funds#property" className="font-lato text-sm text-gray-300 hover:text-gold transition-colors">
-                  Sankofa Property Impact Fund
+                <Link to="/impact-funds#myproperty" className="font-lato text-sm text-gray-300 hover:text-gold transition-colors">
+                  MyProperty Impact Fund
                 </Link>
               </li>
               <li>
-                <Link to="/impact-funds#energy" className="font-lato text-sm text-gray-300 hover:text-gold transition-colors">
-                  Sankofa Energy Impact Fund
+                <Link to="/impact-funds#myfranchise" className="font-lato text-sm text-gray-300 hover:text-gold transition-colors">
+                  MyFranchise Impact Fund
                 </Link>
               </li>
               <li>
-                <Link to="/impact-funds#enterprise" className="font-lato text-sm text-gray-300 hover:text-gold transition-colors">
-                  Sankofa Enterprise Impact Fund
+                <Link to="/impact-funds" className="font-lato text-sm text-gold hover:underline transition-colors font-semibold">
+                  View All Impact Funds
                 </Link>
               </li>
               <li>
@@ -139,8 +140,8 @@ const Footer = () => {
                 </a>
               </p>
               <p className="font-lato text-sm text-gray-300 mb-2">
-                <a href="mailto:info@luthandoms.co.za" className="hover:text-gold transition-colors">
-                  info@luthandoms.co.za
+                <a href="mailto:info@madunacas.com" className="hover:text-gold transition-colors">
+                  info@madunacas.com
                 </a>
               </p>
             </address>
@@ -217,3 +218,4 @@ const Footer = () => {
 };
 
 export default Footer;
+
