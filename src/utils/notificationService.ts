@@ -1,4 +1,3 @@
-
 import { toast } from "sonner";
 
 // Define notification types for consistent messaging
@@ -29,90 +28,128 @@ export interface NotificationRecipient {
   phone?: string;
 }
 
+// HTML email wrapper with logo and branding
+const emailWrapper = (content: string) => `
+  <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+    <div style="text-align: center; margin-bottom: 20px;">
+      <img src="/lovable-uploads/4f2d889e-ba23-463a-9efe-bc8453a5e5b2.png" alt="Luthando Maduna CA" style="max-width: 200px; height: auto;" />
+    </div>
+    <div style="background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+      ${content}
+    </div>
+    <div style="text-align: center; margin-top: 20px; color: #666666; font-size: 12px;">
+      <p>© ${new Date().getFullYear()} Luthando Maduna Chartered Accountants. All rights reserved.</p>
+    </div>
+  </div>
+`;
+
 // Template library for all notifications
 const templates: Record<NotificationType, NotificationTemplate> = {
   welcome: {
     subject: "Welcome to Luthando Maduna Chartered Accountants",
-    body: `
+    body: emailWrapper(`
       <p>Dear {fullName},</p>
       <p>Welcome to Luthando Maduna Chartered Accountants! Your account has been created successfully.</p>
       <p>You can now log in to access your investment opportunities and manage your portfolio.</p>
       <p>Please complete your profile information to get personalized investment recommendations.</p>
       <p>If you need any assistance, please don't hesitate to contact our support team.</p>
       <p>Best regards,<br>The MCA Team</p>
-    `,
+    `),
     whatsappBody: "Welcome to Luthando Maduna Chartered Accountants, {fullName}! Your account has been created successfully. You can now log in to access your investment opportunities and manage your portfolio."
   },
   profile_update: {
     subject: "Your MCA Profile Has Been Updated",
-    body: `
+    body: emailWrapper(`
       <p>Dear {fullName},</p>
       <p>This is to confirm that your profile information has been updated.</p>
       <p>If you did not make these changes, please contact our support team immediately.</p>
       <p>Best regards,<br>The MCA Team</p>
-    `,
+    `),
     whatsappBody: "Hello {fullName}, your MCA profile has been updated. If you did not make these changes, please contact our support team immediately."
   },
   deal_approved: {
-    subject: "Your Investment Has Been Approved",
-    body: `
+    subject: "Investment Opportunity Approved - {dealName}",
+    body: emailWrapper(`
       <p>Dear {fullName},</p>
       <p>Great news! Your investment in {dealName} has been approved.</p>
-      <p>You can view the details in your investment dashboard.</p>
-      <p>Thank you for investing with MCA.</p>
+      <p>Next Steps:</p>
+      <ul>
+        <li>Review the full investment details in your dashboard</li>
+        <li>Complete any remaining documentation</li>
+        <li>Track your investment performance</li>
+      </ul>
+      <p>If you have any questions about your investment, please don't hesitate to reach out.</p>
       <p>Best regards,<br>The MCA Team</p>
-    `,
-    whatsappBody: "Good news, {fullName}! Your investment in {dealName} has been approved. You can view the details in your investment dashboard."
+    `),
+    whatsappBody: "Good news, {fullName}! Your investment in {dealName} has been approved. Please check your email for detailed information."
   },
   deal_pending: {
-    subject: "Your Investment is Pending",
-    body: `
+    subject: "Investment Under Review - {dealName}",
+    body: emailWrapper(`
       <p>Dear {fullName},</p>
-      <p>Your investment in {dealName} is currently pending approval.</p>
-      <p>You will be notified once the approval process is complete.</p>
+      <p>Your investment application for {dealName} is currently under review.</p>
+      <p>Our team is carefully evaluating your application. We will notify you of any updates or if additional information is required.</p>
+      <p>Expected review time: 2-3 business days</p>
       <p>Best regards,<br>The MCA Team</p>
-    `,
-    whatsappBody: "Hello {fullName}, your investment in {dealName} is currently pending approval. You will be notified once the approval process is complete."
+    `),
+    whatsappBody: "Hello {fullName}, your investment in {dealName} is under review. We'll notify you once the review is complete."
   },
   deal_completed: {
-    subject: "Investment Deal Completed",
-    body: `
+    subject: "Investment Successfully Completed - {dealName}",
+    body: emailWrapper(`
       <p>Dear {fullName},</p>
-      <p>Congratulations! The investment deal {dealName} has been successfully completed.</p>
-      <p>You can view the details and documents in your investment dashboard.</p>
+      <p>Congratulations! Your investment in {dealName} has been successfully completed.</p>
+      <p>Important Information:</p>
+      <ul>
+        <li>Investment Amount: R{amount}</li>
+        <li>Transaction Date: {date}</li>
+        <li>Share Certificate Number: {certificateNumber}</li>
+      </ul>
+      <p>You can view your investment details and download your share certificate from your dashboard.</p>
       <p>Best regards,<br>The MCA Team</p>
-    `,
-    whatsappBody: "Congratulations, {fullName}! The investment deal {dealName} has been successfully completed. You can view the details and documents in your investment dashboard."
+    `),
+    whatsappBody: "Congratulations, {fullName}! Your investment in {dealName} has been successfully completed. Please check your email for important details."
   },
   new_opportunity: {
-    subject: "New Investment Opportunity Available",
-    body: `
+    subject: "New Investment Opportunity - {dealName}",
+    body: emailWrapper(`
       <p>Dear {fullName},</p>
-      <p>We have a new investment opportunity that might interest you: {dealName}.</p>
-      <p>Log in to your dashboard to learn more and invest.</p>
+      <p>We're excited to present a new investment opportunity that matches your interests: {dealName}</p>
+      <p>Key Highlights:</p>
+      <ul>
+        <li>Investment Type: {investmentType}</li>
+        <li>Expected Returns: {returns}</li>
+        <li>Minimum Investment: R{minimumAmount}</li>
+      </ul>
+      <p>Don't miss out on this opportunity. Log in to your dashboard to learn more and invest.</p>
       <p>Best regards,<br>The MCA Team</p>
-    `,
+    `),
     whatsappBody: "Hello {fullName}, we have a new investment opportunity that might interest you: {dealName}. Log in to your dashboard to learn more and invest."
   },
   document_uploaded: {
-    subject: "New Document Available",
-    body: `
+    subject: "New Document Available - {documentName}",
+    body: emailWrapper(`
       <p>Dear {fullName},</p>
       <p>A new document ({documentName}) has been uploaded to your account.</p>
-      <p>Log in to your dashboard to view and download it.</p>
+      <p>You can access this document by:</p>
+      <ol>
+        <li>Logging into your account</li>
+        <li>Visiting the Documents section</li>
+        <li>Downloading the file named "{documentName}"</li>
+      </ol>
       <p>Best regards,<br>The MCA Team</p>
-    `,
+    `),
     whatsappBody: "Hello {fullName}, a new document ({documentName}) has been uploaded to your account. Log in to your dashboard to view and download it."
   },
   password_reset: {
     subject: "Password Reset Request",
-    body: `
+    body: emailWrapper(`
       <p>Dear {fullName},</p>
       <p>We received a request to reset your password. Click the link below to set a new password:</p>
-      <p><a href="{resetLink}">Reset Password</a></p>
+      <p><a href="{resetLink}" style="display: inline-block; background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Reset Password</a></p>
       <p>If you did not request this change, please ignore this email or contact our support team.</p>
       <p>Best regards,<br>The MCA Team</p>
-    `,
+    `),
     whatsappBody: "Hello {fullName}, we received a request to reset your password. Please check your email for instructions or contact our support team if you did not request this change."
   },
 };
