@@ -11,66 +11,73 @@ const funds = [
     id: "myfarm",
     name: "MyFarm Impact Fund",
     brief: "Sustainable agriculture and farming for food security and rural economic growth.",
-    image: "https://images.unsplash.com/photo-1516706578602-8acb51c21ba5?auto=format&fit=crop&w=1200&q=80", // Detailed farm scene with crops and machinery
+    image: "https://images.unsplash.com/photo-1628352081506-83c43123ed6d?auto=format&fit=crop&w=1200&q=80",
     returnPercentage: 12,
     minInvestment: 1000,
+    bgGradient: "from-green-700 to-green-900",
   },
   {
     id: "myproperty",
     name: "MyProperty Impact Fund",
     brief: "Affordable housing and community-focused property for social development.",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80", // Modern affordable housing complex
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
     returnPercentage: 10,
     minInvestment: 2000,
+    bgGradient: "from-blue-700 to-blue-900",
   },
   {
     id: "myfoodretail",
     name: "MyFoodRetail Impact Fund",
     brief: "Investing in food retail businesses to improve food distribution and access.",
-    image: "https://images.unsplash.com/photo-1665686306574-1ace09918ffd?auto=format&fit=crop&w=1200&q=80", // Modern grocery store interior with fresh produce
+    image: "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&w=1200&q=80",
     returnPercentage: 15,
     minInvestment: 5000,
+    bgGradient: "from-yellow-600 to-yellow-800",
   },
   {
     id: "myfranchise",
     name: "MyFranchise Impact Fund",
     brief: "Backing franchises to create jobs and support business ownership.",
-    image: "https://images.unsplash.com/photo-1661686645638-7131fd68a724?auto=format&fit=crop&w=1200&q=80", // Business people shaking hands, franchise concept
+    image: "https://images.unsplash.com/photo-1532938911079-1b06ac7cedf7?auto=format&fit=crop&w=1200&q=80",
     returnPercentage: 14,
     minInvestment: 1500,
+    bgGradient: "from-red-600 to-red-800",
   },
-  // Additional Funds
   {
     id: "myenergy",
     name: "MyEnergy Impact Fund",
     brief: "Renewable energy investments driving sustainable power solutions.",
-    image: "https://images.unsplash.com/photo-1519710164239-da123dc03672?auto=format&fit=crop&w=1200&q=80", // Solar panels or wind turbines
+    image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1200&q=80",
     returnPercentage: 13,
     minInvestment: 3000,
+    bgGradient: "from-orange-600 to-amber-900",
   },
   {
     id: "myhealth",
     name: "MyHealth Impact Fund",
     brief: "Healthcare and medical technology investments improving community wellness.",
-    image: "https://images.unsplash.com/photo-1532938911079-1b06ac7cedf7?auto=format&fit=crop&w=1200&q=80", // Modern medical facility or healthcare technology
+    image: "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=1200&q=80",
     returnPercentage: 11,
     minInvestment: 2500,
+    bgGradient: "from-pink-600 to-pink-900",
   },
   {
     id: "mytech",
-    name: "MyTech Impact Fund",
+    name: "MyTelecoms Impact Fund",
     brief: "Innovative technology solutions driving digital transformation.",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80", // Tech startup or innovation lab
+    image: "https://images.unsplash.com/photo-1562408590-e32931084e23?auto=format&fit=crop&w=1200&q=80",
     returnPercentage: 16,
     minInvestment: 4000,
+    bgGradient: "from-purple-600 to-violet-900",
   },
   {
     id: "myeducation",
-    name: "MyEducation Impact Fund",
+    name: "MySchool Impact Fund",
     brief: "Educational initiatives and skill development programs.",
-    image: "https://images.unsplash.com/photo-1541692641319-81bc2bdf9f2a?auto=format&fit=crop&w=1200&q=80", // Modern classroom or educational technology
+    image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=80",
     returnPercentage: 10,
     minInvestment: 1500,
+    bgGradient: "from-indigo-700 to-indigo-900",
   }
 ];
 
@@ -113,15 +120,17 @@ const ImpactFunds = () => {
             {funds.map(fund => (
               <div
                 key={fund.id}
-                className="flex flex-col items-center bg-gradient-to-br from-blue-700 to-blue-900 rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-200"
+                className="flex flex-col items-center bg-white rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-200"
               >
-                <img
-                  src={fund.image}
-                  alt={fund.name}
-                  className="w-full h-44 object-cover"
-                  style={{ borderBottom: '2px solid #144671' }}
-                />
-                <div className="p-6 flex-1 flex flex-col justify-between w-full">
+                <div className="relative w-full h-48">
+                  <img
+                    src={fund.image}
+                    alt={fund.name}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${fund.bgGradient} opacity-60`}></div>
+                </div>
+                <div className="p-6 flex-1 flex flex-col justify-between w-full bg-gradient-to-br from-blue-700 to-blue-900">
                   <div>
                     <h3 className="font-montserrat font-bold text-2xl text-white mb-1">{fund.name}</h3>
                     <p className="font-lato text-gray-200 mb-3">{fund.brief}</p>
@@ -165,3 +174,4 @@ const ImpactFunds = () => {
 };
 
 export default ImpactFunds;
+
