@@ -1,9 +1,7 @@
-
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
 
-// Define the impact funds data structure
 const funds = [
   {
     name: "MyFarm Impact Fund",
@@ -62,9 +60,102 @@ const ImpactFunds = () => {
         <div className="container mx-auto px-4">
           <SectionTitle 
             title="Impact Funds" 
-            subtitle="Explore our curated selection of impact funds designed to create meaningful change while delivering returns."
+            subtitle="A simple way to own businesses that make a difference in your community"
             centered
           />
+          
+          <div className="max-w-3xl mx-auto mb-16 bg-white rounded-lg p-8 shadow-md">
+            <h3 className="text-2xl font-bold text-navyblue mb-6">Understanding Business Ownership</h3>
+            
+            <div className="space-y-6 text-gray-700">
+              <p>
+                When you invest in our Impact Funds, you become a real business owner. This means:
+              </p>
+              
+              <ul className="list-disc pl-6 space-y-3">
+                <li>You own actual businesses, not just shares on an app</li>
+                <li>You receive regular updates about how your businesses are performing</li>
+                <li>Your money grows as the businesses grow</li>
+                <li>You don't have to manage anything - we handle all the work</li>
+              </ul>
+
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <p className="font-medium text-navyblue">
+                  "Think of it like owning a house but having a trusted property manager handle everything for you."
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="max-w-3xl mx-auto mb-16 bg-white rounded-lg p-8 shadow-md">
+            <h3 className="text-2xl font-bold text-navyblue mb-6">Professional Support at No Extra Cost</h3>
+            
+            <div className="space-y-6 text-gray-700">
+              <p>
+                As a business owner through our platform, you get access to:
+              </p>
+              
+              <ul className="list-disc pl-6 space-y-3">
+                <li>Professional accountants who manage your business finances</li>
+                <li>Banking relationships that help your business grow</li>
+                <li>Expert business managers who run daily operations</li>
+                <li>Regular financial reports in simple, easy-to-understand language</li>
+              </ul>
+
+              <div className="bg-amber-50 p-4 rounded-lg">
+                <p className="font-medium text-navyblue">
+                  We take our fees from the business operations, not from your pocket. Our success depends on making your businesses successful.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="max-w-3xl mx-auto mb-16 bg-white rounded-lg p-8 shadow-md">
+            <h3 className="text-2xl font-bold text-navyblue mb-6">How You Make Money</h3>
+            
+            <div className="space-y-6 text-gray-700">
+              <p>
+                Your businesses make money in simple, understandable ways:
+              </p>
+              
+              <ul className="list-disc pl-6 space-y-3">
+                <li>Food businesses make money from selling food and drinks</li>
+                <li>Property businesses earn rent from tenants</li>
+                <li>Franchise businesses profit from selling products and services</li>
+                <li>You receive your share of these profits regularly</li>
+              </ul>
+
+              <div className="bg-green-50 p-4 rounded-lg mt-4">
+                <p className="font-medium text-navyblue">
+                  The more customers support these businesses, the more money you make as an owner. It's that simple.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="max-w-3xl mx-auto mb-16 bg-white rounded-lg p-8 shadow-md">
+            <h3 className="text-2xl font-bold text-navyblue mb-6">Your Easy-to-Use Digital Platform</h3>
+            
+            <div className="space-y-6 text-gray-700">
+              <p>
+                Our MCA Direct platform makes business ownership simple:
+              </p>
+              
+              <ul className="list-disc pl-6 space-y-3">
+                <li>View your business performance anytime</li>
+                <li>Receive important updates automatically</li>
+                <li>Track your profits and growth</li>
+                <li>Access educational resources about business ownership</li>
+                <li>Connect with other business owners in your community</li>
+              </ul>
+
+              <div className="bg-purple-50 p-4 rounded-lg">
+                <p className="font-medium text-navyblue">
+                  Everything you need to know about your businesses is available at your fingertips, 24/7.
+                </p>
+              </div>
+            </div>
+          </div>
           
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {funds.map((fund, index) => (
@@ -108,13 +199,13 @@ const ImpactFunds = () => {
           
           <div className="text-center mt-16">
             <p className="text-lg text-gray-700 mb-6">
-              Interested in investing in these impact funds? Contact our team for more information.
+              Ready to become a business owner? Start by browsing our available businesses.
             </p>
             <a 
-              href="/contact" 
+              href="/register" 
               className="inline-block bg-gold text-navyblue font-medium py-3 px-8 rounded-md hover:bg-amber-400 transition-colors"
             >
-              Contact Us
+              Get Started Today
             </a>
           </div>
         </div>
