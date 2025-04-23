@@ -1,4 +1,3 @@
-
 import AdminLayout from "@/components/layout/AdminLayout";
 import { useState, FormEvent, useEffect } from "react";
 import { Button } from "@/components/ui/button";
@@ -19,7 +18,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Mail, MessageCircle } from "lucide-react";
 
-// Mock client data for demonstration
 const mockClients: NotificationRecipient[] = [
   { fullName: "John Doe", email: "john@example.com", phone: "+27123456789" },
   { fullName: "Jane Smith", email: "jane@example.com", phone: "+27987654321" },
@@ -28,7 +26,6 @@ const mockClients: NotificationRecipient[] = [
   { fullName: "Michael Brown", email: "michael@example.com", phone: "+27556677889" },
 ];
 
-// Mock recent notifications for history
 const mockNotificationHistory = [
   { id: 1, type: "Welcome Email", recipients: 12, date: "2023-04-22", status: "Delivered" },
   { id: 2, type: "Deal Update", recipients: 24, date: "2023-04-20", status: "Delivered" },
@@ -36,7 +33,6 @@ const mockNotificationHistory = [
   { id: 4, type: "Reminder", recipients: 34, date: "2023-04-15", status: "Partial Delivery" },
 ];
 
-// Client groups
 const clientGroups = [
   { value: "all", label: "All Clients" },
   { value: "property", label: "Property Fund Clients" },
@@ -44,6 +40,9 @@ const clientGroups = [
   { value: "agri", label: "Agriculture Fund Clients" },
   { value: "active", label: "Active Clients" },
   { value: "new", label: "New Clients (Last 30 Days)" },
+  { value: "property_shareholders", label: "Property Fund Shareholders" },
+  { value: "energy_shareholders", label: "Energy Fund Shareholders" },
+  { value: "agri_shareholders", label: "Agriculture Fund Shareholders" }
 ];
 
 const AdminNotifications = () => {
@@ -56,13 +55,21 @@ const AdminNotifications = () => {
   const [recipients, setRecipients] = useState<NotificationRecipient[]>([]);
   const [sendingStatus, setSendingStatus] = useState({ sending: false, progress: 0 });
   const [templateType, setTemplateType] = useState("custom");
-  
-  // Update recipients based on selected group
+  const [selectedDeal, setSelectedDeal] = useState("");
+
   useEffect(() => {
-    // In a real app, this would fetch from the database based on the selected group
-    setRecipients(mockClients);
-  }, [selectedGroup]);
-  
+    let filteredRecipients = [...mockClients];
+    
+    if (selectedGroup.includes('shareholders')) {
+      const fundType = selectedGroup.split('_')[0];
+      filteredRecipients = mockClients.filter(client => 
+        client.email.includes(fundType)
+      );
+    }
+    
+    setRecipients(filteredRecipients);
+  }, [selectedGroup, selectedDeal]);
+
   const handleChannelToggle = (channel: NotificationChannel) => {
     setSelectedChannels(prev => {
       if (prev.includes(channel)) {
@@ -72,7 +79,7 @@ const AdminNotifications = () => {
       }
     });
   };
-  
+
   const handleEmailSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!emailSubject || !emailBody || selectedChannels.length === 0) {
@@ -83,16 +90,14 @@ const AdminNotifications = () => {
     setSendingStatus({ sending: true, progress: 0 });
     
     try {
-      // Create custom variables for the message
       const variables = {
         subject: emailSubject,
         message: emailBody,
       };
       
-      // Send notifications through selected channels
       const result = await sendBulkNotifications(
         recipients,
-        'custom' as any, // Using dynamic content instead of template
+        'custom' as any,
         selectedChannels,
         variables
       );
@@ -109,7 +114,7 @@ const AdminNotifications = () => {
       setSendingStatus({ sending: false, progress: 100 });
     }
   };
-  
+
   const handleWhatsappSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!whatsappMessage) {
@@ -120,7 +125,6 @@ const AdminNotifications = () => {
     setSendingStatus({ sending: true, progress: 0 });
     
     try {
-      // Filter recipients who have phone numbers
       const validRecipients = recipients.filter(r => r.phone);
       
       if (validRecipients.length === 0) {
@@ -128,15 +132,13 @@ const AdminNotifications = () => {
         return;
       }
       
-      // Create custom variables for the message
       const variables = {
         message: whatsappMessage,
       };
       
-      // Send WhatsApp notifications
       const result = await sendBulkNotifications(
         validRecipients,
-        'custom' as any, // Using dynamic content instead of template
+        'custom' as any,
         ['whatsapp'],
         variables
       );
@@ -187,6 +189,21 @@ const AdminNotifications = () => {
                         ))}
                       </SelectContent>
                     </Select>
+                    {selectedGroup.includes('shareholders') && (
+                      <div className="mt-2">
+                        <Label htmlFor="deal">Select Deal</Label>
+                        <Select value={selectedDeal} onValueChange={setSelectedDeal}>
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select specific deal" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="deal1">Deal 1</SelectItem>
+                            <SelectItem value="deal2">Deal 2</SelectItem>
+                            <SelectItem value="deal3">Deal 3</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    )}
                     <p className="text-sm text-muted-foreground">
                       {recipients.length} recipients selected
                     </p>
