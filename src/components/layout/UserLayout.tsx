@@ -1,6 +1,5 @@
-
 import { ReactNode, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "sonner";
 import UserSidebar from "./user/UserSidebar";
 import UserHeader from "./user/UserHeader";
@@ -8,6 +7,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { supabase } from "@/integrations/supabase/client";
 import { Loader } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface UserLayoutProps {
   children: ReactNode;
@@ -15,6 +15,7 @@ interface UserLayoutProps {
 
 const UserLayout = ({ children }: UserLayoutProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const isMobile = useIsMobile();
   const [isSidebarOpen, setIsSidebarOpen] = useState(!isMobile);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -56,13 +57,17 @@ const UserLayout = ({ children }: UserLayoutProps) => {
           
           // If no client record, create one with pending_registration status
           if (error.code === 'PGRST116') {
+            // Get profile data for name
             const { data: profile } = await supabase
               .from('profiles')
               .select('full_name')
               .eq('id', user.id)
               .single();
-              
+
             const fullName = profile?.full_name || user.user_metadata?.full_name || 'New User';
+            
+            // Generate temporary client number
+            const tempClientNumber = `TEMP${new Date().getTime().toString().slice(-6)}`;
             
             const { error: insertError } = await supabase
               .from('clients')
@@ -77,12 +82,17 @@ const UserLayout = ({ children }: UserLayoutProps) => {
             
             setRegistrationStatus('pending_registration');
             
-            // Store the full name in localStorage
             localStorage.setItem("userName", fullName.split(' ')[0] || "");
             localStorage.setItem("userSurname", fullName.split(' ').slice(1).join(' ') || "");
-            
-            toast.info("Please complete your registration");
-            navigate('/complete-registration');
+            localStorage.setItem("tempClientNumber", tempClientNumber);
+
+            // Only show registration prompt if trying to access restricted areas
+            if (location.pathname.includes('/new-deals') || 
+                location.pathname.includes('/my-investments') || 
+                location.pathname.includes('/wallet')) {
+              toast.info("Please complete your registration to invest");
+              navigate('/complete-registration');
+            }
             return;
           } else {
             throw error;
@@ -92,35 +102,33 @@ const UserLayout = ({ children }: UserLayoutProps) => {
         // Client record exists
         setRegistrationStatus(client?.status || 'pending_registration');
         
-        // Get user profile data for name
+        // Get user profile data
         const { data: profile } = await supabase
           .from('profiles')
           .select('full_name')
           .eq('id', user.id)
           .single();
           
-        // Store the full name in localStorage if available
         if (profile?.full_name) {
-          const fullName = profile.full_name;
-          localStorage.setItem("userName", fullName.split(' ')[0] || "");
-          localStorage.setItem("userSurname", fullName.split(' ').slice(1).join(' ') || "");
-        } else if (user.user_metadata?.full_name) {
-          const fullName = user.user_metadata.full_name;
-          localStorage.setItem("userName", fullName.split(' ')[0] || "");
-          localStorage.setItem("userSurname", fullName.split(' ').slice(1).join(' ') || "");
+          localStorage.setItem("userName", profile.full_name.split(' ')[0] || "");
+          localStorage.setItem("userSurname", profile.full_name.split(' ').slice(1).join(' ') || "");
         }
 
-        // Force redirect to complete registration if status is pending
+        // Only restrict access to investment-related pages if not fully registered
         if (client?.status === 'pending_registration' && 
-            window.location.pathname !== '/complete-registration') {
-          toast.info("Please complete your registration first");
+            (location.pathname.includes('/new-deals') || 
+             location.pathname.includes('/my-investments') || 
+             location.pathname.includes('/wallet'))) {
+          toast.info("Please complete your registration to invest");
           navigate('/complete-registration');
         }
         
-        // If the user isn't approved yet, they shouldn't access the dashboard
+        // If the user isn't approved yet, they shouldn't access investment pages
         if (client?.status !== 'approved' && 
             client?.status !== 'active' && 
-            window.location.pathname !== '/complete-registration') {
+            (location.pathname.includes('/new-deals') || 
+             location.pathname.includes('/my-investments') || 
+             location.pathname.includes('/wallet'))) {
           toast.error("Your account is pending approval");
           navigate('/complete-registration');
         }
@@ -134,7 +142,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
     };
 
     checkRegistrationStatus();
-  }, [navigate]);
+  }, [navigate, location.pathname]);
 
   const handleLogout = async () => {
     try {
@@ -152,7 +160,6 @@ const UserLayout = ({ children }: UserLayoutProps) => {
     }
   };
 
-  // Get full name from localStorage for user greeting
   const userName = localStorage.getItem("userName") || "User";
   const userSurname = localStorage.getItem("userSurname") || "";
   const fullName = `${userName} ${userSurname}`.trim();
@@ -168,9 +175,21 @@ const UserLayout = ({ children }: UserLayoutProps) => {
     );
   }
 
-  if (registrationStatus === 'pending_registration') {
-    navigate('/complete-registration');
-    return null;
+  if (registrationStatus === 'pending_registration' && 
+      (location.pathname.includes('/new-deals') || 
+       location.pathname.includes('/my-investments') || 
+       location.pathname.includes('/wallet'))) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-lightgray">
+        <div className="text-center max-w-md p-8 bg-white rounded-lg shadow-lg">
+          <h2 className="text-2xl font-bold text-navyblue mb-4">Complete Registration Required</h2>
+          <p className="text-gray-600 mb-6">To access investment features, please complete your registration first.</p>
+          <Button onClick={() => navigate('/complete-registration')} className="bg-gold text-white hover:bg-gold/90">
+            Complete Registration
+          </Button>
+        </div>
+      </div>
+    );
   }
 
   return (

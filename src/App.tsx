@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import { Toaster } from "sonner";
@@ -103,6 +102,7 @@ function App() {
         <Route path="/funds/myhealth" element={<MyHealthFund />} />
         <Route path="/funds/myschool" element={<MySchoolFund />} />
         <Route path="/funds/mytelco" element={<MyTelcoFund />} />
+        <Route path="/mca-direct" element={<ImpactFunds />} />
 
         {/* Protected user routes */}
         <Route path="/user" element={<ProtectedRoute><Outlet /></ProtectedRoute>}>

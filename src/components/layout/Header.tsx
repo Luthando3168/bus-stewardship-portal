@@ -19,6 +19,7 @@ const Header = () => {
     { to: "/bus", label: "BUS", icon: Bus },
     { to: "/foundation", label: "Foundation", icon: Building },
     { to: "/impact-funds", label: "Impact Funds", icon: DollarSign },
+    { to: "/mca-direct", label: "MCA Direct", icon: Briefcase },
     { to: "/contact", label: "Contact", icon: PhoneCall },
   ];
 
