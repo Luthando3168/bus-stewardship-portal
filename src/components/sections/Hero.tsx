@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import corporateBackground from "/public/lovable-uploads/ebe1f4b0-992c-4b60-ab22-243564b7b792.png";
+import corporateBackground from "/public/lovable-uploads/3bf955d5-5ab4-48d1-be77-4c951cf953ca.png";
 
 const Hero = () => {
   return (
