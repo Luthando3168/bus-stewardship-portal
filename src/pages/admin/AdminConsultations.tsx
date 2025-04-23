@@ -4,20 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Plus, Search, Video, Calendar } from "lucide-react";
+import { Plus, Search, Calendar } from "lucide-react";
 import { toast } from "sonner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
-import { format } from "date-fns";
-import { Calendar as CalendarComponent } from "@/components/ui/calendar";
+import ConsultationBookingDialog from "@/components/consultations/ConsultationBookingDialog";
 
 const mockConsultations = [
   {
@@ -100,101 +90,21 @@ const AdminConsultations = () => {
   return (
     <AdminLayout>
       <div className="space-y-6">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <h2 className="text-2xl font-bold text-navyblue">Client Consultations</h2>
+        <div className="flex flex-col gap-6">
+          <div className="flex justify-center">
+            <img 
+              src="/public/lovable-uploads/c21dd704-6d94-4ce9-8e09-1d26da6a0503.png" 
+              alt="Luthando Maduna Chartered Accountants" 
+              className="h-20 object-contain"
+            />
+          </div>
           
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button className="bg-gold hover:bg-lightgold flex gap-2">
-                <Plus className="h-4 w-4" />
-                <span>Schedule Consultation</span>
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-[525px]">
-              <DialogHeader>
-                <DialogTitle>Schedule New Consultation</DialogTitle>
-                <DialogDescription>
-                  Schedule a consultation with Google Calendar integration.
-                </DialogDescription>
-              </DialogHeader>
-              <div className="grid gap-4 py-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="date">Date</Label>
-                  <CalendarComponent
-                    mode="single"
-                    selected={date}
-                    onSelect={setDate}
-                    className="rounded-md border"
-                    disabled={(date) => date < new Date()}
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="time">Time</Label>
-                  <Input
-                    id="time"
-                    type="time"
-                    value={time}
-                    onChange={(e) => setTime(e.target.value)}
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="clientName">Client Name</Label>
-                  <Input
-                    id="clientName"
-                    value={clientName}
-                    onChange={(e) => setClientName(e.target.value)}
-                    placeholder="Enter client name"
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="clientEmail">Client Email</Label>
-                  <Input
-                    id="clientEmail"
-                    type="email"
-                    value={clientEmail}
-                    onChange={(e) => setClientEmail(e.target.value)}
-                    placeholder="Enter client email"
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="clientPhone">Client Phone</Label>
-                  <Input
-                    id="clientPhone"
-                    value={clientPhone}
-                    onChange={(e) => setClientPhone(e.target.value)}
-                    placeholder="Enter client phone"
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="topic">Topic</Label>
-                  <Input
-                    id="topic"
-                    value={topic}
-                    onChange={(e) => setTopic(e.target.value)}
-                    placeholder="Enter consultation topic"
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="notes">Notes</Label>
-                  <Input
-                    id="notes"
-                    value={notes}
-                    onChange={(e) => setNotes(e.target.value)}
-                    placeholder="Add any additional notes"
-                  />
-                </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <Button onClick={handleScheduleConsultation} className="bg-gold hover:bg-lightgold">
-                  <Calendar className="mr-2 h-4 w-4" />
-                  Schedule with Google Calendar
-                </Button>
-                <p className="text-sm text-muted-foreground text-center">
-                  A Google Meet link will be automatically generated and included in the calendar invite
-                </p>
-              </div>
-            </DialogContent>
-          </Dialog>
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <h2 className="text-2xl font-bold text-navyblue">Client Consultations</h2>
+            <div className="flex gap-2">
+              <ConsultationBookingDialog />
+            </div>
+          </div>
         </div>
 
         <div className="relative max-w-sm">
