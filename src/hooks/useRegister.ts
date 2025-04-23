@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -57,21 +56,16 @@ export const useRegister = () => {
       console.log("Registration response:", authData);
 
       if (authData.user) {
-        const recipient: NotificationRecipient = {
-          fullName,
-          email,
-        };
-        
         try {
-          await sendNotification(
-            recipient,
-            'welcome',
-            ['email'],
-            {}
-          );
-          console.log("Welcome notification sent successfully");
-        } catch (notificationError) {
-          console.error("Failed to send welcome notification:", notificationError);
+          const { error: welcomeError } = await supabase.functions.invoke('send-welcome', {
+            body: { email, fullName }
+          });
+
+          if (welcomeError) {
+            console.error("Failed to send welcome email:", welcomeError);
+          }
+        } catch (emailError) {
+          console.error("Error calling welcome email function:", emailError);
         }
       }
       
