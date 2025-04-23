@@ -20,6 +20,7 @@ interface BusinessCardProps {
   onToggle: (id: string) => void;
   onAddToCart: (business: Business, fundName: string) => void;
 }
+
 const BusinessCard = ({
   business,
   expanded,
@@ -27,47 +28,62 @@ const BusinessCard = ({
   onToggle,
   onAddToCart,
 }: BusinessCardProps) => (
-  <Card className="overflow-hidden animate-fade-in">
-    <CardHeader className="pb-3">
+  <Card className="overflow-hidden animate-fade-in hover:shadow-md transition-shadow">
+    <CardHeader className="pb-2">
       <div className="flex justify-between items-start">
         <div>
-          <CardTitle className="text-lg">{business.title}</CardTitle>
-          <CardDescription className="text-sm">{business.region}</CardDescription>
+          <CardTitle className="text-lg text-navyblue">{business.title}</CardTitle>
+          <CardDescription className="text-sm mt-1">{business.region}</CardDescription>
         </div>
-        <Badge className="bg-blue-600">
+        <Badge variant="secondary" className="bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100">
           {fundName.replace(" Impact Fund", "")}
         </Badge>
       </div>
+    </CardHeader>
+    
+    <CardContent className="pb-2 pt-0">
+      {!expanded && (
+        <p className="text-sm line-clamp-2 text-muted-foreground">
+          {business.description}
+        </p>
+      )}
+      
+      {expanded && (
+        <>
+          <p className="text-sm mb-4">{business.description}</p>
+          <div>
+            <p className="text-sm text-muted-foreground mb-1">Minimum Investment</p>
+            <p className="font-medium text-navyblue">R {business.minInvestment.toLocaleString()}</p>
+          </div>
+        </>
+      )}
+    </CardContent>
+    
+    <CardFooter className="pt-2 flex justify-between items-center">
       <Button
         variant="ghost"
         size="sm"
         onClick={() => onToggle(business.id)}
-        className="p-0 h-8 hover:bg-transparent"
-        aria-label={expanded ? "Collapse" : "Expand"}
+        className="text-navyblue hover:text-navyblue/80"
       >
-        {expanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+        {expanded ? (
+          <span className="flex items-center gap-1">View Less <ChevronUp size={16} /></span>
+        ) : (
+          <span className="flex items-center gap-1">View More <ChevronDown size={16} /></span>
+        )}
       </Button>
-    </CardHeader>
-    {expanded && (
-      <>
-        <CardContent className="pt-2">
-          <p className="text-sm">{business.description}</p>
-          <div className="mt-4">
-            <p className="text-sm text-muted-foreground">Minimum Investment</p>
-            <p className="font-medium text-lg">R {business.minInvestment.toLocaleString()}</p>
-          </div>
-        </CardContent>
-        <CardFooter className="flex justify-end pt-2">
-          <Button
-            className="w-full sm:w-auto bg-gold hover:bg-lightgold"
-            onClick={() => onAddToCart(business, fundName)}
-          >
-            <Plus size={16} className="mr-1" />
-            Add to Investment Cart
-          </Button>
-        </CardFooter>
-      </>
-    )}
+      
+      {expanded && (
+        <Button
+          className="bg-gold hover:bg-lightgold text-white"
+          size="sm"
+          onClick={() => onAddToCart(business, fundName)}
+        >
+          <Plus size={14} className="mr-1" />
+          Add to Cart
+        </Button>
+      )}
+    </CardFooter>
   </Card>
 );
 

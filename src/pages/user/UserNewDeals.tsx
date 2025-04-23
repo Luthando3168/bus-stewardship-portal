@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import UserLayout from "@/components/layout/UserLayout";
 import { Button } from "@/components/ui/button";
@@ -221,97 +222,96 @@ const UserNewDeals = () => {
 
   return (
     <UserLayout>
-      <div className="max-w-3xl mx-auto space-y-6 px-0 sm:px-4 py-0">
-        <div className="rounded-t-xl overflow-hidden border-b">
-          <div className="bg-white shadow-sm px-4 py-3 flex flex-col gap-2">
-            <div className="flex items-center justify-between mb-1">
-              <h2 className="text-2xl font-bold text-navyblue">Investment Opportunities</h2>
-              <div className="flex items-center">
-                <span className="text-sm font-semibold mr-1">Wallet Balance:</span>
-                <span className="font-bold text-navyblue mr-2">R {walletBalance.toLocaleString()}</span>
-                <Button 
-                  variant="outline" 
-                  size="icon"
-                  onClick={() => setIsCartOpen(true)}
-                  className="relative"
-                >
-                  <ShoppingCart size={20}/>
-                  {cartItems.length > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                      {cartItems.length}
-                    </span>
-                  )}  
-                </Button>
-              </div>
+      <div className="max-w-4xl mx-auto px-4 py-6 space-y-8">
+        {/* Header with wallet and cart */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div>
+            <h2 className="text-2xl font-bold text-navyblue">Investment Opportunities</h2>
+            <p className="text-muted-foreground">Browse and select deals from our impact funds</p>
+          </div>
+          
+          <div className="flex items-center gap-4 self-end sm:self-auto">
+            <div className="flex flex-col sm:flex-row items-end sm:items-center gap-1">
+              <span className="text-sm text-muted-foreground">Wallet Balance:</span>
+              <span className="font-bold text-navyblue">R {walletBalance.toLocaleString()}</span>
             </div>
-            <p className="text-base text-muted-foreground">
-              Browse and select deals from our impact funds
-            </p>
+            
+            <Button 
+              variant="outline" 
+              size="icon"
+              onClick={() => setIsCartOpen(true)}
+              className="relative"
+            >
+              <ShoppingCart size={20}/>
+              {cartItems.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                  {cartItems.length}
+                </span>
+              )}  
+            </Button>
           </div>
         </div>
-
-        <div className="bg-blue-50 rounded-lg p-4 text-sm">
-          <p className="font-medium text-navyblue">How it works:</p>
+        
+        {/* How it works explanation */}
+        <div className="bg-blue-50 rounded-lg p-5 max-w-2xl mx-auto">
+          <p className="font-medium text-navyblue mb-1">How it works:</p>
           <p className="text-muted-foreground">
-            Select business deals that interest you from any impact fund. Your selections are linked to their respective funds and consolidated at checkout. Payment is made through your Standard Bank wallet after you receive a unique order number.
+            Select business deals that interest you from any impact fund. Your selections are linked to 
+            their respective funds and consolidated at checkout. Payment is made through your Standard Bank 
+            wallet after you receive a unique order number.
           </p>
         </div>
 
-        <div>
+        {/* Fund Selection */}
+        <div className="max-w-2xl mx-auto">
           {isMobile ? (
-            <>
-              <div className="my-2">
-                <FundSelector
-                  funds={impactFunds}
-                  value={activeTab}
-                  onChange={handleTabChange}
-                />
-              </div>
-              {currentFund && (
-                <div className="mt-2 mb-4 px-3 py-2 rounded border border-navyblue bg-white flex flex-col gap-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-base font-semibold text-navyblue">{currentFund.name.replace(" Impact Fund","")}</span>
-                    <span className="badge bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">{currentFund.return}</span>
-                  </div>
-                  <span className="text-xs text-muted-foreground">
-                    Minimum Investment: <span className="font-medium text-navyblue">R {currentFund.minInvestment.toLocaleString()}</span>
-                  </span>
-                </div>
-              )}
-            </>
-          ) : (
-            <>
-              <ImpactFundTabs
-                impactFunds={impactFunds}
-                activeTab={activeTab}
-                onTabChange={handleTabChange}
+            <div className="mb-6">
+              <FundSelector
+                funds={impactFunds}
+                value={activeTab}
+                onChange={handleTabChange}
               />
-              {currentFund && (
-                <div className="mt-2 mb-4 px-3 py-2 rounded border border-navyblue bg-white flex flex-row justify-between gap-2 max-w-xl mx-auto">
-                  <span className="text-base font-semibold text-navyblue">{currentFund.name.replace(" Impact Fund","")}</span>
-                  <span className="badge bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">{currentFund.return}</span>
-                  <span className="text-xs text-muted-foreground">
-                    Min: <span className="font-medium text-navyblue">R {currentFund.minInvestment.toLocaleString()}</span>
-                  </span>
-                </div>
-              )}
-            </>
+            </div>
+          ) : (
+            <ImpactFundTabs
+              impactFunds={impactFunds}
+              activeTab={activeTab}
+              onTabChange={handleTabChange}
+              className="mb-6"
+            />
+          )}
+          
+          {/* Fund Info Box */}
+          {currentFund && (
+            <div className="mb-8 p-4 rounded-lg border border-navyblue/20 bg-white flex flex-col sm:flex-row sm:justify-between gap-3">
+              <div>
+                <h3 className="text-lg font-semibold text-navyblue">{currentFund.name}</h3>
+                <p className="text-sm text-muted-foreground">
+                  Min. Investment: <span className="font-medium">R {currentFund.minInvestment.toLocaleString()}</span>
+                </p>
+              </div>
+              <div className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium self-start">
+                {currentFund.return}
+              </div>
+            </div>
           )}
         </div>
 
-        <div className="space-y-4">
+        {/* Business Cards */}
+        <div className="grid gap-6 max-w-3xl mx-auto">
           {currentFund?.businesses.map(business => (
             <BusinessCard
               key={business.id}
               business={business}
               expanded={expandedBusinessId === business.id}
-              fundName={currentFund.name.replace(" Impact Fund","")}
+              fundName={currentFund.name}
               onToggle={toggleBusinessExpansion}
               onAddToCart={(biz, fname) => handleAddToCart(biz, fname)}
             />
           ))}
         </div>
 
+        {/* Investment Cart Dialog */}
         <InvestmentCart
           open={isCartOpen}
           onOpenChange={setIsCartOpen}
