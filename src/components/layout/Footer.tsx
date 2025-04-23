@@ -1,10 +1,16 @@
-
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const Footer = () => {
+  const location = useLocation();
   const currentYear = new Date().getFullYear();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [location.pathname]);
 
   const socialLinks = [
     { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
@@ -218,4 +224,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
