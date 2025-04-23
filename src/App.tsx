@@ -1,3 +1,4 @@
+
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
 import { Toaster } from "sonner";
@@ -36,6 +37,7 @@ import UserPendingDeals from "@/pages/user/UserPendingDeals";
 import UserMyInvestments from "@/pages/user/UserMyInvestments";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import CompleteRegistration from "@/components/auth/CompleteRegistration";
+import EmailPreview from "@/pages/EmailPreview";
 
 function App() {
   // Move the state hooks inside the function component
@@ -84,6 +86,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/email-preview" element={<EmailPreview />} />
           
           {/* Add the complete registration route */}
           <Route path="/complete-registration" element={<CompleteRegistration />} />
