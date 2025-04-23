@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from "lucide-react";
@@ -23,32 +22,21 @@ const Header = () => {
     { to: "/bus", label: "BUS" },
   ];
 
-  // Mobile simplified header that matches the image
+  // Mobile header
   if (isMobile) {
     return (
       <header className="bg-white shadow-sm fixed top-0 left-0 w-full z-30">
-        <div className="container mx-auto flex items-center justify-between py-3 px-4">
-          {/* Logo styling based on the image */}
-          <div className="flex items-center">
-            <Link to="/" className="block">
-              <div className="flex flex-col">
-                <div className="text-gold font-montserrat font-bold text-2xl">
-                  Luthando
-                </div>
-                <div className="text-navyblue font-montserrat font-bold text-2xl -mt-1">
-                  Maduna
-                </div>
-                <div className="text-navyblue font-montserrat text-xs tracking-wider uppercase mt-1">
-                  CHARTERED ACCOUNTANTS
-                </div>
-              </div>
-            </Link>
-          </div>
+        <div className="container mx-auto flex items-center justify-between py-2 px-4">
+          {/* Logo */}
+          <Link to="/" className="block">
+            <Logo />
+          </Link>
 
-          {/* Simplified mobile menu button */}
+          {/* Mobile menu button */}
           <button
             className="p-2 rounded focus:outline-none"
             onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
           >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -61,8 +49,7 @@ const Header = () => {
                 onClick={() => setMenuOpen(false)}
               />
               <div className="fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 p-4 transform transition-transform duration-300 ease-in-out">
-                <div className="flex justify-between items-center mb-6">
-                  <Logo className="scale-75 origin-left" />
+                <div className="flex justify-end mb-6">
                   <button onClick={() => setMenuOpen(false)} className="p-2">
                     <X size={24} />
                   </button>
@@ -82,6 +69,7 @@ const Header = () => {
                   <Link
                     to="/contact"
                     className="bg-gold text-white px-4 py-2 rounded font-semibold text-center mt-2"
+                    onClick={() => setMenuOpen(false)}
                   >
                     Contact Us
                   </Link>
@@ -89,12 +77,14 @@ const Header = () => {
                     <Link
                       to="/login"
                       className="bg-blue-600 text-white px-4 py-2 rounded font-semibold text-center"
+                      onClick={() => setMenuOpen(false)}
                     >
                       Login
                     </Link>
                     <Link
                       to="/register"
                       className="bg-blue-600 text-white px-4 py-2 rounded font-semibold text-center"
+                      onClick={() => setMenuOpen(false)}
                     >
                       Register
                     </Link>
@@ -104,31 +94,11 @@ const Header = () => {
             </>
           )}
         </div>
-
-        {/* Horizontal navigation links matching the image */}
-        <div className="flex justify-center border-t border-gray-100 overflow-x-auto">
-          <div className="flex space-x-6 px-4 py-2">
-            {navLinks.map(link => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`text-sm font-semibold whitespace-nowrap ${
-                  isActive(link.to) ? 'text-gold border-b-2 border-gold' : 'text-navyblue'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        {/* Spacer to prevent content from being hidden under header */}
-        <div className="h-1"></div>
       </header>
     );
   }
 
-  // Desktop header remains similar to original
+  // Desktop header
   return (
     <header className="bg-white shadow-md fixed top-0 left-0 w-full z-30">
       <nav className="container mx-auto flex items-center justify-between py-2 md:py-3 px-4 md:px-6 relative">
