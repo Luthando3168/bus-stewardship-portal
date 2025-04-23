@@ -75,6 +75,7 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
+          {/* Public routes */}
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/how-we-work" element={<HowWeWork />} />
@@ -88,13 +89,15 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
-          <Route path="/email-preview" element={<EmailPreview />} />
           <Route path="/complete-registration" element={<CompleteRegistration />} />
+          <Route path="/email-preview" element={<EmailPreview />} />
           <Route path="/funds/myfarm" element={<MyFarmFund />} />
           <Route path="/funds/myproperty" element={<MyPropertyFund />} />
           <Route path="/funds/myfranchise" element={<MyFranchiseFund />} />
           <Route path="/funds/myfoodretail" element={<MyFoodRetailFund />} />
-          <Route path="/user" element={<ProtectedRoute allowedRole="user"><Outlet /></ProtectedRoute>}>
+
+          {/* Protected user routes */}
+          <Route path="/user" element={<ProtectedRoute><Outlet /></ProtectedRoute>}>
             <Route path="dashboard" element={<UserDashboard />} />
             <Route path="wallet" element={<UserWallet />} />
             <Route path="beneficiaries" element={<UserBeneficiaries />} />
@@ -105,7 +108,9 @@ function App() {
             <Route path="pending-deals" element={<UserPendingDeals />} />
             <Route path="my-investments" element={<UserMyInvestments />} />
           </Route>
-          <Route path="/admin" element={<ProtectedRoute allowedRole="admin"><Outlet /></ProtectedRoute>}>
+
+          {/* Protected admin routes */}
+          <Route path="/admin" element={<ProtectedRoute requireAdmin={true}><Outlet /></ProtectedRoute>}>
             <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="users" element={<AdminUsers />} />
             <Route path="deals" element={<AdminDeals />} />
@@ -117,6 +122,7 @@ function App() {
             <Route path="share-certificates" element={<AdminShareCertificates />} />
             <Route path="financial-statements" element={<AdminFinancialStatements />} />
           </Route>
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AuthProvider>

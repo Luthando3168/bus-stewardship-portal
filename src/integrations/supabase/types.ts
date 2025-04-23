@@ -370,6 +370,7 @@ export type Database = {
           full_name: string
           id: string
           phone: string | null
+          role: Database["public"]["Enums"]["user_role"]
           updated_at: string
         }
         Insert: {
@@ -379,6 +380,7 @@ export type Database = {
           full_name: string
           id: string
           phone?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
           updated_at?: string
         }
         Update: {
@@ -388,6 +390,7 @@ export type Database = {
           full_name?: string
           id?: string
           phone?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
           updated_at?: string
         }
         Relationships: []
@@ -424,7 +427,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
     }
     Enums: {
       client_status:
@@ -436,6 +442,7 @@ export type Database = {
         | "active"
         | "rejected"
         | "suspended"
+      user_role: "admin" | "user"
       verification_status: "not_submitted" | "pending" | "verified" | "rejected"
     }
     CompositeTypes: {
@@ -562,6 +569,7 @@ export const Constants = {
         "rejected",
         "suspended",
       ],
+      user_role: ["admin", "user"],
       verification_status: ["not_submitted", "pending", "verified", "rejected"],
     },
   },
