@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { sendNotification, NotificationRecipient } from "@/utils/notificationService";
 
 export const useRegister = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -42,13 +41,17 @@ export const useRegister = () => {
     try {
       console.log("Attempting to register user:", { email, fullName });
       
+      // Disable email confirmation
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email,
         password,
         options: {
           data: {
             full_name: fullName,
-          }
+          },
+          // Disable email confirmation
+          emailRedirectTo: undefined,
+          shouldCreateUser: true
         }
       });
       
@@ -78,7 +81,7 @@ export const useRegister = () => {
         }
       }
       
-      toast.success("Registration successful! Please check your email to verify your account.");
+      toast.success("Registration successful! Please check your email.");
       navigate("/login");
     } catch (error: any) {
       console.error("Registration error:", error);
