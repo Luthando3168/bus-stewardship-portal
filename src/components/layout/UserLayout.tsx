@@ -1,3 +1,4 @@
+
 import { ReactNode, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -6,6 +7,7 @@ import UserHeader from "./user/UserHeader";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { supabase } from "@/integrations/supabase/client";
+import { Loader } from "lucide-react";
 
 interface UserLayoutProps {
   children: ReactNode;
@@ -42,22 +44,65 @@ const UserLayout = ({ children }: UserLayoutProps) => {
           return;
         }
 
+        // Check if client record exists
         const { data: client, error } = await supabase
           .from('clients')
-          .select('status')
+          .select('status, full_name')
           .eq('id', user.id)
           .single();
 
-        if (error) throw error;
+        if (error) {
+          console.error('Error fetching client data:', error);
+          
+          // If no client record, create one with pending_registration status
+          if (error.code === 'PGRST116') {
+            const { error: insertError } = await supabase
+              .from('clients')
+              .insert([{ 
+                id: user.id, 
+                status: 'pending_registration',
+                full_name: user.user_metadata?.full_name || 'New User'
+              }]);
+            
+            if (insertError) {
+              throw insertError;
+            }
+            
+            setRegistrationStatus('pending_registration');
+            toast.info("Please complete your registration");
+            navigate('/complete-registration');
+            return;
+          } else {
+            throw error;
+          }
+        }
 
-        setRegistrationStatus(client?.status || null);
+        setRegistrationStatus(client?.status || 'pending_registration');
+        
+        // Store the full name in localStorage if available
+        if (client?.full_name) {
+          localStorage.setItem("userName", client.full_name.split(' ')[0] || "");
+          localStorage.setItem("userSurname", client.full_name.split(' ').slice(1).join(' ') || "");
+        }
 
-        if (client?.status === 'pending_registration' && window.location.pathname !== '/complete-registration') {
+        // Force redirect to complete registration if status is pending
+        if (client?.status === 'pending_registration' && 
+            window.location.pathname !== '/complete-registration') {
+          toast.info("Please complete your registration first");
+          navigate('/complete-registration');
+        }
+        
+        // If the user isn't approved yet, they shouldn't access the dashboard
+        if (client?.status !== 'approved' && 
+            client?.status !== 'active' && 
+            window.location.pathname !== '/complete-registration') {
+          toast.error("Your account is pending approval");
           navigate('/complete-registration');
         }
       } catch (error) {
         console.error('Error checking registration status:', error);
         toast.error('Error checking registration status');
+        navigate('/login');
       } finally {
         setIsLoading(false);
       }
@@ -66,13 +111,20 @@ const UserLayout = ({ children }: UserLayoutProps) => {
     checkRegistrationStatus();
   }, [navigate]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("userRole");
-    localStorage.removeItem("userName");
-    localStorage.removeItem("userSurname");
-    localStorage.removeItem("isLoggedIn");
-    toast.success("Logged out successfully");
-    navigate("/login");
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      localStorage.removeItem("userRole");
+      localStorage.removeItem("userName");
+      localStorage.removeItem("userSurname");
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("clientNumber");
+      toast.success("Logged out successfully");
+      navigate("/login");
+    } catch (error) {
+      console.error("Logout error:", error);
+      toast.error("Error logging out");
+    }
   };
 
   // Get full name from localStorage for user greeting
@@ -81,7 +133,14 @@ const UserLayout = ({ children }: UserLayoutProps) => {
   const fullName = `${userName} ${userSurname}`.trim();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-lightgray">
+        <div className="text-center">
+          <Loader className="h-8 w-8 animate-spin text-navyblue mx-auto mb-4" />
+          <p className="text-navyblue">Loading your account...</p>
+        </div>
+      </div>
+    );
   }
 
   if (registrationStatus === 'pending_registration') {

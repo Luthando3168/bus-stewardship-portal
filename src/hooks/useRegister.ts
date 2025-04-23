@@ -103,19 +103,43 @@ export const useRegister = () => {
       console.log("Registration response:", authData);
 
       if (authData.user) {
-        // Don't redirect or show success message until email is sent
+        // Create a client record with pending_registration status
+        const { error: clientError } = await supabase
+          .from('clients')
+          .insert([{ 
+            id: authData.user.id, 
+            status: 'pending_registration',
+            full_name: fullName,
+            email: email
+          }]);
+          
+        if (clientError) {
+          console.error("Error creating client record:", clientError);
+          // Continue with the process even if client record creation fails
+          // We'll try to create it again when they log in
+        }
+      
+        // Try sending welcome email
         try {
           console.log("Attempting to send welcome email...");
           
-          // Try sending welcome email via edge function first
-          const { data: sessionData } = await supabase.auth.getSession();
-          const accessToken = sessionData.session?.access_token;
+          // Call the Supabase edge function directly
+          const { error: functionError } = await supabase.functions.invoke('send-registration-email', {
+            body: { 
+              fullName: fullName,
+              email: email,
+              confirmationLink: `${window.location.origin}/complete-registration`
+            }
+          });
           
-          if (!accessToken) {
-            console.warn("No access token available for email authentication");
+          if (functionError) {
+            console.error("Error from edge function:", functionError);
+            throw functionError;
           }
           
-          // Always try to send welcome email through notification service as primary method
+          console.log("Welcome email sent via edge function");
+          
+          // Also try sending through notification service as backup
           const emailResult = await sendUserNotification(
             { fullName, email }, 
             'welcome', 
@@ -124,7 +148,7 @@ export const useRegister = () => {
           
           console.log("Email notification result:", emailResult);
           
-          // Only show success and redirect if email notification was successful
+          // Show success regardless of the backup email result
           toast.success("Registration successful! Please check your email to verify your account.");
           
           // Add delay before redirecting to ensure toast is seen
@@ -134,7 +158,7 @@ export const useRegister = () => {
         } catch (emailError) {
           console.error("Error sending welcome email:", emailError);
           // Show partial success but note the email issue
-          toast.warning("Account created, but we couldn't send a welcome email. Please contact support if you don't receive a verification email.");
+          toast.warning("Account created, but we couldn't send a welcome email. Please check your spam folder or contact support if you don't receive a verification email.");
           setTimeout(() => {
             navigate("/login");
           }, 3000);
@@ -155,8 +179,6 @@ export const useRegister = () => {
         setErrorMessage("Registration failed. Please try again later.");
         toast.error("Registration failed. Please try again later.");
       }
-      
-      // Don't navigate on error
     } finally {
       setIsLoading(false);
     }

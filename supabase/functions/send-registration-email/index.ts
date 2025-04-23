@@ -1,110 +1,95 @@
 
-import { serve } from "https://deno.land/std@0.190.0/http/server.ts"
-import { Resend } from "npm:resend@2.0.0"
-import { renderAsync } from 'npm:@react-email/components@0.0.12'
-import { RegistrationConfirmEmail } from "./_templates/registration-confirm.tsx"
-import { DealApprovalEmail } from "./_templates/deal-approval.tsx"
-import { ShareCertificateEmail } from "./_templates/share-certificate.tsx"
+import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { Resend } from "npm:resend@2.0.0";
+import { renderAsync } from 'npm:@react-email/components@0.0.12';
+import { ShareCertificateEmail } from "./_templates/share-certificate.tsx";
+import { RegistrationConfirmEmail } from "./_templates/registration-confirm.tsx";
 
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"))
+const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers":
+    "authorization, x-client-info, apikey, content-type",
+};
+
+interface EmailRequest {
+  fullName: string;
+  email: string;
+  confirmationLink?: string;
+  dealName?: string;
+  certificateNumber?: string;
+  viewLink?: string;
 }
 
-serve(async (req) => {
+export const handler = async (req: Request): Promise<Response> => {
+  // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
-    return new Response(null, { 
-      headers: {
-        ...corsHeaders,
-        "Access-Control-Allow-Methods": "POST, OPTIONS",
-        "Access-Control-Max-Age": "86400"
-      }
-    })
+    return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    const { 
-      type,
-      fullName, 
-      email,
-      confirmationLink,
-      dealName,
-      investmentAmount,
-      approvalLink,
-      certificateNumber,
-      viewLink
-    } = await req.json()
+    const body: EmailRequest = await req.json();
+    const { fullName, email } = body;
 
-    let html;
-    let subject;
-
-    switch (type) {
-      case 'registration':
-        html = await renderAsync(
-          RegistrationConfirmEmail({ 
-            fullName, 
-            confirmationLink 
-          })
-        )
-        subject = "Complete Your MCA Direct Registration"
-        break;
-      
-      case 'deal_approval':
-        html = await renderAsync(
-          DealApprovalEmail({ 
-            fullName, 
-            dealName, 
-            investmentAmount, 
-            approvalLink 
-          })
-        )
-        subject = "Your MCA Direct Investment is Ready for Approval"
-        break;
-      
-      case 'share_certificate':
-        html = await renderAsync(
-          ShareCertificateEmail({ 
-            fullName, 
-            dealName, 
-            certificateNumber, 
-            viewLink 
-          })
-        )
-        subject = "Your MCA Direct Share Certificate is Ready"
-        break;
-      
-      default:
-        throw new Error("Invalid email type")
+    if (!email || !fullName) {
+      throw new Error("Missing required fields: email and fullName are required");
     }
+
+    // Determine which email template to use based on the request
+    let emailHtml: string;
+    let subject: string;
+
+    if (body.certificateNumber && body.dealName && body.viewLink) {
+      // Share certificate email
+      emailHtml = await renderAsync(
+        ShareCertificateEmail({
+          fullName,
+          dealName: body.dealName,
+          certificateNumber: body.certificateNumber,
+          viewLink: body.viewLink,
+        })
+      );
+      subject = "Your MCA Direct Share Certificate is Ready";
+    } else {
+      // Registration confirmation email
+      emailHtml = await renderAsync(
+        RegistrationConfirmEmail({
+          fullName,
+          confirmationLink: body.confirmationLink || `${req.headers.get("origin") || ""}/complete-registration`,
+        })
+      );
+      subject = "Complete Your MCA Direct Registration";
+    }
+
+    console.log(`Sending ${subject} email to ${email}`);
     
-    const data = await resend.emails.send({
-      from: "Luthando Maduna Chartered Accountants <info@madunacas.com>",
+    const emailResponse = await resend.emails.send({
+      from: "MCA Direct <onboarding@resend.dev>",
       to: [email],
       subject: subject,
-      html: html,
-      reply_to: "info@madunacas.com",
-    })
+      html: emailHtml,
+    });
 
-    return new Response(JSON.stringify(data), {
-      headers: { 
-        ...corsHeaders, 
-        "Content-Type": "application/json",
-      },
-      status: 200,
-    })
-  } catch (error) {
-    console.error("Error sending email:", error)
+    console.log("Email sent successfully:", emailResponse);
+
+    return new Response(
+      JSON.stringify({ success: true, message: "Email sent successfully" }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      }
+    );
+  } catch (error: any) {
+    console.error("Error in send email function:", error);
     return new Response(
       JSON.stringify({ error: error.message }),
       {
-        headers: { 
-          ...corsHeaders, 
-          "Content-Type": "application/json",
-        },
         status: 500,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
       }
-    )
+    );
   }
-})
+};
+
+serve(handler);
