@@ -2,10 +2,16 @@
 import React from "react";
 import FundEducationalPage from "@/components/funds/FundEducationalPage";
 import Layout from "@/components/layout/Layout";
+import { Helmet } from "react-helmet";
 
 const MyHealthFund = () => {
   return (
     <Layout>
+      <Helmet>
+        <title>MyHealth Impact Fund | LMCA</title>
+        <meta name="description" content="Investing in accessible healthcare solutions and medical facilities to improve community health outcomes." />
+      </Helmet>
+      
       <FundEducationalPage
         fundName="MyHealth Impact Fund"
         description="Focus: Investing in accessible healthcare solutions and medical facilities to improve community health outcomes."

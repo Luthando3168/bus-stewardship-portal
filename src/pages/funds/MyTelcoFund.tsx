@@ -2,10 +2,16 @@
 import React from "react";
 import FundEducationalPage from "@/components/funds/FundEducationalPage";
 import Layout from "@/components/layout/Layout";
+import { Helmet } from "react-helmet";
 
 const MyTelcoFund = () => {
   return (
     <Layout>
+      <Helmet>
+        <title>MyTelco Impact Fund | LMCA</title>
+        <meta name="description" content="Investing in telecommunications infrastructure and services to provide affordable connectivity solutions." />
+      </Helmet>
+      
       <FundEducationalPage
         fundName="MyTelco Impact Fund"
         description="Focus: Investing in telecommunications infrastructure and services to provide affordable connectivity solutions."
