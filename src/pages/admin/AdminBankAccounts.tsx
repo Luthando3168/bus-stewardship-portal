@@ -8,6 +8,8 @@ import { CreditCard, Plus, Search } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import EditAccountDialog from "@/components/admin/bank-accounts/EditAccountDialog";
+import ManualTransactionDialog from "@/components/admin/bank-accounts/ManualTransactionDialog";
 
 const saBanks = [
   "ABSA Bank",
