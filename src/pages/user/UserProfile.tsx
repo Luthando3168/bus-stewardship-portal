@@ -1,15 +1,15 @@
 import UserLayout from "@/components/layout/UserLayout";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { Star } from "lucide-react";
+import { Star, Plus } from "lucide-react";
 import FundAccordion from "@/components/FundAccordion";
 import FundOpportunities, { Opportunity } from "@/components/user/FundOpportunities";
-import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const FUNDS = [
   {
@@ -137,6 +137,7 @@ const UserProfile = () => {
   const [userData, setUserData] = useState(INITIAL_USER_DATA);
   const [password, setPassword] = useState({ current: "", new: "", confirm: "" });
   const [activeFundTab, setActiveFundTab] = useState(FUNDS[0].name);
+  const [userInvestments, setUserInvestments] = useState<Opportunity[]>([]);
 
   const handleProfileUpdate = (e: React.FormEvent) => {
     e.preventDefault();
@@ -160,62 +161,29 @@ const UserProfile = () => {
   const isMissing = (key: string, required?: boolean) =>
     required && !userData[key as keyof typeof userData];
 
-  const opportunities: Opportunity[] = [
-    {
-      id: "opp1",
-      fundId: "MyProperty Impact Fund",
-      title: "Downtown Office Building",
-      summary: "10-story CBD building, green retrofit completed.",
-      minInvestment: "R 120,000",
-      projectedReturn: "8.5% p.a.",
-      status: "Open",
-    },
-    {
-      id: "opp2",
-      fundId: "MyProperty Impact Fund",
-      title: "Student Housing Project",
-      summary: "Affordable student living in Cape Town.",
-      minInvestment: "R 15,000",
-      projectedReturn: "7.8% p.a.",
-      status: "Open",
-    },
-    {
-      id: "opp3",
-      fundId: "MyFarm Impact Fund",
-      title: "Organic Farm Expansion",
-      summary: "Certified organic vegetables for export markets.",
-      minInvestment: "R 40,000",
-      projectedReturn: "6.8% p.a.",
-      status: "Open",
-    },
-    {
-      id: "opp4",
-      fundId: "MyEnergy Impact Fund",
-      title: "Solar Farm Project",
-      summary: "Commercial solar farm installation, regional rollout.",
-      minInvestment: "R 85,000",
-      projectedReturn: "11.2% p.a.",
-      status: "Open",
-    },
-    {
-      id: "opp5",
-      fundId: "MyFranchise Impact Fund",
-      title: "Franchise Rollout - Bakery Chain",
-      summary: "Expansion of local franchise into three provinces.",
-      minInvestment: "R 15,000",
-      projectedReturn: "12.4% p.a.",
-      status: "Open",
-    },
-    {
-      id: "opp6",
-      fundId: "MyTelecoms Impact Fund",
-      title: "Tech SME Scale-up",
-      summary: "Support for a black-owned app development company.",
-      minInvestment: "R 10,000",
-      projectedReturn: "15.0% p.a.",
-      status: "Open",
-    },
-  ];
+  useEffect(() => {
+    const userInvestmentData: Opportunity[] = [
+      {
+        id: "opp2",
+        fundId: "MyProperty Impact Fund",
+        title: "Student Housing Project",
+        summary: "Affordable student living in Cape Town.",
+        minInvestment: "R 15,000",
+        projectedReturn: "7.8% p.a.",
+        status: "Open",
+      },
+      {
+        id: "opp4",
+        fundId: "MyEnergy Impact Fund",
+        title: "Solar Farm Project",
+        summary: "Commercial solar farm installation, regional rollout.",
+        minInvestment: "R 85,000",
+        projectedReturn: "11.2% p.a.",
+        status: "Open",
+      }
+    ];
+    setUserInvestments(userInvestmentData);
+  }, []);
 
   useEffect(() => {
     const section = document.getElementById("fund-opportunity-list");
@@ -233,7 +201,7 @@ const UserProfile = () => {
           <TabsList className="grid w-full md:w-auto md:inline-grid grid-cols-3 md:grid-cols-3">
             <TabsTrigger value="personal">Personal Details</TabsTrigger>
             <TabsTrigger value="security">Security</TabsTrigger>
-            <TabsTrigger value="investment">Investment Profile</TabsTrigger>
+            <TabsTrigger value="investment">My Investments</TabsTrigger>
           </TabsList>
           <TabsContent value="personal">
             <Card>
@@ -332,10 +300,19 @@ const UserProfile = () => {
           <TabsContent value="investment">
             <Card>
               <CardHeader>
-                <CardTitle>Investment Fund Options</CardTitle>
-                <CardDescription>
-                  Click any fund to see details &amp; opportunities.
-                </CardDescription>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <CardTitle>My Investment Portfolio</CardTitle>
+                    <CardDescription>
+                      These are the investments you have made
+                    </CardDescription>
+                  </div>
+                  <Link to="/user/new-deals">
+                    <Button className="bg-gold hover:bg-lightgold text-white flex items-center gap-2">
+                      <Plus className="h-4 w-4" /> Add Investment
+                    </Button>
+                  </Link>
+                </div>
                 <div className="flex flex-wrap gap-2 mt-4">
                   {FUNDS.map((fund) => (
                     <button
@@ -359,10 +336,21 @@ const UserProfile = () => {
               <CardContent>
                 <FundAccordion funds={FUNDS} />
                 <div id="fund-opportunity-list" className="pt-6">
+                  <h3 className="text-lg font-semibold mb-4">My Investments in These Funds</h3>
                   <FundOpportunities
                     fundId={activeFundTab}
-                    opportunities={opportunities}
+                    opportunities={userInvestments}
                   />
+                  {userInvestments.filter(opp => opp.fundId === activeFundTab).length === 0 && (
+                    <div className="text-center py-8 bg-gray-50 rounded-md border">
+                      <p className="text-muted-foreground">You haven't invested in this fund yet.</p>
+                      <Link to="/user/new-deals">
+                        <Button className="mt-4 bg-gold hover:bg-lightgold text-white">
+                          Browse Investment Opportunities
+                        </Button>
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
