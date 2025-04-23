@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import AdminLayout from "@/components/layout/AdminLayout";
 import { Button } from "@/components/ui/button";
@@ -209,15 +208,25 @@ const AdminDeals = () => {
   );
 
   const checkDealProgress = (deal: Deal) => {
-    if (deal.progress === 100 && (!deal.companyRegistered || !deal.prospectusIssued)) {
-      const emailContent = `Deal "${deal.name}" has reached 100% completion and requires further processing:
-      ${!deal.companyRegistered ? '- Company registration needed\n' : ''}
-      ${!deal.prospectusIssued ? '- Prospectus lodgement needed\n' : ''}`;
+    if (deal.progress === 100) {
+      const updatedDeals = deals.map(d => {
+        if (d.id === deal.id && d.status === "Pending") {
+          return { ...d, status: "Needs Action" };
+        }
+        return d;
+      });
+      setDeals(updatedDeals);
 
-      toast.info("Notification emails will be sent to administrators and users");
-      console.log("Would send email to:", "info@madunacas.com");
-      console.log("Would send email to user accounts");
-      console.log("Email content:", emailContent);
+      if (!deal.companyRegistered || !deal.prospectusIssued) {
+        const emailContent = `Deal "${deal.name}" has reached 100% completion and requires further processing:
+        ${!deal.companyRegistered ? '- Company registration needed\n' : ''}
+        ${!deal.prospectusIssued ? '- Prospectus lodgement needed\n' : ''}`;
+
+        toast.info("Notification emails will be sent to administrators and users");
+        console.log("Would send email to:", "info@madunacas.com");
+        console.log("Would send email to user accounts");
+        console.log("Email content:", emailContent);
+      }
     }
   };
 
@@ -234,7 +243,7 @@ const AdminDeals = () => {
       fund: newDeal.fund,
       value: parseInt(newDeal.value),
       investors: 0,
-      status: "New",
+      status: "Pending",
       location: newDeal.location,
       progress: 0,
       companyRegistered: false,
