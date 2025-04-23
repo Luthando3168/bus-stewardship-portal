@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -15,36 +15,66 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [authError, setAuthError] = useState<string | null>(null);
   const { signIn } = useAuth();
   const navigate = useNavigate();
   
+  // Check for auth error in URL when redirected back from OAuth
+  useEffect(() => {
+    const hashParams = new URLSearchParams(window.location.hash.substring(1));
+    const error = hashParams.get("error_description") || hashParams.get("error");
+    
+    if (error) {
+      console.error("Auth error from redirect:", error);
+      setAuthError(error);
+      toast.error(`Login failed: ${error}`);
+    }
+  }, []);
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await signIn(email, password);
+    setAuthError(null);
+    try {
+      setIsLoading(true);
+      await signIn(email, password);
+    } catch (error) {
+      console.error("Form login error:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleSocialLogin = async (provider: 'google' | 'apple' | 'facebook') => {
     try {
       setIsLoading(true);
+      setAuthError(null);
+
+      // Get the current URL to use as base for the redirect
+      const redirectTo = `${window.location.origin}/login`;
+      console.log(`Attempting ${provider} login with redirect to:`, redirectTo);
+
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: provider,
         options: {
-          redirectTo: `${window.location.origin}/login`,
+          redirectTo: redirectTo,
+          queryParams: {
+            prompt: 'select_account' // Force Google account selection each time
+          }
         }
       });
       
       if (error) {
-        console.error("Social login error:", error);
         throw error;
       }
       
       // If we have a URL to redirect to, do it
       if (data?.url) {
-        console.log("Redirecting to:", data.url);
+        console.log("Redirecting to OAuth provider URL:", data.url);
         window.location.href = data.url;
       }
     } catch (error: any) {
-      console.error("Social login error details:", error);
+      console.error("Social login error:", error);
+      setAuthError(error.message);
       toast.error(`Login failed: ${error.message}`);
     } finally {
       setIsLoading(false);
@@ -64,6 +94,12 @@ const Login = () => {
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
+            {authError && (
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
+                <p className="text-sm">{authError}</p>
+              </div>
+            )}
+            
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -100,8 +136,12 @@ const Login = () => {
               />
             </div>
             
-            <Button type="submit" className="w-full bg-gold hover:bg-lightgold text-white">
-              Sign In
+            <Button 
+              type="submit" 
+              className="w-full bg-gold hover:bg-lightgold text-white"
+              disabled={isLoading}
+            >
+              {isLoading ? "Signing in..." : "Sign In"}
             </Button>
 
             <div className="relative">

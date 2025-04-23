@@ -29,13 +29,36 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, currentSession) => {
+        console.log(`Auth event: ${event}`, currentSession?.user?.id || 'No user');
+        
         if (currentSession) {
           setSession(currentSession);
           const authUser = mapSupabaseUser(currentSession.user);
           setUser(authUser);
+          
+          // Only show toast and redirect on specific auth events
+          if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+            const isAdmin = authUser?.role === 'admin';
+            
+            // Only redirect if they're on auth pages
+            const currentPath = window.location.pathname;
+            if (currentPath === '/login' || currentPath === '/register' || currentPath === '/') {
+              const redirectPath = isAdmin ? '/admin/dashboard' : '/user/dashboard';
+              console.log(`Redirecting to ${redirectPath}`);
+              setTimeout(() => {
+                navigate(redirectPath);
+                toast.success('Successfully signed in');
+              }, 0);
+            }
+          }
         } else {
           setSession(null);
           setUser(null);
+          
+          if (event === 'SIGNED_OUT') {
+            toast.success('Successfully signed out');
+            navigate('/login');
+          }
         }
         
         setLoading(false);
@@ -44,6 +67,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     // Check for existing session
     supabase.auth.getSession().then(({ data: { session: currentSession } }) => {
+      console.log("Existing session check:", currentSession?.user?.id || 'No session');
       if (currentSession) {
         setSession(currentSession);
         const authUser = mapSupabaseUser(currentSession.user);
@@ -53,12 +77,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     });
 
     return () => subscription.unsubscribe();
-  }, []);
+  }, [navigate]);
 
   // Add session refresh logic
   useEffect(() => {
     const refreshTimeout = setTimeout(() => {
       if (session) {
+        console.log("Refreshing session token");
         supabase.auth.refreshSession().then(({ data }) => {
           if (data.session) {
             setSession(data.session);
@@ -74,31 +99,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const signIn = async (email: string, password: string) => {
     try {
+      console.log(`Attempting to sign in with email: ${email}`);
       const { data, error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) throw error;
       
-      if (data?.session) {
-        setSession(data.session);
-        const authUser = mapSupabaseUser(data.session.user);
-        if (authUser) {
-          setUser(authUser);
-          navigate('/admin/dashboard');
-          toast.success('Successfully signed in');
-        }
-      }
+      // Don't need to navigate here - the onAuthStateChange will handle that
+      console.log("Sign in successful", data.user?.id);
     } catch (error: any) {
       console.error("Sign in error:", error);
       toast.error("Invalid email or password");
+      throw error;
     }
   };
 
   const signOut = async () => {
     try {
       await supabase.auth.signOut();
-      setSession(null);
-      setUser(null);
-      navigate('/login');
-      toast.success('Successfully signed out');
+      // Don't need to navigate here - the onAuthStateChange will handle that
     } catch (error: any) {
       console.error("Sign out error:", error);
       toast.error("Failed to sign out");
