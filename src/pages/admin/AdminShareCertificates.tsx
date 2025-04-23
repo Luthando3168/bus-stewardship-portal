@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import AdminLayout from "@/components/layout/AdminLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -10,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CertificateActions } from "@/components/admin/certificates/CertificateActions";
+import { useToast } from "@/hooks/use-toast";
 
 // Define our certificate type
 interface Certificate {
@@ -97,6 +99,10 @@ const AdminShareCertificates = () => {
   const [selectedFund, setSelectedFund] = useState<string>("all");
   const [selectedCompany, setSelectedCompany] = useState<string>("all");
   const [viewingCertificate, setViewingCertificate] = useState<string | null>(null);
+  const { toast } = useToast();
+  
+  // Define selectedCertificate state
+  const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
   
   const allCertificates = Object.values(fundCertificatesData).flat();
   const fundsList = Object.keys(fundCertificatesData);
@@ -130,6 +136,12 @@ const AdminShareCertificates = () => {
         cert.id === certificateId ? { ...cert, status: newStatus } : cert
       );
     });
+    
+    // Show toast notification
+    toast({
+      title: `Certificate ${certificateId}`,
+      description: `Status changed to ${newStatus}`,
+    });
   };
 
   // Group certificates by company within each fund with proper typing
@@ -146,6 +158,16 @@ const AdminShareCertificates = () => {
       });
     });
   });
+  
+  // Update the effect to set selectedCertificate when viewingCertificate changes
+  useEffect(() => {
+    if (viewingCertificate) {
+      const certificate = allCertificates.find(cert => cert.id === viewingCertificate);
+      setSelectedCertificate(certificate || null);
+    } else {
+      setSelectedCertificate(null);
+    }
+  }, [viewingCertificate, allCertificates]);
 
   return (
     <AdminLayout>
