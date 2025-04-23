@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
+import { EmailLogo, baseEmailStyles } from './BaseEmailTemplate';
 
 const WelcomeEmailPreview = () => {
   const fullName = "John Doe"; // Example name
@@ -9,15 +10,8 @@ const WelcomeEmailPreview = () => {
       <Card>
         <CardContent className="p-6">
           <div style={{backgroundColor: '#ffffff', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif'}}>
-            <div style={{margin: '0 auto', padding: '20px 0 48px', maxWidth: '600px'}}>
-              <div style={{textAlign: 'center', padding: '20px 0', marginBottom: '24px'}}>
-                <img
-                  src="/lovable-uploads/4f2d889e-ba23-463a-9efe-bc8453a5e5b2.png"
-                  width="250"
-                  height="auto"
-                  alt="Luthando Maduna Chartered Accountants"
-                />
-              </div>
+            <div style={baseEmailStyles.container}>
+              <EmailLogo />
 
               <h1 style={{color: '#1e3a8a', fontSize: '24px', fontWeight: '700', margin: '30px 0', padding: '0', textAlign: 'center'}}>
                 Welcome to Luthando Maduna Chartered Accountants (MCA Direct)!
