@@ -9,7 +9,294 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      client_documents: {
+        Row: {
+          client_id: string
+          document_path: string
+          document_type: string
+          id: string
+          rejection_reason: string | null
+          uploaded_at: string
+          verification_status: Database["public"]["Enums"]["verification_status"]
+          verified_at: string | null
+          verified_by: string | null
+        }
+        Insert: {
+          client_id: string
+          document_path: string
+          document_type: string
+          id?: string
+          rejection_reason?: string | null
+          uploaded_at?: string
+          verification_status?: Database["public"]["Enums"]["verification_status"]
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Update: {
+          client_id?: string
+          document_path?: string
+          document_type?: string
+          id?: string
+          rejection_reason?: string | null
+          uploaded_at?: string
+          verification_status?: Database["public"]["Enums"]["verification_status"]
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "client_documents_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      client_notes: {
+        Row: {
+          admin_id: string
+          client_id: string
+          created_at: string
+          id: string
+          note: string
+        }
+        Insert: {
+          admin_id: string
+          client_id: string
+          created_at?: string
+          id?: string
+          note: string
+        }
+        Update: {
+          admin_id?: string
+          client_id?: string
+          created_at?: string
+          id?: string
+          note?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "client_notes_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      client_status_logs: {
+        Row: {
+          changed_by: string
+          client_id: string
+          created_at: string
+          id: string
+          new_status: Database["public"]["Enums"]["client_status"]
+          notes: string | null
+          previous_status: Database["public"]["Enums"]["client_status"]
+        }
+        Insert: {
+          changed_by: string
+          client_id: string
+          created_at?: string
+          id?: string
+          new_status: Database["public"]["Enums"]["client_status"]
+          notes?: string | null
+          previous_status: Database["public"]["Enums"]["client_status"]
+        }
+        Update: {
+          changed_by?: string
+          client_id?: string
+          created_at?: string
+          id?: string
+          new_status?: Database["public"]["Enums"]["client_status"]
+          notes?: string | null
+          previous_status?: Database["public"]["Enums"]["client_status"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "client_status_logs_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      clients: {
+        Row: {
+          address: string | null
+          approval_date: string | null
+          approval_notes: string | null
+          approved_by: string | null
+          city: string | null
+          created_at: string
+          documents_submitted: boolean | null
+          employer: string | null
+          employment_status: string | null
+          id: string
+          id_number: string | null
+          id_verification_status: Database["public"]["Enums"]["verification_status"]
+          income_bracket: string | null
+          is_two_factor_enabled: boolean | null
+          kyc_complete: boolean | null
+          nationality: string | null
+          occupation: string | null
+          pep: boolean | null
+          postal_code: string | null
+          province: string | null
+          rejection_reason: string | null
+          risk_profile: string | null
+          source_of_funds: string | null
+          status: Database["public"]["Enums"]["client_status"]
+          tax_country: string | null
+          tax_number: string | null
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          approval_date?: string | null
+          approval_notes?: string | null
+          approved_by?: string | null
+          city?: string | null
+          created_at?: string
+          documents_submitted?: boolean | null
+          employer?: string | null
+          employment_status?: string | null
+          id: string
+          id_number?: string | null
+          id_verification_status?: Database["public"]["Enums"]["verification_status"]
+          income_bracket?: string | null
+          is_two_factor_enabled?: boolean | null
+          kyc_complete?: boolean | null
+          nationality?: string | null
+          occupation?: string | null
+          pep?: boolean | null
+          postal_code?: string | null
+          province?: string | null
+          rejection_reason?: string | null
+          risk_profile?: string | null
+          source_of_funds?: string | null
+          status?: Database["public"]["Enums"]["client_status"]
+          tax_country?: string | null
+          tax_number?: string | null
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          approval_date?: string | null
+          approval_notes?: string | null
+          approved_by?: string | null
+          city?: string | null
+          created_at?: string
+          documents_submitted?: boolean | null
+          employer?: string | null
+          employment_status?: string | null
+          id?: string
+          id_number?: string | null
+          id_verification_status?: Database["public"]["Enums"]["verification_status"]
+          income_bracket?: string | null
+          is_two_factor_enabled?: boolean | null
+          kyc_complete?: boolean | null
+          nationality?: string | null
+          occupation?: string | null
+          pep?: boolean | null
+          postal_code?: string | null
+          province?: string | null
+          rejection_reason?: string | null
+          risk_profile?: string | null
+          source_of_funds?: string | null
+          status?: Database["public"]["Enums"]["client_status"]
+          tax_country?: string | null
+          tax_number?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      email_templates: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          subject: string
+          template_type: string
+          updated_at: string
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          id?: string
+          subject: string
+          template_type: string
+          updated_at?: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          subject?: string
+          template_type?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          client_number: string | null
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          phone: string | null
+          updated_at: string
+        }
+        Insert: {
+          client_number?: string | null
+          created_at?: string
+          email: string
+          full_name: string
+          id: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          client_number?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      verification_codes: {
+        Row: {
+          code: string
+          created_at: string
+          expires_at: string
+          id: string
+          user_id: string
+          verified: boolean | null
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          expires_at: string
+          id?: string
+          user_id: string
+          verified?: boolean | null
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          expires_at?: string
+          id?: string
+          user_id?: string
+          verified?: boolean | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -18,7 +305,16 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      client_status:
+        | "pending_registration"
+        | "verification_pending"
+        | "background_check"
+        | "pending_approval"
+        | "approved"
+        | "active"
+        | "rejected"
+        | "suspended"
+      verification_status: "not_submitted" | "pending" | "verified" | "rejected"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -133,6 +429,18 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      client_status: [
+        "pending_registration",
+        "verification_pending",
+        "background_check",
+        "pending_approval",
+        "approved",
+        "active",
+        "rejected",
+        "suspended",
+      ],
+      verification_status: ["not_submitted", "pending", "verified", "rejected"],
+    },
   },
 } as const
