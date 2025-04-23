@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -79,7 +78,7 @@ const Bus = () => {
           </div>
 
           <div className="max-w-4xl mx-auto mt-8 md:mt-12 space-y-12 md:space-y-16">
-            {/* Introduction with Professional Images */}
+            {/* Introduction */}
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="text-charcoal space-y-4">
                 <p className="text-mobile-base md:text-lg">
@@ -99,13 +98,6 @@ const Bus = () => {
                   Our team of chartered accountants and business professionals takes on the operational management of your business,
                   allowing you to focus on strategic growth or pursue other ventures.
                 </p>
-                <div className="w-full h-48 md:h-64 overflow-hidden rounded-lg shadow-lg">
-                  <img
-                    src="https://images.unsplash.com/photo-1573496527892-904f897eb114"
-                    alt="Professional accountant working"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
               </div>
             </div>
 
@@ -124,7 +116,7 @@ const Bus = () => {
               </div>
             </div>
 
-            {/* How It Works with Professional Image */}
+            {/* How It Works */}
             <div>
               <h3 className="text-mobile-xl md:text-2xl font-bold text-navyblue mb-6 text-center">How It Works</h3>
               <div className="grid md:grid-cols-2 gap-8 items-center mb-8">
