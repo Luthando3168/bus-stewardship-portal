@@ -1,13 +1,15 @@
 
 import { Link } from "react-router-dom";
+import corporateBackground from "/public/lovable-uploads/ebe1f4b0-992c-4b60-ab22-243564b7b792.png";
 
 const Hero = () => {
   return (
-    <section className="relative bg-navyblue text-white py-20 md:py-32">
-      {/* Background pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="h-full w-full bg-[radial-gradient(#c5aa6a_1px,transparent_1px)] [background-size:20px_20px]"></div>
-      </div>
+    <section 
+      className="relative text-white py-20 md:py-32 bg-cover bg-center" 
+      style={{ backgroundImage: `url(${corporateBackground})` }}
+    >
+      {/* Overlay to ensure text readability */}
+      <div className="absolute inset-0 bg-black opacity-60"></div>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl animate-fade-in">
@@ -16,8 +18,7 @@ const Hero = () => {
             <span className="text-gold">Growing Your Wealth</span>
           </h1>
           <p className="font-lato text-lg md:text-xl mb-8 text-gray-300 max-w-2xl">
-            Luthando Maduna Chartered Accountants assists clients to own multiple businesses through our impact funds, 
-            which we then professionally manage to grow your wealth through our Business Under Stewardship program.
+            LMCA helps you own multiple businesses with MCA Direct.
           </p>
           
           <div className="flex flex-wrap gap-4">
