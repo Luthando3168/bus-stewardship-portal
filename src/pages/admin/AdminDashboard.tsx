@@ -1,8 +1,9 @@
+
 import React, { useState } from 'react';
 import AdminLayout from "@/components/layout/AdminLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { UsersIcon, FileChartLine, DollarSign, FilePdf, FileExcel } from "lucide-react";
+import { UsersIcon, FileChartLine, DollarSign, FileText, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -129,7 +130,7 @@ const AdminDashboard = () => {
                                 size="sm"
                                 onClick={() => exportInvestorsList('pdf')}
                               >
-                                <FilePdf className="h-4 w-4 mr-2" />
+                                <FileText className="h-4 w-4 mr-2" />
                                 Export PDF
                               </Button>
                               <Button
@@ -137,7 +138,7 @@ const AdminDashboard = () => {
                                 size="sm"
                                 onClick={() => exportInvestorsList('excel')}
                               >
-                                <FileExcel className="h-4 w-4 mr-2" />
+                                <Download className="h-4 w-4 mr-2" />
                                 Export Excel
                               </Button>
                             </div>
