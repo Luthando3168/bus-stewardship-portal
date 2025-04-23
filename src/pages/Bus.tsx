@@ -27,8 +27,8 @@ const Bus = () => {
       description: "You maintain ownership and strategic decision-making authority while we handle the operational complexities."
     },
     {
-      title: "Performance-Based Structure",
-      description: "Our fee structure aligns with your business success, creating a true partnership arrangement."
+      title: "Transparent Reporting",
+      description: "Quarterly financial statements delivered via MCA Direct and profit sharing twice yearly to keep you informed."
     },
     {
       title: "Multi-Business Integration",
@@ -42,20 +42,20 @@ const Bus = () => {
       description: "We assess your business needs, goals, and current operational structure."
     },
     {
-      step: "Diagnostic Review",
-      description: "Our team conducts a comprehensive analysis of your business finances, operations, and growth potential."
+      step: "Business Selection",
+      description: "Browse our Impact Funds and choose the businesses you want to own through MCA Direct."
     },
     {
       step: "Stewardship Agreement",
       description: "We establish a formal agreement outlining management responsibilities, reporting structures, and fee arrangements."
     },
     {
-      step: "Transition Period",
+      step: "Transition to Management",
       description: "We implement systems and processes to ensure a smooth transition to professional management."
     },
     {
       step: "Ongoing Management & Reporting",
-      description: "Our team manages day-to-day operations and provides you with regular updates. You'll receive quarterly financial statements via MCA Direct and profit-sharing takes place twice yearly."
+      description: "Our team manages day-to-day operations. You'll receive quarterly financial statements via MCA Direct and profit-sharing takes place twice yearly."
     }
   ];
 
@@ -73,7 +73,7 @@ const Bus = () => {
           <div className="flex justify-center">
             <div className="bg-lightgray rounded-lg p-6 mt-4 mb-8 text-center max-w-3xl w-full">
               <p className="text-lg font-semibold text-navyblue">
-                Under the BUS program, once you've selected the businesses you want to own, our team manages these on your behalf. We provide regular updates and send you quarterly financial statements via MCA Direct. Profit sharing occurs every six months, so you benefit directly from your business ownership while we handle day-to-day management.
+                Under the BUS program, once you've selected the businesses you want to own, our team professionally manages these on your behalf. You'll receive regular updates and quarterly financial statements via MCA Direct. Profit sharing occurs twice a year, so you benefit directly from your business ownership while we handle the day-to-day management.
               </p>
             </div>
           </div>
@@ -90,13 +90,13 @@ const Bus = () => {
               <p>
                 This innovative approach bridges the gap between complete ownership burden and selling your business,
                 providing a "third way" that combines the benefits of professional management with the wealth creation
-                potential of continued ownership. With periodic reporting, quarterly financials, and twice-yearly profit sharing, you can confidently build lasting wealth.
+                potential of continued ownership. With regular reporting, quarterly financial statements via MCA Direct, and twice-yearly profit sharing, you can confidently build lasting wealth.
               </p>
             </div>
 
             {/* Benefits */}
             <div>
-              <h3 className="text-2xl font-bold text-navyblue mb-6">Key Benefits</h3>
+              <h3 className="text-2xl font-bold text-navyblue mb-6 text-center">Key Benefits</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {benefits.map((benefit, index) => (
                   <div key={index} className="flex items-start">
@@ -111,7 +111,7 @@ const Bus = () => {
 
             {/* How It Works */}
             <div>
-              <h3 className="text-2xl font-bold text-navyblue mb-6">How It Works</h3>
+              <h3 className="text-2xl font-bold text-navyblue mb-6 text-center">How It Works</h3>
               <div className="space-y-8">
                 {steps.map((step, index) => (
                   <div key={index} className="flex">
@@ -129,7 +129,7 @@ const Bus = () => {
 
             {/* Features */}
             <div>
-              <h3 className="text-2xl font-bold text-navyblue mb-6">Program Features</h3>
+              <h3 className="text-2xl font-bold text-navyblue mb-6 text-center">Program Features</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {features.map((feature, index) => (
                   <Card key={index}>
@@ -146,7 +146,7 @@ const Bus = () => {
             <div className="flex justify-center">
               <div className="bg-lightgray p-8 rounded-lg text-center max-w-2xl w-full">
                 <h3 className="text-2xl font-bold text-navyblue mb-4">Ready to transform your business management?</h3>
-                <p className="mb-6">Contact us today to learn how the BUS program can benefit your business with full professional management, clear financial reporting, and profit-sharing opportunities.</p>
+                <p className="mb-6">Contact us today to learn how the BUS program can benefit you with full professional management, quarterly financial reporting via MCA Direct, and twice-yearly profit-sharing opportunities.</p>
                 <a
                   href="/contact"
                   className="inline-block px-6 py-3 bg-gold text-white rounded font-medium hover:bg-lightgold transition-colors"

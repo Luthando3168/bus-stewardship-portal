@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Layout from "@/components/layout/Layout";
@@ -38,7 +39,7 @@ const HowWeWork = () => {
     {
       title: "Professional Management (BUS Program)",
       description:
-        "Once you have selected businesses to own, Luthando Maduna (via the BUS program) professionally manages these businesses on your behalf. You receive regular updates and quarterly financial statements through MCA Direct, and profit-sharing payments are distributed twice annually.",
+        "Once you have selected businesses to own, Luthando Maduna (via the BUS program) professionally manages these businesses on your behalf. You receive quarterly financial statements through MCA Direct, and profit-sharing payments are distributed twice annually.",
       icon: Circle
     },
     {
@@ -64,7 +65,7 @@ const HowWeWork = () => {
           />
 
           <div className="max-w-4xl mx-auto mb-16">
-            <h2 className="text-2xl font-montserrat font-bold mb-4 text-navyblue">Why We Exist</h2>
+            <h2 className="text-2xl font-montserrat font-bold mb-4 text-navyblue text-center">Why We Exist</h2>
             <p className="mb-4">
               At Luthando Maduna Chartered Accountants, we exist to solve a fundamental economic imbalance: <strong>the majority of our population does not own the businesses they consume services from monthly</strong>.
             </p>
@@ -85,8 +86,8 @@ const HowWeWork = () => {
 
           <div className="max-w-4xl mx-auto mb-16 bg-white shadow-md rounded-lg overflow-hidden">
             <div className="p-6 border-b border-gray-200">
-              <h2 className="text-2xl font-montserrat font-bold mb-2 text-navyblue">The Reality of Monthly Income</h2>
-              <p className="mb-4">
+              <h2 className="text-2xl font-montserrat font-bold mb-2 text-navyblue text-center">The Reality of Monthly Income</h2>
+              <p className="mb-4 text-center">
                 Consider an ordinary person living in Tsakane taking home R22,000 per month. Here's how their money is typically spent:
               </p>
             </div>
@@ -121,17 +122,17 @@ const HowWeWork = () => {
             </Table>
 
             <div className="p-6 bg-lightgray">
-              <p className="mb-2 font-semibold">
+              <p className="mb-2 font-semibold text-center">
                 As you can see, after all monthly expenses, there's virtually nothing left for wealth building or investments.
               </p>
-              <p>
+              <p className="text-center">
                 This cycle keeps many South Africans in a perpetual state of consumption without ownership, limiting their ability to build lasting wealth.
               </p>
             </div>
           </div>
 
           <div className="max-w-4xl mx-auto mb-16">
-            <h2 className="text-2xl font-montserrat font-bold mb-4 text-navyblue">Our Solution: MCA Direct</h2>
+            <h2 className="text-2xl font-montserrat font-bold mb-4 text-navyblue text-center">Our Solution: MCA Direct</h2>
             <p className="mb-4">
               Luthando Maduna Chartered Accountants has developed a groundbreaking approach called <strong>MCA Direct</strong> that allows everyday people to invest in businesses they regularly support.
             </p>

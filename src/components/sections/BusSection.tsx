@@ -13,12 +13,12 @@ const BusSection = () => {
       description: "Comprehensive financial management including accounting, bookkeeping, and tax compliance."
     },
     {
-      title: "Business Development",
-      description: "Strategic guidance to help your business grow and expand into new markets."
+      title: "Regular Reporting",
+      description: "Quarterly financial statements delivered via MCA Direct and bi-annual profit sharing distributions."
     },
     {
-      title: "Regulatory Compliance",
-      description: "Ensuring your business meets all legal and regulatory requirements."
+      title: "Business Development",
+      description: "Strategic guidance to help your business grow and expand into new markets."
     }
   ];
 
@@ -33,8 +33,14 @@ const BusSection = () => {
             />
 
             <p className="font-lato text-charcoal mb-6">
-              The Business Under Stewardship (BUS) program is our flagship service where we manage the daily operations of your businesses while providing comprehensive professional services.
+              The Business Under Stewardship (BUS) program is our flagship service where we professionally manage businesses that you select to own, while providing you with regular financial updates and profit distributions.
             </p>
+
+            <div className="bg-lightgray rounded-lg p-5 mb-6 text-center">
+              <p className="font-semibold text-navyblue">
+                Once you select businesses to own, our team manages these on your behalf. You'll receive quarterly financial statements via MCA Direct and profit sharing occurs twice a year.
+              </p>
+            </div>
 
             <ul className="space-y-6 mb-8">
               {features.map((feature, index) => (
@@ -50,12 +56,14 @@ const BusSection = () => {
               ))}
             </ul>
 
-            <Link
-              to="/bus"
-              className="font-montserrat inline-block px-6 py-3 bg-navyblue text-white rounded font-medium hover:bg-deepblue transition-colors"
-            >
-              Learn More About BUS Program
-            </Link>
+            <div className="text-center">
+              <Link
+                to="/bus"
+                className="font-montserrat inline-block px-6 py-3 bg-navyblue text-white rounded font-medium hover:bg-deepblue transition-colors"
+              >
+                Learn More About BUS Program
+              </Link>
+            </div>
           </div>
 
           <div className="relative">
