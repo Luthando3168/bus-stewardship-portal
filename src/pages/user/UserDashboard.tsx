@@ -1,9 +1,9 @@
 
+import React, { useEffect, useState } from "react";
 import UserLayout from "@/components/layout/UserLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Wallet, FileText, ChartPie } from "lucide-react";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
@@ -11,63 +11,63 @@ import { Button } from "@/components/ui/button";
 const impactFunds = [
   {
     id: "myfarm",
-    name: "MyFarm Impact Fund",
+    name: "MyFarm", // Removed "Impact Fund"
     color: "bg-gradient-to-br from-green-700 to-green-900",
     minInvestment: "R 5,000",
     count: 3,
   },
   {
     id: "myproperty",
-    name: "MyProperty Impact Fund",
+    name: "MyProperty", // Removed "Impact Fund"
     color: "bg-gradient-to-br from-blue-700 to-blue-900",
     minInvestment: "R 10,000",
     count: 3,
   },
   {
     id: "myfranchise",
-    name: "MyFranchise Impact Fund",
+    name: "MyFranchise", // Removed "Impact Fund"
     color: "bg-gradient-to-br from-red-600 to-red-800",
     minInvestment: "R 5,000",
     count: 3,
   },
   {
     id: "myfoodretail",
-    name: "MyFoodRetail Impact Fund",
+    name: "MyFoodRetail", // Removed "Impact Fund"
     color: "bg-gradient-to-br from-yellow-600 to-yellow-800",
     minInvestment: "R 5,000",
     count: 2,
   },
   {
     id: "myenergy",
-    name: "MyEnergy Impact Fund",
+    name: "MyEnergy", // Removed "Impact Fund"
     color: "bg-gradient-to-br from-orange-600 to-amber-900",
     minInvestment: "R 3,000",
     count: 2,
   },
   {
     id: "myhealth",
-    name: "MyHealth Impact Fund",
+    name: "MyHealth", // Removed "Impact Fund"
     color: "bg-gradient-to-br from-pink-600 to-pink-900",
     minInvestment: "R 2,500",
     count: 2,
   },
   {
     id: "mytech",
-    name: "MyTech Impact Fund",
+    name: "MyTech", // Removed "Impact Fund"
     color: "bg-gradient-to-br from-purple-600 to-violet-900",
     minInvestment: "R 4,000",
     count: 2,
   },
   {
     id: "myeducation",
-    name: "MyEducation Impact Fund",
+    name: "MyEducation", // Removed "Impact Fund"
     color: "bg-gradient-to-br from-indigo-700 to-indigo-900",
     minInvestment: "R 1,500",
     count: 2,
   },
   {
     id: "mytelco",
-    name: "MyTelco Impact Fund",
+    name: "MyTelco", // Removed "Impact Fund"
     color: "bg-gradient-to-br from-blue-500 to-blue-800",
     minInvestment: "R 2,500",
     count: 2,
