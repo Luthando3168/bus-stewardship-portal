@@ -6,12 +6,12 @@ import {
   Head,
   Heading,
   Html,
-  Img,
   Link,
   Preview,
   Section,
   Text,
-} from 'npm:@react-email/components@0.0.22';
+  Img,
+} from '@react-email/components';
 
 interface RegistrationApprovedEmailProps {
   fullName: string;
