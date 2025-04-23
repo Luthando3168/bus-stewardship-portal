@@ -1,90 +1,66 @@
-
-import React from "react";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import React from 'react';
+import { ChevronDown } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Button } from "@/components/ui/button";
-import { ChevronDown, ChevronUp, Plus } from "lucide-react";
-
-interface Business {
-  id: string;
-  title: string;
-  region: string;
-  description: string;
-  minInvestment: number;
-}
 
 interface BusinessCardProps {
-  business: Business;
+  business: any;
   expanded: boolean;
   fundName: string;
   onToggle: (id: string) => void;
-  onAddToCart: (business: Business, fundName: string) => void;
+  onAddToCart: (business: any, fundName: string) => void;
 }
 
-const BusinessCard = ({
-  business,
-  expanded,
-  fundName,
-  onToggle,
-  onAddToCart,
-}: BusinessCardProps) => (
-  <Card className="overflow-hidden animate-fade-in hover:shadow-md transition-shadow">
-    <CardHeader className="pb-2">
-      <div className="flex justify-between items-start">
+const BusinessCard = ({ 
+  business, 
+  expanded, 
+  fundName, 
+  onToggle, 
+  onAddToCart 
+}: BusinessCardProps) => {
+  return (
+    <div className="border rounded-lg p-4 bg-white">
+      <div className="flex justify-between items-center">
         <div>
-          <CardTitle className="text-lg text-navyblue">{business.title}</CardTitle>
-          <CardDescription className="text-sm mt-1">{business.region}</CardDescription>
+          <h3 className="text-lg font-semibold text-navyblue">{business.title}</h3>
+          <p className="text-sm text-muted-foreground">{business.region}</p>
         </div>
-        <Badge variant="secondary" className="bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100">
-          {fundName.replace(" Impact Fund", "")}
-        </Badge>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button 
+                onClick={() => onToggle(business.id)}
+                className="flex items-center text-blue-600 hover:text-blue-800"
+              >
+                <span className="mr-1 text-sm">View More</span>
+                <ChevronDown 
+                  className={`transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`} 
+                  size={20} 
+                />
+              </button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Click to see more details about this business</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </div>
-    </CardHeader>
-    
-    <CardContent className="pb-2 pt-0">
-      {!expanded && (
-        <p className="text-sm line-clamp-2 text-muted-foreground">
-          {business.description}
-        </p>
-      )}
-      
+
       {expanded && (
-        <>
-          <p className="text-sm mb-4">{business.description}</p>
-          <div>
-            <p className="text-sm text-muted-foreground mb-1">Minimum Investment</p>
-            <p className="font-medium text-navyblue">R {business.minInvestment.toLocaleString()}</p>
+        <div className="mt-4">
+          <p className="text-sm text-gray-700 mb-3">{business.description}</p>
+          <div className="flex justify-between items-center">
+            <div className="text-sm text-gray-600">
+              Min. Investment: <span className="font-semibold">R {business.minInvestment.toLocaleString()}</span>
+            </div>
+            <Button size="sm" onClick={() => onAddToCart(business, fundName)}>
+              Add to Cart
+            </Button>
           </div>
-        </>
+        </div>
       )}
-    </CardContent>
-    
-    <CardFooter className="pt-2 flex justify-between items-center">
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => onToggle(business.id)}
-        className="text-navyblue hover:text-navyblue/80"
-      >
-        {expanded ? (
-          <span className="flex items-center gap-1">View Less <ChevronUp size={16} /></span>
-        ) : (
-          <span className="flex items-center gap-1">View More <ChevronDown size={16} /></span>
-        )}
-      </Button>
-      
-      {expanded && (
-        <Button
-          className="bg-gold hover:bg-lightgold text-white"
-          size="sm"
-          onClick={() => onAddToCart(business, fundName)}
-        >
-          <Plus size={14} className="mr-1" />
-          Add to Cart
-        </Button>
-      )}
-    </CardFooter>
-  </Card>
-);
+    </div>
+  );
+};
 
 export default BusinessCard;
