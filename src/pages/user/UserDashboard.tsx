@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
-// Simplified impact funds for the dashboard
+// Extended impact funds for the dashboard (up to mytelco)
 const impactFunds = [
   {
     id: "myfarm",
@@ -29,27 +29,86 @@ const impactFunds = [
     color: "bg-gradient-to-br from-red-600 to-red-800",
     minInvestment: "R 5,000",
     count: 3,
+  },
+  {
+    id: "myfoodretail",
+    name: "MyFoodRetail Impact Fund",
+    color: "bg-gradient-to-br from-yellow-600 to-yellow-800",
+    minInvestment: "R 5,000",
+    count: 2,
+  },
+  {
+    id: "myenergy",
+    name: "MyEnergy Impact Fund",
+    color: "bg-gradient-to-br from-orange-600 to-amber-900",
+    minInvestment: "R 3,000",
+    count: 2,
+  },
+  {
+    id: "myhealth",
+    name: "MyHealth Impact Fund",
+    color: "bg-gradient-to-br from-pink-600 to-pink-900",
+    minInvestment: "R 2,500",
+    count: 2,
+  },
+  {
+    id: "mytech",
+    name: "MyTech Impact Fund",
+    color: "bg-gradient-to-br from-purple-600 to-violet-900",
+    minInvestment: "R 4,000",
+    count: 2,
+  },
+  {
+    id: "myeducation",
+    name: "MyEducation Impact Fund",
+    color: "bg-gradient-to-br from-indigo-700 to-indigo-900",
+    minInvestment: "R 1,500",
+    count: 2,
+  },
+  {
+    id: "mytelco",
+    name: "MyTelco Impact Fund",
+    color: "bg-gradient-to-br from-blue-500 to-blue-800",
+    minInvestment: "R 2,500",
+    count: 2,
   }
 ];
 
 const UserDashboard = () => {
   const [userName, setUserName] = useState("");
   const [userSurname, setUserSurname] = useState("");
-  
+  const [clientNumber, setClientNumber] = useState("");
+
   useEffect(() => {
     // Get user details from localStorage
     const storedName = localStorage.getItem("userName") || "";
     const storedSurname = localStorage.getItem("userSurname") || "";
     setUserName(storedName);
     setUserSurname(storedSurname);
+
+    const storedClientNumber = localStorage.getItem("clientNumber") || "N/A";
+    setClientNumber(storedClientNumber);
   }, []);
 
   return (
     <UserLayout>
       <div className="space-y-6">
-        <h2 className="text-2xl font-bold text-navyblue">
-          Welcome, {userName} {userSurname}
-        </h2>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+          <h2 className="text-2xl font-bold text-navyblue">
+            Welcome, {userName} {userSurname}
+          </h2>
+          <div className="text-sm text-muted-foreground">
+            Client Number: <span className="font-medium">{clientNumber}</span>
+          </div>
+        </div>
+
+        {/* Intro title + explanation */}
+        <div className="bg-blue-100 px-4 py-3 rounded border border-blue-200 mb-3">
+          <h3 className="text-navyblue text-lg font-semibold mb-1">Investment Opportunities</h3>
+          <p className="text-muted-foreground text-sm">
+            Choose from a wide selection of impact funds to grow your portfolio and support projects that drive positive change.
+          </p>
+        </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card>
@@ -101,7 +160,7 @@ const UserDashboard = () => {
         
         <div>
           <h3 className="text-lg font-semibold mb-4">Our Impact Funds</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {impactFunds.map((fund) => (
               <div
                 key={fund.id}
@@ -214,3 +273,5 @@ const UserDashboard = () => {
 };
 
 export default UserDashboard;
+
+// IMPORTANT: This file is now quite long (over 220 lines). Please consider asking me to refactor it into smaller focused files for easier maintenance.
