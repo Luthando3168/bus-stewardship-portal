@@ -34,7 +34,7 @@ const Header = () => {
       <header className="bg-white shadow-sm fixed top-0 left-0 w-full z-30">
         <div className="container mx-auto flex items-center justify-between py-2 px-4">
           <Link to="/" className="block">
-            <Logo />
+            <Logo size="small" />
           </Link>
 
           <button
@@ -51,74 +51,78 @@ const Header = () => {
                 className="fixed inset-0 bg-black bg-opacity-50 z-40"
                 onClick={() => setMenuOpen(false)}
               />
-              <div className="fixed top-0 right-0 h-full w-72 bg-white shadow-lg z-50 p-4 transform transition-transform duration-300 ease-in-out overflow-y-auto">
-                <div className="flex justify-end mb-6">
-                  <button onClick={() => setMenuOpen(false)} className="p-2">
-                    <X size={24} />
-                  </button>
-                </div>
-
-                <nav className="flex flex-col space-y-4">
-                  {navLinks.map(link => (
-                    <Link
-                      key={link.to}
-                      to={link.to}
-                      className={`flex items-center space-x-2 text-lg font-semibold ${
-                        isActive(link.to) ? 'text-gold' : 'text-navyblue'
-                      }`}
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      <link.icon size={20} />
-                      <span>{link.label}</span>
-                    </Link>
-                  ))}
-                </nav>
-
-                <div className="mt-8 pt-6 border-t border-gray-200">
-                  <div className="flex flex-col space-y-4">
-                    <a href="tel:+27123456789" className="flex items-center space-x-2 text-gray-600">
-                      <Phone size={20} />
-                      <span>+27 12 345 6789</span>
-                    </a>
-                    <a href="mailto:info@madunacas.com" className="flex items-center space-x-2 text-gray-600">
-                      <Mail size={20} />
-                      <span>info@madunacas.com</span>
-                    </a>
+              <div className="fixed top-0 right-0 h-full w-72 bg-white shadow-lg z-50 overflow-hidden">
+                <div className="flex flex-col h-full">
+                  <div className="p-4 border-b border-gray-100">
+                    <button onClick={() => setMenuOpen(false)} className="p-1">
+                      <X size={20} />
+                    </button>
                   </div>
-                </div>
 
-                <div className="mt-6 pt-6 border-t border-gray-200">
-                  <div className="flex justify-center space-x-6">
-                    {socialLinks.map(social => (
-                      <a
-                        key={social.label}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-600 hover:text-gold transition-colors"
+                  <div className="p-4 overflow-y-auto flex-1">
+                    <nav className="flex flex-col space-y-3">
+                      {navLinks.map(link => (
+                        <Link
+                          key={link.to}
+                          to={link.to}
+                          className={`flex items-center space-x-2 text-sm font-semibold ${
+                            isActive(link.to) ? 'text-gold' : 'text-navyblue'
+                          }`}
+                          onClick={() => setMenuOpen(false)}
+                        >
+                          <link.icon size={16} />
+                          <span>{link.label}</span>
+                        </Link>
+                      ))}
+                    </nav>
+
+                    <div className="mt-4 pt-4 border-t border-gray-100">
+                      <div className="flex flex-col space-y-3">
+                        <a href="tel:0620193208" className="flex items-center space-x-2 text-sm text-gray-600">
+                          <Phone size={16} />
+                          <span>062 019 3208</span>
+                        </a>
+                        <a href="mailto:info@madunacas.com" className="flex items-center space-x-2 text-sm text-gray-600">
+                          <Mail size={16} />
+                          <span>info@madunacas.com</span>
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="mt-4 pt-4 border-t border-gray-100">
+                      <div className="flex justify-center space-x-6">
+                        {socialLinks.map(social => (
+                          <a
+                            key={social.label}
+                            href={social.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-gray-600 hover:text-gold transition-colors"
+                          >
+                            <social.icon size={20} />
+                            <span className="sr-only">{social.label}</span>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-gray-100">
+                      <Link
+                        to="/login"
+                        className="bg-blue-600 text-white px-4 py-2 rounded text-sm font-semibold text-center"
+                        onClick={() => setMenuOpen(false)}
                       >
-                        <social.icon size={24} />
-                        <span className="sr-only">{social.label}</span>
-                      </a>
-                    ))}
+                        Login
+                      </Link>
+                      <Link
+                        to="/register"
+                        className="bg-blue-600 text-white px-4 py-2 rounded text-sm font-semibold text-center"
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        Register
+                      </Link>
+                    </div>
                   </div>
-                </div>
-
-                <div className="flex flex-col gap-2 mt-6 pt-6 border-t border-gray-200">
-                  <Link
-                    to="/login"
-                    className="bg-blue-600 text-white px-4 py-2 rounded font-semibold text-center"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    Login
-                  </Link>
-                  <Link
-                    to="/register"
-                    className="bg-blue-600 text-white px-4 py-2 rounded font-semibold text-center"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    Register
-                  </Link>
                 </div>
               </div>
             </>
