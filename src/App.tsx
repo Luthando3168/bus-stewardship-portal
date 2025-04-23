@@ -4,11 +4,11 @@ import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom
 import { Toaster } from "sonner";
 import Index from "@/pages/Index";
 import About from "@/pages/About";
+import HowWeWork from "@/pages/HowWeWork";
 import Services from "@/pages/Services";
 import Bus from "@/pages/Bus";
 import Foundation from "@/pages/Foundation";
 import ImpactFunds from "@/pages/ImpactFunds";
-import HowWeWork from "@/pages/HowWeWork";
 import Contact from "@/pages/Contact";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
@@ -59,11 +59,11 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<Index />} />
         <Route path="/about" element={<About />} />
+        <Route path="/how-we-work" element={<HowWeWork />} />
         <Route path="/services" element={<Services />} />
         <Route path="/bus" element={<Bus />} />
         <Route path="/foundation" element={<Foundation />} />
         <Route path="/impact-funds" element={<ImpactFunds />} />
-        <Route path="/how-we-work" element={<HowWeWork />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -103,3 +103,4 @@ function App() {
 }
 
 export default App;
+
