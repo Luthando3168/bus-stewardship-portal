@@ -101,7 +101,7 @@ function App() {
         <Route path="/funds/myfoodretail" element={<MyFoodRetailFund />} />
         <Route path="/funds/myenergy" element={<MyEnergyFund />} />
         <Route path="/funds/myhealth" element={<MyHealthFund />} />
-        <Route path="/funds/myeducation" element={<MySchoolFund />} />
+        <Route path="/funds/myschool" element={<MySchoolFund />} />
         <Route path="/funds/mytelco" element={<MyTelcoFund />} />
 
         {/* Protected user routes */}
