@@ -11,6 +11,7 @@ export const useRegister = () => {
   const navigate = useNavigate();
   const { sendUserNotification } = useNotifications();
 
+  // Enhanced password validation with detailed feedback
   const validatePassword = (password: string): { isValid: boolean; message: string } => {
     if (password.length < 12) {
       return { isValid: false, message: "Password must be at least 12 characters long" };
@@ -39,6 +40,7 @@ export const useRegister = () => {
     return { isValid: true, message: "" };
   };
 
+  // Enhanced registration handler with security improvements
   const handleRegister = async (
     email: string,
     password: string,
@@ -48,6 +50,7 @@ export const useRegister = () => {
   ) => {
     setErrorMessage("");
     
+    // Input validation with clear error messages
     if (!fullName.trim()) {
       setErrorMessage("Full name is required");
       toast.error("Full name is required");
@@ -70,6 +73,12 @@ export const useRegister = () => {
     if (!isAgreeTerms) {
       setErrorMessage("You must agree to the Terms and Conditions");
       toast.error("You must agree to the Terms and Conditions");
+      return;
+    }
+    
+    // Force HTTPS for production environments
+    if (window.location.protocol === 'http:' && !window.location.hostname.includes('localhost')) {
+      window.location.href = window.location.href.replace('http:', 'https:');
       return;
     }
     
@@ -104,7 +113,9 @@ export const useRegister = () => {
             const { data, error: welcomeError } = await supabase.functions.invoke('send-welcome', {
               body: { fullName, email },
               headers: {
-                Authorization: `Bearer ${accessToken}`
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+                'X-Client-Info': 'supabase-js/2.0.0'
               }
             });
 

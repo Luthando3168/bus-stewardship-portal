@@ -3,4 +3,3 @@ project_id = "tryalfcdjznmtqaxungq"
 
 [functions.send-welcome]
 verify_jwt = true
-

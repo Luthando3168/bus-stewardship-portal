@@ -12,8 +12,15 @@ const corsHeaders = {
 }
 
 serve(async (req) => {
+  // Enhanced CORS handling
   if (req.method === "OPTIONS") {
-    return new Response(null, { headers: corsHeaders })
+    return new Response(null, { 
+      headers: {
+        ...corsHeaders,
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Max-Age": "86400"
+      }
+    })
   }
 
   try {
@@ -26,8 +33,13 @@ serve(async (req) => {
 
     const { fullName, email } = await req.json()
 
-    if (!fullName || !email) {
-      throw new Error("Full name and email are required")
+    // Enhanced input validation
+    if (!fullName || typeof fullName !== 'string') {
+      throw new Error("Full name is required and must be a string")
+    }
+
+    if (!email || typeof email !== 'string' || !email.includes('@')) {
+      throw new Error("Valid email is required")
     }
 
     console.log(`Rendering email template for ${fullName} at ${email}`)
@@ -38,12 +50,18 @@ serve(async (req) => {
     
     console.log("Email HTML rendered successfully")
 
+    // Send email with strict content security policies
     const data = await resend.emails.send({
       from: "Luthando Maduna Chartered Accountants <info@madunacas.com>",
       to: [email],
       subject: "Welcome to Luthando Maduna Chartered Accountants",
       html: html,
-      reply_to: "info@madunacas.com"
+      reply_to: "info@madunacas.com",
+      headers: {
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+        "Content-Security-Policy": "default-src 'self'"
+      }
     })
 
     console.log("Email sending response:", data)
@@ -55,7 +73,11 @@ serve(async (req) => {
     console.log("Welcome email sent successfully")
 
     return new Response(JSON.stringify(data), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
+      headers: { 
+        ...corsHeaders, 
+        "Content-Type": "application/json",
+        "X-Content-Type-Options": "nosniff" 
+      },
       status: 200,
     })
   } catch (error) {
@@ -63,7 +85,11 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({ error: error.message }),
       {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        headers: { 
+          ...corsHeaders, 
+          "Content-Type": "application/json",
+          "X-Content-Type-Options": "nosniff" 
+        },
         status: 500,
       }
     )
