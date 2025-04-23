@@ -40,7 +40,7 @@ const UserSidebar = ({
       path: "/user/dashboard",
     },
     {
-      name: "Investment Opportunities",
+      name: "Business Opportunities",
       icon: <ShoppingBag size={20} />,
       path: "/user/new-deals",
     },
