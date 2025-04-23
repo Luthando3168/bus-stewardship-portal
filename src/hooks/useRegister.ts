@@ -1,12 +1,15 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { useNotifications } from "@/hooks/useNotifications"; // Import the notifications hook
 
 export const useRegister = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const { sendUserNotification } = useNotifications(); // Use the notifications hook
 
   const handleRegister = async (
     email: string,
@@ -40,7 +43,6 @@ export const useRegister = () => {
     try {
       console.log("Attempting to register user:", { email, fullName });
       
-      // Use only valid options for signUp - remove shouldCreateUser
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email,
         password,
@@ -48,7 +50,6 @@ export const useRegister = () => {
           data: {
             full_name: fullName,
           },
-          // Disable automatic redirect for email confirmation
           emailRedirectTo: undefined
         }
       });
@@ -58,25 +59,15 @@ export const useRegister = () => {
       console.log("Registration response:", authData);
 
       if (authData.user) {
-        try {
-          console.log("Attempting to send welcome email...");
-          toast.info("Sending welcome email...");
-          
-          const { data, error: welcomeError } = await supabase.functions.invoke('send-welcome', {
-            body: { email, fullName }
-          });
-
-          if (welcomeError) {
-            console.error("Failed to send welcome email:", welcomeError);
-            toast.error("Could not send welcome email: " + welcomeError.message);
-          } else {
-            console.log("Welcome email sent successfully:", data);
-            toast.success("Welcome email sent successfully!");
-          }
-        } catch (emailError) {
-          console.error("Error calling welcome email function:", emailError);
-          toast.error("Error sending welcome email: " + (emailError instanceof Error ? emailError.message : "Unknown error"));
-        }
+        // Send welcome notification
+        await sendUserNotification(
+          { 
+            fullName, 
+            email 
+          }, 
+          'welcome', 
+          ['email', 'whatsapp']
+        );
       }
       
       toast.success("Registration successful! Please check your email.");
