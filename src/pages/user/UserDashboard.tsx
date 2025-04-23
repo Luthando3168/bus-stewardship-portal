@@ -1,73 +1,72 @@
-
 import React, { useEffect, useState } from "react";
 import UserLayout from "@/components/layout/UserLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Wallet, FileText, ChartPie } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 // Extended impact funds for the dashboard (up to mytelco)
 const impactFunds = [
   {
     id: "myfarm",
-    name: "MyFarm", // Removed "Impact Fund"
+    name: "MyFarm",
     color: "bg-gradient-to-br from-green-700 to-green-900",
     minInvestment: "R 5,000",
     count: 3,
   },
   {
     id: "myproperty",
-    name: "MyProperty", // Removed "Impact Fund"
+    name: "MyProperty",
     color: "bg-gradient-to-br from-blue-700 to-blue-900",
     minInvestment: "R 10,000",
     count: 3,
   },
   {
     id: "myfranchise",
-    name: "MyFranchise", // Removed "Impact Fund"
+    name: "MyFranchise",
     color: "bg-gradient-to-br from-red-600 to-red-800",
     minInvestment: "R 5,000",
     count: 3,
   },
   {
     id: "myfoodretail",
-    name: "MyFoodRetail", // Removed "Impact Fund"
+    name: "MyFoodRetail",
     color: "bg-gradient-to-br from-yellow-600 to-yellow-800",
     minInvestment: "R 5,000",
     count: 2,
   },
   {
     id: "myenergy",
-    name: "MyEnergy", // Removed "Impact Fund"
+    name: "MyEnergy",
     color: "bg-gradient-to-br from-orange-600 to-amber-900",
     minInvestment: "R 3,000",
     count: 2,
   },
   {
     id: "myhealth",
-    name: "MyHealth", // Removed "Impact Fund"
+    name: "MyHealth",
     color: "bg-gradient-to-br from-pink-600 to-pink-900",
     minInvestment: "R 2,500",
     count: 2,
   },
   {
     id: "mytech",
-    name: "MyTech", // Removed "Impact Fund"
+    name: "MyTech",
     color: "bg-gradient-to-br from-purple-600 to-violet-900",
     minInvestment: "R 4,000",
     count: 2,
   },
   {
     id: "myeducation",
-    name: "MyEducation", // Removed "Impact Fund"
+    name: "MyEducation",
     color: "bg-gradient-to-br from-indigo-700 to-indigo-900",
     minInvestment: "R 1,500",
     count: 2,
   },
   {
     id: "mytelco",
-    name: "MyTelco", // Removed "Impact Fund"
+    name: "MyTelco",
     color: "bg-gradient-to-br from-blue-500 to-blue-800",
     minInvestment: "R 2,500",
     count: 2,
@@ -78,6 +77,7 @@ const UserDashboard = () => {
   const [userName, setUserName] = useState("");
   const [userSurname, setUserSurname] = useState("");
   const [clientNumber, setClientNumber] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Get user details from localStorage
@@ -89,6 +89,11 @@ const UserDashboard = () => {
     const storedClientNumber = localStorage.getItem("clientNumber") || "N/A";
     setClientNumber(storedClientNumber);
   }, []);
+
+  // Handle click on the fund card
+  const handleFundClick = (fundId: string) => {
+    navigate(`/user/new-deals?fund=${fundId}`);
+  };
 
   return (
     <UserLayout>
@@ -102,7 +107,6 @@ const UserDashboard = () => {
           </div>
         </div>
 
-        {/* Intro title + explanation */}
         <div className="bg-blue-100 px-4 py-3 rounded border border-blue-200 mb-3">
           <h3 className="text-navyblue text-lg font-semibold mb-1">Investment Opportunities</h3>
           <p className="text-muted-foreground text-sm">
@@ -164,17 +168,21 @@ const UserDashboard = () => {
             {impactFunds.map((fund) => (
               <div
                 key={fund.id}
-                className={`rounded-lg text-white overflow-hidden shadow-lg ${fund.color} hover:-translate-y-1 transition-transform duration-300`}
+                role="button"
+                tabIndex={0}
+                onClick={() => handleFundClick(fund.id)}
+                onKeyPress={(e) => { if (e.key === 'Enter' || e.key === ' ') handleFundClick(fund.id); }}
+                className={`rounded-lg text-white overflow-hidden shadow-lg ${fund.color} hover:-translate-y-1 transition-transform duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2`}
+                style={{ transitionProperty: "box-shadow, transform" }}
+                aria-label={`Browse ${fund.name} opportunities`}
               >
                 <div className="p-5">
                   <h3 className="font-bold text-xl mb-2">{fund.name}</h3>
                   <p className="text-sm mb-4">Min Investment: {fund.minInvestment}</p>
                   <p className="text-sm text-white/80 mb-4">{fund.count} investment opportunities available</p>
-                  <Link to={`/user/new-deals?fund=${fund.id}`}>
-                    <Button className="w-full bg-white/20 hover:bg-white/30 text-white">
-                      Browse Opportunities
-                    </Button>
-                  </Link>
+                  <Button className="w-full bg-white/20 hover:bg-white/30 text-white pointer-events-none">
+                    Browse Opportunities
+                  </Button>
                 </div>
               </div>
             ))}
