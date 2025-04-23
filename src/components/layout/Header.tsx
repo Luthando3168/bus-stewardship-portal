@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Home, Info, HelpCircle, Briefcase, Bus, Building, DollarSign, PhoneCall, Mail, Phone, Facebook, Instagram, Linkedin } from "lucide-react";
@@ -53,43 +52,44 @@ const Header = () => {
               />
               <div className="fixed top-0 right-0 h-full w-72 bg-white shadow-lg z-50 overflow-hidden">
                 <div className="flex flex-col h-full">
-                  <div className="p-4 border-b border-gray-100">
+                  <div className="p-4 border-b border-gray-100 flex justify-between items-center">
                     <button onClick={() => setMenuOpen(false)} className="p-1">
                       <X size={20} />
                     </button>
+                    <Logo size="small" className="scale-75" />
                   </div>
 
                   <div className="p-4 overflow-y-auto flex-1">
-                    <nav className="flex flex-col space-y-3">
+                    <nav className="flex flex-col space-y-2.5">
                       {navLinks.map(link => (
                         <Link
                           key={link.to}
                           to={link.to}
-                          className={`flex items-center space-x-2 text-sm font-semibold ${
+                          className={`flex items-center space-x-2 text-[0.95rem] font-semibold ${
                             isActive(link.to) ? 'text-gold' : 'text-navyblue'
                           }`}
                           onClick={() => setMenuOpen(false)}
                         >
-                          <link.icon size={16} />
+                          <link.icon size={15} />
                           <span>{link.label}</span>
                         </Link>
                       ))}
                     </nav>
 
-                    <div className="mt-4 pt-4 border-t border-gray-100">
-                      <div className="flex flex-col space-y-3">
-                        <a href="tel:0620193208" className="flex items-center space-x-2 text-sm text-gray-600">
-                          <Phone size={16} />
+                    <div className="mt-3 pt-3 border-t border-gray-100">
+                      <div className="flex flex-col space-y-2">
+                        <a href="tel:0620193208" className="flex items-center space-x-2 text-[0.95rem] text-gray-600">
+                          <Phone size={15} />
                           <span>062 019 3208</span>
                         </a>
-                        <a href="mailto:info@madunacas.com" className="flex items-center space-x-2 text-sm text-gray-600">
-                          <Mail size={16} />
+                        <a href="mailto:info@madunacas.com" className="flex items-center space-x-2 text-[0.95rem] text-gray-600">
+                          <Mail size={15} />
                           <span>info@madunacas.com</span>
                         </a>
                       </div>
                     </div>
 
-                    <div className="mt-4 pt-4 border-t border-gray-100">
+                    <div className="mt-3 pt-3 border-t border-gray-100">
                       <div className="flex justify-center space-x-6">
                         {socialLinks.map(social => (
                           <a
@@ -99,24 +99,24 @@ const Header = () => {
                             rel="noopener noreferrer"
                             className="text-gray-600 hover:text-gold transition-colors"
                           >
-                            <social.icon size={20} />
+                            <social.icon size={18} />
                             <span className="sr-only">{social.label}</span>
                           </a>
                         ))}
                       </div>
                     </div>
 
-                    <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-gray-100">
+                    <div className="flex flex-col gap-2 mt-3 pt-3 border-t border-gray-100">
                       <Link
                         to="/login"
-                        className="bg-blue-600 text-white px-4 py-2 rounded text-sm font-semibold text-center"
+                        className="bg-blue-600 text-white px-4 py-2 rounded text-[0.95rem] font-semibold text-center"
                         onClick={() => setMenuOpen(false)}
                       >
                         Login
                       </Link>
                       <Link
                         to="/register"
-                        className="bg-blue-600 text-white px-4 py-2 rounded text-sm font-semibold text-center"
+                        className="bg-blue-600 text-white px-4 py-2 rounded text-[0.95rem] font-semibold text-center"
                         onClick={() => setMenuOpen(false)}
                       >
                         Register
@@ -132,11 +132,9 @@ const Header = () => {
     );
   }
 
-  // Desktop header
   return (
     <header className="bg-white shadow-md fixed top-0 left-0 w-full z-30">
       <nav className="container mx-auto flex items-center justify-between py-2 md:py-3 px-4 md:px-6 relative">
-        {/* Logo (left side) */}
         <Link to="/" className="flex items-start group cursor-pointer">
           <div className="flex flex-col">
             <span className="font-montserrat font-bold text-xl md:text-2xl tracking-tight">
@@ -149,7 +147,6 @@ const Header = () => {
           </div>
         </Link>
 
-        {/* Desktop menu/navigation */}
         <div className="flex items-center space-x-6">
           <div className="flex space-x-4">
             {navLinks.map(link => (
@@ -186,7 +183,6 @@ const Header = () => {
           </div>
         </div>
       </nav>
-      {/* Spacer to prevent content from being hidden under header */}
       <div className="h-5 md:h-6"></div>
     </header>
   );
