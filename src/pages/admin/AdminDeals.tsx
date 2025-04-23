@@ -9,7 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogD
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { FilePlus, FileText, Users, Check, AlertCircle, ChevronDown, ChevronUp } from "lucide-react";
+import { FilePlus, FileText, Users, Check, AlertCircle, ChevronDown, ChevronUp, Printer } from "lucide-react";
 import { toast } from "sonner";
 
 const mockDeals = [
@@ -23,7 +23,14 @@ const mockDeals = [
     location: "Cape Town",
     progress: 100,
     companyRegistered: true,
-    prospectusIssued: true
+    prospectusIssued: true,
+    companyDetails: {
+      regNumber: "2023/123456/07",
+      directors: "John Smith, Sarah Johnson",
+      address: "123 Main Street, Cape Town, 8001",
+      shareCount: 10000,
+      sharePrice: 350
+    }
   },
   { 
     id: 2, 
@@ -280,6 +287,83 @@ const AdminDeals = () => {
     }
   };
 
+  const handlePrintDetails = (deal) => {
+    const element = document.createElement('div');
+    element.innerHTML = `
+      <div style="padding: 20px;">
+        <h2 style="text-align: center;">${deal.name} - Company Details</h2>
+        <p style="text-align: center;">Generated on ${new Date().toLocaleDateString()}</p>
+        
+        <div style="margin-top: 20px;">
+          <h3 style="color: #333;">Company Information</h3>
+          <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+            <tr>
+              <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Registration Number</td>
+              <td style="padding: 8px; border: 1px solid #ddd;">${deal.companyDetails?.regNumber || 'Not registered'}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Directors</td>
+              <td style="padding: 8px; border: 1px solid #ddd;">${deal.companyDetails?.directors || 'Not registered'}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Address</td>
+              <td style="padding: 8px; border: 1px solid #ddd;">${deal.companyDetails?.address || 'Not registered'}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Total Shares</td>
+              <td style="padding: 8px; border: 1px solid #ddd;">${deal.companyDetails?.shareCount?.toLocaleString() || 'Not registered'}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Share Price</td>
+              <td style="padding: 8px; border: 1px solid #ddd;">R ${deal.companyDetails?.sharePrice?.toLocaleString() || 'Not registered'}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div style="margin-top: 20px;">
+          <h3 style="color: #333;">Investment Information</h3>
+          <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+            <tr>
+              <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Fund</td>
+              <td style="padding: 8px; border: 1px solid #ddd;">${deal.fund}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Total Value</td>
+              <td style="padding: 8px; border: 1px solid #ddd;">R ${deal.value.toLocaleString()}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Location</td>
+              <td style="padding: 8px; border: 1px solid #ddd;">${deal.location}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Number of Investors</td>
+              <td style="padding: 8px; border: 1px solid #ddd;">${deal.investors}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Status</td>
+              <td style="padding: 8px; border: 1px solid #ddd;">${deal.status}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    `;
+
+    const opt = {
+      margin: 1,
+      filename: `${deal.name}_company_details.pdf`,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+
+    html2pdf().from(element).set(opt).save().then(() => {
+      toast.success("Company details exported successfully");
+    }).catch((error) => {
+      console.error("PDF export error:", error);
+      toast.error("Failed to export company details");
+    });
+  };
+
   return (
     <AdminLayout>
       <div className="space-y-6">
@@ -486,35 +570,47 @@ const AdminDeals = () => {
               </TabsContent>
               
               <TabsContent value="active">
-                <div className="rounded-md border">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Name</TableHead>
-                        <TableHead>Fund</TableHead>
-                        <TableHead>Value</TableHead>
-                        <TableHead>Investors</TableHead>
-                        <TableHead>Actions</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {filteredDeals.filter(d => d.status === "Active").map(deal => (
-                        <TableRow key={deal.id}>
-                          <TableCell className="font-medium">{deal.name}</TableCell>
-                          <TableCell>{deal.fund}</TableCell>
-                          <TableCell>R {deal.value.toLocaleString()}</TableCell>
-                          <TableCell>{deal.investors}</TableCell>
-                          <TableCell>
-                            <Button variant="outline" size="sm">
-                              <FileText className="h-4 w-4 mr-1" />
-                              View Details
-                            </Button>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </div>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Active Businesses Overview</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="rounded-md border">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Name</TableHead>
+                            <TableHead>Fund</TableHead>
+                            <TableHead>Value</TableHead>
+                            <TableHead>Investors</TableHead>
+                            <TableHead>Actions</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {filteredDeals.filter(d => d.status === "Active").map(deal => (
+                            <TableRow key={deal.id}>
+                              <TableCell className="font-medium">{deal.name}</TableCell>
+                              <TableCell>{deal.fund}</TableCell>
+                              <TableCell>R {deal.value.toLocaleString()}</TableCell>
+                              <TableCell>{deal.investors}</TableCell>
+                              <TableCell>
+                                <Button 
+                                  variant="outline" 
+                                  size="sm"
+                                  onClick={() => handlePrintDetails(deal)}
+                                  className="flex items-center gap-2"
+                                >
+                                  <Printer className="h-4 w-4" />
+                                  Print Details
+                                </Button>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
+                  </CardContent>
+                </Card>
               </TabsContent>
               
               <TabsContent value="needsAction">
