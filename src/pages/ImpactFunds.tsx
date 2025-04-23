@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -60,15 +59,6 @@ const funds = [
     returnPercentage: 11,
     minInvestment: 2500,
     bgGradient: "from-pink-600 to-pink-900",
-  },
-  {
-    id: "mytech",
-    name: "MyTelecoms Impact Fund",
-    brief: "Innovative technology solutions driving digital transformation.",
-    image: "https://images.unsplash.com/photo-1562408590-e32931084e23?auto=format&fit=crop&w=1200&q=80",
-    returnPercentage: 16,
-    minInvestment: 4000,
-    bgGradient: "from-purple-600 to-violet-900",
   },
   {
     id: "myeducation",
@@ -174,4 +164,3 @@ const ImpactFunds = () => {
 };
 
 export default ImpactFunds;
-

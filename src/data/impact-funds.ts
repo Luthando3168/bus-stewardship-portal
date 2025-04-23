@@ -43,13 +43,6 @@ export const impactFunds = [
     count: 2,
   },
   {
-    id: "mytech",
-    name: "MyTelecoms",
-    color: "bg-gradient-to-br from-purple-600 to-violet-900",
-    minInvestment: "R 4,000",
-    count: 2,
-  },
-  {
     id: "myeducation",
     name: "MySchool",
     color: "bg-gradient-to-br from-indigo-700 to-indigo-900",

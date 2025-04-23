@@ -418,33 +418,6 @@ const impactFunds = [
     businesses: []
   },
   {
-    id: "mytech",
-    name: "MyTelecoms",
-    return: "16% p.a.",
-    minInvestment: 4000,
-    businesses: [
-      {
-        id: "our-own-mvno",
-        title: "Our Own MVNO",
-        region: "National",
-        description: (
-          <>
-            <span>
-              An MVNO (Mobile Virtual Network Operator) lets a company offer mobile services using another network’s infrastructure.
-              This unique opportunity allows clients to co-own an MVNO in partnership with MTN and share in profits from the sale of data and airtime nationwide.
-              <br /><br />
-              <strong>Minimum Investment:</strong> R1,000 <br />
-              <br />
-              Dividends will be paid twice per year in line with the shareholder agreement.
-              MyTelecoms offers you an opportunity to own a part of a MVNO working with MTN, with shared profits from all prepaid sales. You can invest more if you prefer.
-            </span>
-          </>
-        ),
-        minInvestment: 1000,
-      },
-    ],
-  },
-  {
     id: "myeducation",
     name: "MySchool",
     return: "10% p.a.",
