@@ -4,15 +4,15 @@ import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "react-router-dom";
 
+// Only the four visible funds, all blue, each has a simple, relevant image and consistent card style
 const funds = [
   {
     id: "myfarm",
     name: "MyFarm Impact Fund",
     brief: "Sustainable agriculture and farming for food security and rural economic growth.",
-    gradient: "from-green-700 to-green-900",
+    image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=600&q=80",
     returnPercentage: 12,
     minInvestment: 1000,
   },
@@ -20,7 +20,7 @@ const funds = [
     id: "myproperty",
     name: "MyProperty Impact Fund",
     brief: "Affordable housing and community-focused property for social development.",
-    gradient: "from-blue-700 to-blue-900",
+    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=600&q=80",
     returnPercentage: 10,
     minInvestment: 2000,
   },
@@ -28,7 +28,7 @@ const funds = [
     id: "myfoodretail",
     name: "MyFoodRetail Impact Fund",
     brief: "Investing in food retail businesses to improve food distribution and access.",
-    gradient: "from-orange-700 to-orange-900",
+    image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80",
     returnPercentage: 15,
     minInvestment: 5000,
   },
@@ -36,47 +36,13 @@ const funds = [
     id: "myfranchise",
     name: "MyFranchise Impact Fund",
     brief: "Backing franchises to create jobs and support business ownership.",
-    gradient: "from-red-600 to-red-800",
+    image: "https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?auto=format&fit=crop&w=600&q=80",
     returnPercentage: 14,
     minInvestment: 1500,
   },
-  {
-    id: "myenergy",
-    name: "MyEnergy Impact Fund",
-    brief: "Supporting clean energy and renewables for a sustainable future.",
-    gradient: "from-yellow-700 to-yellow-900",
-    returnPercentage: 16,
-    minInvestment: 5000,
-  },
-  {
-    id: "myeducation",
-    name: "MySchool Impact Fund",
-    brief: "Supporting quality education and school infrastructure development.",
-    gradient: "from-cyan-700 to-cyan-900",
-    returnPercentage: 13,
-    minInvestment: 5000,
-  },
-  {
-    id: "myhealth",
-    name: "MyHealth Impact Fund",
-    brief: "Investing in ventures that improve access to medical and healthcare services.",
-    gradient: "from-emerald-700 to-emerald-900",
-    returnPercentage: 11,
-    minInvestment: 5000,
-  },
-  {
-    id: "mytelcom",
-    name: "MyTelcom Impact Fund",
-    brief: "Expanding digital connectivity and telecommunications access.",
-    gradient: "from-indigo-700 to-indigo-900",
-    returnPercentage: 12,
-    minInvestment: 1000,
-  }
 ];
 
 const ImpactFunds = () => {
-  const isMobile = useIsMobile();
-
   const handleInvestClick = () => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
     if (!isLoggedIn) {
@@ -98,7 +64,6 @@ const ImpactFunds = () => {
             subtitle="Choose from a selection of impact funds and invest in opportunities that matter to you."
             centered
           />
-
           <div className="bg-lightgray rounded-lg p-6 mb-10 text-center">
             <h3 className="text-xl font-medium mb-2">How Our Investment Process Works</h3>
             <p className="mb-4">
@@ -112,35 +77,58 @@ const ImpactFunds = () => {
             </Button>
           </div>
 
-          <div className="max-w-3xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {funds.map(fund => (
-                <div 
-                  key={fund.id}
-                  className={`rounded-lg border bg-gradient-to-br p-6 flex flex-col justify-between shadow transition ${fund.gradient} text-white`}
-                >
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 mb-10">
+            {funds.map(fund => (
+              <div
+                key={fund.id}
+                className="flex flex-row items-center bg-gradient-to-br from-blue-700 to-blue-900 rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-200"
+              >
+                <img
+                  src={fund.image}
+                  alt={fund.name}
+                  className="h-36 w-36 object-cover flex-shrink-0"
+                  style={{ borderRight: '2px solid #144671' }}
+                />
+                <div className="p-6 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="font-montserrat font-bold text-lg mb-2">{fund.name}</h3>
-                    <p className="font-lato mb-2">{fund.brief}</p>
-                    <div className="mt-2 flex justify-between items-center">
-                      <span className="text-sm">Return: {fund.returnPercentage}%</span>
-                      <span className="text-sm">Min. Investment: R {fund.minInvestment}</span>
+                    <h3 className="font-montserrat font-bold text-2xl text-white mb-1">{fund.name}</h3>
+                    <p className="font-lato text-gray-200 mb-3">{fund.brief}</p>
+                    <div className="flex flex-wrap gap-x-8 text-sm text-blue-100 mb-1">
+                      <span>Return: <span className="font-semibold">{fund.returnPercentage}%</span></span>
+                      <span>Min. Investment: <span className="font-semibold">R {fund.minInvestment}</span></span>
                     </div>
                   </div>
-                  <Link 
+                  <Link
                     to={`/user/new-deals?fund=${fund.id}`}
-                    className="mt-3 inline-block px-4 py-2 bg-gold text-white rounded font-medium hover:bg-lightgold transition-colors text-center"
+                    className="mt-4 inline-block px-4 py-2 bg-gold text-navyblue rounded font-semibold hover:bg-lightgold transition-colors text-center"
                   >
                     View Opportunities
                   </Link>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex flex-col sm:flex-row justify-center gap-6 mt-10 text-center">
+            <Link
+              to="/impact-funds"
+              className="inline-block px-6 py-3 bg-navyblue text-white rounded hover:bg-blue-800 font-semibold transition"
+            >
+              Explore All Impact Funds
+            </Link>
+            <Link
+              to="/foundation"
+              className="inline-block px-6 py-3 bg-gold text-navyblue rounded hover:bg-lightgold font-semibold transition"
+            >
+              Foundation
+            </Link>
+          </div>
+          <div className="text-center mt-6 text-gray-500 font-lato">
+            For enquiries: <a className="text-blue-800 underline" href="mailto:info@madunacas.com">info@madunacas.com</a>
           </div>
         </div>
       </section>
     </Layout>
   );
 };
-
 export default ImpactFunds;

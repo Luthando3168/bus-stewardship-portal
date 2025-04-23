@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Layout from "@/components/layout/Layout";
 import { Card, CardContent } from "@/components/ui/card";
@@ -88,7 +89,7 @@ const About = () => {
                   <li>Sole Proprietor trading as Luthando Maduna Chartered Accountants</li>
                   <li>Registered with the South African Institute of Chartered Accountants (SAICA)</li>
                   <li>SAICA Registration Number: 20055210</li>
-                  <li>Individual Registration: 2019/621826/07</li>
+                  <li>Company Registration: 2019/621826/07</li>
                 </ul>
               </div>
             </div>
