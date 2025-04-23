@@ -109,7 +109,7 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-navyblue to-deepblue px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-navyblue to-deepblue px-4 py-16">
       <div className="w-full max-w-md">
         <Card className="border-gold shadow-lg">
           <CardHeader className="space-y-1 text-center">

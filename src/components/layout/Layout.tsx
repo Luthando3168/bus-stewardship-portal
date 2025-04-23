@@ -11,9 +11,8 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-grow mt-6">{children}</main>
+      <main className="flex-grow mt-16 md:mt-20">{children}</main>
       <Footer />
-      <div className="bg-navyblue py-12"></div> {/* Added spacer */}
     </div>
   );
 };
