@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import AdminLayout from "@/components/layout/AdminLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -13,7 +12,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CertificateActions } from "@/components/admin/certificates/CertificateActions";
 import { useToast } from "@/hooks/use-toast";
 
-// Define our certificate type
 interface Certificate {
   id: string;
   userId: number;
@@ -30,17 +28,23 @@ interface Certificate {
   sequentialNumber?: string;
 }
 
-// Define our fund certificates data type
 interface FundCertificatesData {
   [fundName: string]: Certificate[];
 }
 
-// Define our company certificates data type
 interface CertificatesByCompany {
   [fundName: string]: {
     [companyName: string]: Certificate[];
   };
 }
+
+const allImpactFunds = [
+  "MyFoodRetail Impact Fund", 
+  "MyTelco Impact Fund", 
+  "MyProperty Impact Fund",
+  "MyEnergy Impact Fund",
+  "MyAgriculture Impact Fund"
+];
 
 const fundCertificatesData: FundCertificatesData = {
   "MyFoodRetail Impact Fund": [
@@ -101,13 +105,11 @@ const AdminShareCertificates = () => {
   const [viewingCertificate, setViewingCertificate] = useState<string | null>(null);
   const { toast } = useToast();
   
-  // Define selectedCertificate state
   const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
   
   const allCertificates = Object.values(fundCertificatesData).flat();
-  const fundsList = Object.keys(fundCertificatesData);
+  const fundsList = allImpactFunds;
   
-  // Get unique companies across all funds
   const companiesList = Array.from(new Set(allCertificates.map(cert => cert.companyName)));
   
   const filteredCertificates = allCertificates.filter(cert => {
@@ -137,14 +139,12 @@ const AdminShareCertificates = () => {
       );
     });
     
-    // Show toast notification
     toast({
       title: `Certificate ${certificateId}`,
       description: `Status changed to ${newStatus}`,
     });
   };
 
-  // Group certificates by company within each fund with proper typing
   const certificatesByCompany: CertificatesByCompany = {};
   Object.entries(fundCertificatesData).forEach(([fundName, certificates]) => {
     certificatesByCompany[fundName] = {};
@@ -159,7 +159,6 @@ const AdminShareCertificates = () => {
     });
   });
   
-  // Update the effect to set selectedCertificate when viewingCertificate changes
   useEffect(() => {
     if (viewingCertificate) {
       const certificate = allCertificates.find(cert => cert.id === viewingCertificate);
@@ -197,7 +196,7 @@ const AdminShareCertificates = () => {
                     <SelectItem value="all">All Impact Funds</SelectItem>
                     {fundsList.map((fund) => (
                       <SelectItem key={fund} value={fund}>
-                        {fund}
+                        {fund.replace(" Impact Fund", "")}
                       </SelectItem>
                     ))}
                   </SelectContent>
