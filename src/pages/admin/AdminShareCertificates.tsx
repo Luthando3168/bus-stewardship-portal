@@ -102,6 +102,21 @@ const AdminShareCertificates = () => {
     });
   };
 
+  // Group certificates by company within each fund
+  const certificatesByCompany = {};
+  Object.entries(fundCertificatesData).forEach(([fundName, certificates]) => {
+    certificatesByCompany[fundName] = {};
+    certificates.forEach(cert => {
+      if (!certificatesByCompany[fundName][cert.companyName]) {
+        certificatesByCompany[fundName][cert.companyName] = [];
+      }
+      certificatesByCompany[fundName][cert.companyName].push({
+        ...cert,
+        sequentialNumber: (certificatesByCompany[fundName][cert.companyName].length + 1).toString().padStart(3, '0')
+      });
+    });
+  });
+
   return (
     <AdminLayout>
       <div className="space-y-6">
@@ -241,69 +256,85 @@ const AdminShareCertificates = () => {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="rounded-md border overflow-x-auto">
-                      <Table>
-                        <TableHeader>
-                          <TableRow>
-                            <TableHead>Certificate ID</TableHead>
-                            <TableHead>Company</TableHead>
-                            <TableHead>Shareholder</TableHead>
-                            <TableHead>Shares</TableHead>
-                            <TableHead>Issue Date</TableHead>
-                            <TableHead>Status</TableHead>
-                            <TableHead>Actions</TableHead>
-                          </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                          {fundCertificatesData[fund].map((cert) => (
-                            <TableRow key={cert.id}>
-                              <TableCell className="font-mono text-sm">{cert.id}</TableCell>
-                              <TableCell>{cert.companyName}</TableCell>
-                              <TableCell>
-                                <div>
-                                  <p className="font-medium">{cert.userName}</p>
-                                  <p className="text-sm text-muted-foreground">{cert.clientNumber}</p>
-                                </div>
-                              </TableCell>
-                              <TableCell>{cert.shares} @ R{cert.sharePrice}</TableCell>
-                              <TableCell>{new Date(cert.issueDate).toLocaleDateString()}</TableCell>
-                              <TableCell>
-                                <Badge className={
-                                  cert.status === "active" ? "bg-green-600" :
-                                  cert.status === "revoked" ? "bg-red-600" :
-                                  "bg-amber-600"
-                                }>
-                                  {cert.status.charAt(0).toUpperCase() + cert.status.slice(1)}
-                                </Badge>
-                              </TableCell>
-                              <TableCell>
-                                <div className="flex space-x-2">
-                                  <CertificateActions
-                                    certificateId={cert.id}
-                                    status={cert.status}
-                                    onStatusChange={handleStatusChange}
-                                  />
-                                  <Button 
-                                    variant="outline" 
-                                    size="sm"
-                                    onClick={() => setViewingCertificate(cert.id)}
-                                  >
-                                    <Eye size={14} />
-                                    <span className="hidden sm:inline">View</span>
-                                  </Button>
-                                  <Button 
-                                    variant="outline" 
-                                    size="sm"
-                                  >
-                                    <Download size={14} />
-                                    <span className="hidden sm:inline">PDF</span>
-                                  </Button>
-                                </div>
-                              </TableCell>
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
+                    <div className="space-y-8">
+                      {Object.entries(certificatesByCompany[fund]).map(([companyName, certificates]) => (
+                        <div key={companyName} className="border rounded-lg p-4">
+                          <div className="mb-4">
+                            <h3 className="text-lg font-semibold">{companyName}</h3>
+                            <p className="text-sm text-muted-foreground">
+                              Total Certificates: {certificates.length}
+                            </p>
+                          </div>
+                          <div className="rounded-md border overflow-x-auto">
+                            <Table>
+                              <TableHeader>
+                                <TableRow>
+                                  <TableHead>Certificate Number</TableHead>
+                                  <TableHead>Sequential #</TableHead>
+                                  <TableHead>Shareholder</TableHead>
+                                  <TableHead>Shares</TableHead>
+                                  <TableHead>Issue Date</TableHead>
+                                  <TableHead>Status</TableHead>
+                                  <TableHead>Actions</TableHead>
+                                </TableRow>
+                              </TableHeader>
+                              <TableBody>
+                                {certificates.map((cert: any) => (
+                                  <TableRow key={cert.id}>
+                                    <TableCell className="font-mono text-sm">
+                                      {cert.id}
+                                    </TableCell>
+                                    <TableCell className="font-mono">
+                                      #{cert.sequentialNumber}
+                                    </TableCell>
+                                    <TableCell>
+                                      <div>
+                                        <p className="font-medium">{cert.userName}</p>
+                                        <p className="text-sm text-muted-foreground">{cert.clientNumber}</p>
+                                      </div>
+                                    </TableCell>
+                                    <TableCell>{cert.shares} @ R{cert.sharePrice}</TableCell>
+                                    <TableCell>{new Date(cert.issueDate).toLocaleDateString()}</TableCell>
+                                    <TableCell>
+                                      <Badge className={
+                                        cert.status === "active" ? "bg-green-600" :
+                                        cert.status === "revoked" ? "bg-red-600" :
+                                        "bg-amber-600"
+                                      }>
+                                        {cert.status.charAt(0).toUpperCase() + cert.status.slice(1)}
+                                      </Badge>
+                                    </TableCell>
+                                    <TableCell>
+                                      <div className="flex space-x-2">
+                                        <CertificateActions
+                                          certificateId={cert.id}
+                                          status={cert.status}
+                                          onStatusChange={handleStatusChange}
+                                        />
+                                        <Button 
+                                          variant="outline" 
+                                          size="sm"
+                                          onClick={() => setViewingCertificate(cert.id)}
+                                        >
+                                          <Eye size={14} />
+                                          <span className="hidden sm:inline">View</span>
+                                        </Button>
+                                        <Button 
+                                          variant="outline" 
+                                          size="sm"
+                                        >
+                                          <Download size={14} />
+                                          <span className="hidden sm:inline">PDF</span>
+                                        </Button>
+                                      </div>
+                                    </TableCell>
+                                  </TableRow>
+                                ))}
+                              </TableBody>
+                            </Table>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </CardContent>
                 </Card>

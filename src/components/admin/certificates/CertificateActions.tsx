@@ -1,11 +1,10 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
-import { transfer } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 interface CertificateActionsProps {
   certificateId: string;
@@ -49,7 +48,7 @@ export const CertificateActions: React.FC<CertificateActionsProps> = ({
             onClick={() => setShowTransferDialog(true)}
             disabled={status !== "active"}
           >
-            <transfer className="mr-2 h-4 w-4" />
+            <ArrowRight className="mr-2 h-4 w-4" />
             Transfer
           </DropdownMenuItem>
           <DropdownMenuItem 
