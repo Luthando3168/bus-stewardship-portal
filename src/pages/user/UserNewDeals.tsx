@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import UserLayout from "@/components/layout/UserLayout";
 import { Button } from "@/components/ui/button";
@@ -54,6 +53,76 @@ const impactFunds = [
     return: "14% p.a.",
     minInvestment: 2000,
     businesses: [
+      {
+        id: "the-rubik-cpt",
+        title: "The Rubik CPT",
+        region: "Cape Town",
+        description: "A modern property investment opportunity in Cape Town with unique architectural design.",
+        minInvestment: 2000,
+      },
+      {
+        id: "the-rockefeller-cpt",
+        title: "The Rockefeller CPT",
+        region: "Cape Town",
+        description: "An exclusive property investment in Cape Town offering premium living spaces.",
+        minInvestment: 2000,
+      },
+      {
+        id: "da-vinci-student-apartments-cpt",
+        title: "Da Vinci Student Apartments CPT",
+        region: "Cape Town",
+        description: "Purpose-built student accommodation near key educational institutions in Cape Town.",
+        minInvestment: 2000,
+      },
+      {
+        id: "marina-bay-umhlanga-dbn",
+        title: "Marina Bay Umhlanga DBN",
+        region: "Durban",
+        description: "Luxurious waterfront property investment in the vibrant Umhlanga area of Durban.",
+        minInvestment: 2000,
+      },
+      {
+        id: "change-alex-now",
+        title: "#ChangeAlexNow",
+        region: "Johannesburg",
+        description: "A community-focused property development initiative in Alexandra, Johannesburg.",
+        minInvestment: 2000,
+      },
+      {
+        id: "propinvest-benoni",
+        title: "Propinvest - Benoni",
+        region: "Benoni",
+        description: "Strategic property investment opportunity in the Benoni area.",
+        minInvestment: 2000,
+      },
+      {
+        id: "propinvest-haartebees",
+        title: "Propinvest - Haartebees",
+        region: "Haartebees",
+        description: "Property investment in the Haartebees region with potential for growth.",
+        minInvestment: 2000,
+      },
+      {
+        id: "propinvest-midrand",
+        title: "Propinvest - Midrand",
+        region: "Midrand",
+        description: "Investment property located in the strategic Midrand area.",
+        minInvestment: 2000,
+      },
+      {
+        id: "propinvest-bedfordview",
+        title: "Propinvest - Bedfordview",
+        region: "Bedfordview",
+        description: "Property investment opportunity in the sought-after Bedfordview suburb.",
+        minInvestment: 2000,
+      },
+      {
+        id: "propinvest-olifantsvlei",
+        title: "Propinvest - Olifantsvlei",
+        region: "Olifantsvlei",
+        description: "Unique property investment in the Olifantsvlei area with promising potential.",
+        minInvestment: 2000,
+      },
       {
         id: "affordable-housing-jhb",
         title: "Affordable Housing - eKasi Mixed Use (Johannesburg)",
@@ -186,7 +255,7 @@ const impactFunds = [
     id: "myfranchise",
     name: "MyFranchise Impact Fund",
     return: "13% p.a.",
-    minInvestment: 1500, // minimum for this fund, individual minimums for each business below
+    minInvestment: 1500,
     businesses: [
       {
         id: "steers",
@@ -257,7 +326,7 @@ const impactFunds = [
   {
     id: "myfoodretail",
     name: "MyFoodRetail Impact Fund",
-    return: "12% p.a.", // Added a return rate, adjust as needed
+    return: "12% p.a.",
     minInvestment: 5000,
     description:
       "Lifestyle Mini Complex is designed to offer local communities an opportunity to own food retail outlets and share in the trading companies' profits and rent they pay. Clients own the trading companies and share according to what they want to own. You can own multiple complexes and increase your impact and returns. This is a unique opportunity to participate in the growth of local food retail through shared ownership.",
@@ -350,14 +419,14 @@ const impactFunds = [
   },
   {
     id: "mytech",
-    name: "MyTelecoms", // Already renamed from "MyTech"
+    name: "MyTelecoms",
     return: "16% p.a.",
     minInvestment: 4000,
     businesses: []
   },
   {
     id: "myeducation",
-    name: "MySchool", // Already renamed from "MyEducation"
+    name: "MySchool",
     return: "10% p.a.",
     minInvestment: 1500,
     businesses: []
