@@ -2,7 +2,7 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from "@/integrations/supabase/client";
-import { AuthUser, Session } from '@/types/auth';
+import { AuthUser, Session, mapSupabaseUser } from '@/types/auth';
 import { toast } from "sonner";
 
 interface AuthContextType {
@@ -28,14 +28,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        if (session) {
-          setSession(session);
-          setUser({
-            id: session.user.id,
-            email: session.user.email!,
-            role: session.user.role ?? 'user'
-          });
+      (event, currentSession) => {
+        if (currentSession) {
+          setSession(currentSession);
+          const authUser = mapSupabaseUser(currentSession.user);
+          setUser(authUser);
         } else {
           setSession(null);
           setUser(null);
@@ -46,14 +43,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     );
 
     // Check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) {
-        setSession(session);
-        setUser({
-          id: session.user.id,
-          email: session.user.email!,
-          role: session.user.role ?? 'user'
-        });
+    supabase.auth.getSession().then(({ data: { session: currentSession } }) => {
+      if (currentSession) {
+        setSession(currentSession);
+        const authUser = mapSupabaseUser(currentSession.user);
+        setUser(authUser);
       }
       setLoading(false);
     });
@@ -68,6 +62,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         supabase.auth.refreshSession().then(({ data }) => {
           if (data.session) {
             setSession(data.session);
+            const authUser = mapSupabaseUser(data.session.user);
+            setUser(authUser);
           }
         });
       }
@@ -83,13 +79,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       
       if (data?.session) {
         setSession(data.session);
-        setUser({
-          id: data.user.id,
-          email: data.user.email!,
-          role: data.user.role ?? 'user'
-        });
-        navigate('/admin/dashboard');
-        toast.success('Successfully signed in');
+        const authUser = mapSupabaseUser(data.session.user);
+        if (authUser) {
+          setUser(authUser);
+          navigate('/admin/dashboard');
+          toast.success('Successfully signed in');
+        }
       }
     } catch (error: any) {
       console.error("Sign in error:", error);
