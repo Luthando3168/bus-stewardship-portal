@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Home, Info, HelpCircle, Briefcase, Bus, Building, DollarSign, PhoneCall, Mail, Phone, Facebook, Instagram, Linkedin } from "lucide-react";
@@ -24,7 +23,6 @@ const Header = () => {
     { to: "/bus", label: "BUS", icon: Bus },
     { to: "/foundation", label: "Foundation", icon: Building },
     { to: "/impact-funds", label: "Impact Funds", icon: DollarSign },
-    { to: "/mca-direct", label: "MCA Direct", icon: Briefcase },
     { to: "/contact", label: "Contact", icon: PhoneCall },
   ];
 
@@ -85,19 +83,33 @@ const Header = () => {
                           className={`flex items-center space-x-2 text-[0.95rem] font-semibold ${
                             isActive(link.to) ? 'text-gold' : 'text-navyblue'
                           }`}
-                          onClick={(e) => {
-                            if (link.to === '/mca-direct') {
-                              handleMcaDirectClick(e);
-                            }
-                            setMenuOpen(false);
-                          }}
+                          onClick={() => setMenuOpen(false)}
                         >
                           <link.icon size={15} />
                           <span>{link.label}</span>
-                          {link.label === 'MCA Direct' && <sup className="text-[10px] ml-0.5">™</sup>}
                         </Link>
                       ))}
                     </nav>
+
+                    <div className="mt-6 flex flex-col space-y-3">
+                      <Link
+                        to="/login"
+                        className="bg-blue-600 text-white px-4 py-2 rounded text-base font-semibold text-center"
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        Sign-in or Register
+                      </Link>
+                      <Link
+                        to="/mca-direct"
+                        onClick={(e) => {
+                          handleMcaDirectClick(e);
+                          setMenuOpen(false);
+                        }}
+                        className="bg-gold text-navyblue px-4 py-2 rounded text-lg font-bold text-center"
+                      >
+                        MCA Direct<sup className="text-xs ml-0.5">™</sup>
+                      </Link>
+                    </div>
 
                     <div className="mt-3 pt-3 border-t border-gray-100">
                       <div className="flex flex-col space-y-2">
@@ -128,16 +140,6 @@ const Header = () => {
                         ))}
                       </div>
                     </div>
-
-                    <div className="flex flex-col gap-2 mt-3 pt-3 border-t border-gray-100">
-                      <Link
-                        to="/login"
-                        className="bg-blue-600 text-white px-4 py-2 rounded text-[0.95rem] font-semibold text-center"
-                        onClick={() => setMenuOpen(false)}
-                      >
-                        Sign-in or Register
-                      </Link>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -152,15 +154,7 @@ const Header = () => {
     <header className="bg-white shadow-md fixed top-0 left-0 w-full z-30">
       <nav className="container mx-auto flex items-center justify-between py-2 md:py-3 px-4 md:px-6 relative">
         <Link to="/" className="flex items-start group cursor-pointer">
-          <div className="flex flex-col">
-            <span className="font-montserrat font-bold text-xl md:text-2xl tracking-tight">
-              <span className="text-gold border-b-2 border-gold pb-0.5">Luthando</span>
-              <span className="text-navyblue ml-1"> Maduna</span>
-            </span>
-            <span className="font-montserrat text-xs text-navyblue tracking-wider mt-1">
-              CHARTERED ACCOUNTANTS
-            </span>
-          </div>
+          <Logo />
         </Link>
 
         <div className="flex items-center space-x-6">
@@ -169,24 +163,25 @@ const Header = () => {
               <Link
                 key={link.to}
                 to={link.to}
-                onClick={(e) => {
-                  if (link.to === '/mca-direct') {
-                    handleMcaDirectClick(e);
-                  }
-                }}
                 className={`text-gray-700 hover:text-navyblue font-semibold ${
                   isActive(link.to) ? 'underline' : ''
                 }`}
               >
                 {link.label}
-                {link.label === 'MCA Direct' && <sup className="text-[10px] ml-0.5">™</sup>}
               </Link>
             ))}
             <Link
               to="/login"
-              className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 font-semibold"
+              className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 font-semibold text-base"
             >
               Sign-in or Register
+            </Link>
+            <Link
+              to="/mca-direct"
+              onClick={handleMcaDirectClick}
+              className="bg-gold text-navyblue px-6 py-2.5 rounded hover:bg-gold/90 font-bold text-lg"
+            >
+              MCA Direct<sup className="text-xs ml-0.5">™</sup>
             </Link>
           </div>
         </div>
