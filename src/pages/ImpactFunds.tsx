@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
+import { Link } from "react-router-dom";
 
 const funds = [
   {
@@ -14,6 +15,7 @@ const funds = [
       "Organic and mixed-crop ventures"
     ],
     minInvestment: "R 1,000",
+    route: "/funds/myfarm"
   },
   {
     name: "MyProperty Impact Fund",
@@ -26,6 +28,7 @@ const funds = [
       "Student accommodation"
     ],
     minInvestment: "R 2,000",
+    route: "/funds/myproperty"
   },
   {
     name: "MyFranchise Impact Fund",
@@ -38,6 +41,7 @@ const funds = [
       "Entrepreneurship development"
     ],
     minInvestment: "R 1,500",
+    route: "/funds/myfranchise"
   },
   {
     name: "MyFoodRetail Impact Fund",
@@ -50,6 +54,7 @@ const funds = [
       "Community markets"
     ],
     minInvestment: "R 1,800",
+    route: "/funds/myfoodretail"
   }
 ];
 
@@ -189,7 +194,9 @@ const ImpactFunds = () => {
                     </div>
                     
                     <button className="w-full mt-4 bg-navyblue text-white py-2 px-4 rounded-md hover:bg-blue-800 transition-colors">
-                      Learn More
+                      <Link to={fund.route} className="text-white">
+                        Learn More
+                      </Link>
                     </button>
                   </div>
                 </div>

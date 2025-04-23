@@ -1,4 +1,3 @@
-
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
 import { Toaster } from "sonner";
@@ -39,15 +38,17 @@ import UserMyInvestments from "@/pages/user/UserMyInvestments";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import CompleteRegistration from "@/components/auth/CompleteRegistration";
 import EmailPreview from "@/pages/EmailPreview";
+import MyFarmFund from "@/pages/funds/MyFarmFund";
+import MyPropertyFund from "@/pages/funds/MyPropertyFund";
+import MyFranchiseFund from "@/pages/funds/MyFranchiseFund";
+import MyFoodRetailFund from "@/pages/funds/MyFoodRetailFund";
 
 function App() {
-  // Move the state hooks inside the function component
   const [isLoggedIn, setIsLoggedIn] = React.useState(
     localStorage.getItem("isLoggedIn") === "true"
   );
   const [userRole, setUserRole] = React.useState(localStorage.getItem("userRole"));
 
-  // Generate and store client number if not available
   React.useEffect(() => {
     if (isLoggedIn && !localStorage.getItem("clientNumber")) {
       const year = new Date().getFullYear();
@@ -74,7 +75,6 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          {/* Public Routes */}
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/how-we-work" element={<HowWeWork />} />
@@ -89,11 +89,11 @@ function App() {
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/email-preview" element={<EmailPreview />} />
-          
-          {/* Add the complete registration route */}
           <Route path="/complete-registration" element={<CompleteRegistration />} />
-          
-          {/* User Routes */}
+          <Route path="/funds/myfarm" element={<MyFarmFund />} />
+          <Route path="/funds/myproperty" element={<MyPropertyFund />} />
+          <Route path="/funds/myfranchise" element={<MyFranchiseFund />} />
+          <Route path="/funds/myfoodretail" element={<MyFoodRetailFund />} />
           <Route path="/user" element={<ProtectedRoute allowedRole="user"><Outlet /></ProtectedRoute>}>
             <Route path="dashboard" element={<UserDashboard />} />
             <Route path="wallet" element={<UserWallet />} />
@@ -105,8 +105,6 @@ function App() {
             <Route path="pending-deals" element={<UserPendingDeals />} />
             <Route path="my-investments" element={<UserMyInvestments />} />
           </Route>
-          
-          {/* Admin Routes */}
           <Route path="/admin" element={<ProtectedRoute allowedRole="admin"><Outlet /></ProtectedRoute>}>
             <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="users" element={<AdminUsers />} />
@@ -119,7 +117,6 @@ function App() {
             <Route path="share-certificates" element={<AdminShareCertificates />} />
             <Route path="financial-statements" element={<AdminFinancialStatements />} />
           </Route>
-
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AuthProvider>
