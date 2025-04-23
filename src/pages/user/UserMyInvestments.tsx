@@ -5,7 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Download, FileText, Lock, Shield } from "lucide-react";
+import { Download, FileText, Shield } from "lucide-react";
 import { toast } from "sonner";
 import html2pdf from 'html2pdf.js';
 
@@ -54,6 +54,10 @@ const UserMyInvestments = () => {
 
   const handleViewShareCertificate = (investmentId: number) => {
     setShowCertificate(investmentId);
+    
+    setTimeout(() => {
+      handleDownloadCertificate();
+    }, 300);
   };
 
   const handleDownloadCertificate = () => {
@@ -86,6 +90,7 @@ const UserMyInvestments = () => {
       .then(() => {
         certificateRef.current?.removeChild(watermarkDiv);
         toast.success("Share certificate downloaded successfully");
+        setShowCertificate(null);
       });
   };
 
@@ -189,7 +194,7 @@ const UserMyInvestments = () => {
               <>
                 <div 
                   ref={certificateRef}
-                  className="relative border-2 border-gray-300 p-6 rounded-md bg-white"
+                  className="relative border-4 border-gray-300 p-6 rounded-md bg-white"
                   style={{
                     backgroundImage: "url('/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png')",
                     backgroundRepeat: "no-repeat",
@@ -202,15 +207,7 @@ const UserMyInvestments = () => {
                     <img 
                       src="/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png" 
                       alt="Firm Logo" 
-                      className="h-14 w-auto object-contain"
-                    />
-                  </div>
-
-                  <div className="absolute top-0 right-0 p-3 opacity-20 pointer-events-none">
-                    <img 
-                      src="/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png" 
-                      alt="Watermark" 
-                      className="h-16 w-16" 
+                      className="h-16 w-auto object-contain"
                     />
                   </div>
 
@@ -235,10 +232,16 @@ const UserMyInvestments = () => {
                       <p className="font-bold text-lg my-2">
                         {userName} {userSurname}
                       </p>
-                      <p className="text-sm mb-2">Address: <span className="font-normal">{clientAddress}</span></p>
-                      <p>
+                      
+                      <div className="border border-gray-200 bg-gray-50 p-3 my-3 rounded-md">
+                        <p className="font-medium text-navyblue">Client Address:</p> 
+                        <p className="font-normal">{clientAddress}</p>
+                      </div>
+                      
+                      <p className="mt-2">
                         Client Number: {clientNumber} | ID Number: {clientIdNumber}
                       </p>
+                      
                       <p className="my-2">is the registered holder of</p>
                       <p className="font-bold text-xl my-2">
                         {selectedInvestment.shares} Ordinary Shares (Profit Participation Rights)
@@ -272,25 +275,12 @@ const UserMyInvestments = () => {
                       </div>
                       <div className="text-xs text-center mt-4 text-muted-foreground">
                         <div className="flex items-center justify-center gap-2">
-                          <Lock size={12} />
+                          <Shield size={12} />
                           <span>Document secured with digital signature • Generated on {timestamp}</span>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-
-                <div className="flex justify-end gap-2 mt-4">
-                  <Button variant="outline" onClick={() => setShowCertificate(null)}>
-                    Close
-                  </Button>
-                  <Button 
-                    className="bg-navyblue hover:bg-blue-800 flex gap-1"
-                    onClick={handleDownloadCertificate}
-                  >
-                    <Download size={16} />
-                    Download as PDF
-                  </Button>
                 </div>
               </>
             )}
