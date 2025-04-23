@@ -8,16 +8,46 @@ import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import Logo from "@/components/ui/Logo";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, AlertCircle } from "lucide-react";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [timeoutActive, setTimeoutActive] = useState(false);
+  const [timeoutSeconds, setTimeoutSeconds] = useState(0);
   const navigate = useNavigate();
+
+  const startTimeout = () => {
+    const timeoutDuration = 60; // 60 seconds timeout
+    setTimeoutActive(true);
+    setTimeoutSeconds(timeoutDuration);
+    
+    const intervalId = setInterval(() => {
+      setTimeoutSeconds(prev => {
+        if (prev <= 1) {
+          clearInterval(intervalId);
+          setTimeoutActive(false);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (timeoutActive) {
+      toast.error(`Please wait ${timeoutSeconds} seconds before trying again`);
+      return;
+    }
+    
+    if (!email.trim() || !email.includes('@')) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+    
     setIsLoading(true);
 
     try {
@@ -30,10 +60,16 @@ const ForgotPassword = () => {
       }
 
       setIsSuccess(true);
+      startTimeout(); // Start cooldown period
       toast.success("Password reset link sent! Please check your email.");
     } catch (error: any) {
       console.error("Password reset error:", error);
-      toast.error(error.message || "Failed to send password reset link");
+      
+      // Generic error message to prevent email enumeration
+      toast.error("If your email is registered, you will receive a password reset link shortly");
+      
+      // Still start timeout to prevent email enumeration through timing attacks
+      startTimeout();
     } finally {
       setIsLoading(false);
     }
@@ -66,15 +102,26 @@ const ForgotPassword = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   className="border-gray-300"
+                  disabled={isLoading || timeoutActive}
+                  autoComplete="email"
                 />
               </div>
+              
+              {timeoutActive && (
+                <div className="bg-amber-50 border-l-4 border-amber-500 p-4 mb-4 flex items-start">
+                  <AlertCircle className="text-amber-500 mt-0.5 mr-2 flex-shrink-0" size={16} />
+                  <p className="text-amber-700 text-sm">
+                    Please wait {timeoutSeconds} seconds before requesting another reset link
+                  </p>
+                </div>
+              )}
               
               <Button 
                 type="submit" 
                 className="w-full bg-gold hover:bg-lightgold text-white"
-                disabled={isLoading}
+                disabled={isLoading || timeoutActive}
               >
-                {isLoading ? "Sending..." : "Send Reset Link"}
+                {isLoading ? "Sending..." : timeoutActive ? `Wait ${timeoutSeconds}s` : "Send Reset Link"}
               </Button>
             </CardContent>
           </form>

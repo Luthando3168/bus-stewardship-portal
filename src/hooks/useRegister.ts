@@ -3,13 +3,19 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { useNotifications } from "@/hooks/useNotifications"; // Import the notifications hook
+import { useNotifications } from "@/hooks/useNotifications";
 
 export const useRegister = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-  const { sendUserNotification } = useNotifications(); // Use the notifications hook
+  const { sendUserNotification } = useNotifications();
+
+  const validatePassword = (password: string): boolean => {
+    // At least 8 characters, with a mix of letters, numbers, and special characters
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+    return passwordRegex.test(password);
+  };
 
   const handleRegister = async (
     email: string,
@@ -32,6 +38,12 @@ export const useRegister = () => {
       return;
     }
     
+    if (!validatePassword(password)) {
+      setErrorMessage("Password must be at least 8 characters and include letters, numbers, and special characters");
+      toast.error("Password must be at least 8 characters and include letters, numbers, and special characters");
+      return;
+    }
+    
     if (!isAgreeTerms) {
       setErrorMessage("You must agree to the Terms and Conditions");
       toast.error("You must agree to the Terms and Conditions");
@@ -50,7 +62,7 @@ export const useRegister = () => {
           data: {
             full_name: fullName,
           },
-          emailRedirectTo: undefined
+          emailRedirectTo: `${window.location.origin}/login`
         }
       });
       
@@ -60,7 +72,7 @@ export const useRegister = () => {
 
       if (authData.user) {
         try {
-          // First try the direct edge function call
+          // First try the direct edge function call with rate limiting
           console.log("Attempting to send welcome email via edge function...");
           
           const { data, error: welcomeError } = await supabase.functions.invoke('send-welcome', {
@@ -85,24 +97,25 @@ export const useRegister = () => {
           }
         } catch (emailError) {
           console.error("Error sending welcome email:", emailError);
-          toast.error("There was an issue sending your welcome email, but your account was created successfully.");
+          // Don't show this error to the user as it's not critical to registration
         }
       }
       
-      toast.success("Registration successful! Please check your email.");
+      toast.success("Registration successful! Please check your email to verify your account.");
       navigate("/login");
     } catch (error: any) {
       console.error("Registration error:", error);
       
       if (error.message.includes("already registered")) {
-        setErrorMessage("This email is already registered. Please use a different email or try logging in.");
-        toast.error("This email is already registered. Please use a different email or try logging in.");
+        // Generic error to prevent email enumeration
+        setErrorMessage("Registration failed. Please try again or contact support.");
+        toast.error("Registration failed. Please try again or contact support.");
       } else if (error.message.includes("password")) {
-        setErrorMessage("Password issue: " + error.message);
-        toast.error("Password issue: " + error.message);
+        setErrorMessage("Password does not meet security requirements");
+        toast.error("Password does not meet security requirements");
       } else {
-        setErrorMessage(error.message || "Registration failed. Please try again.");
-        toast.error(error.message || "Registration failed. Please try again.");
+        setErrorMessage("Registration failed. Please try again later.");
+        toast.error("Registration failed. Please try again later.");
       }
     } finally {
       setIsLoading(false);
