@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -85,22 +86,26 @@ const Bus = () => {
                   The Business Under Stewardship (BUS) program is our flagship service that enables business owners to
                   benefit from professional management while maintaining ownership of their companies.
                 </p>
-                <img
-                  src="https://images.unsplash.com/photo-1542744094-24638eff58bb"
-                  alt="Professional business meeting with diverse team"
-                  className="rounded-lg shadow-lg w-full h-48 md:h-64 object-cover"
-                />
+                <div className="w-full h-48 md:h-64 overflow-hidden rounded-lg">
+                  <img
+                    src="https://images.unsplash.com/photo-1542744094-24638eff58bb"
+                    alt="Professional business meeting with diverse team"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
               <div>
                 <p className="text-mobile-base md:text-lg mb-4">
                   Our team of chartered accountants and business professionals takes on the operational management of your business,
                   allowing you to focus on strategic growth or pursue other ventures.
                 </p>
-                <img
-                  src="https://images.unsplash.com/photo-1573496527892-904f897eb114"
-                  alt="Professional accountant working"
-                  className="rounded-lg shadow-lg w-full h-48 md:h-64 object-cover"
-                />
+                <div className="w-full h-48 md:h-64 overflow-hidden rounded-lg shadow-lg">
+                  <img
+                    src="https://images.unsplash.com/photo-1573496527892-904f897eb114"
+                    alt="Professional accountant working"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
             </div>
 
@@ -123,11 +128,13 @@ const Bus = () => {
             <div>
               <h3 className="text-mobile-xl md:text-2xl font-bold text-navyblue mb-6 text-center">How It Works</h3>
               <div className="grid md:grid-cols-2 gap-8 items-center mb-8">
-                <img
-                  src="https://images.unsplash.com/photo-1573497161161-c3e73707e25c"
-                  alt="Professional team collaboration"
-                  className="rounded-lg shadow-lg w-full h-48 md:h-64 object-cover"
-                />
+                <div className="w-full h-64 overflow-hidden rounded-lg shadow-lg">
+                  <img
+                    src="https://images.unsplash.com/photo-1573497161161-c3e73707e25c"
+                    alt="Professional team collaboration"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                 <div className="space-y-6">
                   {steps.map((step, index) => (
                     <div key={index} className="flex">

@@ -68,13 +68,13 @@ const BusSection = () => {
 
           <div className="relative">
             <div className="aspect-w-4 aspect-h-3 relative z-10">
-              <div className="w-full h-full bg-gray-200 rounded-lg overflow-hidden shadow-lg">
-                {/* Replace with actual image when available */}
-                <div className="w-full h-full bg-gradient-to-r from-navyblue to-deepblue flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <span className="text-gold text-5xl font-bold">BUS</span>
-                    <p className="text-white mt-4 font-montserrat">Business Under Stewardship</p>
-                  </div>
+              <div className="w-full h-full rounded-lg overflow-hidden shadow-lg">
+                <div className="w-full h-full flex items-center justify-center">
+                  <img
+                    src="/lovable-uploads/b37923d0-335b-46bc-9852-7d271458f2a9.png"
+                    alt="Business Under Stewardship"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
             </div>
