@@ -50,27 +50,23 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       className={`bg-navyblue text-white h-full ${fullWidth ? "w-full" : isSidebarOpen ? "w-64" : "w-20"}`}
     >
       <div className="p-4 flex flex-col h-full">
-        <div className="flex items-center justify-between mb-8">
-          {(fullWidth || isSidebarOpen) ? (
-            <div className="flex items-center">
-              <div className="flex flex-col">
-                <span className="font-montserrat font-bold text-lg tracking-tight">
-                  <span className="text-gold border-b-2 border-gold pb-0.5">Luthando</span>
-                  <span className="text-white ml-1">Maduna</span>
-                </span>
-                <span className="font-montserrat text-[10px] text-white tracking-wider mt-1">
-                  CHARTERED ACCOUNTANTS
-                </span>
-              </div>
-              <h2 className="text-lg font-bold ml-2">MCA Direct Admin</h2>
-            </div>
-          ) : (
-            <div className="font-montserrat font-bold text-lg">MCA</div>
+        <div className="flex flex-col items-start mb-8">
+          <div className="flex flex-col">
+            <span className="font-montserrat font-bold text-lg tracking-tight">
+              <span className="text-gold border-b-2 border-gold pb-0.5">Luthando</span>
+              <span className="text-white ml-1">Maduna</span>
+            </span>
+            <span className="font-montserrat text-[10px] text-white tracking-wider mt-1">
+              CHARTERED ACCOUNTANTS
+            </span>
+          </div>
+          {!fullWidth && !isSidebarOpen && (
+            <div className="font-montserrat font-bold text-lg mt-2">MCA</div>
           )}
           {!fullWidth && (
             <button
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              className="text-white p-2 rounded hover:bg-blue-900 transition"
+              className="absolute right-2 top-4 text-white p-2 rounded hover:bg-blue-900 transition"
             >
               {isSidebarOpen ? "←" : "→"}
             </button>
@@ -127,13 +123,8 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
               >
                 <Menu className="h-5 w-5" />
               </Button>
-              <img 
-                src="/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png" 
-                alt="Luthando Maduna CA" 
-                className="h-8 mr-2" 
-              />
               <h1 className="text-lg font-semibold text-navyblue">
-                Admin
+                MCA Direct Admin
               </h1>
             </div>
             <Button
@@ -166,16 +157,9 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       <div className="flex-1 overflow-x-hidden">
         <header className="bg-white shadow-sm p-4">
           <div className="max-w-7xl mx-auto flex justify-between items-center">
-            <div className="flex items-center">
-              <img 
-                src="/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png" 
-                alt="Luthando Maduna CA" 
-                className="h-8 mr-3" 
-              />
-              <h1 className="text-xl font-semibold text-navyblue">
-                Admin Dashboard
-              </h1>
-            </div>
+            <h1 className="text-xl font-semibold text-navyblue">
+              MCA Direct Admin
+            </h1>
             <div className="relative">
               <Button
                 variant="outline"
