@@ -41,7 +41,7 @@ export const useRegister = () => {
     try {
       console.log("Attempting to register user:", { email, fullName });
       
-      // Disable email confirmation
+      // Use only valid options for signUp - remove shouldCreateUser
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email,
         password,
@@ -49,9 +49,8 @@ export const useRegister = () => {
           data: {
             full_name: fullName,
           },
-          // Disable email confirmation
-          emailRedirectTo: undefined,
-          shouldCreateUser: true
+          // Disable automatic redirect for email confirmation
+          emailRedirectTo: undefined
         }
       });
       
