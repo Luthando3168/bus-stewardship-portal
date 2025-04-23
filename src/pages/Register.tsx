@@ -62,6 +62,7 @@ const Register = () => {
             ['email'],
             {}
           );
+          console.log("Welcome notification sent successfully");
         } catch (notificationError) {
           console.error("Failed to send welcome notification:", notificationError);
           // Don't throw here - we still want to complete registration even if notification fails
@@ -72,7 +73,15 @@ const Register = () => {
       navigate("/login");
     } catch (error: any) {
       console.error("Registration error:", error);
-      toast.error(error.message);
+      
+      // Provide more specific error messages for common issues
+      if (error.message.includes("already registered")) {
+        toast.error("This email is already registered. Please use a different email or try logging in.");
+      } else if (error.message.includes("password")) {
+        toast.error("Password issue: " + error.message);
+      } else {
+        toast.error(error.message || "Registration failed. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }
