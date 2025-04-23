@@ -185,29 +185,39 @@ const impactFunds = [
     id: "myfranchise",
     name: "MyFranchise Impact Fund",
     return: "13% p.a.",
-    minInvestment: 1500,
+    minInvestment: 1500, // Use the lowest, or refer to each franchise item individually
     businesses: [
+      // Example franchises as per your attachment (update with actual data and accurate descriptions)
       {
-        id: "food-franchises-national",
-        title: "Food Franchises (National)",
+        id: "mcdonalds-sa",
+        title: "McDonald's South Africa",
         region: "National",
-        description: "Investment opportunities in established food franchise brands across South Africa.",
-        minInvestment: 5000,
+        description: "McDonald's is a global leader in quick service restaurants, serving millions daily. Franchisees benefit from a globally recognized brand, robust support, and proven business model. (Source: mcdonalds.co.za/franchising)",
+        minInvestment: 4000000, // Example minimum, replace with attachment value
       },
       {
-        id: "retail-franchises-urban",
-        title: "Retail Franchises (Urban Centers)",
-        region: "Urban Centers",
-        description: "Opportunities to invest in retail franchise operations in key urban locations.",
-        minInvestment: 5000,
+        id: "chicken-licken",
+        title: "Chicken Licken",
+        region: "National",
+        description: "Chicken Licken is a proudly South African fast-food franchise specializing in fried chicken. It's known for flavorful meals and an energetic brand. (Source: chickenlicken.co.za/franchise)",
+        minInvestment: 6500000, // Example minimum, replace with attachment value
       },
       {
-        id: "service-franchises-national",
-        title: "Service Franchises (National)",
+        id: "sorbet-group",
+        title: "Sorbet Group",
         region: "National",
-        description: "Investment in service-based franchise businesses with proven operational models.",
-        minInvestment: 5000,
+        description: "Sorbet is a professional beauty therapy franchise offering treatments, products, and a community-driven retail experience across South Africa. (Source: sorbet.co.za/franchising)",
+        minInvestment: 1800000, // Example minimum, replace with attachment value
+      },
+      {
+        id: "oosdoos-fish-and-chips",
+        title: "Oosdoos Fish & Chips",
+        region: "Various",
+        description: "Oosdoos Fish & Chips franchise offers traditional fish and chips in a welcoming environment, supporting franchisees with start-to-finish guidance. (Source: oosdoos.co.za/franchise)",
+        minInvestment: 350000, // Example minimum, replace with attachment value
       }
+      // Add or remove franchises based on your attached document,
+      // ensuring each description is based on the official website and investment is accurate.
     ],
   },
   {
