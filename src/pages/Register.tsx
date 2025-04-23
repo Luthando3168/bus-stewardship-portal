@@ -1,6 +1,6 @@
 
 import { useNavigate } from "react-router-dom";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "@/components/ui/card";
 import RegisterForm from "@/components/auth/registration/RegisterForm";
 import Logo from "@/components/ui/Logo";
 
@@ -16,10 +16,21 @@ const Register = () => {
               <Logo />
             </div>
             <CardDescription className="text-gray-500 text-center">
-              Enter your details to register
+              Client Registration Process
             </CardDescription>
           </CardHeader>
           <CardContent>
+            <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
+              <p className="text-blue-700 text-sm">
+                Welcome to our client onboarding process. To access our website and services:
+              </p>
+              <ul className="list-disc list-inside text-blue-700 text-sm mt-2 space-y-1">
+                <li>Complete this initial registration form</li>
+                <li>You will receive an email with further instructions</li>
+                <li>Follow the email link to complete your full client registration</li>
+                <li>Our team will review and approve your registration</li>
+              </ul>
+            </div>
             <RegisterForm />
           </CardContent>
           <CardFooter className="flex flex-col space-y-4">
