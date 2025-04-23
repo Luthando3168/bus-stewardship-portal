@@ -1,5 +1,5 @@
 
-import { Bell, Menu } from "lucide-react";
+import { Bell, Menu, Facebook, Instagram, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import {
@@ -8,6 +8,25 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
+// Add social media data
+const SOCIAL_LINKS = [
+  {
+    name: "Facebook",
+    url: "https://www.facebook.com/",
+    icon: Facebook,
+  },
+  {
+    name: "Instagram",
+    url: "https://www.instagram.com/",
+    icon: Instagram,
+  },
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/",
+    icon: Linkedin,
+  },
+];
 
 interface Notification {
   id: number;
@@ -58,43 +77,71 @@ const UserHeader = ({
             </Link>
           </div>
         </div>
-        <div className="flex items-center gap-4">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="relative">
-                <Bell className="h-5 w-5" />
-                {notifications.length > 0 && (
-                  <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500" />
-                )}
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-[300px] max-w-[95vw]">
-              {notifications.length > 0 ? (
-                notifications.map((notification) => (
-                  <DropdownMenuItem key={notification.id} className="p-3">
-                    <div className="flex flex-col gap-1">
-                      <div className="font-medium">{notification.title}</div>
-                      <div className="text-sm text-muted-foreground">
-                        {notification.message}
+        <div className="flex flex-col gap-2 items-end">
+          <div className="flex items-center gap-4">
+            {/* Social Media Icons */}
+            <div className="flex items-center gap-2">
+              {SOCIAL_LINKS.map((social) => (
+                <a
+                  key={social.name}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.name}
+                  className="text-navyblue hover:text-gold transition-colors"
+                >
+                  <social.icon size={18} />
+                </a>
+              ))}
+            </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="relative">
+                  <Bell className="h-5 w-5" />
+                  {notifications.length > 0 && (
+                    <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500" />
+                  )}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-[300px] max-w-[95vw]">
+                {notifications.length > 0 ? (
+                  notifications.map((notification) => (
+                    <DropdownMenuItem key={notification.id} className="p-3">
+                      <div className="flex flex-col gap-1">
+                        <div className="font-medium">{notification.title}</div>
+                        <div className="text-sm text-muted-foreground">
+                          {notification.message}
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          {notification.time}
+                        </div>
                       </div>
-                      <div className="text-xs text-muted-foreground">
-                        {notification.time}
-                      </div>
-                    </div>
+                    </DropdownMenuItem>
+                  ))
+                ) : (
+                  <DropdownMenuItem className="p-3 text-center">
+                    No new notifications
                   </DropdownMenuItem>
-                ))
-              ) : (
-                <DropdownMenuItem className="p-3 text-center">
-                  No new notifications
+                )}
+                <DropdownMenuItem asChild className="p-2 justify-center border-t">
+                  <Link to="/user/notifications" className="w-full text-center text-sm text-blue-600">
+                    View all
+                  </Link>
                 </DropdownMenuItem>
-              )}
-              <DropdownMenuItem asChild className="p-2 justify-center border-t">
-                <Link to="/user/notifications" className="w-full text-center text-sm text-blue-600">
-                  View all
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+          {/* Contact details */}
+          <div className="flex flex-col items-end md:flex-row md:items-center md:gap-4">
+            <a
+              href="mailto:info@madunacas.com"
+              className="text-xs text-navyblue hover:underline"
+            >
+              info@madunacas.com
+            </a>
+            <span className="text-xs text-navyblue hidden md:inline">|</span>
+            <span className="text-xs text-navyblue">062 019 3208</span>
+          </div>
         </div>
       </div>
     </header>
@@ -102,3 +149,4 @@ const UserHeader = ({
 };
 
 export default UserHeader;
+
