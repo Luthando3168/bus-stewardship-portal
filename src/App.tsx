@@ -43,6 +43,10 @@ import MyFarmFund from "@/pages/funds/MyFarmFund";
 import MyPropertyFund from "@/pages/funds/MyPropertyFund";
 import MyFranchiseFund from "@/pages/funds/MyFranchiseFund";
 import MyFoodRetailFund from "@/pages/funds/MyFoodRetailFund";
+import MyEnergyFund from "@/pages/funds/MyEnergyFund";
+import MyHealthFund from "@/pages/funds/MyHealthFund";
+import MySchoolFund from "@/pages/funds/MySchoolFund";
+import MyTelcoFund from "@/pages/funds/MyTelcoFund";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(
@@ -95,6 +99,10 @@ function App() {
         <Route path="/funds/myproperty" element={<MyPropertyFund />} />
         <Route path="/funds/myfranchise" element={<MyFranchiseFund />} />
         <Route path="/funds/myfoodretail" element={<MyFoodRetailFund />} />
+        <Route path="/funds/myenergy" element={<MyEnergyFund />} />
+        <Route path="/funds/myhealth" element={<MyHealthFund />} />
+        <Route path="/funds/myeducation" element={<MySchoolFund />} />
+        <Route path="/funds/mytelco" element={<MyTelcoFund />} />
 
         {/* Protected user routes */}
         <Route path="/user" element={<ProtectedRoute><Outlet /></ProtectedRoute>}>
