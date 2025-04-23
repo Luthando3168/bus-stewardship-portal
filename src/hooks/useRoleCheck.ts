@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
@@ -25,11 +26,12 @@ export const useRoleCheck = () => {
           setIsAdmin(false);
         }
 
-        // Try to verify with database
+        // Try to verify with database using a simpler query approach
+        // This avoids the recursive policy issue
         const { data, error } = await supabase
-          .from("user_roles")
-          .select("role")
-          .eq("user_id", user.id)
+          .from('profiles')
+          .select('role')
+          .eq('id', user.id)
           .single();
         
         if (error) {

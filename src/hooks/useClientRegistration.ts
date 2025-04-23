@@ -20,6 +20,12 @@ export const useClientRegistration = (user: User | null) => {
       }
 
       try {
+        // First check if we have a cached status to use as fallback
+        const cachedStatus = localStorage.getItem("registrationStatus");
+        if (cachedStatus) {
+          setRegistrationStatus(cachedStatus);
+        }
+
         // Check if client record exists
         const { data: client, error: clientError } = await supabase
           .from('clients')
@@ -38,6 +44,13 @@ export const useClientRegistration = (user: User | null) => {
                 .eq('id', user.id)
                 .single();
 
+              // Handle potential infinite recursion error from RLS policies
+              if (profileError && profileError.message && 
+                  profileError.message.includes('infinite recursion')) {
+                console.warn("Policy recursion error detected in profiles table:", profileError);
+                throw new Error("Database policy error: " + profileError.message);
+              }
+              
               if (profileError) {
                 console.warn("Error fetching profile:", profileError);
                 throw profileError;
@@ -60,6 +73,7 @@ export const useClientRegistration = (user: User | null) => {
               }
               
               setRegistrationStatus('pending_registration');
+              localStorage.setItem("registrationStatus", 'pending_registration');
               
               localStorage.setItem("userName", fullName.split(' ')[0] || "");
               localStorage.setItem("userSurname", fullName.split(' ').slice(1).join(' ') || "");
@@ -75,18 +89,29 @@ export const useClientRegistration = (user: User | null) => {
             } catch (err) {
               console.error("Error creating client record:", err);
               setError(err instanceof Error ? err : new Error(String(err)));
+              
               // Still set a default registration status so the app can function
-              setRegistrationStatus('pending_registration');
+              setRegistrationStatus(cachedStatus || 'pending_registration');
+              
+              // Store minimal user info in localStorage as fallback
+              if (user.user_metadata?.full_name) {
+                const fullName = user.user_metadata.full_name;
+                localStorage.setItem("userName", fullName.split(' ')[0] || "");
+                localStorage.setItem("userSurname", fullName.split(' ').slice(1).join(' ') || "");
+              } else if (user.email) {
+                localStorage.setItem("userName", user.email.split('@')[0] || "User");
+              }
             }
           } else {
             console.error("Error checking client status:", clientError);
             setError(clientError);
-            // Set fallback status
-            setRegistrationStatus('pending_registration');
+            // Set fallback status from cache or default
+            setRegistrationStatus(cachedStatus || 'pending_registration');
           }
         } else {
           // Client record exists
           setRegistrationStatus(client?.status || 'pending_registration');
+          localStorage.setItem("registrationStatus", client?.status || 'pending_registration');
           
           try {
             // Get user profile data
@@ -96,7 +121,18 @@ export const useClientRegistration = (user: User | null) => {
               .eq('id', user.id)
               .single();
 
-            if (profileError) {
+            // Handle potential recursive policy error
+            if (profileError && profileError.message && 
+                profileError.message.includes('infinite recursion')) {
+              console.warn("Policy recursion error detected in profiles table:", profileError);
+              
+              // Use user metadata as fallback
+              if (user.user_metadata?.full_name) {
+                const fullName = user.user_metadata.full_name;
+                localStorage.setItem("userName", fullName.split(' ')[0] || "");
+                localStorage.setItem("userSurname", fullName.split(' ').slice(1).join(' ') || "");
+              }
+            } else if (profileError) {
               console.warn("Error fetching profile:", profileError);
             } else if (profile?.full_name) {
               localStorage.setItem("userName", profile.full_name.split(' ')[0] || "");
@@ -107,7 +143,8 @@ export const useClientRegistration = (user: User | null) => {
           }
 
           // Only restrict access to investment-related pages if not fully registered
-          if (client?.status === 'pending_registration' && 
+          // and there's no error
+          if (!error && client?.status === 'pending_registration' && 
               (location.pathname.includes('/new-deals') || 
                location.pathname.includes('/my-investments') || 
                location.pathname.includes('/wallet'))) {
@@ -116,7 +153,7 @@ export const useClientRegistration = (user: User | null) => {
           }
           
           // If the user isn't approved yet, they shouldn't access investment pages
-          else if (client?.status !== 'approved' && 
+          else if (!error && client?.status !== 'approved' && 
               client?.status !== 'active' && 
               (location.pathname.includes('/new-deals') || 
                location.pathname.includes('/my-investments') || 
@@ -128,7 +165,14 @@ export const useClientRegistration = (user: User | null) => {
       } catch (err) {
         console.error('Error checking registration status:', err);
         setError(err instanceof Error ? err : new Error(String(err)));
-        toast.error('Error loading account information');
+        
+        // Use cached status as fallback
+        const cachedStatus = localStorage.getItem("registrationStatus");
+        if (cachedStatus) {
+          setRegistrationStatus(cachedStatus);
+        } else {
+          setRegistrationStatus('pending_registration');
+        }
       } finally {
         setIsLoading(false);
       }

@@ -9,6 +9,7 @@ import LoadingScreen from "@/components/ui/LoadingScreen";
 import RegistrationRequired from "@/components/auth/RegistrationRequired";
 import { useAuthState } from "@/hooks/useAuthState";
 import { useClientRegistration } from "@/hooks/useClientRegistration";
+import { toast } from "sonner";
 
 interface UserLayoutProps {
   children: ReactNode;
@@ -16,6 +17,7 @@ interface UserLayoutProps {
 
 const UserLayout = ({ children }: UserLayoutProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const isMobile = useIsMobile();
   const [isSidebarOpen, setIsSidebarOpen] = useState(!isMobile);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -50,9 +52,19 @@ const UserLayout = ({ children }: UserLayoutProps) => {
   // just proceed to show the dashboard with limited features
   if (registrationError) {
     console.warn("Error checking registration status:", registrationError);
+    // Show a toast only once to inform the user about the error
+    if (!localStorage.getItem("error_notification_shown")) {
+      toast.error("There was an issue loading your profile data. Some features may be limited.");
+      localStorage.setItem("error_notification_shown", "true");
+      // Clear this flag after 10 minutes so it doesn't spam the user
+      setTimeout(() => {
+        localStorage.removeItem("error_notification_shown");
+      }, 10 * 60 * 1000);
+    }
   }
 
   // Only block access to certain pages if we successfully determined registration status
+  // and there's no error
   if (!registrationError && registrationStatus === 'pending_registration' && 
       (location.pathname.includes('/new-deals') || 
        location.pathname.includes('/my-investments') || 
