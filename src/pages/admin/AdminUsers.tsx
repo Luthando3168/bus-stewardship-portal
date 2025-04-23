@@ -1,4 +1,3 @@
-
 import AdminLayout from "@/components/layout/AdminLayout";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -10,8 +9,8 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
+import UserDetailsDialog from "@/components/admin/users/UserDetailsDialog";
 
-// Profile fields should match user profile page — fields updated!
 const PROFILE_FIELDS = [
   { key: "fullName", label: "Full Name", required: true },
   { key: "email", label: "Email Address", required: true },
@@ -85,6 +84,29 @@ const mockUsers = [
   },
 ];
 
+const mockBeneficiaries = [
+  {
+    id: 1,
+    userId: 1,
+    beneficiaryName: "Sarah Dlamini",
+    relationship: "Spouse",
+    phone: "073 123 4567",
+    email: "sarah.d@example.com",
+    type: "Primary",
+    percentage: 60
+  },
+  {
+    id: 2,
+    userId: 1,
+    beneficiaryName: "Thabo Dlamini",
+    relationship: "Son",
+    phone: "082 987 6543",
+    email: "thabo.d@example.com",
+    type: "Secondary",
+    percentage: 40
+  }
+];
+
 const RedStar = () => <Star size={13} className="text-red-500 inline ml-1 align-text-bottom" />;
 
 const isMissing = (user: any, key: string, required?: boolean) => required && !user[key];
@@ -114,6 +136,10 @@ const AdminUsers = () => {
       user.idNumber.includes(searchTerm)
     );
   });
+
+  const getUserBeneficiaries = (userId: number) => {
+    return mockBeneficiaries.filter(b => b.userId === userId);
+  };
 
   const onSubmitAdvancedSearch = (data: SearchFormValues) => {
     if (data.searchType === 'name') {
@@ -262,7 +288,10 @@ const AdminUsers = () => {
                         <TableCell>{user.lastLogin}</TableCell>
                         <TableCell>
                           <div className="flex space-x-2">
-                            <Button variant="outline" size="sm">View</Button>
+                            <UserDetailsDialog 
+                              user={user} 
+                              beneficiaries={getUserBeneficiaries(user.id)} 
+                            />
                             <Button variant="outline" size="sm">Edit</Button>
                           </div>
                         </TableCell>
