@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -19,7 +18,6 @@ const Login = () => {
   const { signIn } = useAuth();
   const navigate = useNavigate();
   
-  // Check for auth error in URL when redirected back from OAuth
   useEffect(() => {
     const hashParams = new URLSearchParams(window.location.hash.substring(1));
     const error = hashParams.get("error_description") || hashParams.get("error");
@@ -49,7 +47,6 @@ const Login = () => {
       setIsLoading(true);
       setAuthError(null);
 
-      // Get the current URL to use as base for the redirect
       const redirectTo = `${window.location.origin}/login`;
       console.log(`Attempting ${provider} login with redirect to:`, redirectTo);
 
@@ -58,7 +55,7 @@ const Login = () => {
         options: {
           redirectTo: redirectTo,
           queryParams: {
-            prompt: 'select_account' // Force Google account selection each time
+            prompt: 'select_account'
           }
         }
       });
@@ -67,7 +64,6 @@ const Login = () => {
         throw error;
       }
       
-      // If we have a URL to redirect to, do it
       if (data?.url) {
         console.log("Redirecting to OAuth provider URL:", data.url);
         window.location.href = data.url;
@@ -88,15 +84,15 @@ const Login = () => {
           <div className="flex justify-center mb-4">
             <Logo />
           </div>
-          <CardDescription className="text-gray-600 text-center">
-            Enter your credentials to access your account
+          <CardDescription className="text-gray-600">
+            Welcome back! Please sign in to your account
           </CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
             {authError && (
               <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
-                <p className="text-sm">{authError}</p>
+                <p className="text-sm">Invalid email or password</p>
               </div>
             )}
             
@@ -164,7 +160,7 @@ const Login = () => {
                 className="w-full"
               >
                 <Icons.google className="mr-2 h-4 w-4" />
-                Google
+                Continue with Google
               </Button>
               <Button
                 type="button"
@@ -174,7 +170,7 @@ const Login = () => {
                 className="w-full"
               >
                 <Icons.apple className="mr-2 h-4 w-4" />
-                Apple
+                Continue with Apple
               </Button>
               <Button
                 type="button"
@@ -184,7 +180,7 @@ const Login = () => {
                 className="w-full"
               >
                 <Icons.facebook className="mr-2 h-4 w-4" />
-                Facebook
+                Continue with Facebook
               </Button>
             </div>
           </CardContent>
