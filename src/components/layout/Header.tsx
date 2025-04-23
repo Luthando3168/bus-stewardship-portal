@@ -34,11 +34,7 @@ const Header = () => {
 
   const handleMcaDirectClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    if (user) {
-      navigate('/user/dashboard');
-    } else {
-      navigate('/mca-direct');
-    }
+    navigate('/user/dashboard');
   };
 
   if (isMobile) {
@@ -94,21 +90,21 @@ const Header = () => {
                     <div className="mt-6 flex flex-col space-y-3">
                       <Link
                         to="/login"
-                        className="bg-blue-600 text-white px-4 py-2 rounded text-base font-semibold text-center"
+                        className="bg-blue-600 text-white px-4 py-2 rounded text-lg font-semibold text-center"
                         onClick={() => setMenuOpen(false)}
                       >
                         Sign-in or Register
                       </Link>
-                      <Link
-                        to="/mca-direct"
+                      <a
+                        href="#"
                         onClick={(e) => {
                           handleMcaDirectClick(e);
                           setMenuOpen(false);
                         }}
-                        className="bg-gold text-navyblue px-4 py-2 rounded text-lg font-bold text-center"
+                        className="bg-gold text-navyblue px-4 py-2.5 rounded text-xl font-bold text-center"
                       >
                         MCA Direct<sup className="text-xs ml-0.5">™</sup>
-                      </Link>
+                      </a>
                     </div>
 
                     <div className="mt-3 pt-3 border-t border-gray-100">
@@ -172,17 +168,17 @@ const Header = () => {
             ))}
             <Link
               to="/login"
-              className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 font-semibold text-base"
+              className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 font-semibold text-lg"
             >
               Sign-in or Register
             </Link>
-            <Link
-              to="/mca-direct"
+            <a
+              href="#"
               onClick={handleMcaDirectClick}
-              className="bg-gold text-navyblue px-6 py-2.5 rounded hover:bg-gold/90 font-bold text-lg"
+              className="bg-gold text-navyblue px-6 py-2.5 rounded hover:bg-gold/90 font-bold text-xl"
             >
               MCA Direct<sup className="text-xs ml-0.5">™</sup>
-            </Link>
+            </a>
           </div>
         </div>
       </nav>
