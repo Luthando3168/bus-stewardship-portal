@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import AdminLayout from "@/components/layout/AdminLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -14,6 +13,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { toast } from "sonner";
+import html2pdf from "html2pdf.js";
 
 const AdminDashboard = () => {
   const [selectedCompany, setSelectedCompany] = useState<string | null>(null);
@@ -31,13 +32,91 @@ const AdminDashboard = () => {
         // ... additional investors would be fetched from actual data
       ]
     },
-    // ... keep sample data structure for other businesses
+    // ... keep existing code
   ];
 
+  // Function to export investors list in PDF or Excel format
   const exportInvestorsList = (format: 'pdf' | 'excel') => {
-    // In a real implementation, this would generate and download the appropriate file
-    console.log(`Exporting investors list in ${format} format`);
-    // Add actual export logic here
+    // Find the selected business
+    const business = businesses.find(b => b.name === selectedCompany);
+    
+    if (!business) {
+      toast.error("No business selected for export");
+      return;
+    }
+
+    if (format === 'pdf') {
+      // Create a temporary div to render the content
+      const element = document.createElement('div');
+      element.innerHTML = `
+        <div style="padding: 20px;">
+          <h2 style="text-align: center;">${business.name} - Shareholders List</h2>
+          <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+              <tr style="background-color: #f3f4f6;">
+                <th style="border: 1px solid #e5e7eb; padding: 8px; text-align: left;">Shareholder Name</th>
+                <th style="border: 1px solid #e5e7eb; padding: 8px; text-align: left;">Number of Shares</th>
+                <th style="border: 1px solid #e5e7eb; padding: 8px; text-align: left;">Ownership Percentage</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${business.investorsList.map(investor => `
+                <tr>
+                  <td style="border: 1px solid #e5e7eb; padding: 8px;">${investor.name}</td>
+                  <td style="border: 1px solid #e5e7eb; padding: 8px;">${investor.shares}</td>
+                  <td style="border: 1px solid #e5e7eb; padding: 8px;">${investor.percentage}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+
+      // Use html2pdf to convert the element to PDF
+      const opt = {
+        margin: 1,
+        filename: `${business.name}_shareholders.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf().from(element).set(opt).save().then(() => {
+        toast.success("PDF export successful");
+      }).catch((error) => {
+        console.error("PDF export error:", error);
+        toast.error("Failed to export PDF");
+      });
+      
+      console.log(`Exporting investors list in ${format} format`);
+    } else if (format === 'excel') {
+      // Create CSV content
+      let csvContent = "Shareholder Name,Number of Shares,Ownership Percentage\n";
+      
+      business.investorsList.forEach(investor => {
+        csvContent += `${investor.name},${investor.shares},${investor.percentage}\n`;
+      });
+      
+      // Create a Blob with the CSV content
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      
+      // Create a link to download the CSV
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `${business.name}_shareholders.csv`);
+      document.body.appendChild(link);
+      
+      // Trigger the download
+      link.click();
+      
+      // Clean up
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      
+      toast.success("Excel export successful");
+      console.log(`Exporting investors list in ${format} format`);
+    }
   };
 
   return (
