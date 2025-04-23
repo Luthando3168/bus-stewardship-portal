@@ -35,17 +35,25 @@ const UserLayout = ({ children }: UserLayoutProps) => {
   ]);
 
   const { isLoading: authLoading, user, handleLogout } = useAuthState();
-  const { isLoading: registrationLoading, registrationStatus } = useClientRegistration(user);
+  const { isLoading: registrationLoading, registrationStatus, error: registrationError } = useClientRegistration(user);
 
   const userName = localStorage.getItem("userName") || "User";
   const userSurname = localStorage.getItem("userSurname") || "";
   const fullName = `${userName} ${userSurname}`.trim();
 
-  if (authLoading || registrationLoading) {
+  // Handle loading state
+  if (authLoading || (registrationLoading && !registrationError)) {
     return <LoadingScreen />;
   }
 
-  if (registrationStatus === 'pending_registration' && 
+  // If there was an error checking registration but we have a user,
+  // just proceed to show the dashboard with limited features
+  if (registrationError) {
+    console.warn("Error checking registration status:", registrationError);
+  }
+
+  // Only block access to certain pages if we successfully determined registration status
+  if (!registrationError && registrationStatus === 'pending_registration' && 
       (location.pathname.includes('/new-deals') || 
        location.pathname.includes('/my-investments') || 
        location.pathname.includes('/wallet'))) {

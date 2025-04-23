@@ -10,79 +10,100 @@ export const useClientRegistration = (user: User | null) => {
   const location = useLocation();
   const [registrationStatus, setRegistrationStatus] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     const checkRegistrationStatus = async () => {
       if (!user) {
-        navigate('/login');
+        setIsLoading(false);
         return;
       }
 
       try {
         // Check if client record exists
-        const { data: client, error } = await supabase
+        const { data: client, error: clientError } = await supabase
           .from('clients')
           .select('status')
           .eq('id', user.id)
           .single();
 
-        if (error) {
+        if (clientError) {
           // If no client record, create one with pending_registration status
-          if (error.code === 'PGRST116') {
-            // Get profile data for name
-            const { data: profile } = await supabase
-              .from('profiles')
-              .select('full_name')
-              .eq('id', user.id)
-              .single();
+          if (clientError.code === 'PGRST116') {
+            try {
+              // Get profile data for name
+              const { data: profile, error: profileError } = await supabase
+                .from('profiles')
+                .select('full_name')
+                .eq('id', user.id)
+                .single();
 
-            const fullName = profile?.full_name || user.user_metadata?.full_name || 'New User';
-            
-            // Generate temporary client number
-            const tempClientNumber = `TEMP${new Date().getTime().toString().slice(-6)}`;
-            
-            const { error: insertError } = await supabase
-              .from('clients')
-              .insert([{ 
-                id: user.id, 
-                status: 'pending_registration'
-              }]);
-            
-            if (insertError) {
-              throw insertError;
-            }
-            
-            setRegistrationStatus('pending_registration');
-            
-            localStorage.setItem("userName", fullName.split(' ')[0] || "");
-            localStorage.setItem("userSurname", fullName.split(' ').slice(1).join(' ') || "");
-            localStorage.setItem("tempClientNumber", tempClientNumber);
+              if (profileError) {
+                console.warn("Error fetching profile:", profileError);
+                throw profileError;
+              }
 
-            // Only show registration prompt if trying to access restricted areas
-            if (location.pathname.includes('/new-deals') || 
-                location.pathname.includes('/my-investments') || 
-                location.pathname.includes('/wallet')) {
-              toast.info("Please complete your registration to invest");
-              navigate('/complete-registration');
-              return;
+              const fullName = profile?.full_name || user.user_metadata?.full_name || 'New User';
+              
+              // Generate temporary client number
+              const tempClientNumber = `TEMP${new Date().getTime().toString().slice(-6)}`;
+              
+              const { error: insertError } = await supabase
+                .from('clients')
+                .insert([{ 
+                  id: user.id, 
+                  status: 'pending_registration'
+                }]);
+              
+              if (insertError) {
+                throw insertError;
+              }
+              
+              setRegistrationStatus('pending_registration');
+              
+              localStorage.setItem("userName", fullName.split(' ')[0] || "");
+              localStorage.setItem("userSurname", fullName.split(' ').slice(1).join(' ') || "");
+              localStorage.setItem("tempClientNumber", tempClientNumber);
+
+              // Only show registration prompt if trying to access restricted areas
+              if (location.pathname.includes('/new-deals') || 
+                  location.pathname.includes('/my-investments') || 
+                  location.pathname.includes('/wallet')) {
+                toast.info("Please complete your registration to invest");
+                navigate('/complete-registration');
+              }
+            } catch (err) {
+              console.error("Error creating client record:", err);
+              setError(err instanceof Error ? err : new Error(String(err)));
+              // Still set a default registration status so the app can function
+              setRegistrationStatus('pending_registration');
             }
           } else {
-            throw error;
+            console.error("Error checking client status:", clientError);
+            setError(clientError);
+            // Set fallback status
+            setRegistrationStatus('pending_registration');
           }
         } else {
           // Client record exists
           setRegistrationStatus(client?.status || 'pending_registration');
           
-          // Get user profile data
-          const { data: profile } = await supabase
-            .from('profiles')
-            .select('full_name')
-            .eq('id', user.id)
-            .single();
-            
-          if (profile?.full_name) {
-            localStorage.setItem("userName", profile.full_name.split(' ')[0] || "");
-            localStorage.setItem("userSurname", profile.full_name.split(' ').slice(1).join(' ') || "");
+          try {
+            // Get user profile data
+            const { data: profile, error: profileError } = await supabase
+              .from('profiles')
+              .select('full_name')
+              .eq('id', user.id)
+              .single();
+
+            if (profileError) {
+              console.warn("Error fetching profile:", profileError);
+            } else if (profile?.full_name) {
+              localStorage.setItem("userName", profile.full_name.split(' ')[0] || "");
+              localStorage.setItem("userSurname", profile.full_name.split(' ').slice(1).join(' ') || "");
+            }
+          } catch (err) {
+            console.error("Error fetching profile data:", err);
           }
 
           // Only restrict access to investment-related pages if not fully registered
@@ -92,24 +113,22 @@ export const useClientRegistration = (user: User | null) => {
                location.pathname.includes('/wallet'))) {
             toast.info("Please complete your registration to invest");
             navigate('/complete-registration');
-            return;
           }
           
           // If the user isn't approved yet, they shouldn't access investment pages
-          if (client?.status !== 'approved' && 
+          else if (client?.status !== 'approved' && 
               client?.status !== 'active' && 
               (location.pathname.includes('/new-deals') || 
                location.pathname.includes('/my-investments') || 
                location.pathname.includes('/wallet'))) {
             toast.error("Your account is pending approval");
             navigate('/complete-registration');
-            return;
           }
         }
-      } catch (error) {
-        console.error('Error checking registration status:', error);
-        toast.error('Error checking registration status');
-        navigate('/login');
+      } catch (err) {
+        console.error('Error checking registration status:', err);
+        setError(err instanceof Error ? err : new Error(String(err)));
+        toast.error('Error loading account information');
       } finally {
         setIsLoading(false);
       }
@@ -118,5 +137,5 @@ export const useClientRegistration = (user: User | null) => {
     checkRegistrationStatus();
   }, [user, navigate, location.pathname]);
 
-  return { registrationStatus, isLoading };
+  return { registrationStatus, isLoading, error };
 };
