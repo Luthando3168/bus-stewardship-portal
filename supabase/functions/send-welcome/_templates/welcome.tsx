@@ -1,4 +1,3 @@
-
 import {
   Body,
   Container,
@@ -15,10 +14,12 @@ import * as React from 'npm:react@18.3.1'
 
 interface WelcomeEmailProps {
   fullName: string;
+  verificationUrl?: string;
 }
 
 export const WelcomeEmail = ({
   fullName,
+  verificationUrl = "https://mcadirect.madunacas.com/verify",
 }: WelcomeEmailProps) => (
   <Html>
     <Head />
@@ -27,11 +28,11 @@ export const WelcomeEmail = ({
       <Container style={container}>
         <Section style={logoContainer}>
           <Img
-            src="https://tryalfcdjznmtqaxungq.supabase.co/storage/v1/object/public/public/luthando_maduna_logo.png"
-            width="200"
+            src="https://lovable.app/lovable-uploads/4f2d889e-ba23-463a-9efe-bc8453a5e5b2.png"
+            width="250"
             height="auto"
-            alt="Luthando Maduna CA Logo"
-            style={{margin: '0 auto'}}
+            alt="Luthando Maduna Chartered Accountants"
+            style={{ margin: '0 auto' }}
           />
         </Section>
 
@@ -43,6 +44,26 @@ export const WelcomeEmail = ({
           I am Luthando Maduna, CA(SA), Director of the firm. On behalf of our entire team, 
           I extend a warm welcome to you as you begin your journey with us.
         </Text>
+
+        <Section style={buttonContainer}>
+          <Link
+            href={verificationUrl}
+            style={button}
+          >
+            Verify Your Email
+          </Link>
+        </Section>
+
+        <Text style={text}>
+          After verifying your email, you'll gain access to:
+        </Text>
+
+        <ul style={list}>
+          <li style={listItem}>Professional business management services</li>
+          <li style={listItem}>Investment opportunities</li>
+          <li style={listItem}>Financial advisory services</li>
+          <li style={listItem}>Your personalized MCA Direct dashboard</li>
+        </ul>
 
         <Heading style={h2}>About MCA Direct:</Heading>
         <Text style={text}>
@@ -104,6 +125,7 @@ const container = {
 const logoContainer = {
   textAlign: 'center' as const,
   padding: '20px 0',
+  marginBottom: '24px',
 }
 
 const h1 = {
@@ -128,6 +150,35 @@ const text = {
   fontSize: '16px',
   lineHeight: '1.5',
   margin: '16px 0',
+}
+
+const buttonContainer = {
+  textAlign: 'center' as const,
+  margin: '32px 0',
+}
+
+const button = {
+  backgroundColor: '#1e3a8a',
+  borderRadius: '4px',
+  color: '#fff',
+  display: 'inline-block',
+  fontSize: '16px',
+  fontWeight: '600',
+  padding: '12px 24px',
+  textDecoration: 'none',
+  textAlign: 'center' as const,
+}
+
+const list = {
+  margin: '16px 0',
+  padding: '0 0 0 24px',
+}
+
+const listItem = {
+  color: '#333',
+  fontSize: '16px',
+  lineHeight: '1.5',
+  marginBottom: '8px',
 }
 
 const contactSection = {
