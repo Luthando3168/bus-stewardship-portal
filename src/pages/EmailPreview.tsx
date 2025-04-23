@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Layout from "@/components/layout/Layout";
 import WelcomeEmailPreview from "@/components/email/WelcomeEmailPreview";
@@ -6,6 +5,7 @@ import ClientEmailPreview from "@/components/email/ClientEmailPreview";
 import { RegistrationConfirmEmail } from "@/components/email/RegistrationConfirmEmail";
 import { ShareCertificateEmail } from "@/components/email/ShareCertificateEmail";
 import { DealApprovalEmail } from "@/components/email/DealApprovalEmail";
+import { RegistrationApprovedEmail } from "@/components/email/RegistrationApprovedEmail";
 import {
   Carousel,
   CarouselContent,
@@ -23,7 +23,10 @@ const EmailPreview = () => {
     confirmationLink: "#",
     approvalLink: "#",
     viewLink: "#",
-    email: "john.doe@example.com"
+    email: "john.doe@example.com",
+    clientNumber: "MCA2024005",
+    bankAccountNumber: "1234567890",
+    bankAccountBranch: "Universal Branch 250"
   };
 
   return (
@@ -48,6 +51,20 @@ const EmailPreview = () => {
                     <RegistrationConfirmEmail
                       fullName={demoProps.fullName}
                       confirmationLink={demoProps.confirmationLink}
+                    />
+                  </div>
+                </div>
+              </CarouselItem>
+              
+              <CarouselItem>
+                <div className="p-2">
+                  <h2 className="text-lg font-semibold mb-4">Registration Approved</h2>
+                  <div className="bg-white rounded-lg shadow-lg">
+                    <RegistrationApprovedEmail
+                      fullName={demoProps.fullName}
+                      clientNumber={demoProps.clientNumber}
+                      bankAccountNumber={demoProps.bankAccountNumber}
+                      bankAccountBranch={demoProps.bankAccountBranch}
                     />
                   </div>
                 </div>
