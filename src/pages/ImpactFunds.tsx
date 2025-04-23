@@ -55,6 +55,45 @@ const funds = [
     ],
     minInvestment: "R 1,800",
     route: "/funds/myfoodretail"
+  },
+  {
+    name: "MyTelco Impact Fund",
+    description: "Focus: Investing in telecommunications infrastructure and services to provide affordable connectivity solutions.",
+    bgGradient: "from-blue-500 to-blue-800",
+    image: "https://images.unsplash.com/photo-1563770660941-20978e870e26",
+    focus: [
+      "Mobile network services",
+      "Internet connectivity",
+      "Digital infrastructure"
+    ],
+    minInvestment: "R 2,500",
+    route: "/funds/mytelco"
+  },
+  {
+    name: "MyHealth Impact Fund",
+    description: "Focus: Investing in accessible healthcare solutions and medical facilities to improve community health outcomes.",
+    bgGradient: "from-pink-600 to-pink-900",
+    image: "https://images.unsplash.com/photo-1538108149393-fbbd81895907",
+    focus: [
+      "Community health centers",
+      "Medical equipment",
+      "Healthcare services"
+    ],
+    minInvestment: "R 2,500",
+    route: "/funds/myhealth"
+  },
+  {
+    name: "MySchool Impact Fund",
+    description: "Focus: Investing in quality education infrastructure and learning institutions to enhance community development through education.",
+    bgGradient: "from-indigo-700 to-indigo-900",
+    image: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6",
+    focus: [
+      "Educational facilities",
+      "Learning resources",
+      "Skills development centers"
+    ],
+    minInvestment: "R 1,500",
+    route: "/funds/myschool"
   }
 ];
 
@@ -69,6 +108,30 @@ const ImpactFunds = () => {
             centered
           />
           
+          {/* New Savings Information Section */}
+          <div className="max-w-3xl mx-auto mb-16 bg-white rounded-lg p-8 shadow-md">
+            <h3 className="text-2xl font-bold text-navyblue mb-6">Starting Your Investment Journey</h3>
+            
+            <div className="space-y-6 text-gray-700">
+              <p>
+                As our valued client, you can build your investment portfolio step by step:
+              </p>
+              
+              <ul className="list-disc pl-6 space-y-3">
+                <li>We provide you with a dedicated savings account to help you save towards your investment goals</li>
+                <li>Start saving at your own pace - every amount counts towards your future business ownership</li>
+                <li>Once you reach the minimum investment amount, you can participate in available business deals</li>
+                <li>Your savings are secure and properly managed while you work towards your investment target</li>
+              </ul>
+
+              <div className="bg-blue-50 p-4 rounded-lg mt-4">
+                <p className="font-medium text-navyblue">
+                  Remember: You can start saving today and invest when you're ready. Your dedicated account helps you build towards your business ownership goals.
+                </p>
+              </div>
+            </div>
+          </div>
+
           <div className="max-w-3xl mx-auto mb-16 bg-white rounded-lg p-8 shadow-md">
             <h3 className="text-2xl font-bold text-navyblue mb-6">Understanding Business Ownership</h3>
             
