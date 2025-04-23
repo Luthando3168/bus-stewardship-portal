@@ -186,62 +186,150 @@ const impactFunds = [
     id: "myfranchise",
     name: "MyFranchise Impact Fund",
     return: "13% p.a.",
-    minInvestment: 1500,
+    minInvestment: 1500, // minimum for this fund, individual minimums for each business below
     businesses: [
       {
         id: "steers",
         title: "Steers",
         region: "National",
-        description: "Steers is one of South Africa’s leading fast food brands, famous for flame-grilled burgers and chips. Franchisees benefit from a well-established brand, award-winning meals, and national reach. (Source: steers.co.za/franchising)",
+        description:
+          "Steers is one of South Africa’s leading fast food brands, famous for flame-grilled burgers and chips. Franchisees benefit from a well-established brand, award-winning meals, and national reach. (Source: steers.co.za/franchising)",
         minInvestment: 1500,
       },
       {
         id: "debonairs",
         title: "Debonairs",
         region: "National",
-        description: "Debonairs Pizza is a popular South African pizza franchise known for fresh, innovative pizzas and quick delivery. Franchisees enjoy brand support and an established loyal customer base. (Source: debonairspizza.co.za/franchising)",
+        description:
+          "Debonairs Pizza is a popular South African pizza franchise known for innovative pizzas and quick delivery. Franchisees enjoy brand support and an established customer base. (Source: debonairspizza.co.za/franchising)",
         minInvestment: 3000,
       },
       {
         id: "wimpy",
         title: "Wimpy",
         region: "National",
-        description: "Wimpy is a well-known South African family restaurant and fast-food brand. The franchise offers a friendly dining experience with a wide menu—including breakfast—all supported by strong marketing and operational support. (Source: wimpy.co.za/franchising)",
+        description:
+          "Wimpy is a well-known South African family restaurant and fast-food brand. The franchise offers a friendly dining experience with a wide menu—all supported by strong marketing and operational support. (Source: wimpy.co.za/franchising)",
         minInvestment: 5000,
       },
       {
         id: "burger-king",
         title: "Burger King",
         region: "National",
-        description: "Burger King is a globally recognized fast-food hamburger chain, offering flame-grilled burgers and signature sides. South African franchisees gain backing from international operations and strong national recognition. (Source: burgerking.co.za/franchising)",
+        description:
+          "Burger King is a globally recognized fast-food hamburger chain, offering flame-grilled burgers and signature sides. South African franchisees gain backing from international operations and strong national recognition. (Source: burgerking.co.za/franchising)",
         minInvestment: 6000,
       },
       {
         id: "pedros",
         title: "Pedros",
         region: "National",
-        description: "Pedros is a dynamic South African flame-grilled chicken franchise known for fresh and affordable flame-grilled chicken and growing national footprint. Franchisees enjoy support in site selection and operations. (Source: pedroschicken.co.za/franchises)",
+        description:
+          "Pedros is a dynamic South African flame-grilled chicken franchise known for fresh and affordable flame-grilled chicken and a growing national footprint. Franchisees enjoy support in site selection and operations. (Source: pedroschicken.co.za/franchises)",
         minInvestment: 2500,
       },
       {
         id: "fish-and-co",
         title: "The Fish and Co",
         region: "National",
-        description: "The Fish and Co. is a South African fast-food franchise specializing in a variety of delicious fresh seafood meals in a relaxed environment. Franchisees receive extensive support in business setup and daily operations. (Source: thefishco.co.za/franchise)",
+        description:
+          "The Fish and Co. is a South African fast-food franchise specializing in a variety of fresh seafood meals in a relaxed environment. Franchisees receive extensive support in business setup and daily operations. (Source: thefishco.co.za/franchise)",
         minInvestment: 2000,
       },
       {
         id: "spur",
         title: "Spur",
         region: "National",
-        description: "Spur is South Africa’s very popular family restaurant franchise, known for great steaks, platters and a unique kids-friendly atmosphere. Franchisees benefit from national recognition and extensive franchise support. (Source: spurfranchise.co.za)",
+        description:
+          "Spur is one of South Africa’s best-loved family restaurant franchises, famous for its steaks, rib platters, and a unique kids-friendly atmosphere. Franchisees benefit from national recognition and extensive franchise support. (Source: spurfranchise.co.za)",
         minInvestment: 5000,
       },
       {
         id: "tigermilk",
         title: "Tiger Milk",
         region: "National",
-        description: "Tiger Milk is a leading restaurant and bar franchise brand offering a unique experience combining gourmet burgers, pizza, and signature cocktails, with trendy décor and urban atmosphere. Franchisees receive site selection and operational guidance. (Source: tigermilk.co.za/franchise)",
+        description:
+          "Tiger Milk is a leading restaurant and bar franchise offering a unique experience with gourmet burgers, pizza, signature cocktails, and trendy décor. Franchisees receive site selection and operational guidance. (Source: tigermilk.co.za/franchise)",
+        minInvestment: 5000,
+      },
+    ],
+  },
+  {
+    id: "myfoodretail",
+    name: "MyFoodRetail Impact Fund",
+    return: "12% p.a.", // Added a return rate, adjust as needed
+    minInvestment: 5000,
+    description:
+      "Lifestyle Mini Complex is designed to offer local communities an opportunity to own food retail outlets and share in the trading companies' profits and rent they pay. Clients own the trading companies and share according to what they want to own. You can own multiple complexes and increase your impact and returns. This is a unique opportunity to participate in the growth of local food retail through shared ownership.",
+    businesses: [
+      {
+        id: "lmc-soweto",
+        title: "Lifestyle Mini Complex - Soweto",
+        region: "Soweto",
+        description: "Invest in a community-driven food retail complex located in Soweto.",
+        minInvestment: 5000,
+      },
+      {
+        id: "lmc-pretoria",
+        title: "Lifestyle Mini Complex - Pretoria",
+        region: "Pretoria",
+        description: "Invest in a community-driven food retail complex located in Pretoria.",
+        minInvestment: 5000,
+      },
+      {
+        id: "lmc-west-rand",
+        title: "Lifestyle Mini Complex - West Rand",
+        region: "West Rand",
+        description: "Invest in a community-driven food retail complex located in West Rand.",
+        minInvestment: 5000,
+      },
+      {
+        id: "lmc-east-rand",
+        title: "Lifestyle Mini Complex - East Rand",
+        region: "East Rand",
+        description: "Invest in a community-driven food retail complex located in East Rand.",
+        minInvestment: 5000,
+      },
+      {
+        id: "lmc-tembisa",
+        title: "Lifestyle Mini Complex - Tembisa",
+        region: "Tembisa",
+        description: "Invest in a community-driven food retail complex located in Tembisa.",
+        minInvestment: 5000,
+      },
+      {
+        id: "lmc-vaal",
+        title: "Lifestyle Mini Complex - Vaal",
+        region: "Vaal",
+        description: "Invest in a community-driven food retail complex located in Vaal.",
+        minInvestment: 5000,
+      },
+      {
+        id: "lmc-polokwane",
+        title: "Lifestyle Mini Complex - Polokwane",
+        region: "Polokwane",
+        description: "Invest in a community-driven food retail complex located in Polokwane.",
+        minInvestment: 5000,
+      },
+      {
+        id: "lmc-north-west",
+        title: "Lifestyle Mini Complex - North West (Rustenburg or Mahikeng)",
+        region: "North West",
+        description: "Invest in a community-driven food retail complex in North West (Rustenburg or Mahikeng).",
+        minInvestment: 5000,
+      },
+      {
+        id: "lmc-durban",
+        title: "Lifestyle Mini Complex - Durban",
+        region: "Durban",
+        description: "Invest in a community-driven food retail complex located in Durban.",
+        minInvestment: 5000,
+      },
+      {
+        id: "lmc-western-cape",
+        title: "Lifestyle Mini Complex - Western Cape",
+        region: "Western Cape",
+        description: "Invest in a community-driven food retail complex located in Western Cape.",
         minInvestment: 5000,
       },
     ],
@@ -262,14 +350,14 @@ const impactFunds = [
   },
   {
     id: "mytech",
-    name: "MyTelecoms", // Changed from "MyTech"
+    name: "MyTelecoms", // Already renamed from "MyTech"
     return: "16% p.a.",
     minInvestment: 4000,
     businesses: []
   },
   {
     id: "myeducation",
-    name: "MySchool", // Changed from "MyEducation"
+    name: "MySchool", // Already renamed from "MyEducation"
     return: "10% p.a.",
     minInvestment: 1500,
     businesses: []
