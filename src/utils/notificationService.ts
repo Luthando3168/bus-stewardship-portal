@@ -1,3 +1,4 @@
+
 import { toast } from "sonner";
 
 // Define notification types for consistent messaging
@@ -15,7 +16,7 @@ export type NotificationType =
 export type NotificationChannel = 'email' | 'whatsapp' | 'sms' | 'in_app';
 
 // Define notification template structure
-interface NotificationTemplate {
+export interface NotificationTemplate {
   subject: string;
   body: string;
   whatsappBody?: string;
@@ -43,8 +44,8 @@ const emailWrapper = (content: string) => `
   </div>
 `;
 
-// Template library for all notifications
-const templates: Record<NotificationType, NotificationTemplate> = {
+// Template library for all notifications - NOW EXPORTED
+export const templates: Record<NotificationType, NotificationTemplate> = {
   welcome: {
     subject: "Welcome to Luthando Maduna Chartered Accountants",
     body: emailWrapper(`
