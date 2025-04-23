@@ -39,15 +39,18 @@ interface CertificatesByCompany {
 }
 
 const allImpactFunds = [
-  "MyFoodRetail Impact Fund", 
-  "MyTelco Impact Fund", 
-  "MyProperty Impact Fund",
-  "MyEnergy Impact Fund",
-  "MyAgriculture Impact Fund"
+  "MyFarm",
+  "MyProperty",
+  "MyFranchise",
+  "MyFoodRetail",
+  "MyEnergy",
+  "MyHealth",
+  "MyTelecoms",
+  "MySchool"
 ];
 
 const fundCertificatesData: FundCertificatesData = {
-  "MyFoodRetail Impact Fund": [
+  "MyFarm": [
     {
       id: "SC-101-742",
       userId: 1,
@@ -63,23 +66,7 @@ const fundCertificatesData: FundCertificatesData = {
       status: "active"
     }
   ],
-  "MyTelco Impact Fund": [
-    {
-      id: "SC-102-835",
-      userId: 1,
-      userName: "John Dube",
-      clientNumber: "LM20230001",
-      investmentId: 102,
-      investmentName: "Rural Connectivity Project",
-      companyName: "Rural Connect Technologies (Pty) Ltd",
-      registrationNumber: "2023/654321/07",
-      shares: 120,
-      sharePrice: 125,
-      issueDate: "2023-03-10",
-      status: "active"
-    }
-  ],
-  "MyProperty Impact Fund": [
+  "MyProperty": [
     {
       id: "SC-103-491",
       userId: 2,
@@ -190,13 +177,13 @@ const AdminShareCertificates = () => {
               <div className="flex-1 space-y-4">
                 <Select value={selectedFund} onValueChange={setSelectedFund}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select Impact Fund" />
+                    <SelectValue placeholder="Select Fund" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">All Impact Funds</SelectItem>
+                    <SelectItem value="all">All Funds</SelectItem>
                     {fundsList.map((fund) => (
                       <SelectItem key={fund} value={fund}>
-                        {fund.replace(" Impact Fund", "")}
+                        {fund}
                       </SelectItem>
                     ))}
                   </SelectContent>
