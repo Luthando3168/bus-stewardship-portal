@@ -1,6 +1,6 @@
 
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
+import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import { Toaster } from "sonner";
 import { AuthProvider } from "@/contexts/AuthContext";
 import Index from "@/pages/Index";
@@ -73,7 +73,7 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
+    <>
       <Routes>
         {/* Public routes */}
         <Route path="/" element={<Index />} />
@@ -126,9 +126,8 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Toaster position="top-center" />
-    </BrowserRouter>
+    </>
   );
 }
 
-// The AuthProvider has been moved to main.tsx to ensure it's properly initialized
 export default App;
