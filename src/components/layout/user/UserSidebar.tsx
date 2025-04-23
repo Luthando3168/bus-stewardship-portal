@@ -33,6 +33,9 @@ const UserSidebar = ({
 }: UserSidebarProps) => {
   const location = useLocation();
 
+  // Read the client number from localStorage
+  const clientNumber = localStorage.getItem("clientNumber") || "N/A";
+
   const sidebarLinks = [
     {
       name: "Dashboard",
@@ -107,6 +110,12 @@ const UserSidebar = ({
         >
           MCA Direct
         </div>
+        {/* Show client number under MCA Direct only when expanded */}
+        {isSidebarOpen && (
+          <div className="text-xs mt-1 text-gray-200 font-mono">
+            Client Number: <span className="font-semibold">{clientNumber}</span>
+          </div>
+        )}
         {!isSidebarOpen && <div className="text-xl font-bold text-center">MCA</div>}
       </div>
 
@@ -181,3 +190,4 @@ const UserSidebar = ({
 };
 
 export default UserSidebar;
+
