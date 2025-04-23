@@ -8,11 +8,13 @@ import Layout from "@/components/layout/Layout";
 const Index = () => {
   return (
     <Layout>
-      <Hero />
-      <ServicesSection />
-      <BusSection />
-      <ImpactFundsSection />
-      <div className="bg-white py-16"></div> {/* Added white spacer */}
+      <div className="w-full">
+        <Hero />
+        <ServicesSection />
+        <BusSection />
+        <ImpactFundsSection />
+        <div className="bg-white py-16"></div> {/* Added white spacer */}
+      </div>
     </Layout>
   );
 };
