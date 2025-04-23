@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import UserLayout from "@/components/layout/UserLayout";
 import { Button } from "@/components/ui/button";
@@ -161,7 +162,6 @@ const UserNewDeals = () => {
       const matchingFund = impactFunds.find(
         fund => fund.id === fundFromUrl || fund.name.toLowerCase().includes(fundFromUrl)
       );
-      
       if (matchingFund) {
         setActiveTab(matchingFund.id);
       }
@@ -241,6 +241,9 @@ const UserNewDeals = () => {
 
   const isMobile = useIsMobile();
 
+  // Only show the active fund
+  const currentFund = impactFunds.find(fund => fund.id === activeTab);
+
   return (
     <UserLayout>
       <div className="max-w-4xl mx-auto px-4 py-6 space-y-8">
@@ -249,29 +252,27 @@ const UserNewDeals = () => {
             <h2 className="text-2xl font-bold text-navyblue">Business Opportunities</h2>
             <p className="text-muted-foreground">Browse and select business deals from our impact funds</p>
           </div>
-          
           <div className="flex items-center gap-4 self-end sm:self-auto">
             <div className="flex flex-col sm:flex-row items-end sm:items-center gap-1">
               <span className="text-sm text-muted-foreground">Wallet Balance:</span>
               <span className="font-bold text-navyblue">R {walletBalance.toLocaleString()}</span>
             </div>
-            
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               size="icon"
               onClick={() => setIsCartOpen(true)}
               className="relative"
             >
-              <ShoppingCart size={20}/>
+              <ShoppingCart size={20} />
               {cartItems.length > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
                   {cartItems.length}
                 </span>
-              )}  
+              )}
             </Button>
           </div>
         </div>
-        
+
         <div className="bg-blue-50 rounded-lg p-5 max-w-2xl mx-auto">
           <p className="font-medium text-navyblue mb-1">How it works:</p>
           <p className="text-muted-foreground">
@@ -298,42 +299,41 @@ const UserNewDeals = () => {
               className="mb-6"
             />
           )}
-          
-          <div className="space-y-10 max-w-3xl mx-auto">
-            {impactFunds.map((fund) => (
-              <div key={fund.id} className="border border-navyblue/10 rounded-lg p-4 bg-white">
-                <div className="flex flex-col sm:flex-row sm:justify-between gap-3 mb-3">
-                  <div>
-                    <h3 className="text-lg font-semibold text-navyblue">{fund.name}</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Min. Investment: <span className="font-medium">R {fund.minInvestment.toLocaleString()}</span>
-                    </p>
-                  </div>
-                  <div className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium self-start">
-                    {fund.return}
-                  </div>
+
+          {/* Only show the currently selected fund */}
+          {currentFund && (
+            <div key={currentFund.id} className="border border-navyblue/10 rounded-lg p-4 bg-white">
+              <div className="flex flex-col sm:flex-row sm:justify-between gap-3 mb-3">
+                <div>
+                  <h3 className="text-lg font-semibold text-navyblue">{currentFund.name}</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Min. Investment: <span className="font-medium">R {currentFund.minInvestment.toLocaleString()}</span>
+                  </p>
                 </div>
-                {fund.businesses.length > 0 ? (
-                  <div className="grid gap-6">
-                    {fund.businesses.map(business => (
-                      <BusinessCard
-                        key={business.id}
-                        business={business}
-                        expanded={expandedBusinessId === business.id}
-                        fundName={fund.name}
-                        onToggle={toggleBusinessExpansion}
-                        onAddToCart={(biz, fname) => handleAddToCart(biz, fname)}
-                      />
-                    ))}
-                  </div>
-                ) : (
-                  <div className="px-2 py-6 text-gray-400 text-center italic border border-dashed border-gray-200 bg-gray-50 rounded">
-                    Currently No Opportunities
-                  </div>
-                )}
+                <div className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium self-start">
+                  {currentFund.return}
+                </div>
               </div>
-            ))}
-          </div>
+              {currentFund.businesses.length > 0 ? (
+                <div className="grid gap-6">
+                  {currentFund.businesses.map(business => (
+                    <BusinessCard
+                      key={business.id}
+                      business={business}
+                      expanded={expandedBusinessId === business.id}
+                      fundName={currentFund.name}
+                      onToggle={toggleBusinessExpansion}
+                      onAddToCart={(biz, fname) => handleAddToCart(biz, fname)}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className="px-2 py-6 text-gray-400 text-center italic border border-dashed border-gray-200 bg-gray-50 rounded">
+                  Currently No Opportunities
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         <InvestmentCart
