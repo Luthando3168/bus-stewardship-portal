@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Home, Info, HelpCircle, Briefcase, Bus, Building, DollarSign, PhoneCall, Mail, Phone, Facebook, Instagram, Linkedin } from "lucide-react";
@@ -33,11 +34,12 @@ const Header = () => {
     { icon: Linkedin, href: "https://linkedin.com/company/madunacas", label: "LinkedIn" },
   ];
 
-  const handleMcaDirectClick = () => {
+  const handleMcaDirectClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
     if (user) {
       navigate('/user/dashboard');
     } else {
-      navigate('/login');
+      navigate('/mca-direct');
     }
   };
 
@@ -50,13 +52,6 @@ const Header = () => {
           </Link>
 
           <div className="flex items-center gap-3">
-            <Button
-              onClick={handleMcaDirectClick}
-              className="bg-gold hover:bg-lightgold text-white px-4 py-2 rounded font-semibold flex items-center"
-            >
-              MCA Direct<sup className="text-[10px] ml-0.5">™</sup>
-            </Button>
-
             <button
               className="p-2 rounded focus:outline-none"
               onClick={() => setMenuOpen(!menuOpen)}
@@ -90,10 +85,16 @@ const Header = () => {
                           className={`flex items-center space-x-2 text-[0.95rem] font-semibold ${
                             isActive(link.to) ? 'text-gold' : 'text-navyblue'
                           }`}
-                          onClick={() => setMenuOpen(false)}
+                          onClick={(e) => {
+                            if (link.to === '/mca-direct') {
+                              handleMcaDirectClick(e);
+                            }
+                            setMenuOpen(false);
+                          }}
                         >
                           <link.icon size={15} />
                           <span>{link.label}</span>
+                          {link.label === 'MCA Direct' && <sup className="text-[10px] ml-0.5">™</sup>}
                         </Link>
                       ))}
                     </nav>
@@ -134,7 +135,7 @@ const Header = () => {
                         className="bg-blue-600 text-white px-4 py-2 rounded text-[0.95rem] font-semibold text-center"
                         onClick={() => setMenuOpen(false)}
                       >
-                        Sign In
+                        Sign-in or Register
                       </Link>
                     </div>
                   </div>
@@ -168,24 +169,24 @@ const Header = () => {
               <Link
                 key={link.to}
                 to={link.to}
+                onClick={(e) => {
+                  if (link.to === '/mca-direct') {
+                    handleMcaDirectClick(e);
+                  }
+                }}
                 className={`text-gray-700 hover:text-navyblue font-semibold ${
                   isActive(link.to) ? 'underline' : ''
                 }`}
               >
                 {link.label}
+                {link.label === 'MCA Direct' && <sup className="text-[10px] ml-0.5">™</sup>}
               </Link>
             ))}
-            <Button
-              onClick={handleMcaDirectClick}
-              className="bg-gold hover:bg-lightgold text-white px-4 py-2 rounded font-semibold flex items-center"
-            >
-              MCA Direct<sup className="text-[10px] ml-0.5">™</sup>
-            </Button>
             <Link
               to="/login"
               className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 font-semibold"
             >
-              Sign In
+              Sign-in or Register
             </Link>
           </div>
         </div>

@@ -1,4 +1,3 @@
-
 import { ReactNode, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
@@ -52,23 +51,21 @@ const UserLayout = ({ children }: UserLayoutProps) => {
   // just proceed to show the dashboard with limited features
   if (registrationError) {
     console.warn("Error checking registration status:", registrationError);
-    // Show a toast only once to inform the user about the error
     if (!localStorage.getItem("error_notification_shown")) {
       toast.error("There was an issue loading your profile data. Some features may be limited.");
       localStorage.setItem("error_notification_shown", "true");
-      // Clear this flag after 10 minutes so it doesn't spam the user
       setTimeout(() => {
         localStorage.removeItem("error_notification_shown");
       }, 10 * 60 * 1000);
     }
   }
 
-  // Only block access to certain pages if we successfully determined registration status
-  // and there's no error
+  // Only block access to investment-related features if registration is pending
   if (!registrationError && registrationStatus === 'pending_registration' && 
       (location.pathname.includes('/new-deals') || 
        location.pathname.includes('/my-investments') || 
        location.pathname.includes('/wallet'))) {
+    toast.info("Please complete your registration to access investment features");
     return <RegistrationRequired />;
   }
 
