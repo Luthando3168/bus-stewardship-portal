@@ -72,28 +72,39 @@ export const useRegister = () => {
 
       if (authData.user) {
         try {
-          // First try the direct edge function call with rate limiting
-          console.log("Attempting to send welcome email via edge function...");
+          // Get the access token for authenticated API calls
+          const { data: sessionData } = await supabase.auth.getSession();
+          const accessToken = sessionData.session?.access_token;
           
-          const { data, error: welcomeError } = await supabase.functions.invoke('send-welcome', {
-            body: { fullName, email }
-          });
-
-          if (welcomeError) {
-            console.error("Failed to send welcome email via edge function:", welcomeError);
-            // Fall back to notification service
-            console.log("Falling back to notification service...");
+          if (accessToken) {
+            // First try the direct edge function call with JWT authentication
+            console.log("Attempting to send welcome email via edge function...");
             
-            await sendUserNotification(
-              { 
-                fullName, 
-                email 
-              }, 
-              'welcome', 
-              ['email']  // Remove WhatsApp to avoid errors if phone is missing
-            );
+            const { data, error: welcomeError } = await supabase.functions.invoke('send-welcome', {
+              body: { fullName, email },
+              headers: {
+                Authorization: `Bearer ${accessToken}`
+              }
+            });
+
+            if (welcomeError) {
+              console.error("Failed to send welcome email via edge function:", welcomeError);
+              // Fall back to notification service
+              console.log("Falling back to notification service...");
+              
+              await sendUserNotification(
+                { 
+                  fullName, 
+                  email 
+                }, 
+                'welcome', 
+                ['email']  // Remove WhatsApp to avoid errors if phone is missing
+              );
+            } else {
+              console.log("Welcome email sent successfully via edge function:", data);
+            }
           } else {
-            console.log("Welcome email sent successfully via edge function:", data);
+            throw new Error("No access token available for authentication");
           }
         } catch (emailError) {
           console.error("Error sending welcome email:", emailError);

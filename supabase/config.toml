@@ -2,4 +2,5 @@
 project_id = "tryalfcdjznmtqaxungq"
 
 [functions.send-welcome]
-verify_jwt = false
+verify_jwt = true
+

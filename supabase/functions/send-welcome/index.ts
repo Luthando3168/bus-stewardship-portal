@@ -17,6 +17,13 @@ serve(async (req) => {
   }
 
   try {
+    // Get the JWT from the request (now that we're verifying it)
+    const jwt = req.headers.get("authorization")?.replace("Bearer ", "")
+    
+    if (!jwt) {
+      throw new Error("Missing authorization header")
+    }
+
     const { fullName, email } = await req.json()
 
     if (!fullName || !email) {
