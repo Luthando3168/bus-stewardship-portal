@@ -251,6 +251,10 @@ export type Database = {
           approval_date: string | null
           approval_notes: string | null
           approved_by: string | null
+          bank_account_allocated_at: string | null
+          bank_account_branch_code: string | null
+          bank_account_number: string | null
+          bank_account_type: string | null
           city: string | null
           created_at: string
           documents_submitted: boolean | null
@@ -267,6 +271,9 @@ export type Database = {
           pep: boolean | null
           postal_code: string | null
           province: string | null
+          registration_fee_amount: number | null
+          registration_fee_paid: boolean | null
+          registration_fee_paid_at: string | null
           rejection_reason: string | null
           risk_profile: string | null
           source_of_funds: string | null
@@ -280,6 +287,10 @@ export type Database = {
           approval_date?: string | null
           approval_notes?: string | null
           approved_by?: string | null
+          bank_account_allocated_at?: string | null
+          bank_account_branch_code?: string | null
+          bank_account_number?: string | null
+          bank_account_type?: string | null
           city?: string | null
           created_at?: string
           documents_submitted?: boolean | null
@@ -296,6 +307,9 @@ export type Database = {
           pep?: boolean | null
           postal_code?: string | null
           province?: string | null
+          registration_fee_amount?: number | null
+          registration_fee_paid?: boolean | null
+          registration_fee_paid_at?: string | null
           rejection_reason?: string | null
           risk_profile?: string | null
           source_of_funds?: string | null
@@ -309,6 +323,10 @@ export type Database = {
           approval_date?: string | null
           approval_notes?: string | null
           approved_by?: string | null
+          bank_account_allocated_at?: string | null
+          bank_account_branch_code?: string | null
+          bank_account_number?: string | null
+          bank_account_type?: string | null
           city?: string | null
           created_at?: string
           documents_submitted?: boolean | null
@@ -325,6 +343,9 @@ export type Database = {
           pep?: boolean | null
           postal_code?: string | null
           province?: string | null
+          registration_fee_amount?: number | null
+          registration_fee_paid?: boolean | null
+          registration_fee_paid_at?: string | null
           rejection_reason?: string | null
           risk_profile?: string | null
           source_of_funds?: string | null
@@ -395,6 +416,47 @@ export type Database = {
         }
         Relationships: []
       }
+      registration_payments: {
+        Row: {
+          amount: number
+          client_id: string | null
+          created_at: string | null
+          id: string
+          payment_date: string | null
+          payment_reference: string | null
+          payment_status: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          amount: number
+          client_id?: string | null
+          created_at?: string | null
+          id?: string
+          payment_date?: string | null
+          payment_reference?: string | null
+          payment_status?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          amount?: number
+          client_id?: string | null
+          created_at?: string | null
+          id?: string
+          payment_date?: string | null
+          payment_reference?: string | null
+          payment_status?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "registration_payments_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       verification_codes: {
         Row: {
           code: string
@@ -442,6 +504,7 @@ export type Database = {
         | "active"
         | "rejected"
         | "suspended"
+        | "pending_payment"
       user_role: "admin" | "user"
       verification_status: "not_submitted" | "pending" | "verified" | "rejected"
     }
@@ -568,6 +631,7 @@ export const Constants = {
         "active",
         "rejected",
         "suspended",
+        "pending_payment",
       ],
       user_role: ["admin", "user"],
       verification_status: ["not_submitted", "pending", "verified", "rejected"],

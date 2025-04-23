@@ -1,4 +1,3 @@
-
 import { toast } from "sonner";
 
 // Define notification types for consistent messaging
@@ -10,7 +9,8 @@ export type NotificationType =
   | 'deal_completed'
   | 'new_opportunity'
   | 'document_uploaded'
-  | 'password_reset';
+  | 'password_reset'
+  | 'registration_approved';
 
 // Define notification channels
 export type NotificationChannel = 'email' | 'whatsapp' | 'sms' | 'in_app';
@@ -152,6 +152,16 @@ export const templates: Record<NotificationType, NotificationTemplate> = {
       <p>Best regards,<br>The MCA Team</p>
     `),
     whatsappBody: "Hello {fullName}, we received a request to reset your password. Please check your email for instructions or contact our support team if you did not request this change."
+  },
+  registration_approved: {
+    subject: "Registration Approved",
+    body: emailWrapper(`
+      <p>Dear {fullName},</p>
+      <p>Your registration with Luthando Maduna Chartered Accountants is approved! Your client number is {clientNumber}.</p>
+      <p>Thank you for choosing Luthando Maduna Chartered Accountants.</p>
+      <p>Best regards,<br>The MCA Team</p>
+    `),
+    whatsappBody: "Your registration with Luthando Maduna Chartered Accountants is approved! Your client number is {clientNumber}."
   },
 };
 
