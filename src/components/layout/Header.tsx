@@ -1,13 +1,17 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Home, Info, HelpCircle, Briefcase, Bus, Building, DollarSign, PhoneCall, Mail, Phone, Facebook, Instagram, Linkedin } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Logo from "@/components/ui/Logo";
+import { Button } from "@/components/ui/button";
+import { useAuthState } from "@/hooks/useAuthState";
 
 const Header = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const isMobile = useIsMobile();
   const [menuOpen, setMenuOpen] = React.useState(false);
+  const { user } = useAuthState();
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -29,6 +33,14 @@ const Header = () => {
     { icon: Linkedin, href: "https://linkedin.com/company/madunacas", label: "LinkedIn" },
   ];
 
+  const handleMcaDirectClick = () => {
+    if (user) {
+      navigate('/user/dashboard');
+    } else {
+      navigate('/login');
+    }
+  };
+
   if (isMobile) {
     return (
       <header className="bg-white shadow-sm fixed top-0 left-0 w-full z-30">
@@ -37,13 +49,22 @@ const Header = () => {
             <Logo size="small" />
           </Link>
 
-          <button
-            className="p-2 rounded focus:outline-none"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
-            {menuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="flex items-center gap-3">
+            <Button
+              onClick={handleMcaDirectClick}
+              className="bg-gold hover:bg-lightgold text-white px-4 py-2 rounded font-semibold flex items-center"
+            >
+              MCA Direct<sup className="text-[10px] ml-0.5">™</sup>
+            </Button>
+
+            <button
+              className="p-2 rounded focus:outline-none"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Toggle menu"
+            >
+              {menuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
 
           {menuOpen && (
             <>
@@ -113,14 +134,7 @@ const Header = () => {
                         className="bg-blue-600 text-white px-4 py-2 rounded text-[0.95rem] font-semibold text-center"
                         onClick={() => setMenuOpen(false)}
                       >
-                        Login
-                      </Link>
-                      <Link
-                        to="/register"
-                        className="bg-blue-600 text-white px-4 py-2 rounded text-[0.95rem] font-semibold text-center"
-                        onClick={() => setMenuOpen(false)}
-                      >
-                        Register
+                        Sign In
                       </Link>
                     </div>
                   </div>
@@ -149,7 +163,7 @@ const Header = () => {
         </Link>
 
         <div className="flex items-center space-x-6">
-          <div className="flex space-x-4">
+          <div className="flex items-center space-x-4">
             {navLinks.map(link => (
               <Link
                 key={link.to}
@@ -161,25 +175,17 @@ const Header = () => {
                 {link.label}
               </Link>
             ))}
-            <Link
-              to="/contact"
-              className="bg-gold text-white px-3 py-1 rounded hover:bg-lightgold font-semibold"
+            <Button
+              onClick={handleMcaDirectClick}
+              className="bg-gold hover:bg-lightgold text-white px-4 py-2 rounded font-semibold flex items-center"
             >
-              Contact Us
-            </Link>
-          </div>
-          <div className="flex space-x-2">
+              MCA Direct<sup className="text-[10px] ml-0.5">™</sup>
+            </Button>
             <Link
               to="/login"
-              className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 font-semibold"
+              className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 font-semibold"
             >
-              Login
-            </Link>
-            <Link
-              to="/register"
-              className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 font-semibold"
-            >
-              Register
+              Sign In
             </Link>
           </div>
         </div>
