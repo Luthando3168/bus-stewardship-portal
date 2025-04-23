@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import AdminLayout from "@/components/layout/AdminLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { UsersIcon, FileChartLine, DollarSign, FileText, Download } from "lucide-react";
+import { UsersIcon, FileChartLine, DollarSign, FileText, Download, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -76,21 +76,17 @@ const AdminDashboard = () => {
     }
   ];
   
-  // Calculate total NAV/AUM
   const totalAUM = useMemo(() => {
     return businesses.reduce((sum, business) => sum + business.nav, 0);
   }, [businesses]);
   
   const totalActiveBusinesses = businesses.length;
   
-  // Format currency to millions with one decimal place
   const formatInMillions = (amount: number) => {
     return `R ${(amount / 1000000).toFixed(1)}M`;
   };
 
-  // Function to export investors list in PDF or Excel format
   const exportInvestorsList = (format: 'pdf' | 'excel') => {
-    // Find the selected business
     const business = businesses.find(b => b.name === selectedCompany);
     
     if (!business) {
@@ -99,7 +95,6 @@ const AdminDashboard = () => {
     }
 
     if (format === 'pdf') {
-      // Create a temporary div to render the content
       const element = document.createElement('div');
       element.innerHTML = `
         <div style="padding: 20px;">
@@ -125,7 +120,6 @@ const AdminDashboard = () => {
         </div>
       `;
 
-      // Use html2pdf to convert the element to PDF
       const opt = {
         margin: 1,
         filename: `${business.name}_shareholders.pdf`,
@@ -143,33 +137,73 @@ const AdminDashboard = () => {
       
       console.log(`Exporting investors list in ${format} format`);
     } else if (format === 'excel') {
-      // Create CSV content
       let csvContent = "Shareholder Name,Number of Shares,Ownership Percentage\n";
       
       business.investorsList.forEach(investor => {
         csvContent += `${investor.name},${investor.shares},${investor.percentage}\n`;
       });
       
-      // Create a Blob with the CSV content
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       
-      // Create a link to download the CSV
       const link = document.createElement('a');
       link.href = url;
       link.setAttribute('download', `${business.name}_shareholders.csv`);
       document.body.appendChild(link);
       
-      // Trigger the download
       link.click();
       
-      // Clean up
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
       
       toast.success("Excel export successful");
       console.log(`Exporting investors list in ${format} format`);
     }
+  };
+
+  const printUserActivity = () => {
+    const element = document.createElement('div');
+    element.innerHTML = `
+      <div style="padding: 20px;">
+        <h2 style="text-align: center;">Recent User Activity Report</h2>
+        <p style="text-align: center;">Generated on ${new Date().toLocaleDateString()}</p>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+          <thead>
+            <tr style="background-color: #f3f4f6;">
+              <th style="border: 1px solid #e5e7eb; padding: 8px;">User</th>
+              <th style="border: 1px solid #e5e7eb; padding: 8px;">Email</th>
+              <th style="border: 1px solid #e5e7eb; padding: 8px;">Last Login</th>
+              <th style="border: 1px solid #e5e7eb; padding: 8px;">Investments</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${[1, 2, 3, 4, 5].map(() => `
+              <tr>
+                <td style="border: 1px solid #e5e7eb; padding: 8px;">John Dube</td>
+                <td style="border: 1px solid #e5e7eb; padding: 8px;">john.d@example.com</td>
+                <td style="border: 1px solid #e5e7eb; padding: 8px;">Today, 10:42 AM</td>
+                <td style="border: 1px solid #e5e7eb; padding: 8px;">3 Active</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
+
+    const opt = {
+      margin: 1,
+      filename: 'user-activity-report.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+
+    html2pdf().from(element).set(opt).save().then(() => {
+      toast.success("User activity report exported successfully");
+    }).catch((error) => {
+      console.error("PDF export error:", error);
+      toast.error("Failed to export user activity report");
+    });
   };
 
   return (
@@ -330,8 +364,17 @@ const AdminDashboard = () => {
           </TabsContent>
           <TabsContent value="users">
             <Card>
-              <CardHeader>
+              <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle>Recent User Activity</CardTitle>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={printUserActivity}
+                  className="flex items-center gap-2"
+                >
+                  <Printer className="h-4 w-4" />
+                  Print Activity
+                </Button>
               </CardHeader>
               <CardContent>
                 <div className="rounded-md border">
