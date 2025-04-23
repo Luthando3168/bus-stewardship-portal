@@ -2,6 +2,7 @@
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import RegisterForm from "@/components/auth/registration/RegisterForm";
+import Logo from "@/components/ui/Logo";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -11,10 +12,10 @@ const Register = () => {
       <div className="w-full max-w-md">
         <Card className="border-gold shadow-lg">
           <CardHeader className="space-y-1 text-center">
-            <CardTitle className="text-2xl font-bold text-navyblue">
-              Create an Account
-            </CardTitle>
-            <CardDescription className="text-gray-500">
+            <div className="flex justify-center mb-4">
+              <Logo />
+            </div>
+            <CardDescription className="text-gray-500 text-center">
               Enter your details to register
             </CardDescription>
           </CardHeader>
