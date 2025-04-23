@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import AdminLayout from "@/components/layout/AdminLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -10,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { FileUpload, Upload, CheckCircle, AlertCircle } from "lucide-react";
+import { Upload, CheckCircle, AlertCircle } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const fundsData = {
@@ -61,7 +60,6 @@ const periods = [
   "Q1 2024"
 ];
 
-// Mock uploaded statements data
 const uploadedStatements = [
   { id: 1, fund: "myfarm", period: "Annual 2023", uploadDate: "2024-03-20", notified: true },
   { id: 2, fund: "myproperty", period: "Annual 2023", uploadDate: "2024-03-15", notified: true },
@@ -81,7 +79,6 @@ const AdminFinancialStatements = () => {
   const [statements, setStatements] = useState(uploadedStatements);
   const [selectedTab, setSelectedTab] = useState("uploaded");
   
-  // Form state for new statement
   const [newStatement, setNewStatement] = useState({
     fund: "",
     period: "",
@@ -102,7 +99,6 @@ const AdminFinancialStatements = () => {
       setNewStatement({ ...newStatement, file: files[0] });
       setFileUploaded(true);
       
-      // Auto-calculate profit if revenue and expenses are set
       if (newStatement.revenue && newStatement.expenses) {
         const revenue = parseFloat(newStatement.revenue.replace(/[^\d.-]/g, ''));
         const expenses = parseFloat(newStatement.expenses.replace(/[^\d.-]/g, ''));
@@ -137,7 +133,6 @@ const AdminFinancialStatements = () => {
       return;
     }
     
-    // Format values with R and commas
     const formatCurrency = (value: string) => {
       if (value.startsWith('R')) return value;
       const numberVal = parseFloat(value.replace(/[^\d.-]/g, ''));
@@ -163,7 +158,6 @@ const AdminFinancialStatements = () => {
     toast.success("Financial statement uploaded successfully");
     toast.success("Notification sent to all investors in the fund");
     
-    // Reset form
     setNewStatement({
       fund: "",
       period: "",
@@ -200,7 +194,7 @@ const AdminFinancialStatements = () => {
             className="bg-gold hover:bg-lightgold flex gap-2"
             onClick={() => setUploadDialogOpen(true)}
           >
-            <FileUpload className="h-4 w-4" />
+            <Upload className="h-4 w-4" />
             <span>Upload New Statement</span>
           </Button>
         </div>
@@ -340,7 +334,6 @@ const AdminFinancialStatements = () => {
         </Tabs>
       </div>
       
-      {/* Upload Dialog */}
       <Dialog open={uploadDialogOpen} onOpenChange={setUploadDialogOpen}>
         <DialogContent className="max-w-md">
           <DialogHeader>
