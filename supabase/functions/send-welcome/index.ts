@@ -17,7 +17,7 @@ serve(async (req) => {
   }
 
   try {
-    // Get the JWT from the request (now that we're verifying it)
+    // Verify JWT is present since we're now requiring authentication
     const jwt = req.headers.get("authorization")?.replace("Bearer ", "")
     
     if (!jwt) {
@@ -38,13 +38,11 @@ serve(async (req) => {
     
     console.log("Email HTML rendered successfully")
 
-    // Make sure to use info@madunacas.com with a proper display name
     const data = await resend.emails.send({
       from: "Luthando Maduna Chartered Accountants <info@madunacas.com>",
       to: [email],
       subject: "Welcome to Luthando Maduna Chartered Accountants",
       html: html,
-      // Add a reply-to to ensure replies go to the right place
       reply_to: "info@madunacas.com"
     })
 
