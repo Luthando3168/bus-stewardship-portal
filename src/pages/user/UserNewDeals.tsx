@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import UserLayout from "@/components/layout/UserLayout";
 import { Button } from "@/components/ui/button";
@@ -19,25 +18,32 @@ const impactFunds = [
     minInvestment: 1000,
     businesses: [
       {
-        id: "urban-farming-ct",
-        title: "Urban Farming - AgroUrban Oasis (Cape Town)",
-        region: "Cape Town",
-        description: "Invest in a sustainable hydroponic farm producing fresh produce for local supermarkets, restaurants, and communities. Focus on water-efficient and high-yield methods.",
-        minInvestment: 5000,
+        id: "lf-poultry",
+        title: "LF Poultry",
+        region: "Pretoria",
+        description: "LF Poultry is a poultry farm business in Pretoria that supplies local communities.",
+        minInvestment: 1000,
       },
       {
-        id: "organic-farm-kzn",
-        title: "Organic Expansion (KwaZulu-Natal)",
-        region: "KwaZulu-Natal",
-        description: "Expansion of existing organic farm focusing on vegetables and herbs for major grocery chains. Certified organic and regenerative methods.",
-        minInvestment: 5000,
+        id: "home-grown-with-love",
+        title: "Home Grown With Love",
+        region: "Fourways",
+        description: "The company specialises in mass production of fish and supplies to a network of private businesses. It operates in Fourways.",
+        minInvestment: 2000,
       },
       {
-        id: "mixed-crops-limpopo",
-        title: "Mixed Crops Cultivation (Limpopo)",
-        region: "Limpopo",
-        description: "A project to cultivate and process diverse crops, supporting food security and market supply across the Limpopo region.",
-        minInvestment: 5000,
+        id: "mayime-winery",
+        title: "Mayime Winery",
+        region: "Not specified",
+        description: "Mayime Winery specialises in production and supply of wines.",
+        minInvestment: 2000,
+      },
+      {
+        id: "mixed-livestock-farm",
+        title: "Mixed Livestock Farm",
+        region: "Not specified",
+        description: "Operates various livestock supplying meat and fresh produce to a network of Lifestyle Mini Complexes, eKasi Mix Use Developments, and other clients.",
+        minInvestment: 1000,
       }
     ],
   },
@@ -241,7 +247,6 @@ const UserNewDeals = () => {
 
   const isMobile = useIsMobile();
 
-  // Only show the active fund
   const currentFund = impactFunds.find(fund => fund.id === activeTab);
 
   return (
@@ -300,7 +305,6 @@ const UserNewDeals = () => {
             />
           )}
 
-          {/* Only show the currently selected fund */}
           {currentFund && (
             <div key={currentFund.id} className="border border-navyblue/10 rounded-lg p-4 bg-white">
               <div className="flex flex-col sm:flex-row sm:justify-between gap-3 mb-3">
