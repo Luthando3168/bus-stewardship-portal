@@ -3,6 +3,36 @@ import React from "react";
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { Link } from "react-router-dom";
+import { Users, Briefcase, Banknote, FileText, ChartBar } from "lucide-react";
+
+interface BusinessStep {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface ProfessionalService {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface ReportingInfo {
+  frequency: string;
+  reports: string[];
+}
+
+interface BusinessModel {
+  title: string;
+  description: string;
+  steps: BusinessStep[];
+}
+
+interface ProfessionalSupport {
+  title: string;
+  description: string;
+  services: ProfessionalService[];
+}
 
 interface FundEducationalPageProps {
   fundName: string;
@@ -11,15 +41,38 @@ interface FundEducationalPageProps {
   image: string;
   focus: string[];
   minInvestment: string;
+  businessModel: BusinessModel;
+  professionalSupport: ProfessionalSupport;
+  reporting: ReportingInfo;
 }
 
-const FundEducationalPage = ({ 
-  fundName, 
-  description, 
+const IconComponent = ({ name }: { name: string }) => {
+  switch (name) {
+    case "users":
+      return <Users className="w-6 h-6" />;
+    case "briefcase":
+      return <Briefcase className="w-6 h-6" />;
+    case "banknote":
+      return <Banknote className="w-6 h-6" />;
+    case "fileText":
+      return <FileText className="w-6 h-6" />;
+    case "chartBar":
+      return <ChartBar className="w-6 h-6" />;
+    default:
+      return null;
+  }
+};
+
+const FundEducationalPage = ({
+  fundName,
+  description,
   bgGradient,
   image,
   focus,
-  minInvestment 
+  minInvestment,
+  businessModel,
+  professionalSupport,
+  reporting
 }: FundEducationalPageProps) => {
   return (
     <Layout>
@@ -39,70 +92,55 @@ const FundEducationalPage = ({
             </div>
 
             <div className="space-y-12">
-              {/* Understanding Business Ownership */}
+              {/* Business Model Section */}
               <div className="bg-white rounded-lg p-8 shadow-md">
-                <h3 className="text-2xl font-bold text-navyblue mb-6">Real Business Ownership Made Simple</h3>
-                <div className="space-y-4 text-gray-700">
-                  <p>When you invest with us, you become a real business owner. Think of it like this:</p>
-                  <ul className="list-disc pl-6 space-y-3">
-                    <li>Instead of just buying numbers on an app, you own actual businesses that serve real customers</li>
-                    <li>You get regular updates about how your businesses are doing, written in simple language</li>
-                    <li>As your businesses grow and serve more customers, you make more money</li>
-                    <li>We handle all the day-to-day work, just like having a trusted manager run your shop</li>
-                  </ul>
+                <h3 className="text-2xl font-bold text-navyblue mb-6">{businessModel.title}</h3>
+                <p className="text-gray-700 mb-6">{businessModel.description}</p>
+                <div className="space-y-6">
+                  {businessModel.steps.map((step, index) => (
+                    <div key={index} className="flex items-start space-x-4">
+                      <div className="flex-shrink-0 p-3 bg-gray-100 rounded-lg">
+                        <IconComponent name={step.icon} />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-lg text-gray-900">{step.title}</h4>
+                        <p className="text-gray-700">{step.description}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              {/* Professional Support */}
+              {/* Professional Support Section */}
               <div className="bg-white rounded-lg p-8 shadow-md">
-                <h3 className="text-2xl font-bold text-navyblue mb-6">Your Professional Support Team</h3>
-                <div className="space-y-4 text-gray-700">
-                  <p>As a business owner through our platform, you get:</p>
-                  <ul className="list-disc pl-6 space-y-3">
-                    <li>Professional accountants who keep your business finances in order</li>
-                    <li>Banking relationships that help your business grow</li>
-                    <li>Expert managers who run daily operations</li>
-                    <li>Regular updates in simple, easy-to-understand language</li>
-                  </ul>
-                  <div className="bg-amber-50 p-4 rounded-lg mt-4">
-                    <p className="font-medium text-navyblue">
-                      We take our fees from the business operations, not from your pocket. When your business succeeds, we succeed.
-                    </p>
-                  </div>
+                <h3 className="text-2xl font-bold text-navyblue mb-6">{professionalSupport.title}</h3>
+                <p className="text-gray-700 mb-6">{professionalSupport.description}</p>
+                <div className="space-y-6">
+                  {professionalSupport.services.map((service, index) => (
+                    <div key={index} className="flex items-start space-x-4">
+                      <div className="flex-shrink-0 p-3 bg-gray-100 rounded-lg">
+                        <IconComponent name={service.icon} />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-lg text-gray-900">{service.title}</h4>
+                        <p className="text-gray-700">{service.description}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              {/* How Your Business Makes Money */}
+              {/* Reporting Section */}
               <div className="bg-white rounded-lg p-8 shadow-md">
-                <h3 className="text-2xl font-bold text-navyblue mb-6">How Your Business Makes Money</h3>
-                <div className="space-y-4 text-gray-700">
-                  <p className="font-medium">Focus Areas:</p>
-                  <ul className="list-disc pl-6 space-y-3">
-                    {focus.map((item, index) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
-                  <div className="bg-green-50 p-4 rounded-lg mt-4">
-                    <p className="font-medium text-navyblue">
-                      The more customers support these businesses, the more money you make as an owner. It's that simple.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Digital Platform */}
-              <div className="bg-white rounded-lg p-8 shadow-md">
-                <h3 className="text-2xl font-bold text-navyblue mb-6">Your Easy-to-Use Digital Platform</h3>
-                <div className="space-y-4 text-gray-700">
-                  <p>Our MCA Direct platform makes business ownership simple:</p>
-                  <ul className="list-disc pl-6 space-y-3">
-                    <li>See how your business is doing anytime</li>
-                    <li>Get important updates automatically</li>
-                    <li>Track your profits and growth</li>
-                    <li>Learn about business ownership</li>
-                    <li>Connect with other business owners in your community</li>
-                  </ul>
-                </div>
+                <h3 className="text-2xl font-bold text-navyblue mb-6">Regular Business Reports</h3>
+                <p className="text-gray-700 mb-4">
+                  Every {reporting.frequency}, you receive professional reports about your business:
+                </p>
+                <ul className="list-disc pl-6 space-y-2 text-gray-700">
+                  {reporting.reports.map((report, index) => (
+                    <li key={index}>{report}</li>
+                  ))}
+                </ul>
               </div>
 
               {/* Investment Details */}
