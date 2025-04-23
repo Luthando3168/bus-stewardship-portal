@@ -27,7 +27,7 @@ export const WelcomeEmail = ({
       <Container style={container}>
         <Section style={logoContainer}>
           <Img
-            src="https://lovable.app/lovable-uploads/4f2d889e-ba23-463a-9efe-bc8453a5e5b2.png"
+            src="https://tryalfcdjznmtqaxungq.supabase.co/storage/v1/object/public/public/luthando_maduna_logo.png"
             width="200"
             height="auto"
             alt="Luthando Maduna CA Logo"

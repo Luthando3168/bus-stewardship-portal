@@ -23,10 +23,15 @@ serve(async (req) => {
       throw new Error("Full name and email are required")
     }
 
+    console.log(`Rendering email template for ${fullName} at ${email}`)
+    
     const html = await renderAsync(
       WelcomeEmail({ fullName })
     )
+    
+    console.log("Email HTML rendered successfully")
 
+    // Use info@madunacas.com as the sending address since this domain is verified
     const data = await resend.emails.send({
       from: "Luthando Maduna CA <info@madunacas.com>",
       to: [email],
@@ -34,7 +39,13 @@ serve(async (req) => {
       html: html,
     })
 
-    console.log("Welcome email sent successfully:", data)
+    console.log("Email sending response:", data)
+
+    if (data.error) {
+      throw new Error(`Resend API error: ${JSON.stringify(data.error)}`)
+    }
+
+    console.log("Welcome email sent successfully")
 
     return new Response(JSON.stringify(data), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },

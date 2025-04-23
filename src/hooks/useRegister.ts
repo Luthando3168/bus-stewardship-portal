@@ -59,6 +59,8 @@ export const useRegister = () => {
       if (authData.user) {
         try {
           console.log("Attempting to send welcome email...");
+          toast.info("Sending welcome email...");
+          
           const { data, error: welcomeError } = await supabase.functions.invoke('send-welcome', {
             body: { email, fullName }
           });
@@ -72,7 +74,7 @@ export const useRegister = () => {
           }
         } catch (emailError) {
           console.error("Error calling welcome email function:", emailError);
-          toast.error("Error sending welcome email");
+          toast.error("Error sending welcome email: " + (emailError instanceof Error ? emailError.message : "Unknown error"));
         }
       }
       
