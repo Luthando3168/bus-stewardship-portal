@@ -1,7 +1,7 @@
-
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
 import { Toaster } from "sonner";
+import { AuthProvider } from "@/contexts/AuthContext";
 import Index from "@/pages/Index";
 import About from "@/pages/About";
 import HowWeWork from "@/pages/HowWeWork";
@@ -68,50 +68,52 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
+      <AuthProvider>
         {/* Public Routes */}
-        <Route path="/" element={<Index />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/how-we-work" element={<HowWeWork />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/bus" element={<Bus />} />
-        <Route path="/foundation" element={<Foundation />} />
-        <Route path="/impact-funds" element={<ImpactFunds />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/privacy" element={<Privacy />} />
-        
-        {/* User Routes */}
-        <Route path="/user" element={<ProtectedRoute allowedRole="user"><Outlet /></ProtectedRoute>}>
-          <Route path="dashboard" element={<UserDashboard />} />
-          <Route path="wallet" element={<UserWallet />} />
-          <Route path="beneficiaries" element={<UserBeneficiaries />} />
-          <Route path="statements" element={<UserStatements />} />
-          <Route path="profile" element={<UserProfile />} />
-          <Route path="investments" element={<UserInvestments />} />
-          <Route path="new-deals" element={<UserNewDeals />} />
-          <Route path="pending-deals" element={<UserPendingDeals />} />
-          <Route path="my-investments" element={<UserMyInvestments />} />
-        </Route>
-        
-        {/* Admin Routes */}
-        <Route path="/admin" element={<ProtectedRoute allowedRole="admin"><Outlet /></ProtectedRoute>}>
-          <Route path="dashboard" element={<AdminDashboard />} />
-          <Route path="users" element={<AdminUsers />} />
-          <Route path="deals" element={<AdminDeals />} />
-          <Route path="reports" element={<AdminReports />} />
-          <Route path="consultations" element={<AdminConsultations />} />
-          <Route path="bank-accounts" element={<AdminBankAccounts />} />
-          <Route path="beneficiaries" element={<AdminBeneficiaries />} />
-          <Route path="notifications" element={<AdminNotifications />} />
-          <Route path="share-certificates" element={<AdminShareCertificates />} />
-          <Route path="financial-statements" element={<AdminFinancialStatements />} />
-        </Route>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/how-we-work" element={<HowWeWork />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/bus" element={<Bus />} />
+          <Route path="/foundation" element={<Foundation />} />
+          <Route path="/impact-funds" element={<ImpactFunds />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
+          
+          {/* User Routes */}
+          <Route path="/user" element={<ProtectedRoute allowedRole="user"><Outlet /></ProtectedRoute>}>
+            <Route path="dashboard" element={<UserDashboard />} />
+            <Route path="wallet" element={<UserWallet />} />
+            <Route path="beneficiaries" element={<UserBeneficiaries />} />
+            <Route path="statements" element={<UserStatements />} />
+            <Route path="profile" element={<UserProfile />} />
+            <Route path="investments" element={<UserInvestments />} />
+            <Route path="new-deals" element={<UserNewDeals />} />
+            <Route path="pending-deals" element={<UserPendingDeals />} />
+            <Route path="my-investments" element={<UserMyInvestments />} />
+          </Route>
+          
+          {/* Admin Routes */}
+          <Route path="/admin" element={<ProtectedRoute allowedRole="admin"><Outlet /></ProtectedRoute>}>
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="users" element={<AdminUsers />} />
+            <Route path="deals" element={<AdminDeals />} />
+            <Route path="reports" element={<AdminReports />} />
+            <Route path="consultations" element={<AdminConsultations />} />
+            <Route path="bank-accounts" element={<AdminBankAccounts />} />
+            <Route path="beneficiaries" element={<AdminBeneficiaries />} />
+            <Route path="notifications" element={<AdminNotifications />} />
+            <Route path="share-certificates" element={<AdminShareCertificates />} />
+            <Route path="financial-statements" element={<AdminFinancialStatements />} />
+          </Route>
 
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </AuthProvider>
       <Toaster position="top-center" />
     </BrowserRouter>
   );

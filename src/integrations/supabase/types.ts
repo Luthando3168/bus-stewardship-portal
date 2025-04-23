@@ -9,6 +9,128 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      admin_users: {
+        Row: {
+          address: string | null
+          city: string | null
+          created_at: string | null
+          dob: string | null
+          email: string
+          employer: string | null
+          employment_status: string | null
+          full_name: string
+          id: string
+          id_number: string | null
+          income_bracket: string | null
+          investment_count: number | null
+          last_login: string | null
+          nationality: string | null
+          occupation: string | null
+          pep: boolean | null
+          phone: string | null
+          postal_code: string | null
+          province: string | null
+          risk_profile: string | null
+          source_of_funds: string | null
+          tax_country: string | null
+          tax_number: string | null
+        }
+        Insert: {
+          address?: string | null
+          city?: string | null
+          created_at?: string | null
+          dob?: string | null
+          email: string
+          employer?: string | null
+          employment_status?: string | null
+          full_name: string
+          id?: string
+          id_number?: string | null
+          income_bracket?: string | null
+          investment_count?: number | null
+          last_login?: string | null
+          nationality?: string | null
+          occupation?: string | null
+          pep?: boolean | null
+          phone?: string | null
+          postal_code?: string | null
+          province?: string | null
+          risk_profile?: string | null
+          source_of_funds?: string | null
+          tax_country?: string | null
+          tax_number?: string | null
+        }
+        Update: {
+          address?: string | null
+          city?: string | null
+          created_at?: string | null
+          dob?: string | null
+          email?: string
+          employer?: string | null
+          employment_status?: string | null
+          full_name?: string
+          id?: string
+          id_number?: string | null
+          income_bracket?: string | null
+          investment_count?: number | null
+          last_login?: string | null
+          nationality?: string | null
+          occupation?: string | null
+          pep?: boolean | null
+          phone?: string | null
+          postal_code?: string | null
+          province?: string | null
+          risk_profile?: string | null
+          source_of_funds?: string | null
+          tax_country?: string | null
+          tax_number?: string | null
+        }
+        Relationships: []
+      }
+      beneficiaries: {
+        Row: {
+          beneficiary_name: string
+          created_at: string | null
+          email: string | null
+          id: string
+          percentage: number | null
+          phone: string | null
+          relationship: string | null
+          type: string | null
+          user_id: string | null
+        }
+        Insert: {
+          beneficiary_name: string
+          created_at?: string | null
+          email?: string | null
+          id?: string
+          percentage?: number | null
+          phone?: string | null
+          relationship?: string | null
+          type?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          beneficiary_name?: string
+          created_at?: string | null
+          email?: string | null
+          id?: string
+          percentage?: number | null
+          phone?: string | null
+          relationship?: string | null
+          type?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "beneficiaries_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "admin_users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       client_documents: {
         Row: {
           client_id: string
