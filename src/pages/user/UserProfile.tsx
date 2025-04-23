@@ -11,43 +11,81 @@ import FundAccordion from "@/components/FundAccordion";
 import FundOpportunities, { Opportunity } from "@/components/user/FundOpportunities";
 import { useEffect } from "react";
 
-// Updated list of funds with Enterprise Impact Fund and R5000 minimum
 const FUNDS = [
   {
-    name: "Sankofa Property Impact Fund",
-    description: "A diversified fund investing in sustainable property projects across South Africa.",
-    currency: "ZAR",
-    minInvestment: "R 5,000",
-    term: "5 Years",
-    risk: "Moderate",
-  },
-  {
-    name: "Sankofa Agri Impact Fund",
-    description: "Focus on transforming African agriculture through impact-driven investments.",
+    name: "MyFarm Impact Fund",
+    description: "Focus on sustainable agriculture and farming businesses across South Africa.",
     currency: "ZAR",
     minInvestment: "R 5,000",
     term: "3 Years",
     risk: "Moderate",
   },
   {
-    name: "Sankofa Enterprise Impact Fund",
-    description: "Empowering high-impact SMEs, focusing on social and economic development.",
+    name: "MyProperty Impact Fund",
+    description: "Investing in community-focused real estate, affordable housing, and property businesses.",
+    currency: "ZAR",
+    minInvestment: "R 10,000",
+    term: "5 Years",
+    risk: "Moderate",
+  },
+  {
+    name: "MyFranchise Impact Fund",
+    description: "Investing in franchise businesses with proven models to create jobs and business skills.",
     currency: "ZAR",
     minInvestment: "R 5,000",
     term: "3-6 Years",
     risk: "Medium to High",
   },
   {
-    name: "Sankofa Energy Impact Fund",
-    description: "Direct investment into renewable and alternative energy projects.",
+    name: "MyFoodRetail Impact Fund",
+    description: "Focus on supporting and growing the food retail sector for economic development.",
     currency: "ZAR",
     minInvestment: "R 5,000",
     term: "4 Years",
     risk: "High",
   },
+  {
+    name: "MyEnergy Impact Fund",
+    description: "Direct investment into renewable and alternative energy projects across Africa.",
+    currency: "ZAR",
+    minInvestment: "R 3,000",
+    term: "4 Years",
+    risk: "High",
+  },
+  {
+    name: "MyHealth Impact Fund",
+    description: "Empowering businesses focused on healthcare and wellness for positive social impact.",
+    currency: "ZAR",
+    minInvestment: "R 2,500",
+    term: "3 Years",
+    risk: "Medium",
+  },
+  {
+    name: "MyTelecoms Impact Fund",
+    description: "Investing in telecom infrastructure to improve connectivity and digital inclusion.",
+    currency: "ZAR",
+    minInvestment: "R 4,000",
+    term: "3 Years",
+    risk: "Medium",
+  },
+  {
+    name: "MySchool Impact Fund",
+    description: "Supporting educational projects and institutions for access to quality education.",
+    currency: "ZAR",
+    minInvestment: "R 1,500",
+    term: "5 Years",
+    risk: "Low",
+  },
+  {
+    name: "MyTelco Impact Fund",
+    description: "Investment in regional/national telecommunications expansion and infrastructure.",
+    currency: "ZAR",
+    minInvestment: "R 2,500",
+    term: "3 Years",
+    risk: "Medium",
+  },
 ];
 
-// Profile fields, matching jaltech sample (update as per your version if you want to add more fields)
 const PROFILE_FIELDS = [
   { key: "fullName", label: "Full Name", required: true },
   { key: "email", label: "Email Address", required: true },
@@ -125,43 +163,43 @@ const UserProfile = () => {
   const opportunities: Opportunity[] = [
     {
       id: "opp1",
-      fundId: "Sankofa Property Impact Fund",
+      fundId: "MyProperty Impact Fund",
       title: "Downtown Office Building",
       summary: "10-story CBD building, green retrofit completed.",
-      minInvestment: "R 20,000",
+      minInvestment: "R 120,000",
       projectedReturn: "8.5% p.a.",
       status: "Open",
     },
     {
       id: "opp2",
-      fundId: "Sankofa Property Impact Fund",
+      fundId: "MyProperty Impact Fund",
       title: "Student Housing Project",
       summary: "Affordable student living in Cape Town.",
-      minInvestment: "R 10,000",
+      minInvestment: "R 15,000",
       projectedReturn: "7.8% p.a.",
       status: "Open",
     },
     {
       id: "opp3",
-      fundId: "Sankofa Agri Impact Fund",
+      fundId: "MyFarm Impact Fund",
       title: "Organic Farm Expansion",
       summary: "Certified organic vegetables for export markets.",
-      minInvestment: "R 5,000",
+      minInvestment: "R 40,000",
       projectedReturn: "6.8% p.a.",
       status: "Open",
     },
     {
       id: "opp4",
-      fundId: "Sankofa Energy Impact Fund",
-      title: "Solar Installation Network",
-      summary: "Commercial solar panels, Cape Town businesses.",
-      minInvestment: "R 8,000",
+      fundId: "MyEnergy Impact Fund",
+      title: "Solar Farm Project",
+      summary: "Commercial solar farm installation, regional rollout.",
+      minInvestment: "R 85,000",
       projectedReturn: "11.2% p.a.",
       status: "Open",
     },
     {
       id: "opp5",
-      fundId: "Sankofa Enterprise Impact Fund",
+      fundId: "MyFranchise Impact Fund",
       title: "Franchise Rollout - Bakery Chain",
       summary: "Expansion of local franchise into three provinces.",
       minInvestment: "R 15,000",
@@ -170,7 +208,7 @@ const UserProfile = () => {
     },
     {
       id: "opp6",
-      fundId: "Sankofa Enterprise Impact Fund",
+      fundId: "MyTelecoms Impact Fund",
       title: "Tech SME Scale-up",
       summary: "Support for a black-owned app development company.",
       minInvestment: "R 10,000",
@@ -313,7 +351,7 @@ const UserProfile = () => {
                       tabIndex={0}
                       aria-pressed={activeFundTab === fund.name}
                     >
-                      {fund.name.replace("Sankofa ", "")}
+                      {fund.name.replace(" Impact Fund", "")}
                     </button>
                   ))}
                 </div>
