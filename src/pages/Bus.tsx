@@ -54,8 +54,8 @@ const Bus = () => {
       description: "We implement systems and processes to ensure a smooth transition to professional management."
     },
     {
-      step: "Ongoing Management",
-      description: "Our team takes over day-to-day operations while providing regular updates and consulting with you on strategic decisions."
+      step: "Ongoing Management & Reporting",
+      description: "Our team manages day-to-day operations and provides you with regular updates. You'll receive quarterly financial statements via MCA Direct and profit-sharing takes place twice yearly."
     }
   ];
 
@@ -69,6 +69,15 @@ const Bus = () => {
             centered
           />
 
+          {/* Centered key message below section title */}
+          <div className="flex justify-center">
+            <div className="bg-lightgray rounded-lg p-6 mt-4 mb-8 text-center max-w-3xl w-full">
+              <p className="text-lg font-semibold text-navyblue">
+                Under the BUS program, once you've selected the businesses you want to own, our team manages these on your behalf. We provide regular updates and send you quarterly financial statements via MCA Direct. Profit sharing occurs every six months, so you benefit directly from your business ownership while we handle day-to-day management.
+              </p>
+            </div>
+          </div>
+
           <div className="max-w-4xl mx-auto mt-12 space-y-16">
             {/* Introduction */}
             <div className="text-charcoal space-y-6">
@@ -81,7 +90,7 @@ const Bus = () => {
               <p>
                 This innovative approach bridges the gap between complete ownership burden and selling your business,
                 providing a "third way" that combines the benefits of professional management with the wealth creation
-                potential of continued ownership.
+                potential of continued ownership. With periodic reporting, quarterly financials, and twice-yearly profit sharing, you can confidently build lasting wealth.
               </p>
             </div>
 
@@ -133,16 +142,18 @@ const Bus = () => {
               </div>
             </div>
 
-            {/* Contact */}
-            <div className="bg-lightgray p-8 rounded-lg text-center">
-              <h3 className="text-2xl font-bold text-navyblue mb-4">Ready to transform your business management?</h3>
-              <p className="mb-6">Contact us today to learn how the BUS program can benefit your business.</p>
-              <a
-                href="/contact"
-                className="inline-block px-6 py-3 bg-gold text-white rounded font-medium hover:bg-lightgold transition-colors"
-              >
-                Request a Consultation
-              </a>
+            {/* Contact/Call to Action, centered */}
+            <div className="flex justify-center">
+              <div className="bg-lightgray p-8 rounded-lg text-center max-w-2xl w-full">
+                <h3 className="text-2xl font-bold text-navyblue mb-4">Ready to transform your business management?</h3>
+                <p className="mb-6">Contact us today to learn how the BUS program can benefit your business with full professional management, clear financial reporting, and profit-sharing opportunities.</p>
+                <a
+                  href="/contact"
+                  className="inline-block px-6 py-3 bg-gold text-white rounded font-medium hover:bg-lightgold transition-colors"
+                >
+                  Request a Consultation
+                </a>
+              </div>
             </div>
           </div>
         </div>

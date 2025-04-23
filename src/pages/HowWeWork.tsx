@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Layout from "@/components/layout/Layout";
@@ -37,6 +36,12 @@ const HowWeWork = () => {
       icon: CircleDollarSign
     },
     {
+      title: "Professional Management (BUS Program)",
+      description:
+        "Once you have selected businesses to own, Luthando Maduna (via the BUS program) professionally manages these businesses on your behalf. You receive regular updates and quarterly financial statements through MCA Direct, and profit-sharing payments are distributed twice annually.",
+      icon: Circle
+    },
+    {
       title: "Fund Your Account",
       description: "Deposit funds to your wallet using your Standard Bank account to participate in deals.",
       icon: Circle
@@ -58,7 +63,6 @@ const HowWeWork = () => {
             centered
           />
 
-          {/* Introduction and Why We Exist */}
           <div className="max-w-4xl mx-auto mb-16">
             <h2 className="text-2xl font-montserrat font-bold mb-4 text-navyblue">Why We Exist</h2>
             <p className="mb-4">
@@ -79,7 +83,6 @@ const HowWeWork = () => {
             </div>
           </div>
 
-          {/* Example of Monthly Expenses */}
           <div className="max-w-4xl mx-auto mb-16 bg-white shadow-md rounded-lg overflow-hidden">
             <div className="p-6 border-b border-gray-200">
               <h2 className="text-2xl font-montserrat font-bold mb-2 text-navyblue">The Reality of Monthly Income</h2>
@@ -127,7 +130,6 @@ const HowWeWork = () => {
             </div>
           </div>
 
-          {/* Our Solution */}
           <div className="max-w-4xl mx-auto mb-16">
             <h2 className="text-2xl font-montserrat font-bold mb-4 text-navyblue">Our Solution: MCA Direct</h2>
             <p className="mb-4">
@@ -148,7 +150,6 @@ const HowWeWork = () => {
             </p>
           </div>
 
-          {/* How It Works Steps */}
           <div className="max-w-4xl mx-auto mb-16">
             <h2 className="text-2xl font-montserrat font-bold mb-6 text-navyblue text-center">How to Get Started</h2>
             
@@ -177,7 +178,6 @@ const HowWeWork = () => {
             </div>
           </div>
 
-          {/* Who Is This For? */}
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl font-montserrat font-bold mb-6 text-navyblue text-center">Who MCA Direct Is Designed For</h2>
             

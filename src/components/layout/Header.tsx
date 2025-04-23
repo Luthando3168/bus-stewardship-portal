@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from "lucide-react";
@@ -19,7 +20,7 @@ const Header = () => {
     // eslint-disable-next-line
   }, [location.pathname]);
 
-  // Navigation links config - Updated order
+  // Navigation links config - How We Work now directly after About
   const navLinks = [
     { to: "/", label: "Home" },
     { to: "/about", label: "About" },
