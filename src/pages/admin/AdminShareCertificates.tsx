@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CertificateActions } from "@/components/admin/certificates/CertificateActions";
+import { CertificatePreview } from "@/components/admin/certificates/CertificatePreview";
 import { useToast } from "@/hooks/use-toast";
 
 interface Certificate {
@@ -310,79 +311,13 @@ const AdminShareCertificates = () => {
         </Card>
 
         <Dialog open={viewingCertificate !== null} onOpenChange={() => setViewingCertificate(null)}>
-          <DialogContent className="max-w-3xl">
+          <DialogContent className="max-w-4xl w-full">
             <DialogHeader>
               <DialogTitle>Share Certificate Preview</DialogTitle>
             </DialogHeader>
             
             {selectedCertificate && (
-              <div className="space-y-4">
-                <div className="border-2 border-gray-300 p-6 rounded-md bg-white">
-                  <div className="text-center space-y-4">
-                    <div className="border-b-2 border-navyblue pb-2">
-                      <h3 className="text-lg font-bold uppercase text-navyblue">Republic of South Africa</h3>
-                      <p className="text-xs text-muted-foreground">Companies Act, 2008 (Act 71 of 2008)</p>
-                    </div>
-                    
-                    <h3 className="text-xl font-bold uppercase text-navyblue pt-2">Certificate of Share Ownership</h3>
-                    
-                    <div className="space-y-1">
-                      <p className="font-semibold text-lg">{selectedCertificate.companyName}</p>
-                      <p className="text-sm">Registration Number: {selectedCertificate.registrationNumber}</p>
-                      <p className="text-sm text-muted-foreground">Share certificate issued in terms of section 51(1)(a) of the Companies Act, 2008</p>
-                    </div>
-                    
-                    <div className="my-6 border-t border-b border-gray-300 py-4">
-                      <p>This is to certify that</p>
-                      <p className="font-bold text-lg my-2">{selectedCertificate.userName}</p>
-                      <p>Client Number: {selectedCertificate.clientNumber}</p>
-                      <p className="my-2">is the registered holder of</p>
-                      <p className="font-bold text-xl my-2">{selectedCertificate.shares} Ordinary Shares</p>
-                      <p className="text-sm">with a nominal value of R{selectedCertificate.sharePrice} each, fully paid</p>
-                      <p className="mt-2">in the above-named Company, subject to the Memorandum and Articles of Association of the Company.</p>
-                    </div>
-                    
-                    <div className="text-sm">
-                      <div className="flex justify-between">
-                        <p>Issue Date: {new Date(selectedCertificate.issueDate).toLocaleDateString()}</p>
-                        <p>Certificate No: {selectedCertificate.id}</p>
-                      </div>
-                    </div>
-                    
-                    <div className="mt-6 pt-6 border-t border-gray-300">
-                      <p className="font-semibold">Luthando Maduna CA(SA)</p>
-                      <p className="text-sm italic">Director</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="flex justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <Badge className={
-                      selectedCertificate.status === "active" ? "bg-green-600" :
-                      selectedCertificate.status === "revoked" ? "bg-red-600" :
-                      "bg-amber-600"
-                    }>
-                      {selectedCertificate.status.charAt(0).toUpperCase() + selectedCertificate.status.slice(1)}
-                    </Badge>
-                    <span className="text-sm text-muted-foreground">
-                      Certificate ID: {selectedCertificate.id}
-                    </span>
-                  </div>
-                  
-                  <div className="flex gap-2">
-                    <Button variant="outline">
-                      Print
-                    </Button>
-                    <Button variant="outline">
-                      Download as PDF
-                    </Button>
-                    <Button className="bg-navyblue hover:bg-blue-800">
-                      Email to Client
-                    </Button>
-                  </div>
-                </div>
-              </div>
+              <CertificatePreview certificate={selectedCertificate} />
             )}
           </DialogContent>
         </Dialog>
