@@ -1,38 +1,42 @@
+
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from "lucide-react";
+import { Menu, X, Home, Info, HelpCircle, Briefcase, Bus, Building, DollarSign, PhoneCall, Mail, Phone, Facebook, Instagram, Linkedin } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Logo from "@/components/ui/Logo";
 
 const Header = () => {
   const location = useLocation();
   const isMobile = useIsMobile();
-
-  // Determine if the current path is active for styling
-  const isActive = (path: string) => location.pathname === path;
-
-  // State to open/close mobile menu
   const [menuOpen, setMenuOpen] = React.useState(false);
 
-  // Simplified navigation links to match image
+  const isActive = (path: string) => location.pathname === path;
+
   const navLinks = [
-    { to: "/", label: "Home" },
-    { to: "/about", label: "About" },
-    { to: "/services", label: "Services" },
-    { to: "/bus", label: "BUS" },
+    { to: "/", label: "Home", icon: Home },
+    { to: "/about", label: "About", icon: Info },
+    { to: "/how-we-work", label: "How We Work", icon: HelpCircle },
+    { to: "/services", label: "Services", icon: Briefcase },
+    { to: "/bus", label: "BUS", icon: Bus },
+    { to: "/foundation", label: "Foundation", icon: Building },
+    { to: "/impact-funds", label: "Impact Funds", icon: DollarSign },
+    { to: "/contact", label: "Contact", icon: PhoneCall },
   ];
 
-  // Mobile header
+  const socialLinks = [
+    { icon: Facebook, href: "https://facebook.com/madunacas", label: "Facebook" },
+    { icon: Instagram, href: "https://instagram.com/madunacas", label: "Instagram" },
+    { icon: Linkedin, href: "https://linkedin.com/company/madunacas", label: "LinkedIn" },
+  ];
+
   if (isMobile) {
     return (
       <header className="bg-white shadow-sm fixed top-0 left-0 w-full z-30">
         <div className="container mx-auto flex items-center justify-between py-2 px-4">
-          {/* Logo */}
           <Link to="/" className="block">
             <Logo />
           </Link>
 
-          {/* Mobile menu button */}
           <button
             className="p-2 rounded focus:outline-none"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -41,54 +45,80 @@ const Header = () => {
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
 
-          {/* Mobile navigation menu overlay */}
           {menuOpen && (
             <>
               <div 
                 className="fixed inset-0 bg-black bg-opacity-50 z-40"
                 onClick={() => setMenuOpen(false)}
               />
-              <div className="fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 p-4 transform transition-transform duration-300 ease-in-out">
+              <div className="fixed top-0 right-0 h-full w-72 bg-white shadow-lg z-50 p-4 transform transition-transform duration-300 ease-in-out overflow-y-auto">
                 <div className="flex justify-end mb-6">
                   <button onClick={() => setMenuOpen(false)} className="p-2">
                     <X size={24} />
                   </button>
                 </div>
 
-                <div className="flex flex-col space-y-4">
+                <nav className="flex flex-col space-y-4">
                   {navLinks.map(link => (
                     <Link
                       key={link.to}
                       to={link.to}
-                      className={`text-lg font-semibold ${isActive(link.to) ? 'text-gold' : 'text-navyblue'}`}
+                      className={`flex items-center space-x-2 text-lg font-semibold ${
+                        isActive(link.to) ? 'text-gold' : 'text-navyblue'
+                      }`}
                       onClick={() => setMenuOpen(false)}
                     >
-                      {link.label}
+                      <link.icon size={20} />
+                      <span>{link.label}</span>
                     </Link>
                   ))}
+                </nav>
+
+                <div className="mt-8 pt-6 border-t border-gray-200">
+                  <div className="flex flex-col space-y-4">
+                    <a href="tel:+27123456789" className="flex items-center space-x-2 text-gray-600">
+                      <Phone size={20} />
+                      <span>+27 12 345 6789</span>
+                    </a>
+                    <a href="mailto:info@madunacas.com" className="flex items-center space-x-2 text-gray-600">
+                      <Mail size={20} />
+                      <span>info@madunacas.com</span>
+                    </a>
+                  </div>
+                </div>
+
+                <div className="mt-6 pt-6 border-t border-gray-200">
+                  <div className="flex justify-center space-x-6">
+                    {socialLinks.map(social => (
+                      <a
+                        key={social.label}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-600 hover:text-gold transition-colors"
+                      >
+                        <social.icon size={24} />
+                        <span className="sr-only">{social.label}</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-2 mt-6 pt-6 border-t border-gray-200">
                   <Link
-                    to="/contact"
-                    className="bg-gold text-white px-4 py-2 rounded font-semibold text-center mt-2"
+                    to="/login"
+                    className="bg-blue-600 text-white px-4 py-2 rounded font-semibold text-center"
                     onClick={() => setMenuOpen(false)}
                   >
-                    Contact Us
+                    Login
                   </Link>
-                  <div className="flex flex-col gap-2 mt-2">
-                    <Link
-                      to="/login"
-                      className="bg-blue-600 text-white px-4 py-2 rounded font-semibold text-center"
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      Login
-                    </Link>
-                    <Link
-                      to="/register"
-                      className="bg-blue-600 text-white px-4 py-2 rounded font-semibold text-center"
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      Register
-                    </Link>
-                  </div>
+                  <Link
+                    to="/register"
+                    className="bg-blue-600 text-white px-4 py-2 rounded font-semibold text-center"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    Register
+                  </Link>
                 </div>
               </div>
             </>
