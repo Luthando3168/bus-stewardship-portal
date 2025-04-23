@@ -81,37 +81,42 @@ const Services = () => {
 
   return (
     <Layout>
-      <div className="bg-white py-20">
-        <div className="container mx-auto px-4">
+      <div className="bg-white py-12 md:py-20">
+        <div className="container mx-auto px-4 sm:px-6">
           <SectionTitle
             title="Our Professional Services"
             subtitle="Comprehensive financial and business solutions delivered by experienced chartered accountants"
             centered
           />
 
-          <div className="grid gap-12 mt-16">
+          <div className="mt-8 md:mt-16 space-y-6 md:space-y-12">
             {services.map((service, index) => (
               <div 
                 key={index}
-                className="grid md:grid-cols-2 gap-8 items-start p-8 rounded-lg hover:bg-lightgray transition-colors"
+                className="flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-8 p-4 md:p-8 rounded-lg hover:bg-lightgray transition-colors animate-fade-in"
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div>
-                  <div className="mb-4">{service.icon}</div>
-                  <h3 className="text-2xl font-montserrat font-bold text-navyblue mb-4">
-                    {service.title}
-                  </h3>
-                  <p className="text-charcoal mb-6">
+                <div className="flex flex-col">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="p-3 bg-gold/10 rounded-lg">
+                      {service.icon}
+                    </div>
+                    <h3 className="text-xl md:text-2xl font-montserrat font-bold text-navyblue">
+                      {service.title}
+                    </h3>
+                  </div>
+                  <p className="text-charcoal text-mobile-base md:text-base mb-6">
                     {service.description}
                   </p>
                 </div>
-                <div className="bg-white p-6 rounded-lg shadow-sm">
+                <div className="bg-white p-4 md:p-6 rounded-lg shadow-sm">
                   <h4 className="font-montserrat font-semibold text-lg mb-4 text-navyblue">
                     Key Features
                   </h4>
-                  <ul className="space-y-3">
+                  <ul className="space-y-2.5">
                     {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-charcoal">
-                        <div className="w-1.5 h-1.5 bg-gold rounded-full mr-3" />
+                      <li key={idx} className="flex items-center text-charcoal text-mobile-base md:text-base">
+                        <div className="w-1.5 h-1.5 bg-gold rounded-full mr-3 flex-shrink-0" />
                         {feature}
                       </li>
                     ))}
@@ -121,14 +126,14 @@ const Services = () => {
             ))}
           </div>
 
-          <div className="mt-20 text-center">
-            <p className="text-lg text-charcoal mb-8 max-w-2xl mx-auto">
+          <div className="mt-12 md:mt-20 text-center">
+            <p className="text-mobile-lg md:text-lg text-charcoal mb-6 md:mb-8 max-w-2xl mx-auto">
               As a registered accountable financial institution (FIC) operating under SAICA ID 20055210, 
               we maintain the highest standards of professional service and compliance.
             </p>
             <a 
               href="tel:0620193208"
-              className="inline-flex items-center bg-gold text-navyblue px-8 py-4 rounded font-montserrat font-medium hover:bg-lightgold transition-colors"
+              className="inline-flex items-center bg-gold text-navyblue px-6 py-3 md:px-8 md:py-4 rounded font-montserrat font-medium hover:bg-lightgold transition-colors text-mobile-base md:text-base"
             >
               Contact Us: 062 019 3208
             </a>
