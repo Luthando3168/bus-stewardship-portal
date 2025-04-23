@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Layout from "@/components/layout/Layout";
 import WelcomeEmailPreview from "@/components/email/WelcomeEmailPreview";
@@ -20,13 +21,15 @@ const EmailPreview = () => {
     dealName: "MyHealth Fund Investment",
     investmentAmount: "25,000",
     certificateNumber: "MCA2024001",
-    confirmationLink: "#",
-    approvalLink: "#",
-    viewLink: "#",
+    confirmationLink: "/complete-registration",
+    approvalLink: "/user/pending-deals",
+    viewLink: "/user/my-investments",
     email: "john.doe@example.com",
     clientNumber: "MCA2024005",
     bankAccountNumber: "1234567890",
-    bankAccountBranch: "Universal Branch 250"
+    bankAccountBranch: "Universal Branch 250",
+    dashboardLink: "/user/dashboard",
+    supportLink: "/contact"
   };
 
   return (
@@ -65,6 +68,8 @@ const EmailPreview = () => {
                       clientNumber={demoProps.clientNumber}
                       bankAccountNumber={demoProps.bankAccountNumber}
                       bankAccountBranch={demoProps.bankAccountBranch}
+                      dashboardLink={demoProps.dashboardLink}
+                      supportLink={demoProps.supportLink}
                     />
                   </div>
                 </div>
