@@ -13,6 +13,7 @@ import { toast } from "sonner";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const { signIn } = useAuth();
   const navigate = useNavigate();
   
@@ -23,12 +24,29 @@ const Login = () => {
 
   const handleSocialLogin = async (provider: 'google' | 'apple' | 'facebook') => {
     try {
-      const { error } = await supabase.auth.signInWithOAuth({
+      setIsLoading(true);
+      const { data, error } = await supabase.auth.signInWithOAuth({
         provider: provider,
+        options: {
+          redirectTo: `${window.location.origin}/login`,
+        }
       });
-      if (error) throw error;
+      
+      if (error) {
+        console.error("Social login error:", error);
+        throw error;
+      }
+      
+      // If we have a URL to redirect to, do it
+      if (data?.url) {
+        console.log("Redirecting to:", data.url);
+        window.location.href = data.url;
+      }
     } catch (error: any) {
-      toast.error(error.message);
+      console.error("Social login error details:", error);
+      toast.error(`Login failed: ${error.message}`);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -97,6 +115,7 @@ const Login = () => {
                 type="button"
                 variant="outline"
                 onClick={() => handleSocialLogin('google')}
+                disabled={isLoading}
                 className="w-full"
               >
                 <Icons.google className="mr-2 h-4 w-4" />
@@ -106,6 +125,7 @@ const Login = () => {
                 type="button"
                 variant="outline"
                 onClick={() => handleSocialLogin('apple')}
+                disabled={isLoading}
                 className="w-full"
               >
                 <Icons.apple className="mr-2 h-4 w-4" />
@@ -115,6 +135,7 @@ const Login = () => {
                 type="button"
                 variant="outline"
                 onClick={() => handleSocialLogin('facebook')}
+                disabled={isLoading}
                 className="w-full"
               >
                 <Icons.facebook className="mr-2 h-4 w-4" />

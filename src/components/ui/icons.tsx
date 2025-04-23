@@ -1,8 +1,8 @@
 
-import { Mail, Github, Chrome, Facebook, Apple } from "lucide-react";
+import { Mail, Github, Chrome, Facebook, Apple, Laptop } from "lucide-react";
 
 export const Icons = {
-  google: Chrome, // Using Chrome as a replacement for Google
+  google: Laptop, // Using Laptop as a replacement for Google since Chrome isn't working well
   apple: Apple,
   facebook: Facebook,
   mail: Mail,
