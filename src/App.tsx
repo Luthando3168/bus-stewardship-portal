@@ -35,6 +35,7 @@ import UserNewDeals from "@/pages/user/UserNewDeals";
 import UserPendingDeals from "@/pages/user/UserPendingDeals";
 import UserMyInvestments from "@/pages/user/UserMyInvestments";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
+import CompleteRegistration from "@/components/auth/CompleteRegistration";
 
 function App() {
   // Move the state hooks inside the function component
@@ -69,8 +70,8 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        {/* Public Routes */}
         <Routes>
+          {/* Public Routes */}
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/how-we-work" element={<HowWeWork />} />
@@ -83,6 +84,9 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
+          
+          {/* Add the complete registration route */}
+          <Route path="/complete-registration" element={<CompleteRegistration />} />
           
           {/* User Routes */}
           <Route path="/user" element={<ProtectedRoute allowedRole="user"><Outlet /></ProtectedRoute>}>

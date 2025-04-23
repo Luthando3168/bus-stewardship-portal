@@ -1,11 +1,11 @@
-
-import { ReactNode, useState } from "react";
+import { ReactNode, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import UserSidebar from "./user/UserSidebar";
 import UserHeader from "./user/UserHeader";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { supabase } from "@/integrations/supabase/client";
 
 interface UserLayoutProps {
   children: ReactNode;
@@ -16,6 +16,8 @@ const UserLayout = ({ children }: UserLayoutProps) => {
   const isMobile = useIsMobile();
   const [isSidebarOpen, setIsSidebarOpen] = useState(!isMobile);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [registrationStatus, setRegistrationStatus] = useState<string | null>(null);
   const [notifications] = useState([
     {
       id: 1,
@@ -31,6 +33,39 @@ const UserLayout = ({ children }: UserLayoutProps) => {
     }
   ]);
 
+  useEffect(() => {
+    const checkRegistrationStatus = async () => {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) {
+          navigate('/login');
+          return;
+        }
+
+        const { data: client, error } = await supabase
+          .from('clients')
+          .select('status')
+          .eq('id', user.id)
+          .single();
+
+        if (error) throw error;
+
+        setRegistrationStatus(client?.status || null);
+
+        if (client?.status === 'pending_registration' && window.location.pathname !== '/complete-registration') {
+          navigate('/complete-registration');
+        }
+      } catch (error) {
+        console.error('Error checking registration status:', error);
+        toast.error('Error checking registration status');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkRegistrationStatus();
+  }, [navigate]);
+
   const handleLogout = () => {
     localStorage.removeItem("userRole");
     localStorage.removeItem("userName");
@@ -44,6 +79,15 @@ const UserLayout = ({ children }: UserLayoutProps) => {
   const userName = localStorage.getItem("userName") || "User";
   const userSurname = localStorage.getItem("userSurname") || "";
   const fullName = `${userName} ${userSurname}`.trim();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (registrationStatus === 'pending_registration') {
+    navigate('/complete-registration');
+    return null;
+  }
 
   return (
     <div className="flex min-h-screen bg-lightgray">
