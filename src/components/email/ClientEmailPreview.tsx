@@ -13,10 +13,10 @@ const ClientEmailPreview = () => {
             <div style={{margin: '0 auto', padding: '20px 0 48px', maxWidth: '600px'}}>
               <div style={{textAlign: 'center', padding: '20px 0'}}>
                 <img
-                  src="https://lovable.app/lovable-uploads/4f2d889e-ba23-463a-9efe-bc8453a5e5b2.png"
-                  width="200"
+                  src="/lovable-uploads/4f2d889e-ba23-463a-9efe-bc8453a5e5b2.png"
+                  width="250"
                   height="auto"
-                  alt="Luthando Maduna CA Logo"
+                  alt="Luthando Maduna Chartered Accountants"
                 />
               </div>
 

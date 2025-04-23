@@ -30,6 +30,8 @@ export const RegistrationConfirmEmail = ({
         <Section style={logoContainer}>
           <Img
             src="/lovable-uploads/4f2d889e-ba23-463a-9efe-bc8453a5e5b2.png"
+            width="250"
+            height="auto"
             alt="Luthando Maduna Chartered Accountants"
             style={logo}
           />
