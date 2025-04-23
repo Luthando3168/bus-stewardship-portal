@@ -6,7 +6,7 @@ const Hero = () => (
   <section className="w-full min-h-[60vh] md:min-h-[70vh] flex items-center justify-center bg-navyblue px-2">
     <div className="w-full flex flex-col items-center justify-center py-14 md:py-24 max-w-2xl mx-auto text-center animate-fade-in">
       <h1 className="font-montserrat font-extrabold text-4xl sm:text-5xl md:text-6xl tracking-tight text-white drop-shadow mb-1">
-        Business
+        Managing Your Business
       </h1>
       <h2 className="font-montserrat font-extrabold text-3xl sm:text-4xl md:text-5xl text-gold mb-6 md:mb-7 tracking-tight">
         Growing Your Wealth
@@ -33,3 +33,4 @@ const Hero = () => (
 );
 
 export default Hero;
+
