@@ -68,14 +68,16 @@ const BusSection = () => {
 
           <div className="relative">
             <div className="aspect-w-4 aspect-h-3 relative z-10">
-              <div className="w-full h-full rounded-lg overflow-hidden shadow-lg">
-                <div className="w-full h-full flex items-center justify-center">
-                  <img
-                    src="/lovable-uploads/b37923d0-335b-46bc-9852-7d271458f2a9.png"
-                    alt="Business Under Stewardship"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+              <div className="w-full h-full rounded-lg overflow-hidden shadow-lg bg-gray-100">
+                <img
+                  src="/lovable-uploads/aa792d14-7473-4673-89cf-c3f6e1d15711.png"
+                  alt="Business Under Stewardship"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = "/lovable-uploads/4f2d889e-ba23-463a-9efe-bc8453a5e5b2.png";
+                  }}
+                />
               </div>
             </div>
             {/* Decorative elements */}
