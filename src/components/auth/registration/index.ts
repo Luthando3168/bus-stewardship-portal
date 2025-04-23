@@ -7,3 +7,4 @@ export interface FileItem {
 }
 
 export { default as FormProgress } from "./FormProgress";
+export { default as FileUpload } from "./FileUpload";
