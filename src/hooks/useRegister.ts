@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -57,15 +58,21 @@ export const useRegister = () => {
 
       if (authData.user) {
         try {
-          const { error: welcomeError } = await supabase.functions.invoke('send-welcome', {
+          console.log("Attempting to send welcome email...");
+          const { data, error: welcomeError } = await supabase.functions.invoke('send-welcome', {
             body: { email, fullName }
           });
 
           if (welcomeError) {
             console.error("Failed to send welcome email:", welcomeError);
+            toast.error("Could not send welcome email: " + welcomeError.message);
+          } else {
+            console.log("Welcome email sent successfully:", data);
+            toast.success("Welcome email sent successfully!");
           }
         } catch (emailError) {
           console.error("Error calling welcome email function:", emailError);
+          toast.error("Error sending welcome email");
         }
       }
       
