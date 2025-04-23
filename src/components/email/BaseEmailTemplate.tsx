@@ -21,24 +21,15 @@ export const baseEmailStyles = {
   logo: {
     maxWidth: '250px',
     margin: '0 auto',
-  },
-  networkMemberText: {
-    textAlign: 'center' as const,
-    color: '#666666',
-    fontSize: '12px',
-    marginTop: '10px',
   }
 };
 
 export const EmailLogo = () => (
   <div style={baseEmailStyles.logoContainer}>
     <img 
-      src="/lovable-uploads/c1492a4e-ca1c-4b86-866c-2945f7178765.png" 
-      alt="Chartered Accountants Worldwide" 
+      src="/lovable-uploads/4f2d889e-ba23-463a-9efe-bc8453a5e5b2.png" 
+      alt="Luthando Maduna Chartered Accountants" 
       style={baseEmailStyles.logo}
     />
-    <div style={baseEmailStyles.networkMemberText}>
-      Network Member
-    </div>
   </div>
 );
