@@ -20,9 +20,12 @@ interface FundOpportunitiesProps {
 }
 
 const FundOpportunities: React.FC<FundOpportunitiesProps> = ({ fundId, opportunities }) => {
+  // Filter opportunities that match exactly the selected fundId
   const fundOpportunities = opportunities.filter(
     (op) => op.fundId === fundId
   );
+  
+  // If no opportunities found for this fund
   if (fundOpportunities.length === 0) {
     return (
       <div className="text-center text-muted-foreground py-8">
@@ -30,6 +33,7 @@ const FundOpportunities: React.FC<FundOpportunitiesProps> = ({ fundId, opportuni
       </div>
     );
   }
+  
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
       {fundOpportunities.map((opportunity) => (
@@ -62,4 +66,3 @@ const FundOpportunities: React.FC<FundOpportunitiesProps> = ({ fundId, opportuni
 };
 
 export default FundOpportunities;
-

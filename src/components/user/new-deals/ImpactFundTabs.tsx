@@ -20,6 +20,7 @@ const ImpactFundTabs = ({ impactFunds, activeTab, onTabChange, className = "" }:
                   ${activeTab === fund.id 
                     ? "bg-white border border-navyblue text-navyblue shadow-sm" 
                     : "bg-muted text-gray-700 hover:bg-gray-200 border border-transparent"}`}
+          aria-selected={activeTab === fund.id}
         >
           {fund.name.replace(" Impact Fund", "")}
         </button>
