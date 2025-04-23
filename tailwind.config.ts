@@ -119,6 +119,14 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.5s ease-out',
 				'fade-in-slow': 'fade-in-slow 0.8s ease-out',
+			},
+			fontSize: {
+				'mobile-xs': '0.7rem',
+				'mobile-sm': '0.8rem',
+				'mobile-base': '0.9rem',
+				'mobile-lg': '1.1rem',
+				'mobile-xl': '1.3rem',
+				'mobile-2xl': '1.5rem',
 			}
 		}
 	},

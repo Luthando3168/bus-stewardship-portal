@@ -61,95 +61,113 @@ const Bus = () => {
 
   return (
     <Layout>
-      <section className="py-16 bg-white">
+      <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <SectionTitle
-            title="Business Under Stewardship Program"
-            subtitle="Professional management solutions for business owners"
+            title={<span className="text-mobile-2xl md:text-2xl lg:text-3xl">Business Under Stewardship Program</span>}
+            subtitle={<span className="text-mobile-base md:text-lg">Professional management solutions for business owners</span>}
             centered
           />
 
-          {/* Centered key message below section title */}
+          {/* Key Message */}
           <div className="flex justify-center">
-            <div className="bg-lightgray rounded-lg p-6 mt-4 mb-8 text-center max-w-3xl w-full">
-              <p className="text-lg font-semibold text-navyblue">
-                Under the BUS program, once you've selected the businesses you want to own, our team professionally manages these on your behalf. You'll receive regular updates and quarterly financial statements via MCA Direct. Profit sharing occurs twice a year, so you benefit directly from your business ownership while we handle the day-to-day management.
+            <div className="bg-lightgray rounded-lg p-4 md:p-6 mt-4 mb-6 md:mb-8 text-center max-w-3xl w-full">
+              <p className="text-mobile-base md:text-lg font-semibold text-navyblue">
+                Under the BUS program, once you've selected the businesses you want to own, our team professionally manages these on your behalf. You'll receive regular updates and quarterly financial statements via MCA Direct. Profit sharing occurs twice a year.
               </p>
             </div>
           </div>
 
-          <div className="max-w-4xl mx-auto mt-12 space-y-16">
-            {/* Introduction */}
-            <div className="text-charcoal space-y-6">
-              <p className="text-lg">
-                The Business Under Stewardship (BUS) program is our flagship service that enables business owners to
-                benefit from professional management while maintaining ownership of their companies. Our team of chartered
-                accountants and business professionals takes on the operational management of your business, allowing you
-                to focus on strategic growth or pursue other ventures.
-              </p>
-              <p>
-                This innovative approach bridges the gap between complete ownership burden and selling your business,
-                providing a "third way" that combines the benefits of professional management with the wealth creation
-                potential of continued ownership. With regular reporting, quarterly financial statements via MCA Direct, and twice-yearly profit sharing, you can confidently build lasting wealth.
-              </p>
+          <div className="max-w-4xl mx-auto mt-8 md:mt-12 space-y-12 md:space-y-16">
+            {/* Introduction with Professional Image */}
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="text-charcoal space-y-4">
+                <p className="text-mobile-base md:text-lg">
+                  The Business Under Stewardship (BUS) program is our flagship service that enables business owners to
+                  benefit from professional management while maintaining ownership of their companies.
+                </p>
+                <img
+                  src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40"
+                  alt="Professional business meeting"
+                  className="rounded-lg shadow-lg w-full h-48 md:h-64 object-cover"
+                />
+              </div>
+              <div>
+                <p className="text-mobile-base md:text-lg mb-4">
+                  Our team of chartered accountants and business professionals takes on the operational management of your business,
+                  allowing you to focus on strategic growth or pursue other ventures.
+                </p>
+                <img
+                  src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf"
+                  alt="Financial analysis"
+                  className="rounded-lg shadow-lg w-full h-48 md:h-64 object-cover"
+                />
+              </div>
             </div>
 
             {/* Benefits */}
             <div>
-              <h3 className="text-2xl font-bold text-navyblue mb-6 text-center">Key Benefits</h3>
+              <h3 className="text-mobile-xl md:text-2xl font-bold text-navyblue mb-6 text-center">Key Benefits</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {benefits.map((benefit, index) => (
                   <div key={index} className="flex items-start">
                     <div className="flex-shrink-0 h-6 w-6 bg-gold rounded-full flex items-center justify-center mt-1">
                       <Check className="h-4 w-4 text-white" />
                     </div>
-                    <p className="ml-3">{benefit}</p>
+                    <p className="ml-3 text-mobile-base md:text-base">{benefit}</p>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* How It Works */}
+            {/* How It Works with Professional Image */}
             <div>
-              <h3 className="text-2xl font-bold text-navyblue mb-6 text-center">How It Works</h3>
-              <div className="space-y-8">
-                {steps.map((step, index) => (
-                  <div key={index} className="flex">
-                    <div className="flex-shrink-0 h-10 w-10 rounded-full bg-navyblue text-white flex items-center justify-center font-bold text-lg">
-                      {index + 1}
+              <h3 className="text-mobile-xl md:text-2xl font-bold text-navyblue mb-6 text-center">How It Works</h3>
+              <div className="grid md:grid-cols-2 gap-8 items-center mb-8">
+                <img
+                  src="https://images.unsplash.com/photo-1553729459-efe14ef6055d"
+                  alt="Professional team collaboration"
+                  className="rounded-lg shadow-lg w-full h-48 md:h-64 object-cover"
+                />
+                <div className="space-y-6">
+                  {steps.map((step, index) => (
+                    <div key={index} className="flex">
+                      <div className="flex-shrink-0 h-8 w-8 rounded-full bg-navyblue text-white flex items-center justify-center font-bold text-mobile-base">
+                        {index + 1}
+                      </div>
+                      <div className="ml-4">
+                        <h4 className="text-mobile-lg md:text-lg font-semibold text-navyblue">{step.step}</h4>
+                        <p className="text-mobile-base md:text-base text-charcoal">{step.description}</p>
+                      </div>
                     </div>
-                    <div className="ml-4">
-                      <h4 className="text-lg font-semibold text-navyblue">{step.step}</h4>
-                      <p className="text-charcoal">{step.description}</p>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
 
             {/* Features */}
             <div>
-              <h3 className="text-2xl font-bold text-navyblue mb-6 text-center">Program Features</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <h3 className="text-mobile-xl md:text-2xl font-bold text-navyblue mb-6 text-center">Program Features</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {features.map((feature, index) => (
                   <Card key={index}>
                     <CardContent className="pt-6">
-                      <h4 className="text-lg font-semibold text-navyblue mb-2">{feature.title}</h4>
-                      <p className="text-charcoal">{feature.description}</p>
+                      <h4 className="text-mobile-lg md:text-lg font-semibold text-navyblue mb-2">{feature.title}</h4>
+                      <p className="text-mobile-base md:text-base text-charcoal">{feature.description}</p>
                     </CardContent>
                   </Card>
                 ))}
               </div>
             </div>
 
-            {/* Contact/Call to Action, centered */}
+            {/* Contact/Call to Action */}
             <div className="flex justify-center">
-              <div className="bg-lightgray p-8 rounded-lg text-center max-w-2xl w-full">
-                <h3 className="text-2xl font-bold text-navyblue mb-4">Ready to transform your business management?</h3>
-                <p className="mb-6">Contact us today to learn how the BUS program can benefit you with full professional management, quarterly financial reporting via MCA Direct, and twice-yearly profit-sharing opportunities.</p>
+              <div className="bg-lightgray p-6 md:p-8 rounded-lg text-center max-w-2xl w-full">
+                <h3 className="text-mobile-xl md:text-2xl font-bold text-navyblue mb-4">Ready to transform your business management?</h3>
+                <p className="text-mobile-base md:text-lg mb-6">Contact us today to learn how the BUS program can benefit you.</p>
                 <a
                   href="/contact"
-                  className="inline-block px-6 py-3 bg-gold text-white rounded font-medium hover:bg-lightgold transition-colors"
+                  className="inline-block px-6 py-3 bg-gold text-white rounded font-medium hover:bg-lightgold transition-colors text-mobile-base md:text-base"
                 >
                   Request a Consultation
                 </a>
