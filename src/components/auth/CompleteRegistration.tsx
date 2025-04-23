@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -49,7 +48,6 @@ const CompleteRegistration = () => {
     }
   });
 
-  // Load user data when component mounts
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -60,7 +58,6 @@ const CompleteRegistration = () => {
           return;
         }
 
-        // Try to get client information
         const { data: client, error } = await supabase
           .from('clients')
           .select('*')
@@ -68,10 +65,8 @@ const CompleteRegistration = () => {
           .single();
 
         if (!error && client) {
-          // Get user email from auth
           const userEmail = user.email || "";
           
-          // Get profile information for name
           const { data: profile } = await supabase
             .from('profiles')
             .select('full_name, phone')
@@ -81,7 +76,6 @@ const CompleteRegistration = () => {
           const fullName = profile?.full_name || user.user_metadata?.full_name || "";
           const phoneNumber = profile?.phone || "";
           
-          // Populate form with existing data
           form.reset({
             fullName: fullName,
             email: userEmail,
@@ -104,13 +98,11 @@ const CompleteRegistration = () => {
             pep: client.pep ? "yes" : "no"
           });
 
-          // If they've already submitted personal info, go to documents step
           if (client.status === 'verification_pending') {
             setStep("DOCUMENTS");
           }
         }
 
-        // Store user data for later use
         setUserData({
           id: user.id,
           email: user.email || "",
@@ -137,7 +129,6 @@ const CompleteRegistration = () => {
 
       setIsLoading(true);
       
-      // Update client data
       const { error: clientError } = await supabase
         .from('clients')
         .update({
@@ -163,7 +154,6 @@ const CompleteRegistration = () => {
 
       if (clientError) throw clientError;
       
-      // Update profile data
       const { error: profileError } = await supabase
         .from('profiles')
         .update({
@@ -175,14 +165,12 @@ const CompleteRegistration = () => {
         
       if (profileError) throw profileError;
 
-      // Store name in localStorage
       localStorage.setItem("userName", data.fullName.split(' ')[0] || "");
       localStorage.setItem("userSurname", data.fullName.split(' ').slice(1).join(' ') || "");
 
       setStep("DOCUMENTS");
       toast.success("Personal information saved successfully");
       
-      // Send notification about profile update
       await sendUserNotification(
         { 
           fullName: data.fullName, 
@@ -269,12 +257,8 @@ const CompleteRegistration = () => {
 
       if (error) throw error;
 
-      // Send notification to the admin about new registration
-      // (This would typically be handled by a database trigger or edge function)
-      
       toast.success("Registration completed successfully! Your account will be reviewed by our team.");
       
-      // Generate a client number (typically this would be done by admin during approval)
       const year = new Date().getFullYear();
       const randomNum = Math.floor(10000 + Math.random() * 90000);
       const clientNumber = `LM${year}${randomNum}`;
@@ -404,6 +388,34 @@ const CompleteRegistration = () => {
                         <FormLabel>City</FormLabel>
                         <FormControl>
                           <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    name="dob"
+                    control={form.control}
+                    rules={{ 
+                      required: "Date of birth is required",
+                      validate: {
+                        validDate: (value) => {
+                          const dobDate = new Date(value);
+                          const minAge = new Date();
+                          minAge.setFullYear(minAge.getFullYear() - 18);
+                          return dobDate <= minAge || "You must be at least 18 years old";
+                        }
+                      }
+                    }}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Date of Birth</FormLabel>
+                        <FormControl>
+                          <Input 
+                            type="date" 
+                            {...field} 
+                            max={new Date().toISOString().split('T')[0]} 
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>

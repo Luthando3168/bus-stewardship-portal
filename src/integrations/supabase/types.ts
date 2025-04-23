@@ -257,6 +257,7 @@ export type Database = {
           bank_account_type: string | null
           city: string | null
           created_at: string
+          dob: string | null
           documents_submitted: boolean | null
           employer: string | null
           employment_status: string | null
@@ -293,6 +294,7 @@ export type Database = {
           bank_account_type?: string | null
           city?: string | null
           created_at?: string
+          dob?: string | null
           documents_submitted?: boolean | null
           employer?: string | null
           employment_status?: string | null
@@ -329,6 +331,7 @@ export type Database = {
           bank_account_type?: string | null
           city?: string | null
           created_at?: string
+          dob?: string | null
           documents_submitted?: boolean | null
           employer?: string | null
           employment_status?: string | null
