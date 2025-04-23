@@ -163,5 +163,5 @@ const ImpactFunds = () => {
     </Layout>
   );
 };
-export default ImpactFunds;
 
+export default ImpactFunds;

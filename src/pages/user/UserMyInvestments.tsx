@@ -1,4 +1,3 @@
-
 import React, { useRef } from 'react';
 import UserLayout from "@/components/layout/UserLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
@@ -200,7 +199,7 @@ const UserMyInvestments = () => {
                     backgroundRepeat: "no-repeat",
                     backgroundPosition: "top right",
                     backgroundSize: "100px",
-                    backgroundOpacity: 0.1
+                    opacity: 1
                   }}
                 >
                   <div className="absolute top-0 right-0 p-3 opacity-20 pointer-events-none">
