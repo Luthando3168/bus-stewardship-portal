@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import corporateBackground from "/public/lovable-uploads/3bf955d5-5ab4-48d1-be77-4c951cf953ca.png";
+import corporateBackground from "/public/lovable-uploads/36f1e3ec-1682-4086-8e11-d7c4e572618b.png";
 
 const Hero = () => {
   return (
@@ -18,7 +18,7 @@ const Hero = () => {
             <span className="text-gold">Growing Your Wealth</span>
           </h1>
           <p className="font-lato text-lg md:text-xl mb-8 text-gray-300 max-w-2xl">
-            LMCA helps you own multiple businesses with MCA Direct.
+            LMCA helps individuals earn passive income by owning multiple businesses through MCA Direct.
           </p>
           
           <div className="flex flex-wrap gap-4">
