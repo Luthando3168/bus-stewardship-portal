@@ -9,8 +9,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { CertificateActions } from "@/components/admin/certificates/CertificateActions";
 
-// Mock data structured by funds
 const fundCertificatesData = {
   "MyFoodRetail Impact Fund": [
     {
@@ -68,13 +68,10 @@ const AdminShareCertificates = () => {
   const [selectedFund, setSelectedFund] = useState<string>("all");
   const [viewingCertificate, setViewingCertificate] = useState<string | null>(null);
   
-  // Get all certificates across all funds
   const allCertificates = Object.values(fundCertificatesData).flat();
   
-  // Get list of unique funds
   const fundsList = Object.keys(fundCertificatesData);
   
-  // Filter certificates based on search term, status, and selected fund
   const filteredCertificates = allCertificates.filter(cert => {
     const matchesSearch = 
       cert.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -92,6 +89,18 @@ const AdminShareCertificates = () => {
   });
   
   const selectedCertificate = allCertificates.find(cert => cert.id === viewingCertificate);
+
+  const handleStatusChange = (certificateId: string, newStatus: string) => {
+    const updatedCertificates = allCertificates.map(cert => 
+      cert.id === certificateId ? { ...cert, status: newStatus } : cert
+    );
+    
+    Object.keys(fundCertificatesData).forEach(fund => {
+      fundCertificatesData[fund] = fundCertificatesData[fund].map(cert =>
+        cert.id === certificateId ? { ...cert, status: newStatus } : cert
+      );
+    });
+  };
 
   return (
     <AdminLayout>
@@ -183,10 +192,14 @@ const AdminShareCertificates = () => {
                             </TableCell>
                             <TableCell>
                               <div className="flex space-x-2">
+                                <CertificateActions
+                                  certificateId={cert.id}
+                                  status={cert.status}
+                                  onStatusChange={handleStatusChange}
+                                />
                                 <Button 
                                   variant="outline" 
                                   size="sm"
-                                  className="flex gap-1 items-center h-8"
                                   onClick={() => setViewingCertificate(cert.id)}
                                 >
                                   <Eye size={14} />
@@ -195,7 +208,6 @@ const AdminShareCertificates = () => {
                                 <Button 
                                   variant="outline" 
                                   size="sm"
-                                  className="flex gap-1 items-center h-8"
                                 >
                                   <Download size={14} />
                                   <span className="hidden sm:inline">PDF</span>
@@ -266,10 +278,14 @@ const AdminShareCertificates = () => {
                               </TableCell>
                               <TableCell>
                                 <div className="flex space-x-2">
+                                  <CertificateActions
+                                    certificateId={cert.id}
+                                    status={cert.status}
+                                    onStatusChange={handleStatusChange}
+                                  />
                                   <Button 
                                     variant="outline" 
                                     size="sm"
-                                    className="flex gap-1 items-center h-8"
                                     onClick={() => setViewingCertificate(cert.id)}
                                   >
                                     <Eye size={14} />
@@ -278,7 +294,6 @@ const AdminShareCertificates = () => {
                                   <Button 
                                     variant="outline" 
                                     size="sm"
-                                    className="flex gap-1 items-center h-8"
                                   >
                                     <Download size={14} />
                                     <span className="hidden sm:inline">PDF</span>
@@ -297,7 +312,6 @@ const AdminShareCertificates = () => {
           </TabsContent>
         </Tabs>
         
-        {/* Certificate Preview Dialog */}
         <Dialog open={viewingCertificate !== null} onOpenChange={() => setViewingCertificate(null)}>
           <DialogContent className="max-w-3xl">
             <DialogHeader>
