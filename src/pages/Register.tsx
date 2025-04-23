@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { Checkbox } from "@/components/ui/checkbox";
 import { supabase } from "@/integrations/supabase/client";
 import { sendNotification, NotificationRecipient } from "@/utils/notificationService";
+import { AlertCircle } from "lucide-react";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -17,17 +18,30 @@ const Register = () => {
   const [fullName, setFullName] = useState("");
   const [isAgreeTerms, setIsAgreeTerms] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Clear any previous error messages
+    setErrorMessage("");
+    
+    // Form validation
+    if (!fullName.trim()) {
+      setErrorMessage("Full name is required");
+      toast.error("Full name is required");
+      return;
+    }
+    
     if (password !== confirmPassword) {
+      setErrorMessage("Passwords do not match");
       toast.error("Passwords do not match");
       return;
     }
     
     if (!isAgreeTerms) {
+      setErrorMessage("You must agree to the Terms and Conditions");
       toast.error("You must agree to the Terms and Conditions");
       return;
     }
@@ -35,6 +49,8 @@ const Register = () => {
     setIsLoading(true);
     
     try {
+      console.log("Attempting to register user:", { email, fullName });
+      
       // Register with Supabase
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email,
@@ -47,6 +63,8 @@ const Register = () => {
       });
       
       if (authError) throw authError;
+
+      console.log("Registration response:", authData);
 
       if (authData.user) {
         // Send welcome notification
@@ -76,10 +94,13 @@ const Register = () => {
       
       // Provide more specific error messages for common issues
       if (error.message.includes("already registered")) {
+        setErrorMessage("This email is already registered. Please use a different email or try logging in.");
         toast.error("This email is already registered. Please use a different email or try logging in.");
       } else if (error.message.includes("password")) {
+        setErrorMessage("Password issue: " + error.message);
         toast.error("Password issue: " + error.message);
       } else {
+        setErrorMessage(error.message || "Registration failed. Please try again.");
         toast.error(error.message || "Registration failed. Please try again.");
       }
     } finally {
@@ -100,6 +121,13 @@ const Register = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
+            {errorMessage && (
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4 flex items-start">
+                <AlertCircle className="h-5 w-5 mr-2 mt-0.5 flex-shrink-0" />
+                <span className="text-sm">{errorMessage}</span>
+              </div>
+            )}
+            
             <form onSubmit={handleRegister} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="fullName">Full Name</Label>
