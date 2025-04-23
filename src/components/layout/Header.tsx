@@ -19,13 +19,13 @@ const Header = () => {
     // eslint-disable-next-line
   }, [location.pathname]);
 
-  // Navigation links config
+  // Navigation links config - Updated order
   const navLinks = [
     { to: "/", label: "Home" },
     { to: "/about", label: "About" },
+    { to: "/how-we-work", label: "How We Work" },
     { to: "/services", label: "Services" },
     { to: "/bus", label: "BUS" },
-    { to: "/how-we-work", label: "How We Work" },
     { to: "/impact-funds", label: "Impact Funds" },
     { to: "/foundation", label: "Foundation" },
   ];
