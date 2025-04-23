@@ -6,14 +6,12 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
 
-// Only the four visible funds, all blue, each has a simple, relevant image and consistent card style
 const funds = [
   {
     id: "myfarm",
     name: "MyFarm Impact Fund",
     brief: "Sustainable agriculture and farming for food security and rural economic growth.",
-    // Agricultural field, not too bright, farm themed
-    image: "https://images.unsplash.com/photo-1465379944081-7f47de8d74ac?auto=format&fit=crop&w=600&q=80",
+    image: "https://images.unsplash.com/photo-1516706578602-8acb51c21ba5?auto=format&fit=crop&w=1200&q=80", // Detailed farm scene with crops and machinery
     returnPercentage: 12,
     minInvestment: 1000,
   },
@@ -21,8 +19,7 @@ const funds = [
     id: "myproperty",
     name: "MyProperty Impact Fund",
     brief: "Affordable housing and community-focused property for social development.",
-    // Neutral homes and housing, blue-toned if possible
-    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=600&q=80",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80", // Modern affordable housing complex
     returnPercentage: 10,
     minInvestment: 2000,
   },
@@ -30,8 +27,7 @@ const funds = [
     id: "myfoodretail",
     name: "MyFoodRetail Impact Fund",
     brief: "Investing in food retail businesses to improve food distribution and access.",
-    // Grocery store shelves, neutral simple indoor retail
-    image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80",
+    image: "https://images.unsplash.com/photo-1665686306574-1ace09918ffd?auto=format&fit=crop&w=1200&q=80", // Modern grocery store interior with fresh produce
     returnPercentage: 15,
     minInvestment: 5000,
   },
@@ -39,11 +35,43 @@ const funds = [
     id: "myfranchise",
     name: "MyFranchise Impact Fund",
     brief: "Backing franchises to create jobs and support business ownership.",
-    // Neutral office or business people, handshake for business
-    image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=600&q=80",
+    image: "https://images.unsplash.com/photo-1661686645638-7131fd68a724?auto=format&fit=crop&w=1200&q=80", // Business people shaking hands, franchise concept
     returnPercentage: 14,
     minInvestment: 1500,
   },
+  // Additional Funds
+  {
+    id: "myenergy",
+    name: "MyEnergy Impact Fund",
+    brief: "Renewable energy investments driving sustainable power solutions.",
+    image: "https://images.unsplash.com/photo-1519710164239-da123dc03672?auto=format&fit=crop&w=1200&q=80", // Solar panels or wind turbines
+    returnPercentage: 13,
+    minInvestment: 3000,
+  },
+  {
+    id: "myhealth",
+    name: "MyHealth Impact Fund",
+    brief: "Healthcare and medical technology investments improving community wellness.",
+    image: "https://images.unsplash.com/photo-1532938911079-1b06ac7cedf7?auto=format&fit=crop&w=1200&q=80", // Modern medical facility or healthcare technology
+    returnPercentage: 11,
+    minInvestment: 2500,
+  },
+  {
+    id: "mytech",
+    name: "MyTech Impact Fund",
+    brief: "Innovative technology solutions driving digital transformation.",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80", // Tech startup or innovation lab
+    returnPercentage: 16,
+    minInvestment: 4000,
+  },
+  {
+    id: "myeducation",
+    name: "MyEducation Impact Fund",
+    brief: "Educational initiatives and skill development programs.",
+    image: "https://images.unsplash.com/photo-1541692641319-81bc2bdf9f2a?auto=format&fit=crop&w=1200&q=80", // Modern classroom or educational technology
+    returnPercentage: 10,
+    minInvestment: 1500,
+  }
 ];
 
 const ImpactFunds = () => {
@@ -65,7 +93,7 @@ const ImpactFunds = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <SectionTitle
             title="Impact Funds"
-            subtitle="Choose from a selection of impact funds and invest in opportunities that matter to you."
+            subtitle="Choose from a comprehensive selection of impact funds and invest in opportunities that drive positive change."
             centered
           />
           <div className="bg-lightgray rounded-lg p-6 mb-10 text-center">
@@ -81,7 +109,7 @@ const ImpactFunds = () => {
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-10">
             {funds.map(fund => (
               <div
                 key={fund.id}
