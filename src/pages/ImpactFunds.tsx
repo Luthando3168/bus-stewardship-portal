@@ -12,7 +12,8 @@ const funds = [
     id: "myfarm",
     name: "MyFarm Impact Fund",
     brief: "Sustainable agriculture and farming for food security and rural economic growth.",
-    image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=600&q=80",
+    // Agricultural field, not too bright, farm themed
+    image: "https://images.unsplash.com/photo-1465379944081-7f47de8d74ac?auto=format&fit=crop&w=600&q=80",
     returnPercentage: 12,
     minInvestment: 1000,
   },
@@ -20,6 +21,7 @@ const funds = [
     id: "myproperty",
     name: "MyProperty Impact Fund",
     brief: "Affordable housing and community-focused property for social development.",
+    // Neutral homes and housing, blue-toned if possible
     image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=600&q=80",
     returnPercentage: 10,
     minInvestment: 2000,
@@ -28,6 +30,7 @@ const funds = [
     id: "myfoodretail",
     name: "MyFoodRetail Impact Fund",
     brief: "Investing in food retail businesses to improve food distribution and access.",
+    // Grocery store shelves, neutral simple indoor retail
     image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80",
     returnPercentage: 15,
     minInvestment: 5000,
@@ -36,7 +39,8 @@ const funds = [
     id: "myfranchise",
     name: "MyFranchise Impact Fund",
     brief: "Backing franchises to create jobs and support business ownership.",
-    image: "https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?auto=format&fit=crop&w=600&q=80",
+    // Neutral office or business people, handshake for business
+    image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=600&q=80",
     returnPercentage: 14,
     minInvestment: 1500,
   },
@@ -81,15 +85,15 @@ const ImpactFunds = () => {
             {funds.map(fund => (
               <div
                 key={fund.id}
-                className="flex flex-row items-center bg-gradient-to-br from-blue-700 to-blue-900 rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-200"
+                className="flex flex-col items-center bg-gradient-to-br from-blue-700 to-blue-900 rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-200"
               >
                 <img
                   src={fund.image}
                   alt={fund.name}
-                  className="h-36 w-36 object-cover flex-shrink-0"
-                  style={{ borderRight: '2px solid #144671' }}
+                  className="w-full h-44 object-cover"
+                  style={{ borderBottom: '2px solid #144671' }}
                 />
-                <div className="p-6 flex-1 flex flex-col justify-between">
+                <div className="p-6 flex-1 flex flex-col justify-between w-full">
                   <div>
                     <h3 className="font-montserrat font-bold text-2xl text-white mb-1">{fund.name}</h3>
                     <p className="font-lato text-gray-200 mb-3">{fund.brief}</p>
@@ -132,3 +136,4 @@ const ImpactFunds = () => {
   );
 };
 export default ImpactFunds;
+
