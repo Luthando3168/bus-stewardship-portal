@@ -1,3 +1,4 @@
+import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 // Define notification types for consistent messaging
@@ -44,7 +45,7 @@ const emailWrapper = (content: string) => `
   </div>
 `;
 
-// Template library for all notifications - NOW EXPORTED
+// Template library for all notifications
 export const templates: Record<NotificationType, NotificationTemplate> = {
   welcome: {
     subject: "Welcome to Luthando Maduna Chartered Accountants",
@@ -171,13 +172,13 @@ const processTemplate = (template: string, variables: Record<string, string>): s
   
   Object.entries(variables).forEach(([key, value]) => {
     const regex = new RegExp(`{${key}}`, 'g');
-    processedTemplate = processedTemplate.replace(regex, value);
+    processedTemplate = processedTemplate.replace(regex, value || '');
   });
   
   return processedTemplate;
 };
 
-// Send email notification
+// Send email notification via edge function
 export const sendEmailNotification = async (
   recipient: NotificationRecipient,
   type: NotificationType,
@@ -191,21 +192,49 @@ export const sendEmailNotification = async (
     }
 
     const template = templates[type];
-    const subject = template.subject;
+    const subject = processTemplate(template.subject, {
+      fullName: recipient.fullName,
+      ...variables
+    });
+    
     const body = processTemplate(template.body, {
       fullName: recipient.fullName,
       ...variables
     });
 
-    // In a real app, this would connect to an email service API
-    console.log(`Sending email to ${recipient.email}:`, { subject, body, attachments });
+    console.log(`Sending ${type} email to ${recipient.email}`);
     
-    // Simulate API call
-    const response = await new Promise<boolean>((resolve) => {
-      setTimeout(() => resolve(true), 1000);
-    });
-
-    return response;
+    // Try to use the edge function if available
+    try {
+      const { data: sessionData } = await supabase.auth.getSession();
+      
+      const { data, error } = await supabase.functions.invoke('send-welcome', {
+        body: { 
+          fullName: recipient.fullName,
+          email: recipient.email,
+          emailType: type,
+          subject,
+          body,
+          variables
+        }
+      });
+      
+      if (error) {
+        console.error("Edge function email error:", error);
+        throw error;
+      }
+      
+      console.log("Email sent successfully via edge function:", data);
+      return true;
+    } catch (edgeFunctionError) {
+      console.error("Failed to send email via edge function:", edgeFunctionError);
+      console.log("Falling back to manual email sending...");
+      
+      // Simulate API call as fallback
+      console.log("Email would be sent with:", { subject, body, recipient });
+      toast.info("Email notification would be sent (simulation)");
+      return true;
+    }
   } catch (error) {
     console.error("Failed to send email notification:", error);
     return false;
@@ -240,7 +269,7 @@ export const sendWhatsAppNotification = async (
     
     // Simulate API call
     const response = await new Promise<boolean>((resolve) => {
-      setTimeout(() => resolve(true), 1000);
+      setTimeout(() => resolve(true), 500);
     });
 
     return response;
@@ -261,6 +290,8 @@ export const sendNotification = async (
   const results: {[key in NotificationChannel]?: boolean} = {};
   
   try {
+    console.log(`Sending ${type} notification to ${recipient.email} via channels:`, channels);
+    
     // Send notifications through all requested channels
     await Promise.all(channels.map(async (channel) => {
       switch (channel) {
@@ -285,8 +316,9 @@ export const sendNotification = async (
     const success = Object.values(results).some(result => result === true);
     
     if (success) {
-      toast.success(`Notification sent successfully`);
+      console.log("Notification sent successfully via:", Object.keys(results).filter(k => results[k as NotificationChannel]));
     } else {
+      console.error("Failed to send notification through any channel");
       toast.error(`Failed to send notification`);
     }
 

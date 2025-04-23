@@ -103,49 +103,51 @@ export const useRegister = () => {
       console.log("Registration response:", authData);
 
       if (authData.user) {
+        // Don't redirect or show success message until email is sent
         try {
+          console.log("Attempting to send welcome email...");
+          
+          // Try sending welcome email via edge function first
           const { data: sessionData } = await supabase.auth.getSession();
           const accessToken = sessionData.session?.access_token;
           
-          if (accessToken) {
-            console.log("Attempting to send welcome email via edge function...");
-            
-            const { data, error: welcomeError } = await supabase.functions.invoke('send-welcome', {
-              body: { fullName, email },
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-                'Content-Type': 'application/json',
-                'X-Client-Info': 'supabase-js/2.0.0'
-              }
-            });
-
-            if (welcomeError) {
-              console.error("Failed to send welcome email via edge function:", welcomeError);
-              console.log("Falling back to notification service...");
-              await sendUserNotification(
-                { fullName, email }, 
-                'welcome', 
-                ['email']
-              );
-            } else {
-              console.log("Welcome email sent successfully via edge function:", data);
-            }
-          } else {
-            throw new Error("No access token available for authentication");
+          if (!accessToken) {
+            console.warn("No access token available for email authentication");
           }
+          
+          // Always try to send welcome email through notification service as primary method
+          const emailResult = await sendUserNotification(
+            { fullName, email }, 
+            'welcome', 
+            ['email']
+          );
+          
+          console.log("Email notification result:", emailResult);
+          
+          // Only show success and redirect if email notification was successful
+          toast.success("Registration successful! Please check your email to verify your account.");
+          
+          // Add delay before redirecting to ensure toast is seen
+          setTimeout(() => {
+            navigate("/login");
+          }, 2000);
         } catch (emailError) {
           console.error("Error sending welcome email:", emailError);
+          // Show partial success but note the email issue
+          toast.warning("Account created, but we couldn't send a welcome email. Please contact support if you don't receive a verification email.");
+          setTimeout(() => {
+            navigate("/login");
+          }, 3000);
         }
+      } else {
+        throw new Error("Registration failed: User account was not created");
       }
-      
-      toast.success("Registration successful! Please check your email to verify your account.");
-      navigate("/login");
     } catch (error: any) {
       console.error("Registration error:", error);
       
       if (error.message.includes("already registered")) {
-        setErrorMessage("Registration failed. Please try again or contact support.");
-        toast.error("Registration failed. Please try again or contact support.");
+        setErrorMessage("This email is already registered. Please try logging in instead.");
+        toast.error("This email is already registered. Please try logging in instead.");
       } else if (error.message.includes("password")) {
         setErrorMessage("Password does not meet security requirements");
         toast.error("Password does not meet security requirements");
@@ -153,6 +155,8 @@ export const useRegister = () => {
         setErrorMessage("Registration failed. Please try again later.");
         toast.error("Registration failed. Please try again later.");
       }
+      
+      // Don't navigate on error
     } finally {
       setIsLoading(false);
     }

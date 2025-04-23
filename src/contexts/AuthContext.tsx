@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           setUser(authUser);
           
           // Only show toast and redirect on specific auth events
-          if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+          if (event === 'SIGNED_IN') {
             const isAdmin = authUser?.role === 'admin';
             
             // Only redirect if they're on auth pages
@@ -48,8 +48,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
               setTimeout(() => {
                 navigate(redirectPath);
                 toast.success('Successfully signed in');
-              }, 0);
+              }, 300);
             }
+          } else if (event === 'TOKEN_REFRESHED') {
+            console.log('Auth token refreshed successfully');
           }
         } else {
           setSession(null);
@@ -58,6 +60,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           if (event === 'SIGNED_OUT') {
             toast.success('Successfully signed out');
             navigate('/login');
+          } else if (event === 'USER_DELETED') {
+            toast.info('Your account has been deleted');
+            navigate('/register');
           }
         }
         

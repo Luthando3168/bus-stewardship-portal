@@ -24,14 +24,19 @@ serve(async (req) => {
   }
 
   try {
-    // Verify JWT is present since we're now requiring authentication
+    // More flexible authentication - allow both JWT and anonymous access for initial registration
+    let isAuthenticated = false;
     const jwt = req.headers.get("authorization")?.replace("Bearer ", "")
     
-    if (!jwt) {
-      throw new Error("Missing authorization header")
+    if (jwt) {
+      isAuthenticated = true;
+      console.log("Request authenticated with JWT");
+    } else {
+      // For initial registrations, allow anonymous access with logging
+      console.log("Anonymous welcome email request - this is normal for initial registrations");
     }
 
-    const { fullName, email } = await req.json()
+    const { fullName, email, emailType, subject: customSubject, body: customBody } = await req.json()
 
     // Enhanced input validation
     if (!fullName || typeof fullName !== 'string') {
@@ -44,9 +49,21 @@ serve(async (req) => {
 
     console.log(`Rendering email template for ${fullName} at ${email}`)
     
-    const html = await renderAsync(
-      WelcomeEmail({ fullName })
-    )
+    // Determine whether to use custom content or WelcomeEmail template
+    let html;
+    let subject;
+    
+    if (customBody) {
+      html = customBody;
+      subject = customSubject || "Welcome to Luthando Maduna Chartered Accountants";
+      console.log("Using custom email content");
+    } else {
+      html = await renderAsync(
+        WelcomeEmail({ fullName })
+      );
+      subject = "Welcome to Luthando Maduna Chartered Accountants";
+      console.log("Using WelcomeEmail template");
+    }
     
     console.log("Email HTML rendered successfully")
 
@@ -54,7 +71,7 @@ serve(async (req) => {
     const data = await resend.emails.send({
       from: "Luthando Maduna Chartered Accountants <info@madunacas.com>",
       to: [email],
-      subject: "Welcome to Luthando Maduna Chartered Accountants",
+      subject: subject,
       html: html,
       reply_to: "info@madunacas.com",
       headers: {
@@ -72,7 +89,7 @@ serve(async (req) => {
 
     console.log("Welcome email sent successfully")
 
-    return new Response(JSON.stringify(data), {
+    return new Response(JSON.stringify({ success: true, message: "Email sent successfully" }), {
       headers: { 
         ...corsHeaders, 
         "Content-Type": "application/json",
