@@ -60,10 +60,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           if (event === 'SIGNED_OUT') {
             toast.success('Successfully signed out');
             navigate('/login');
-          } else if (event === 'USER_DELETED') {
-            toast.info('Your account has been deleted');
-            navigate('/register');
           }
+          // We need to remove the USER_DELETED check as it's not in the valid event types
+          // Since this event type is not supported by Supabase auth state changes
         }
         
         setLoading(false);

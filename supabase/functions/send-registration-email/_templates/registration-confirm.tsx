@@ -11,7 +11,7 @@ import {
   Section,
   Text,
   Img,
-} from '@react-email/components';
+} from 'npm:@react-email/components@0.0.12';
 
 interface RegistrationConfirmEmailProps {
   fullName: string;
