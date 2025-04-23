@@ -1,6 +1,6 @@
 
-import { ReactNode } from "react";
-import { useNavigate } from "react-router-dom";
+import { ReactNode, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
 import UserSidebar from "./user/UserSidebar";
