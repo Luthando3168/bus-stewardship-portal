@@ -86,6 +86,60 @@ const AdminDashboard = () => {
     return `R ${(amount / 1000000).toFixed(1)}M`;
   };
 
+  const printUserActivity = () => {
+    const element = document.createElement('div');
+    element.innerHTML = `
+      <div style="padding: 20px;">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <img 
+            src="/lovable-uploads/c21dd704-6d94-4ce9-8e09-1d26da6a0503.png" 
+            alt="Luthando Maduna Chartered Accountants"
+            style="height: 80px; margin-bottom: 10px;"
+          />
+          <h2 style="text-align: center;">Recent User Activity Report</h2>
+          <p style="text-align: center; color: #666; font-size: 12px;">
+            Generated on ${new Date().toLocaleDateString()} by Admin User
+          </p>
+        </div>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+          <thead>
+            <tr style="background-color: #f3f4f6;">
+              <th style="border: 1px solid #e5e7eb; padding: 8px;">User</th>
+              <th style="border: 1px solid #e5e7eb; padding: 8px;">Email</th>
+              <th style="border: 1px solid #e5e7eb; padding: 8px;">Last Login</th>
+              <th style="border: 1px solid #e5e7eb; padding: 8px;">Investments</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${[1, 2, 3, 4, 5].map(() => `
+              <tr>
+                <td style="border: 1px solid #e5e7eb; padding: 8px;">John Dube</td>
+                <td style="border: 1px solid #e5e7eb; padding: 8px;">john.d@example.com</td>
+                <td style="border: 1px solid #e5e7eb; padding: 8px;">Today, 10:42 AM</td>
+                <td style="border: 1px solid #e5e7eb; padding: 8px;">3 Active</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
+
+    const opt = {
+      margin: 1,
+      filename: 'user-activity-report.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+
+    html2pdf().from(element).set(opt).save().then(() => {
+      toast.success("User activity report exported successfully");
+    }).catch((error) => {
+      console.error("PDF export error:", error);
+      toast.error("Failed to export user activity report");
+    });
+  };
+
   const exportInvestorsList = (format: 'pdf' | 'excel') => {
     const business = businesses.find(b => b.name === selectedCompany);
     
@@ -98,7 +152,17 @@ const AdminDashboard = () => {
       const element = document.createElement('div');
       element.innerHTML = `
         <div style="padding: 20px;">
-          <h2 style="text-align: center;">${business.name} - Shareholders List</h2>
+          <div style="text-align: center; margin-bottom: 20px;">
+            <img 
+              src="/lovable-uploads/c21dd704-6d94-4ce9-8e09-1d26da6a0503.png" 
+              alt="Luthando Maduna Chartered Accountants"
+              style="height: 80px; margin-bottom: 10px;"
+            />
+            <h2 style="text-align: center;">${business.name} - Shareholders List</h2>
+            <p style="text-align: center; color: #666; font-size: 12px;">
+              Generated on ${new Date().toLocaleDateString()} by Admin User
+            </p>
+          </div>
           <table style="width: 100%; border-collapse: collapse;">
             <thead>
               <tr style="background-color: #f3f4f6;">
@@ -159,51 +223,6 @@ const AdminDashboard = () => {
       toast.success("Excel export successful");
       console.log(`Exporting investors list in ${format} format`);
     }
-  };
-
-  const printUserActivity = () => {
-    const element = document.createElement('div');
-    element.innerHTML = `
-      <div style="padding: 20px;">
-        <h2 style="text-align: center;">Recent User Activity Report</h2>
-        <p style="text-align: center;">Generated on ${new Date().toLocaleDateString()}</p>
-        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-          <thead>
-            <tr style="background-color: #f3f4f6;">
-              <th style="border: 1px solid #e5e7eb; padding: 8px;">User</th>
-              <th style="border: 1px solid #e5e7eb; padding: 8px;">Email</th>
-              <th style="border: 1px solid #e5e7eb; padding: 8px;">Last Login</th>
-              <th style="border: 1px solid #e5e7eb; padding: 8px;">Investments</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${[1, 2, 3, 4, 5].map(() => `
-              <tr>
-                <td style="border: 1px solid #e5e7eb; padding: 8px;">John Dube</td>
-                <td style="border: 1px solid #e5e7eb; padding: 8px;">john.d@example.com</td>
-                <td style="border: 1px solid #e5e7eb; padding: 8px;">Today, 10:42 AM</td>
-                <td style="border: 1px solid #e5e7eb; padding: 8px;">3 Active</td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
-      </div>
-    `;
-
-    const opt = {
-      margin: 1,
-      filename: 'user-activity-report.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-    };
-
-    html2pdf().from(element).set(opt).save().then(() => {
-      toast.success("User activity report exported successfully");
-    }).catch((error) => {
-      console.error("PDF export error:", error);
-      toast.error("Failed to export user activity report");
-    });
   };
 
   return (

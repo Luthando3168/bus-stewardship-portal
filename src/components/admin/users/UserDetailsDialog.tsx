@@ -14,6 +14,29 @@ const UserDetailsDialog = ({ user, beneficiaries }: UserDetailsDialogProps) => {
   const handlePrint = () => {
     const content = document.getElementById('printableContent');
     if (content) {
+      // Create a temporary element for the header
+      const header = document.createElement('div');
+      header.innerHTML = `
+        <div style="text-align: center; margin-bottom: 20px;">
+          <img 
+            src="/lovable-uploads/c21dd704-6d94-4ce9-8e09-1d26da6a0503.png" 
+            alt="Luthando Maduna Chartered Accountants"
+            style="height: 80px; margin-bottom: 10px;"
+          />
+          <div style="font-size: 12px; color: #666;">
+            Generated on ${new Date().toLocaleDateString()} by ${user.fullName}
+          </div>
+        </div>
+      `;
+
+      // Clone the content
+      const printContent = content.cloneNode(true) as HTMLElement;
+      
+      // Create wrapper and add header
+      const wrapper = document.createElement('div');
+      wrapper.appendChild(header);
+      wrapper.appendChild(printContent);
+
       const opt = {
         margin: 1,
         filename: `user-details-${user.fullName}.pdf`,
@@ -21,7 +44,8 @@ const UserDetailsDialog = ({ user, beneficiaries }: UserDetailsDialogProps) => {
         html2canvas: { scale: 2 },
         jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
       };
-      html2pdf().set(opt).from(content).save();
+
+      html2pdf().set(opt).from(wrapper).save();
     }
   };
 
