@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import AdminLayout from "@/components/layout/AdminLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -11,7 +12,36 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CertificateActions } from "@/components/admin/certificates/CertificateActions";
 
-const fundCertificatesData = {
+// Define our certificate type
+interface Certificate {
+  id: string;
+  userId: number;
+  userName: string;
+  clientNumber: string;
+  investmentId: number;
+  investmentName: string;
+  companyName: string;
+  registrationNumber: string;
+  shares: number;
+  sharePrice: number;
+  issueDate: string;
+  status: string;
+  sequentialNumber?: string;
+}
+
+// Define our fund certificates data type
+interface FundCertificatesData {
+  [fundName: string]: Certificate[];
+}
+
+// Define our company certificates data type
+interface CertificatesByCompany {
+  [fundName: string]: {
+    [companyName: string]: Certificate[];
+  };
+}
+
+const fundCertificatesData: FundCertificatesData = {
   "MyFoodRetail Impact Fund": [
     {
       id: "SC-101-742",
@@ -102,8 +132,8 @@ const AdminShareCertificates = () => {
     });
   };
 
-  // Group certificates by company within each fund
-  const certificatesByCompany = {};
+  // Group certificates by company within each fund with proper typing
+  const certificatesByCompany: CertificatesByCompany = {};
   Object.entries(fundCertificatesData).forEach(([fundName, certificates]) => {
     certificatesByCompany[fundName] = {};
     certificates.forEach(cert => {
@@ -279,7 +309,7 @@ const AdminShareCertificates = () => {
                                 </TableRow>
                               </TableHeader>
                               <TableBody>
-                                {certificates.map((cert: any) => (
+                                {certificates.map((cert) => (
                                   <TableRow key={cert.id}>
                                     <TableCell className="font-mono text-sm">
                                       {cert.id}
