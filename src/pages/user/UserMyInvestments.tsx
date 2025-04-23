@@ -1,11 +1,10 @@
 import React, { useRef } from 'react';
 import UserLayout from "@/components/layout/UserLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Download, FileText, Shield } from "lucide-react";
+import { FileText, Shield } from "lucide-react";
 import { toast } from "sonner";
 import html2pdf from 'html2pdf.js';
 
@@ -54,18 +53,19 @@ const UserMyInvestments = () => {
 
   const handleViewShareCertificate = (investmentId: number) => {
     setShowCertificate(investmentId);
-    
     setTimeout(() => {
-      handleDownloadCertificate();
-    }, 300);
+      handleDownloadCertificate(investmentId);
+    }, 400);
   };
 
-  const handleDownloadCertificate = () => {
+  const handleDownloadCertificate = (investmentId?: number) => {
     if (!certificateRef.current) return;
 
+    const selectedInvestmentLocal = investments.find(inv => inv.id === (investmentId ?? showCertificate));
+
     const opt = {
-      margin: 10,
-      filename: `share_certificate_${selectedInvestment?.certificateId || 'certificate'}.pdf`,
+      margin: 12,
+      filename: `share_certificate_${selectedInvestmentLocal?.certificateId || 'certificate'}.pdf`,
       image: { type: 'jpeg', quality: 0.98 },
       html2canvas: {
         scale: 2,
@@ -81,17 +81,9 @@ const UserMyInvestments = () => {
       pagebreak: { mode: 'avoid-all' }
     };
 
-    const watermarkDiv = document.createElement('div');
-    watermarkDiv.className = 'absolute inset-0 z-0 pointer-events-none opacity-10 flex items-center justify-center';
-    watermarkDiv.innerHTML = '<img src="/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png" alt="Watermark" style="width: 40%; max-width: 200px; transform: rotate(-30deg);" />';
-    certificateRef.current.appendChild(watermarkDiv);
-
-    html2pdf().from(certificateRef.current).set(opt).save()
-      .then(() => {
-        certificateRef.current?.removeChild(watermarkDiv);
-        toast.success("Share certificate downloaded successfully");
-        setShowCertificate(null);
-      });
+    html2pdf().from(certificateRef.current).set(opt).save().then(() => {
+      toast.success("Share certificate downloaded successfully");
+    });
   };
 
   const selectedInvestment = investments.find(inv => inv.id === showCertificate);
@@ -108,7 +100,6 @@ const UserMyInvestments = () => {
             Client Number: <span className="font-medium">{clientNumber}</span>
           </div>
         </div>
-
         <p className="text-muted-foreground">
           View and manage your active investments. Access your share certificates and financial statements.
         </p>
@@ -191,98 +182,76 @@ const UserMyInvestments = () => {
             </DialogHeader>
 
             {selectedInvestment && (
-              <>
-                <div 
-                  ref={certificateRef}
-                  className="relative border-4 border-gray-300 p-6 rounded-md bg-white"
-                  style={{
-                    backgroundImage: "url('/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png')",
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "top right",
-                    backgroundSize: "100px",
-                    opacity: 1
-                  }}
-                >
-                  <div className="flex justify-center mb-4">
-                    <img 
-                      src="/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png" 
-                      alt="Firm Logo" 
-                      className="h-16 w-auto object-contain"
-                    />
+              <div 
+                ref={certificateRef}
+                className="relative border-4 border-gray-300 p-8 rounded-md bg-white text-black shadow-lg"
+                style={{
+                  background: "white",
+                  opacity: 1,
+                  maxWidth: 700,
+                  margin: "0 auto"
+                }}
+              >
+                <div className="text-center space-y-4">
+                  <div className="border-b-2 border-navyblue pb-2 mb-2">
+                    <h3 className="text-lg font-bold uppercase text-navyblue">Republic of South Africa</h3>
+                    <p className="text-xs text-muted-foreground">
+                      Companies Act, 2008 (Act 71 of 2008)
+                    </p>
                   </div>
 
-                  <div className="text-center space-y-4">
-                    <div className="border-b-2 border-navyblue pb-2">
-                      <h3 className="text-lg font-bold uppercase text-navyblue">Republic of South Africa</h3>
-                      <p className="text-xs text-muted-foreground">Companies Act, 2008 (Act 71 of 2008)</p>
+                  <h3 className="text-xl font-bold uppercase text-navyblue">Certificate of Share Ownership</h3>
+
+                  <div className="space-y-1">
+                    <p className="font-semibold text-lg">{selectedInvestment.companyName}</p>
+                    <p className="text-sm">Registration Number: {selectedInvestment.registrationNumber}</p>
+                    <p className="text-xs text-muted-foreground">
+                      Share certificate issued in terms of section 51(1)(a) of the Companies Act, 2008
+                    </p>
+                  </div>
+
+                  <div className="my-6 border-t border-b border-gray-300 py-4 space-y-1">
+                    <p>This is to certify that</p>
+                    <p className="font-bold text-lg my-1">
+                      {userName} {userSurname}
+                    </p>
+                    <div className="border border-gray-200 bg-gray-50 px-4 py-2 rounded-md mb-2">
+                      <p className="font-medium text-navyblue text-sm mb-0">Address:</p>
+                      <p className="text-sm">{clientAddress}</p>
                     </div>
-
-                    <h3 className="text-xl font-bold uppercase text-navyblue pt-2">Certificate of Share Ownership</h3>
-
-                    <div className="space-y-1">
-                      <p className="font-semibold text-lg">{selectedInvestment.companyName}</p>
-                      <p className="text-sm">Registration Number: {selectedInvestment.registrationNumber}</p>
-                      <p className="text-sm text-muted-foreground">
-                        Share certificate issued in terms of section 51(1)(a) of the Companies Act, 2008
-                      </p>
+                    <div className="mb-2 text-sm">
+                      Client Number: {clientNumber} &nbsp;|&nbsp; ID Number: {clientIdNumber}
                     </div>
+                    <p className="my-2">is the registered holder of</p>
+                    <p className="font-bold text-xl my-2">
+                      {selectedInvestment.shares} Ordinary Shares (Profit Participation Rights)
+                    </p>
+                    <p className="text-sm mb-1">with a nominal value of R{selectedInvestment.sharePrice} each, fully paid</p>
+                    <p className="mt-2">
+                      in the above-named Company, subject to the Memorandum and Articles of Association of the Company.<br/>
+                      <span className="font-medium text-navyblue">These shares confer profit participation rights.</span>
+                    </p>
+                  </div>
 
-                    <div className="my-6 border-t border-b border-gray-300 py-4">
-                      <p>This is to certify that</p>
-                      <p className="font-bold text-lg my-2">
-                        {userName} {userSurname}
-                      </p>
-                      
-                      <div className="border border-gray-200 bg-gray-50 p-3 my-3 rounded-md">
-                        <p className="font-medium text-navyblue">Client Address:</p> 
-                        <p className="font-normal">{clientAddress}</p>
-                      </div>
-                      
-                      <p className="mt-2">
-                        Client Number: {clientNumber} | ID Number: {clientIdNumber}
-                      </p>
-                      
-                      <p className="my-2">is the registered holder of</p>
-                      <p className="font-bold text-xl my-2">
-                        {selectedInvestment.shares} Ordinary Shares (Profit Participation Rights)
-                      </p>
-                      <p className="text-sm">with a nominal value of R{selectedInvestment.sharePrice} each, fully paid</p>
-                      <p className="mt-2">
-                        in the above-named Company, subject to the Memorandum and Articles of Association of the Company.<br/>
-                        <span className="font-medium text-navyblue">These shares confer profit participation rights.</span>
-                      </p>
+                  <div className="flex justify-between text-sm mb-6">
+                    <div>
+                      Issue Date: {new Date(selectedInvestment.purchaseDate).toLocaleDateString()}
                     </div>
-
-                    <div className="text-sm">
-                      <div className="flex justify-between">
-                        <p>Issue Date: {new Date(selectedInvestment.purchaseDate).toLocaleDateString()}</p>
-                        <p>Certificate No: {selectedInvestment.certificateId}</p>
-                      </div>
+                    <div>
+                      Certificate No: {selectedInvestment.certificateId}
                     </div>
+                  </div>
 
-                    <div className="mt-6 pt-6 border-t border-gray-300 relative">
-                      <div className="flex flex-col items-center">
-                        <div className="relative" style={{ userSelect: 'none' }}>
-                          <img 
-                            src="/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png" 
-                            alt="Signature Background" 
-                            className="absolute top-0 left-0 w-full h-full opacity-10 object-cover z-0"
-                            style={{ pointerEvents: 'none' }}
-                          />
-                          <p className="font-semibold relative z-10">Luthando Maduna CA(SA)</p>
-                          <p className="text-sm italic relative z-10">Director</p>
-                        </div>
-                      </div>
-                      <div className="text-xs text-center mt-4 text-muted-foreground">
-                        <div className="flex items-center justify-center gap-2">
-                          <Shield size={12} />
-                          <span>Document secured with digital signature • Generated on {timestamp}</span>
-                        </div>
-                      </div>
+                  <div className="text-center pt-8 border-t border-gray-300">
+                    <p className="font-semibold mt-8">Luthando Maduna CA(SA)</p>
+                    <p className="text-sm italic text-navyblue">Company Director</p>
+                    <div className="text-xs text-center mt-4 text-muted-foreground flex items-center justify-center gap-2">
+                      <Shield size={12} />
+                      <span>Document secured with digital signature • Generated on {timestamp}</span>
                     </div>
                   </div>
                 </div>
-              </>
+              </div>
             )}
           </DialogContent>
         </Dialog>
