@@ -11,6 +11,8 @@ import FundAccordion from "@/components/FundAccordion";
 import FundOpportunities, { Opportunity } from "@/components/user/FundOpportunities";
 import { Link } from "react-router-dom";
 import { useNotifications } from "@/hooks/useNotifications";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { supabase } from "@/lib/supabase";
 
 const FUNDS = [
   {
@@ -140,6 +142,34 @@ const UserProfile = () => {
   const [activeFundTab, setActiveFundTab] = useState(FUNDS[0].name);
   const [userInvestments, setUserInvestments] = useState<Opportunity[]>([]);
   const { notifyProfileUpdate } = useNotifications();
+  const { user } = useAuthState();
+
+  useEffect(() => {
+    const loadUserProfile = async () => {
+      if (user) {
+        try {
+          const { data: profile, error } = await supabase
+            .from('clients')
+            .select('*')
+            .eq('id', user.id)
+            .single();
+
+          if (error && error.code !== 'PGRST116') throw error;
+
+          if (profile) {
+            setUserData({
+              ...userData,
+              ...profile
+            });
+          }
+        } catch (error) {
+          console.error('Error loading profile:', error);
+        }
+      }
+    };
+
+    loadUserProfile();
+  }, [user]);
 
   const handleProfileUpdate = async (e: React.FormEvent) => {
     e.preventDefault();

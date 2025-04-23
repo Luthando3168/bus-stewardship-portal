@@ -8,21 +8,41 @@ import DashboardSummaryCard from "@/components/user/dashboard/DashboardSummaryCa
 import InvestmentOpportunities from "@/components/user/dashboard/InvestmentOpportunities";
 import InvestmentsTable from "@/components/user/dashboard/InvestmentsTable";
 import PendingDealsTable from "@/components/user/dashboard/PendingDealsTable";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuthState } from "@/hooks/useAuthState";
 
 const UserDashboard = () => {
+  const { user } = useAuthState();
   const [userName, setUserName] = useState("");
   const [userSurname, setUserSurname] = useState("");
   const [clientNumber, setClientNumber] = useState("");
 
   useEffect(() => {
-    const storedName = localStorage.getItem("userName") || "";
-    const storedSurname = localStorage.getItem("userSurname") || "";
-    setUserName(storedName);
-    setUserSurname(storedSurname);
+    const loadUserProfile = async () => {
+      if (user) {
+        try {
+          const { data: profile, error } = await supabase
+            .from('profiles')
+            .select('full_name, client_number')
+            .eq('id', user.id)
+            .single();
 
-    const storedClientNumber = localStorage.getItem("clientNumber") || "N/A";
-    setClientNumber(storedClientNumber);
-  }, []);
+          if (error) throw error;
+
+          if (profile) {
+            const nameParts = profile.full_name.split(' ');
+            setUserName(nameParts[0] || '');
+            setUserSurname(nameParts.slice(1).join(' ') || '');
+            setClientNumber(profile.client_number || 'Pending');
+          }
+        } catch (error) {
+          console.error('Error loading profile:', error);
+        }
+      }
+    };
+
+    loadUserProfile();
+  }, [user]);
 
   return (
     <UserLayout>
@@ -46,19 +66,19 @@ const UserDashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <DashboardSummaryCard
             title="Wallet Balance"
-            value="R 245,000.00"
+            value="R 0.00"
             description="Available in your Standard Bank account"
             icon={Wallet}
           />
           <DashboardSummaryCard
             title="Active Investments"
-            value="3"
-            description="Across 2 impact funds"
+            value="0"
+            description="Start investing today"
             icon={FileText}
           />
           <DashboardSummaryCard
             title="Total Returns"
-            value="8.7%"
+            value="0.0%"
             description="Year-to-date performance"
             icon={ChartPie}
           />
