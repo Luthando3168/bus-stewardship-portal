@@ -51,23 +51,23 @@ const ConsultationBookingDialog = () => {
           Book Consultation
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[525px]">
+      <DialogContent className="sm:max-w-[525px] font-montserrat">
         <DialogHeader>
           <div className="flex flex-col items-center gap-4">
             <img 
-              src="/public/lovable-uploads/c21dd704-6d94-4ce9-8e09-1d26da6a0503.png" 
+              src="/lovable-uploads/c21dd704-6d94-4ce9-8e09-1d26da6a0503.png" 
               alt="Luthando Maduna Chartered Accountants" 
               className="h-16 object-contain"
             />
-            <DialogTitle>Schedule a Consultation</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="text-2xl font-bold tracking-tight">Schedule a Consultation</DialogTitle>
+            <DialogDescription className="text-center text-gray-600">
               Book a consultation with our experts. You'll receive a Google Calendar invite with Google Meet link.
             </DialogDescription>
           </div>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid gap-2">
-            <Label htmlFor="date">Date</Label>
+            <Label htmlFor="date" className="font-semibold">Date</Label>
             <Calendar
               mode="single"
               selected={date}
@@ -77,51 +77,56 @@ const ConsultationBookingDialog = () => {
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="time">Time</Label>
+            <Label htmlFor="time" className="font-semibold">Time</Label>
             <Input
               id="time"
               type="time"
               value={time}
               onChange={(e) => setTime(e.target.value)}
+              className="font-medium"
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="clientName">Your Name *</Label>
+            <Label htmlFor="clientName" className="font-semibold">Your Name *</Label>
             <Input
               id="clientName"
               value={clientName}
               onChange={(e) => setClientName(e.target.value)}
               placeholder="Enter your name"
+              className="font-medium"
               required
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="clientEmail">Email Address *</Label>
+            <Label htmlFor="clientEmail" className="font-semibold">Email Address *</Label>
             <Input
               id="clientEmail"
               type="email"
               value={clientEmail}
               onChange={(e) => setClientEmail(e.target.value)}
               placeholder="Enter your email"
+              className="font-medium"
               required
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="clientPhone">Phone Number</Label>
+            <Label htmlFor="clientPhone" className="font-semibold">Phone Number</Label>
             <Input
               id="clientPhone"
               value={clientPhone}
               onChange={(e) => setClientPhone(e.target.value)}
               placeholder="Enter your phone number"
+              className="font-medium"
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="topic">Consultation Topic *</Label>
+            <Label htmlFor="topic" className="font-semibold">Consultation Topic *</Label>
             <Input
               id="topic"
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
               placeholder="What would you like to discuss?"
+              className="font-medium"
               required
             />
           </div>
@@ -130,7 +135,7 @@ const ConsultationBookingDialog = () => {
           <CalendarIcon className="mr-2 h-4 w-4" />
           Schedule Consultation
         </Button>
-        <p className="text-sm text-muted-foreground text-center mt-2">
+        <p className="text-sm text-muted-foreground text-center mt-2 font-medium">
           You will receive an email with the Google Calendar invitation and Google Meet link
         </p>
       </DialogContent>
