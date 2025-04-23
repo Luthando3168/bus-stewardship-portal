@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import AdminLayout from "@/components/layout/AdminLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -33,8 +32,18 @@ const AdminDashboard = () => {
         // ... additional investors would be fetched from actual data
       ]
     },
-    // ... keep existing code
+    // ... keep existing code (additional businesses)
   ];
+  
+  // Calculate total NAV
+  const totalNAV = useMemo(() => {
+    return businesses.reduce((sum, business) => sum + business.nav, 0);
+  }, [businesses]);
+  
+  // Format NAV to millions with one decimal place
+  const formatNAVInMillions = (nav: number) => {
+    return `R ${(nav / 1000000).toFixed(1)}M`;
+  };
 
   // Function to export investors list in PDF or Excel format
   const exportInvestorsList = (format: 'pdf' | 'excel') => {
@@ -156,7 +165,7 @@ const AdminDashboard = () => {
               <DollarSign className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">R 14.2M</div>
+              <div className="text-2xl font-bold">{formatNAVInMillions(totalNAV)}</div>
               <p className="text-xs text-muted-foreground">
                 +5.2% from last month
               </p>
@@ -194,7 +203,7 @@ const AdminDashboard = () => {
                           >
                             <div>{business.name}</div>
                             <div>{business.fund}</div>
-                            <div>R {(business.nav / 1000000).toFixed(1)}M</div>
+                            <div>{formatNAVInMillions(business.nav)}</div>
                             <div>{business.investors}</div>
                             <div className="text-green-600">{business.status}</div>
                           </div>
