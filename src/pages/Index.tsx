@@ -8,7 +8,7 @@ import Layout from "@/components/layout/Layout";
 const Index = () => {
   return (
     <Layout>
-      <div className="bg-white py-16"></div> {/* Blank spacer */}
+      <Hero />
       <ServicesSection />
       <BusSection />
       <ImpactFundsSection />
