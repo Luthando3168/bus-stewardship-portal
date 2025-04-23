@@ -6,7 +6,6 @@ import { Wallet, FileText, ChartPie } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
-// Extended impact funds for the dashboard (up to mytelco)
 const impactFunds = [
   {
     id: "myfarm",
@@ -52,14 +51,14 @@ const impactFunds = [
   },
   {
     id: "mytech",
-    name: "MyTech",
+    name: "MyTelecoms",
     color: "bg-gradient-to-br from-purple-600 to-violet-900",
     minInvestment: "R 4,000",
     count: 2,
   },
   {
     id: "myeducation",
-    name: "MyEducation",
+    name: "MySchool",
     color: "bg-gradient-to-br from-indigo-700 to-indigo-900",
     minInvestment: "R 1,500",
     count: 2,
@@ -80,7 +79,6 @@ const UserDashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Get user details from localStorage
     const storedName = localStorage.getItem("userName") || "";
     const storedSurname = localStorage.getItem("userSurname") || "";
     setUserName(storedName);
@@ -90,7 +88,6 @@ const UserDashboard = () => {
     setClientNumber(storedClientNumber);
   }, []);
 
-  // Handle click on the fund card
   const handleFundClick = (fundId: string) => {
     navigate(`/user/new-deals?fund=${fundId}`);
   };
@@ -281,5 +278,3 @@ const UserDashboard = () => {
 };
 
 export default UserDashboard;
-
-// IMPORTANT: This file is now quite long (over 220 lines). Please consider asking me to refactor it into smaller focused files for easier maintenance.

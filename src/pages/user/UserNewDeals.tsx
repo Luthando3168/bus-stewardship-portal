@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import UserLayout from "@/components/layout/UserLayout";
 import { Button } from "@/components/ui/button";
@@ -261,14 +262,14 @@ const impactFunds = [
   },
   {
     id: "mytech",
-    name: "MyTech Impact Fund",
+    name: "MyTelecoms", // Changed from "MyTech"
     return: "16% p.a.",
     minInvestment: 4000,
     businesses: []
   },
   {
     id: "myeducation",
-    name: "MyEducation Impact Fund",
+    name: "MySchool", // Changed from "MyEducation"
     return: "10% p.a.",
     minInvestment: 1500,
     businesses: []
