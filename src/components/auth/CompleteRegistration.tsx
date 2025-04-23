@@ -70,8 +70,8 @@ const CompleteRegistration = () => {
         if (!error && client) {
           // Populate form with existing data
           form.reset({
-            fullName: client.full_name || user.user_metadata?.full_name || "",
-            email: client.email || user.email || "",
+            fullName: user.user_metadata?.full_name || "",
+            email: user.email || "",
             phone: client.phone || "",
             dob: client.dob || "",
             idNumber: client.id_number || "",
@@ -92,7 +92,7 @@ const CompleteRegistration = () => {
           });
 
           // If they've already submitted personal info, go to documents step
-          if (client.status === 'pending_documents') {
+          if (client.status === 'verification_pending') {
             setStep("DOCUMENTS");
           }
         }
@@ -128,9 +128,10 @@ const CompleteRegistration = () => {
         .update({
           ...data,
           pep: data.pep === "yes",
-          status: 'pending_documents',
+          status: 'verification_pending',
           full_name: data.fullName,
-          email: data.email
+          email: data.email,
+          phone: data.phone
         })
         .eq('id', userData.id);
 

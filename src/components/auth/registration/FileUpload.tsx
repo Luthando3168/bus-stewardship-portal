@@ -6,7 +6,7 @@ import { FileItem } from "./index";
 import { toast } from "sonner";
 
 interface FileUploadProps {
-  onFileUploaded: (fileItem: FileItem) => void;
+  onFileUploaded: (file: File) => Promise<void>;
   isUploading?: boolean;
 }
 
@@ -19,24 +19,7 @@ const FileUpload = ({ onFileUploaded, isUploading }: FileUploadProps) => {
       if (!file) return;
 
       setUploading(true);
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error("No user found");
-
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${user.id}/${Date.now()}.${fileExt}`;
-
-      const { error: uploadError } = await supabase.storage
-        .from('fica-documents')
-        .upload(fileName, file);
-
-      if (uploadError) throw uploadError;
-
-      onFileUploaded({
-        name: file.name,
-        path: fileName
-      });
-
-      toast.success("Document uploaded successfully");
+      await onFileUploaded(file);
     } catch (error: any) {
       console.error("Error uploading document:", error);
       toast.error(error.message || "Error uploading document");

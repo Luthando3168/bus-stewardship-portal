@@ -47,7 +47,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
         // Check if client record exists
         const { data: client, error } = await supabase
           .from('clients')
-          .select('status, full_name')
+          .select('status')
           .eq('id', user.id)
           .single();
 
@@ -56,12 +56,13 @@ const UserLayout = ({ children }: UserLayoutProps) => {
           
           // If no client record, create one with pending_registration status
           if (error.code === 'PGRST116') {
+            const fullName = user.user_metadata?.full_name || 'New User';
             const { error: insertError } = await supabase
               .from('clients')
               .insert([{ 
                 id: user.id, 
                 status: 'pending_registration',
-                full_name: user.user_metadata?.full_name || 'New User'
+                full_name: fullName
               }]);
             
             if (insertError) {
@@ -69,6 +70,11 @@ const UserLayout = ({ children }: UserLayoutProps) => {
             }
             
             setRegistrationStatus('pending_registration');
+            
+            // Store the full name in localStorage
+            localStorage.setItem("userName", fullName.split(' ')[0] || "");
+            localStorage.setItem("userSurname", fullName.split(' ').slice(1).join(' ') || "");
+            
             toast.info("Please complete your registration");
             navigate('/complete-registration');
             return;
@@ -77,12 +83,25 @@ const UserLayout = ({ children }: UserLayoutProps) => {
           }
         }
 
+        // Client record exists
         setRegistrationStatus(client?.status || 'pending_registration');
         
+        // Get user profile data for name
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('full_name')
+          .eq('id', user.id)
+          .single();
+          
         // Store the full name in localStorage if available
-        if (client?.full_name) {
-          localStorage.setItem("userName", client.full_name.split(' ')[0] || "");
-          localStorage.setItem("userSurname", client.full_name.split(' ').slice(1).join(' ') || "");
+        if (profile?.full_name) {
+          const fullName = profile.full_name;
+          localStorage.setItem("userName", fullName.split(' ')[0] || "");
+          localStorage.setItem("userSurname", fullName.split(' ').slice(1).join(' ') || "");
+        } else if (user.user_metadata?.full_name) {
+          const fullName = user.user_metadata.full_name;
+          localStorage.setItem("userName", fullName.split(' ')[0] || "");
+          localStorage.setItem("userSurname", fullName.split(' ').slice(1).join(' ') || "");
         }
 
         // Force redirect to complete registration if status is pending
