@@ -6,7 +6,13 @@ import ClientEmailPreview from "@/components/email/ClientEmailPreview";
 import { RegistrationConfirmEmail } from "@/components/email/RegistrationConfirmEmail";
 import { ShareCertificateEmail } from "@/components/email/ShareCertificateEmail";
 import { DealApprovalEmail } from "@/components/email/DealApprovalEmail";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const EmailPreview = () => {
   const demoProps = {
@@ -25,54 +31,67 @@ const EmailPreview = () => {
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-2xl font-bold mb-6">Email Templates Preview</h1>
         
-        <Tabs defaultValue="welcome" className="w-full">
-          <TabsList className="grid w-full grid-cols-5 mb-8">
-            <TabsTrigger value="welcome">Welcome Email</TabsTrigger>
-            <TabsTrigger value="registration">Registration</TabsTrigger>
-            <TabsTrigger value="deal-approval">Deal Approval</TabsTrigger>
-            <TabsTrigger value="share-certificate">Share Certificate</TabsTrigger>
-            <TabsTrigger value="client">Client Update</TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="welcome">
-            <WelcomeEmailPreview />
-          </TabsContent>
-          
-          <TabsContent value="registration">
-            <div className="bg-white rounded-lg shadow-lg">
-              <RegistrationConfirmEmail
-                fullName={demoProps.fullName}
-                confirmationLink={demoProps.confirmationLink}
-              />
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="deal-approval">
-            <div className="bg-white rounded-lg shadow-lg">
-              <DealApprovalEmail
-                fullName={demoProps.fullName}
-                dealName={demoProps.dealName}
-                investmentAmount={demoProps.investmentAmount}
-                approvalLink={demoProps.approvalLink}
-              />
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="share-certificate">
-            <div className="bg-white rounded-lg shadow-lg">
-              <ShareCertificateEmail
-                fullName={demoProps.fullName}
-                dealName={demoProps.dealName}
-                certificateNumber={demoProps.certificateNumber}
-                viewLink={demoProps.viewLink}
-              />
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="client">
-            <ClientEmailPreview />
-          </TabsContent>
-        </Tabs>
+        <div className="relative">
+          <Carousel className="w-full max-w-4xl mx-auto">
+            <CarouselContent>
+              <CarouselItem>
+                <div className="p-2">
+                  <h2 className="text-lg font-semibold mb-4">Welcome Email</h2>
+                  <WelcomeEmailPreview />
+                </div>
+              </CarouselItem>
+              
+              <CarouselItem>
+                <div className="p-2">
+                  <h2 className="text-lg font-semibold mb-4">Registration Confirmation</h2>
+                  <div className="bg-white rounded-lg shadow-lg">
+                    <RegistrationConfirmEmail
+                      fullName={demoProps.fullName}
+                      confirmationLink={demoProps.confirmationLink}
+                    />
+                  </div>
+                </div>
+              </CarouselItem>
+              
+              <CarouselItem>
+                <div className="p-2">
+                  <h2 className="text-lg font-semibold mb-4">Deal Approval</h2>
+                  <div className="bg-white rounded-lg shadow-lg">
+                    <DealApprovalEmail
+                      fullName={demoProps.fullName}
+                      dealName={demoProps.dealName}
+                      investmentAmount={demoProps.investmentAmount}
+                      approvalLink={demoProps.approvalLink}
+                    />
+                  </div>
+                </div>
+              </CarouselItem>
+              
+              <CarouselItem>
+                <div className="p-2">
+                  <h2 className="text-lg font-semibold mb-4">Share Certificate</h2>
+                  <div className="bg-white rounded-lg shadow-lg">
+                    <ShareCertificateEmail
+                      fullName={demoProps.fullName}
+                      dealName={demoProps.dealName}
+                      certificateNumber={demoProps.certificateNumber}
+                      viewLink={demoProps.viewLink}
+                    />
+                  </div>
+                </div>
+              </CarouselItem>
+              
+              <CarouselItem>
+                <div className="p-2">
+                  <h2 className="text-lg font-semibold mb-4">Client Update</h2>
+                  <ClientEmailPreview />
+                </div>
+              </CarouselItem>
+            </CarouselContent>
+            <CarouselPrevious className="left-0" />
+            <CarouselNext className="right-0" />
+          </Carousel>
+        </div>
       </div>
     </Layout>
   );
