@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter }
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { FileText, Shield, Download } from "lucide-react";
+import { FileText, Printer } from "lucide-react"; // Only allowed icons used here
 import { toast } from "sonner";
 import html2pdf from 'html2pdf.js';
 
@@ -38,9 +38,109 @@ const investments = [
   }
 ];
 
+// Certificate body as its own component (no icons/logos, address after client name)
+const CertificateContent = React.forwardRef(
+  (
+    {
+      investment,
+      clientNumber,
+      clientIdNumber,
+      userName,
+      userSurname,
+      clientAddress,
+      timestamp
+    }: {
+      investment: typeof investments[0];
+      clientNumber: string;
+      clientIdNumber: string;
+      userName: string;
+      userSurname: string;
+      clientAddress: string;
+      timestamp: string;
+    },
+    ref: React.Ref<HTMLDivElement>
+  ) => (
+    <div
+      ref={ref}
+      className="relative border-4 border-gray-300 p-8 rounded-md bg-white text-black shadow-lg"
+      style={{
+        background: "white",
+        opacity: 1,
+        maxWidth: 700,
+        margin: "0 auto"
+      }}
+    >
+      <div className="text-center space-y-4">
+        <div className="border-b-2 border-navyblue pb-2 mb-2">
+          <h3 className="text-lg font-bold uppercase text-navyblue">Republic of South Africa</h3>
+          <p className="text-xs text-muted-foreground">
+            Companies Act, 2008 (Act 71 of 2008)
+          </p>
+        </div>
+
+        <h3 className="text-xl font-bold uppercase text-navyblue">Certificate of Share Ownership</h3>
+
+        <div className="space-y-1">
+          <p className="font-semibold text-lg">{investment.companyName}</p>
+          <p className="text-sm">Registration Number: {investment.registrationNumber}</p>
+          <p className="text-xs text-muted-foreground">
+            Share certificate issued in terms of section 51(1)(a) of the Companies Act, 2008
+          </p>
+        </div>
+
+        <div className="my-6 border-t border-b border-gray-300 py-4 space-y-1">
+          <p>This is to certify that</p>
+          <p className="font-bold text-lg my-1">
+            {userName} {userSurname}
+          </p>
+          {/* Address appears right after client name */}
+          <div className="border border-gray-200 bg-gray-50 px-4 py-2 rounded-md mb-2">
+            <p className="font-medium text-navyblue text-sm mb-0">Address:</p>
+            <p className="text-sm">{clientAddress}</p>
+          </div>
+          <div className="mb-2 text-sm">
+            Client Number: {clientNumber} &nbsp;|&nbsp; ID Number: {clientIdNumber}
+          </div>
+          <p className="my-2">is the registered holder of</p>
+          <p className="font-bold text-xl my-2">
+            {investment.shares} Ordinary Shares (Profit Participation Rights)
+          </p>
+          <p className="text-sm mb-1">with a nominal value of R{investment.sharePrice} each, fully paid</p>
+          <p className="mt-2">
+            in the above-named Company, subject to the Memorandum and Articles of Association of the Company.<br/>
+            <span className="font-medium text-navyblue">These shares confer profit participation rights.</span>
+          </p>
+        </div>
+
+        <div className="flex justify-between text-sm mb-6">
+          <div>
+            Issue Date: {new Date(investment.purchaseDate).toLocaleDateString()}
+          </div>
+          <div>
+            Certificate No: {investment.certificateId}
+          </div>
+        </div>
+
+        <div className="text-center pt-8 border-t border-gray-300">
+          <p className="font-semibold mt-8">Luthando Maduna CA(SA)</p>
+          <p className="text-sm italic text-navyblue">Company Director</p>
+          <div className="text-xs text-center mt-4 text-muted-foreground">
+            <span>
+              Generated on {timestamp}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+);
+
+CertificateContent.displayName = "CertificateContent";
+
 const UserMyInvestments = () => {
   const [showCertificate, setShowCertificate] = React.useState<number | null>(null);
   const certificateRef = useRef<HTMLDivElement>(null);
+  const printAllRef = useRef<HTMLDivElement>(null);
 
   const clientNumber = localStorage.getItem("clientNumber") || "N/A";
   const clientIdNumber = localStorage.getItem("clientId") || "N/A";
@@ -52,6 +152,7 @@ const UserMyInvestments = () => {
     toast.success("Financial statement is being downloaded");
   };
 
+  // Download as PDF (single certificate)
   const handleViewShareCertificate = (investmentId: number) => {
     setShowCertificate(investmentId);
     setTimeout(() => {
@@ -87,6 +188,44 @@ const UserMyInvestments = () => {
     });
   };
 
+  // Print all certificates
+  const [showPrintAll, setShowPrintAll] = React.useState(false);
+
+  const handlePrintAllCertificates = () => {
+    setShowPrintAll(true);
+    setTimeout(() => {
+      if (printAllRef.current) {
+        const printContents = printAllRef.current.innerHTML;
+        const printWindow = window.open('', '_blank', 'width=900,height=1200');
+        if (printWindow) {
+          printWindow.document.write(`
+            <html>
+                <head>
+                    <title>All Share Certificates</title>
+                    <style>
+                        body { font-family: Inter, Arial, sans-serif; background: #fff; color: #222; }
+                        .certificate-content { page-break-after: always; border: 2px solid #d1d5db; padding: 40px; max-width: 700px; margin: 0 auto 40px; border-radius: 8px; }
+                        h3, .font-bold { color: #172554 !important; }
+                        .text-navyblue { color: #172554 !important; }
+                        .border-gray-300 { border-color: #d1d5db !important; }
+                        .border-navyblue { border-color: #172554 !important; }
+                    </style>
+                </head>
+                <body>${printContents}</body>
+            </html>
+          `);
+          printWindow.document.close();
+          printWindow.focus();
+          setTimeout(() => {
+            printWindow.print();
+            printWindow.close();
+            setShowPrintAll(false);
+          }, 500);
+        }
+      }
+    }, 500);
+  };
+
   const selectedInvestment = investments.find(inv => inv.id === showCertificate);
 
   const now = new Date();
@@ -100,6 +239,17 @@ const UserMyInvestments = () => {
           <div className="text-sm text-muted-foreground">
             Client Number: <span className="font-medium">{clientNumber}</span>
           </div>
+        </div>
+        <div className="flex gap-4">
+          <Button
+            variant="outline"
+            size="sm"
+            className="flex items-center gap-1"
+            onClick={handlePrintAllCertificates}
+          >
+            <Printer size={16} />
+            Print All Share Certificates
+          </Button>
         </div>
         <p className="text-muted-foreground">
           View and manage your active investments. Access your share certificates and financial statements.
@@ -161,7 +311,7 @@ const UserMyInvestments = () => {
                     className="flex gap-1"
                     onClick={() => handleDownloadStatement(investment.id)}
                   >
-                    <Download size={16} />
+                    {/* No Download icon (not allowed), just text */}
                     Financial Statement
                   </Button>
                 </CardFooter>
@@ -170,11 +320,31 @@ const UserMyInvestments = () => {
           </div>
         )}
 
+        {/* The Printable Certificates section, rendered only when showPrintAll is true */}
+        {showPrintAll && (
+          <div style={{ position: 'fixed', left: -9999, top: 0 }}>
+            <div ref={printAllRef}>
+              {investments.map((investment) => (
+                <div style={{ marginBottom: 40 }} className="certificate-content" key={investment.id}>
+                  <CertificateContent
+                    investment={investment}
+                    clientNumber={clientNumber}
+                    clientIdNumber={clientIdNumber}
+                    userName={userName}
+                    userSurname={userSurname}
+                    clientAddress={clientAddress}
+                    timestamp={timestamp}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         <Dialog open={showCertificate !== null} onOpenChange={() => setShowCertificate(null)}>
           <DialogContent className="max-w-2xl">
             <DialogHeader>
               <DialogTitle className="flex items-center gap-2">
-                <Shield size={16} /> 
                 Share Certificate
                 <span className="ml-auto text-xs text-muted-foreground">
                   Certificate ID: {selectedInvestment?.certificateId}
@@ -183,76 +353,16 @@ const UserMyInvestments = () => {
             </DialogHeader>
 
             {selectedInvestment && (
-              <div 
+              <CertificateContent
                 ref={certificateRef}
-                className="relative border-4 border-gray-300 p-8 rounded-md bg-white text-black shadow-lg"
-                style={{
-                  background: "white",
-                  opacity: 1,
-                  maxWidth: 700,
-                  margin: "0 auto"
-                }}
-              >
-                <div className="text-center space-y-4">
-                  <div className="border-b-2 border-navyblue pb-2 mb-2">
-                    <h3 className="text-lg font-bold uppercase text-navyblue">Republic of South Africa</h3>
-                    <p className="text-xs text-muted-foreground">
-                      Companies Act, 2008 (Act 71 of 2008)
-                    </p>
-                  </div>
-
-                  <h3 className="text-xl font-bold uppercase text-navyblue">Certificate of Share Ownership</h3>
-
-                  <div className="space-y-1">
-                    <p className="font-semibold text-lg">{selectedInvestment.companyName}</p>
-                    <p className="text-sm">Registration Number: {selectedInvestment.registrationNumber}</p>
-                    <p className="text-xs text-muted-foreground">
-                      Share certificate issued in terms of section 51(1)(a) of the Companies Act, 2008
-                    </p>
-                  </div>
-
-                  <div className="my-6 border-t border-b border-gray-300 py-4 space-y-1">
-                    <p>This is to certify that</p>
-                    <p className="font-bold text-lg my-1">
-                      {userName} {userSurname}
-                    </p>
-                    <div className="border border-gray-200 bg-gray-50 px-4 py-2 rounded-md mb-2">
-                      <p className="font-medium text-navyblue text-sm mb-0">Address:</p>
-                      <p className="text-sm">{clientAddress}</p>
-                    </div>
-                    <div className="mb-2 text-sm">
-                      Client Number: {clientNumber} &nbsp;|&nbsp; ID Number: {clientIdNumber}
-                    </div>
-                    <p className="my-2">is the registered holder of</p>
-                    <p className="font-bold text-xl my-2">
-                      {selectedInvestment.shares} Ordinary Shares (Profit Participation Rights)
-                    </p>
-                    <p className="text-sm mb-1">with a nominal value of R{selectedInvestment.sharePrice} each, fully paid</p>
-                    <p className="mt-2">
-                      in the above-named Company, subject to the Memorandum and Articles of Association of the Company.<br/>
-                      <span className="font-medium text-navyblue">These shares confer profit participation rights.</span>
-                    </p>
-                  </div>
-
-                  <div className="flex justify-between text-sm mb-6">
-                    <div>
-                      Issue Date: {new Date(selectedInvestment.purchaseDate).toLocaleDateString()}
-                    </div>
-                    <div>
-                      Certificate No: {selectedInvestment.certificateId}
-                    </div>
-                  </div>
-
-                  <div className="text-center pt-8 border-t border-gray-300">
-                    <p className="font-semibold mt-8">Luthando Maduna CA(SA)</p>
-                    <p className="text-sm italic text-navyblue">Company Director</p>
-                    <div className="text-xs text-center mt-4 text-muted-foreground flex items-center justify-center gap-2">
-                      <Shield size={12} />
-                      <span>Document secured with digital signature • Generated on {timestamp}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                investment={selectedInvestment}
+                clientNumber={clientNumber}
+                clientIdNumber={clientIdNumber}
+                userName={userName}
+                userSurname={userSurname}
+                clientAddress={clientAddress}
+                timestamp={timestamp}
+              />
             )}
           </DialogContent>
         </Dialog>
@@ -262,3 +372,4 @@ const UserMyInvestments = () => {
 };
 
 export default UserMyInvestments;
+
