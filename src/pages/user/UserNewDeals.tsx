@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import UserLayout from "@/components/layout/UserLayout";
 import { Button } from "@/components/ui/button";
@@ -226,8 +225,8 @@ const UserNewDeals = () => {
         {/* Header with wallet and cart */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <h2 className="text-2xl font-bold text-navyblue">Investment Opportunities</h2>
-            <p className="text-muted-foreground">Browse and select deals from our impact funds</p>
+            <h2 className="text-2xl font-bold text-navyblue">Business Opportunities</h2>
+            <p className="text-muted-foreground">Browse and select business deals from our impact funds</p>
           </div>
           
           <div className="flex items-center gap-4 self-end sm:self-auto">
