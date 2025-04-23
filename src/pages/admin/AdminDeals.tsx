@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import AdminLayout from "@/components/layout/AdminLayout";
 import { Button } from "@/components/ui/button";
@@ -11,8 +12,38 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { FilePlus, FileText, Users, Check, AlertCircle, ChevronDown, ChevronUp, Printer } from "lucide-react";
 import { toast } from "sonner";
+import html2pdf from "html2pdf.js";
 
-const mockDeals = [
+interface CompanyDetails {
+  regNumber: string;
+  directors: string;
+  address?: string;
+  shareCount: number | string;
+  sharePrice: number | string;
+  companyName?: string;
+}
+
+interface Deal {
+  id: number;
+  name: string;
+  fund: string;
+  value: number;
+  investors: number;
+  status: string;
+  location: string;
+  progress: number;
+  companyRegistered: boolean;
+  prospectusIssued: boolean;
+  companyDetails?: CompanyDetails;
+  prospectusDetails?: {
+    title: string;
+    summary: string;
+    riskDisclosures: string;
+    financialProjections: string;
+  };
+}
+
+const mockDeals: Deal[] = [
   { 
     id: 1, 
     name: "Downtown Office Building", 
@@ -134,8 +165,8 @@ const funds = [
 
 const AdminDeals = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [deals, setDeals] = useState(mockDeals);
-  const [selectedDeal, setSelectedDeal] = useState<any | null>(null);
+  const [deals, setDeals] = useState<Deal[]>(mockDeals);
+  const [selectedDeal, setSelectedDeal] = useState<Deal | null>(null);
   const [showNewDealDialog, setShowNewDealDialog] = useState(false);
   const [showCompanyRegistrationDialog, setShowCompanyRegistrationDialog] = useState(false);
   const [showProspectusDialog, setShowProspectusDialog] = useState(false);
@@ -149,7 +180,13 @@ const AdminDeals = () => {
     description: ""
   });
   
-  const [companyRegistration, setCompanyRegistration] = useState({
+  const [companyRegistration, setCompanyRegistration] = useState<{
+    companyName: string;
+    regNumber: string;
+    directors: string;
+    shareCount: string;
+    sharePrice: string;
+  }>({
     companyName: "",
     regNumber: "",
     directors: "",
@@ -171,7 +208,7 @@ const AdminDeals = () => {
       deal.location.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const checkDealProgress = (deal) => {
+  const checkDealProgress = (deal: Deal) => {
     if (deal.progress === 100 && (!deal.companyRegistered || !deal.prospectusIssued)) {
       const emailContent = `Deal "${deal.name}" has reached 100% completion and requires further processing:
       ${!deal.companyRegistered ? '- Company registration needed\n' : ''}
@@ -191,7 +228,7 @@ const AdminDeals = () => {
     }
 
     const id = deals.length > 0 ? Math.max(...deals.map(d => d.id)) + 1 : 1;
-    const deal = {
+    const deal: Deal = {
       id,
       name: newDeal.name,
       fund: newDeal.fund,
@@ -230,7 +267,17 @@ const AdminDeals = () => {
     if (selectedDeal) {
       const updatedDeals = deals.map(deal => {
         if (deal.id === selectedDeal.id) {
-          return { ...deal, companyRegistered: true, companyDetails: companyRegistration };
+          return { 
+            ...deal, 
+            companyRegistered: true, 
+            companyDetails: {
+              companyName: companyRegistration.companyName,
+              regNumber: companyRegistration.regNumber,
+              directors: companyRegistration.directors,
+              shareCount: companyRegistration.shareCount,
+              sharePrice: companyRegistration.sharePrice
+            } 
+          };
         }
         return deal;
       });
@@ -259,7 +306,11 @@ const AdminDeals = () => {
     if (selectedDeal) {
       const updatedDeals = deals.map(deal => {
         if (deal.id === selectedDeal.id) {
-          return { ...deal, prospectusIssued: true, prospectusDetails: prospectus };
+          return { 
+            ...deal, 
+            prospectusIssued: true, 
+            prospectusDetails: prospectus 
+          };
         }
         return deal;
       });
@@ -287,7 +338,7 @@ const AdminDeals = () => {
     }
   };
 
-  const handlePrintDetails = (deal) => {
+  const handlePrintDetails = (deal: Deal) => {
     const element = document.createElement('div');
     element.innerHTML = `
       <div style="padding: 20px;">
