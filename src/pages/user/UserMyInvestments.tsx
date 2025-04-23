@@ -1,4 +1,3 @@
-
 import React, { useRef } from 'react';
 import UserLayout from "@/components/layout/UserLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
@@ -10,7 +9,6 @@ import { Download, FileText, Lock, Shield } from "lucide-react";
 import { toast } from "sonner";
 import html2pdf from 'html2pdf.js';
 
-// Mock investments data
 const investments = [
   {
     id: 101,
@@ -44,15 +42,14 @@ const UserMyInvestments = () => {
   const [showCertificate, setShowCertificate] = React.useState<number | null>(null);
   const certificateRef = useRef<HTMLDivElement>(null);
 
-  // Retrieve the client number and address from localStorage
   const clientNumber = localStorage.getItem("clientNumber") || "N/A";
+  const clientIdNumber = localStorage.getItem("clientId") || "N/A";
   const userName = localStorage.getItem("userName") || "Investor";
   const userSurname = localStorage.getItem("userSurname") || "";
   const clientAddress = localStorage.getItem("clientAddress") || "N/A";
 
   const handleDownloadStatement = (investmentId: number) => {
     toast.success("Financial statement is being downloaded");
-    // In a real application, this would trigger an actual download
   };
 
   const handleViewShareCertificate = (investmentId: number) => {
@@ -80,16 +77,13 @@ const UserMyInvestments = () => {
       pagebreak: { mode: 'avoid-all' }
     };
 
-    // Add watermark dynamically
     const watermarkDiv = document.createElement('div');
     watermarkDiv.className = 'absolute inset-0 z-0 pointer-events-none opacity-10 flex items-center justify-center';
     watermarkDiv.innerHTML = '<img src="/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png" alt="Watermark" style="width: 40%; max-width: 200px; transform: rotate(-30deg);" />';
     certificateRef.current.appendChild(watermarkDiv);
 
-    // Convert to PDF with watermark
     html2pdf().from(certificateRef.current).set(opt).save()
       .then(() => {
-        // Remove the watermark after PDF is generated
         certificateRef.current?.removeChild(watermarkDiv);
         toast.success("Share certificate downloaded successfully");
       });
@@ -97,7 +91,6 @@ const UserMyInvestments = () => {
 
   const selectedInvestment = investments.find(inv => inv.id === showCertificate);
 
-  // Get current date and time for the timestamp
   const now = new Date();
   const timestamp = now.toLocaleString();
 
@@ -180,7 +173,6 @@ const UserMyInvestments = () => {
           </div>
         )}
 
-        {/* Share Certificate Dialog */}
         <Dialog open={showCertificate !== null} onOpenChange={() => setShowCertificate(null)}>
           <DialogContent className="max-w-2xl">
             <DialogHeader>
@@ -206,7 +198,6 @@ const UserMyInvestments = () => {
                     opacity: 1
                   }}
                 >
-                  {/* -- Firm Logo (Top Center): Match homepage logo path -- */}
                   <div className="flex justify-center mb-4">
                     <img 
                       src="/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png" 
@@ -234,21 +225,29 @@ const UserMyInvestments = () => {
                     <div className="space-y-1">
                       <p className="font-semibold text-lg">{selectedInvestment.companyName}</p>
                       <p className="text-sm">Registration Number: {selectedInvestment.registrationNumber}</p>
-                      <p className="text-sm text-muted-foreground">Share certificate issued in terms of section 51(1)(a) of the Companies Act, 2008</p>
+                      <p className="text-sm text-muted-foreground">
+                        Share certificate issued in terms of section 51(1)(a) of the Companies Act, 2008
+                      </p>
                     </div>
 
-                    {/* -- Client Name, Address, and Number -- */}
                     <div className="my-6 border-t border-b border-gray-300 py-4">
                       <p>This is to certify that</p>
                       <p className="font-bold text-lg my-2">
                         {userName} {userSurname}
                       </p>
                       <p className="text-sm mb-2">Address: <span className="font-normal">{clientAddress}</span></p>
-                      <p>Client Number: {clientNumber}</p>
+                      <p>
+                        Client Number: {clientNumber} | ID Number: {clientIdNumber}
+                      </p>
                       <p className="my-2">is the registered holder of</p>
-                      <p className="font-bold text-xl my-2">{selectedInvestment.shares} Ordinary Shares</p>
+                      <p className="font-bold text-xl my-2">
+                        {selectedInvestment.shares} Ordinary Shares (Profit Participation Rights)
+                      </p>
                       <p className="text-sm">with a nominal value of R{selectedInvestment.sharePrice} each, fully paid</p>
-                      <p className="mt-2">in the above-named Company, subject to the Memorandum and Articles of Association of the Company.</p>
+                      <p className="mt-2">
+                        in the above-named Company, subject to the Memorandum and Articles of Association of the Company.<br/>
+                        <span className="font-medium text-navyblue">These shares confer profit participation rights.</span>
+                      </p>
                     </div>
 
                     <div className="text-sm">
@@ -303,5 +302,3 @@ const UserMyInvestments = () => {
 };
 
 export default UserMyInvestments;
-
-// IMPORTANT: This file is now very long (over 300 lines). Please consider asking me to refactor it into smaller focused files for easier maintenance.
