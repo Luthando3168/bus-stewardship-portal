@@ -1,10 +1,10 @@
-
 import { ReactNode, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { 
   Users, LayoutDashboard, FileText, 
   Bell, LogOut, FileChartLine, Menu,
-  CreditCard, CalendarClock, UserCheck
+  CreditCard, CalendarClock, UserCheck,
+  Shield
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -35,6 +35,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
     { icon: LayoutDashboard, label: "Dashboard", path: "/admin/dashboard" },
     { icon: Users, label: "Users", path: "/admin/users" },
     { icon: FileChartLine, label: "Deals", path: "/admin/deals" },
+    { icon: Shield, label: "Share Certificates", path: "/admin/share-certificates" },
     { icon: CreditCard, label: "Bank Accounts", path: "/admin/bank-accounts" },
     { icon: CalendarClock, label: "Consultations", path: "/admin/consultations" },
     { icon: UserCheck, label: "Beneficiaries", path: "/admin/beneficiaries" },

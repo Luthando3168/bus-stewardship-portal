@@ -29,6 +29,7 @@ import AdminConsultations from "@/pages/admin/AdminConsultations";
 import AdminBankAccounts from "@/pages/admin/AdminBankAccounts";
 import AdminBeneficiaries from "@/pages/admin/AdminBeneficiaries";
 import AdminNotifications from "@/pages/admin/AdminNotifications";
+import AdminShareCertificates from "@/pages/admin/AdminShareCertificates";
 import UserNewDeals from "@/pages/user/UserNewDeals";
 import UserPendingDeals from "@/pages/user/UserPendingDeals";
 import UserMyInvestments from "@/pages/user/UserMyInvestments";
@@ -39,6 +40,16 @@ function App() {
     localStorage.getItem("isLoggedIn") === "true"
   );
   const [userRole, setUserRole] = useState(localStorage.getItem("userRole"));
+
+  // Generate and store client number if not available
+  useEffect(() => {
+    if (isLoggedIn && !localStorage.getItem("clientNumber")) {
+      const year = new Date().getFullYear();
+      const randomNum = Math.floor(10000 + Math.random() * 90000);
+      const clientNumber = `LM${year}${randomNum}`;
+      localStorage.setItem("clientNumber", clientNumber);
+    }
+  }, [isLoggedIn]);
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -93,6 +104,7 @@ function App() {
           <Route path="bank-accounts" element={<AdminBankAccounts />} />
           <Route path="beneficiaries" element={<AdminBeneficiaries />} />
           <Route path="notifications" element={<AdminNotifications />} />
+          <Route path="share-certificates" element={<AdminShareCertificates />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />
@@ -103,4 +115,3 @@ function App() {
 }
 
 export default App;
-
