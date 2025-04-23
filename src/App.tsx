@@ -30,6 +30,7 @@ import AdminBankAccounts from "@/pages/admin/AdminBankAccounts";
 import AdminBeneficiaries from "@/pages/admin/AdminBeneficiaries";
 import AdminNotifications from "@/pages/admin/AdminNotifications";
 import AdminShareCertificates from "@/pages/admin/AdminShareCertificates";
+import AdminFinancialStatements from "@/pages/admin/AdminFinancialStatements";
 import UserNewDeals from "@/pages/user/UserNewDeals";
 import UserPendingDeals from "@/pages/user/UserPendingDeals";
 import UserMyInvestments from "@/pages/user/UserMyInvestments";
@@ -106,6 +107,7 @@ function App() {
           <Route path="beneficiaries" element={<AdminBeneficiaries />} />
           <Route path="notifications" element={<AdminNotifications />} />
           <Route path="share-certificates" element={<AdminShareCertificates />} />
+          <Route path="financial-statements" element={<AdminFinancialStatements />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

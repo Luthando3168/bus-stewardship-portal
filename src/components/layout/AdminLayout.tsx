@@ -4,7 +4,7 @@ import {
   Users, LayoutDashboard, FileText, 
   Bell, LogOut, FileChartLine, Menu,
   CreditCard, CalendarClock, UserCheck,
-  Shield
+  Shield, Download
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -41,6 +41,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
     { icon: UserCheck, label: "Beneficiaries", path: "/admin/beneficiaries" },
     { icon: Bell, label: "Notifications", path: "/admin/notifications" },
     { icon: FileText, label: "Reports", path: "/admin/reports" },
+    { icon: Download, label: "Financial Statements", path: "/admin/financial-statements" },
   ];
 
   const renderSidebar = (fullWidth = false) => (
