@@ -160,10 +160,8 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
 
   return (
     <div className="flex min-h-screen bg-lightgray">
-      {/* Desktop Sidebar */}
       {renderSidebar()}
 
-      {/* Main Content */}
       <div className="flex-1 overflow-x-hidden">
         <header className="bg-white shadow-sm p-4">
           <div className="max-w-7xl mx-auto flex justify-between items-center">
