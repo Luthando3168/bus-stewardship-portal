@@ -1,4 +1,3 @@
-
 import { Bell, Menu, Facebook, Instagram, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -9,21 +8,20 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-// Add social media data
 const SOCIAL_LINKS = [
   {
     name: "Facebook",
-    url: "https://www.facebook.com/",
+    url: "https://facebook.com/Lifestylefarmsclub",
     icon: Facebook,
   },
   {
     name: "Instagram",
-    url: "https://www.instagram.com/",
+    url: "https://instagram.com/LMCA_ZA",
     icon: Instagram,
   },
   {
     name: "LinkedIn",
-    url: "https://www.linkedin.com/",
+    url: "https://linkedin.com/in/luthando-isaac-maduna-87267257?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_content=profile&utm_medium=android_app",
     icon: Linkedin,
   },
 ];
@@ -79,7 +77,6 @@ const UserHeader = ({
         </div>
         <div className="flex flex-col gap-2 items-end">
           <div className="flex items-center gap-4">
-            {/* Social Media Icons */}
             <div className="flex items-center gap-2">
               {SOCIAL_LINKS.map((social) => (
                 <a
@@ -131,7 +128,6 @@ const UserHeader = ({
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-          {/* Contact details */}
           <div className="flex flex-col items-end md:flex-row md:items-center md:gap-4">
             <a
               href="mailto:info@madunacas.com"
@@ -149,4 +145,3 @@ const UserHeader = ({
 };
 
 export default UserHeader;
-

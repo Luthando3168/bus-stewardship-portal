@@ -16,9 +16,9 @@ const Footer = () => {
 
   const socialLinks = [
     { icon: Facebook, href: "https://facebook.com/Lifestylefarmsclub", label: "Facebook" },
-    { icon: Instagram, href: "https://instagram.com/madunacas", label: "Instagram" },
-    { icon: Linkedin, href: "https://linkedin.com/in/luthando-isaac-maduna", label: "LinkedIn" },
-    { icon: Youtube, href: "https://youtube.com/@LMCA-SA", label: "Youtube" }
+    { icon: Instagram, href: "https://instagram.com/LMCA_ZA", label: "Instagram" },
+    { icon: Linkedin, href: "https://linkedin.com/in/luthando-isaac-maduna-87267257?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_content=profile&utm_medium=android_app", label: "LinkedIn" },
+    { icon: Youtube, href: "https://youtube.com/@LMCA_SA", label: "Youtube" }
   ];
 
   return (
