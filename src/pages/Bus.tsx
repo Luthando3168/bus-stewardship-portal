@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -31,8 +32,8 @@ const Bus = () => {
       description: "Once registered, browse and select the businesses you're interested in through our user-friendly MCA Direct platform."
     },
     {
-      step: "Online Agreement",
-      description: "Complete the digital stewardship agreement and verify your details through our secure platform."
+      step: "Engagement Letter",
+      description: "Sign a professional engagement letter that outlines our services, fee structure, and business management approach."
     },
     {
       step: "Automated Management",
