@@ -1,7 +1,8 @@
+
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Briefcase, Users, Banknote, FileText } from "lucide-react";
 
 interface BusinessStep {
   title: string;
@@ -59,6 +60,29 @@ const IconComponent = ({ name }: { name: string }) => {
     default:
       return null;
   }
+};
+
+// We need to add the ChartBar icon since it's not directly available in lucide-react
+// Creating a custom ChartBar icon component based on common chart bar icon styling
+const ChartBar = (props: any) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <rect x="3" y="12" width="4" height="8" />
+      <rect x="10" y="8" width="4" height="12" />
+      <rect x="17" y="4" width="4" height="16" />
+    </svg>
+  );
 };
 
 const FundEducationalPage = ({
@@ -139,7 +163,7 @@ const FundEducationalPage = ({
               <div className="bg-white rounded-lg p-8 shadow-md">
                 <h3 className="text-2xl font-bold text-navyblue mb-6">Regular Business Reports</h3>
                 <p className="text-gray-700 mb-4">
-                  Every {reporting.frequency}, you receive professional reports about your business:
+                  {reporting.frequency}, you receive professional reports about your business:
                 </p>
                 <ul className="list-disc pl-6 space-y-2 text-gray-700">
                   {reporting.reports.map((report, index) => (
