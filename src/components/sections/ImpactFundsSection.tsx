@@ -33,7 +33,7 @@ const funds = [
     name: "MyFranchise Impact Fund",
     description: "Focus: Investing in franchise businesses with proven operational models, creating jobs and business skills.",
     color: "from-red-600 to-red-800",
-    image: "https://images.unsplash.com/photo-1582819509237-d66f7c4ff755?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
+    image: "/lovable-uploads/e5869f22-682c-4c5c-bd33-5a19766a95cf.png",
     focus: [
       "Food franchise outlets",
       "Retail and service franchises",
@@ -50,11 +50,24 @@ const ImpactFundsSection = () => {
     <section className="py-20 bg-navyblue text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle 
-          title="Impact Funds" 
-          subtitle="At LMCA, we assist clients to own multiple businesses using our in-house MCA Direct, where business deals are linked to impact funds. See some of the funds below."
+          title="What Are Business Impact Funds?" 
+          subtitle="These are groups of similar businesses that you can own part of. Each group does good things for the community while making money."
           light
           centered
         />
+
+        <div className="max-w-3xl mx-auto mb-10">
+          <div className="bg-white/10 rounded-lg p-6 text-center">
+            <p className="text-white text-lg mb-4">
+              Business Impact Funds are simply groups of similar businesses bundled together. 
+              For example, the MyFarm fund includes chicken farms, vegetable farms, and cattle farms. 
+              You can own a part of these businesses with just R500 per month.
+            </p>
+            <p className="text-white/80 text-lg">
+              We show you just 3 funds below, but we have 8 different types of business groups you can join.
+            </p>
+          </div>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-10">
           {funds.map((fund, index) => (
@@ -98,10 +111,17 @@ const ImpactFundsSection = () => {
           ))}
         </div>
 
-        <div className="text-center mt-10">
-          <span className="text-gray-300 font-lato text-sm">
-            For full details and business deal selection, visit our <Link to="/impact-funds" className="text-gold underline">Impact Fund page</Link>.
-          </span>
+        <div className="text-center mt-10 bg-white/10 rounded-lg p-6 max-w-3xl mx-auto">
+          <h3 className="text-xl font-bold text-gold mb-3">Want to See More Business Opportunities?</h3>
+          <p className="text-white text-lg mb-4">
+            We have 5 more business groups not shown here. Visit our full list to see all 8 types of businesses you can own.
+          </p>
+          <Link 
+            to="/impact-funds" 
+            className="inline-block px-6 py-3 bg-gold text-navyblue rounded-lg font-semibold hover:bg-lightgold transition-colors"
+          >
+            See All 8 Business Groups
+          </Link>
         </div>
       </div>
     </section>

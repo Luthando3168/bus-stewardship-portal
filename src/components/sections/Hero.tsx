@@ -8,13 +8,13 @@ const Hero = () => (
       <div className="w-full md:w-1/2 text-left">
         <h1 className="font-montserrat font-bold text-3xl md:text-4xl lg:text-5xl tracking-tight text-white mb-4 leading-tight">
           Own Real Businesses.<br />
-          Let Us Manage Them<br />For You
+          We Run Them<br />For You
         </h1>
         <h2 className="font-montserrat text-xl md:text-2xl text-gold mb-6 tracking-tight leading-tight">
           Start with just R500 per month
         </h2>
         <p className="font-lato text-white/95 text-lg md:text-xl max-w-xl mb-8">
-          Whether you're a taxi driver, teacher, or football fan — you can now own multiple businesses. We'll manage everything while you watch them grow.
+          Whether you're a taxi driver, teacher, or football fan — you can now own multiple businesses like shops, farms, and property. We'll manage everything while you watch them grow.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <Link

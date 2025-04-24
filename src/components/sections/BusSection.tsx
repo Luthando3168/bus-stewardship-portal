@@ -6,19 +6,19 @@ const BusSection = () => {
   const steps = [
     {
       title: "1. Choose Your Business Type",
-      description: "Browse our MyImpact categories and pick the businesses you want to own - from food shops to farms."
+      description: "Pick from our simple business choices - like food shops, farms, or housing."
     },
     {
       title: "2. Start with R500/month",
-      description: "Join the platform with a small monthly contribution. Your money goes into a secure business account."
+      description: "Join with a small monthly payment. Your money goes into a secure business account."
     },
     {
       title: "3. We Do All The Work",
-      description: "Our professional team handles everything while you get regular updates on your phone or computer."
+      description: "Our professional team handles everything. You just check updates on your phone."
     },
     {
       title: "4. Watch Your Business Grow",
-      description: "Track your progress through our easy-to-use MCA Direct platform and receive profit shares."
+      description: "See your progress through our easy platform and receive your share of profits."
     }
   ];
 

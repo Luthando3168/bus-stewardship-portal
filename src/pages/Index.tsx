@@ -4,6 +4,7 @@ import Hero from "@/components/sections/Hero";
 import ServicesSection from "@/components/sections/ServicesSection";
 import BusSection from "@/components/sections/BusSection";
 import ImpactFundsSection from "@/components/sections/ImpactFundsSection";
+import FoundationSection from "@/components/sections/FoundationSection";
 import Layout from "@/components/layout/Layout";
 import IndexRequest from "@/components/seo/IndexRequest";
 
@@ -11,17 +12,18 @@ const Index = () => {
   return (
     <Layout>
       <Helmet>
-        <title>LMCA | Professional Chartered Accountants & Business Management</title>
-        <meta name="description" content="Expert chartered accountants providing comprehensive business management, investment strategies, and professional accounting services through our innovative Business Under Stewardship program." />
-        <meta name="keywords" content="chartered accountants, business management, investment services, South Africa, BUS program, financial advisory, tax services, corporate finance, wealth management" />
+        <title>LMCA | Own Real Businesses, We Run Them For You - Start with R500/month</title>
+        <meta name="description" content="LMCA helps ordinary people own businesses with just R500/month. Professional chartered accountants manage everything for you - whether you're a taxi driver, teacher or football fan." />
+        <meta name="keywords" content="business ownership, R500 investment, affordable business opportunities, passive income, professional business management, South Africa, BUS program, financial inclusion" />
         <link rel="canonical" href="https://www.madunacas.com/" />
       </Helmet>
       
       <div className="w-full">
         <Hero />
-        <ServicesSection />
         <BusSection />
         <ImpactFundsSection />
+        <ServicesSection />
+        <FoundationSection />
         <div className="bg-white py-16">
           {/* Admin-only tool for requesting reindexing */}
           {localStorage.getItem("userRole") === "admin" && (
