@@ -2,24 +2,25 @@ import React from "react";
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { Link } from "react-router-dom";
+import { Card, CardContent } from "@/components/ui/card";
 
 const funds = [
   {
     name: "MyFarm Impact Fund",
-    description: "Focus: Supporting sustainable agriculture and farming businesses across South Africa.",
+    description: "Supporting sustainable agriculture and farming businesses across South Africa.",
     bgGradient: "from-green-700 to-green-900",
     image: "https://images.unsplash.com/photo-1593113646773-028c64a8f1b8",
     focus: [
       "Sustainable farming operations",
       "Food security projects",
-      "Organic and mixed-crop ventures"
+      "Mixed-crop ventures"
     ],
     minInvestment: "R 1,000",
     route: "/funds/myfarm"
   },
   {
     name: "MyProperty Impact Fund",
-    description: "Focus: Investing in community-focused real estate, affordable housing and property businesses.",
+    description: "Investing in community-focused real estate, affordable housing and property businesses.",
     bgGradient: "from-blue-700 to-blue-900",
     image: "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11",
     focus: [
@@ -32,7 +33,7 @@ const funds = [
   },
   {
     name: "MyFranchise Impact Fund",
-    description: "Focus: Investing in franchise businesses with proven operational models, creating jobs and business skills.",
+    description: "Investing in franchise businesses with proven operational models, creating jobs and business skills.",
     bgGradient: "from-red-600 to-red-800",
     image: "https://images.unsplash.com/photo-1577962917302-cd874c4e31d2",
     focus: [
@@ -45,7 +46,7 @@ const funds = [
   },
   {
     name: "MyFoodRetail Impact Fund",
-    description: "Focus: Investing in food retail businesses to improve access to quality food in underserved communities.",
+    description: "Investing in food retail businesses to improve access to quality food in underserved communities.",
     bgGradient: "from-amber-600 to-amber-800",
     image: "https://images.unsplash.com/photo-1604719312566-8912e9227c6a",
     focus: [
@@ -58,7 +59,7 @@ const funds = [
   },
   {
     name: "MyTelco Impact Fund",
-    description: "Focus: Investing in telecommunications infrastructure and services to provide affordable connectivity solutions.",
+    description: "Investing in telecommunications infrastructure and services to provide affordable connectivity solutions.",
     bgGradient: "from-blue-500 to-blue-800",
     image: "https://images.unsplash.com/photo-1563770660941-20978e870e26",
     focus: [
@@ -71,7 +72,7 @@ const funds = [
   },
   {
     name: "MyHealth Impact Fund",
-    description: "Focus: Investing in accessible healthcare solutions and medical facilities to improve community health outcomes.",
+    description: "Investing in accessible healthcare solutions and medical facilities to improve community health outcomes.",
     bgGradient: "from-pink-600 to-pink-900",
     image: "https://images.unsplash.com/photo-1538108149393-fbbd81895907",
     focus: [
@@ -84,7 +85,7 @@ const funds = [
   },
   {
     name: "MySchool Impact Fund",
-    description: "Focus: Investing in quality education infrastructure and learning institutions to enhance community development through education.",
+    description: "Investing in quality education infrastructure and learning institutions to enhance community development through education.",
     bgGradient: "from-indigo-700 to-indigo-900",
     image: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6",
     focus: [
@@ -100,183 +101,100 @@ const funds = [
 const ImpactFunds = () => {
   return (
     <Layout>
-      <div className="bg-gray-50 py-16">
+      <div className="bg-gray-50 min-h-screen py-12">
         <div className="container mx-auto px-4">
           <SectionTitle 
             title="Impact Funds" 
-            subtitle="A simple way to own businesses that make a difference in your community"
+            subtitle="Own multiple businesses that make a difference in your community"
             centered
           />
           
-          {/* New Savings Information Section */}
-          <div className="max-w-3xl mx-auto mb-16 bg-white rounded-lg p-8 shadow-md">
-            <h3 className="text-2xl font-bold text-navyblue mb-6">Starting Your Investment Journey</h3>
-            
-            <div className="space-y-6 text-gray-700">
-              <p>
-                As our valued client, you can build your investment portfolio step by step:
-              </p>
-              
-              <ul className="list-disc pl-6 space-y-3">
-                <li>We provide you with a dedicated savings account to help you save towards your investment goals</li>
-                <li>Start saving at your own pace - every amount counts towards your future business ownership</li>
-                <li>Once you reach the minimum investment amount, you can participate in available business deals</li>
-                <li>Your savings are secure and properly managed while you work towards your investment target</li>
-              </ul>
-
-              <div className="bg-blue-50 p-4 rounded-lg mt-4">
-                <p className="font-medium text-navyblue">
-                  Remember: You can start saving today and invest when you're ready. Your dedicated account helps you build towards your business ownership goals.
-                </p>
+          <div className="max-w-4xl mx-auto mb-12 bg-white rounded-lg shadow-md p-6 md:p-8">
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-xl font-bold text-navyblue mb-4">Business Ownership Made Simple</h3>
+                <ul className="space-y-3 text-gray-700">
+                  <li className="flex items-center gap-2">
+                    • Start with any amount and build your portfolio
+                  </li>
+                  <li className="flex items-center gap-2">
+                    • Professional team manages operations
+                  </li>
+                  <li className="flex items-center gap-2">
+                    • Regular profit distributions
+                  </li>
+                </ul>
               </div>
-            </div>
-          </div>
-
-          <div className="max-w-3xl mx-auto mb-16 bg-white rounded-lg p-8 shadow-md">
-            <h3 className="text-2xl font-bold text-navyblue mb-6">Understanding Business Ownership</h3>
-            
-            <div className="space-y-6 text-gray-700">
-              <p>
-                When you invest in our Impact Funds, you become a real business owner. This means:
-              </p>
-              
-              <ul className="list-disc pl-6 space-y-3">
-                <li>You own actual businesses, not just shares on an app</li>
-                <li>You receive regular updates about how your businesses are performing</li>
-                <li>Your money grows as the businesses grow</li>
-                <li>You don't have to manage anything - we handle all the work</li>
-              </ul>
-
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <p className="font-medium text-navyblue">
-                  "Think of it like owning a house but having a trusted property manager handle everything for you."
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="max-w-3xl mx-auto mb-16 bg-white rounded-lg p-8 shadow-md">
-            <h3 className="text-2xl font-bold text-navyblue mb-6">Professional Support at No Extra Cost</h3>
-            
-            <div className="space-y-6 text-gray-700">
-              <p>
-                As a business owner through our platform, you get access to:
-              </p>
-              
-              <ul className="list-disc pl-6 space-y-3">
-                <li>Professional accountants who manage your business finances</li>
-                <li>Banking relationships that help your business grow</li>
-                <li>Expert business managers who run daily operations</li>
-                <li>Regular financial reports in simple, easy-to-understand language</li>
-              </ul>
-
-              <div className="bg-amber-50 p-4 rounded-lg">
-                <p className="font-medium text-navyblue">
-                  We take our fees from the business operations, not from your pocket. Our success depends on making your businesses successful.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="max-w-3xl mx-auto mb-16 bg-white rounded-lg p-8 shadow-md">
-            <h3 className="text-2xl font-bold text-navyblue mb-6">How You Make Money</h3>
-            
-            <div className="space-y-6 text-gray-700">
-              <p>
-                Your businesses make money in simple, understandable ways:
-              </p>
-              
-              <ul className="list-disc pl-6 space-y-3">
-                <li>Food businesses make money from selling food and drinks</li>
-                <li>Property businesses earn rent from tenants</li>
-                <li>Franchise businesses profit from selling products and services</li>
-                <li>You receive your share of these profits regularly</li>
-              </ul>
-
-              <div className="bg-green-50 p-4 rounded-lg mt-4">
-                <p className="font-medium text-navyblue">
-                  The more customers support these businesses, the more money you make as an owner. It's that simple.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="max-w-3xl mx-auto mb-16 bg-white rounded-lg p-8 shadow-md">
-            <h3 className="text-2xl font-bold text-navyblue mb-6">Your Easy-to-Use Digital Platform</h3>
-            
-            <div className="space-y-6 text-gray-700">
-              <p>
-                Our MCA Direct platform makes business ownership simple:
-              </p>
-              
-              <ul className="list-disc pl-6 space-y-3">
-                <li>View your business performance anytime</li>
-                <li>Receive important updates automatically</li>
-                <li>Track your profits and growth</li>
-                <li>Access educational resources about business ownership</li>
-                <li>Connect with other business owners in your community</li>
-              </ul>
-
-              <div className="bg-purple-50 p-4 rounded-lg">
-                <p className="font-medium text-navyblue">
-                  Everything you need to know about your businesses is available at your fingertips, 24/7.
-                </p>
+              <div>
+                <h3 className="text-xl font-bold text-navyblue mb-4">Professional Support</h3>
+                <ul className="space-y-3 text-gray-700">
+                  <li className="flex items-center gap-2">
+                    • Expert financial management
+                  </li>
+                  <li className="flex items-center gap-2">
+                    • Dedicated business managers
+                  </li>
+                  <li className="flex items-center gap-2">
+                    • Regular performance updates
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
           
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {funds.map((fund, index) => (
-              <div 
-                key={index} 
-                className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
-              >
-                <div className="relative w-full h-48">
+              <Card key={index} className="group overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div className="relative h-48">
                   <img
                     src={fund.image}
                     alt={fund.name}
-                    className="w-full h-full object-cover brightness-110 contrast-110"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                  <div className={`absolute inset-0 bg-gradient-to-br ${fund.bgGradient} opacity-40`}></div>
+                  <div className={`absolute inset-0 bg-gradient-to-br ${fund.bgGradient} opacity-60`}></div>
+                  <h3 className="absolute bottom-0 left-0 right-0 p-4 text-xl font-bold text-white">
+                    {fund.name}
+                  </h3>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{fund.name}</h3>
+                <CardContent className="p-6">
                   <p className="text-gray-600 mb-4">{fund.description}</p>
                   
-                  <h4 className="font-semibold text-gray-800 mt-4 mb-2">Focus Areas:</h4>
-                  <ul className="list-disc pl-5 text-gray-700 mb-4">
-                    {fund.focus.map((item, i) => (
-                      <li key={i} className="mb-1">{item}</li>
-                    ))}
-                  </ul>
-                  
-                  <div className="mt-4 pt-4 border-t border-gray-200">
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-700">Minimum investment:</span>
-                      <span className="font-bold text-blue-800">{fund.minInvestment}</span>
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-semibold text-navyblue mb-2">Focus Areas:</h4>
+                      <ul className="list-disc pl-5 text-gray-700 space-y-1">
+                        {fund.focus.map((item, i) => (
+                          <li key={i}>{item}</li>
+                        ))}
+                      </ul>
                     </div>
                     
-                    <button className="w-full mt-4 bg-navyblue text-white py-2 px-4 rounded-md hover:bg-blue-800 transition-colors">
-                      <Link to={fund.route} className="text-white">
+                    <div className="pt-4 border-t border-gray-100">
+                      <div className="flex justify-between items-center mb-4">
+                        <span className="text-gray-600">Minimum investment:</span>
+                        <span className="font-bold text-navyblue">{fund.minInvestment}</span>
+                      </div>
+                      
+                      <Link 
+                        to={fund.route}
+                        className="block w-full text-center bg-navyblue text-white py-2 px-4 rounded-md hover:bg-blue-800 transition-colors"
+                      >
                         Learn More
                       </Link>
-                    </button>
+                    </div>
                   </div>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
           
-          <div className="text-center mt-16">
-            <p className="text-lg text-gray-700 mb-6">
-              Ready to become a business owner? Start by browsing our available businesses.
-            </p>
-            <a 
-              href="/register" 
-              className="inline-block bg-gold text-navyblue font-medium py-3 px-8 rounded-md hover:bg-amber-400 transition-colors"
+          <div className="text-center">
+            <Link 
+              to="/register" 
+              className="inline-block bg-gold text-white font-medium py-3 px-8 rounded-md hover:bg-amber-500 transition-colors"
             >
-              Get Started Today
-            </a>
+              Start Your Investment Journey
+            </Link>
           </div>
         </div>
       </div>
