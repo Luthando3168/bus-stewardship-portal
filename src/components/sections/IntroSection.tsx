@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SectionTitle from '@/components/ui/SectionTitle';
@@ -53,7 +52,7 @@ const IntroSection = () => {
                 <Store className="w-8 h-8 text-amber-600 mb-4" />
                 <h3 className="text-xl font-bold text-navyblue mb-3">MyFoodRetail</h3>
                 <p className="text-gray-600 mb-4">
-                  Own mini shopping complexes and food outlets in your community. Start with just R5,000.
+                  Own mini shopping complexes and food outlets in your community. Start with a once-off R5,000 investment.
                 </p>
               </Card>
 
@@ -61,7 +60,7 @@ const IntroSection = () => {
                 <Home className="w-8 h-8 text-blue-600 mb-4" />
                 <h3 className="text-xl font-bold text-navyblue mb-3">MyProperty</h3>
                 <p className="text-gray-600 mb-4">
-                  Own property that makes money through rent every month. Start with R2,000.
+                  Own property that makes money through rent every month. Start with a once-off R2,000 investment.
                 </p>
               </Card>
 
@@ -69,7 +68,7 @@ const IntroSection = () => {
                 <ShoppingBag className="w-8 h-8 text-red-600 mb-4" />
                 <h3 className="text-xl font-bold text-navyblue mb-3">MyFranchise</h3>
                 <p className="text-gray-600 mb-4">
-                  Own parts of famous brand stores like Steers or Debonairs. Start with R5,000.
+                  Own parts of famous brand stores like Steers or Debonairs. Start with a once-off R1,500 investment.
                 </p>
               </Card>
             </div>
