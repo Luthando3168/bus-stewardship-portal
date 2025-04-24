@@ -8,7 +8,7 @@ const MyFranchiseFund = () => {
       fundName="MyFranchise"
       description="Focus: Investing in franchise businesses with proven operational models, creating jobs and business skills."
       bgGradient="from-red-600 to-red-800"
-      image="https://images.unsplash.com/photo-1572874449137-d9f290d5b9a7" // New hamburger ad image
+      image="/lovable-uploads/e5869f22-682c-4c5c-bd33-5a19766a95cf.png" // Updated hamburger image
       focus={[
         "Food franchise outlets",
         "Retail and service franchises",
