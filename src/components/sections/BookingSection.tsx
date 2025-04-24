@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Calendar, Phone, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -29,16 +28,6 @@ const BookingSection = () => {
                     <MessageCircle size={18} />
                   </div>
                   <span>WhatsApp us: 062 019 3208</span>
-                </a>
-                
-                <a 
-                  href="tel:0876243204" 
-                  className="flex items-center gap-3 text-white hover:text-gold transition-colors"
-                >
-                  <div className="bg-gold rounded-full p-2">
-                    <Phone size={18} />
-                  </div>
-                  <span>Call us: 087 624 3204</span>
                 </a>
               </div>
               

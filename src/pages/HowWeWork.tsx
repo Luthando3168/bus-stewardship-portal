@@ -127,13 +127,21 @@ const HowWeWork = () => {
             <h2 className="text-2xl font-montserrat font-bold mb-6 text-navyblue text-center">
               Frequently Asked Questions
             </h2>
-            <Accordion type="single" collapsible className="w-full">
+            <Accordion 
+              type="single" 
+              collapsible 
+              className="w-full space-y-4"
+            >
               {faqs.map((faq, index) => (
-                <AccordionItem key={index} value={`item-${index}`}>
-                  <AccordionTrigger className="text-left">
+                <AccordionItem 
+                  key={index} 
+                  value={`item-${index}`} 
+                  className="border-b border-gray-200 last:border-b-0"
+                >
+                  <AccordionTrigger className="text-left text-lg font-semibold text-navyblue hover:text-gold transition-colors py-4">
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent>
+                  <AccordionContent className="text-gray-700 text-base leading-relaxed pb-4">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
