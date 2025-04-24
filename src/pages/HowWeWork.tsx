@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Layout from "@/components/layout/Layout";
@@ -6,7 +7,7 @@ import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Circle, User, Users, School, Home, CircleDollarSign, FileCheck, BankCard, Building } from "lucide-react";
+import { Circle, User, Users, School, Home, CircleDollarSign, FileCheck, CreditCard, Building } from "lucide-react";
 
 const HowWeWork = () => {
   const monthlyExpenses = [
@@ -34,7 +35,7 @@ const HowWeWork = () => {
     {
       title: "Open Your Business Account",
       description: "We'll help you set up a dedicated bank account where your R500 monthly investment is safely kept until you approve a deal.",
-      icon: BankCard
+      icon: CreditCard
     },
     {
       title: "Choose Your Investments",

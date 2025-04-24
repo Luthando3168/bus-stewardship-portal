@@ -3,7 +3,7 @@ import React from 'react';
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { Card, CardContent } from "@/components/ui/card";
-import { HandShake, Users, FileText, Briefcase, BanknoteIcon } from "lucide-react";
+import { Handshake, Users, FileText, Briefcase, BanknoteIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Bus = () => {
@@ -45,7 +45,7 @@ const Bus = () => {
     {
       title: "Like Having a Business Partner",
       description: "We're like your business-savvy partner who handles all the hard work. You own it, we run it, and keep you informed.",
-      icon: HandShake
+      icon: Handshake
     },
     {
       title: "Your Money Stays Safe",
