@@ -19,6 +19,7 @@ export const impactFunds = [
     color: "bg-gradient-to-br from-red-600 to-red-800",
     minInvestment: "R 5,000",
     count: 3,
+    image: "https://images.unsplash.com/photo-1552566626-52f8b828add9",
   },
   {
     id: "myfoodretail",

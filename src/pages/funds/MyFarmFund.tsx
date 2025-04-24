@@ -1,11 +1,10 @@
 import React from "react";
 import FundEducationalPage from "@/components/funds/FundEducationalPage";
-import { Users, Briefcase, Banknote, FileText, ChartBar } from "lucide-react";
 
 const MyFarmFund = () => {
   return (
     <FundEducationalPage
-      fundName="MyFarm Impact Fund"
+      fundName="MyFarm"
       description="Focus: Supporting sustainable agriculture and farming businesses across South Africa."
       bgGradient="from-green-700 to-green-900"
       image="https://images.unsplash.com/photo-1593113646773-028c64a8f1b8"

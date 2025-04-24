@@ -5,7 +5,7 @@ import { Users, Briefcase, Banknote, FileText, ChartBar } from "lucide-react";
 const MyPropertyFund = () => {
   return (
     <FundEducationalPage
-      fundName="MyProperty Impact Fund"
+      fundName="MyProperty"
       description="Focus: Investing in community-focused real estate, affordable housing and property businesses."
       bgGradient="from-blue-700 to-blue-900"
       image="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11"

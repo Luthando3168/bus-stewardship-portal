@@ -1,9 +1,9 @@
-
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { Link } from "react-router-dom";
 import { Users, Briefcase, Banknote, FileText, ChartBar } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 interface BusinessStep {
   title: string;
@@ -79,6 +79,16 @@ const FundEducationalPage = ({
       <div className="bg-gray-50 py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
+            <div className="mb-8">
+              <Link 
+                to="/impact-funds" 
+                className="inline-flex items-center text-navyblue hover:text-blue-700 transition-colors mb-6"
+              >
+                <ArrowLeft className="h-5 w-5 mr-2" />
+                Back to Impact Funds
+              </Link>
+            </div>
+
             <div className="relative w-full h-64 rounded-xl overflow-hidden mb-8">
               <img
                 src={image}

@@ -1,14 +1,14 @@
+
 import React from "react";
 import FundEducationalPage from "@/components/funds/FundEducationalPage";
-import { Users, Briefcase, Banknote, FileText, ChartBar } from "lucide-react";
 
 const MyFranchiseFund = () => {
   return (
     <FundEducationalPage
-      fundName="MyFranchise Impact Fund"
+      fundName="MyFranchise"
       description="Focus: Investing in franchise businesses with proven operational models, creating jobs and business skills."
       bgGradient="from-red-600 to-red-800"
-      image="https://images.unsplash.com/photo-1577962917302-cd874c4e31d2"
+      image="https://images.unsplash.com/photo-1552566626-52f8b828add9"
       focus={[
         "Food franchise outlets",
         "Retail and service franchises",
