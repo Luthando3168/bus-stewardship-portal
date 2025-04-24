@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -120,28 +119,54 @@ const Terms = () => {
             </div>
             
             <div>
-              <h3 className="text-xl font-bold text-navyblue mb-3">9. Investment Services</h3>
-              <p className="mb-3">For clients utilizing our investment services through Sankofa Capital Partners:</p>
+              <h3 className="text-xl font-bold text-navyblue mb-3">9. Investment Services and Risk Disclosure</h3>
+              <p className="mb-3">
+                For clients utilizing our investment services through Business Under Stewardship (BUS) or Impact Funds:
+              </p>
               <ul className="list-disc pl-5 space-y-2">
-                <li>All investments carry risk, including the potential loss of capital</li>
+                <li>All investments carry inherent risks, including the potential loss of capital</li>
                 <li>Past performance is not indicative of future results</li>
-                <li>You acknowledge receiving and reviewing all relevant risk disclosures</li>
+                <li>Dividends and returns are not guaranteed and are solely dependent on business performance</li>
                 <li>Investment decisions will be made in accordance with your investment policy statement and risk profile</li>
-                <li>Specific terms of investments will be governed by relevant fund documents or investment agreements</li>
+                <li>While we employ professional management and oversight, business success cannot be guaranteed</li>
+                <li>Market conditions, economic factors, and other variables may affect business performance</li>
+                <li>Some investments may be illiquid and have restrictions on withdrawal or transfer</li>
               </ul>
             </div>
-            
+
             <div>
-              <h3 className="text-xl font-bold text-navyblue mb-3">10. Limitation of Liability</h3>
-              <p>
-                To the extent permitted by law, our liability for any claim arising out of or in connection with our services is 
-                limited to the amount of fees paid for the specific service giving rise to the claim. We will not be liable for any 
-                indirect, special, incidental, or consequential damages, including lost profits or business opportunities.
+              <h3 className="text-xl font-bold text-navyblue mb-3">10. Business Management and Due Diligence</h3>
+              <p className="mb-3">
+                LMCA commits to:
+              </p>
+              <ul className="list-disc pl-5 space-y-2">
+                <li>Conducting thorough due diligence on all business opportunities</li>
+                <li>Implementing comprehensive risk assessment frameworks</li>
+                <li>Maintaining professional management and oversight of business operations</li>
+                <li>Regular monitoring and reporting of business performance</li>
+                <li>Compliance with all regulatory requirements and industry standards</li>
+              </ul>
+              <p className="mt-3">
+                However, despite our best efforts and professional management, business success and investment returns cannot be guaranteed.
               </p>
             </div>
-            
+
             <div>
-              <h3 className="text-xl font-bold text-navyblue mb-3">11. Termination</h3>
+              <h3 className="text-xl font-bold text-navyblue mb-3">11. Indemnification and Limitation of Liability</h3>
+              <p className="mb-3">
+                By engaging our services and making investments through our platforms:
+              </p>
+              <ul className="list-disc pl-5 space-y-2">
+                <li>You acknowledge understanding and accepting all investment risks</li>
+                <li>You agree to indemnify and hold harmless LMCA, its directors, officers, employees, and agents from any claims, losses, damages, liabilities, costs, and expenses arising from your investment decisions</li>
+                <li>You acknowledge that LMCA's liability is limited to instances of gross negligence or willful misconduct</li>
+                <li>You understand that market conditions and business performance are beyond LMCA's direct control</li>
+                <li>You accept that investment decisions are made based on your own judgment and risk tolerance</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-bold text-navyblue mb-3">12. Termination</h3>
               <p>
                 Either party may terminate the engagement by providing written notice in accordance with the terms specified in the 
                 Client Engagement Letter. Upon termination, you agree to pay for all services rendered up to the date of termination. 
@@ -150,7 +175,7 @@ const Terms = () => {
             </div>
             
             <div>
-              <h3 className="text-xl font-bold text-navyblue mb-3">12. Governing Law</h3>
+              <h3 className="text-xl font-bold text-navyblue mb-3">13. Governing Law</h3>
               <p>
                 These Terms are governed by the laws of the Republic of South Africa. Any disputes arising out of or in connection 
                 with these Terms shall be subject to the exclusive jurisdiction of the courts of the Republic of South Africa.
@@ -158,7 +183,7 @@ const Terms = () => {
             </div>
             
             <div>
-              <h3 className="text-xl font-bold text-navyblue mb-3">13. Changes to Terms</h3>
+              <h3 className="text-xl font-bold text-navyblue mb-3">14. Changes to Terms</h3>
               <p>
                 We may update these Terms from time to time to reflect changes in our services, business practices, or legal requirements. 
                 Updated Terms will be posted on our website with an effective date. Your continued use of our services after such changes 
@@ -167,7 +192,7 @@ const Terms = () => {
             </div>
             
             <div>
-              <h3 className="text-xl font-bold text-navyblue mb-3">14. Contact Information</h3>
+              <h3 className="text-xl font-bold text-navyblue mb-3">15. Contact Information</h3>
               <p>
                 If you have questions about these Terms, please contact us at:
               </p>
@@ -181,7 +206,7 @@ const Terms = () => {
             </div>
             
             <div className="border-t border-gray-200 pt-6 mt-10">
-              <p className="text-sm text-muted-foreground">Last Updated: April 20, 2025</p>
+              <p className="text-sm text-muted-foreground">Last Updated: April 24, 2025</p>
             </div>
           </div>
         </div>
