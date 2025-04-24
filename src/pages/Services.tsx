@@ -81,42 +81,42 @@ const Services = () => {
 
   return (
     <Layout>
-      <div className="bg-white py-12 md:py-20">
+      <div className="bg-white py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6">
           <SectionTitle
-            title="Our Professional Services"
-            subtitle="Comprehensive financial and business solutions delivered by experienced chartered accountants"
+            title="Professional Services Portfolio"
+            subtitle="Comprehensive financial solutions tailored to drive your business success"
             centered
           />
 
-          <div className="mt-8 md:mt-16 space-y-6 md:space-y-12">
+          <div className="mt-12 md:mt-16 space-y-8 md:space-y-12">
             {services.map((service, index) => (
               <div 
                 key={index}
-                className="flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-8 p-4 md:p-8 rounded-lg hover:bg-lightgray transition-colors animate-fade-in"
+                className="flex flex-col md:grid md:grid-cols-2 gap-8 md:gap-12 p-6 md:p-10 rounded-lg hover:bg-lightgray/50 transition-colors animate-fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="flex flex-col">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 bg-gold/10 rounded-lg">
+                  <div className="flex items-center gap-5 mb-6">
+                    <div className="p-4 bg-navyblue/5 rounded-lg">
                       {service.icon}
                     </div>
-                    <h3 className="text-xl md:text-2xl font-montserrat font-bold text-navyblue">
+                    <h3 className="corporate-heading text-2xl md:text-3xl">
                       {service.title}
                     </h3>
                   </div>
-                  <p className="text-charcoal text-mobile-base md:text-base mb-6">
+                  <p className="text-charcoal/80 text-lg md:text-xl leading-relaxed">
                     {service.description}
                   </p>
                 </div>
-                <div className="bg-white p-4 md:p-6 rounded-lg shadow-sm">
-                  <h4 className="font-montserrat font-semibold text-lg mb-4 text-navyblue">
-                    Key Features
+                <div className="bg-white p-6 md:p-8 rounded-lg shadow-sm border border-gray-100">
+                  <h4 className="corporate-subheading text-xl mb-6">
+                    Key Features & Benefits
                   </h4>
-                  <ul className="space-y-2.5">
+                  <ul className="space-y-4">
                     {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-charcoal text-mobile-base md:text-base">
-                        <div className="w-1.5 h-1.5 bg-gold rounded-full mr-3 flex-shrink-0" />
+                      <li key={idx} className="flex items-center text-lg text-charcoal/90">
+                        <div className="w-2 h-2 bg-gold rounded-full mr-4 flex-shrink-0" />
                         {feature}
                       </li>
                     ))}
@@ -126,14 +126,14 @@ const Services = () => {
             ))}
           </div>
 
-          <div className="mt-12 md:mt-20 text-center">
-            <p className="text-mobile-lg md:text-lg text-charcoal mb-6 md:mb-8 max-w-2xl mx-auto">
+          <div className="mt-16 md:mt-24 text-center">
+            <p className="text-xl md:text-2xl text-charcoal/80 mb-8 max-w-3xl mx-auto leading-relaxed">
               As a registered accountable financial institution (FIC) operating under SAICA ID 20055210, 
               we maintain the highest standards of professional service and compliance.
             </p>
             <a 
               href="tel:0620193208"
-              className="inline-flex items-center bg-gold text-navyblue px-6 py-3 md:px-8 md:py-4 rounded font-montserrat font-medium hover:bg-lightgold transition-colors text-mobile-base md:text-base"
+              className="inline-flex items-center bg-gold hover:bg-lightgold text-navyblue px-8 py-4 rounded-lg font-heading font-semibold text-lg transition-colors"
             >
               Contact Us: 062 019 3208
             </a>

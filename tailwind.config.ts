@@ -38,6 +38,8 @@ export default {
     fontFamily: {
       montserrat: ['Montserrat', 'sans-serif'],
       lato: ['Lato', 'sans-serif'],
+      'heading': ['Montserrat', 'sans-serif'],
+      'body': ['Lato', 'sans-serif'],
     },
     extend: {
       colors: {
@@ -137,6 +139,28 @@ export default {
         'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in': 'fade-in 0.5s ease-out',
         'fade-in-slow': 'fade-in-slow 0.8s ease-out',
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            h1: {
+              fontWeight: '700',
+              letterSpacing: '-0.025em',
+            },
+            h2: {
+              fontWeight: '600',
+              letterSpacing: '-0.025em',
+            },
+            h3: {
+              fontWeight: '600',
+              letterSpacing: '-0.025em',
+            },
+            p: {
+              lineHeight: '1.75',
+              letterSpacing: '0.01em',
+            }
+          }
+        }
       }
     }
   },
