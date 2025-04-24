@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Helmet } from "react-helmet";
 import { ArrowRight, Calendar, HandCoins, HelpCircle, Phone, CircleDollarSign, Shield, ShieldCheck } from 'lucide-react';
+
 const funds = [{
   id: "myfarm",
   name: "MyFarm",
@@ -68,6 +69,7 @@ const funds = [{
   minInvestment: "R 5,000",
   route: "/funds/myschool"
 }];
+
 const ImpactFunds = () => {
   return <Layout>
       <Helmet>
@@ -177,11 +179,15 @@ const ImpactFunds = () => {
               <div className="grid md:grid-cols-2 gap-8 items-center mb-8">
                 <div>
                   <p className="text-lg leading-relaxed mb-6">
-                    Thembi is a call centre agent in Johannesburg, earning R8,000 monthly. Like many South Africans, 
-                    she dreams of owning businesses but thought it was out of reach. Now, we're helping her create a 
-                    path to business ownership through MCA Direct.
+                    Thembi is a dedicated call centre agent in Johannesburg, earning R8,000 monthly. Like many South Africans, 
+                    she wants to build additional income streams and create long-term financial security. Our innovative MCA Direct 
+                    program offers her a path to business ownership without the complexity of managing day-to-day operations.
                   </p>
-                  <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158" alt="Young professional working at a desk" className="rounded-lg w-full shadow-lg mb-6" />
+                  <img 
+                    src="/lovable-uploads/697f3367-6bf9-47c7-8610-d21869a0d029.png" 
+                    alt="Call centre agent with headset smiling" 
+                    className="rounded-lg w-full shadow-lg mb-6 object-cover h-96" 
+                  />
                 </div>
 
                 <div className="bg-white/10 p-6 rounded-xl">
@@ -234,8 +240,6 @@ const ImpactFunds = () => {
               </div>
             </div>
           </div>
-
-          
 
           <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
             <div className="grid md:grid-cols-2">
