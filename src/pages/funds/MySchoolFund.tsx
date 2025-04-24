@@ -9,64 +9,64 @@ const MySchoolFund = () => {
     <Layout>
       <Helmet>
         <title>MySchool Impact Fund | LMCA</title>
-        <meta name="description" content="Investing in quality education infrastructure and learning institutions to enhance community development through education." />
+        <meta name="description" content="Own schools and training centers that help our communities grow through education." />
       </Helmet>
       
       <FundEducationalPage
         fundName="MySchool Impact Fund"
-        description="Focus: Investing in quality education infrastructure and learning institutions to enhance community development through education."
+        description="Own schools and training centers that help our communities grow through education."
         bgGradient="from-indigo-700 to-indigo-900"
         image="https://images.unsplash.com/photo-1497633762265-9d179a990aa6"
         focus={[
-          "Educational facilities",
-          "Learning resources",
-          "Skills development centers"
+          "Schools and learning centers",
+          "Teaching resources",
+          "Skills training centers"
         ]}
         minInvestment="R 1,500"
         businessModel={{
-          title: "How Your Education Business Makes Money",
-          description: "Your investment in education creates sustainable revenue through:",
+          title: "How Your School Makes Money",
+          description: "Your education business brings in money while helping people learn:",
           steps: [
             {
-              title: "Education Services",
-              description: "Your schools earn through providing quality education and training",
+              title: "Teaching Services",
+              description: "Your schools earn by providing quality education and training",
               icon: "briefcase"
             },
             {
-              title: "Community Integration",
-              description: "Your facilities can train workers for our other business ventures",
+              title: "Working Together",
+              description: "Your centers can train workers for our other businesses - everyone wins!",
               icon: "users"
             },
             {
-              title: "Resource Optimization",
-              description: "Additional income through resource sharing and facility usage",
+              title: "Smart Use",
+              description: "Extra money comes from sharing resources and using facilities wisely",
               icon: "banknote"
             }
           ]
         }}
         professionalSupport={{
-          title: "Your Professional Business Support Team",
-          description: "Expert educational management support:",
+          title: "Your School Management Team",
+          description: "Expert help to run everything smoothly:",
           services: [
             {
-              title: "Education Management",
-              description: "Professional educators and administrators handle operations",
+              title: "School Management",
+              description: "Professional educators and managers handle daily operations",
               icon: "chartBar"
             },
             {
-              title: "Financial Control",
-              description: "Education finance specialists manage accounting and reporting",
+              title: "Money Management",
+              description: "Education finance experts handle the money side",
               icon: "fileText"
             }
           ]
         }}
         reporting={{
-          frequency: "Quarterly",
+          frequency: "Every 3 months",
           reports: [
-            "Educational performance metrics",
-            "Financial statements",
-            "Student progress reports",
-            "Community impact assessments"
+            "How well students are doing",
+            "Money reports",
+            "School progress updates",
+            "How you're helping the community"
           ]
         }}
       />
@@ -75,3 +75,4 @@ const MySchoolFund = () => {
 };
 
 export default MySchoolFund;
+

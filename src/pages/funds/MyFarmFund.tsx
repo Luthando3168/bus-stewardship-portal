@@ -1,3 +1,4 @@
+
 import React from "react";
 import FundEducationalPage from "@/components/funds/FundEducationalPage";
 
@@ -5,48 +6,48 @@ const MyFarmFund = () => {
   return (
     <FundEducationalPage
       fundName="MyFarm"
-      description="Focus: Supporting sustainable agriculture and farming businesses across South Africa."
+      description="Own farms that feed our communities and make you money - all professionally managed."
       bgGradient="from-green-700 to-green-900"
       image="https://images.unsplash.com/photo-1593113646773-028c64a8f1b8"
       focus={[
-        "Sustainable farming operations",
-        "Food security projects",
-        "Organic and mixed-crop ventures"
+        "Smart farming operations",
+        "Growing food for communities",
+        "Mixed farming projects"
       ]}
       minInvestment="R 1,000"
       businessModel={{
-        title: "How Your Farm Business Makes Money",
-        description: "When you invest in MyFarm, you're not just buying shares - you're becoming an owner in a complete farming ecosystem:",
+        title: "How Your Farm Makes Money",
+        description: "When you invest in MyFarm, you're not just buying a piece of land - you're joining a whole farming business system:",
         steps: [
           {
-            title: "Farm Operations",
-            description: "Your capital is used to invest in multiple agricultural farms that grow crops and raise livestock",
+            title: "Growing Food",
+            description: "Your money helps run farms that grow food and raise animals",
             icon: "briefcase"
           },
           {
-            title: "Distribution Network",
-            description: "Your farms sell products through our network of retail outlets (which you can also own through MyFoodRetail Fund)",
+            title: "Selling Smart",
+            description: "Your farms sell food through our own shops (which you can also own through MyFoodRetail)",
             icon: "users"
           },
           {
-            title: "Profit Sharing",
-            description: "When customers buy from our retail outlets, the money goes back to your farming business, creating a cycle of growth",
+            title: "Extra Profit",
+            description: "When people buy from our shops, money goes back to your farming business - it all works together!",
             icon: "banknote"
           }
         ]
       }}
       professionalSupport={{
-        title: "Your Professional Business Support Team",
-        description: "As a business owner, you get the same professional support as large corporations:",
+        title: "Your Farm Management Team",
+        description: "You get the same professional help as big farming companies:",
         services: [
           {
-            title: "Professional Accounting",
-            description: "Expert accountants handle all financial records and tax matters with SARS",
+            title: "Money Management",
+            description: "Expert accountants handle your books and SARS matters",
             icon: "chartBar"
           },
           {
-            title: "Financial Audits",
-            description: "Independent auditors verify our work and financial reports twice a year",
+            title: "Regular Checks",
+            description: "Independent experts check your farm's books twice a year",
             icon: "fileText"
           }
         ]
@@ -54,10 +55,10 @@ const MyFarmFund = () => {
       reporting={{
         frequency: "Every 6 months",
         reports: [
-          "Audited financial statements",
-          "Tax compliance reports",
-          "Farm performance metrics",
-          "Environmental impact assessments"
+          "Professional money reports",
+          "Tax paperwork",
+          "How well your farms are doing",
+          "How you're helping the environment"
         ]
       }}
     />
@@ -65,3 +66,4 @@ const MyFarmFund = () => {
 };
 
 export default MyFarmFund;
+

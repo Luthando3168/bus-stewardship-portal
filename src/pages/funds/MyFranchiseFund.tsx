@@ -6,48 +6,48 @@ const MyFranchiseFund = () => {
   return (
     <FundEducationalPage
       fundName="MyFranchise"
-      description="Focus: Investing in franchise businesses with proven operational models, creating jobs and business skills."
+      description="Own famous brand stores like Steers or Debonairs - we handle everything while you earn."
       bgGradient="from-red-600 to-red-800"
-      image="/lovable-uploads/e5869f22-682c-4c5c-bd33-5a19766a95cf.png" // Updated hamburger image
+      image="/lovable-uploads/e5869f22-682c-4c5c-bd33-5a19766a95cf.png"
       focus={[
-        "Food franchise outlets",
-        "Retail and service franchises",
-        "Entrepreneurship development"
+        "Well-known food franchises",
+        "Retail store franchises",
+        "Job creation"
       ]}
       minInvestment="R 5,000"
       businessModel={{
-        title: "How Your Franchise Business Makes Money",
-        description: "Your investment in franchises creates a network of proven businesses:",
+        title: "How Your Franchise Makes Money",
+        description: "Your franchise investment works in proven ways:",
         steps: [
           {
-            title: "Multiple Locations",
-            description: "Your capital is used to establish franchise outlets in strategic locations",
+            title: "Multiple Stores",
+            description: "Your money helps open franchise stores in busy areas",
             icon: "briefcase"
           },
           {
-            title: "Ecosystem Integration",
-            description: "Your franchises can be located in our MyProperty buildings and source from MyFarm",
+            title: "Smart Business Mix",
+            description: "Your franchises can be in our MyProperty buildings and get food from MyFarm",
             icon: "users"
           },
           {
-            title: "Daily Operations",
-            description: "Every customer transaction generates income, with proven business models reducing risk",
+            title: "Daily Sales",
+            description: "Every customer that buys means money for you - and these are trusted brands people love",
             icon: "banknote"
           }
         ]
       }}
       professionalSupport={{
-        title: "Your Professional Business Support Team",
-        description: "Comprehensive franchise management support:",
+        title: "Your Franchise Support Team",
+        description: "We handle all the daily work:",
         services: [
           {
-            title: "Operations Management",
-            description: "Professional managers handle daily operations and staff training",
+            title: "Store Management",
+            description: "Professional managers run the stores and train staff",
             icon: "chartBar"
           },
           {
-            title: "Financial Control",
-            description: "Expert accountants and auditors ensure proper financial management",
+            title: "Money Management",
+            description: "Expert accountants make sure your money is handled properly",
             icon: "fileText"
           }
         ]
@@ -55,10 +55,10 @@ const MyFranchiseFund = () => {
       reporting={{
         frequency: "Every 6 months",
         reports: [
-          "Audited financial statements",
-          "Franchise performance metrics",
-          "Customer satisfaction surveys",
-          "Growth and expansion plans"
+          "Professional money reports",
+          "How well your stores are doing",
+          "What customers think",
+          "Plans to grow bigger"
         ]
       }}
     />
@@ -66,3 +66,4 @@ const MyFranchiseFund = () => {
 };
 
 export default MyFranchiseFund;
+

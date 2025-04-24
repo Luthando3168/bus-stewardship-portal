@@ -9,53 +9,53 @@ const MyTelcoFund = () => {
     <Layout>
       <Helmet>
         <title>MyTelco Impact Fund | LMCA</title>
-        <meta name="description" content="Investing in telecommunications infrastructure and services to provide affordable connectivity solutions." />
+        <meta name="description" content="Own internet and phone businesses that connect our communities." />
       </Helmet>
       
       <FundEducationalPage
         fundName="MyTelco Impact Fund"
-        description="Focus: Investing in telecommunications infrastructure and services to provide affordable connectivity solutions."
+        description="Own internet and phone businesses that connect our communities."
         bgGradient="from-blue-500 to-blue-800"
         image="https://images.unsplash.com/photo-1563770660941-20978e870e26"
         focus={[
           "Mobile network services",
-          "Internet connectivity",
-          "Digital infrastructure"
+          "Internet connections",
+          "Digital solutions"
         ]}
         minInvestment="R 2,500"
         businessModel={{
           title: "How Your Telco Business Makes Money",
-          description: "Your investment in telecommunications creates multiple revenue streams:",
+          description: "Your telecom investment brings in money in different ways:",
           steps: [
             {
               title: "Network Services",
-              description: "Your MVNO business earns from selling airtime, data, and voice services",
+              description: "Your business makes money selling airtime, data, and calls",
               icon: "briefcase"
             },
             {
-              title: "Ecosystem Integration",
-              description: "Your telco services can be used across our other business ventures",
+              title: "Working Together",
+              description: "Your services can be used by all our other businesses too",
               icon: "users"
             },
             {
-              title: "Digital Solutions",
-              description: "Additional revenue through value-added services and digital solutions",
+              title: "Extra Services",
+              description: "Make more money through special digital services",
               icon: "banknote"
             }
           ]
         }}
         professionalSupport={{
-          title: "Your Professional Business Support Team",
-          description: "Expert telecommunications and technical support:",
+          title: "Your Telco Management Team",
+          description: "Expert help at your service:",
           services: [
             {
-              title: "Technical Management",
-              description: "Professional network operators handle service delivery and maintenance",
+              title: "Technical Support",
+              description: "Professional network operators keep everything running smoothly",
               icon: "chartBar"
             },
             {
-              title: "Financial Control",
-              description: "Regular audits and financial reporting ensure transparency",
+              title: "Money Management",
+              description: "Regular checks to make sure your money is handled properly",
               icon: "fileText"
             }
           ]
@@ -63,10 +63,10 @@ const MyTelcoFund = () => {
         reporting={{
           frequency: "Monthly",
           reports: [
-            "Network performance metrics",
-            "Customer growth statistics",
-            "Revenue analysis",
-            "Service quality reports"
+            "How well the network is running",
+            "New customer numbers",
+            "Money reports",
+            "Service quality updates"
           ]
         }}
       />
@@ -75,3 +75,4 @@ const MyTelcoFund = () => {
 };
 
 export default MyTelcoFund;
+

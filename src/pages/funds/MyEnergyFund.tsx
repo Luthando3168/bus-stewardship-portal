@@ -9,64 +9,64 @@ const MyEnergyFund = () => {
     <Layout>
       <Helmet>
         <title>MyEnergy Impact Fund | LMCA</title>
-        <meta name="description" content="Investing in renewable energy solutions to provide clean power and energy efficiency for communities." />
+        <meta name="description" content="Own solar and power businesses that light up our communities." />
       </Helmet>
       
       <FundEducationalPage
         fundName="MyEnergy Impact Fund"
-        description="Focus: Investing in renewable energy solutions to provide clean power and energy efficiency for communities."
+        description="Own solar and power businesses that light up our communities."
         bgGradient="from-orange-600 to-amber-900"
         image="https://images.unsplash.com/photo-1521618755572-156ae0cdd74d"
         focus={[
-          "Solar power installations",
-          "Energy efficiency solutions",
-          "Alternative energy infrastructure"
+          "Solar power systems",
+          "Energy saving solutions",
+          "Power supply projects"
         ]}
         minInvestment="R 3,000"
         businessModel={{
           title: "How Your Energy Business Makes Money",
-          description: "Your investment in energy creates sustainable revenue through:",
+          description: "Your energy investment powers up profits in several ways:",
           steps: [
             {
-              title: "Energy Production",
-              description: "Your capital is used to set up renewable energy installations that generate electricity",
+              title: "Power Generation",
+              description: "Your money helps set up solar systems that make electricity",
               icon: "briefcase"
             },
             {
-              title: "Community Integration",
-              description: "Your energy systems can power our other business ventures, creating an ecosystem",
+              title: "Working Together",
+              description: "Your energy systems can power our other businesses - everyone saves!",
               icon: "users"
             },
             {
-              title: "Energy Sales",
-              description: "Income is generated through the sale of electricity and energy services to customers",
+              title: "Power Sales",
+              description: "Make money by selling electricity and energy services",
               icon: "banknote"
             }
           ]
         }}
         professionalSupport={{
-          title: "Your Professional Business Support Team",
-          description: "Expert energy management support:",
+          title: "Your Energy Management Team",
+          description: "Expert help to keep the lights on:",
           services: [
             {
-              title: "Technical Management",
-              description: "Professional engineers and technicians manage installation and maintenance",
+              title: "Technical Team",
+              description: "Professional engineers keep everything running smoothly",
               icon: "chartBar"
             },
             {
-              title: "Financial Oversight",
-              description: "Regular audits and financial reports ensure transparency",
+              title: "Money Management",
+              description: "Regular checks to make sure your money is working hard",
               icon: "fileText"
             }
           ]
         }}
         reporting={{
-          frequency: "Quarterly",
+          frequency: "Every 3 months",
           reports: [
-            "Energy production metrics",
-            "Financial statements",
-            "Carbon offset calculations",
-            "System efficiency reports"
+            "How much power you've made",
+            "Money reports",
+            "How much carbon you've saved",
+            "System performance updates"
           ]
         }}
       />
@@ -75,3 +75,4 @@ const MyEnergyFund = () => {
 };
 
 export default MyEnergyFund;
+
