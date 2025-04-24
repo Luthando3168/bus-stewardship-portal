@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -74,7 +73,6 @@ const Foundation = () => {
     }
   ];
 
-  // Find current program based on active tab
   const currentProgram = programs.find(p => p.id === activeTab) || programs[0];
 
   const handleTabChange = (value: string) => {
@@ -244,6 +242,34 @@ const Foundation = () => {
                     Through our foundation programs, we strive to create meaningful, measurable impact in the communities 
                     we serve. We rigorously track outcomes and regularly publish impact reports to ensure transparency 
                     and accountability to our stakeholders.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div>
+              <h3 className="text-2xl font-bold text-navyblue mb-6">Our Impact Targets</h3>
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div className="text-center">
+                      <p className="text-3xl font-bold text-gold">2,500+</p>
+                      <p className="text-sm text-muted-foreground">Youth to be trained in digital skills by 2026</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-3xl font-bold text-gold">500+</p>
+                      <p className="text-sm text-muted-foreground">Small businesses to support by 2025</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-3xl font-bold text-gold">10</p>
+                      <p className="text-sm text-muted-foreground">Community development projects planned</p>
+                    </div>
+                  </div>
+                  <p>
+                    These ambitious targets reflect our commitment to creating meaningful, sustainable 
+                    impact in the communities we serve. We are dedicated to tracking our progress and 
+                    ensuring we meet or exceed these goals through strategic partnerships and focused 
+                    community development initiatives.
                   </p>
                 </CardContent>
               </Card>

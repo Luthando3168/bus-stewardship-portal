@@ -289,7 +289,7 @@ const ImpactFunds = () => {
                 <div className="space-y-3 py-2">
                   <div className="flex items-center gap-3">
                     <Phone className="text-gold" size={20} />
-                    <span>Call us: 087 624 3204</span>
+                    <span>062 019 3208</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Calendar className="text-gold" size={20} />
