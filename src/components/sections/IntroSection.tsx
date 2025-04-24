@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SectionTitle from '@/components/ui/SectionTitle';
@@ -41,7 +42,12 @@ const IntroSection = () => {
           </div>
 
           <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
-            <h2 className="text-2xl font-bold text-navyblue text-center mb-8">Featured Business Types</h2>
+            <h2 className="text-2xl font-bold text-navyblue text-center mb-4">Featured Business Types</h2>
+            <p className="text-gray-700 text-center max-w-3xl mx-auto mb-8">
+              As a registered client on MCA Direct, you can participate in any of these professionally managed 
+              businesses. Each business type offers unique opportunities to grow your wealth while contributing 
+              to community development.
+            </p>
             
             <div className="grid gap-4 md:gap-6 md:grid-cols-3 mb-8">
               <Card className="p-6 transition-all duration-300 hover:shadow-lg bg-gradient-to-br from-amber-50 to-amber-100">
@@ -70,14 +76,17 @@ const IntroSection = () => {
             </div>
 
             <div className="text-center space-y-4">
-              <p className="text-gray-700 max-w-2xl mx-auto">
-                Our platform allows you to become a co-owner of diverse businesses across multiple sectors. 
-                Each featured business type represents an opportunity to invest in and support local economic growth. 
-                Through our carefully curated investment options, you can diversify your portfolio and contribute to community development.
-              </p>
-              <p className="text-gray-700 max-w-2xl mx-auto">
-                View more investment categories and find the perfect business type that aligns with your financial goals and interests.
-              </p>
+              <div className="bg-gray-50 rounded-lg p-6 max-w-3xl mx-auto">
+                <h3 className="text-lg font-semibold text-navyblue mb-3">How You Can Participate:</h3>
+                <p className="text-gray-700 mb-4">
+                  Our platform allows you to become a co-owner of these diverse businesses across multiple sectors. 
+                  Simply register, choose your preferred business type, and start with as little as R500 monthly savings. 
+                  Our professional team handles all the management while you build your business portfolio.
+                </p>
+                <p className="text-gray-700">
+                  View more investment categories and find the perfect business type that aligns with your financial goals and interests.
+                </p>
+              </div>
               <Link 
                 to="/impact-funds" 
                 className="inline-flex items-center gap-2 px-6 py-3 bg-navyblue text-white rounded-lg hover:bg-blue-800 transition-colors"
