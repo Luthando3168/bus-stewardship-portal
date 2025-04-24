@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/ui/icons";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface SocialLoginProps {
   onError: (error: string) => void;
@@ -14,6 +14,7 @@ interface SocialLoginProps {
 const SocialLogin = ({ onError }: SocialLoginProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Check for authentication errors on component mount
   useEffect(() => {
@@ -26,7 +27,32 @@ const SocialLogin = ({ onError }: SocialLoginProps) => {
       onError(error);
       toast.error(`Login failed: ${error}`);
     }
-  }, [location, onError]);
+    
+    // Check for successful auth
+    const checkForAuth = async () => {
+      const { data } = await supabase.auth.getSession();
+      if (data?.session) {
+        console.log("Session detected after social auth redirect");
+        const role = data.session.user?.user_metadata?.role || 'user';
+        toast.success("Successfully logged in");
+        
+        // Ensure we navigate to the dashboard of the current site
+        setTimeout(() => {
+          if (role === 'admin') {
+            navigate('/admin/dashboard');
+          } else {
+            navigate('/user/dashboard');
+          }
+        }, 300);
+      }
+    };
+    
+    // Only run this if we detect we might be in a redirect situation
+    const hash = window.location.hash;
+    if (hash.includes('access_token') || hash.includes('id_token') || location.search.includes('code=')) {
+      checkForAuth();
+    }
+  }, [location, onError, navigate]);
 
   const handleSocialLogin = async (provider: 'google') => {
     try {
@@ -35,7 +61,8 @@ const SocialLogin = ({ onError }: SocialLoginProps) => {
       // Get the current window URL for proper redirect handling
       const currentURL = window.location.origin;
       
-      // Make sure we redirect to the login page of the current application
+      // IMPORTANT: Make sure we redirect back to THIS site, not the old one
+      // We use the full origin (protocol + hostname) to ensure correct redirection
       const redirectTo = `${currentURL}/login`;
       
       console.log(`Attempting ${provider} login with redirect to:`, redirectTo);
@@ -44,7 +71,7 @@ const SocialLogin = ({ onError }: SocialLoginProps) => {
         provider: provider,
         options: {
           redirectTo: redirectTo,
-          skipBrowserRedirect: false, // Ensure browser redirect happens
+          skipBrowserRedirect: false,
           queryParams: {
             prompt: 'select_account',
             access_type: 'offline' // Request refresh token
