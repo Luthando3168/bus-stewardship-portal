@@ -549,6 +549,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      check_leaked_password: {
+        Args: { password: string }
+        Returns: undefined
+      }
       is_admin: {
         Args: Record<PropertyKey, never>
         Returns: boolean

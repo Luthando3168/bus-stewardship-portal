@@ -6,3 +6,14 @@ verify_jwt = false
 
 [functions.send-contact-email]
 verify_jwt = false
+
+[auth.hooks.password]
+# Enable password security checks
+check_compromised_password = true
+min_password_length = 12
+
+# Set minimum password strength
+require_upper_case = true
+require_lower_case = true
+require_number = true
+require_special_char = true
