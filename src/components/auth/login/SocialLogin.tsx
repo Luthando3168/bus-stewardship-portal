@@ -1,10 +1,11 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/ui/icons";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { useLocation } from "react-router-dom";
 
 interface SocialLoginProps {
   onError: (error: string) => void;
@@ -12,6 +13,20 @@ interface SocialLoginProps {
 
 const SocialLogin = ({ onError }: SocialLoginProps) => {
   const [isLoading, setIsLoading] = useState(false);
+  const location = useLocation();
+
+  // Check for authentication errors on component mount
+  useEffect(() => {
+    // Parse URL for error information from auth redirect
+    const params = new URLSearchParams(location.search);
+    const error = params.get("error") || params.get("error_description");
+    
+    if (error) {
+      console.error("Authentication error from redirect:", error);
+      onError(error);
+      toast.error(`Login failed: ${error}`);
+    }
+  }, [location, onError]);
 
   const handleSocialLogin = async (provider: 'google') => {
     try {
@@ -35,7 +50,10 @@ const SocialLogin = ({ onError }: SocialLoginProps) => {
         }
       });
       
-      if (error) throw error;
+      if (error) {
+        console.error("OAuth error:", error.message);
+        throw error;
+      }
       
       if (data?.url) {
         console.log("Redirecting to OAuth provider URL:", data.url);
