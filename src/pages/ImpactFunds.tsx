@@ -166,11 +166,20 @@ const ImpactFunds = () => {
                 </p>
                 
                 <div className="bg-amber-50 p-4 rounded-md border border-amber-200">
-                  <h3 className="font-semibold text-xl mb-2">Bank-Managed Programme:</h3>
+                  <h3 className="font-semibold text-xl mb-2">Bank Partnership for Impact:</h3>
                   <p>
-                    Your money is kept safe in a dedicated bank account with one of South Africa's top four banks. 
-                    They work with LMCA to manage the Foundation's Impact Investment Programme, making sure your 
-                    money helps both you and our communities grow.
+                    Our foundation partners with a leading South African bank to ensure professional, transparent, and secure management of our Impact Investment Programme. 
+                    The bank provides critical infrastructure that enables our mission:
+                  </p>
+                  <ul className="list-disc pl-6 mt-2 space-y-2 text-gray-700">
+                    <li>Secure, dedicated account management for participant investments</li>
+                    <li>Rigorous financial compliance and regulatory oversight</li>
+                    <li>Professional fund tracking and reporting mechanisms</li>
+                    <li>Risk management and due diligence on potential business investments</li>
+                    <li>Independent financial auditing of foundation activities</li>
+                  </ul>
+                  <p className="mt-2 text-sm text-gray-600">
+                    This partnership ensures that every Rand invested is handled with the utmost integrity and professional care.
                   </p>
                 </div>
                 
