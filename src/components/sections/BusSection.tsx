@@ -68,14 +68,18 @@ const BusSection = () => {
 
           <div className="relative">
             <div className="aspect-w-4 aspect-h-3 relative z-10">
-              <div className="w-full h-full bg-navyblue rounded-lg overflow-hidden shadow-lg flex items-center justify-center">
-                <div className="text-gold text-8xl font-bold tracking-wider">
+              <div className="w-full h-full bg-gradient-to-br from-navyblue to-deepblue rounded-lg overflow-hidden shadow-2xl flex items-center justify-center">
+                <div 
+                  className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-black tracking-wider text-transparent bg-clip-text 
+                  bg-gradient-to-r from-gold via-lightgold to-gold 
+                  animate-pulse transform hover:scale-105 transition-transform duration-300"
+                >
                   BUS
                 </div>
               </div>
             </div>
             {/* Decorative elements */}
-            <div className="absolute -bottom-6 -right-6 w-full h-full border-4 border-gold rounded-lg z-0"></div>
+            <div className="absolute -bottom-6 -right-6 w-full h-full border-4 border-gold rounded-lg z-0 shadow-lg"></div>
           </div>
         </div>
       </div>
@@ -84,3 +88,4 @@ const BusSection = () => {
 };
 
 export default BusSection;
+
