@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { AlertCircle } from "lucide-react";
 import { useRegister } from "@/hooks/useRegister";
+import { validatePassword } from "@/utils/passwordUtils";
+import { PasswordStrengthIndicator } from "@/components/ui/PasswordStrengthIndicator";
 
 const RegisterForm = () => {
   const [email, setEmail] = useState("");
@@ -14,9 +16,19 @@ const RegisterForm = () => {
   const [fullName, setFullName] = useState("");
   const [isAgreeTerms, setIsAgreeTerms] = useState(false);
   const { isLoading, errorMessage, handleRegister } = useRegister();
+  const [passwordValidation, setPasswordValidation] = useState(validatePassword(""));
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newPassword = e.target.value;
+    setPassword(newPassword);
+    setPasswordValidation(validatePassword(newPassword));
+  };
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!passwordValidation.isValid) {
+      return;
+    }
     handleRegister(email, password, confirmPassword, fullName, isAgreeTerms);
   };
 
@@ -58,9 +70,15 @@ const RegisterForm = () => {
           id="password"
           type="password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={handlePasswordChange}
           required
         />
+        {password && (
+          <PasswordStrengthIndicator 
+            strength={passwordValidation.strength}
+            message={passwordValidation.message}
+          />
+        )}
       </div>
       
       <div className="space-y-2">
@@ -72,6 +90,9 @@ const RegisterForm = () => {
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
+        {confirmPassword && password !== confirmPassword && (
+          <p className="text-xs text-red-500">Passwords do not match</p>
+        )}
       </div>
       
       <div className="flex items-center space-x-2">
@@ -99,7 +120,7 @@ const RegisterForm = () => {
       <Button
         className="w-full bg-gold hover:bg-lightgold text-white"
         type="submit"
-        disabled={isLoading}
+        disabled={isLoading || !passwordValidation.isValid || password !== confirmPassword}
       >
         {isLoading ? "Creating account..." : "Create Account"}
       </Button>
