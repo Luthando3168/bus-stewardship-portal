@@ -179,40 +179,74 @@ const ImpactFunds = () => {
               
               <div className="space-y-6 text-gray-700 text-lg">
                 <p>
-                  Think of this like a shopping mall for businesses. Your R500/month gets saved in your personal 
-                  account until you decide which business you want to own.
+                  Through MCA Direct, you become part of the Luthando Maduna Foundation's Impact Investment Programme. 
+                  This programme helps you own real businesses while creating positive change in our communities.
                 </p>
                 
                 <div className="bg-amber-50 p-4 rounded-md border border-amber-200">
-                  <h3 className="font-semibold text-xl mb-2">Example for a Taxi Owner:</h3>
+                  <h3 className="font-semibold text-xl mb-2">Bank-Managed Programme:</h3>
                   <p>
-                    As a taxi owner, you already understand business. But instead of buying one whole new taxi for 
-                    R300,000, you can use just R500/month to own a small part of many different businesses.
+                    Your money is kept safe in a dedicated bank account with one of South Africa's top four banks. 
+                    They work with LMCA to manage the Foundation's Impact Investment Programme, making sure your 
+                    money helps both you and our communities grow.
                   </p>
+                </div>
+                
+                <div className="bg-green-50 p-4 rounded-md border border-green-200">
+                  <h3 className="font-semibold text-xl mb-2">Making Money While Making a Difference:</h3>
+                  <ul className="space-y-2">
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600">•</span>
+                      <span>Your businesses create jobs in communities that need them most</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600">•</span>
+                      <span>Young people get work experience and training</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600">•</span>
+                      <span>Communities get better access to services they need</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600">•</span>
+                      <span>As communities grow stronger, your businesses do better</span>
+                    </li>
+                  </ul>
                 </div>
                 
                 <ol className="space-y-4 list-decimal pl-5">
                   <li>
-                    <span className="font-medium">Save your money</span> - Every month, put R500 into your LMCA account
+                    <span className="font-medium">Save your money</span> - Every month, R500 goes into your dedicated 
+                    bank account created by LMCA with our partner bank. Based on your savings, you can choose which 
+                    businesses to own through MCA Direct.
                   </li>
                   <li>
-                    <span className="font-medium">Pick businesses</span> - Choose from farms, shops, properties or other businesses
+                    <span className="font-medium">Pick businesses</span> - Choose from farms, shops, properties or 
+                    other businesses that help build stronger communities
                   </li>
                   <li>
-                    <span className="font-medium">We handle everything</span> - Our professional team manages the businesses
+                    <span className="font-medium">We handle everything</span> - Our professional team manages the 
+                    businesses and makes sure they benefit both you and the community
                   </li>
                   <li>
-                    <span className="font-medium">You get profits</span> - When businesses make money, you get your share
+                    <span className="font-medium">You get profits</span> - When businesses make money, you get your 
+                    share, while knowing you're helping create jobs and opportunities
                   </li>
                 </ol>
                 
                 <div className="flex items-center justify-center my-6">
                   <div className="bg-navyblue text-white p-5 rounded-lg max-w-2xl">
-                    <h3 className="font-bold text-xl mb-3">Your Money Stays Safe Until You Decide</h3>
-                    <p>
-                      We don't touch your money until you say "YES" to a specific business. 
-                      It stays in your account until you choose where to invest it.
+                    <h3 className="font-bold text-xl mb-3">Want to Learn More About Your Impact?</h3>
+                    <p className="mb-4">
+                      Visit our Foundation page to see how your business ownership helps create positive 
+                      change in communities across South Africa.
                     </p>
+                    <Link 
+                      to="/foundation" 
+                      className="inline-block bg-gold text-white px-6 py-2 rounded-md hover:bg-amber-500 transition-colors"
+                    >
+                      Learn About Our Impact
+                    </Link>
                   </div>
                 </div>
               </div>
