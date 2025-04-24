@@ -1,8 +1,11 @@
+
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
+import { Helmet } from "react-helmet";
+import { ArrowRight, Banknote, Briefcase, Calendar, HandCoins, HelpCircle, Phone } from "lucide-react";
 
 const funds = [
   {
@@ -108,46 +111,59 @@ const funds = [
 const ImpactFunds = () => {
   return (
     <Layout>
+      <Helmet>
+        <title>Business Types You Can Own | LMCA</title>
+        <meta name="description" content="Browse different types of businesses you can co-own with as little as R500 per month. We handle all the management for you." />
+      </Helmet>
+      
       <div className="bg-gray-50 min-h-screen py-12">
         <div className="container mx-auto px-4">
           <SectionTitle 
-            title="Impact Funds" 
-            subtitle="Own multiple businesses that make a difference in your community"
+            title="Business Types You Can Own" 
+            subtitle="Choose which businesses you want to own - we'll manage everything"
             centered
           />
           
           <div className="max-w-4xl mx-auto mb-12 bg-white rounded-lg shadow-md p-6 md:p-8">
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-xl font-bold text-navyblue mb-4">Business Ownership Made Simple</h3>
-                <ul className="space-y-3 text-gray-700">
-                  <li className="flex items-center gap-2">
-                    • Save up in your account to reach minimum investment amounts
-                  </li>
-                  <li className="flex items-center gap-2">
-                    • Start with any amount and build your portfolio gradually
-                  </li>
-                  <li className="flex items-center gap-2">
-                    • Professional team manages operations
-                  </li>
-                  <li className="flex items-center gap-2">
-                    • Regular profit distributions based on funds available
-                  </li>
-                </ul>
+            <h2 className="text-2xl font-bold text-navyblue mb-6">How This Works - In Simple Terms</h2>
+            
+            <div className="space-y-6 text-gray-700 text-lg">
+              <p>
+                Think of this like a shopping mall for businesses. Your R500/month gets saved in your personal 
+                account until you decide which business you want to own.
+              </p>
+              
+              <div className="bg-amber-50 p-4 rounded-md border border-amber-200">
+                <h3 className="font-semibold text-xl mb-2">Example for a Taxi Owner:</h3>
+                <p>
+                  As a taxi owner, you already understand business. But instead of buying one whole new taxi for 
+                  R300,000, you can use just R500/month to own a small part of many different businesses.
+                </p>
               </div>
-              <div>
-                <h3 className="text-xl font-bold text-navyblue mb-4">Professional Support</h3>
-                <ul className="space-y-3 text-gray-700">
-                  <li className="flex items-center gap-2">
-                    • Expert financial management
-                  </li>
-                  <li className="flex items-center gap-2">
-                    • Dedicated business managers
-                  </li>
-                  <li className="flex items-center gap-2">
-                    • Regular performance updates
-                  </li>
-                </ul>
+              
+              <ol className="space-y-4 list-decimal pl-5">
+                <li>
+                  <span className="font-medium">Save your money</span> - Every month, put R500 into your LMCA account
+                </li>
+                <li>
+                  <span className="font-medium">Pick businesses</span> - Choose from farms, shops, properties or other businesses
+                </li>
+                <li>
+                  <span className="font-medium">We handle everything</span> - Our professional team manages the businesses
+                </li>
+                <li>
+                  <span className="font-medium">You get profits</span> - When businesses make money, you get your share
+                </li>
+              </ol>
+              
+              <div className="flex items-center justify-center my-6">
+                <div className="bg-navyblue text-white p-5 rounded-lg max-w-2xl">
+                  <h3 className="font-bold text-xl mb-3">Your Money Stays Safe Until You Decide</h3>
+                  <p>
+                    We don't touch your money until you say "YES" to a specific business. 
+                    It stays in your account until you choose where to invest it.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -171,7 +187,7 @@ const ImpactFunds = () => {
                   
                   <div className="space-y-4">
                     <div>
-                      <h4 className="font-semibold text-navyblue mb-2">Focus Areas:</h4>
+                      <h4 className="font-semibold text-navyblue mb-2">What You'll Own:</h4>
                       <ul className="list-disc pl-5 text-gray-700 space-y-1">
                         {fund.focus.map((item, i) => (
                           <li key={i}>{item}</li>
@@ -181,7 +197,7 @@ const ImpactFunds = () => {
                     
                     <div className="pt-4 border-t border-gray-100">
                       <div className="flex justify-between items-center mb-4">
-                        <span className="text-gray-600">Minimum investment:</span>
+                        <span className="text-gray-600">Start with:</span>
                         <span className="font-bold text-navyblue">{fund.minInvestment}</span>
                       </div>
                       
@@ -198,14 +214,66 @@ const ImpactFunds = () => {
             ))}
           </div>
           
-          <div className="text-center">
-            <Link 
-              to="/register" 
-              className="inline-block bg-gold text-white font-medium py-3 px-8 rounded-md hover:bg-amber-500 transition-colors"
-            >
-              Start Your Investment Journey
-            </Link>
+          <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+            <div className="grid md:grid-cols-2">
+              <div className="p-8 space-y-4">
+                <h3 className="text-2xl font-bold text-navyblue">Need Help Understanding?</h3>
+                <p className="text-gray-700">
+                  We know this might be new to you. Our team can explain everything in simple terms, 
+                  in your language, and answer all your questions.
+                </p>
+                <div className="space-y-3 py-2">
+                  <div className="flex items-center gap-3">
+                    <Phone className="text-gold" size={20} />
+                    <span>Call us: 087 624 3204</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Calendar className="text-gold" size={20} />
+                    <Link 
+                      to="/contact"
+                      className="flex items-center gap-1 text-navyblue font-medium hover:text-blue-700 transition-colors"
+                    >
+                      Book a free consultation <ArrowRight size={16} />
+                    </Link>
+                  </div>
+                </div>
+                
+                <Link 
+                  to="/register" 
+                  className="inline-block bg-gold text-white font-medium py-3 px-8 rounded-md hover:bg-amber-500 transition-colors mt-4"
+                >
+                  Start With R500/Month
+                </Link>
+              </div>
+              <div className="bg-navyblue p-8 text-white">
+                <h3 className="text-xl font-bold mb-4">Common Questions</h3>
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="font-medium flex items-center gap-2">
+                      <HelpCircle size={18} className="text-gold" /> 
+                      Do I need business experience?
+                    </h4>
+                    <p className="text-white/80 ml-6">No, our professionals handle everything.</p>
+                  </div>
+                  <div>
+                    <h4 className="font-medium flex items-center gap-2">
+                      <HelpCircle size={18} className="text-gold" /> 
+                      When do I get profits?
+                    </h4>
+                    <p className="text-white/80 ml-6">When the businesses make money, we share it with all co-owners.</p>
+                  </div>
+                  <div>
+                    <h4 className="font-medium flex items-center gap-2">
+                      <HelpCircle size={18} className="text-gold" /> 
+                      What if I want to stop?
+                    </h4>
+                    <p className="text-white/80 ml-6">You can sell your ownership back to us or to other members.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+          
         </div>
       </div>
     </Layout>
