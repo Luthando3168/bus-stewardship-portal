@@ -8,23 +8,23 @@ const Services = () => {
     {
       icon: <FileText className="w-12 h-12 text-gold" />,
       title: "Accounting & Bookkeeping",
-      description: "Our comprehensive accounting and bookkeeping services ensure accurate financial records, timely reporting, and compliance with regulatory requirements. We handle everything from daily transactions to financial statements.",
+      description: "As qualified money experts, we ensure your business runs properly and legally. We handle all financial records, reporting, and compliance requirements - think of us as your business doctors keeping everything healthy.",
       features: [
-        "Monthly bookkeeping",
+        "Daily financial management",
+        "Monthly bookkeeping and reconciliation",
         "Financial statements preparation",
-        "Management accounts",
-        "Payroll management",
-        "VAT returns"
+        "Payroll processing and management",
+        "Tax compliance and returns"
       ]
     },
     {
       icon: <Briefcase className="w-12 h-12 text-gold" />,
       title: "Tax Services",
-      description: "Expert tax planning and compliance services for individuals and businesses. We ensure optimal tax efficiency while maintaining full compliance with SARS regulations.",
+      description: "We make sure all money is counted correctly, taxes are handled properly, and everything is done according to SARS rules. Our expert team keeps you compliant while maximizing efficiency.",
       features: [
-        "Tax planning and strategy",
+        "Strategic tax planning",
         "Tax returns preparation",
-        "SARS compliance",
+        "SARS compliance management",
         "Tax dispute resolution",
         "International tax consulting"
       ]
@@ -32,19 +32,19 @@ const Services = () => {
     {
       icon: <ChartBar className="w-12 h-12 text-gold" />,
       title: "Business Development",
-      description: "Strategic guidance and support to help your business grow and thrive under our Business Under Stewardship (BUS) program.",
+      description: "Our team works hard to make businesses bigger and more profitable. We create and implement strategic plans that help your investment grow over time through our Business Under Stewardship (BUS) program.",
       features: [
-        "Business strategy development",
-        "Growth planning",
-        "Market analysis",
+        "Growth strategy development",
         "Performance monitoring",
-        "Business optimization"
+        "Market analysis and research",
+        "Business process optimization",
+        "Strategic partnership planning"
       ]
     },
     {
       icon: <Coins className="w-12 h-12 text-gold" />,
       title: "Corporate Finance",
-      description: "Comprehensive financial advisory services to help businesses make strategic investment decisions, secure funding, and optimize financial performance.",
+      description: "When businesses need more money to grow, we work with banks and other professionals to make it happen safely. Our comprehensive advisory services help secure funding and optimize financial performance.",
       features: [
         "Investment analysis",
         "Fund structuring",
@@ -56,7 +56,7 @@ const Services = () => {
     {
       icon: <Building className="w-12 h-12 text-gold" />,
       title: "Company Registration",
-      description: "Efficient company registration and secretarial services to establish and maintain your business entity in compliance with regulations.",
+      description: "We handle all the paperwork and ensure businesses follow all government rules. Our registration and compliance services keep your business legally sound so you don't have to worry about anything.",
       features: [
         "Company incorporation",
         "Statutory compliance",
@@ -68,7 +68,7 @@ const Services = () => {
     {
       icon: <Users className="w-12 h-12 text-gold" />,
       title: "Consulting & Advisory",
-      description: "Specialized consulting services provided by our team of professional chartered accountants, working across various industries.",
+      description: "When businesses face challenges, we use our experience as chartered accountants to solve problems and find new opportunities for growth. Our expert team provides guidance across various industries.",
       features: [
         "Strategic planning",
         "Risk management",
