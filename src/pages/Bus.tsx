@@ -3,60 +3,64 @@ import React from 'react';
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { Card, CardContent } from "@/components/ui/card";
-import { Check } from "lucide-react";
+import { HandShake, Users, FileText, Briefcase, BanknoteIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Bus = () => {
   const benefits = [
-    "24/7 access to our digital platform for business management",
-    "Complete accounting and financial oversight through MCA Direct",
-    "Automated tax planning and compliance monitoring",
-    "Digital business strategy tools and dashboards",
-    "Real-time performance reporting and analysis",
-    "Online access to our network of business opportunities",
-    "Digital integration with our impact fund investments",
-    "Streamlined operations with minimal manual intervention"
+    "You own real registered businesses, not just shares in a company",
+    "Your money stays in your account until you approve joining a business",
+    "Professional chartered accountants manage everything day-to-day",
+    "Regular updates and reports on your phone or computer",
+    "All paperwork and legal matters handled by our team",
+    "Support from banks and business experts",
+    "Official share certificates for every business you own",
+    "Monthly financial reports in simple language"
   ];
 
   const steps = [
     {
-      step: "Browse Impact Funds",
-      description: "Start by exploring our Impact Funds section to view available business opportunities - no registration required."
+      step: "Check Available Businesses",
+      description: "Browse through businesses you can own - from food shops to farms. No pressure to join until you're ready."
     },
     {
-      step: "Digital Registration",
-      description: "Create your account on our platform to access detailed business information and investment opportunities."
+      step: "Join with R500 Monthly",
+      description: "Your money goes to a special business bank account in your name. It stays there until you choose to join a business."
     },
     {
-      step: "Select Businesses",
-      description: "Once registered, browse and select the businesses you're interested in through our user-friendly MCA Direct platform."
+      step: "Get Professionally Screened",
+      description: "We check your details to make sure we match you with the right business opportunities. Think of it like a business marriage - we want it to last!"
     },
     {
-      step: "Engagement Letter",
-      description: "Sign a professional engagement letter that outlines our services, fee structure, and business management approach."
+      step: "Choose Your Business",
+      description: "Pick the type of business you want to own. We'll present real opportunities when they come up, and you decide if you want in."
     },
     {
-      step: "Automated Management",
-      description: "Access your business dashboard, view reports, and track performance through MCA Direct. Receive automated quarterly statements and bi-annual profit distributions."
+      step: "We Run Everything",
+      description: "Once you approve joining a business, our qualified team handles all the day-to-day work. You get your share certificate and regular updates."
     }
   ];
 
   const features = [
     {
-      title: "Self-Service Platform",
-      description: "Our digital platform allows you to manage your business investments entirely online, at your own pace."
+      title: "Like Having a Business Partner",
+      description: "We're like your business-savvy partner who handles all the hard work. You own it, we run it, and keep you informed.",
+      icon: HandShake
     },
     {
-      title: "User-Friendly Interface",
-      description: "Simple, intuitive design makes it easy for everyone, regardless of technical expertise, to navigate and manage their investments."
+      title: "Your Money Stays Safe",
+      description: "Your R500 monthly investment stays in your business bank account. It only moves when you say yes to a specific business deal.",
+      icon: BanknoteIcon
     },
     {
-      title: "Digital Reporting",
-      description: "Access real-time reports, financial statements, and profit distributions directly through your personalized dashboard."
+      title: "Professional Management",
+      description: "Our team of chartered accountants and business experts handle everything from staff to suppliers to taxes.",
+      icon: Users
     },
     {
-      title: "Guided Experience",
-      description: "Step-by-step guidance and tooltips throughout the platform help you make informed decisions with confidence."
+      title: "Clear Communication",
+      description: "Get simple, regular updates about your business. No complicated jargon - just straight talk about how things are going.",
+      icon: FileText
     }
   ];
 
@@ -65,108 +69,92 @@ const Bus = () => {
       <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <SectionTitle
-            title="Digital Business Management Platform"
-            subtitle="Your self-service portal for business ownership and management"
+            title="Business Under Stewardship (BUS)"
+            subtitle="Like having a professional business partner who does all the work"
             centered
           />
 
           {/* Key Message */}
-          <div className="flex justify-center">
-            <div className="bg-lightgray rounded-lg p-4 md:p-6 mt-4 mb-6 md:mb-8 text-center max-w-3xl w-full">
-              <p className="text-mobile-base md:text-lg font-semibold text-navyblue">
-                Start by exploring our Impact Funds to view available businesses. Register online to access our digital platform and begin your journey to business ownership - no initial consultation required.
+          <div className="flex justify-center mb-12">
+            <div className="bg-lightgray rounded-lg p-6 md:p-8 mt-4 text-center max-w-3xl w-full">
+              <p className="text-lg md:text-xl font-semibold text-navyblue">
+                "Think of BUS like this: You own the business, but instead of running it yourself, 
+                you have qualified accountants and banks as your partners who handle everything. 
+                You get the benefits of ownership without the daily stress."
               </p>
             </div>
           </div>
 
-          <div className="max-w-4xl mx-auto mt-8 md:mt-12 space-y-12 md:space-y-16">
-            {/* Digital Process */}
-            <div className="grid md:grid-cols-2 gap-8 items-start">
-              <div className="text-charcoal space-y-4">
-                <p className="text-mobile-base md:text-lg">
-                  Our digital platform enables you to browse, select, and manage businesses entirely online. View all available opportunities in our Impact Funds section before registering.
-                </p>
-              </div>
-              <div>
-                <p className="text-mobile-base md:text-lg mb-4">
-                  Once registered, our automated systems and professional team handle all operational aspects while you maintain full visibility through your personalized dashboard.
-                </p>
-                <Link 
-                  to="/impact-funds" 
+          {/* Features */}
+          <div className="grid md:grid-cols-2 gap-8 mb-16">
+            {features.map((feature, index) => (
+              <Card key={index} className="border-l-4 border-gold">
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-gold rounded-full p-2 text-white">
+                      <feature.icon size={24} />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-navyblue mb-2">{feature.title}</h3>
+                      <p className="text-charcoal">{feature.description}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* How It Works */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-bold text-navyblue mb-8 text-center">How BUS Works</h3>
+            <div className="space-y-6">
+              {steps.map((step, index) => (
+                <div key={index} className="flex gap-4 items-start bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                  <div className="flex-shrink-0 h-8 w-8 rounded-full bg-gold text-white flex items-center justify-center font-bold">
+                    {index + 1}
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold text-navyblue">{step.step}</h4>
+                    <p className="text-charcoal">{step.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Benefits */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-bold text-navyblue mb-8 text-center">What You Get</h3>
+            <div className="grid md:grid-cols-2 gap-6">
+              {benefits.map((benefit, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  <div className="h-6 w-6 rounded-full bg-gold text-white flex items-center justify-center flex-shrink-0 mt-1">
+                    ✓
+                  </div>
+                  <p className="text-charcoal">{benefit}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Call to Action */}
+          <div className="flex justify-center">
+            <div className="bg-lightgray p-8 rounded-lg text-center max-w-2xl w-full">
+              <h3 className="text-2xl font-bold text-navyblue mb-4">Ready to Own a Real Business?</h3>
+              <p className="text-lg mb-6">Start your journey with just R500 monthly. Your money stays safe until you approve a business deal.</p>
+              <div className="space-x-4">
+                <Link
+                  to="/how-we-work"
+                  className="inline-block px-6 py-3 bg-navyblue text-white rounded-lg hover:bg-blue-900 transition-colors"
+                >
+                  See How It Works
+                </Link>
+                <Link
+                  to="/register"
                   className="inline-block px-6 py-3 bg-gold text-white rounded-lg hover:bg-lightgold transition-colors"
                 >
-                  View Impact Funds
+                  Start Now
                 </Link>
-              </div>
-            </div>
-
-            {/* Benefits */}
-            <div>
-              <h3 className="text-mobile-xl md:text-2xl font-bold text-navyblue mb-6 text-center">Key Benefits</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {benefits.map((benefit, index) => (
-                  <div key={index} className="flex items-start">
-                    <div className="flex-shrink-0 h-6 w-6 bg-gold rounded-full flex items-center justify-center mt-1">
-                      <Check className="h-4 w-4 text-white" />
-                    </div>
-                    <p className="ml-3 text-mobile-base md:text-base">{benefit}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* How It Works */}
-            <div>
-              <h3 className="text-mobile-xl md:text-2xl font-bold text-navyblue mb-6 text-center">Digital Onboarding Process</h3>
-              <div className="space-y-6">
-                {steps.map((step, index) => (
-                  <div key={index} className="flex">
-                    <div className="flex-shrink-0 h-8 w-8 rounded-full bg-navyblue text-white flex items-center justify-center font-bold text-mobile-base">
-                      {index + 1}
-                    </div>
-                    <div className="ml-4">
-                      <h4 className="text-mobile-lg md:text-lg font-semibold text-navyblue">{step.step}</h4>
-                      <p className="text-mobile-base md:text-base text-charcoal">{step.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Features */}
-            <div>
-              <h3 className="text-mobile-xl md:text-2xl font-bold text-navyblue mb-6 text-center">Program Features</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {features.map((feature, index) => (
-                  <Card key={index}>
-                    <CardContent className="pt-6">
-                      <h4 className="text-mobile-lg md:text-lg font-semibold text-navyblue mb-2">{feature.title}</h4>
-                      <p className="text-mobile-base md:text-base text-charcoal">{feature.description}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
-
-            {/* Call to Action */}
-            <div className="flex justify-center">
-              <div className="bg-lightgray p-6 md:p-8 rounded-lg text-center max-w-2xl w-full">
-                <h3 className="text-mobile-xl md:text-2xl font-bold text-navyblue mb-4">Ready to explore business ownership?</h3>
-                <p className="text-mobile-base md:text-lg mb-6">Start by browsing our Impact Funds - no registration required.</p>
-                <div className="space-x-4">
-                  <Link
-                    to="/impact-funds"
-                    className="inline-block px-6 py-3 bg-gold text-white rounded font-medium hover:bg-lightgold transition-colors text-mobile-base md:text-base"
-                  >
-                    Browse Impact Funds
-                  </Link>
-                  <Link
-                    to="/register"
-                    className="inline-block px-6 py-3 bg-navyblue text-white rounded font-medium hover:bg-blue-900 transition-colors text-mobile-base md:text-base"
-                  >
-                    Register Now
-                  </Link>
-                </div>
               </div>
             </div>
           </div>
