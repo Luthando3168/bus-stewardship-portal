@@ -74,23 +74,12 @@ const IntroSection = () => {
               </Card>
             </div>
 
-            <div className="text-center space-y-4">
-              <div className="bg-gray-50 rounded-lg p-6 max-w-3xl mx-auto">
-                <h3 className="text-lg font-semibold text-navyblue mb-3">How You Can Participate:</h3>
-                <p className="text-gray-700 mb-4">
-                  Our platform allows you to become a co-owner of these diverse businesses across multiple sectors. 
-                  Simply register, choose your preferred business type, and start with as little as R500 monthly savings. 
-                  Our professional team handles all the management while you build your business portfolio.
-                </p>
-                <p className="text-gray-700">
-                  View more investment categories and find the perfect business type that aligns with your financial goals and interests.
-                </p>
-              </div>
+            <div className="text-center mt-8">
               <Link 
-                to="/impact-funds" 
+                to="/how-we-work" 
                 className="inline-flex items-center gap-2 px-6 py-3 bg-navyblue text-white rounded-lg hover:bg-blue-800 transition-colors"
               >
-                See All Business Types <ArrowRight className="w-4 h-4" />
+                Learn How To Get Started <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </div>
