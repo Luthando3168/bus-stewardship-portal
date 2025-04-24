@@ -4,111 +4,72 @@ import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Helmet } from "react-helmet";
 import { ArrowRight, Calendar, HandCoins, HelpCircle, Phone, CircleDollarSign, Shield, ShieldCheck } from 'lucide-react';
-
-const funds = [
-  {
-    id: "myfarm",
-    name: "MyFarm",
-    description: "Supporting sustainable agriculture and farming businesses across South Africa.",
-    bgGradient: "from-green-700 to-green-900",
-    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
-    focus: [
-      "Sustainable farming operations",
-      "Food security projects",
-      "Mixed-crop ventures"
-    ],
-    minInvestment: "R 1,000",
-    route: "/funds/myfarm"
-  },
-  {
-    id: "myproperty",
-    name: "MyProperty",
-    description: "Investing in community-focused real estate, affordable housing and property businesses.",
-    bgGradient: "from-blue-700 to-blue-900",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
-    focus: [
-      "Affordable & mixed-use housing",
-      "Community property projects",
-      "Student accommodation"
-    ],
-    minInvestment: "R 2,000",
-    route: "/funds/myproperty"
-  },
-  {
-    id: "myfranchise",
-    name: "MyFranchise",
-    description: "Investing in franchise businesses with proven operational models, creating jobs and business skills.",
-    bgGradient: "from-red-600 to-red-800",
-    image: "/lovable-uploads/e5869f22-682c-4c5c-bd33-5a19766a95cf.png",
-    focus: [
-      "Food franchise outlets",
-      "Retail and service franchises",
-      "Entrepreneurship development"
-    ],
-    minInvestment: "R 5,000",
-    route: "/funds/myfranchise"
-  },
-  {
-    id: "myfoodretail",
-    name: "MyFoodRetail",
-    description: "Investing in mini shopping complexes and food retail businesses to improve access to quality food in underserved communities.",
-    bgGradient: "from-amber-600 to-amber-800",
-    image: "/lovable-uploads/0bf3e14d-cb74-4a37-b156-c269331b7a57.png",
-    focus: [
-      "Mini shopping complexes",
-      "Food distribution",
-      "Community markets"
-    ],
-    minInvestment: "R 5,000",
-    route: "/funds/myfoodretail"
-  },
-  {
-    id: "mytelco",
-    name: "MyTelco",
-    description: "Investing in telecommunications infrastructure and services to provide affordable connectivity solutions.",
-    bgGradient: "from-blue-500 to-blue-800",
-    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
-    focus: [
-      "Mobile network services",
-      "Internet connectivity",
-      "Digital infrastructure"
-    ],
-    minInvestment: "R 1,000",
-    route: "/funds/mytelco"
-  },
-  {
-    id: "myhealth",
-    name: "MyHealth",
-    description: "Investing in accessible healthcare solutions and medical facilities to improve community health outcomes.",
-    bgGradient: "from-pink-600 to-pink-900",
-    image: "https://images.unsplash.com/photo-1583324113626-70df0f4deaab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
-    focus: [
-      "Community health centers",
-      "Medical equipment",
-      "Healthcare services"
-    ],
-    minInvestment: "R 5,000",
-    route: "/funds/myhealth"
-  },
-  {
-    id: "myeducation",
-    name: "MySchool",
-    description: "Investing in quality education infrastructure and learning institutions to enhance community development through education.",
-    bgGradient: "from-indigo-700 to-indigo-900",
-    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
-    focus: [
-      "Educational facilities",
-      "Learning resources",
-      "Skills development centers"
-    ],
-    minInvestment: "R 5,000",
-    route: "/funds/myschool"
-  }
-];
-
+const funds = [{
+  id: "myfarm",
+  name: "MyFarm",
+  description: "Supporting sustainable agriculture and farming businesses across South Africa.",
+  bgGradient: "from-green-700 to-green-900",
+  image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
+  focus: ["Sustainable farming operations", "Food security projects", "Mixed-crop ventures"],
+  minInvestment: "R 1,000",
+  route: "/funds/myfarm"
+}, {
+  id: "myproperty",
+  name: "MyProperty",
+  description: "Investing in community-focused real estate, affordable housing and property businesses.",
+  bgGradient: "from-blue-700 to-blue-900",
+  image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
+  focus: ["Affordable & mixed-use housing", "Community property projects", "Student accommodation"],
+  minInvestment: "R 2,000",
+  route: "/funds/myproperty"
+}, {
+  id: "myfranchise",
+  name: "MyFranchise",
+  description: "Investing in franchise businesses with proven operational models, creating jobs and business skills.",
+  bgGradient: "from-red-600 to-red-800",
+  image: "/lovable-uploads/e5869f22-682c-4c5c-bd33-5a19766a95cf.png",
+  focus: ["Food franchise outlets", "Retail and service franchises", "Entrepreneurship development"],
+  minInvestment: "R 5,000",
+  route: "/funds/myfranchise"
+}, {
+  id: "myfoodretail",
+  name: "MyFoodRetail",
+  description: "Investing in mini shopping complexes and food retail businesses to improve access to quality food in underserved communities.",
+  bgGradient: "from-amber-600 to-amber-800",
+  image: "/lovable-uploads/0bf3e14d-cb74-4a37-b156-c269331b7a57.png",
+  focus: ["Mini shopping complexes", "Food distribution", "Community markets"],
+  minInvestment: "R 5,000",
+  route: "/funds/myfoodretail"
+}, {
+  id: "mytelco",
+  name: "MyTelco",
+  description: "Investing in telecommunications infrastructure and services to provide affordable connectivity solutions.",
+  bgGradient: "from-blue-500 to-blue-800",
+  image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
+  focus: ["Mobile network services", "Internet connectivity", "Digital infrastructure"],
+  minInvestment: "R 1,000",
+  route: "/funds/mytelco"
+}, {
+  id: "myhealth",
+  name: "MyHealth",
+  description: "Investing in accessible healthcare solutions and medical facilities to improve community health outcomes.",
+  bgGradient: "from-pink-600 to-pink-900",
+  image: "https://images.unsplash.com/photo-1583324113626-70df0f4deaab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
+  focus: ["Community health centers", "Medical equipment", "Healthcare services"],
+  minInvestment: "R 5,000",
+  route: "/funds/myhealth"
+}, {
+  id: "myeducation",
+  name: "MySchool",
+  description: "Investing in quality education infrastructure and learning institutions to enhance community development through education.",
+  bgGradient: "from-indigo-700 to-indigo-900",
+  image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
+  focus: ["Educational facilities", "Learning resources", "Skills development centers"],
+  minInvestment: "R 5,000",
+  route: "/funds/myschool"
+}];
 const ImpactFunds = () => {
-  return (
-    <Layout>
+  return <Layout>
       <Helmet>
         <title>Business Types You Can Own | LMCA</title>
         <meta name="description" content="Whether you're a call center agent, teacher or gogo - join us! Own real businesses with R500/month. We handle everything, your money stays safe in the bank." />
@@ -163,14 +124,9 @@ const ImpactFunds = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {funds.map((fund, index) => (
-              <Card key={index} className="group overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            {funds.map((fund, index) => <Card key={index} className="group overflow-hidden hover:shadow-lg transition-shadow duration-300">
                 <div className="relative h-48">
-                  <img
-                    src={fund.image}
-                    alt={fund.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
+                  <img src={fund.image} alt={fund.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                   <div className={`absolute inset-0 bg-gradient-to-br ${fund.bgGradient} opacity-60`}></div>
                   <h3 className="absolute bottom-0 left-0 right-0 p-4 text-xl font-bold text-white">
                     {fund.name}
@@ -183,9 +139,7 @@ const ImpactFunds = () => {
                     <div>
                       <h4 className="font-semibold text-navyblue mb-2">What You'll Own:</h4>
                       <ul className="list-disc pl-5 text-gray-700 space-y-1">
-                        {fund.focus.map((item, i) => (
-                          <li key={i}>{item}</li>
-                        ))}
+                        {fund.focus.map((item, i) => <li key={i}>{item}</li>)}
                       </ul>
                     </div>
                     
@@ -195,17 +149,13 @@ const ImpactFunds = () => {
                         <span className="font-bold text-navyblue">{fund.minInvestment}</span>
                       </div>
                       
-                      <Link 
-                        to={fund.route}
-                        className="block w-full text-center bg-navyblue text-white py-2 px-4 rounded-md hover:bg-blue-800 transition-colors"
-                      >
+                      <Link to={fund.route} className="block w-full text-center bg-navyblue text-white py-2 px-4 rounded-md hover:bg-blue-800 transition-colors">
                         Learn More
                       </Link>
                     </div>
                   </div>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
 
           <div className="text-center bg-gradient-to-r from-navyblue to-blue-900 text-white p-8 rounded-2xl shadow-lg mb-12">
@@ -214,10 +164,7 @@ const ImpactFunds = () => {
               Visit our Foundation page to see how your business ownership helps create positive 
               change in communities across South Africa.
             </p>
-            <Link 
-              to="/foundation" 
-              className="inline-flex items-center gap-2 bg-gold hover:bg-amber-500 text-white px-8 py-3 rounded-lg transition-colors font-semibold"
-            >
+            <Link to="/foundation" className="inline-flex items-center gap-2 bg-gold hover:bg-amber-500 text-white px-8 py-3 rounded-lg transition-colors font-semibold">
               Learn About Our Impact
               <ArrowRight className="w-5 h-5" />
             </Link>
@@ -234,11 +181,7 @@ const ImpactFunds = () => {
                     she dreams of owning businesses but thought it was out of reach. Now, we're helping her create a 
                     path to business ownership through MCA Direct.
                   </p>
-                  <img 
-                    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158" 
-                    alt="Young professional working at a desk" 
-                    className="rounded-lg w-full shadow-lg mb-6"
-                  />
+                  <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158" alt="Young professional working at a desk" className="rounded-lg w-full shadow-lg mb-6" />
                 </div>
 
                 <div className="bg-white/10 p-6 rounded-xl">
@@ -292,60 +235,7 @@ const ImpactFunds = () => {
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 shadow-lg">
-            <h3 className="text-2xl font-bold text-navyblue mb-6">
-              Meet Thembi: From Call Centre Agent to Business Owner
-            </h3>
-            <p className="text-gray-700 mb-6">
-              Thembi works as a call centre agent in Johannesburg, earning R8,000 monthly. Like many South Africans, 
-              she dreamed of owning businesses but thought it was out of reach. That's until she discovered MCA Direct.
-            </p>
-            
-            <div className="bg-white rounded-xl p-6 shadow-sm">
-              <h4 className="text-xl font-semibold text-navyblue mb-4">Here's How We Helped Thembi:</h4>
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <Calendar className="w-6 h-6 text-gold" />
-                  <div>
-                    <span className="font-medium text-navyblue">Smart Planning:</span>
-                    <p className="text-gray-600">
-                      We created a 6-month investment plan where Thembi saves just R500 monthly in her bank account.
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <Shield className="w-6 h-6 text-gold" />
-                  <div>
-                    <span className="font-medium text-navyblue">Bank Partnership:</span>
-                    <p className="text-gray-600">
-                      We worked with her bank to set up a dedicated savings pocket, making it easy to track her 
-                      progress towards business ownership.
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <CircleDollarSign className="w-6 h-6 text-gold" />
-                  <div>
-                    <span className="font-medium text-navyblue">Portfolio Building:</span>
-                    <p className="text-gray-600">
-                      After 6 months, Thembi had R3,000 saved. We helped her invest in:
-                    </p>
-                    <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-600">
-                      <li>A mini food outlet in her community (MyFoodRetail)</li>
-                      <li>A small share in a property trust (MyProperty)</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <p className="text-lg font-medium text-navyblue mt-6">
-              Today, Thembi still works her regular job while earning extra income from her business 
-              investments - all managed professionally by our team.
-            </p>
-          </div>
+          
 
           <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
             <div className="grid md:grid-cols-2">
@@ -362,19 +252,13 @@ const ImpactFunds = () => {
                   </div>
                   <div className="flex items-center gap-3">
                     <Calendar className="text-gold" size={20} />
-                    <Link 
-                      to="/contact"
-                      className="flex items-center gap-1 text-navyblue font-medium hover:text-blue-700 transition-colors"
-                    >
+                    <Link to="/contact" className="flex items-center gap-1 text-navyblue font-medium hover:text-blue-700 transition-colors">
                       Book a free consultation <ArrowRight size={16} />
                     </Link>
                   </div>
                 </div>
                 
-                <Link 
-                  to="/register" 
-                  className="inline-block bg-gold text-white font-medium py-3 px-8 rounded-md hover:bg-amber-500 transition-colors mt-4"
-                >
+                <Link to="/register" className="inline-block bg-gold text-white font-medium py-3 px-8 rounded-md hover:bg-amber-500 transition-colors mt-4">
                   Start With R500/Month
                 </Link>
               </div>
@@ -408,8 +292,6 @@ const ImpactFunds = () => {
           </div>
         </div>
       </div>
-    </Layout>
-  );
+    </Layout>;
 };
-
 export default ImpactFunds;
