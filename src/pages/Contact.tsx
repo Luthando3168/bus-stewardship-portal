@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from "@/components/layout/Layout";
 import { Card, CardContent } from "@/components/ui/card";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -7,12 +7,50 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: ''
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.id]: e.target.value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Message sent! We'll get back to you shortly.");
-    // In a real app, this would send the form data to a backend
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase.functions.invoke('send-contact-email', {
+        body: formData
+      });
+
+      if (error) throw error;
+
+      toast.success("Message sent! We'll get back to you shortly.");
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Error sending message:', error);
+      toast.error("Failed to send message. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -34,32 +72,62 @@ const Contact = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <label htmlFor="name" className="text-sm font-medium">Full Name</label>
-                        <Input id="name" placeholder="Your name" required />
+                        <Input 
+                          id="name" 
+                          value={formData.name}
+                          onChange={handleChange}
+                          placeholder="Your name" 
+                          required 
+                        />
                       </div>
                       <div className="space-y-2">
                         <label htmlFor="email" className="text-sm font-medium">Email Address</label>
-                        <Input id="email" type="email" placeholder="Your email" required />
+                        <Input 
+                          id="email" 
+                          type="email" 
+                          value={formData.email}
+                          onChange={handleChange}
+                          placeholder="Your email" 
+                          required 
+                        />
                       </div>
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="phone" className="text-sm font-medium">Phone Number</label>
-                      <Input id="phone" placeholder="Your phone number" />
+                      <Input 
+                        id="phone" 
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="Your phone number" 
+                      />
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="subject" className="text-sm font-medium">Subject</label>
-                      <Input id="subject" placeholder="What is this regarding?" required />
+                      <Input 
+                        id="subject" 
+                        value={formData.subject}
+                        onChange={handleChange}
+                        placeholder="What is this regarding?" 
+                        required 
+                      />
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="message" className="text-sm font-medium">Message</label>
                       <Textarea 
                         id="message" 
+                        value={formData.message}
+                        onChange={handleChange}
                         placeholder="Please provide details about your inquiry" 
                         rows={5}
                         required
                       />
                     </div>
-                    <Button type="submit" className="bg-gold hover:bg-lightgold text-white w-full">
-                      Send Message
+                    <Button 
+                      type="submit" 
+                      className="bg-gold hover:bg-lightgold text-white w-full"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Sending..." : "Send Message"}
                     </Button>
                   </form>
                 </CardContent>
