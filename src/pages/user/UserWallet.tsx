@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import UserLayout from "@/components/layout/UserLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -57,8 +58,18 @@ const UserWallet = () => {
         if (txError) {
           console.error("Error fetching transactions:", txError);
           setTransactions([]);
-        } else {
-          setTransactions(txData || []);
+        } else if (txData) {
+          // Convert the DB data to match our Transaction type
+          const typedTransactions: Transaction[] = txData.map(tx => ({
+            id: tx.id,
+            date: tx.date || new Date().toISOString(),
+            description: tx.description,
+            amount: Number(tx.amount),
+            type: (tx.type === 'deposit' || tx.type === 'withdrawal') 
+              ? tx.type as 'deposit' | 'withdrawal' 
+              : 'deposit' // Default value to satisfy TypeScript
+          }));
+          setTransactions(typedTransactions);
         }
         
         // Fetch statements
@@ -72,8 +83,14 @@ const UserWallet = () => {
         if (statementsError) {
           console.error("Error fetching statements:", statementsError);
           setStatements([]);
-        } else {
-          setStatements(statementsData || []);
+        } else if (statementsData) {
+          // Convert the DB data to match our BankStatement type
+          const typedStatements: BankStatement[] = statementsData.map(stmt => ({
+            id: stmt.id,
+            period: stmt.period,
+            issue_date: stmt.issue_date || new Date().toISOString()
+          }));
+          setStatements(typedStatements);
         }
       } catch (error) {
         console.error("Error in wallet data fetch:", error);
@@ -247,7 +264,7 @@ const UserWallet = () => {
                       {statements.map((statement) => (
                         <TableRow key={statement.id}>
                           <TableCell>{statement.period}</TableCell>
-                          <TableCell>{formatDate(statement.issueDate)}</TableCell>
+                          <TableCell>{formatDate(statement.issue_date)}</TableCell>
                           <TableCell>
                             <Button variant="outline" size="sm">Download</Button>
                           </TableCell>

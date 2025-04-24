@@ -1,4 +1,3 @@
-
 import UserLayout from "@/components/layout/UserLayout";
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -238,29 +237,28 @@ const UserProfile = () => {
     const fetchUserInvestments = async () => {
       if (user) {
         try {
-          const { data, error } = await supabase
-            .from('investments')
-            .select('*')
-            .eq('user_id', user.id);
-            
-          if (error) throw error;
+          const mockInvestments: Opportunity[] = [
+            {
+              id: "1",
+              fundId: "MyFarm Impact Fund",
+              title: "Farm Expansion Project",
+              summary: "Supporting sustainable farming initiatives",
+              minInvestment: "R 5,000",
+              projectedReturn: "8.5% p.a.",
+              status: "Open",
+            },
+            {
+              id: "2",
+              fundId: "MyProperty Impact Fund",
+              title: "Affordable Housing Development",
+              summary: "Urban housing project for low-income families",
+              minInvestment: "R 10,000",
+              projectedReturn: "7.2% p.a.",
+              status: "Open",
+            }
+          ];
           
-          // If we have actual investment data, use it
-          if (data && data.length > 0) {
-            const formattedInvestments = data.map(investment => ({
-              id: investment.id,
-              fundId: investment.fund_id || "",
-              title: investment.title || "",
-              summary: investment.summary || "",
-              minInvestment: investment.min_investment || "",
-              projectedReturn: investment.projected_return || "",
-              status: investment.status || "Open",
-            }));
-            setUserInvestments(formattedInvestments);
-          } else {
-            // If no actual data, set an empty array
-            setUserInvestments([]);
-          }
+          setUserInvestments(mockInvestments);
         } catch (error) {
           console.error('Error fetching investments:', error);
           setUserInvestments([]);

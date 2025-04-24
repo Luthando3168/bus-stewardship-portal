@@ -18,14 +18,11 @@ export const useUserInvestments = () => {
         setIsLoading(true);
         setError(null);
 
-        const { data, error: fetchError } = await supabase
-          .from('investments')
-          .select('*')
-          .eq('user_id', user.id);
+        // Using mock data for now as investments table doesn't exist yet
+        // We'll return a structured empty array that matches the Investment type
+        const mockInvestments: Investment[] = [];
 
-        if (fetchError) throw fetchError;
-
-        setInvestments(data || []);
+        setInvestments(mockInvestments);
       } catch (err) {
         console.error('Error fetching investments:', err);
         setError('Failed to load investments');
