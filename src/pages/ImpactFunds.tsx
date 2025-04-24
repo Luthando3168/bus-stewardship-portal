@@ -1,3 +1,4 @@
+
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -6,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const funds = [
   {
-    name: "MyFarm Impact Fund",
+    name: "MyFarm",
     description: "Supporting sustainable agriculture and farming businesses across South Africa.",
     bgGradient: "from-green-700 to-green-900",
     image: "https://images.unsplash.com/photo-1593113646773-028c64a8f1b8",
@@ -19,7 +20,7 @@ const funds = [
     route: "/funds/myfarm"
   },
   {
-    name: "MyProperty Impact Fund",
+    name: "MyProperty",
     description: "Investing in community-focused real estate, affordable housing and property businesses.",
     bgGradient: "from-blue-700 to-blue-900",
     image: "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11",
@@ -32,7 +33,7 @@ const funds = [
     route: "/funds/myproperty"
   },
   {
-    name: "MyFranchise Impact Fund",
+    name: "MyFranchise",
     description: "Investing in franchise businesses with proven operational models, creating jobs and business skills.",
     bgGradient: "from-red-600 to-red-800",
     image: "https://images.unsplash.com/photo-1577962917302-cd874c4e31d2",
@@ -45,7 +46,7 @@ const funds = [
     route: "/funds/myfranchise"
   },
   {
-    name: "MyFoodRetail Impact Fund",
+    name: "MyFoodRetail",
     description: "Investing in food retail businesses to improve access to quality food in underserved communities.",
     bgGradient: "from-amber-600 to-amber-800",
     image: "https://images.unsplash.com/photo-1604719312566-8912e9227c6a",
@@ -54,11 +55,11 @@ const funds = [
       "Food distribution",
       "Community markets"
     ],
-    minInvestment: "R 1,800",
+    minInvestment: "R 5,000",
     route: "/funds/myfoodretail"
   },
   {
-    name: "MyTelco Impact Fund",
+    name: "MyTelco",
     description: "Investing in telecommunications infrastructure and services to provide affordable connectivity solutions.",
     bgGradient: "from-blue-500 to-blue-800",
     image: "https://images.unsplash.com/photo-1563770660941-20978e870e26",
@@ -67,11 +68,11 @@ const funds = [
       "Internet connectivity",
       "Digital infrastructure"
     ],
-    minInvestment: "R 2,500",
+    minInvestment: "R 1,000",
     route: "/funds/mytelco"
   },
   {
-    name: "MyHealth Impact Fund",
+    name: "MyHealth",
     description: "Investing in accessible healthcare solutions and medical facilities to improve community health outcomes.",
     bgGradient: "from-pink-600 to-pink-900",
     image: "https://images.unsplash.com/photo-1538108149393-fbbd81895907",
@@ -80,11 +81,11 @@ const funds = [
       "Medical equipment",
       "Healthcare services"
     ],
-    minInvestment: "R 2,500",
+    minInvestment: "R 5,000",
     route: "/funds/myhealth"
   },
   {
-    name: "MySchool Impact Fund",
+    name: "MySchool",
     description: "Investing in quality education infrastructure and learning institutions to enhance community development through education.",
     bgGradient: "from-indigo-700 to-indigo-900",
     image: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6",
@@ -93,7 +94,7 @@ const funds = [
       "Learning resources",
       "Skills development centers"
     ],
-    minInvestment: "R 1,500",
+    minInvestment: "R 5,000",
     route: "/funds/myschool"
   }
 ];
@@ -115,13 +116,16 @@ const ImpactFunds = () => {
                 <h3 className="text-xl font-bold text-navyblue mb-4">Business Ownership Made Simple</h3>
                 <ul className="space-y-3 text-gray-700">
                   <li className="flex items-center gap-2">
-                    • Start with any amount and build your portfolio
+                    • Save up in your account to reach minimum investment amounts
+                  </li>
+                  <li className="flex items-center gap-2">
+                    • Start with any amount and build your portfolio gradually
                   </li>
                   <li className="flex items-center gap-2">
                     • Professional team manages operations
                   </li>
                   <li className="flex items-center gap-2">
-                    • Regular profit distributions
+                    • Regular profit distributions based on funds available
                   </li>
                 </ul>
               </div>
