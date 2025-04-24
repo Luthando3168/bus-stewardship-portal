@@ -19,7 +19,7 @@ const SocialLogin = ({ onError }: SocialLoginProps) => {
 
   // Check for authentication errors on component mount
   useEffect(() => {
-    // Parse URL for error information from auth redirect
+    // Parse URL for error information
     const params = new URLSearchParams(location.search);
     const error = params.get("error") || params.get("error_description");
     
@@ -64,9 +64,50 @@ const SocialLogin = ({ onError }: SocialLoginProps) => {
     }
   }, [location, onError, navigate]);
 
+  // Function to test Google domain connectivity
+  const testGoogleConnectivity = async () => {
+    try {
+      // Create a simple fetch request to test connectivity to Google
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+      
+      await fetch('https://accounts.google.com/favicon.ico', { 
+        mode: 'no-cors', // This is important for cross-origin requests
+        signal: controller.signal
+      });
+      
+      clearTimeout(timeoutId);
+      return true;
+    } catch (error: any) {
+      console.error("Google connectivity test failed:", error.message || "Unknown error");
+      return false;
+    }
+  };
+
+  // Test Google connectivity when component mounts
+  useEffect(() => {
+    testGoogleConnectivity().then(available => {
+      if (!available) {
+        console.log("Google services appear to be unavailable");
+        setGoogleAvailable(false);
+      } else {
+        console.log("Google services appear to be available");
+      }
+    });
+  }, []);
+
   const handleSocialLogin = async (provider: 'google') => {
     try {
       setIsLoading(true);
+      
+      // Test connectivity before attempting login
+      const isConnected = await testGoogleConnectivity();
+      if (!isConnected) {
+        toast.error("Cannot connect to Google authentication services. Please check your network connection or try email login instead.");
+        setGoogleAvailable(false);
+        onError("Connection to Google authentication services failed");
+        return;
+      }
       
       // Get the current window URL for proper redirect handling
       const currentURL = window.location.origin;
