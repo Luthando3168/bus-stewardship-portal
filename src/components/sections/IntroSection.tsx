@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SectionTitle from '@/components/ui/SectionTitle';
@@ -41,11 +42,10 @@ const IntroSection = () => {
           </div>
 
           <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
-            <h2 className="text-2xl font-bold text-navyblue text-center mb-4">Featured Business Types</h2>
+            <h2 className="text-2xl font-bold text-navyblue text-center mb-4">Featured Impact Funds</h2>
             <p className="text-gray-700 text-center max-w-3xl mx-auto mb-8">
-              As a registered client on MCA Direct, you can participate in any of these professionally managed 
-              businesses. Each business type offers unique opportunities to grow your wealth while contributing 
-              to community development.
+              Through our Impact Funds, you can participate in professionally managed businesses that create positive change in communities. 
+              Each fund offers unique opportunities to grow your wealth while building stronger neighborhoods.
             </p>
             
             <div className="grid gap-4 md:gap-6 md:grid-cols-3 mb-8">
