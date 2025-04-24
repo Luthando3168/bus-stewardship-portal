@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Store, Wheat, Home, ShoppingBag, GraduationCap, Zap, Phone, Stethoscope } from 'lucide-react';
@@ -88,105 +87,60 @@ const ImpactFundsShowcase = () => {
     <section className="py-16 bg-lightgray">
       <div className="container max-w-[1400px] mx-auto px-4">
         <SectionTitle
-          title="What Business Do You Want to Own?"
-          subtitle="Complete registration to access our secure business ownership platform"
+          title="Build Your Business Empire"
+          subtitle="Start with R500 monthly, own real businesses that work for you"
           centered
         />
         
-        <div className="mt-8 mb-12 grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-[1400px] mx-auto">
-          <div className="bg-white p-8 rounded-lg shadow-md space-y-6">
-            <h3 className="text-2xl font-bold text-navyblue">Required Documents for Registration</h3>
-            <ul className="list-none space-y-4">
-              <li className="flex items-center gap-3 text-lg">
-                <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
-                  <span className="text-blue-600 font-semibold">1</span>
-                </div>
-                <span>Valid South African ID or Passport</span>
-              </li>
-              <li className="flex items-center gap-3 text-lg">
-                <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
-                  <span className="text-blue-600 font-semibold">2</span>
-                </div>
-                <span>Proof of Address (not older than 3 months)</span>
-              </li>
-              <li className="flex items-center gap-3 text-lg">
-                <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
-                  <span className="text-blue-600 font-semibold">3</span>
-                </div>
-                <span>3 Months Bank Statements</span>
-              </li>
-              <li className="flex items-center gap-3 text-lg">
-                <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
-                  <span className="text-blue-600 font-semibold">4</span>
-                </div>
-                <span>Latest Payslip or Proof of Income</span>
-              </li>
-            </ul>
-          </div>
-
-          <div className="bg-white p-8 rounded-lg shadow-md space-y-6">
-            <h3 className="text-2xl font-bold text-navyblue">Registration Process</h3>
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center shrink-0">
-                  <span className="text-gold font-semibold">1</span>
-                </div>
-                <div>
-                  <p className="text-lg">Register online and submit required documents</p>
-                </div>
+        <div className="max-w-4xl mx-auto mb-12">
+          <div className="bg-white p-8 rounded-lg shadow-md text-center mb-12">
+            <h3 className="text-2xl font-bold text-navyblue mb-6">What Makes Us Different?</h3>
+            <div className="grid md:grid-cols-3 gap-6 text-left">
+              <div className="space-y-2">
+                <div className="text-gold text-xl font-bold">1.</div>
+                <h4 className="font-semibold text-lg">Real Businesses</h4>
+                <p className="text-gray-600">We don't do stocks or crypto. You own actual profitable businesses in your community.</p>
               </div>
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center shrink-0">
-                  <span className="text-gold font-semibold">2</span>
-                </div>
-                <div>
-                  <p className="text-lg">Our team verifies your information</p>
-                </div>
+              <div className="space-y-2">
+                <div className="text-gold text-xl font-bold">2.</div>
+                <h4 className="font-semibold text-lg">Professional Management</h4>
+                <p className="text-gray-600">Our team handles everything. You own it, we run it for you.</p>
               </div>
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center shrink-0">
-                  <span className="text-gold font-semibold">3</span>
-                </div>
-                <div>
-                  <p className="text-lg">Save R500 monthly in your secure bank account</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center shrink-0">
-                  <span className="text-gold font-semibold">4</span>
-                </div>
-                <div>
-                  <p className="text-lg">Choose businesses you want to own when ready</p>
-                </div>
+              <div className="space-y-2">
+                <div className="text-gold text-xl font-bold">3.</div>
+                <h4 className="font-semibold text-lg">Money Safety</h4>
+                <p className="text-gray-600">Your R500 stays in your account until you approve a specific business deal.</p>
               </div>
             </div>
           </div>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {fundCategories.map((fund) => (
-            <Link 
-              to={fund.route} 
-              key={fund.id}
-              className="group"
-            >
-              <Card className="p-6 hover:shadow-lg transition-all duration-300 h-full flex flex-col">
-                <div className={`w-12 h-12 rounded-full ${colorMap[fund.color]} flex items-center justify-center mb-4`}>
-                  <fund.icon className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-xl font-bold mb-2 text-navyblue">{fund.name}</h3>
-                <p className="text-gray-600 flex-grow">{fund.description}</p>
-                <div className="mt-4 pt-4 border-t border-gray-100">
-                  <span className="text-sm font-semibold text-gold flex items-center gap-1">
-                    Learn More
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </span>
-                </div>
-              </Card>
-            </Link>
-          ))}
+        <div className="mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {fundCategories.map((fund) => (
+              <Link 
+                to={fund.route} 
+                key={fund.id}
+                className="group"
+              >
+                <Card className="p-6 hover:shadow-lg transition-all duration-300 h-full flex flex-col">
+                  <div className={`w-12 h-12 rounded-full ${colorMap[fund.color]} flex items-center justify-center mb-4`}>
+                    <fund.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-2 text-navyblue">{fund.name}</h3>
+                  <p className="text-gray-600 flex-grow">{fund.description}</p>
+                  <div className="mt-4 pt-4 border-t border-gray-100">
+                    <span className="text-sm font-semibold text-gold flex items-center gap-1">
+                      Learn More
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </span>
+                  </div>
+                </Card>
+              </Link>
+            ))}
+          </div>
         </div>
         
         <div className="mt-12 text-center space-y-6">

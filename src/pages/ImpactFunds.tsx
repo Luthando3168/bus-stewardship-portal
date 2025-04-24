@@ -4,7 +4,7 @@ import SectionTitle from "@/components/ui/SectionTitle";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Helmet } from "react-helmet";
-import { ArrowRight, Banknote, Shield, ShieldCheck, HandCoins, HelpCircle, Phone, CircleDollarSign } from 'lucide-react';
+import { ArrowRight, Calendar, HandCoins, HelpCircle, Phone, CircleDollarSign, Shield, ShieldCheck } from 'lucide-react';
 
 const funds = [
   {
