@@ -233,6 +233,42 @@ const ImpactFunds = () => {
                 </div>
               </div>
             </div>
+
+            <div className="bg-gradient-to-br from-gold/10 to-amber-50 rounded-xl p-6 md:p-8 shadow-lg mb-8">
+              <h3 className="text-2xl font-bold text-navyblue mb-4">Meet Thembi: From Call Centre Agent to Business Owner</h3>
+              <div className="prose max-w-none text-gray-700">
+                <p className="mb-4">
+                  Thembi works as a call centre agent in Johannesburg, earning R8,000 monthly. Like many South Africans, 
+                  she dreamed of owning businesses but thought it was out of reach. That's until she discovered MCA Direct.
+                </p>
+                
+                <div className="bg-white rounded-lg p-6 my-6">
+                  <h4 className="text-xl font-semibold text-navyblue mb-3">Here's How We Helped Thembi:</h4>
+                  <ol className="list-decimal pl-4 space-y-3">
+                    <li>
+                      <strong>Smart Planning:</strong> We created a 6-month investment plan where Thembi saves just R500 monthly 
+                      in her bank account.
+                    </li>
+                    <li>
+                      <strong>Bank Partnership:</strong> We worked with her bank to set up a dedicated savings pocket, making 
+                      it easy to track her progress towards business ownership.
+                    </li>
+                    <li>
+                      <strong>Portfolio Building:</strong> After 6 months, Thembi had R3,000 saved. We helped her invest in:
+                      <ul className="list-disc pl-6 mt-2">
+                        <li>A mini food outlet in her community (MyFoodRetail)</li>
+                        <li>A small share in a property trust (MyProperty)</li>
+                      </ul>
+                    </li>
+                  </ol>
+                </div>
+
+                <p className="text-lg font-medium text-navyblue">
+                  Today, Thembi still works her regular job while earning extra income from her business investments - 
+                  all managed professionally by our team.
+                </p>
+              </div>
+            </div>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
