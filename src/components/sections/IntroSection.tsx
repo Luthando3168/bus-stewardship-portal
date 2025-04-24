@@ -15,7 +15,7 @@ const IntroSection = () => {
         />
         
         <div className="max-w-4xl mx-auto space-y-8">
-          <div className="bg-gradient-to-br from-navyblue to-blue-900 text-white rounded-xl p-8 shadow-xl">
+          <div className="bg-gradient-to-br from-navyblue to-blue-900 text-white rounded-xl p-6 md:p-8 shadow-xl">
             <div className="prose prose-lg prose-invert max-w-none">
               <p className="text-xl leading-relaxed mb-6">
                 MCA Direct is a special platform created by LMCA to help everyday South Africans own real businesses. 
@@ -23,7 +23,7 @@ const IntroSection = () => {
                 professionally managed businesses with just R500 monthly.
               </p>
               
-              <div className="grid md:grid-cols-2 gap-8 mb-8">
+              <div className="grid md:grid-cols-2 gap-6 md:gap-8">
                 <div>
                   <h3 className="text-xl font-semibold mb-3 text-gold">We Handle Everything</h3>
                   <p className="text-white/90">
@@ -41,21 +41,21 @@ const IntroSection = () => {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-lg p-8 space-y-8">
-            <h2 className="text-2xl font-bold text-navyblue text-center mb-8">Business Types You Can Own</h2>
+          <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 space-y-6 md:space-y-8">
+            <h2 className="text-2xl font-bold text-navyblue text-center mb-6 md:mb-8">Business Types You Can Own</h2>
             
-            <div className="grid gap-6">
-              <Card className="p-6">
-                <h3 className="text-xl font-bold text-navyblue mb-3">MyFoodRetail: Own Food Shops</h3>
+            <div className="grid gap-4 md:gap-6">
+              <Card className="p-6 transition-all duration-300 hover:shadow-lg">
+                <h3 className="text-xl font-bold text-navyblue mb-3">MyFoodRetail: Own Mini Shopping Complexes</h3>
                 <p className="text-gray-600 mb-4">
-                  Start with just R5,000 and own parts of spaza shops, food outlets, and grocery stores in your 
+                  Start with just R5,000 and own parts of mini shopping complexes, food outlets, and grocery stores in your 
                   community. These shops work together with our MyFarm businesses to get good prices on food, 
                   which means more profit for you. We handle everything - from managing staff to keeping the 
                   shops clean and well-stocked.
                 </p>
               </Card>
 
-              <Card className="p-6">
+              <Card className="p-6 transition-all duration-300 hover:shadow-lg">
                 <h3 className="text-xl font-bold text-navyblue mb-3">MyFarm: Own Farming Businesses</h3>
                 <p className="text-gray-600 mb-4">
                   With R1,000, you can own parts of farms that grow food for our communities. Your farms will 
@@ -64,7 +64,7 @@ const IntroSection = () => {
                 </p>
               </Card>
 
-              <Card className="p-6">
+              <Card className="p-6 transition-all duration-300 hover:shadow-lg">
                 <h3 className="text-xl font-bold text-navyblue mb-3">MyProperty: Own Money-Making Properties</h3>
                 <p className="text-gray-600 mb-4">
                   Start with R2,000 and own parts of properties that make money every month through rent. 
@@ -73,7 +73,7 @@ const IntroSection = () => {
                 </p>
               </Card>
 
-              <Card className="p-6">
+              <Card className="p-6 transition-all duration-300 hover:shadow-lg">
                 <h3 className="text-xl font-bold text-navyblue mb-3">MyFranchise: Own Famous Brand Stores</h3>
                 <p className="text-gray-600 mb-4">
                   With R5,000, own parts of well-known franchise stores like Steers or Debonairs. These are 
@@ -82,7 +82,7 @@ const IntroSection = () => {
                 </p>
               </Card>
 
-              <Card className="p-6">
+              <Card className="p-6 transition-all duration-300 hover:shadow-lg">
                 <h3 className="text-xl font-bold text-navyblue mb-3">MySchool: Own Educational Centers</h3>
                 <p className="text-gray-600 mb-4">
                   Start with R1,500 and own parts of schools and training centers. These help our communities 
@@ -91,7 +91,7 @@ const IntroSection = () => {
                 </p>
               </Card>
 
-              <Card className="p-6">
+              <Card className="p-6 transition-all duration-300 hover:shadow-lg">
                 <h3 className="text-xl font-bold text-navyblue mb-3">MyEnergy: Own Power Solutions</h3>
                 <p className="text-gray-600 mb-4">
                   With R3,000, own parts of solar and power businesses that help solve electricity problems. 
@@ -100,7 +100,7 @@ const IntroSection = () => {
                 </p>
               </Card>
 
-              <Card className="p-6">
+              <Card className="p-6 transition-all duration-300 hover:shadow-lg">
                 <h3 className="text-xl font-bold text-navyblue mb-3">MyTelco: Own Internet & Phone Services</h3>
                 <p className="text-gray-600 mb-4">
                   Start with R2,500 and own parts of internet and phone businesses. These make money by 
@@ -109,7 +109,7 @@ const IntroSection = () => {
                 </p>
               </Card>
 
-              <Card className="p-6">
+              <Card className="p-6 transition-all duration-300 hover:shadow-lg">
                 <h3 className="text-xl font-bold text-navyblue mb-3">MyHealth: Own Healthcare Services</h3>
                 <p className="text-gray-600 mb-4">
                   With R2,500, own parts of clinics and healthcare businesses that help keep our communities 
@@ -119,10 +119,10 @@ const IntroSection = () => {
               </Card>
             </div>
 
-            <div className="text-center mt-12">
+            <div className="text-center mt-8 md:mt-12">
               <Link 
                 to="/register"
-                className="inline-block px-8 py-4 bg-gold text-navyblue font-semibold rounded-lg hover:bg-lightgold transition-colors text-lg shadow-md"
+                className="inline-block px-6 md:px-8 py-3 md:py-4 bg-gold text-navyblue font-semibold rounded-lg hover:bg-lightgold transition-colors text-lg shadow-md"
               >
                 Start Your Business Journey
               </Link>

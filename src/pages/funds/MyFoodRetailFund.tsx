@@ -6,11 +6,11 @@ const MyFoodRetailFund = () => {
   return (
     <FundEducationalPage
       fundName="MyFoodRetail"
-      description="Own your own food shops and supply your community with quality food they can afford."
+      description="Own your own mini shopping complexes and supply your community with quality food they can afford."
       bgGradient="from-amber-600 to-amber-800"
       image="/lovable-uploads/0bf3e14d-cb74-4a37-b156-c269331b7a57.png"
       focus={[
-        "Your own grocery stores",
+        "Your own retail complexes",
         "Food supply network",
         "Community markets"
       ]}
@@ -20,8 +20,8 @@ const MyFoodRetailFund = () => {
         description: "Your money works for you in a complete food supply system:",
         steps: [
           {
-            title: "Running Your Shops",
-            description: "Your money helps set up and run food shops in different areas",
+            title: "Running Your Complexes",
+            description: "Your money helps set up and run mini shopping complexes in different areas",
             icon: "briefcase"
           },
           {
@@ -66,4 +66,3 @@ const MyFoodRetailFund = () => {
 };
 
 export default MyFoodRetailFund;
-

@@ -52,11 +52,11 @@ const funds = [
   {
     id: "myfoodretail",
     name: "MyFoodRetail",
-    description: "Investing in food retail businesses to improve access to quality food in underserved communities.",
+    description: "Investing in mini shopping complexes and food retail businesses to improve access to quality food in underserved communities.",
     bgGradient: "from-amber-600 to-amber-800",
     image: "/lovable-uploads/0bf3e14d-cb74-4a37-b156-c269331b7a57.png",
     focus: [
-      "Grocery stores",
+      "Mini shopping complexes",
       "Food distribution",
       "Community markets"
     ],
@@ -132,7 +132,7 @@ const ImpactFunds = () => {
                   in her bank account through our platform. After 6 months, she owned parts of:
                 </p>
                 <ul className="list-disc pl-6 space-y-2">
-                  <li>A spaza shop in Soweto (MyFoodRetail)</li>
+                  <li>A mini shopping complex in Soweto (MyFoodRetail)</li>
                   <li>A small farm in Mpumalanga (MyFarm)</li>
                   <li>Student housing in Pretoria (MyProperty)</li>
                 </ul>
