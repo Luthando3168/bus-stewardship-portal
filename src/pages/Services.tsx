@@ -44,7 +44,7 @@ const Services = () => {
     {
       icon: <Coins className="w-12 h-12 text-gold" />,
       title: "Corporate Finance",
-      description: "Comprehensive financial advisory services for corporate transactions, fundraising, and strategic investment decisions through Sankofa Capital Partners.",
+      description: "Comprehensive financial advisory services to help businesses make strategic investment decisions, secure funding, and optimize financial performance.",
       features: [
         "Investment analysis",
         "Fund structuring",
