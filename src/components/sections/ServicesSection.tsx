@@ -1,3 +1,4 @@
+
 import { Briefcase, FileText, ChartBar, Building, Users, Coins } from "lucide-react";
 import ServiceCard from "../ui/ServiceCard";
 import SectionTitle from "../ui/SectionTitle";
@@ -46,7 +47,7 @@ const ServicesSection = () => {
     <section className="py-20 bg-lightgray">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle 
-          title="What Do We Do For You?" 
+          title="What We Do For You as Chartered Accountants" 
           subtitle="We run the businesses you own. Our services are paid for by the business, not by you directly."
           centered
         />
