@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const Bus = () => {
   const benefits = [
     "You own real registered businesses, not just shares in a company",
-    "Your money stays in your account until you approve joining a business",
+    "Your R500 monthly stays in YOUR personal bank account until you approve joining a business",
     "Professional chartered accountants manage everything day-to-day",
     "Regular updates and reports on your phone or computer",
     "All paperwork and legal matters handled by our team",
@@ -24,8 +24,8 @@ const Bus = () => {
       description: "Browse through businesses you can own - from food shops to farms. No pressure to join until you're ready."
     },
     {
-      step: "Join with R500 Monthly",
-      description: "Your money goes to a special business bank account in your name. It stays there until you choose to join a business."
+      step: "Keep Money in Your Account",
+      description: "Your R500 monthly stays in YOUR personal bank account. It only moves when you personally approve a specific business opportunity."
     },
     {
       step: "Get Professionally Screened",
@@ -49,7 +49,7 @@ const Bus = () => {
     },
     {
       title: "Your Money Stays Safe",
-      description: "Your R500 monthly investment stays in your business bank account. It only moves when you say yes to a specific business deal.",
+      description: "Your R500 monthly investment stays in YOUR personal bank account. It only moves when you say yes to a specific business deal.",
       icon: BanknoteIcon
     },
     {
@@ -80,7 +80,7 @@ const Bus = () => {
               <p className="text-lg md:text-xl font-semibold text-navyblue">
                 "Think of BUS like this: You own the business, but instead of running it yourself, 
                 you have qualified accountants and banks as your partners who handle everything. 
-                You get the benefits of ownership without the daily stress."
+                Your money stays safely in YOUR bank account until you choose to invest."
               </p>
             </div>
           </div>
@@ -141,7 +141,7 @@ const Bus = () => {
           <div className="flex justify-center">
             <div className="bg-lightgray p-8 rounded-lg text-center max-w-2xl w-full">
               <h3 className="text-2xl font-bold text-navyblue mb-4">Ready to Own a Real Business?</h3>
-              <p className="text-lg mb-6">Start your journey with just R500 monthly. Your money stays safe until you approve a business deal.</p>
+              <p className="text-lg mb-6">Start your journey with just R500 monthly. Your money stays in YOUR bank account until you approve a business deal.</p>
               <div className="space-x-4">
                 <Link
                   to="/how-we-work"
