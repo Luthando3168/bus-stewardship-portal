@@ -13,7 +13,8 @@ const Hero = () => (
           Own Real Businesses.
         </h1>
         <p className="font-lato text-white/95 text-xl md:text-2xl max-w-2xl">
-          Whether you're a taxi driver, teacher, call center agent, or gogo - our platform is designed for everyone. Complete our registration process to access our business ownership platform. After verification, start saving R500 monthly in your bank account. Your money stays safe until you approve a deal.
+          Our platform empowers everyone to own multiple businesses with just R500 monthly. 
+          Simple, secure, and professionally managed.
         </p>
         <div className="flex flex-col sm:flex-row gap-4">
           <Link
