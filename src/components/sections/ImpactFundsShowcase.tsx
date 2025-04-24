@@ -19,13 +19,13 @@ const ImpactFundsShowcase = () => {
             <div className="grid md:grid-cols-3 gap-6 text-left">
               <div className="space-y-2">
                 <div className="text-gold text-xl font-bold">1.</div>
-                <h4 className="font-semibold text-lg">Choose Businesses</h4>
-                <p className="text-gray-600">Pick from our range of business types. You can own multiple!</p>
+                <h4 className="font-semibold text-lg">Quick Registration</h4>
+                <p className="text-gray-600">Simple registration process with basic documents needed</p>
               </div>
               <div className="space-y-2">
                 <div className="text-gold text-xl font-bold">2.</div>
-                <h4 className="font-semibold text-lg">Quick Registration</h4>
-                <p className="text-gray-600">Simple registration process with basic documents needed</p>
+                <h4 className="font-semibold text-lg">Choose Businesses</h4>
+                <p className="text-gray-600">Pick from our range of business types. You can own multiple!</p>
               </div>
               <div className="space-y-2">
                 <div className="text-gold text-xl font-bold">3.</div>
@@ -54,4 +54,3 @@ const ImpactFundsShowcase = () => {
 };
 
 export default ImpactFundsShowcase;
-
