@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Home, Info, HelpCircle, Briefcase, Bus, Building, DollarSign, PhoneCall, Mail, Phone, Facebook, Instagram, Linkedin } from "lucide-react";
@@ -147,37 +148,40 @@ const Header = () => {
   }
 
   return (
-    <header className="bg-white shadow-md fixed top-0 left-0 w-full z-30">
-      <nav className="container mx-auto flex items-center justify-between py-2 px-4">
+    <header className="bg-white shadow-md fixed top-0 left-0 w-full z-30 py-3">
+      <nav className="container mx-auto flex items-center justify-between px-4">
         <Link to="/" className="flex items-center">
           <Logo size="small" />
         </Link>
 
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-3">
+        <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4">
             {navLinks.map(link => (
               <Link
                 key={link.to}
                 to={link.to}
-                className={`text-sm text-gray-700 hover:text-navyblue font-medium ${
+                className={`text-sm text-gray-700 hover:text-navyblue font-medium transition-colors group relative ${
                   isActive(link.to) ? 'text-navyblue font-semibold' : ''
                 }`}
               >
                 {link.label}
+                <span className={`absolute bottom-[-4px] left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full ${
+                  isActive(link.to) ? 'w-full' : ''
+                }`}></span>
               </Link>
             ))}
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <Link
               to="/login"
-              className="bg-blue-600 text-white px-4 py-1.5 rounded text-sm hover:bg-blue-700 font-medium"
+              className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700 transition-colors font-medium"
             >
               Sign-in or Register
             </Link>
             <a
               href="#"
               onClick={handleMcaDirectClick}
-              className="bg-gold text-navyblue px-4 py-1.5 rounded hover:bg-gold/90 font-bold text-sm"
+              className="bg-gold text-navyblue px-4 py-2 rounded-md hover:bg-gold/90 font-bold text-sm transition-colors"
             >
               MCA Direct<sup className="text-xs ml-0.5">™</sup>
             </a>
@@ -189,3 +193,4 @@ const Header = () => {
 };
 
 export default Header;
+
