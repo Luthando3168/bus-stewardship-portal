@@ -7,10 +7,11 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const funds = [
   {
+    id: "myfarm",
     name: "MyFarm",
     description: "Supporting sustainable agriculture and farming businesses across South Africa.",
     bgGradient: "from-green-700 to-green-900",
-    image: "https://images.unsplash.com/photo-1593113646773-028c64a8f1b8",
+    image: "/lovable-uploads/4288eeba-c60b-42f1-a156-13a7ef6df992.png",
     focus: [
       "Sustainable farming operations",
       "Food security projects",
@@ -20,10 +21,11 @@ const funds = [
     route: "/funds/myfarm"
   },
   {
+    id: "myproperty",
     name: "MyProperty",
     description: "Investing in community-focused real estate, affordable housing and property businesses.",
     bgGradient: "from-blue-700 to-blue-900",
-    image: "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11",
+    image: "/lovable-uploads/3bf955d5-5ab4-48d1-be77-4c951cf953ca.png",
     focus: [
       "Affordable & mixed-use housing",
       "Community property projects",
@@ -33,10 +35,11 @@ const funds = [
     route: "/funds/myproperty"
   },
   {
+    id: "myfranchise",
     name: "MyFranchise",
     description: "Investing in franchise businesses with proven operational models, creating jobs and business skills.",
     bgGradient: "from-red-600 to-red-800",
-    image: "https://images.unsplash.com/photo-1577962917302-cd874c4e31d2",
+    image: "/lovable-uploads/b37923d0-335b-46bc-9852-7d271458f2a9.png",
     focus: [
       "Food franchise outlets",
       "Retail and service franchises",
@@ -46,10 +49,11 @@ const funds = [
     route: "/funds/myfranchise"
   },
   {
+    id: "myfoodretail",
     name: "MyFoodRetail",
     description: "Investing in food retail businesses to improve access to quality food in underserved communities.",
     bgGradient: "from-amber-600 to-amber-800",
-    image: "https://images.unsplash.com/photo-1604719312566-8912e9227c6a",
+    image: "/lovable-uploads/36f1e3ec-1682-4086-8e11-d7c4e572618b.png",
     focus: [
       "Grocery stores",
       "Food distribution",
@@ -59,10 +63,11 @@ const funds = [
     route: "/funds/myfoodretail"
   },
   {
+    id: "mytelco",
     name: "MyTelco",
     description: "Investing in telecommunications infrastructure and services to provide affordable connectivity solutions.",
     bgGradient: "from-blue-500 to-blue-800",
-    image: "https://images.unsplash.com/photo-1563770660941-20978e870e26",
+    image: "/lovable-uploads/402c56a2-5e59-41c1-8652-099f61ae559b.png",
     focus: [
       "Mobile network services",
       "Internet connectivity",
@@ -72,10 +77,11 @@ const funds = [
     route: "/funds/mytelco"
   },
   {
+    id: "myhealth",
     name: "MyHealth",
     description: "Investing in accessible healthcare solutions and medical facilities to improve community health outcomes.",
     bgGradient: "from-pink-600 to-pink-900",
-    image: "https://images.unsplash.com/photo-1538108149393-fbbd81895907",
+    image: "/lovable-uploads/4f2d889e-ba23-463a-9efe-bc8453a5e5b2.png",
     focus: [
       "Community health centers",
       "Medical equipment",
@@ -85,10 +91,11 @@ const funds = [
     route: "/funds/myhealth"
   },
   {
+    id: "myeducation",
     name: "MySchool",
     description: "Investing in quality education infrastructure and learning institutions to enhance community development through education.",
     bgGradient: "from-indigo-700 to-indigo-900",
-    image: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6",
+    image: "/lovable-uploads/aa792d14-7473-4673-89cf-c3f6e1d15711.png",
     focus: [
       "Educational facilities",
       "Learning resources",
