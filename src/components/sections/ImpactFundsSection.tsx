@@ -50,21 +50,22 @@ const ImpactFundsSection = () => {
     <section className="py-20 bg-navyblue text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle 
-          title="What Are Business Impact Funds?" 
-          subtitle="These are groups of similar businesses that you can own part of. Each group does good things for the community while making money."
+          title="Business Groups You Can Join" 
+          subtitle="These are different types of businesses bundled together. Choose the ones you understand best."
           light
           centered
         />
 
         <div className="max-w-3xl mx-auto mb-10">
-          <div className="bg-white/10 rounded-lg p-6 text-center">
+          <div className="bg-white/10 rounded-lg p-6">
             <p className="text-white text-lg mb-4">
-              Business Impact Funds are simply groups of similar businesses bundled together. 
-              For example, the MyFarm fund includes chicken farms, vegetable farms, and cattle farms. 
-              You can own a part of these businesses with just R500 per month.
+              Think of these as different shops in a mall. Just like a mall has clothing shops, 
+              food shops, and other types - we have different business groups you can join. 
+              Each group focuses on one type of business, making it easier for you to understand what you own.
             </p>
             <p className="text-white/80 text-lg">
-              We show you just 3 funds below, but we have 8 different types of business groups you can join.
+              Below are just 3 examples. We have 8 different types of businesses you can join, 
+              starting from R500 per month.
             </p>
           </div>
         </div>
@@ -112,15 +113,16 @@ const ImpactFundsSection = () => {
         </div>
 
         <div className="text-center mt-10 bg-white/10 rounded-lg p-6 max-w-3xl mx-auto">
-          <h3 className="text-xl font-bold text-gold mb-3">Want to See More Business Opportunities?</h3>
+          <h3 className="text-xl font-bold text-gold mb-3">Want to See All Business Types?</h3>
           <p className="text-white text-lg mb-4">
-            We have 5 more business groups not shown here. Visit our full list to see all 8 types of businesses you can own.
+            We have 5 more business groups not shown here. Click below to see all 8 types of 
+            businesses you can own through our platform.
           </p>
           <Link 
             to="/impact-funds" 
             className="inline-block px-6 py-3 bg-gold text-navyblue rounded-lg font-semibold hover:bg-lightgold transition-colors"
           >
-            See All 8 Business Groups
+            See All Business Types
           </Link>
         </div>
       </div>

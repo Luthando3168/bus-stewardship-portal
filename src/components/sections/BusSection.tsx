@@ -5,20 +5,20 @@ import SectionTitle from "../ui/SectionTitle";
 const BusSection = () => {
   const steps = [
     {
-      title: "1. Choose Your Business Type",
-      description: "Pick from our simple business choices - like food shops, farms, or housing."
+      title: "1. Pick Your Business Type",
+      description: "Choose from food shops, farms, clinics, or other businesses you'd like to own. No business experience needed."
     },
     {
-      title: "2. Start with R500/month",
-      description: "Join with a small monthly payment. Your money goes into a secure business account."
+      title: "2. Join with R500/month",
+      description: "Your money goes into a secure business account at a big bank. No loans needed, start small and grow with us."
     },
     {
-      title: "3. We Do All The Work",
-      description: "Our professional team handles everything. You just check updates on your phone."
+      title: "3. We Run Everything For You",
+      description: "Our team of professionals manages the day-to-day work. You get regular updates on your phone or computer."
     },
     {
-      title: "4. Watch Your Business Grow",
-      description: "See your progress through our easy platform and receive your share of profits."
+      title: "4. Build Your Legacy",
+      description: "These businesses can be passed down to your children. Start building generational wealth today."
     }
   ];
 
@@ -28,15 +28,15 @@ const BusSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <SectionTitle
-              title="How It Works (Simple as 1-2-3)"
-              subtitle="Our BUS Program makes business ownership easy for everyone"
+              title="How It Works (Easy as 1-2-3)"
+              subtitle="Our BUS Program helps you own businesses without the headache of running them"
             />
 
             <div className="bg-lightgray rounded-lg p-6 mb-8">
               <p className="text-lg text-navyblue text-center italic">
-                "I started with R500 per month, and now I'm part of three different businesses — all managed by professionals!"
+                "I'm a taxi owner and now I own parts of a spaza shop and a farm. LMCA handles everything while I focus on my taxi business!"
               </p>
-              <p className="text-sm text-center mt-2 text-gray-600">- Thuli, School Administrator</p>
+              <p className="text-sm text-center mt-2 text-gray-600">- Bra Joe, Taxi Owner from Soweto</p>
             </div>
 
             <div className="space-y-8 mb-8">
@@ -55,10 +55,10 @@ const BusSection = () => {
 
             <div className="text-center">
               <Link
-                to="/impact-funds"
+                to="/register"
                 className="inline-block px-8 py-4 bg-gold text-white rounded-lg font-semibold hover:bg-lightgold transition-colors"
               >
-                See Available Businesses
+                Start Your Business Journey Today
               </Link>
             </div>
           </div>
@@ -75,11 +75,10 @@ const BusSection = () => {
                     BUS
                   </div>
                   <p className="text-white text-xl md:text-2xl mt-4">Business Under Stewardship</p>
-                  <p className="text-gold text-lg mt-2">We manage. You own.</p>
+                  <p className="text-gold text-lg mt-2">You own. We manage.</p>
                 </div>
               </div>
             </div>
-            {/* Decorative elements */}
             <div className="absolute -bottom-6 -right-6 w-full h-full border-4 border-gold rounded-lg z-0"></div>
           </div>
         </div>

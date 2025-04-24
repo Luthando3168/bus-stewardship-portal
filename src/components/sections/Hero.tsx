@@ -1,5 +1,6 @@
 
 import { Link } from "react-router-dom";
+import { Phone, Mail, WhatsApp } from "lucide-react";
 
 const Hero = () => (
   <section className="w-full min-h-[80vh] flex items-center justify-center bg-navyblue px-4 py-12 md:py-16 relative overflow-hidden">
@@ -7,14 +8,13 @@ const Hero = () => (
       {/* Text Content */}
       <div className="w-full md:w-1/2 text-left">
         <h1 className="font-montserrat font-bold text-3xl md:text-4xl lg:text-5xl tracking-tight text-white mb-4 leading-tight">
-          Own Real Businesses.<br />
-          We Run Them<br />For You
+          Start Your Business Journey.<br />
+          R500 Gets You In.<br />
+          We Handle the Rest.
         </h1>
-        <h2 className="font-montserrat text-xl md:text-2xl text-gold mb-6 tracking-tight leading-tight">
-          Start with just R500 per month
-        </h2>
         <p className="font-lato text-white/95 text-lg md:text-xl max-w-xl mb-8">
-          Whether you're a taxi driver, teacher, or football fan — you can now own multiple businesses like shops, farms, and property. We'll manage everything while you watch them grow.
+          Own real businesses like food shops, farms, or clinics — without needing big money or experience. 
+          Whether you're a taxi driver, teacher, or football fan, this is for you.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <Link
@@ -30,8 +30,19 @@ const Hero = () => (
             See How It Works
           </Link>
         </div>
-        <div className="mt-8 text-white/80 text-sm">
-          🔒 Professional Chartered Accountants managing your businesses
+        <div className="mt-8 space-y-3">
+          <div className="flex items-center gap-2 text-white/90">
+            <WhatsApp size={20} />
+            <span>WhatsApp us: 062 019 3208</span>
+          </div>
+          <div className="flex items-center gap-2 text-white/90">
+            <Phone size={20} />
+            <span>Call us: 087 624 3204</span>
+          </div>
+          <div className="flex items-center gap-2 text-white/90">
+            <Mail size={20} />
+            <span>Email: info@madunacas.com</span>
+          </div>
         </div>
       </div>
 
@@ -40,14 +51,11 @@ const Hero = () => (
         <div className="relative w-full max-w-[280px] sm:max-w-[320px] md:max-w-[360px] lg:max-w-[400px]">
           <div className="absolute inset-0 border-2 border-gold/50 rounded-2xl transform rotate-3 scale-105"></div>
           <div className="absolute inset-0 border-2 border-gold/40 rounded-2xl transform -rotate-2"></div>
-          
           <img
             src="/lovable-uploads/cefab7d3-58a2-43a5-a136-7cac22b5c286.png"
             alt="Successful business owner smiling"
             className="w-full h-auto object-cover rounded-2xl animate-fade-in-slow brightness-110 contrast-105 saturate-105"
-            style={{
-              filter: 'drop-shadow(0 0 20px rgba(0,0,0,0.2))',
-            }}
+            style={{ filter: 'drop-shadow(0 0 20px rgba(0,0,0,0.2))' }}
           />
         </div>
       </div>
