@@ -115,7 +115,7 @@ const Footer = () => {
 
           <div className="col-span-1">
             <h4 className="font-montserrat font-semibold text-md mb-4">Connect With Us</h4>
-            <div className="flex items-center space-x-4 mb-4">
+            <div className="flex items-center space-x-4 mb-6">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
@@ -129,28 +129,28 @@ const Footer = () => {
                 </a>
               ))}
             </div>
-          </div>
 
-          <div className="col-span-1">
-            <h4 className="font-montserrat font-semibold text-md mb-4">Contact Us</h4>
-            <address className="not-italic">
-              <p className="font-lato text-sm text-gray-300 mb-2">
-                28 Beacon Avenue, Linbro Park AH
-              </p>
-              <p className="font-lato text-sm text-gray-300 mb-2">
-                Sandton, 2065
-              </p>
-              <p className="font-lato text-sm text-gray-300 mb-2">
-                <a href="tel:+27620193208" className="hover:text-gold transition-colors">
-                  062 019 3208
-                </a>
-              </p>
-              <p className="font-lato text-sm text-gray-300 mb-2">
-                <a href="mailto:info@madunacas.com" className="hover:text-gold transition-colors">
-                  info@madunacas.com
-                </a>
-              </p>
-            </address>
+            <div className="pt-4 border-t border-gray-700">
+              <h4 className="font-montserrat font-semibold text-md mb-4">Contact Us</h4>
+              <address className="not-italic">
+                <p className="font-lato text-sm text-gray-300 mb-2">
+                  28 Beacon Avenue, Linbro Park AH
+                </p>
+                <p className="font-lato text-sm text-gray-300 mb-2">
+                  Sandton, 2065
+                </p>
+                <p className="font-lato text-sm text-gray-300 mb-2">
+                  <a href="tel:+27620193208" className="hover:text-gold transition-colors">
+                    062 019 3208
+                  </a>
+                </p>
+                <p className="font-lato text-sm text-gray-300 mb-2">
+                  <a href="mailto:info@madunacas.com" className="hover:text-gold transition-colors">
+                    info@madunacas.com
+                  </a>
+                </p>
+              </address>
+            </div>
           </div>
         </div>
 
