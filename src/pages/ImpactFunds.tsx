@@ -124,24 +124,6 @@ const ImpactFunds = () => {
           />
           
           <div className="max-w-4xl mx-auto mb-12">
-            <div className="bg-gradient-to-br from-navyblue to-blue-900 text-white rounded-lg shadow-xl p-6 mb-8">
-              <h2 className="text-2xl font-bold mb-4">Real Example: Meet Thembi</h2>
-              <div className="space-y-4">
-                <p className="text-lg">
-                  Thembi works at a call center earning R7,000 monthly. She saves R500 every month 
-                  in her bank account through our platform. After 6 months, she owned parts of:
-                </p>
-                <ul className="list-disc pl-6 space-y-2">
-                  <li>A mini shopping complex in Soweto (MyFoodRetail)</li>
-                  <li>A small farm in Mpumalanga (MyFarm)</li>
-                  <li>Student housing in Pretoria (MyProperty)</li>
-                </ul>
-                <p className="text-lg font-semibold mt-4">
-                  Now she earns extra money from these businesses - all while keeping her call center job!
-                </p>
-              </div>
-            </div>
-
             <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
               <h2 className="text-2xl font-bold text-navyblue mb-6">How Your Money Stays Safe</h2>
               
