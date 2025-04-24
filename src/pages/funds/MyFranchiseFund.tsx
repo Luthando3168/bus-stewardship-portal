@@ -1,3 +1,4 @@
+
 import React from "react";
 import FundEducationalPage from "@/components/funds/FundEducationalPage";
 
@@ -7,7 +8,7 @@ const MyFranchiseFund = () => {
       fundName="MyFranchise"
       description="Focus: Investing in franchise businesses with proven operational models, creating jobs and business skills."
       bgGradient="from-red-600 to-red-800"
-      image="https://images.unsplash.com/photo-1552566626-52f8b828add9"
+      image="https://images.unsplash.com/photo-1572874449137-d9f290d5b9a7" // New hamburger ad image
       focus={[
         "Food franchise outlets",
         "Retail and service franchises",

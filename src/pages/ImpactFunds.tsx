@@ -39,13 +39,13 @@ const funds = [
     name: "MyFranchise",
     description: "Investing in franchise businesses with proven operational models, creating jobs and business skills.",
     bgGradient: "from-red-600 to-red-800",
-    image: "https://images.unsplash.com/photo-1582819509237-d66f7c4ff755?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1572874449137-d9f290d5b9a7", // New hamburger ad image
     focus: [
       "Food franchise outlets",
       "Retail and service franchises",
       "Entrepreneurship development"
     ],
-    minInvestment: "R 1,500",
+    minInvestment: "R 5,000",
     route: "/funds/myfranchise"
   },
   {
