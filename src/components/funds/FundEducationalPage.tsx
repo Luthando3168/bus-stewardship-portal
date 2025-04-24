@@ -1,8 +1,6 @@
 import React from "react";
 import Layout from "@/components/layout/Layout";
-import SectionTitle from "@/components/ui/SectionTitle";
 import { Link } from "react-router-dom";
-import { Users, Briefcase, Banknote, FileText, ChartBar } from "lucide-react";
 import { ArrowLeft } from "lucide-react";
 
 interface BusinessStep {
@@ -102,7 +100,6 @@ const FundEducationalPage = ({
             </div>
 
             <div className="space-y-12">
-              {/* Business Model Section */}
               <div className="bg-white rounded-lg p-8 shadow-md">
                 <h3 className="text-2xl font-bold text-navyblue mb-6">{businessModel.title}</h3>
                 <p className="text-gray-700 mb-6">{businessModel.description}</p>
@@ -121,7 +118,6 @@ const FundEducationalPage = ({
                 </div>
               </div>
 
-              {/* Professional Support Section */}
               <div className="bg-white rounded-lg p-8 shadow-md">
                 <h3 className="text-2xl font-bold text-navyblue mb-6">{professionalSupport.title}</h3>
                 <p className="text-gray-700 mb-6">{professionalSupport.description}</p>
@@ -140,7 +136,6 @@ const FundEducationalPage = ({
                 </div>
               </div>
 
-              {/* Reporting Section */}
               <div className="bg-white rounded-lg p-8 shadow-md">
                 <h3 className="text-2xl font-bold text-navyblue mb-6">Regular Business Reports</h3>
                 <p className="text-gray-700 mb-4">
@@ -153,7 +148,6 @@ const FundEducationalPage = ({
                 </ul>
               </div>
 
-              {/* Investment Details */}
               <div className="bg-white rounded-lg p-8 shadow-md">
                 <h3 className="text-2xl font-bold text-navyblue mb-6">Investment Details</h3>
                 <div className="space-y-4">

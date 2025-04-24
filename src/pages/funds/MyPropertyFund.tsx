@@ -1,6 +1,5 @@
 import React from "react";
 import FundEducationalPage from "@/components/funds/FundEducationalPage";
-import { Users, Briefcase, Banknote, FileText, ChartBar } from "lucide-react";
 
 const MyPropertyFund = () => {
   return (

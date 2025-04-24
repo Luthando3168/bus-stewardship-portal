@@ -13,7 +13,7 @@ const MyFoodRetailFund = () => {
         "Food distribution",
         "Community markets"
       ]}
-      minInvestment="R 1,800"
+      minInvestment="R 5,000"
       businessModel={{
         title: "How Your Food Retail Business Makes Money",
         description: "Your investment in MyFoodRetail connects you to a complete food distribution network:",

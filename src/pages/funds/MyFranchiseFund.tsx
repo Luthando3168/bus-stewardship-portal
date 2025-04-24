@@ -1,4 +1,3 @@
-
 import React from "react";
 import FundEducationalPage from "@/components/funds/FundEducationalPage";
 
@@ -14,7 +13,7 @@ const MyFranchiseFund = () => {
         "Retail and service franchises",
         "Entrepreneurship development"
       ]}
-      minInvestment="R 1,500"
+      minInvestment="R 5,000"
       businessModel={{
         title: "How Your Franchise Business Makes Money",
         description: "Your investment in franchises creates a network of proven businesses:",
