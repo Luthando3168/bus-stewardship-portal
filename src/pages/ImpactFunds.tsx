@@ -1,11 +1,10 @@
-
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Helmet } from "react-helmet";
-import { ArrowRight, Banknote, Briefcase, Calendar, HandCoins, HelpCircle, Phone } from "lucide-react";
+import { ArrowRight, Banknote, Shield, ShieldCheck, HandCoins, HelpCircle, Phone, CircleDollarSign } from 'lucide-react';
 
 const funds = [
   {
@@ -113,7 +112,7 @@ const ImpactFunds = () => {
     <Layout>
       <Helmet>
         <title>Business Types You Can Own | LMCA</title>
-        <meta name="description" content="Browse different types of businesses you can co-own with as little as R500 per month. We handle all the management for you." />
+        <meta name="description" content="Whether you're a call center agent, teacher or gogo - join us! Own real businesses with R500/month. We handle everything, your money stays safe in the bank." />
       </Helmet>
       
       <div className="bg-gray-50 min-h-screen py-12">
@@ -124,45 +123,97 @@ const ImpactFunds = () => {
             centered
           />
           
-          <div className="max-w-4xl mx-auto mb-12 bg-white rounded-lg shadow-md p-6 md:p-8">
-            <h2 className="text-2xl font-bold text-navyblue mb-6">How This Works - In Simple Terms</h2>
-            
-            <div className="space-y-6 text-gray-700 text-lg">
-              <p>
-                Think of this like a shopping mall for businesses. Your R500/month gets saved in your personal 
-                account until you decide which business you want to own.
-              </p>
-              
-              <div className="bg-amber-50 p-4 rounded-md border border-amber-200">
-                <h3 className="font-semibold text-xl mb-2">Example for a Taxi Owner:</h3>
-                <p>
-                  As a taxi owner, you already understand business. But instead of buying one whole new taxi for 
-                  R300,000, you can use just R500/month to own a small part of many different businesses.
+          <div className="max-w-4xl mx-auto mb-12">
+            <div className="bg-gradient-to-br from-navyblue to-blue-900 text-white rounded-lg shadow-xl p-6 mb-8">
+              <h2 className="text-2xl font-bold mb-4">Real Example: Meet Thembi</h2>
+              <div className="space-y-4">
+                <p className="text-lg">
+                  Thembi works at a call center earning R7,000 monthly. She saves R500 every month 
+                  in her bank account through our platform. After 6 months, she owned parts of:
+                </p>
+                <ul className="list-disc pl-6 space-y-2">
+                  <li>A spaza shop in Soweto (MyFoodRetail)</li>
+                  <li>A small farm in Mpumalanga (MyFarm)</li>
+                  <li>Student housing in Pretoria (MyProperty)</li>
+                </ul>
+                <p className="text-lg font-semibold mt-4">
+                  Now she earns extra money from these businesses - all while keeping her call center job!
                 </p>
               </div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
+              <h2 className="text-2xl font-bold text-navyblue mb-6">How Your Money Stays Safe</h2>
               
-              <ol className="space-y-4 list-decimal pl-5">
-                <li>
-                  <span className="font-medium">Save your money</span> - Every month, put R500 into your LMCA account
-                </li>
-                <li>
-                  <span className="font-medium">Pick businesses</span> - Choose from farms, shops, properties or other businesses
-                </li>
-                <li>
-                  <span className="font-medium">We handle everything</span> - Our professional team manages the businesses
-                </li>
-                <li>
-                  <span className="font-medium">You get profits</span> - When businesses make money, you get your share
-                </li>
-              </ol>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="flex items-start space-x-4">
+                  <div className="bg-gold p-3 rounded-lg">
+                    <ShieldCheck className="w-6 h-6 text-navyblue" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">Bank-Approved Platform</h3>
+                    <p className="text-gray-600">
+                      We work directly with banks. Your R500 stays in YOUR bank account until you 
+                      say "YES" to a business deal.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="bg-gold p-3 rounded-lg">
+                    <Shield className="w-6 h-6 text-navyblue" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">Anti-Fraud Checks</h3>
+                    <p className="text-gray-600">
+                      We check every business and person thoroughly. No chancers or 
+                      skelm business allowed!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
+              <h2 className="text-2xl font-bold text-navyblue mb-6">How This Works - In Simple Terms</h2>
               
-              <div className="flex items-center justify-center my-6">
-                <div className="bg-navyblue text-white p-5 rounded-lg max-w-2xl">
-                  <h3 className="font-bold text-xl mb-3">Your Money Stays Safe Until You Decide</h3>
+              <div className="space-y-6 text-gray-700 text-lg">
+                <p>
+                  Think of this like a shopping mall for businesses. Your R500/month gets saved in your personal 
+                  account until you decide which business you want to own.
+                </p>
+                
+                <div className="bg-amber-50 p-4 rounded-md border border-amber-200">
+                  <h3 className="font-semibold text-xl mb-2">Example for a Taxi Owner:</h3>
                   <p>
-                    We don't touch your money until you say "YES" to a specific business. 
-                    It stays in your account until you choose where to invest it.
+                    As a taxi owner, you already understand business. But instead of buying one whole new taxi for 
+                    R300,000, you can use just R500/month to own a small part of many different businesses.
                   </p>
+                </div>
+                
+                <ol className="space-y-4 list-decimal pl-5">
+                  <li>
+                    <span className="font-medium">Save your money</span> - Every month, put R500 into your LMCA account
+                  </li>
+                  <li>
+                    <span className="font-medium">Pick businesses</span> - Choose from farms, shops, properties or other businesses
+                  </li>
+                  <li>
+                    <span className="font-medium">We handle everything</span> - Our professional team manages the businesses
+                  </li>
+                  <li>
+                    <span className="font-medium">You get profits</span> - When businesses make money, you get your share
+                  </li>
+                </ol>
+                
+                <div className="flex items-center justify-center my-6">
+                  <div className="bg-navyblue text-white p-5 rounded-lg max-w-2xl">
+                    <h3 className="font-bold text-xl mb-3">Your Money Stays Safe Until You Decide</h3>
+                    <p>
+                      We don't touch your money until you say "YES" to a specific business. 
+                      It stays in your account until you choose where to invest it.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
