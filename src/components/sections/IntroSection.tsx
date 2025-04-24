@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import SectionTitle from '@/components/ui/SectionTitle';
 import { Card } from '@/components/ui/card';
-import { Store, Home, ShoppingBag, ArrowRight } from 'lucide-react';
+import { Store, Home, ShoppingBag, ArrowRight, Scale, Briefcase } from 'lucide-react';
 
 const IntroSection = () => {
   return (
@@ -71,6 +71,48 @@ const IntroSection = () => {
                   Own parts of famous brand stores like Steers or Debonairs. Start with a once-off R1,500 investment.
                 </p>
               </Card>
+            </div>
+
+            <div className="grid gap-8 md:grid-cols-2 mt-12">
+              <div className="bg-gradient-to-br from-white to-gray-50 rounded-xl p-8 shadow-lg border-l-4 border-gold">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-navyblue/5 rounded-lg">
+                    <Scale className="w-8 h-8 text-navyblue" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-navyblue mb-3">We Keep Things Legal</h3>
+                    <p className="text-charcoal/80 mb-4">
+                      We handle all the paperwork and make sure the business follows all government rules. You don't have to worry about anything.
+                    </p>
+                    <Link 
+                      to="/how-we-work" 
+                      className="inline-flex items-center text-gold hover:text-navyblue transition-colors font-semibold"
+                    >
+                      Learn More <ArrowRight className="w-4 h-4 ml-1" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-white to-gray-50 rounded-xl p-8 shadow-lg border-l-4 border-gold">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-navyblue/5 rounded-lg">
+                    <Briefcase className="w-8 h-8 text-navyblue" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-navyblue mb-3">We Give Expert Advice</h3>
+                    <p className="text-charcoal/80 mb-4">
+                      When the business faces challenges, we use our experience to solve problems and find new opportunities for growth.
+                    </p>
+                    <Link 
+                      to="/services" 
+                      className="inline-flex items-center text-gold hover:text-navyblue transition-colors font-semibold"
+                    >
+                      Learn More <ArrowRight className="w-4 h-4 ml-1" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="text-center mt-8">
