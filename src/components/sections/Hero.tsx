@@ -8,26 +8,26 @@ const Hero = () => (
       {/* Text Content */}
       <div className="w-full md:w-1/2 text-left">
         <h1 className="font-montserrat font-bold text-3xl md:text-4xl lg:text-5xl tracking-tight text-white mb-4 leading-tight">
+          Register Now.<br />
           Start from R500.<br />
-          Co-Own a Business.<br />
-          We Manage It For You.
+          Own Real Businesses.
         </h1>
-        <p className="font-lato text-white/95 text-lg md:text-xl max-w-xl mb-8">
-          Whether you're a gogo, taxi driver, teacher, or football fan — this is for you. Co-own real businesses like food shops, farms, or clinics without needing big money or experience.
+        <p className="font-lato text-white/95 text-lg md:text-xl max-w-xl mb-6">
+          Registration is easy! Create your account, verify your details, and get access to our business ownership platform. Your R500 stays in your account until you approve a deal.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <Link
             to="/register"
             className="w-full sm:w-auto px-8 py-3.5 font-montserrat font-semibold text-base rounded-lg bg-gold text-navyblue shadow hover:bg-lightgold transition-colors hover:scale-105 text-center"
           >
-            Start with R500/month
+            Register Now - It's Free
           </Link>
           <Link
             to="/contact"
             className="w-full sm:w-auto px-8 py-3.5 font-montserrat font-semibold text-base rounded-lg bg-white/10 text-white hover:bg-white/20 transition-colors text-center flex items-center justify-center gap-2"
           >
             <Calendar size={18} />
-            Book a Free Call
+            Book Free Consultation
           </Link>
         </div>
         <div className="mt-8 space-y-3">

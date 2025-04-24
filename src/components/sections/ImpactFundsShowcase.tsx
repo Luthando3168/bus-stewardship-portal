@@ -89,22 +89,35 @@ const ImpactFundsShowcase = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle
           title="What Business Do You Want to Own?"
-          subtitle="No experience needed - our team handles everything"
+          subtitle="Register now to access our secure business ownership platform"
           centered
         />
         
         <div className="mt-8 mb-12 max-w-3xl mx-auto">
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-bold text-navyblue mb-4">How It Works (Simple!)</h3>
+          <div className="bg-white p-6 rounded-lg shadow-md space-y-6">
+            <h3 className="text-xl font-bold text-navyblue mb-4">How It Works (Simple & Secure!)</h3>
+            
             <div className="space-y-4 text-lg">
               <p className="flex items-center gap-2">
-                <span className="text-gold">1.</span> Save R500 monthly in your account
+                <span className="text-gold">1.</span> Register for free and verify your identity
               </p>
               <p className="flex items-center gap-2">
-                <span className="text-gold">2.</span> Pick which business you like
+                <span className="text-gold">2.</span> Save R500 monthly in your secure bank account
               </p>
               <p className="flex items-center gap-2">
-                <span className="text-gold">3.</span> We run it, you earn from it
+                <span className="text-gold">3.</span> Choose businesses you want to own when ready
+              </p>
+            </div>
+
+            <div className="bg-blue-50 p-4 rounded-lg">
+              <p className="text-sm text-blue-800">
+                <strong>Security First:</strong> Your money stays in your bank account until you approve a deal. We conduct thorough background checks and have strict anti-fraud measures in place.
+              </p>
+            </div>
+
+            <div className="bg-green-50 p-4 rounded-lg">
+              <p className="text-sm text-green-800">
+                <strong>Real Example:</strong> Sarah, a call center agent, started with R500 monthly savings. Through our platform, she now co-owns a food shop that generates monthly returns. We handle all the management!
               </p>
             </div>
           </div>
@@ -136,12 +149,18 @@ const ImpactFundsShowcase = () => {
           ))}
         </div>
         
-        <div className="mt-10 text-center">
+        <div className="mt-10 text-center space-y-4">
+          <Link 
+            to="/register" 
+            className="inline-block px-8 py-4 bg-gold text-navyblue font-semibold rounded-lg hover:bg-lightgold transition-colors text-lg mr-4"
+          >
+            Register Now - It's Free
+          </Link>
           <Link 
             to="/impact-funds" 
             className="inline-block px-8 py-4 bg-navyblue text-white font-semibold rounded-lg hover:bg-blue-900 transition-colors text-lg"
           >
-            See All Business Types You Can Own
+            See All Business Types
           </Link>
         </div>
       </div>
