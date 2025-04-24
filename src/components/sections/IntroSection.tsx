@@ -20,8 +20,7 @@ const IntroSection = () => {
             <div className="prose prose-lg prose-invert max-w-none">
               <p className="text-xl leading-relaxed mb-6">
                 MCA Direct is a special platform created by LMCA to help everyday South Africans own real businesses. 
-                Whether you're a taxi driver, teacher, or small business owner - we help you own parts of 
-                professionally managed businesses with just R500 monthly.
+                We help you invest in professionally managed businesses with just R500 monthly.
               </p>
               
               <div className="grid md:grid-cols-2 gap-6 md:gap-8">
@@ -71,7 +70,15 @@ const IntroSection = () => {
               </Card>
             </div>
 
-            <div className="text-center">
+            <div className="text-center space-y-4">
+              <p className="text-gray-700 max-w-2xl mx-auto">
+                Our platform allows you to become a co-owner of diverse businesses across multiple sectors. 
+                Each featured business type represents an opportunity to invest in and support local economic growth. 
+                Through our carefully curated investment options, you can diversify your portfolio and contribute to community development.
+              </p>
+              <p className="text-gray-700 max-w-2xl mx-auto">
+                View more investment categories and find the perfect business type that aligns with your financial goals and interests.
+              </p>
               <Link 
                 to="/impact-funds" 
                 className="inline-flex items-center gap-2 px-6 py-3 bg-navyblue text-white rounded-lg hover:bg-blue-800 transition-colors"
@@ -87,3 +94,4 @@ const IntroSection = () => {
 };
 
 export default IntroSection;
+
