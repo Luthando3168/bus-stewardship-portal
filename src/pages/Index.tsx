@@ -9,6 +9,7 @@ import Layout from "@/components/layout/Layout";
 import IndexRequest from "@/components/seo/IndexRequest";
 import ImpactFundsShowcase from "@/components/sections/ImpactFundsShowcase";
 import BookingSection from "@/components/sections/BookingSection";
+import BankingSection from "@/components/sections/BankingSection";
 
 const Index = () => {
   return (
@@ -22,6 +23,7 @@ const Index = () => {
       
       <div className="w-full">
         <Hero />
+        <BankingSection />
         <BusSection />
         <ImpactFundsShowcase />
         <BookingSection />
