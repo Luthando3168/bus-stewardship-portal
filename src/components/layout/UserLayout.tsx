@@ -1,3 +1,4 @@
+
 import { ReactNode, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
@@ -9,6 +10,8 @@ import RegistrationRequired from "@/components/auth/RegistrationRequired";
 import { useAuthState } from "@/hooks/useAuthState";
 import { useClientRegistration } from "@/hooks/useClientRegistration";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { LogOut } from "lucide-react";
 
 interface UserLayoutProps {
   children: ReactNode;
@@ -75,12 +78,30 @@ const UserLayout = ({ children }: UserLayoutProps) => {
         <>
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetContent side="left" className="w-[80%] max-w-[320px] p-0 bg-navyblue">
-              <UserSidebar
-                isSidebarOpen={true}
-                setIsSidebarOpen={() => {}}
-                userName={fullName}
-                onLogout={handleLogout}
-              />
+              <div className="flex flex-col h-full">
+                <UserSidebar
+                  isSidebarOpen={true}
+                  setIsSidebarOpen={() => {}}
+                  userName={fullName}
+                  onLogout={() => {
+                    handleLogout();
+                    setMobileMenuOpen(false);
+                  }}
+                />
+                <div className="mt-auto p-4 border-t border-navyblue/20">
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start text-gray-300 hover:text-white hover:bg-white/5"
+                    onClick={() => {
+                      handleLogout();
+                      setMobileMenuOpen(false);
+                    }}
+                  >
+                    <LogOut size={20} />
+                    <span className="ml-2">Logout</span>
+                  </Button>
+                </div>
+              </div>
             </SheetContent>
           </Sheet>
           <div className="flex-1 overflow-x-hidden">

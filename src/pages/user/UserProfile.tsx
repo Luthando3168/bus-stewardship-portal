@@ -1,3 +1,4 @@
+
 import UserLayout from "@/components/layout/UserLayout";
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -234,28 +235,41 @@ const UserProfile = () => {
     required && !userData[key as keyof typeof userData];
 
   useEffect(() => {
-    const userInvestmentData: Opportunity[] = [
-      {
-        id: "opp2",
-        fundId: "MyProperty Impact Fund",
-        title: "Student Housing Project",
-        summary: "Affordable student living in Cape Town.",
-        minInvestment: "R 15,000",
-        projectedReturn: "7.8% p.a.",
-        status: "Open",
-      },
-      {
-        id: "opp4",
-        fundId: "MyEnergy Impact Fund",
-        title: "Solar Farm Project",
-        summary: "Commercial solar farm installation, regional rollout.",
-        minInvestment: "R 85,000",
-        projectedReturn: "11.2% p.a.",
-        status: "Open",
+    const fetchUserInvestments = async () => {
+      if (user) {
+        try {
+          const { data, error } = await supabase
+            .from('investments')
+            .select('*')
+            .eq('user_id', user.id);
+            
+          if (error) throw error;
+          
+          // If we have actual investment data, use it
+          if (data && data.length > 0) {
+            const formattedInvestments = data.map(investment => ({
+              id: investment.id,
+              fundId: investment.fund_id || "",
+              title: investment.title || "",
+              summary: investment.summary || "",
+              minInvestment: investment.min_investment || "",
+              projectedReturn: investment.projected_return || "",
+              status: investment.status || "Open",
+            }));
+            setUserInvestments(formattedInvestments);
+          } else {
+            // If no actual data, set an empty array
+            setUserInvestments([]);
+          }
+        } catch (error) {
+          console.error('Error fetching investments:', error);
+          setUserInvestments([]);
+        }
       }
-    ];
-    setUserInvestments(userInvestmentData);
-  }, []);
+    };
+    
+    fetchUserInvestments();
+  }, [user]);
 
   useEffect(() => {
     const section = document.getElementById("fund-opportunity-list");
