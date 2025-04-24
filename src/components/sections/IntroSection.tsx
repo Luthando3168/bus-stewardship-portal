@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SectionTitle from '@/components/ui/SectionTitle';
@@ -53,7 +52,7 @@ const IntroSection = () => {
             <div className="grid gap-4 md:gap-6 md:grid-cols-3 mb-8">
               <Card className="p-6 transition-all duration-300 hover:shadow-lg bg-gradient-to-br from-amber-50 to-amber-100">
                 <Store className="w-8 h-8 text-amber-600 mb-4" />
-                <h3 className="text-xl font-bold text-navyblue mb-3">Food Shops</h3>
+                <h3 className="text-xl font-bold text-navyblue mb-2">MyFoodRetail</h3>
                 <p className="text-gray-600 mb-4">
                   Baba, own shops in your area. Feed your community, build your legacy. Start with R5,000.
                 </p>
@@ -61,7 +60,7 @@ const IntroSection = () => {
 
               <Card className="p-6 transition-all duration-300 hover:shadow-lg bg-gradient-to-br from-blue-50 to-blue-100">
                 <Home className="w-8 h-8 text-blue-600 mb-4" />
-                <h3 className="text-xl font-bold text-navyblue mb-3">Property</h3>
+                <h3 className="text-xl font-bold text-navyblue mb-2">MyProperty</h3>
                 <p className="text-gray-600 mb-4">
                   Mama, own flats that bring you money every month. Just like collecting rent, but better. Start with R2,000.
                 </p>
@@ -69,7 +68,7 @@ const IntroSection = () => {
 
               <Card className="p-6 transition-all duration-300 hover:shadow-lg bg-gradient-to-br from-red-50 to-red-100">
                 <ShoppingBag className="w-8 h-8 text-red-600 mb-4" />
-                <h3 className="text-xl font-bold text-navyblue mb-3">Famous Brands</h3>
+                <h3 className="text-xl font-bold text-navyblue mb-2">MyFranchise</h3>
                 <p className="text-gray-600 mb-4">
                   Own parts of big names like Steers or Debonairs. Yes, those ones you love! Start with R1,500.
                 </p>
