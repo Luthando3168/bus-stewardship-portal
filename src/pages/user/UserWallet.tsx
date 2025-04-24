@@ -1,14 +1,149 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import UserLayout from "@/components/layout/UserLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { DollarSign, CreditCard } from "lucide-react";
+import { DollarSign, CreditCard, AlertCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuthState } from "@/hooks/useAuthState";
+import { toast } from "sonner";
+
+type Transaction = {
+  id: string;
+  date: string;
+  description: string;
+  amount: number;
+  type: 'deposit' | 'withdrawal';
+};
+
+type BankStatement = {
+  id: string;
+  period: string;
+  issueDate: string;
+};
 
 const UserWallet = () => {
+  const [walletBalance, setWalletBalance] = useState(0);
+  const [accountNumber, setAccountNumber] = useState('');
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [statements, setStatements] = useState<BankStatement[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const { user } = useAuthState();
+
+  useEffect(() => {
+    const fetchWalletData = async () => {
+      if (!user) return;
+      
+      try {
+        setIsLoading(true);
+        
+        // Fetch wallet balance and account details
+        const { data: walletData, error: walletError } = await supabase
+          .from('clients')
+          .select('bank_account_number, wallet_balance')
+          .eq('id', user.id)
+          .single();
+        
+        if (walletError) {
+          console.error("Error fetching wallet data:", walletError);
+          // Use placeholder data if there's an error
+          setWalletBalance(0);
+          setAccountNumber('**** **** **** ####');
+        } else {
+          // Use actual data if available
+          setWalletBalance(walletData?.wallet_balance || 0);
+          
+          // Format account number for display
+          const accNum = walletData?.bank_account_number || '';
+          setAccountNumber(accNum ? 
+            '**** **** **** ' + accNum.substring(Math.max(0, accNum.length - 4)) : 
+            '**** **** **** ####');
+        }
+        
+        // Fetch transaction history
+        const { data: txData, error: txError } = await supabase
+          .from('transactions')
+          .select('*')
+          .eq('user_id', user.id)
+          .order('date', { ascending: false })
+          .limit(10);
+        
+        if (txError) {
+          console.error("Error fetching transactions:", txError);
+          // Use empty array if there's an error
+          setTransactions([]);
+        } else if (txData && txData.length > 0) {
+          setTransactions(txData.map(tx => ({
+            id: tx.id,
+            date: tx.date,
+            description: tx.description,
+            amount: tx.amount,
+            type: tx.type
+          })));
+        } else {
+          // No transactions found - use empty array
+          setTransactions([]);
+        }
+        
+        // Fetch statements
+        const { data: statementsData, error: statementsError } = await supabase
+          .from('statements')
+          .select('*')
+          .eq('user_id', user.id)
+          .order('issue_date', { ascending: false })
+          .limit(5);
+          
+        if (statementsError) {
+          console.error("Error fetching statements:", statementsError);
+          // Use empty array if there's an error
+          setStatements([]);
+        } else if (statementsData && statementsData.length > 0) {
+          setStatements(statementsData.map(statement => ({
+            id: statement.id,
+            period: statement.period,
+            issueDate: statement.issue_date
+          })));
+        } else {
+          // No statements found - use empty array
+          setStatements([]);
+        }
+      } catch (error) {
+        console.error("Error in wallet data fetch:", error);
+        toast.error("Could not load wallet data");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    fetchWalletData();
+  }, [user]);
+
+  // Format date from ISO string to readable format
+  const formatDate = (dateString: string) => {
+    try {
+      const date = new Date(dateString);
+      return date.toLocaleDateString('en-ZA', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      });
+    } catch (e) {
+      return dateString;
+    }
+  };
+
+  // Format currency
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-ZA', {
+      style: 'currency',
+      currency: 'ZAR',
+      minimumFractionDigits: 2
+    }).format(amount);
+  };
+
   return (
     <UserLayout>
       <div className="space-y-6">
@@ -25,9 +160,11 @@ const UserWallet = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
-                <div className="text-3xl font-bold">R 245,000.00</div>
+                <div className="text-3xl font-bold">
+                  {isLoading ? 'Loading...' : formatCurrency(walletBalance)}
+                </div>
                 <div className="text-sm text-muted-foreground">
-                  Account Number: **** **** **** 1234
+                  Account Number: {isLoading ? 'Loading...' : accountNumber}
                 </div>
               </div>
             </CardContent>
@@ -43,9 +180,11 @@ const UserWallet = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
-                <div className="text-3xl font-bold">R 245,000.00</div>
+                <div className="text-3xl font-bold">
+                  {isLoading ? 'Loading...' : formatCurrency(walletBalance)}
+                </div>
                 <Button className="bg-gold hover:bg-lightgold text-white mt-2">
-                  Invest Now
+                  <Link to="/user/new-deals">Invest Now</Link>
                 </Button>
               </div>
             </CardContent>
@@ -80,36 +219,47 @@ const UserWallet = () => {
                 <CardTitle>Transaction History</CardTitle>
               </CardHeader>
               <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Date</TableHead>
-                      <TableHead>Description</TableHead>
-                      <TableHead>Amount</TableHead>
-                      <TableHead>Type</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell>2023-04-15</TableCell>
-                      <TableCell>Investment Distribution</TableCell>
-                      <TableCell className="text-green-600">+ R 12,500.00</TableCell>
-                      <TableCell>Deposit</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>2023-04-01</TableCell>
-                      <TableCell>Solar Farm Project Investment</TableCell>
-                      <TableCell className="text-red-600">- R 85,000.00</TableCell>
-                      <TableCell>Withdrawal</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>2023-03-15</TableCell>
-                      <TableCell>Investment Distribution</TableCell>
-                      <TableCell className="text-green-600">+ R 11,200.00</TableCell>
-                      <TableCell>Deposit</TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
+                {isLoading ? (
+                  <p className="text-center py-4">Loading transactions...</p>
+                ) : transactions.length > 0 ? (
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Date</TableHead>
+                        <TableHead>Description</TableHead>
+                        <TableHead>Amount</TableHead>
+                        <TableHead>Type</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {transactions.map((transaction) => (
+                        <TableRow key={transaction.id}>
+                          <TableCell>{formatDate(transaction.date)}</TableCell>
+                          <TableCell>{transaction.description}</TableCell>
+                          <TableCell className={
+                            transaction.type === 'deposit' 
+                              ? 'text-green-600' 
+                              : 'text-red-600'
+                          }>
+                            {transaction.type === 'deposit' ? '+ ' : '- '}
+                            {formatCurrency(Math.abs(transaction.amount))}
+                          </TableCell>
+                          <TableCell>
+                            {transaction.type === 'deposit' ? 'Deposit' : 'Withdrawal'}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                ) : (
+                  <div className="text-center py-8 bg-gray-50 rounded-md border">
+                    <AlertCircle className="h-8 w-8 mx-auto text-muted-foreground mb-2" />
+                    <p className="text-muted-foreground">No transactions found</p>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Transactions will appear here when you make deposits or investments
+                    </p>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
@@ -119,38 +269,38 @@ const UserWallet = () => {
                 <CardTitle>Available Statements</CardTitle>
               </CardHeader>
               <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Period</TableHead>
-                      <TableHead>Issue Date</TableHead>
-                      <TableHead>Actions</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell>April 2023</TableCell>
-                      <TableCell>May 1, 2023</TableCell>
-                      <TableCell>
-                        <Button variant="outline" size="sm">Download</Button>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>March 2023</TableCell>
-                      <TableCell>April 1, 2023</TableCell>
-                      <TableCell>
-                        <Button variant="outline" size="sm">Download</Button>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>February 2023</TableCell>
-                      <TableCell>March 1, 2023</TableCell>
-                      <TableCell>
-                        <Button variant="outline" size="sm">Download</Button>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
+                {isLoading ? (
+                  <p className="text-center py-4">Loading statements...</p>
+                ) : statements.length > 0 ? (
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Period</TableHead>
+                        <TableHead>Issue Date</TableHead>
+                        <TableHead>Actions</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {statements.map((statement) => (
+                        <TableRow key={statement.id}>
+                          <TableCell>{statement.period}</TableCell>
+                          <TableCell>{formatDate(statement.issueDate)}</TableCell>
+                          <TableCell>
+                            <Button variant="outline" size="sm">Download</Button>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                ) : (
+                  <div className="text-center py-8 bg-gray-50 rounded-md border">
+                    <AlertCircle className="h-8 w-8 mx-auto text-muted-foreground mb-2" />
+                    <p className="text-muted-foreground">No statements available yet</p>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Statements will be available here after your first complete month
+                    </p>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
