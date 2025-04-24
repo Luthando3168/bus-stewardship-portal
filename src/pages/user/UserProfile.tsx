@@ -148,40 +148,46 @@ const UserProfile = () => {
     const loadUserProfile = async () => {
       if (user) {
         try {
-          const { data: profile, error } = await supabase
+          const { data: client, error: clientError } = await supabase
             .from('clients')
             .select('*')
             .eq('id', user.id)
             .single();
 
-          if (error && error.code !== 'PGRST116') throw error;
-
-          if (profile) {
-            const mappedUserData = {
-              fullName: profile.full_name || "",
-              email: profile.email || "",
-              phone: profile.phone || "",
-              dob: profile.dob || "",
-              idNumber: profile.id_number || "",
-              nationality: profile.nationality || "",
-              taxNumber: profile.tax_number || "",
-              taxCountry: profile.tax_country || "",
-              address: profile.address || "",
-              postalCode: profile.postal_code || "",
-              city: profile.city || "",
-              province: profile.province || "",
-              sourceOfFunds: profile.source_of_funds || "",
-              employmentStatus: profile.employment_status || "",
-              employer: profile.employer || "",
-              occupation: profile.occupation || "",
-              riskProfile: profile.risk_profile || "",
-              incomeBracket: profile.income_bracket || "",
-              pep: profile.pep ? "Yes" : "No",
-              joinDate: profile.created_at || ""
-            };
+          if (clientError && clientError.code !== 'PGRST116') throw clientError;
+          
+          const { data: profile, error: profileError } = await supabase
+            .from('profiles')
+            .select('full_name, email, phone')
+            .eq('id', user.id)
+            .single();
             
-            setUserData(mappedUserData);
-          }
+          if (profileError && profileError.code !== 'PGRST116') throw profileError;
+
+          const combinedData = {
+            fullName: profile?.full_name || "",
+            email: profile?.email || user.email || "",
+            phone: profile?.phone || "",
+            dob: client?.dob || "",
+            idNumber: client?.id_number || "",
+            nationality: client?.nationality || "",
+            taxNumber: client?.tax_number || "",
+            taxCountry: client?.tax_country || "",
+            address: client?.address || "",
+            postalCode: client?.postal_code || "",
+            city: client?.city || "",
+            province: client?.province || "",
+            sourceOfFunds: client?.source_of_funds || "",
+            employmentStatus: client?.employment_status || "",
+            employer: client?.employer || "",
+            occupation: client?.occupation || "",
+            riskProfile: client?.risk_profile || "",
+            incomeBracket: client?.income_bracket || "",
+            pep: client?.pep ? "Yes" : "No",
+            joinDate: client?.created_at || ""
+          };
+          
+          setUserData(combinedData);
         } catch (error) {
           console.error('Error loading profile:', error);
         }
