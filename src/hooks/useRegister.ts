@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -11,28 +10,23 @@ export const useRegister = () => {
   const navigate = useNavigate();
   const { sendUserNotification } = useNotifications();
 
-  // Enhanced password validation with detailed feedback
   const validatePassword = (password: string): { isValid: boolean; message: string } => {
     if (password.length < 12) {
       return { isValid: false, message: "Password must be at least 12 characters long" };
     }
     
-    // Check for at least one uppercase letter
     if (!/[A-Z]/.test(password)) {
       return { isValid: false, message: "Password must contain at least one uppercase letter" };
     }
     
-    // Check for at least one lowercase letter
     if (!/[a-z]/.test(password)) {
       return { isValid: false, message: "Password must contain at least one lowercase letter" };
     }
     
-    // Check for at least one number
     if (!/\d/.test(password)) {
       return { isValid: false, message: "Password must contain at least one number" };
     }
     
-    // Check for at least one special character
     if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
       return { isValid: false, message: "Password must contain at least one special character" };
     }
@@ -40,7 +34,6 @@ export const useRegister = () => {
     return { isValid: true, message: "" };
   };
 
-  // Enhanced registration handler with security improvements
   const handleRegister = async (
     email: string,
     password: string,
@@ -50,7 +43,6 @@ export const useRegister = () => {
   ) => {
     setErrorMessage("");
     
-    // Input validation with clear error messages
     if (!fullName.trim()) {
       setErrorMessage("Full name is required");
       toast.error("Full name is required");
@@ -76,7 +68,6 @@ export const useRegister = () => {
       return;
     }
     
-    // Force HTTPS for production environments
     if (window.location.protocol === 'http:' && !window.location.hostname.includes('localhost')) {
       window.location.href = window.location.href.replace('http:', 'https:');
       return;
@@ -98,12 +89,18 @@ export const useRegister = () => {
         }
       });
       
-      if (authError) throw authError;
+      if (authError) {
+        if (authError.message?.toLowerCase().includes('password has been compromised')) {
+          throw new Error(
+            "This password has been found in known data breaches. Please choose a different password to ensure your account's security."
+          );
+        }
+        throw authError;
+      }
 
       console.log("Registration response:", authData);
 
       if (authData.user) {
-        // Create a client record with pending_registration status
         const { error: clientError } = await supabase
           .from('clients')
           .insert([{ 
@@ -115,15 +112,11 @@ export const useRegister = () => {
           
         if (clientError) {
           console.error("Error creating client record:", clientError);
-          // Continue with the process even if client record creation fails
-          // We'll try to create it again when they log in
         }
       
-        // Try sending welcome email
         try {
           console.log("Attempting to send welcome email...");
           
-          // Call the Supabase edge function directly
           const { error: functionError } = await supabase.functions.invoke('send-registration-email', {
             body: { 
               fullName: fullName,
@@ -139,7 +132,6 @@ export const useRegister = () => {
           
           console.log("Welcome email sent via edge function");
           
-          // Also try sending through notification service as backup
           const emailResult = await sendUserNotification(
             { fullName, email }, 
             'welcome', 
@@ -148,16 +140,13 @@ export const useRegister = () => {
           
           console.log("Email notification result:", emailResult);
           
-          // Show success regardless of the backup email result
           toast.success("Registration successful! Please check your email to verify your account.");
           
-          // Add delay before redirecting to ensure toast is seen
           setTimeout(() => {
             navigate("/login");
           }, 2000);
         } catch (emailError) {
           console.error("Error sending welcome email:", emailError);
-          // Show partial success but note the email issue
           toast.warning("Account created, but we couldn't send a welcome email. Please check your spam folder or contact support if you don't receive a verification email.");
           setTimeout(() => {
             navigate("/login");
@@ -169,7 +158,10 @@ export const useRegister = () => {
     } catch (error: any) {
       console.error("Registration error:", error);
       
-      if (error.message.includes("already registered")) {
+      if (error.message.includes("password has been compromised")) {
+        setErrorMessage(error.message);
+        toast.error(error.message);
+      } else if (error.message.includes("already registered")) {
         setErrorMessage("This email is already registered. Please try logging in instead.");
         toast.error("This email is already registered. Please try logging in instead.");
       } else if (error.message.includes("password")) {
