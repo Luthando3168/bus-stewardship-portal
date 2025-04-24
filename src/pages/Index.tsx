@@ -1,15 +1,13 @@
-
 import { Helmet } from 'react-helmet';
 import Hero from "@/components/sections/Hero";
-import ServicesSection from "@/components/sections/ServicesSection";
+import BankingSection from "@/components/sections/BankingSection";
+import ImpactFundsShowcase from "@/components/sections/ImpactFundsShowcase";
 import BusSection from "@/components/sections/BusSection";
-import ImpactFundsSection from "@/components/sections/ImpactFundsSection";
+import BookingSection from "@/components/sections/BookingSection";
+import ServicesSection from "@/components/sections/ServicesSection";
 import FoundationSection from "@/components/sections/FoundationSection";
 import Layout from "@/components/layout/Layout";
 import IndexRequest from "@/components/seo/IndexRequest";
-import ImpactFundsShowcase from "@/components/sections/ImpactFundsShowcase";
-import BookingSection from "@/components/sections/BookingSection";
-import BankingSection from "@/components/sections/BankingSection";
 
 const Index = () => {
   return (
@@ -25,12 +23,10 @@ const Index = () => {
         <Hero />
         <BankingSection />
         <ImpactFundsShowcase />
-        <BusSection />
         <BookingSection />
+        <BusSection />
         <ServicesSection />
-        <ImpactFundsSection />
         <FoundationSection />
-        {/* Admin-only tool for requesting reindexing */}
         {localStorage.getItem("userRole") === "admin" && (
           <div className="container mx-auto px-4">
             <h3 className="text-lg font-semibold mb-2">Admin SEO Tools</h3>
