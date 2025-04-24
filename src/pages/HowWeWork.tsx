@@ -10,16 +10,16 @@ import { Circle, User, Users, School, Home, Car, TrainFront, CircleDollarSign } 
 
 const HowWeWork = () => {
   const monthlyExpenses = [
-    { item: "Groceries", amount: 3500 },
-    { item: "Meat", amount: 2000 },
-    { item: "Vegetables", amount: 800 },
-    { item: "Airtime & Data", amount: 1200 },
-    { item: "Takeaways", amount: 1500 },
-    { item: "Rent/Bond", amount: 5000 },
-    { item: "Fuel/Transport", amount: 2500 },
-    { item: "School fees", amount: 2500 },
-    { item: "Medical aid", amount: 2000 },
-    { item: "Clothing & other", amount: 1000 },
+    { item: "Daily Groceries", amount: 3500 },
+    { item: "Meat & Fish", amount: 2000 },
+    { item: "Fresh Produce", amount: 800 },
+    { item: "Phone & Internet", amount: 1200 },
+    { item: "Food Takeaways", amount: 1500 },
+    { item: "Housing", amount: 5000 },
+    { item: "Transport", amount: 2500 },
+    { item: "Education", amount: 2500 },
+    { item: "Healthcare", amount: 2000 },
+    { item: "Other Needs", amount: 1000 },
   ];
 
   const totalExpenses = monthlyExpenses.reduce((sum, expense) => sum + expense.amount, 0);
@@ -27,29 +27,28 @@ const HowWeWork = () => {
 
   const steps = [
     {
-      title: "Register",
-      description: "Sign up to become a client of Luthando Maduna by creating an account on our platform.",
+      title: "Join Us",
+      description: "Create your free LMCA account - it's as easy as signing up for WhatsApp.",
       icon: User
     },
     {
-      title: "Select Businesses",
-      description: "Browse our Impact Funds and choose the businesses you want to invest in through MCA Direct.",
+      title: "Pick Your Business",
+      description: "Choose businesses you understand - like if you buy takeaways often, why not own shares in food shops?",
       icon: CircleDollarSign
     },
     {
-      title: "Professional Management (BUS Program)",
-      description:
-        "Once you have selected businesses to own, Luthando Maduna (via the BUS program) professionally manages these businesses on your behalf. You receive quarterly financial statements through MCA Direct, and profit-sharing payments are distributed twice annually.",
+      title: "We Run Everything (BUS Program)",
+      description: "Just like how you trust mechanics with your car, trust our professional team to run your business. We handle everything while you get updates on your phone.",
       icon: Circle
     },
     {
-      title: "Fund Your Account",
-      description: "Deposit funds to your wallet using your Standard Bank account to participate in deals.",
+      title: "Start Small, Grow Big",
+      description: "Begin with just R500 monthly - it goes straight to your business account at a trusted bank.",
       icon: Circle
     },
     {
-      title: "Earn Returns",
-      description: "Receive your share of profits as a business owner and build sustainable wealth over time.",
+      title: "Build Your Legacy",
+      description: "These aren't just investments - they're businesses you can pass down to your children.",
       icon: Circle
     }
   ];
@@ -59,44 +58,40 @@ const HowWeWork = () => {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <SectionTitle
-            title="How We Work"
-            subtitle="Understanding the Luthando Maduna Chartered Accountants approach to inclusive business ownership"
+            title="How We Make Business Ownership Simple"
+            subtitle="Think of us as your business partners - we do the work, you build the wealth"
             centered
           />
 
           <div className="max-w-4xl mx-auto mb-16">
-            <h2 className="text-2xl font-montserrat font-bold mb-4 text-navyblue text-center">Why We Exist</h2>
-            <p className="mb-4">
-              At Luthando Maduna Chartered Accountants, we exist to solve a fundamental economic imbalance: <strong>the majority of our population does not own the businesses they consume services from monthly</strong>.
-            </p>
-            <p className="mb-4">
-              Think about it – grocery shops, butcheries, private schools, private hospitals, petrol stations, and takeaway shops are all businesses that we spend our money on regularly, but very few of us actually own these establishments or share in their profits.
-            </p>
-            <p className="mb-8">
-              This is the key realization that drives our mission: to create pathways for everyday South Africans to become owners in the businesses they support daily, allowing them to build wealth through shared business ownership.
+            <h2 className="text-2xl font-montserrat font-bold mb-4 text-navyblue text-center">The Problem We're Solving</h2>
+            <p className="mb-4 text-lg">
+              Think about it: Every month, we spend money at shops, schools, and clinics - 
+              but very few of us actually own these businesses. We're helping change that.
             </p>
             
             <div className="bg-lightgray rounded-lg p-6 mb-10 text-center">
-              <h3 className="text-xl font-medium mb-2">Our Key Insight</h3>
-              <p className="mb-4 text-lg font-semibold text-navyblue">
-                "A majority of the population does not own businesses that we consume their services monthly such as grocery shops, butcheries, private schools, private hospitals, petrol stations and takeaway shops."
+              <h3 className="text-xl font-medium mb-2">Our Simple Truth</h3>
+              <p className="text-lg font-semibold text-navyblue">
+                "If you're spending money at a business every month, 
+                wouldn't you rather be one of its owners?"
               </p>
             </div>
           </div>
 
           <div className="max-w-4xl mx-auto mb-16 bg-white shadow-md rounded-lg overflow-hidden">
             <div className="p-6 border-b border-gray-200">
-              <h2 className="text-2xl font-montserrat font-bold mb-2 text-navyblue text-center">The Reality of Monthly Income</h2>
+              <h2 className="text-2xl font-montserrat font-bold mb-2 text-navyblue text-center">Real Life Example</h2>
               <p className="mb-4 text-center">
-                Consider an ordinary person living in Tsakane taking home R22,000 per month. Here's how their money is typically spent:
+                Let's look at how someone earning R22,000 monthly typically spends their money:
               </p>
             </div>
 
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Expense Item</TableHead>
-                  <TableHead className="text-right">Monthly Amount (R)</TableHead>
+                  <TableHead>What We Spend On</TableHead>
+                  <TableHead className="text-right">Monthly Cost (R)</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -107,52 +102,23 @@ const HowWeWork = () => {
                   </TableRow>
                 ))}
                 <TableRow className="font-bold">
-                  <TableCell>Total Expenses</TableCell>
+                  <TableCell>Total Going Out</TableCell>
                   <TableCell className="text-right">R {totalExpenses.toLocaleString()}</TableCell>
                 </TableRow>
                 <TableRow className="font-bold bg-lightgray">
-                  <TableCell>Monthly Income</TableCell>
+                  <TableCell>Money Coming In</TableCell>
                   <TableCell className="text-right">R 22,000</TableCell>
                 </TableRow>
                 <TableRow className={`font-bold ${remaining <= 0 ? 'text-red-600' : 'text-green-600'}`}>
-                  <TableCell>Remaining for Savings/Investment</TableCell>
+                  <TableCell>Left for Saving</TableCell>
                   <TableCell className="text-right">R {remaining.toLocaleString()}</TableCell>
                 </TableRow>
               </TableBody>
             </Table>
-
-            <div className="p-6 bg-lightgray">
-              <p className="mb-2 font-semibold text-center">
-                As you can see, after all monthly expenses, there's virtually nothing left for wealth building or investments.
-              </p>
-              <p className="text-center">
-                This cycle keeps many South Africans in a perpetual state of consumption without ownership, limiting their ability to build lasting wealth.
-              </p>
-            </div>
           </div>
 
           <div className="max-w-4xl mx-auto mb-16">
-            <h2 className="text-2xl font-montserrat font-bold mb-4 text-navyblue text-center">Our Solution: MCA Direct</h2>
-            <p className="mb-4">
-              Luthando Maduna Chartered Accountants has developed a groundbreaking approach called <strong>MCA Direct</strong> that allows everyday people to invest in businesses they regularly support.
-            </p>
-            <p className="mb-4">
-              By pooling small investments from many individuals into our Impact Funds, we enable clients to:
-            </p>
-            <ul className="list-disc list-inside mb-6 space-y-2 pl-4">
-              <li>Invest with just a small minimum amount into various established businesses</li>
-              <li>Share in the profits of these businesses as partial owners</li>
-              <li>Build wealth through passive income streams from business ownership</li>
-              <li>Diversify investments across multiple sectors and business types</li>
-            </ul>
-            
-            <p className="mb-8">
-              This approach transforms consumers into owners, allowing them to benefit from the very businesses they spend their money at. The profits generated can then be used to build wealth, create financial security, and eventually achieve financial freedom.
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto mb-16">
-            <h2 className="text-2xl font-montserrat font-bold mb-6 text-navyblue text-center">How to Get Started</h2>
+            <h2 className="text-2xl font-montserrat font-bold mb-6 text-navyblue text-center">How It Works</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {steps.map((step, index) => (
@@ -173,60 +139,42 @@ const HowWeWork = () => {
             <div className="text-center mt-8">
               <Link to="/register">
                 <Button className="bg-gold hover:bg-lightgold text-white px-8">
-                  Get Started Today
+                  Start Your Business Journey
                 </Button>
               </Link>
             </div>
           </div>
 
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-montserrat font-bold mb-6 text-navyblue text-center">Who MCA Direct Is Designed For</h2>
+            <h2 className="text-2xl font-montserrat font-bold mb-6 text-navyblue text-center">This Is For You If You're...</h2>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="flex flex-col items-center p-4 text-center">
-                <School size={40} className="text-gold mb-4" />
-                <h3 className="text-lg font-semibold mb-2">Parents of School Learners</h3>
-                <p className="text-sm">Looking to build additional income sources while managing family expenses</p>
-              </div>
-              
-              <div className="flex flex-col items-center p-4 text-center">
                 <Home size={40} className="text-gold mb-4" />
-                <h3 className="text-lg font-semibold mb-2">Domestic Workers</h3>
-                <p className="text-sm">Seeking wealth-building opportunities with minimal starting capital</p>
+                <h3 className="text-lg font-semibold mb-2">Working Hard</h3>
+                <p className="text-sm">And want your money to work hard for you too</p>
               </div>
               
               <div className="flex flex-col items-center p-4 text-center">
                 <Users size={40} className="text-gold mb-4" />
-                <h3 className="text-lg font-semibold mb-2">Low & Middle Income Families</h3>
-                <p className="text-sm">Looking to break the consumption cycle and start building assets</p>
+                <h3 className="text-lg font-semibold mb-2">Supporting Family</h3>
+                <p className="text-sm">Looking to build something to pass down to your children</p>
               </div>
               
               <div className="flex flex-col items-center p-4 text-center">
-                <Car size={40} className="text-gold mb-4" />
-                <h3 className="text-lg font-semibold mb-2">Taxi & Train Commuters</h3>
-                <p className="text-sm">Regular passengers who could benefit from owning shares in their transport</p>
-              </div>
-              
-              <div className="flex flex-col items-center p-4 text-center">
-                <TrainFront size={40} className="text-gold mb-4" />
-                <h3 className="text-lg font-semibold mb-2">Sports Fans & Community Members</h3>
-                <p className="text-sm">Who want to invest in local businesses and community development</p>
-              </div>
-              
-              <div className="flex flex-col items-center p-4 text-center">
-                <User size={40} className="text-gold mb-4" />
-                <h3 className="text-lg font-semibold mb-2">Entrepreneurs & SASSA Beneficiaries</h3>
-                <p className="text-sm">Looking for passive income opportunities to supplement earnings</p>
+                <School size={40} className="text-gold mb-4" />
+                <h3 className="text-lg font-semibold mb-2">Planning Ahead</h3>
+                <p className="text-sm">Ready to start building real wealth, one step at a time</p>
               </div>
             </div>
             
             <div className="bg-lightgray rounded-lg p-6 mt-8 text-center">
               <p className="text-lg mb-4">
-                Each investor must register as a client of Luthando Maduna Chartered Accountants to participate.
+                Remember: You don't need millions to start. Just R500 monthly gets you going.
               </p>
               <Link to="/register">
                 <Button className="bg-navyblue hover:bg-blue-800 text-white">
-                  Register as a Client
+                  Join Us Today
                 </Button>
               </Link>
             </div>
