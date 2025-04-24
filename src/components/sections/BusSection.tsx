@@ -72,7 +72,7 @@ const BusSection = () => {
                 <div 
                   className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-black tracking-wider text-transparent bg-clip-text 
                   bg-gradient-to-r from-gold via-lightgold to-gold 
-                  animate-pulse transform hover:scale-105 transition-transform duration-300"
+                  transform hover:scale-105 transition-transform duration-300"
                 >
                   BUS
                 </div>
@@ -88,4 +88,3 @@ const BusSection = () => {
 };
 
 export default BusSection;
-
