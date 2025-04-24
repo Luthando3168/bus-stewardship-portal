@@ -148,41 +148,42 @@ const Header = () => {
 
   return (
     <header className="bg-white shadow-md fixed top-0 left-0 w-full z-30">
-      <nav className="container mx-auto flex items-center justify-between py-2 md:py-3 px-4 md:px-6 relative">
-        <Link to="/" className="flex items-start group cursor-pointer">
-          <Logo />
+      <nav className="container mx-auto flex items-center justify-between py-2 px-4">
+        <Link to="/" className="flex items-center">
+          <Logo size="small" />
         </Link>
 
-        <div className="flex items-center space-x-6">
-          <div className="flex items-center space-x-4">
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             {navLinks.map(link => (
               <Link
                 key={link.to}
                 to={link.to}
-                className={`text-gray-700 hover:text-navyblue font-semibold ${
-                  isActive(link.to) ? 'underline' : ''
+                className={`text-sm text-gray-700 hover:text-navyblue font-medium ${
+                  isActive(link.to) ? 'text-navyblue font-semibold' : ''
                 }`}
               >
                 {link.label}
               </Link>
             ))}
+          </div>
+          <div className="flex items-center gap-2">
             <Link
               to="/login"
-              className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 font-semibold text-lg"
+              className="bg-blue-600 text-white px-4 py-1.5 rounded text-sm hover:bg-blue-700 font-medium"
             >
               Sign-in or Register
             </Link>
             <a
               href="#"
               onClick={handleMcaDirectClick}
-              className="bg-gold text-navyblue px-6 py-2.5 rounded hover:bg-gold/90 font-bold text-xl"
+              className="bg-gold text-navyblue px-4 py-1.5 rounded hover:bg-gold/90 font-bold text-sm"
             >
               MCA Direct<sup className="text-xs ml-0.5">™</sup>
             </a>
           </div>
         </div>
       </nav>
-      <div className="h-5 md:h-6"></div>
     </header>
   );
 };
