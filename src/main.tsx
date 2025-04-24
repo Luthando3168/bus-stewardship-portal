@@ -5,11 +5,13 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App.tsx'
 import './index.css'
 import { AuthProvider } from './contexts/AuthContext'
+import Favicon from './components/ui/Favicon'
 
 const rootElement = document.getElementById("root");
 if (rootElement) {
   ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
+      <Favicon />
       <BrowserRouter>
         <AuthProvider>
           <App />
