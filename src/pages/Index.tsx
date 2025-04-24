@@ -10,9 +10,9 @@ const Index = () => {
   return (
     <Layout>
       <Helmet>
-        <title>LMCA | Professional Chartered Accountants in South Africa</title>
-        <meta name="description" content="Luthando Maduna Chartered Accountants provides professional accounting, business management, and investment services through our innovative Business Under Stewardship programme." />
-        <meta name="keywords" content="chartered accountants, accounting services, business management, investments, South Africa, BUS program" />
+        <title>LMCA | Professional Chartered Accountants & Business Management</title>
+        <meta name="description" content="Expert chartered accountants providing comprehensive business management, investment strategies, and professional accounting services through our innovative Business Under Stewardship program." />
+        <meta name="keywords" content="chartered accountants, business management, investment services, South Africa, BUS program, financial advisory, tax services, corporate finance, wealth management" />
         <link rel="canonical" href="https://www.madunacas.com/" />
       </Helmet>
       
@@ -21,7 +21,7 @@ const Index = () => {
         <ServicesSection />
         <BusSection />
         <ImpactFundsSection />
-        <div className="bg-white py-16"></div> {/* Added white spacer */}
+        <div className="bg-white py-16"></div>
       </div>
     </Layout>
   );
