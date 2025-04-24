@@ -155,36 +155,41 @@ const Footer = () => {
         </div>
 
         <div className="mt-12 pt-8 border-t border-gray-700">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 text-sm text-gray-300">
-            <div>
-              <h5 className="font-montserrat font-semibold mb-4 text-white">Client Verification</h5>
-              <p className="font-lato mb-3">
-                We exclusively work with thoroughly vetted and verified clients. All clients must complete:
-              </p>
-              <ul className="list-disc pl-5 space-y-2">
-                <li>Comprehensive KYC (Know Your Client) verification</li>
-                <li>Client Engagement Letter signature</li>
-                <li>Risk assessment and profiling</li>
-              </ul>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-gray-300">
+            <div className="flex items-start space-x-3">
+              <div className="flex-shrink-0 w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <div>
+                <h5 className="font-montserrat font-semibold mb-2 text-white">Client Verification</h5>
+                <p className="font-lato">All clients undergo KYC verification, sign engagement letters, and complete risk assessments.</p>
+              </div>
             </div>
             
-            <div>
-              <h5 className="font-montserrat font-semibold mb-4 text-white">Fund Management</h5>
-              <p className="font-lato mb-3">
-                All client funds are managed through the Standard Bank Third Party Fund Administration Platform, ensuring:
-              </p>
-              <ul className="list-disc pl-5 space-y-2">
-                <li>Secure and transparent fund administration</li>
-                <li>Regular reporting and monitoring</li>
-                <li>Independent oversight and compliance</li>
-              </ul>
+            <div className="flex items-start space-x-3">
+              <div className="flex-shrink-0 w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <div>
+                <h5 className="font-montserrat font-semibold mb-2 text-white">Fund Management</h5>
+                <p className="font-lato">Funds managed via Standard Bank Third Party Platform with secure administration and regular reporting.</p>
+              </div>
             </div>
 
-            <div>
-              <h5 className="font-montserrat font-semibold mb-4 text-white">Investment Disclaimer</h5>
-              <p className="font-lato">
-                All investment opportunities undergo rigorous evaluation by our partner banks to mitigate risks. Past performance is not indicative of future results. Investments may be illiquid and carry significant risks. Please read all offering documents carefully.
-              </p>
+            <div className="flex items-start space-x-3">
+              <div className="flex-shrink-0 w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <h5 className="font-montserrat font-semibold mb-2 text-white">Investment Disclaimer</h5>
+                <p className="font-lato">Past performance doesn't guarantee future results. Investments may be illiquid and carry risks. Read all documents carefully.</p>
+              </div>
             </div>
           </div>
         </div>
