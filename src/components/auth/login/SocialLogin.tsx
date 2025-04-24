@@ -13,6 +13,7 @@ interface SocialLoginProps {
 
 const SocialLogin = ({ onError }: SocialLoginProps) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [googleAvailable, setGoogleAvailable] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -30,20 +31,29 @@ const SocialLogin = ({ onError }: SocialLoginProps) => {
     
     // Check for successful auth
     const checkForAuth = async () => {
-      const { data } = await supabase.auth.getSession();
-      if (data?.session) {
-        console.log("Session detected after social auth redirect");
-        const role = data.session.user?.user_metadata?.role || 'user';
-        toast.success("Successfully logged in");
+      try {
+        const { data, error } = await supabase.auth.getSession();
+        if (error) {
+          console.error("Error getting session:", error.message);
+          return;
+        }
         
-        // Ensure we navigate to the dashboard of the current site
-        setTimeout(() => {
-          if (role === 'admin') {
-            navigate('/admin/dashboard');
-          } else {
-            navigate('/user/dashboard');
-          }
-        }, 300);
+        if (data?.session) {
+          console.log("Session detected after social auth redirect");
+          const role = data.session.user?.user_metadata?.role || 'user';
+          toast.success("Successfully logged in");
+          
+          // Ensure we navigate to the dashboard of the current site
+          setTimeout(() => {
+            if (role === 'admin') {
+              navigate('/admin/dashboard');
+            } else {
+              navigate('/user/dashboard');
+            }
+          }, 300);
+        }
+      } catch (error) {
+        console.error("Error in checkForAuth:", error);
       }
     };
     
@@ -81,7 +91,17 @@ const SocialLogin = ({ onError }: SocialLoginProps) => {
       
       if (error) {
         console.error("OAuth error:", error.message);
-        throw error;
+        
+        // Special handling for connection refusal
+        if (error.message.includes("refused to connect") || error.message.includes("network error")) {
+          setGoogleAvailable(false);
+          toast.error("Google authentication is not available. Please check your network connection or try using email login instead.");
+        } else {
+          toast.error(`Authentication failed: ${error.message}`);
+        }
+        
+        onError(error.message);
+        return;
       }
       
       if (data?.url) {
@@ -94,8 +114,9 @@ const SocialLogin = ({ onError }: SocialLoginProps) => {
       }
     } catch (error: any) {
       console.error("Social login error:", error);
-      toast.error(`Authentication failed: ${error.message}`);
+      toast.error(`Authentication failed: ${error.message || "Unknown error"}`);
       onError(error.message || "Authentication failed");
+      setGoogleAvailable(false);
     } finally {
       setIsLoading(false);
     }
@@ -119,7 +140,7 @@ const SocialLogin = ({ onError }: SocialLoginProps) => {
           type="button"
           variant="outline"
           onClick={() => handleSocialLogin('google')}
-          disabled={isLoading}
+          disabled={isLoading || !googleAvailable}
           className="w-full"
         >
           <Icons.google className="mr-2 h-4 w-4" />
@@ -128,7 +149,11 @@ const SocialLogin = ({ onError }: SocialLoginProps) => {
       </div>
       
       <div className="mt-2 text-xs text-center text-gray-500">
-        <p>If you're having trouble logging in with Google, please try using the email login option.</p>
+        {googleAvailable ? (
+          <p>If you're having trouble logging in with Google, please try using the email login option.</p>
+        ) : (
+          <p className="text-red-500">Google login is currently unavailable. Please use the email login option above.</p>
+        )}
       </div>
     </CardContent>
   );
