@@ -58,15 +58,15 @@ const ImpactFundsSection = () => {
           {funds.map((fund, index) => (
             <div 
               key={index} 
-              className={`rounded-lg overflow-hidden shadow-lg flex flex-col hover:-translate-y-2 transition-transform duration-300`}
+              className="rounded-lg overflow-hidden shadow-lg flex flex-col hover:-translate-y-2 transition-transform duration-300"
             >
               <div className="relative h-48 overflow-hidden">
                 <img
                   src={fund.image}
                   alt={fund.name}
-                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover brightness-110 contrast-110 hover:scale-105 transition-transform duration-300"
                 />
-                <div className={`absolute inset-0 bg-gradient-to-br ${fund.color} opacity-40`}></div>
+                <div className={`absolute inset-0 bg-gradient-to-br ${fund.color} opacity-20`}></div>
                 <h3 className="absolute bottom-0 left-0 right-0 p-4 font-montserrat font-bold text-xl sm:text-2xl text-white">
                   {fund.name}
                 </h3>
@@ -74,20 +74,20 @@ const ImpactFundsSection = () => {
               
               <div className={`bg-gradient-to-br ${fund.color} p-6 sm:p-8 flex-1 flex flex-col justify-between`}>
                 <div>
-                  <p className="font-lato text-gray-200 mb-2">{fund.description}</p>
+                  <p className="font-lato text-gray-100 mb-2">{fund.description}</p>
                   <ul className="list-disc list-inside text-sm mb-3 text-gold space-y-1">
                     {fund.focus.map((item, i) => (
                       <li key={i}>{item}</li>
                     ))}
                   </ul>
                   <div className="font-medium mt-2">
-                    <span className="text-white/80">Minimum investment: </span>
+                    <span className="text-white/90">Minimum investment: </span>
                     <span className="text-gold font-semibold">{fund.minInvestment}</span>
                   </div>
                 </div>
                 <Link 
                   to="/impact-funds"
-                  className="font-montserrat inline-block px-4 sm:px-6 py-2 bg-white/10 text-white rounded font-medium hover:bg-white/20 transition-colors mt-5 text-center"
+                  className="font-montserrat inline-block px-4 sm:px-6 py-2 bg-white/20 text-white rounded font-medium hover:bg-white/30 transition-colors mt-5 text-center"
                 >
                   Learn More / All Opportunities
                 </Link>
@@ -95,6 +95,7 @@ const ImpactFundsSection = () => {
             </div>
           ))}
         </div>
+
         <div className="text-center mt-10">
           <span className="text-gray-300 font-lato">
             For full details and business deal selection, visit our <Link to="/impact-funds" className="text-gold underline">Impact Fund page</Link>.
