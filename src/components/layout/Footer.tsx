@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
@@ -197,7 +198,7 @@ const Footer = () => {
         <div className="border-t border-gray-700 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="font-lato text-sm text-gray-400">
-              &copy; {currentYear} Luthando Maduna Chartered Accountants. All rights reserved.
+              &copy; {currentYear} Luthando Maduna Chartered Accountants (Pty) Ltd. Reg: 2019/621826/07. All rights reserved.
             </p>
             <div className="flex flex-col md:flex-row items-center gap-4 mt-4 md:mt-0">
               <div className="flex items-center space-x-6">
