@@ -2,38 +2,48 @@
 import { Link } from "react-router-dom";
 
 const Hero = () => (
-  <section className="w-full min-h-[70vh] flex items-center justify-center bg-navyblue px-4 py-8 md:py-12 relative overflow-hidden">
+  <section className="w-full min-h-[80vh] flex items-center justify-center bg-navyblue px-4 py-12 md:py-16 relative overflow-hidden">
     <div className="container max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0 md:space-x-12 relative z-10">
       {/* Text Content */}
       <div className="w-full md:w-1/2 text-left">
-        <h1 className="font-montserrat font-bold text-2xl md:text-3xl lg:text-4xl tracking-tight text-white mb-3 leading-tight">
-          Managing Your<br />Business
+        <h1 className="font-montserrat font-bold text-3xl md:text-4xl lg:text-5xl tracking-tight text-white mb-4 leading-tight">
+          Own Real Businesses.<br />
+          Let Us Manage Them<br />For You
         </h1>
-        <h2 className="font-montserrat font-bold text-xl md:text-2xl lg:text-3xl text-gold mb-4 tracking-tight leading-tight">
-          Growing Your<br />Wealth
+        <h2 className="font-montserrat text-xl md:text-2xl text-gold mb-6 tracking-tight leading-tight">
+          Start with just R500 per month
         </h2>
-        <p className="font-lato text-white/95 text-sm md:text-base max-w-xl mb-6">
-          Professional chartered accountants providing comprehensive accounting, business management, and investment services through our Business Under Stewardship program.
+        <p className="font-lato text-white/95 text-lg md:text-xl max-w-xl mb-8">
+          Whether you're a taxi driver, teacher, or football fan — you can now own multiple businesses. We'll manage everything while you watch them grow.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <Link
-            to="/contact"
-            className="w-full sm:w-auto px-6 py-2.5 font-montserrat font-semibold text-sm rounded bg-gold text-navyblue shadow hover:bg-lightgold transition-colors hover:scale-105 text-center"
+            to="/register"
+            className="w-full sm:w-auto px-8 py-3.5 font-montserrat font-semibold text-base rounded-lg bg-gold text-navyblue shadow hover:bg-lightgold transition-colors hover:scale-105 text-center"
           >
-            Get Started
+            Start with R500/month
           </Link>
+          <Link
+            to="/how-we-work"
+            className="w-full sm:w-auto px-8 py-3.5 font-montserrat font-semibold text-base rounded-lg bg-white/10 text-white hover:bg-white/20 transition-colors text-center"
+          >
+            See How It Works
+          </Link>
+        </div>
+        <div className="mt-8 text-white/80 text-sm">
+          🔒 Professional Chartered Accountants managing your businesses
         </div>
       </div>
 
       {/* Image section */}
       <div className="w-full md:w-1/2 flex justify-center items-center">
-        <div className="relative w-full max-w-[240px] sm:max-w-[280px] md:max-w-[320px] lg:max-w-[360px]">
+        <div className="relative w-full max-w-[280px] sm:max-w-[320px] md:max-w-[360px] lg:max-w-[400px]">
           <div className="absolute inset-0 border-2 border-gold/50 rounded-2xl transform rotate-3 scale-105"></div>
           <div className="absolute inset-0 border-2 border-gold/40 rounded-2xl transform -rotate-2"></div>
           
           <img
             src="/lovable-uploads/cefab7d3-58a2-43a5-a136-7cac22b5c286.png"
-            alt="Joyful person with natural hair surrounded by yellow flowers"
+            alt="Successful business owner smiling"
             className="w-full h-auto object-cover rounded-2xl animate-fade-in-slow brightness-110 contrast-105 saturate-105"
             style={{
               filter: 'drop-shadow(0 0 20px rgba(0,0,0,0.2))',

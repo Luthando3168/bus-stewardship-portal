@@ -3,22 +3,22 @@ import { Link } from "react-router-dom";
 import SectionTitle from "../ui/SectionTitle";
 
 const BusSection = () => {
-  const features = [
+  const steps = [
     {
-      title: "Complete Business Management",
-      description: "We take full responsibility for managing your businesses day-to-day operations, letting you focus on other priorities."
+      title: "1. Choose Your Business Type",
+      description: "Browse our MyImpact categories and pick the businesses you want to own - from food shops to farms."
     },
     {
-      title: "Professional Team",
-      description: "Our chartered accountants handle everything from accounting and tax compliance to business strategy."
+      title: "2. Start with R500/month",
+      description: "Join the platform with a small monthly contribution. Your money goes into a secure business account."
     },
     {
-      title: "Digital Platform",
-      description: "Access financial reports and track your business performance through our MCA Direct platform."
+      title: "3. We Do All The Work",
+      description: "Our professional team handles everything while you get regular updates on your phone or computer."
     },
     {
-      title: "Regular Updates",
-      description: "Receive quarterly financial statements and twice-yearly profit distributions directly to your account."
+      title: "4. Watch Your Business Grow",
+      description: "Track your progress through our easy-to-use MCA Direct platform and receive profit shares."
     }
   ];
 
@@ -28,40 +28,37 @@ const BusSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <SectionTitle
-              title="Let Us Manage Your Business"
-              subtitle="Professional management services through our Business Under Stewardship program"
+              title="How It Works (Simple as 1-2-3)"
+              subtitle="Our BUS Program makes business ownership easy for everyone"
             />
 
             <div className="bg-lightgray rounded-lg p-6 mb-8">
-              <p className="font-semibold text-lg text-navyblue text-center">
-                "Simply browse our Impact Funds section to view available businesses, then register through MCA Direct to access investment opportunities."
+              <p className="text-lg text-navyblue text-center italic">
+                "I started with R500 per month, and now I'm part of three different businesses — all managed by professionals!"
               </p>
+              <p className="text-sm text-center mt-2 text-gray-600">- Thuli, School Administrator</p>
             </div>
 
-            <p className="font-lato text-charcoal mb-8 text-lg">
-              Through our Business Under Stewardship (BUS) program, you can own multiple businesses without the hassle of day-to-day management. Our digital platform enables you to browse, select, and manage businesses entirely online. We handle everything from operations and accounting to strategy and growth, while you receive regular updates and profit distributions through MCA Direct.
-            </p>
-
-            <ul className="space-y-6 mb-8">
-              {features.map((feature, index) => (
-                <li key={index} className="flex">
-                  <div className="flex-shrink-0 h-6 w-6 bg-gold rounded-full flex items-center justify-center mt-1">
+            <div className="space-y-8 mb-8">
+              {steps.map((step, index) => (
+                <div key={index} className="flex gap-4">
+                  <div className="flex-shrink-0 h-8 w-8 bg-gold rounded-full flex items-center justify-center">
                     <span className="text-white text-sm font-bold">✓</span>
                   </div>
-                  <div className="ml-4">
-                    <h3 className="font-montserrat font-semibold text-lg text-navyblue">{feature.title}</h3>
-                    <p className="font-lato text-charcoal">{feature.description}</p>
+                  <div>
+                    <h3 className="font-montserrat font-semibold text-xl text-navyblue mb-1">{step.title}</h3>
+                    <p className="font-lato text-charcoal text-lg">{step.description}</p>
                   </div>
-                </li>
+                </div>
               ))}
-            </ul>
+            </div>
 
             <div className="text-center">
               <Link
                 to="/impact-funds"
-                className="font-montserrat inline-block px-8 py-4 bg-gold text-white rounded-lg font-medium hover:bg-lightgold transition-colors"
+                className="inline-block px-8 py-4 bg-gold text-white rounded-lg font-semibold hover:bg-lightgold transition-colors"
               >
-                Browse Available Businesses
+                See Available Businesses
               </Link>
             </div>
           </div>
@@ -69,17 +66,21 @@ const BusSection = () => {
           <div className="relative">
             <div className="aspect-w-4 aspect-h-3 relative z-10">
               <div className="w-full h-full bg-gradient-to-br from-navyblue to-deepblue rounded-lg overflow-hidden shadow-2xl flex items-center justify-center">
-                <div 
-                  className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-black tracking-wider text-transparent bg-clip-text 
-                  bg-gradient-to-r from-gold via-lightgold to-gold 
-                  transform hover:scale-105 transition-transform duration-300"
-                >
-                  BUS
+                <div className="text-center p-8">
+                  <div 
+                    className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-black tracking-wider text-transparent bg-clip-text 
+                    bg-gradient-to-r from-gold via-lightgold to-gold 
+                    transform hover:scale-105 transition-transform duration-300"
+                  >
+                    BUS
+                  </div>
+                  <p className="text-white text-xl md:text-2xl mt-4">Business Under Stewardship</p>
+                  <p className="text-gold text-lg mt-2">We manage. You own.</p>
                 </div>
               </div>
             </div>
             {/* Decorative elements */}
-            <div className="absolute -bottom-6 -right-6 w-full h-full border-4 border-gold rounded-lg z-0 shadow-lg"></div>
+            <div className="absolute -bottom-6 -right-6 w-full h-full border-4 border-gold rounded-lg z-0"></div>
           </div>
         </div>
       </div>
