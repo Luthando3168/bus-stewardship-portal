@@ -1,8 +1,9 @@
+
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "@/components/ui/card";
 import RegisterForm from "@/components/auth/registration/RegisterForm";
 import Logo from "@/components/ui/Logo";
-import { Info } from "lucide-react";
+import { FileText } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 
 const Register = () => {
@@ -18,19 +19,26 @@ const Register = () => {
                 <Logo />
               </div>
               <CardDescription className="text-gray-500 text-center">
-                Client Registration Process
+                Business Ownership Registration Process
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4 flex items-start space-x-3">
-                <Info className="text-blue-700 mt-1 flex-shrink-0" size={20} />
+              <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+                <h3 className="font-semibold text-blue-900 mb-2">Required Documents:</h3>
+                <ul className="list-disc pl-5 text-blue-800 space-y-1 text-sm">
+                  <li>Valid South African ID/Passport</li>
+                  <li>Proof of Address (recent 3 months)</li>
+                  <li>3 Months Bank Statements</li>
+                  <li>Latest Payslip/Proof of Income</li>
+                </ul>
+              </div>
+              
+              <div className="flex items-start space-x-3 mb-6 bg-amber-50 p-4 rounded-lg">
+                <FileText className="text-amber-600 mt-1" size={20} />
                 <div>
-                  <p className="text-blue-900 font-medium mb-2">
-                    Client Onboarding Information
-                  </p>
-                  <p className="text-blue-700 text-sm">
-                    To become a client, please complete our initial registration process. 
-                    We'll guide you through the necessary steps to access our services.
+                  <p className="text-amber-900 text-sm">
+                    After completing this initial registration, our team will guide you through 
+                    the document submission process and account verification.
                   </p>
                 </div>
               </div>
@@ -38,7 +46,7 @@ const Register = () => {
             </CardContent>
             <CardFooter className="flex flex-col space-y-4">
               <div className="text-center text-sm">
-                <span className="text-gray-500">Already have an account?</span>{" "}
+                <span className="text-gray-500">Already registered?</span>{" "}
                 <a 
                   href="/login" 
                   className="text-gold hover:text-lightgold underline"

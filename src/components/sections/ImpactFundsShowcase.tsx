@@ -89,36 +89,45 @@ const ImpactFundsShowcase = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle
           title="What Business Do You Want to Own?"
-          subtitle="Register now to access our secure business ownership platform"
+          subtitle="Complete registration to access our secure business ownership platform"
           centered
         />
         
         <div className="mt-8 mb-12 max-w-3xl mx-auto">
           <div className="bg-white p-6 rounded-lg shadow-md space-y-6">
-            <h3 className="text-xl font-bold text-navyblue mb-4">How It Works (Simple & Secure!)</h3>
+            <h3 className="text-xl font-bold text-navyblue mb-4">Registration Process</h3>
             
-            <div className="space-y-4 text-lg">
-              <p className="flex items-center gap-2">
-                <span className="text-gold">1.</span> Register for free and verify your identity
-              </p>
-              <p className="flex items-center gap-2">
-                <span className="text-gold">2.</span> Save R500 monthly in your secure bank account
-              </p>
-              <p className="flex items-center gap-2">
-                <span className="text-gold">3.</span> Choose businesses you want to own when ready
-              </p>
-            </div>
+            <div className="space-y-4">
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <h4 className="font-semibold mb-2">Required Documents:</h4>
+                <ul className="list-disc pl-5 space-y-2 text-blue-900">
+                  <li>Valid South African ID or Passport</li>
+                  <li>Proof of Address (not older than 3 months)</li>
+                  <li>3 Months Bank Statements</li>
+                  <li>Latest Payslip or Proof of Income</li>
+                </ul>
+              </div>
 
-            <div className="bg-blue-50 p-4 rounded-lg">
-              <p className="text-sm text-blue-800">
-                <strong>Security First:</strong> Your money stays in your bank account until you approve a deal. We conduct thorough background checks and have strict anti-fraud measures in place.
-              </p>
-            </div>
+              <div className="space-y-4 text-lg">
+                <p className="flex items-center gap-2">
+                  <span className="text-gold">1.</span> Register online and submit required documents
+                </p>
+                <p className="flex items-center gap-2">
+                  <span className="text-gold">2.</span> Our team verifies your information
+                </p>
+                <p className="flex items-center gap-2">
+                  <span className="text-gold">3.</span> Save R500 monthly in your secure bank account
+                </p>
+                <p className="flex items-center gap-2">
+                  <span className="text-gold">4.</span> Choose businesses you want to own when ready
+                </p>
+              </div>
 
-            <div className="bg-green-50 p-4 rounded-lg">
-              <p className="text-sm text-green-800">
-                <strong>Real Example:</strong> Sarah, a call center agent, started with R500 monthly savings. Through our platform, she now co-owns a food shop that generates monthly returns. We handle all the management!
-              </p>
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <p className="text-sm text-blue-800">
+                  <strong>Security First:</strong> Your money stays in your bank account until you approve a deal. We conduct thorough background checks and have strict anti-fraud measures in place.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -154,7 +163,7 @@ const ImpactFundsShowcase = () => {
             to="/register" 
             className="inline-block px-8 py-4 bg-gold text-navyblue font-semibold rounded-lg hover:bg-lightgold transition-colors text-lg mr-4"
           >
-            Register Now - It's Free
+            Start Registration Process
           </Link>
           <Link 
             to="/impact-funds" 

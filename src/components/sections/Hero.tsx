@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { Phone, Mail, MessageCircle, Calendar } from "lucide-react";
+import { Mail, MessageCircle } from "lucide-react";
 
 const Hero = () => (
   <section className="w-full min-h-[80vh] flex items-center justify-center bg-navyblue px-4 py-12 md:py-16 relative overflow-hidden">
@@ -13,31 +13,26 @@ const Hero = () => (
           Own Real Businesses.
         </h1>
         <p className="font-lato text-white/95 text-lg md:text-xl max-w-xl mb-6">
-          Registration is easy! Create your account, verify your details, and get access to our business ownership platform. Your R500 stays in your account until you approve a deal.
+          Complete our registration process to access our business ownership platform. After verification, start saving R500 monthly in your bank account. Your money stays safe until you approve a deal.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <Link
             to="/register"
             className="w-full sm:w-auto px-8 py-3.5 font-montserrat font-semibold text-base rounded-lg bg-gold text-navyblue shadow hover:bg-lightgold transition-colors hover:scale-105 text-center"
           >
-            Register Now - It's Free
+            Register Now
           </Link>
           <Link
             to="/contact"
-            className="w-full sm:w-auto px-8 py-3.5 font-montserrat font-semibold text-base rounded-lg bg-white/10 text-white hover:bg-white/20 transition-colors text-center flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-8 py-3.5 font-montserrat font-semibold text-base rounded-lg bg-white/10 text-white hover:bg-white/20 transition-colors text-center"
           >
-            <Calendar size={18} />
-            Book Free Consultation
+            Book Consultation
           </Link>
         </div>
         <div className="mt-8 space-y-3">
           <div className="flex items-center gap-2 text-white/90">
             <MessageCircle size={20} />
             <span>WhatsApp us: 062 019 3208</span>
-          </div>
-          <div className="flex items-center gap-2 text-white/90">
-            <Phone size={20} />
-            <span>Call us: 087 624 3204</span>
           </div>
           <div className="flex items-center gap-2 text-white/90">
             <Mail size={20} />
