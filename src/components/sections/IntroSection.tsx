@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import SectionTitle from '@/components/ui/SectionTitle';
 import { Card } from '@/components/ui/card';
+import { Store, Home, ShoppingBag, ArrowRight } from 'lucide-react';
 
 const IntroSection = () => {
   return (
@@ -41,90 +42,41 @@ const IntroSection = () => {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 space-y-6 md:space-y-8">
-            <h2 className="text-2xl font-bold text-navyblue text-center mb-6 md:mb-8">Business Types You Can Own</h2>
+          <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
+            <h2 className="text-2xl font-bold text-navyblue text-center mb-8">Featured Business Types</h2>
             
-            <div className="grid gap-4 md:gap-6">
-              <Card className="p-6 transition-all duration-300 hover:shadow-lg">
-                <h3 className="text-xl font-bold text-navyblue mb-3">MyFoodRetail: Own Mini Shopping Complexes</h3>
+            <div className="grid gap-4 md:gap-6 md:grid-cols-3 mb-8">
+              <Card className="p-6 transition-all duration-300 hover:shadow-lg bg-gradient-to-br from-amber-50 to-amber-100">
+                <Store className="w-8 h-8 text-amber-600 mb-4" />
+                <h3 className="text-xl font-bold text-navyblue mb-3">MyFoodRetail</h3>
                 <p className="text-gray-600 mb-4">
-                  Start with just R5,000 and own parts of mini shopping complexes, food outlets, and grocery stores in your 
-                  community. These shops work together with our MyFarm businesses to get good prices on food, 
-                  which means more profit for you. We handle everything - from managing staff to keeping the 
-                  shops clean and well-stocked.
+                  Own mini shopping complexes and food outlets in your community. Start with just R5,000.
                 </p>
               </Card>
 
-              <Card className="p-6 transition-all duration-300 hover:shadow-lg">
-                <h3 className="text-xl font-bold text-navyblue mb-3">MyFarm: Own Farming Businesses</h3>
+              <Card className="p-6 transition-all duration-300 hover:shadow-lg bg-gradient-to-br from-blue-50 to-blue-100">
+                <Home className="w-8 h-8 text-blue-600 mb-4" />
+                <h3 className="text-xl font-bold text-navyblue mb-3">MyProperty</h3>
                 <p className="text-gray-600 mb-4">
-                  With R1,000, you can own parts of farms that grow food for our communities. Your farms will 
-                  supply food to our MyFoodRetail shops - it's all connected! Professional farmers handle everything, 
-                  from planting to selling the produce.
+                  Own property that makes money through rent every month. Start with R2,000.
                 </p>
               </Card>
 
-              <Card className="p-6 transition-all duration-300 hover:shadow-lg">
-                <h3 className="text-xl font-bold text-navyblue mb-3">MyProperty: Own Money-Making Properties</h3>
+              <Card className="p-6 transition-all duration-300 hover:shadow-lg bg-gradient-to-br from-red-50 to-red-100">
+                <ShoppingBag className="w-8 h-8 text-red-600 mb-4" />
+                <h3 className="text-xl font-bold text-navyblue mb-3">MyFranchise</h3>
                 <p className="text-gray-600 mb-4">
-                  Start with R2,000 and own parts of properties that make money every month through rent. 
-                  This includes houses, flats, and spaces for businesses. Our property managers handle 
-                  everything - from finding good tenants to maintaining the buildings.
-                </p>
-              </Card>
-
-              <Card className="p-6 transition-all duration-300 hover:shadow-lg">
-                <h3 className="text-xl font-bold text-navyblue mb-3">MyFranchise: Own Famous Brand Stores</h3>
-                <p className="text-gray-600 mb-4">
-                  With R5,000, own parts of well-known franchise stores like Steers or Debonairs. These are 
-                  trusted brands that people love. We handle all the hard work - from training staff to making 
-                  sure everything runs smoothly.
-                </p>
-              </Card>
-
-              <Card className="p-6 transition-all duration-300 hover:shadow-lg">
-                <h3 className="text-xl font-bold text-navyblue mb-3">MySchool: Own Educational Centers</h3>
-                <p className="text-gray-600 mb-4">
-                  Start with R1,500 and own parts of schools and training centers. These help our communities 
-                  while making money through school fees and training programs. Professional educators run 
-                  everything, ensuring quality education.
-                </p>
-              </Card>
-
-              <Card className="p-6 transition-all duration-300 hover:shadow-lg">
-                <h3 className="text-xl font-bold text-navyblue mb-3">MyEnergy: Own Power Solutions</h3>
-                <p className="text-gray-600 mb-4">
-                  With R3,000, own parts of solar and power businesses that help solve electricity problems. 
-                  These make money by providing power to homes and businesses. Our engineers handle everything, 
-                  from installation to maintenance.
-                </p>
-              </Card>
-
-              <Card className="p-6 transition-all duration-300 hover:shadow-lg">
-                <h3 className="text-xl font-bold text-navyblue mb-3">MyTelco: Own Internet & Phone Services</h3>
-                <p className="text-gray-600 mb-4">
-                  Start with R2,500 and own parts of internet and phone businesses. These make money by 
-                  providing connection services that people need every day. Technical experts handle everything, 
-                  keeping the networks running smoothly.
-                </p>
-              </Card>
-
-              <Card className="p-6 transition-all duration-300 hover:shadow-lg">
-                <h3 className="text-xl font-bold text-navyblue mb-3">MyHealth: Own Healthcare Services</h3>
-                <p className="text-gray-600 mb-4">
-                  With R2,500, own parts of clinics and healthcare businesses that help keep our communities 
-                  healthy while making money. Professional healthcare workers handle everything, from patient 
-                  care to managing medical supplies.
+                  Own parts of famous brand stores like Steers or Debonairs. Start with R5,000.
                 </p>
               </Card>
             </div>
 
-            <div className="text-center mt-8 md:mt-12">
+            <div className="text-center">
               <Link 
-                to="/register"
-                className="inline-block px-6 md:px-8 py-3 md:py-4 bg-gold text-navyblue font-semibold rounded-lg hover:bg-lightgold transition-colors text-lg shadow-md"
+                to="/impact-funds" 
+                className="inline-flex items-center gap-2 px-6 py-3 bg-navyblue text-white rounded-lg hover:bg-blue-800 transition-colors"
               >
-                Start Your Business Journey
+                See All Business Types <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </div>

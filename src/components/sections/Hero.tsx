@@ -5,7 +5,7 @@ const Hero = () => (
   <section className="w-full min-h-[85vh] flex items-center bg-navyblue px-4 py-12 md:py-16 relative overflow-hidden">
     <div className="container max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 relative z-10">
       {/* Text Content */}
-      <div className="w-full md:w-1/2 text-left space-y-6 md:space-y-8">
+      <div className="w-full md:w-1/2 text-left space-y-6 md:space-y-8 order-2 md:order-1">
         <h1 className="font-montserrat font-bold text-4xl md:text-5xl lg:text-6xl tracking-tight text-white leading-[1.1]">
           Register Now.<br />
           Start from R500.<br />
@@ -42,8 +42,8 @@ const Hero = () => (
         </div>
       </div>
 
-      {/* Image section */}
-      <div className="w-full md:w-1/2">
+      {/* Image section - Moved up on mobile */}
+      <div className="w-full md:w-1/2 order-1 md:order-2">
         <div className="relative w-full max-w-[500px] mx-auto">
           <div className="absolute inset-0 border-2 border-gold/50 rounded-2xl transform rotate-3 scale-105"></div>
           <div className="absolute inset-0 border-2 border-gold/40 rounded-2xl transform -rotate-2"></div>
