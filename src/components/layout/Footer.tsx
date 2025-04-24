@@ -4,6 +4,7 @@ import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import Logo from "@/components/ui/Logo";
 
 const Footer = () => {
   const location = useLocation();
@@ -25,25 +26,16 @@ const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
           <div className="col-span-1">
-            <div className="flex flex-col items-start">
-              <span className="font-montserrat font-bold text-xl md:text-2xl tracking-tight">
-                <span className="text-gold border-b-2 border-gold pb-0.5">Luthando</span>
-                <span className="text-white"> Maduna</span>
-              </span>
-              <span className="font-montserrat text-xs text-white tracking-wider mt-1">
-                CHARTERED ACCOUNTANTS
-              </span>
-            </div>
+            <Logo />
             <p className="font-lato text-sm mt-4 text-gray-300">
-              Professional chartered accountants providing accounting, business 
-              management and investment services through the Business Under 
-              Stewardship (BUS) program.
+              We help everyday people own businesses and grow their money. 
+              Our team manages everything, so you can sit back and watch your investment grow.
             </p>
-            <p className="font-lato text-sm mt-4 text-gray-300">
-              SAICA ID: 20055210
+            <p className="font-lato text-sm mt-4 text-gray-300 opacity-75">
+              Professional Number: 20055210
             </p>
-            <p className="font-lato text-sm text-gray-300">
-              Reg: 2019/621826/07
+            <p className="font-lato text-sm text-gray-300 opacity-75">
+              Business Reg: 2019/621826/07
             </p>
           </div>
 
