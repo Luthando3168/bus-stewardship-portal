@@ -11,8 +11,8 @@ import FundAccordion from "@/components/FundAccordion";
 import FundOpportunities, { Opportunity } from "@/components/user/FundOpportunities";
 import { Link } from "react-router-dom";
 import { useNotifications } from "@/hooks/useNotifications";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { supabase } from "@/lib/supabase";
+import { useAuthState } from "@/hooks/useAuthState";
+import { supabase } from "@/integrations/supabase/client";
 
 const FUNDS = [
   {
