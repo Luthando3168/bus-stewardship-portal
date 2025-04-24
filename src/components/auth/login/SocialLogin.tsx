@@ -13,7 +13,7 @@ interface SocialLoginProps {
 const SocialLogin = ({ onError }: SocialLoginProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSocialLogin = async (provider: 'google' | 'apple' | 'facebook') => {
+  const handleSocialLogin = async (provider: 'google') => {
     try {
       setIsLoading(true);
       
@@ -77,26 +77,6 @@ const SocialLogin = ({ onError }: SocialLoginProps) => {
         >
           <Icons.google className="mr-2 h-4 w-4" />
           Continue with Google
-        </Button>
-        <Button
-          type="button"
-          variant="outline"
-          onClick={() => handleSocialLogin('apple')}
-          disabled={isLoading}
-          className="w-full"
-        >
-          <Icons.apple className="mr-2 h-4 w-4" />
-          Continue with Apple
-        </Button>
-        <Button
-          type="button"
-          variant="outline"
-          onClick={() => handleSocialLogin('facebook')}
-          disabled={isLoading}
-          className="w-full"
-        >
-          <Icons.facebook className="mr-2 h-4 w-4" />
-          Continue with Facebook
         </Button>
       </div>
       
