@@ -1,26 +1,51 @@
 
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Card, CardDescription, CardFooter, CardHeader } from "@/components/ui/card";
 import { toast } from "sonner";
 import Logo from "@/components/ui/Logo";
 import LoginForm from "@/components/auth/login/LoginForm";
 import SocialLogin from "@/components/auth/login/SocialLogin";
+import { supabase } from "@/integrations/supabase/client";
 
 const Login = () => {
   const [authError, setAuthError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const location = useLocation();
   
   useEffect(() => {
+    // Check URL parameters for error information
+    const params = new URLSearchParams(location.search);
     const hashParams = new URLSearchParams(window.location.hash.substring(1));
-    const error = hashParams.get("error_description") || hashParams.get("error");
+    
+    // Check for errors in both query parameters and hash
+    const error = 
+      params.get("error_description") || 
+      params.get("error") ||
+      hashParams.get("error_description") || 
+      hashParams.get("error");
     
     if (error) {
       console.error("Auth error from redirect:", error);
       setAuthError(error);
       toast.error(`Login failed: ${error}`);
     }
-  }, []);
+    
+    // Check if the user is already logged in
+    const checkSession = async () => {
+      const { data } = await supabase.auth.getSession();
+      if (data?.session) {
+        const role = data.session.user?.user_metadata?.role || 'user';
+        if (role === 'admin') {
+          navigate('/admin/dashboard');
+        } else {
+          navigate('/user/dashboard');
+        }
+      }
+    };
+    
+    checkSession();
+  }, [navigate, location]);
 
   const handleError = (error: string) => {
     setAuthError(error);
@@ -42,7 +67,7 @@ const Login = () => {
         {authError && (
           <div className="px-6">
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
-              <p className="text-sm">Invalid email or password</p>
+              <p className="text-sm">{authError}</p>
             </div>
           </div>
         )}

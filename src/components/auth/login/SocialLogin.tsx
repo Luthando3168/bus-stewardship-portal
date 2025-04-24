@@ -4,6 +4,7 @@ import { CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/ui/icons";
 import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 interface SocialLoginProps {
   onError: (error: string) => void;
@@ -15,15 +16,21 @@ const SocialLogin = ({ onError }: SocialLoginProps) => {
   const handleSocialLogin = async (provider: 'google' | 'apple' | 'facebook') => {
     try {
       setIsLoading(true);
-      const redirectTo = `${window.location.origin}/login`;
+      
+      // Get the window URL for proper redirect handling
+      const currentURL = window.location.origin;
+      const redirectTo = `${currentURL}/login`;
+      
       console.log(`Attempting ${provider} login with redirect to:`, redirectTo);
 
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: provider,
         options: {
           redirectTo: redirectTo,
+          skipBrowserRedirect: false, // Ensure browser redirect happens
           queryParams: {
-            prompt: 'select_account'
+            prompt: 'select_account',
+            access_type: 'offline' // Request refresh token
           }
         }
       });
@@ -32,11 +39,16 @@ const SocialLogin = ({ onError }: SocialLoginProps) => {
       
       if (data?.url) {
         console.log("Redirecting to OAuth provider URL:", data.url);
+        // Use window.location.href for more reliable redirects
         window.location.href = data.url;
+      } else {
+        toast.error("No redirect URL received from auth provider");
+        onError("Authentication failed - no redirect URL received");
       }
     } catch (error: any) {
       console.error("Social login error:", error);
-      onError(error.message);
+      toast.error(`Authentication failed: ${error.message}`);
+      onError(error.message || "Authentication failed");
     } finally {
       setIsLoading(false);
     }
@@ -86,6 +98,10 @@ const SocialLogin = ({ onError }: SocialLoginProps) => {
           <Icons.facebook className="mr-2 h-4 w-4" />
           Continue with Facebook
         </Button>
+      </div>
+      
+      <div className="mt-2 text-xs text-center text-gray-500">
+        <p>If you're having trouble logging in with Google, please try using the email login option.</p>
       </div>
     </CardContent>
   );

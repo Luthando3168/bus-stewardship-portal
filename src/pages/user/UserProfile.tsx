@@ -157,10 +157,30 @@ const UserProfile = () => {
           if (error && error.code !== 'PGRST116') throw error;
 
           if (profile) {
-            setUserData({
-              ...userData,
-              ...profile
-            });
+            const mappedUserData = {
+              fullName: profile.full_name || "",
+              email: profile.email || "",
+              phone: profile.phone || "",
+              dob: profile.dob || "",
+              idNumber: profile.id_number || "",
+              nationality: profile.nationality || "",
+              taxNumber: profile.tax_number || "",
+              taxCountry: profile.tax_country || "",
+              address: profile.address || "",
+              postalCode: profile.postal_code || "",
+              city: profile.city || "",
+              province: profile.province || "",
+              sourceOfFunds: profile.source_of_funds || "",
+              employmentStatus: profile.employment_status || "",
+              employer: profile.employer || "",
+              occupation: profile.occupation || "",
+              riskProfile: profile.risk_profile || "",
+              incomeBracket: profile.income_bracket || "",
+              pep: profile.pep ? "Yes" : "No",
+              joinDate: profile.created_at || ""
+            };
+            
+            setUserData(mappedUserData);
           }
         } catch (error) {
           console.error('Error loading profile:', error);
@@ -175,11 +195,8 @@ const UserProfile = () => {
     e.preventDefault();
     
     try {
-      // In a real app, this would save to a backend API
-      // Simulate successful update
       await new Promise(resolve => setTimeout(resolve, 800));
       
-      // Send notification about profile update
       await notifyProfileUpdate({
         fullName: userData.fullName,
         email: userData.email,
