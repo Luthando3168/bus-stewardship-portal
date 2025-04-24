@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
@@ -14,10 +15,10 @@ const Footer = () => {
   }, [location.pathname]);
 
   const socialLinks = [
-    { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
-    { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
-    { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-    { icon: Youtube, href: "https://youtube.com", label: "Youtube" }
+    { icon: Facebook, href: "https://facebook.com/Lifestylefarmsclub", label: "Facebook" },
+    { icon: Instagram, href: "https://instagram.com/madunacas", label: "Instagram" },
+    { icon: Linkedin, href: "https://linkedin.com/in/luthando-isaac-maduna", label: "LinkedIn" },
+    { icon: Youtube, href: "https://youtube.com/@LMCA-SA", label: "Youtube" }
   ];
 
   return (
