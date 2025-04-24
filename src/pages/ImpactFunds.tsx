@@ -11,7 +11,7 @@ const funds = [
     name: "MyFarm",
     description: "Supporting sustainable agriculture and farming businesses across South Africa.",
     bgGradient: "from-green-700 to-green-900",
-    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449",
+    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=800&q=80",
     focus: [
       "Sustainable farming operations",
       "Food security projects",
