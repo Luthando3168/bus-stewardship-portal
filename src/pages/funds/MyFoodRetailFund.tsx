@@ -1,3 +1,4 @@
+
 import React from "react";
 import FundEducationalPage from "@/components/funds/FundEducationalPage";
 
@@ -7,7 +8,7 @@ const MyFoodRetailFund = () => {
       fundName="MyFoodRetail"
       description="Focus: Investing in food retail businesses to improve access to quality food in underserved communities."
       bgGradient="from-amber-600 to-amber-800"
-      image="https://images.unsplash.com/photo-1604719312566-8912e9227c6a"
+      image="/lovable-uploads/0bf3e14d-cb74-4a37-b156-c269331b7a57.png"
       focus={[
         "Grocery stores",
         "Food distribution",

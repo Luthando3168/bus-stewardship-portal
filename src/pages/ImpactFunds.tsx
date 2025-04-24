@@ -1,4 +1,3 @@
-
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -39,7 +38,7 @@ const funds = [
     name: "MyFranchise",
     description: "Investing in franchise businesses with proven operational models, creating jobs and business skills.",
     bgGradient: "from-red-600 to-red-800",
-    image: "/lovable-uploads/e5869f22-682c-4c5c-bd33-5a19766a95cf.png", // Updated hamburger image
+    image: "/lovable-uploads/e5869f22-682c-4c5c-bd33-5a19766a95cf.png",
     focus: [
       "Food franchise outlets",
       "Retail and service franchises",
@@ -53,7 +52,7 @@ const funds = [
     name: "MyFoodRetail",
     description: "Investing in food retail businesses to improve access to quality food in underserved communities.",
     bgGradient: "from-amber-600 to-amber-800",
-    image: "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
+    image: "/lovable-uploads/0bf3e14d-cb74-4a37-b156-c269331b7a57.png",
     focus: [
       "Grocery stores",
       "Food distribution",
