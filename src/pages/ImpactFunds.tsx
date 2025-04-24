@@ -115,168 +115,193 @@ const ImpactFunds = () => {
         <meta name="description" content="Whether you're a call center agent, teacher or gogo - join us! Own real businesses with R500/month. We handle everything, your money stays safe in the bank." />
       </Helmet>
       
-      <div className="bg-gray-50 min-h-screen py-12">
+      <div className="bg-gradient-to-b from-lightgray to-white min-h-screen py-12">
         <div className="container mx-auto px-4">
-          <SectionTitle 
-            title="Business Types You Can Own" 
-            subtitle="Choose which businesses you want to own - we'll manage everything"
-            centered
-          />
+          <div className="text-center mb-16">
+            <h1 className="text-5xl font-bold text-navyblue mb-4 animate-fade-in">
+              Business Types You Can Own
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto animate-fade-in-slow">
+              Choose which businesses you want to own - we'll manage everything
+            </p>
+            <div className="h-1 w-32 bg-gold mx-auto mt-6"></div>
+          </div>
           
           <div className="max-w-4xl mx-auto mb-12">
-            <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
-              <h2 className="text-2xl font-bold text-navyblue mb-6">How Your Money Stays Safe</h2>
+            <div className="bg-gradient-to-br from-navyblue to-blue-900 rounded-2xl p-8 md:p-10 mb-8 text-white shadow-xl">
+              <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
+                <ShieldCheck className="w-8 h-8 text-gold" />
+                How Your Money Stays Safe
+              </h2>
               
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="flex items-start space-x-4">
-                  <div className="bg-gold p-3 rounded-lg">
-                    <ShieldCheck className="w-6 h-6 text-navyblue" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg mb-2">Bank-Approved Platform</h3>
-                    <p className="text-gray-600">
-                      We work directly with banks. Your R500 stays in YOUR bank account until you 
-                      say "YES" to a business deal.
-                    </p>
-                  </div>
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all">
+                  <h3 className="font-semibold text-xl mb-4 text-gold">Bank-Approved Platform</h3>
+                  <p className="text-gray-100">
+                    We work directly with banks. Your R500 stays in YOUR bank account until you 
+                    say "YES" to a business deal.
+                  </p>
                 </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="bg-gold p-3 rounded-lg">
-                    <Shield className="w-6 h-6 text-navyblue" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg mb-2">Anti-Fraud Checks</h3>
-                    <p className="text-gray-600">
-                      We check every business and person thoroughly. No chancers or 
-                      skelm business allowed!
-                    </p>
-                  </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all">
+                  <h3 className="font-semibold text-xl mb-4 text-gold">Anti-Fraud Checks</h3>
+                  <p className="text-gray-100">
+                    We check every business and person thoroughly. No chancers or 
+                    skelm business allowed!
+                  </p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
+            <div className="bg-white rounded-2xl shadow-lg p-8 md:p-10 mb-8">
               <h2 className="text-2xl font-bold text-navyblue mb-6">How This Works - In Simple Terms</h2>
               
-              <div className="space-y-6 text-gray-700 text-lg">
-                <p>
-                  Through MCA Direct, you become part of the Luthando Maduna Foundation's Impact Investment Programme. 
-                  This programme helps you own real businesses while creating positive change in our communities.
-                </p>
-                
-                <div className="bg-amber-50 p-4 rounded-md border border-amber-200">
-                  <h3 className="font-semibold text-xl mb-2">Bank Partnership for Impact:</h3>
-                  <p>
-                    Our foundation partners with a leading South African bank to ensure professional, transparent, and secure management of our Impact Investment Programme. 
-                    The bank provides critical infrastructure that enables our mission:
-                  </p>
-                  <ul className="list-disc pl-6 mt-2 space-y-2 text-gray-700">
-                    <li>Secure, dedicated account management for participant investments</li>
-                    <li>Rigorous financial compliance and regulatory oversight</li>
-                    <li>Professional fund tracking and reporting mechanisms</li>
-                    <li>Risk management and due diligence on potential business investments</li>
-                    <li>Independent financial auditing of foundation activities</li>
-                  </ul>
-                  <p className="mt-2 text-sm text-gray-600">
-                    This partnership ensures that every Rand invested is handled with the utmost integrity and professional care.
+              <div className="space-y-8">
+                <div className="prose max-w-none text-gray-700">
+                  <p className="text-lg leading-relaxed">
+                    Through MCA Direct, you become part of the Luthando Maduna Foundation's Impact Investment Programme. 
+                    This programme helps you own real businesses while creating positive change in our communities.
                   </p>
                 </div>
                 
-                <div className="bg-green-50 p-4 rounded-md border border-green-200">
-                  <h3 className="font-semibold text-xl mb-2">Making Money While Making a Difference:</h3>
-                  <ul className="space-y-2">
+                <div className="bg-gradient-to-r from-blue-50 to-amber-50 p-6 rounded-xl border border-gold/20">
+                  <h3 className="font-semibold text-xl mb-4 text-navyblue">Bank Partnership for Impact:</h3>
+                  <p className="text-gray-700 mb-4">
+                    Our foundation partners with a leading South African bank to ensure professional, transparent, 
+                    and secure management of our Impact Investment Programme.
+                  </p>
+                  <ul className="grid md:grid-cols-2 gap-4">
                     <li className="flex items-start gap-2">
-                      <span className="text-green-600">•</span>
-                      <span>Your businesses create jobs in communities that need them most</span>
+                      <Shield className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                      <span>Secure, dedicated account management</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-green-600">•</span>
-                      <span>Young people get work experience and training</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-green-600">•</span>
-                      <span>Communities get better access to services they need</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-green-600">•</span>
-                      <span>As communities grow stronger, your businesses do better</span>
+                      <CircleDollarSign className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                      <span>Professional fund tracking</span>
                     </li>
                   </ul>
                 </div>
                 
-                <ol className="space-y-4 list-decimal pl-5">
-                  <li>
-                    <span className="font-medium">Save your money</span> - Every month, R500 goes into your dedicated 
-                    bank account created by LMCA with our partner bank. Based on your savings, you can choose which 
-                    businesses to own through MCA Direct.
-                  </li>
-                  <li>
-                    <span className="font-medium">Pick businesses</span> - Choose from farms, shops, properties or 
-                    other businesses that help build stronger communities
-                  </li>
-                  <li>
-                    <span className="font-medium">We handle everything</span> - Our professional team manages the 
-                    businesses and makes sure they benefit both you and the community
-                  </li>
-                  <li>
-                    <span className="font-medium">You get profits</span> - When businesses make money, you get your 
-                    share, while knowing you're helping create jobs and opportunities
-                  </li>
-                </ol>
-                
-                <div className="flex items-center justify-center my-6">
-                  <div className="bg-navyblue text-white p-5 rounded-lg max-w-2xl">
-                    <h3 className="font-bold text-xl mb-3">Want to Learn More About Your Impact?</h3>
-                    <p className="mb-4">
-                      Visit our Foundation page to see how your business ownership helps create positive 
-                      change in communities across South Africa.
-                    </p>
-                    <Link 
-                      to="/foundation" 
-                      className="inline-block bg-gold text-white px-6 py-2 rounded-md hover:bg-amber-500 transition-colors"
-                    >
-                      Learn About Our Impact
-                    </Link>
+                <div className="bg-navyblue text-white p-6 rounded-xl">
+                  <h3 className="font-semibold text-xl mb-4 text-gold">Making Money While Making a Difference:</h3>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {[
+                      "Your businesses create jobs in communities",
+                      "Young people get work experience and training",
+                      "Communities get better access to services",
+                      "As communities grow stronger, your businesses do better"
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-start gap-3">
+                        <div className="bg-gold/20 p-2 rounded">
+                          <HandCoins className="w-5 h-5 text-gold" />
+                        </div>
+                        <span className="text-gray-100">{item}</span>
+                      </div>
+                    ))}
                   </div>
+                </div>
+
+                <div className="space-y-6">
+                  {[
+                    {
+                      title: "Save your money",
+                      content: "Every month, R500 goes into your dedicated bank account created by LMCA with our partner bank."
+                    },
+                    {
+                      title: "Pick businesses",
+                      content: "Choose from farms, shops, properties or other businesses that help build stronger communities."
+                    },
+                    {
+                      title: "We handle everything",
+                      content: "Our professional team manages the businesses and makes sure they benefit both you and the community."
+                    },
+                    {
+                      title: "You get profits",
+                      content: "When businesses make money, you get your share, while knowing you're helping create jobs and opportunities."
+                    }
+                  ].map((step, i) => (
+                    <div key={i} className="flex gap-4 items-start p-4 hover:bg-gray-50 rounded-lg transition-colors">
+                      <div className="bg-gold w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">
+                        <span className="text-white font-bold">{i + 1}</span>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-lg text-navyblue">{step.title}</h4>
+                        <p className="text-gray-600">{step.content}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-gold/10 to-amber-50 rounded-xl p-6 md:p-8 shadow-lg mb-8">
-              <h3 className="text-2xl font-bold text-navyblue mb-4">Meet Thembi: From Call Centre Agent to Business Owner</h3>
-              <div className="prose max-w-none text-gray-700">
-                <p className="mb-4">
-                  Thembi works as a call centre agent in Johannesburg, earning R8,000 monthly. Like many South Africans, 
-                  she dreamed of owning businesses but thought it was out of reach. That's until she discovered MCA Direct.
-                </p>
-                
-                <div className="bg-white rounded-lg p-6 my-6">
-                  <h4 className="text-xl font-semibold text-navyblue mb-3">Here's How We Helped Thembi:</h4>
-                  <ol className="list-decimal pl-4 space-y-3">
-                    <li>
-                      <strong>Smart Planning:</strong> We created a 6-month investment plan where Thembi saves just R500 monthly 
-                      in her bank account.
-                    </li>
-                    <li>
-                      <strong>Bank Partnership:</strong> We worked with her bank to set up a dedicated savings pocket, making 
-                      it easy to track her progress towards business ownership.
-                    </li>
-                    <li>
-                      <strong>Portfolio Building:</strong> After 6 months, Thembi had R3,000 saved. We helped her invest in:
-                      <ul className="list-disc pl-6 mt-2">
+            <div className="text-center bg-gradient-to-r from-navyblue to-blue-900 text-white p-8 rounded-2xl shadow-lg mb-12">
+              <h3 className="text-2xl font-bold mb-4">Want to Learn More About Your Impact?</h3>
+              <p className="mb-6">
+                Visit our Foundation page to see how your business ownership helps create positive 
+                change in communities across South Africa.
+              </p>
+              <Link 
+                to="/foundation" 
+                className="inline-flex items-center gap-2 bg-gold hover:bg-amber-500 text-white px-8 py-3 rounded-lg transition-colors font-semibold"
+              >
+                Learn About Our Impact
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+            </div>
+
+            <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 shadow-lg">
+              <h3 className="text-2xl font-bold text-navyblue mb-6">
+                Meet Thembi: From Call Centre Agent to Business Owner
+              </h3>
+              <p className="text-gray-700 mb-6">
+                Thembi works as a call centre agent in Johannesburg, earning R8,000 monthly. Like many South Africans, 
+                she dreamed of owning businesses but thought it was out of reach. That's until she discovered MCA Direct.
+              </p>
+              
+              <div className="bg-white rounded-xl p-6 shadow-sm">
+                <h4 className="text-xl font-semibold text-navyblue mb-4">Here's How We Helped Thembi:</h4>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <Calendar className="w-6 h-6 text-gold" />
+                    <div>
+                      <span className="font-medium text-navyblue">Smart Planning:</span>
+                      <p className="text-gray-600">
+                        We created a 6-month investment plan where Thembi saves just R500 monthly in her bank account.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <Shield className="w-6 h-6 text-gold" />
+                    <div>
+                      <span className="font-medium text-navyblue">Bank Partnership:</span>
+                      <p className="text-gray-600">
+                        We worked with her bank to set up a dedicated savings pocket, making it easy to track her 
+                        progress towards business ownership.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <CircleDollarSign className="w-6 h-6 text-gold" />
+                    <div>
+                      <span className="font-medium text-navyblue">Portfolio Building:</span>
+                      <p className="text-gray-600">
+                        After 6 months, Thembi had R3,000 saved. We helped her invest in:
+                      </p>
+                      <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-600">
                         <li>A mini food outlet in her community (MyFoodRetail)</li>
                         <li>A small share in a property trust (MyProperty)</li>
                       </ul>
-                    </li>
-                  </ol>
+                    </div>
+                  </div>
                 </div>
-
-                <p className="text-lg font-medium text-navyblue">
-                  Today, Thembi still works her regular job while earning extra income from her business investments - 
-                  all managed professionally by our team.
-                </p>
               </div>
+              
+              <p className="text-lg font-medium text-navyblue mt-6">
+                Today, Thembi still works her regular job while earning extra income from her business 
+                investments - all managed professionally by our team.
+              </p>
             </div>
           </div>
           
