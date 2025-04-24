@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { Phone, Mail, MessageCircle } from "lucide-react";
+import { Phone, Mail, MessageCircle, Calendar } from "lucide-react";
 
 const Hero = () => (
   <section className="w-full min-h-[80vh] flex items-center justify-center bg-navyblue px-4 py-12 md:py-16 relative overflow-hidden">
@@ -8,13 +8,12 @@ const Hero = () => (
       {/* Text Content */}
       <div className="w-full md:w-1/2 text-left">
         <h1 className="font-montserrat font-bold text-3xl md:text-4xl lg:text-5xl tracking-tight text-white mb-4 leading-tight">
-          Start Your Business Journey.<br />
-          R500 Gets You In.<br />
-          We Handle the Rest.
+          Start from R500.<br />
+          Co-Own a Business.<br />
+          We Manage It For You.
         </h1>
         <p className="font-lato text-white/95 text-lg md:text-xl max-w-xl mb-8">
-          Own real businesses like food shops, farms, or clinics — without needing big money or experience. 
-          Whether you're a taxi driver, teacher, or football fan, this is for you.
+          Whether you're a gogo, taxi driver, teacher, or football fan — this is for you. Co-own real businesses like food shops, farms, or clinics without needing big money or experience.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <Link
@@ -24,10 +23,11 @@ const Hero = () => (
             Start with R500/month
           </Link>
           <Link
-            to="/how-we-work"
-            className="w-full sm:w-auto px-8 py-3.5 font-montserrat font-semibold text-base rounded-lg bg-white/10 text-white hover:bg-white/20 transition-colors text-center"
+            to="/contact"
+            className="w-full sm:w-auto px-8 py-3.5 font-montserrat font-semibold text-base rounded-lg bg-white/10 text-white hover:bg-white/20 transition-colors text-center flex items-center justify-center gap-2"
           >
-            See How It Works
+            <Calendar size={18} />
+            Book a Free Call
           </Link>
         </div>
         <div className="mt-8 space-y-3">

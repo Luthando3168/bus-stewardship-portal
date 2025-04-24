@@ -3,25 +3,26 @@ import React from 'react';
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { Card, CardContent } from "@/components/ui/card";
-import { Handshake, Users, FileText, Briefcase, BanknoteIcon } from "lucide-react";
+import { Handshake, Users, FileText, Briefcase, BanknoteIcon, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const Bus = () => {
   const benefits = [
-    "You own real registered businesses, not just shares in a company",
+    "You co-own real registered businesses with other community members",
     "Your R500 monthly stays in YOUR personal bank account until you approve joining a business",
     "Professional chartered accountants manage everything day-to-day",
     "Regular updates and reports on your phone or computer",
     "All paperwork and legal matters handled by our team",
     "Support from banks and business experts",
-    "Official share certificates for every business you own",
+    "Official share certificates for every business you co-own",
     "Monthly financial reports in simple language"
   ];
 
   const steps = [
     {
       step: "Check Available Businesses",
-      description: "Browse through businesses you can own - from food shops to farms. No pressure to join until you're ready."
+      description: "Browse through businesses you can co-own - from food shops to farms. No pressure to join until you're ready."
     },
     {
       step: "Keep Money in Your Account",
@@ -33,7 +34,7 @@ const Bus = () => {
     },
     {
       step: "Choose Your Business",
-      description: "Pick the type of business you want to own. We'll present real opportunities when they come up, and you decide if you want in."
+      description: "Pick the type of business you want to co-own. We'll present real opportunities when they come up, and you decide if you want in."
     },
     {
       step: "We Run Everything",
@@ -44,7 +45,7 @@ const Bus = () => {
   const features = [
     {
       title: "Like Having a Business Partner",
-      description: "We're like your business-savvy partner who handles all the hard work. You own it, we run it, and keep you informed.",
+      description: "We're like your business-savvy partner who handles all the hard work. You co-own it with other community members, we run it, and keep you informed.",
       icon: Handshake
     },
     {
@@ -78,7 +79,7 @@ const Bus = () => {
           <div className="flex justify-center mb-12">
             <div className="bg-lightgray rounded-lg p-6 md:p-8 mt-4 text-center max-w-3xl w-full">
               <p className="text-lg md:text-xl font-semibold text-navyblue">
-                "Think of BUS like this: You own the business, but instead of running it yourself, 
+                "Think of BUS like this: You co-own the business with others, but instead of running it yourself, 
                 you have qualified accountants and banks as your partners who handle everything. 
                 Your money stays safely in YOUR bank account until you choose to invest."
               </p>
@@ -140,7 +141,7 @@ const Bus = () => {
           {/* Call to Action */}
           <div className="flex justify-center">
             <div className="bg-lightgray p-8 rounded-lg text-center max-w-2xl w-full">
-              <h3 className="text-2xl font-bold text-navyblue mb-4">Ready to Own a Real Business?</h3>
+              <h3 className="text-2xl font-bold text-navyblue mb-4">Ready to Co-Own a Real Business?</h3>
               <p className="text-lg mb-6">Start your journey with just R500 monthly. Your money stays in YOUR bank account until you approve a business deal.</p>
               <div className="space-x-4">
                 <Link
@@ -156,6 +157,21 @@ const Bus = () => {
                   Start Now
                 </Link>
               </div>
+            </div>
+          </div>
+
+          {/* Book a Session CTA */}
+          <div className="mt-16 flex justify-center">
+            <div className="bg-navyblue p-8 rounded-lg text-center max-w-2xl w-full shadow-lg">
+              <h3 className="text-2xl font-bold text-white mb-4">Need Help Understanding How It Works?</h3>
+              <p className="text-lg mb-6 text-white/90">Book a free call with our team. We'll explain everything in simple terms and answer all your questions.</p>
+              <Link
+                to="/contact"
+                className="inline-flex items-center px-6 py-3 bg-gold text-navyblue rounded-lg hover:bg-lightgold transition-colors font-bold gap-2"
+              >
+                <Calendar size={20} />
+                Book a Free Session
+              </Link>
             </div>
           </div>
         </div>
