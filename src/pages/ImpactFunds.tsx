@@ -176,9 +176,9 @@ const ImpactFunds = () => {
             <div className="bg-gradient-to-br from-navyblue to-blue-900 rounded-2xl p-8 text-white shadow-xl">
               <h2 className="text-2xl font-bold mb-6 text-gold">Meet Thembi: Planning Her Journey to Business Ownership</h2>
               
-              <div className="grid md:grid-cols-2 gap-8 items-center mb-8">
-                <div>
-                  <p className="text-lg leading-relaxed mb-6">
+              <div className="grid md:grid-cols-2 gap-8 items-start">
+                <div className="space-y-6">
+                  <p className="text-lg leading-relaxed">
                     Thembi is a dedicated call centre agent in Johannesburg, earning R8,000 monthly. Like many South Africans, 
                     she wants to build additional income streams and create long-term financial security. Our innovative MCA Direct 
                     program offers her a path to business ownership without the complexity of managing day-to-day operations.
@@ -186,43 +186,43 @@ const ImpactFunds = () => {
                   <img 
                     src="/lovable-uploads/697f3367-6bf9-47c7-8610-d21869a0d029.png" 
                     alt="Call centre agent with headset smiling" 
-                    className="rounded-lg w-full shadow-lg mb-6 object-cover h-96" 
+                    className="rounded-lg w-full shadow-lg object-cover h-[400px]" 
                   />
                 </div>
 
-                <div className="bg-white/10 p-6 rounded-xl">
-                  <h3 className="text-xl font-bold mb-4 text-gold">Our Plan for Thembi:</h3>
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-3">
+                <div className="bg-white/10 p-8 rounded-xl">
+                  <h3 className="text-xl font-bold mb-6 text-gold">Our Plan for Thembi:</h3>
+                  <div className="space-y-6">
+                    <div className="flex items-start gap-4">
                       <Calendar className="w-6 h-6 text-gold shrink-0 mt-1" />
                       <div>
-                        <span className="font-medium block mb-1">6-Month Savings Plan</span>
-                        <p className="text-white/90 text-sm">
+                        <span className="font-medium block mb-2">6-Month Savings Plan</span>
+                        <p className="text-white/90">
                           We've created a plan where Thembi will save R500 monthly in a dedicated bank account, 
                           building her investment fund step by step.
                         </p>
                       </div>
                     </div>
 
-                    <div className="flex items-start gap-3">
+                    <div className="flex items-start gap-4">
                       <Shield className="w-6 h-6 text-gold shrink-0 mt-1" />
                       <div>
-                        <span className="font-medium block mb-1">Professional Management</span>
-                        <p className="text-white/90 text-sm">
+                        <span className="font-medium block mb-2">Professional Management</span>
+                        <p className="text-white/90">
                           Once she's ready to invest, our team will handle all operations, taxes, and management - 
                           letting Thembi focus on her career while building wealth.
                         </p>
                       </div>
                     </div>
 
-                    <div className="flex items-start gap-3">
+                    <div className="flex items-start gap-4">
                       <CircleDollarSign className="w-6 h-6 text-gold shrink-0 mt-1" />
                       <div>
-                        <span className="font-medium block mb-1">Future Investment Options</span>
-                        <p className="text-white/90 text-sm">
+                        <span className="font-medium block mb-2">Future Investment Options</span>
+                        <p className="text-white/90 mb-2">
                           With R3,000 saved, Thembi will be able to invest in:
                         </p>
-                        <ul className="list-disc pl-6 mt-2 space-y-1 text-white/90 text-sm">
+                        <ul className="list-disc pl-6 space-y-2 text-white/90">
                           <li>A share in community food retail businesses</li>
                           <li>Property investment opportunities</li>
                         </ul>
@@ -230,13 +230,6 @@ const ImpactFunds = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="border-t border-white/20 pt-6 mt-6">
-                <p className="text-lg">
-                  Through this plan, Thembi can keep building her career while our professional team manages 
-                  her business investments - handling all operations, taxes, and day-to-day management.
-                </p>
               </div>
             </div>
           </div>
@@ -298,4 +291,5 @@ const ImpactFunds = () => {
       </div>
     </Layout>;
 };
+
 export default ImpactFunds;
