@@ -26,7 +26,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
           <div className="col-span-1">
-            <Logo />
+            <Logo variant="footer" />
             <p className="font-lato text-sm mt-4 text-gray-300">
               We help everyday people own businesses and grow their money. 
               Our team manages everything, so you can sit back and watch your investment grow.
