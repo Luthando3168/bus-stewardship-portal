@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { Phone, Mail, WhatsApp } from "lucide-react";
+import { Phone, Mail, MessageCircle } from "lucide-react";
 
 const Hero = () => (
   <section className="w-full min-h-[80vh] flex items-center justify-center bg-navyblue px-4 py-12 md:py-16 relative overflow-hidden">
@@ -32,7 +32,7 @@ const Hero = () => (
         </div>
         <div className="mt-8 space-y-3">
           <div className="flex items-center gap-2 text-white/90">
-            <WhatsApp size={20} />
+            <MessageCircle size={20} />
             <span>WhatsApp us: 062 019 3208</span>
           </div>
           <div className="flex items-center gap-2 text-white/90">
