@@ -32,8 +32,10 @@ const SocialLogin = ({ onError }: SocialLoginProps) => {
     try {
       setIsLoading(true);
       
-      // Get the window URL for proper redirect handling
+      // Get the current window URL for proper redirect handling
       const currentURL = window.location.origin;
+      
+      // Make sure we redirect to the login page of the current application
       const redirectTo = `${currentURL}/login`;
       
       console.log(`Attempting ${provider} login with redirect to:`, redirectTo);
