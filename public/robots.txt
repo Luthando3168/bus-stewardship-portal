@@ -8,6 +8,8 @@ Allow: /
 # Allow all crawlers
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 1
+
 User-agent: Bingbot
 Allow: /
 User-agent: Slurp
