@@ -1,7 +1,8 @@
+
 import { Helmet } from 'react-helmet';
 import Hero from "@/components/sections/Hero";
-import BankingSection from "@/components/sections/BankingSection";
 import ImpactFundsShowcase from "@/components/sections/ImpactFundsShowcase";
+import IntroSection from "@/components/sections/IntroSection";
 import BusSection from "@/components/sections/BusSection";
 import BookingSection from "@/components/sections/BookingSection";
 import ServicesSection from "@/components/sections/ServicesSection";
@@ -21,7 +22,7 @@ const Index = () => {
       
       <div className="w-full">
         <Hero />
-        <BankingSection />
+        <IntroSection />
         <ImpactFundsShowcase />
         <BookingSection />
         <BusSection />
