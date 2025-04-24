@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Mail, MessageCircle } from "lucide-react";
 
@@ -13,10 +12,9 @@ const Hero = () => (
           Own Real Businesses.
         </h1>
         <p className="font-lato text-white/95 text-xl md:text-2xl max-w-2xl">
-          Our platform empowers everyone to own multiple businesses - 
-          including taxi drivers, teachers, call center agents, domestic workers, 
-          farmers, small business owners, and those seeking additional income.
-          Simple, secure, and professionally managed.
+          Empowering entrepreneurs across South Africa: Taxi drivers, teachers, 
+          workers, and small business owners can now own professional, 
+          managed businesses starting at just R500 monthly.
         </p>
         <div className="flex flex-col sm:flex-row gap-4">
           <Link
