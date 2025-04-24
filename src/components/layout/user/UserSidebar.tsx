@@ -79,10 +79,6 @@ const UserSidebar = ({
     },
   ];
 
-  const isActive = (path: string) => {
-    return location.pathname === path;
-  };
-
   return (
     <aside
       className={cn(
@@ -174,11 +170,11 @@ const UserSidebar = ({
           className="w-full justify-start text-gray-300 hover:text-white hover:bg-white/5"
           onClick={onLogout}
         >
-          <LogOut size={20} className="mr-2" />
+          <LogOut size={20} />
           <span
             className={cn(
-              "transition-all",
-              isSidebarOpen ? "opacity-100" : "opacity-0 w-0 hidden"
+              "ml-2",
+              isSidebarOpen ? "inline" : "sr-only"
             )}
           >
             Logout
@@ -190,4 +186,3 @@ const UserSidebar = ({
 };
 
 export default UserSidebar;
-
