@@ -2,7 +2,7 @@
 import React from "react";
 import SectionTitle from "../ui/SectionTitle";
 import { Link } from "react-router-dom";
-import { Heart, Users, GraduationCap, Building } from "lucide-react";
+import { Heart, Users, GraduationCap, Building, ArrowRight } from "lucide-react";
 
 const FoundationSection = () => {
   return (
