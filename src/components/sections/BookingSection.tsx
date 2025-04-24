@@ -12,26 +12,34 @@ const BookingSection = () => {
           <div className="grid md:grid-cols-2">
             <div className="p-8 md:p-10 flex flex-col justify-center">
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                Need Help? Book a Free Session
+                Not Sure? Let's Chat!
               </h2>
               <p className="text-white/80 mb-6">
                 Whether you're a gogo, taxi driver or teacher - we'll explain everything in simple terms
               </p>
               
               <div className="space-y-4 mb-8">
-                <div className="flex items-center gap-3">
-                  <div className="bg-gold rounded-full p-2 text-white">
-                    <Phone size={18} />
-                  </div>
-                  <span className="text-white">Call us: 087 624 3204</span>
-                </div>
-                
-                <div className="flex items-center gap-3">
-                  <div className="bg-gold rounded-full p-2 text-white">
+                <a 
+                  href="https://wa.me/27620193208" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 text-white hover:text-gold transition-colors"
+                >
+                  <div className="bg-gold rounded-full p-2">
                     <MessageCircle size={18} />
                   </div>
-                  <span className="text-white">WhatsApp: 062 019 3208</span>
-                </div>
+                  <span>WhatsApp us: 062 019 3208</span>
+                </a>
+                
+                <a 
+                  href="tel:0876243204" 
+                  className="flex items-center gap-3 text-white hover:text-gold transition-colors"
+                >
+                  <div className="bg-gold rounded-full p-2">
+                    <Phone size={18} />
+                  </div>
+                  <span>Call us: 087 624 3204</span>
+                </a>
               </div>
               
               <Link to="/contact">
@@ -40,7 +48,7 @@ const BookingSection = () => {
                   size="lg"
                 >
                   <Calendar size={20} />
-                  Book Your Free Call
+                  Book a Free Chat
                 </Button>
               </Link>
             </div>
@@ -48,7 +56,7 @@ const BookingSection = () => {
             <div className="hidden md:block relative">
               <img 
                 src="/lovable-uploads/98d6869e-a552-4731-9f0c-6dce07a2db48.png" 
-                alt="Customer service team ready to help" 
+                alt="Our friendly team ready to help you" 
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-navyblue/30"></div>

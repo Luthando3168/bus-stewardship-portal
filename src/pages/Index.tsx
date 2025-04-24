@@ -16,7 +16,7 @@ const Index = () => {
     <Layout>
       <Helmet>
         <title>LMCA | Start from R500. Co-Own a Business. We Manage It For You.</title>
-        <meta name="description" content="LMCA helps ordinary people co-own businesses with just R500/month. Professional chartered accountants manage everything for you - whether you're a taxi driver, teacher or football fan." />
+        <meta name="description" content="Whether you're a taxi driver, teacher or gogo - join us! Co-own real businesses like food shops, farms, or clinics without needing big money. We handle everything." />
         <meta name="keywords" content="business ownership, R500 investment, affordable business opportunities, passive income, professional business management, South Africa, BUS program, financial inclusion" />
         <link rel="canonical" href="https://www.madunacas.com/" />
       </Helmet>
@@ -24,21 +24,19 @@ const Index = () => {
       <div className="w-full">
         <Hero />
         <BankingSection />
-        <BusSection />
         <ImpactFundsShowcase />
+        <BusSection />
         <BookingSection />
         <ServicesSection />
         <ImpactFundsSection />
         <FoundationSection />
-        <div className="bg-white py-16">
-          {/* Admin-only tool for requesting reindexing */}
-          {localStorage.getItem("userRole") === "admin" && (
-            <div className="container mx-auto px-4">
-              <h3 className="text-lg font-semibold mb-2">Admin SEO Tools</h3>
-              <IndexRequest />
-            </div>
-          )}
-        </div>
+        {/* Admin-only tool for requesting reindexing */}
+        {localStorage.getItem("userRole") === "admin" && (
+          <div className="container mx-auto px-4">
+            <h3 className="text-lg font-semibold mb-2">Admin SEO Tools</h3>
+            <IndexRequest />
+          </div>
+        )}
       </div>
     </Layout>
   );
