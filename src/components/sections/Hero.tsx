@@ -6,19 +6,19 @@ const Hero = () => (
     <div className="container max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0 md:space-x-12 relative z-10">
       {/* Text Content */}
       <div className="w-full md:w-1/2 text-left">
-        <h1 className="font-montserrat font-bold text-3xl md:text-4xl lg:text-5xl tracking-tight text-white mb-3 leading-tight">
+        <h1 className="font-montserrat font-bold text-2xl md:text-3xl lg:text-4xl tracking-tight text-white mb-3 leading-tight">
           Managing Your<br />Business
         </h1>
-        <h2 className="font-montserrat font-bold text-2xl md:text-3xl lg:text-4xl text-gold mb-4 tracking-tight leading-tight">
+        <h2 className="font-montserrat font-bold text-xl md:text-2xl lg:text-3xl text-gold mb-4 tracking-tight leading-tight">
           Growing Your<br />Wealth
         </h2>
-        <p className="font-lato text-white/95 text-base md:text-lg max-w-xl mb-6">
+        <p className="font-lato text-white/95 text-sm md:text-base max-w-xl mb-6">
           Professional chartered accountants providing comprehensive accounting, business management, and investment services through our Business Under Stewardship program.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <Link
             to="/contact"
-            className="w-full sm:w-auto px-6 py-3 font-montserrat font-semibold text-sm rounded bg-gold text-navyblue shadow hover:bg-lightgold transition-colors hover:scale-105 text-center"
+            className="w-full sm:w-auto px-6 py-2.5 font-montserrat font-semibold text-sm rounded bg-gold text-navyblue shadow hover:bg-lightgold transition-colors hover:scale-105 text-center"
           >
             Get Started
           </Link>
