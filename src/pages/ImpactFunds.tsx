@@ -223,6 +223,75 @@ const ImpactFunds = () => {
             </Link>
           </div>
 
+          <div className="max-w-4xl mx-auto mb-16 mt-24">
+            <div className="bg-gradient-to-br from-navyblue to-blue-900 rounded-2xl p-8 text-white shadow-xl">
+              <h2 className="text-2xl font-bold mb-6 text-gold">Meet Thembi: Planning Her Journey to Business Ownership</h2>
+              
+              <div className="grid md:grid-cols-2 gap-8 items-center mb-8">
+                <div>
+                  <p className="text-lg leading-relaxed mb-6">
+                    Thembi is a call centre agent in Johannesburg, earning R8,000 monthly. Like many South Africans, 
+                    she dreams of owning businesses but thought it was out of reach. Now, we're helping her create a 
+                    path to business ownership through MCA Direct.
+                  </p>
+                  <img 
+                    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158" 
+                    alt="Young professional working at a desk" 
+                    className="rounded-lg w-full shadow-lg mb-6"
+                  />
+                </div>
+
+                <div className="bg-white/10 p-6 rounded-xl">
+                  <h3 className="text-xl font-bold mb-4 text-gold">Our Plan for Thembi:</h3>
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-3">
+                      <Calendar className="w-6 h-6 text-gold shrink-0 mt-1" />
+                      <div>
+                        <span className="font-medium block mb-1">6-Month Savings Plan</span>
+                        <p className="text-white/90 text-sm">
+                          We've created a plan where Thembi will save R500 monthly in a dedicated bank account, 
+                          building her investment fund step by step.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3">
+                      <Shield className="w-6 h-6 text-gold shrink-0 mt-1" />
+                      <div>
+                        <span className="font-medium block mb-1">Professional Management</span>
+                        <p className="text-white/90 text-sm">
+                          Once she's ready to invest, our team will handle all operations, taxes, and management - 
+                          letting Thembi focus on her career while building wealth.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3">
+                      <CircleDollarSign className="w-6 h-6 text-gold shrink-0 mt-1" />
+                      <div>
+                        <span className="font-medium block mb-1">Future Investment Options</span>
+                        <p className="text-white/90 text-sm">
+                          With R3,000 saved, Thembi will be able to invest in:
+                        </p>
+                        <ul className="list-disc pl-6 mt-2 space-y-1 text-white/90 text-sm">
+                          <li>A share in community food retail businesses</li>
+                          <li>Property investment opportunities</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="border-t border-white/20 pt-6 mt-6">
+                <p className="text-lg">
+                  Through this plan, Thembi can keep building her career while our professional team manages 
+                  her business investments - handling all operations, taxes, and day-to-day management.
+                </p>
+              </div>
+            </div>
+          </div>
+
           <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 shadow-lg">
             <h3 className="text-2xl font-bold text-navyblue mb-6">
               Meet Thembi: From Call Centre Agent to Business Owner
