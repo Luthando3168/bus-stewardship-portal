@@ -8,7 +8,7 @@ const funds = [
     name: "MyFarm Impact Fund",
     description: "Focus: Supporting sustainable agriculture and farming businesses across South Africa.",
     color: "from-green-700 to-green-900",
-    image: "/lovable-uploads/4288eeba-c60b-42f1-a156-13a7ef6df992.png",
+    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449",
     focus: [
       "Sustainable farming operations",
       "Food security projects",
@@ -20,7 +20,7 @@ const funds = [
     name: "MyProperty Impact Fund",
     description: "Focus: Investing in community-focused real estate, affordable housing and property businesses.",
     color: "from-blue-700 to-blue-900",
-    image: "/lovable-uploads/3bf955d5-5ab4-48d1-be77-4c951cf953ca.png",
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab",
     focus: [
       "Affordable & mixed-use housing",
       "Community property projects",
@@ -32,7 +32,7 @@ const funds = [
     name: "MyFranchise Impact Fund",
     description: "Focus: Investing in franchise businesses with proven operational models, creating jobs and business skills.",
     color: "from-red-600 to-red-800",
-    image: "/lovable-uploads/b37923d0-335b-46bc-9852-7d271458f2a9.png",
+    image: "https://images.unsplash.com/photo-1582819509237-d66f7c4ff755",
     focus: [
       "Food franchise outlets",
       "Retail and service franchises",

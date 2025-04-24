@@ -11,7 +11,7 @@ const funds = [
     name: "MyFarm",
     description: "Supporting sustainable agriculture and farming businesses across South Africa.",
     bgGradient: "from-green-700 to-green-900",
-    image: "/lovable-uploads/4288eeba-c60b-42f1-a156-13a7ef6df992.png",
+    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449",
     focus: [
       "Sustainable farming operations",
       "Food security projects",
@@ -25,7 +25,7 @@ const funds = [
     name: "MyProperty",
     description: "Investing in community-focused real estate, affordable housing and property businesses.",
     bgGradient: "from-blue-700 to-blue-900",
-    image: "/lovable-uploads/3bf955d5-5ab4-48d1-be77-4c951cf953ca.png",
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab",
     focus: [
       "Affordable & mixed-use housing",
       "Community property projects",
@@ -39,7 +39,7 @@ const funds = [
     name: "MyFranchise",
     description: "Investing in franchise businesses with proven operational models, creating jobs and business skills.",
     bgGradient: "from-red-600 to-red-800",
-    image: "/lovable-uploads/b37923d0-335b-46bc-9852-7d271458f2a9.png",
+    image: "https://images.unsplash.com/photo-1582819509237-d66f7c4ff755",
     focus: [
       "Food franchise outlets",
       "Retail and service franchises",
@@ -53,7 +53,7 @@ const funds = [
     name: "MyFoodRetail",
     description: "Investing in food retail businesses to improve access to quality food in underserved communities.",
     bgGradient: "from-amber-600 to-amber-800",
-    image: "/lovable-uploads/36f1e3ec-1682-4086-8e11-d7c4e572618b.png",
+    image: "https://images.unsplash.com/photo-1604719312566-8912e9227c6a",
     focus: [
       "Grocery stores",
       "Food distribution",
@@ -67,7 +67,7 @@ const funds = [
     name: "MyTelco",
     description: "Investing in telecommunications infrastructure and services to provide affordable connectivity solutions.",
     bgGradient: "from-blue-500 to-blue-800",
-    image: "/lovable-uploads/402c56a2-5e59-41c1-8652-099f61ae559b.png",
+    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8",
     focus: [
       "Mobile network services",
       "Internet connectivity",
@@ -81,7 +81,7 @@ const funds = [
     name: "MyHealth",
     description: "Investing in accessible healthcare solutions and medical facilities to improve community health outcomes.",
     bgGradient: "from-pink-600 to-pink-900",
-    image: "/lovable-uploads/4f2d889e-ba23-463a-9efe-bc8453a5e5b2.png",
+    image: "https://images.unsplash.com/photo-1583324113626-70df0f4deaab",
     focus: [
       "Community health centers",
       "Medical equipment",
@@ -95,7 +95,7 @@ const funds = [
     name: "MySchool",
     description: "Investing in quality education infrastructure and learning institutions to enhance community development through education.",
     bgGradient: "from-indigo-700 to-indigo-900",
-    image: "/lovable-uploads/aa792d14-7473-4673-89cf-c3f6e1d15711.png",
+    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1",
     focus: [
       "Educational facilities",
       "Learning resources",
