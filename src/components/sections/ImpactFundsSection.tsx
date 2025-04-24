@@ -2,13 +2,14 @@
 import SectionTitle from "../ui/SectionTitle";
 import { Link } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { impactFunds } from "@/data/impact-funds";
 
 const funds = [
   {
     name: "MyFarm Impact Fund",
     description: "Focus: Supporting sustainable agriculture and farming businesses across South Africa.",
     color: "from-green-700 to-green-900",
-    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
     focus: [
       "Sustainable farming operations",
       "Food security projects",
@@ -20,7 +21,7 @@ const funds = [
     name: "MyProperty Impact Fund",
     description: "Focus: Investing in community-focused real estate, affordable housing and property businesses.",
     color: "from-blue-700 to-blue-900",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
     focus: [
       "Affordable & mixed-use housing",
       "Community property projects",
@@ -32,7 +33,7 @@ const funds = [
     name: "MyFranchise Impact Fund",
     description: "Focus: Investing in franchise businesses with proven operational models, creating jobs and business skills.",
     color: "from-red-600 to-red-800",
-    image: "https://images.unsplash.com/photo-1582819509237-d66f7c4ff755?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1582819509237-d66f7c4ff755?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
     focus: [
       "Food franchise outlets",
       "Retail and service franchises",

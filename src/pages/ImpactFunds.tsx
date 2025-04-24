@@ -11,7 +11,7 @@ const funds = [
     name: "MyFarm",
     description: "Supporting sustainable agriculture and farming businesses across South Africa.",
     bgGradient: "from-green-700 to-green-900",
-    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
     focus: [
       "Sustainable farming operations",
       "Food security projects",
@@ -25,7 +25,7 @@ const funds = [
     name: "MyProperty",
     description: "Investing in community-focused real estate, affordable housing and property businesses.",
     bgGradient: "from-blue-700 to-blue-900",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab",
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
     focus: [
       "Affordable & mixed-use housing",
       "Community property projects",
@@ -39,7 +39,7 @@ const funds = [
     name: "MyFranchise",
     description: "Investing in franchise businesses with proven operational models, creating jobs and business skills.",
     bgGradient: "from-red-600 to-red-800",
-    image: "https://images.unsplash.com/photo-1582819509237-d66f7c4ff755",
+    image: "https://images.unsplash.com/photo-1582819509237-d66f7c4ff755?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
     focus: [
       "Food franchise outlets",
       "Retail and service franchises",
@@ -53,7 +53,7 @@ const funds = [
     name: "MyFoodRetail",
     description: "Investing in food retail businesses to improve access to quality food in underserved communities.",
     bgGradient: "from-amber-600 to-amber-800",
-    image: "https://images.unsplash.com/photo-1604719312566-8912e9227c6a",
+    image: "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
     focus: [
       "Grocery stores",
       "Food distribution",
@@ -67,7 +67,7 @@ const funds = [
     name: "MyTelco",
     description: "Investing in telecommunications infrastructure and services to provide affordable connectivity solutions.",
     bgGradient: "from-blue-500 to-blue-800",
-    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8",
+    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
     focus: [
       "Mobile network services",
       "Internet connectivity",
@@ -81,7 +81,7 @@ const funds = [
     name: "MyHealth",
     description: "Investing in accessible healthcare solutions and medical facilities to improve community health outcomes.",
     bgGradient: "from-pink-600 to-pink-900",
-    image: "https://images.unsplash.com/photo-1583324113626-70df0f4deaab",
+    image: "https://images.unsplash.com/photo-1583324113626-70df0f4deaab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
     focus: [
       "Community health centers",
       "Medical equipment",
@@ -95,7 +95,7 @@ const funds = [
     name: "MySchool",
     description: "Investing in quality education infrastructure and learning institutions to enhance community development through education.",
     bgGradient: "from-indigo-700 to-indigo-900",
-    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1",
+    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
     focus: [
       "Educational facilities",
       "Learning resources",

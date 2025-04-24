@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
@@ -157,7 +156,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-12 pt-8 border-t border-gray-700">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-gray-300">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-gray-300">
             <div className="flex items-start space-x-3">
               <div className="flex-shrink-0 w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -165,8 +164,8 @@ const Footer = () => {
                 </svg>
               </div>
               <div>
-                <h5 className="font-montserrat font-semibold mb-2 text-white">Client Verification</h5>
-                <p className="font-lato">All clients undergo KYC verification, sign engagement letters, and complete risk assessments.</p>
+                <h5 className="font-montserrat font-semibold mb-1 text-white text-sm">Client Verification</h5>
+                <p className="font-lato text-xs">All clients undergo KYC verification, sign engagement letters, and complete risk assessments.</p>
               </div>
             </div>
             
@@ -177,8 +176,8 @@ const Footer = () => {
                 </svg>
               </div>
               <div>
-                <h5 className="font-montserrat font-semibold mb-2 text-white">Fund Management</h5>
-                <p className="font-lato">Funds managed via Standard Bank Third Party Platform with secure administration and regular reporting.</p>
+                <h5 className="font-montserrat font-semibold mb-1 text-white text-sm">Fund Management</h5>
+                <p className="font-lato text-xs">Funds managed via Standard Bank Third Party Platform with secure administration and regular reporting.</p>
               </div>
             </div>
 
@@ -189,8 +188,8 @@ const Footer = () => {
                 </svg>
               </div>
               <div>
-                <h5 className="font-montserrat font-semibold mb-2 text-white">Investment Disclaimer</h5>
-                <p className="font-lato">Past performance doesn't guarantee future results. Investments may be illiquid and carry risks. Read all documents carefully.</p>
+                <h5 className="font-montserrat font-semibold mb-1 text-white text-sm">Investment Disclaimer</h5>
+                <p className="font-lato text-xs">Past performance doesn't guarantee future results. Investments may be illiquid and carry risks. Read all documents carefully.</p>
               </div>
             </div>
           </div>
