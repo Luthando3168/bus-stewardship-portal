@@ -282,6 +282,7 @@ export type Database = {
           tax_country: string | null
           tax_number: string | null
           updated_at: string
+          wallet_balance: number | null
         }
         Insert: {
           address?: string | null
@@ -319,6 +320,7 @@ export type Database = {
           tax_country?: string | null
           tax_number?: string | null
           updated_at?: string
+          wallet_balance?: number | null
         }
         Update: {
           address?: string | null
@@ -356,6 +358,7 @@ export type Database = {
           tax_country?: string | null
           tax_number?: string | null
           updated_at?: string
+          wallet_balance?: number | null
         }
         Relationships: []
       }
@@ -459,6 +462,60 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      statements: {
+        Row: {
+          created_at: string | null
+          id: string
+          issue_date: string | null
+          period: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          issue_date?: string | null
+          period: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          issue_date?: string | null
+          period?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      transactions: {
+        Row: {
+          amount: number
+          created_at: string | null
+          date: string | null
+          description: string
+          id: string
+          type: string | null
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string | null
+          date?: string | null
+          description: string
+          id?: string
+          type?: string | null
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string | null
+          date?: string | null
+          description?: string
+          id?: string
+          type?: string | null
+          user_id?: string
+        }
+        Relationships: []
       }
       verification_codes: {
         Row: {

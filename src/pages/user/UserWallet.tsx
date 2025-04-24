@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import UserLayout from "@/components/layout/UserLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -10,20 +9,7 @@ import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuthState } from "@/hooks/useAuthState";
 import { toast } from "sonner";
-
-type Transaction = {
-  id: string;
-  date: string;
-  description: string;
-  amount: number;
-  type: 'deposit' | 'withdrawal';
-};
-
-type BankStatement = {
-  id: string;
-  period: string;
-  issueDate: string;
-};
+import { Transaction, BankStatement } from '@/types/wallet';
 
 const UserWallet = () => {
   const [walletBalance, setWalletBalance] = useState(0);
@@ -41,23 +27,20 @@ const UserWallet = () => {
         setIsLoading(true);
         
         // Fetch wallet balance and account details
-        const { data: walletData, error: walletError } = await supabase
+        const { data: clientData, error: clientError } = await supabase
           .from('clients')
-          .select('bank_account_number, wallet_balance')
+          .select('wallet_balance, bank_account_number')
           .eq('id', user.id)
           .single();
         
-        if (walletError) {
-          console.error("Error fetching wallet data:", walletError);
-          // Use placeholder data if there's an error
+        if (clientError) {
+          console.error("Error fetching wallet data:", clientError);
+          toast.error("Could not load wallet data");
           setWalletBalance(0);
           setAccountNumber('**** **** **** ####');
         } else {
-          // Use actual data if available
-          setWalletBalance(walletData?.wallet_balance || 0);
-          
-          // Format account number for display
-          const accNum = walletData?.bank_account_number || '';
+          setWalletBalance(clientData?.wallet_balance || 0);
+          const accNum = clientData?.bank_account_number || '';
           setAccountNumber(accNum ? 
             '**** **** **** ' + accNum.substring(Math.max(0, accNum.length - 4)) : 
             '**** **** **** ####');
@@ -73,19 +56,9 @@ const UserWallet = () => {
         
         if (txError) {
           console.error("Error fetching transactions:", txError);
-          // Use empty array if there's an error
           setTransactions([]);
-        } else if (txData && txData.length > 0) {
-          setTransactions(txData.map(tx => ({
-            id: tx.id,
-            date: tx.date,
-            description: tx.description,
-            amount: tx.amount,
-            type: tx.type
-          })));
         } else {
-          // No transactions found - use empty array
-          setTransactions([]);
+          setTransactions(txData || []);
         }
         
         // Fetch statements
@@ -98,17 +71,9 @@ const UserWallet = () => {
           
         if (statementsError) {
           console.error("Error fetching statements:", statementsError);
-          // Use empty array if there's an error
           setStatements([]);
-        } else if (statementsData && statementsData.length > 0) {
-          setStatements(statementsData.map(statement => ({
-            id: statement.id,
-            period: statement.period,
-            issueDate: statement.issue_date
-          })));
         } else {
-          // No statements found - use empty array
-          setStatements([]);
+          setStatements(statementsData || []);
         }
       } catch (error) {
         console.error("Error in wallet data fetch:", error);
@@ -121,7 +86,6 @@ const UserWallet = () => {
     fetchWalletData();
   }, [user]);
 
-  // Format date from ISO string to readable format
   const formatDate = (dateString: string) => {
     try {
       const date = new Date(dateString);
@@ -135,7 +99,6 @@ const UserWallet = () => {
     }
   };
 
-  // Format currency
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-ZA', {
       style: 'currency',
