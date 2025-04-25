@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Navigate, Outlet } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Toaster } from "sonner";
 import { AuthProvider } from "@/contexts/AuthContext";
 import Index from "@/pages/Index";
@@ -16,28 +16,6 @@ import ForgotPassword from "@/pages/ForgotPassword";
 import Terms from "@/pages/Terms";
 import Privacy from "@/pages/Privacy";
 import NotFound from "@/pages/NotFound";
-import UserDashboard from "@/pages/user/UserDashboard";
-import UserWallet from "@/pages/user/UserWallet";
-import UserBeneficiaries from "@/pages/user/UserBeneficiaries";
-import UserStatements from "@/pages/user/UserStatements";
-import UserProfile from "@/pages/user/UserProfile";
-import UserInvestments from "@/pages/user/UserInvestments";
-import AdminDashboard from "@/pages/admin/AdminDashboard";
-import AdminUsers from "@/pages/admin/AdminUsers";
-import AdminDeals from "@/pages/admin/AdminDeals";
-import AdminReports from "@/pages/admin/AdminReports";
-import AdminConsultations from "@/pages/admin/AdminConsultations";
-import AdminBankAccounts from "@/pages/admin/AdminBankAccounts";
-import AdminBeneficiaries from "@/pages/admin/AdminBeneficiaries";
-import AdminNotifications from "@/pages/admin/AdminNotifications";
-import AdminShareCertificates from "@/pages/admin/AdminShareCertificates";
-import AdminFinancialStatements from "@/pages/admin/AdminFinancialStatements";
-import UserNewDeals from "@/pages/user/UserNewDeals";
-import UserPendingDeals from "@/pages/user/UserPendingDeals";
-import UserMyInvestments from "@/pages/user/UserMyInvestments";
-import ProtectedRoute from "@/components/auth/ProtectedRoute";
-import CompleteRegistration from "@/components/auth/CompleteRegistration";
-import EmailPreview from "@/pages/EmailPreview";
 import MyFarmFund from "@/pages/funds/MyFarmFund";
 import MyPropertyFund from "@/pages/funds/MyPropertyFund";
 import MyFranchiseFund from "@/pages/funds/MyFranchiseFund";
@@ -92,8 +70,6 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
-        <Route path="/complete-registration" element={<CompleteRegistration />} />
-        <Route path="/email-preview" element={<EmailPreview />} />
         <Route path="/funds/myfarm" element={<MyFarmFund />} />
         <Route path="/funds/myproperty" element={<MyPropertyFund />} />
         <Route path="/funds/myfranchise" element={<MyFranchiseFund />} />
@@ -103,34 +79,6 @@ function App() {
         <Route path="/funds/myschool" element={<MySchoolFund />} />
         <Route path="/funds/mytelco" element={<MyTelcoFund />} />
         <Route path="/mca-direct" element={<ImpactFunds />} />
-
-        {/* Protected user routes */}
-        <Route path="/user" element={<ProtectedRoute><Outlet /></ProtectedRoute>}>
-          <Route path="dashboard" element={<UserDashboard />} />
-          <Route path="wallet" element={<UserWallet />} />
-          <Route path="beneficiaries" element={<UserBeneficiaries />} />
-          <Route path="statements" element={<UserStatements />} />
-          <Route path="profile" element={<UserProfile />} />
-          <Route path="investments" element={<UserInvestments />} />
-          <Route path="new-deals" element={<UserNewDeals />} />
-          <Route path="pending-deals" element={<UserPendingDeals />} />
-          <Route path="my-investments" element={<UserMyInvestments />} />
-        </Route>
-
-        {/* Protected admin routes */}
-        <Route path="/admin" element={<ProtectedRoute requireAdmin={true}><Outlet /></ProtectedRoute>}>
-          <Route path="dashboard" element={<AdminDashboard />} />
-          <Route path="users" element={<AdminUsers />} />
-          <Route path="deals" element={<AdminDeals />} />
-          <Route path="reports" element={<AdminReports />} />
-          <Route path="consultations" element={<AdminConsultations />} />
-          <Route path="bank-accounts" element={<AdminBankAccounts />} />
-          <Route path="beneficiaries" element={<AdminBeneficiaries />} />
-          <Route path="notifications" element={<AdminNotifications />} />
-          <Route path="share-certificates" element={<AdminShareCertificates />} />
-          <Route path="financial-statements" element={<AdminFinancialStatements />} />
-        </Route>
-
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Toaster position="top-center" />
