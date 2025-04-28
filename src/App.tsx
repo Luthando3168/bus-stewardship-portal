@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { Toaster } from "sonner";
@@ -24,6 +25,7 @@ import MyEnergyFund from "@/pages/funds/MyEnergyFund";
 import MyHealthFund from "@/pages/funds/MyHealthFund";
 import MySchoolFund from "@/pages/funds/MySchoolFund";
 import MyTelcoFund from "@/pages/funds/MyTelcoFund";
+import WelcomeLetter from "@/pages/WelcomeLetter";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(
@@ -70,6 +72,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
+        <Route path="/welcome-letter" element={<WelcomeLetter />} />
         <Route path="/funds/myfarm" element={<MyFarmFund />} />
         <Route path="/funds/myproperty" element={<MyPropertyFund />} />
         <Route path="/funds/myfranchise" element={<MyFranchiseFund />} />
