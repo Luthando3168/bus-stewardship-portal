@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from "@/integrations/supabase/client";
 import { AuthUser, Session, mapSupabaseUser } from '@/types/auth';
 import { toast } from "sonner";
+import { Session as SupabaseSession } from '@supabase/supabase-js';
 
 interface AuthContextType {
   user: AuthUser | null;
@@ -25,6 +26,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
+  // Helper function to convert Supabase Session to our Session type
+  const convertSession = (supabaseSession: SupabaseSession | null): Session | null => {
+    if (!supabaseSession) return null;
+    
+    const authUser = mapSupabaseUser(supabaseSession.user);
+    if (!authUser) return null;
+    
+    return {
+      access_token: supabaseSession.access_token,
+      user: authUser
+    };
+  };
+
   useEffect(() => {
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -32,26 +46,28 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         console.log(`Auth event: ${event}`, currentSession?.user?.id || 'No user');
         
         if (currentSession) {
-          setSession(currentSession);
-          const authUser = mapSupabaseUser(currentSession.user);
-          setUser(authUser);
-          
-          // Only show toast and redirect on specific auth events
-          if (event === 'SIGNED_IN') {
-            const isAdmin = authUser?.role === 'admin';
+          const convertedSession = convertSession(currentSession);
+          if (convertedSession) {
+            setSession(convertedSession);
+            setUser(convertedSession.user);
             
-            // Only redirect if they're on auth pages
-            const currentPath = window.location.pathname;
-            if (currentPath === '/login' || currentPath === '/register' || currentPath === '/') {
-              const redirectPath = isAdmin ? '/admin/dashboard' : '/user/dashboard';
-              console.log(`Redirecting to ${redirectPath}`);
-              setTimeout(() => {
-                navigate(redirectPath);
-                toast.success('Successfully signed in');
-              }, 300);
+            // Only show toast and redirect on specific auth events
+            if (event === 'SIGNED_IN') {
+              const isAdmin = convertedSession.user?.role === 'admin';
+              
+              // Only redirect if they're on auth pages
+              const currentPath = window.location.pathname;
+              if (currentPath === '/login' || currentPath === '/register' || currentPath === '/') {
+                const redirectPath = isAdmin ? '/admin/dashboard' : '/user/dashboard';
+                console.log(`Redirecting to ${redirectPath}`);
+                setTimeout(() => {
+                  navigate(redirectPath);
+                  toast.success('Successfully signed in');
+                }, 300);
+              }
+            } else if (event === 'TOKEN_REFRESHED') {
+              console.log('Auth token refreshed successfully');
             }
-          } else if (event === 'TOKEN_REFRESHED') {
-            console.log('Auth token refreshed successfully');
           }
         } else {
           setSession(null);
@@ -61,8 +77,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             toast.success('Successfully signed out');
             navigate('/login');
           }
-          // We need to remove the USER_DELETED check as it's not in the valid event types
-          // Since this event type is not supported by Supabase auth state changes
         }
         
         setLoading(false);
@@ -73,9 +87,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     supabase.auth.getSession().then(({ data: { session: currentSession } }) => {
       console.log("Existing session check:", currentSession?.user?.id || 'No session');
       if (currentSession) {
-        setSession(currentSession);
-        const authUser = mapSupabaseUser(currentSession.user);
-        setUser(authUser);
+        const convertedSession = convertSession(currentSession);
+        if (convertedSession) {
+          setSession(convertedSession);
+          setUser(convertedSession.user);
+        }
       }
       setLoading(false);
     });
@@ -90,9 +106,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         console.log("Refreshing session token");
         supabase.auth.refreshSession().then(({ data }) => {
           if (data.session) {
-            setSession(data.session);
-            const authUser = mapSupabaseUser(data.session.user);
-            setUser(authUser);
+            const convertedSession = convertSession(data.session);
+            if (convertedSession) {
+              setSession(convertedSession);
+              setUser(convertedSession.user);
+            }
           }
         });
       }
