@@ -1,6 +1,5 @@
 
-import { Navigate } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
+import { ReactNode } from "react";
 import { useRoleCheck } from "@/hooks/useRoleCheck";
 
 interface ProtectedRouteProps {
@@ -9,39 +8,21 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute = ({ children, requireAdmin = false }: ProtectedRouteProps) => {
-  const { user, loading: authLoading } = useAuth();
-  const { isAdmin, loading: roleLoading, error } = useRoleCheck();
+  const { isAdmin, loading: roleLoading } = useRoleCheck();
   
-  if (authLoading) {
+  // Only block access for admin routes, allow access to all user routes without authentication
+  if (requireAdmin && !isAdmin && !roleLoading) {
+    // For admin pages, we'll display a message instead of redirecting
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-navyblue to-deepblue px-4 py-16">
-        <div className="text-white text-lg">Loading...</div>
+        <div className="text-white text-lg bg-red-600 p-6 rounded-lg">
+          Admin access required. This page is restricted.
+        </div>
       </div>
     );
   }
 
-  if (!user) {
-    return <Navigate to="/login" replace />;
-  }
-
-  // If there's an error checking the role but we have a user,
-  // allow access but don't enforce admin requirement
-  if (error) {
-    console.warn("Error checking role, proceeding with limited permissions:", error);
-    
-    // If admin is required but we can't verify, redirect to dashboard
-    if (requireAdmin) {
-      return <Navigate to="/user/dashboard" replace />;
-    }
-    
-    return <>{children}</>;
-  }
-
-  // Normal role checking when no errors
-  if (requireAdmin && !isAdmin && !roleLoading) {
-    return <Navigate to="/user/dashboard" replace />;
-  }
-
+  // Allow access to all user pages without authentication
   return <>{children}</>;
 };
 

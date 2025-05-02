@@ -5,11 +5,6 @@ import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
 import UserSidebar from "./user/UserSidebar";
 import UserHeader from "./user/UserHeader";
-import LoadingScreen from "@/components/ui/LoadingScreen";
-import RegistrationRequired from "@/components/auth/RegistrationRequired";
-import { useAuthState } from "@/hooks/useAuthState";
-import { useClientRegistration } from "@/hooks/useClientRegistration";
-import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
 
@@ -38,39 +33,20 @@ const UserLayout = ({ children }: UserLayoutProps) => {
     }
   ]);
 
-  const { isLoading: authLoading, user, handleLogout } = useAuthState();
-  const { isLoading: registrationLoading, registrationStatus, error: registrationError } = useClientRegistration(user);
-
-  const userName = localStorage.getItem("userName") || "User";
+  // Use a demo name for users who aren't logged in
+  const userName = localStorage.getItem("userName") || "Demo User";
   const userSurname = localStorage.getItem("userSurname") || "";
   const fullName = `${userName} ${userSurname}`.trim();
 
-  // Handle loading state
-  if (authLoading || (registrationLoading && !registrationError)) {
-    return <LoadingScreen />;
-  }
-
-  // If there was an error checking registration but we have a user,
-  // just proceed to show the dashboard with limited features
-  if (registrationError) {
-    console.warn("Error checking registration status:", registrationError);
-    if (!localStorage.getItem("error_notification_shown")) {
-      toast.error("There was an issue loading your profile data. Some features may be limited.");
-      localStorage.setItem("error_notification_shown", "true");
-      setTimeout(() => {
-        localStorage.removeItem("error_notification_shown");
-      }, 10 * 60 * 1000);
-    }
-  }
-
-  // Only block access to investment-related features if registration is pending
-  if (!registrationError && registrationStatus === 'pending_registration' && 
-      (location.pathname.includes('/new-deals') || 
-       location.pathname.includes('/my-investments') || 
-       location.pathname.includes('/wallet'))) {
-    toast.info("Please complete your registration to access investment features");
-    return <RegistrationRequired />;
-  }
+  // Define a simple logout function that just navigates to login
+  const handleLogout = () => {
+    localStorage.removeItem("userRole");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userSurname");
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("clientNumber");
+    navigate("/login");
+  };
 
   return (
     <div className="flex min-h-screen bg-lightgray">
