@@ -35,7 +35,12 @@ const Header = () => {
 
   const handleMcaDirectClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    navigate('/impact-funds');
+    // If user is logged in, go to user dashboard, otherwise go to impact funds
+    if (user) {
+      navigate('/user/dashboard');
+    } else {
+      navigate('/impact-funds');
+    }
   };
 
   if (isMobile) {
@@ -89,13 +94,23 @@ const Header = () => {
                     </nav>
 
                     <div className="mt-6 flex flex-col space-y-3">
-                      <Link
-                        to="/login"
-                        className="bg-blue-600 text-white px-4 py-2 rounded text-lg font-semibold text-center"
-                        onClick={() => setMenuOpen(false)}
-                      >
-                        Sign-in or Register
-                      </Link>
+                      {user ? (
+                        <Link
+                          to="/user/dashboard"
+                          className="bg-blue-600 text-white px-4 py-2 rounded text-lg font-semibold text-center"
+                          onClick={() => setMenuOpen(false)}
+                        >
+                          My Dashboard
+                        </Link>
+                      ) : (
+                        <Link
+                          to="/login"
+                          className="bg-blue-600 text-white px-4 py-2 rounded text-lg font-semibold text-center"
+                          onClick={() => setMenuOpen(false)}
+                        >
+                          Sign-in or Register
+                        </Link>
+                      )}
                       <a
                         href="#"
                         onClick={(e) => {
@@ -172,12 +187,21 @@ const Header = () => {
             ))}
           </div>
           <div className="flex items-center gap-3">
-            <Link
-              to="/login"
-              className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700 transition-colors font-medium"
-            >
-              Sign-in or Register
-            </Link>
+            {user ? (
+              <Link
+                to="/user/dashboard"
+                className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700 transition-colors font-medium"
+              >
+                My Dashboard
+              </Link>
+            ) : (
+              <Link
+                to="/login"
+                className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700 transition-colors font-medium"
+              >
+                Sign-in or Register
+              </Link>
+            )}
             <a
               href="#"
               onClick={handleMcaDirectClick}

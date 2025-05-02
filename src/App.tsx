@@ -27,6 +27,12 @@ import MySchoolFund from "@/pages/funds/MySchoolFund";
 import MyTelcoFund from "@/pages/funds/MyTelcoFund";
 import WelcomeLetter from "@/pages/WelcomeLetter";
 import AdminDashboard from "@/pages/admin/AdminDashboard";
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
+import UserDashboard from "@/pages/user/UserDashboard";
+import UserInvestments from "@/pages/user/UserInvestments";
+import UserWallet from "@/pages/user/UserWallet";
+import UserProfile from "@/pages/user/UserProfile";
+import UserPendingDeals from "@/pages/user/UserPendingDeals";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(
@@ -85,13 +91,56 @@ function App() {
         <Route path="/mca-direct" element={<ImpactFunds />} />
         
         {/* Admin routes */}
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route 
+          path="/admin/dashboard" 
+          element={
+            <ProtectedRoute requireAdmin={true}>
+              <AdminDashboard />
+            </ProtectedRoute>
+          } 
+        />
         
-        {/* User routes - Redirect to ImpactFunds page temporarily */}
-        <Route path="/user/dashboard" element={<ImpactFunds />} />
-        <Route path="/user/investments" element={<ImpactFunds />} />
-        <Route path="/user/wallet" element={<ImpactFunds />} />
-        <Route path="/user/profile" element={<ImpactFunds />} />
+        {/* User routes */}
+        <Route 
+          path="/user/dashboard" 
+          element={
+            <ProtectedRoute>
+              <UserDashboard />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/user/investments" 
+          element={
+            <ProtectedRoute>
+              <UserInvestments />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/user/wallet" 
+          element={
+            <ProtectedRoute>
+              <UserWallet />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/user/profile" 
+          element={
+            <ProtectedRoute>
+              <UserProfile />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/user/pending-deals" 
+          element={
+            <ProtectedRoute>
+              <UserPendingDeals />
+            </ProtectedRoute>
+          } 
+        />
         
         {/* 404 catch-all */}
         <Route path="*" element={<NotFound />} />
