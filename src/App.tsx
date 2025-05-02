@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "sonner";
 import { AuthProvider } from "@/contexts/AuthContext";
 import Index from "@/pages/Index";
@@ -90,6 +90,9 @@ function App() {
         <Route path="/funds/mytelco" element={<MyTelcoFund />} />
         <Route path="/mca-direct" element={<ImpactFunds />} />
         
+        {/* Add redirect for the problematic route */}
+        <Route path="/user/new-deals" element={<Navigate to="/user/investments" replace />} />
+        
         {/* Admin routes */}
         <Route 
           path="/admin/dashboard" 
@@ -138,6 +141,32 @@ function App() {
           element={
             <ProtectedRoute>
               <UserPendingDeals />
+            </ProtectedRoute>
+          } 
+        />
+        
+        {/* Add route for user investments/beneficiaries/statements */}
+        <Route 
+          path="/user/my-investments" 
+          element={
+            <ProtectedRoute>
+              <UserInvestments />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/user/beneficiaries" 
+          element={
+            <ProtectedRoute>
+              <UserDashboard />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/user/statements" 
+          element={
+            <ProtectedRoute>
+              <UserDashboard />
             </ProtectedRoute>
           } 
         />
