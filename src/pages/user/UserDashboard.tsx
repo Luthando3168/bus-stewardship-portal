@@ -8,41 +8,22 @@ import DashboardSummaryCard from "@/components/user/dashboard/DashboardSummaryCa
 import InvestmentOpportunities from "@/components/user/dashboard/InvestmentOpportunities";
 import InvestmentsTable from "@/components/user/dashboard/InvestmentsTable";
 import PendingDealsTable from "@/components/user/dashboard/PendingDealsTable";
-import { supabase } from "@/integrations/supabase/client";
-import { useAuthState } from "@/hooks/useAuthState";
 
 const UserDashboard = () => {
-  const { user } = useAuthState();
   const [userName, setUserName] = useState("");
   const [userSurname, setUserSurname] = useState("");
   const [clientNumber, setClientNumber] = useState("");
-
+  
   useEffect(() => {
-    const loadUserProfile = async () => {
-      if (user) {
-        try {
-          const { data: profile, error } = await supabase
-            .from('profiles')
-            .select('full_name, client_number')
-            .eq('id', user.id)
-            .single();
-
-          if (error) throw error;
-
-          if (profile) {
-            const nameParts = profile.full_name.split(' ');
-            setUserName(nameParts[0] || '');
-            setUserSurname(nameParts.slice(1).join(' ') || '');
-            setClientNumber(profile.client_number || 'Pending');
-          }
-        } catch (error) {
-          console.error('Error loading profile:', error);
-        }
-      }
-    };
-
-    loadUserProfile();
-  }, [user]);
+    // In your new project, you'll need to implement this logic based on your auth system
+    const storedUserName = localStorage.getItem("userName") || "Demo";
+    const storedUserSurname = localStorage.getItem("userSurname") || "User";
+    const storedClientNumber = localStorage.getItem("clientNumber") || "MCADEMO001";
+    
+    setUserName(storedUserName);
+    setUserSurname(storedUserSurname);
+    setClientNumber(storedClientNumber);
+  }, []);
 
   return (
     <UserLayout>

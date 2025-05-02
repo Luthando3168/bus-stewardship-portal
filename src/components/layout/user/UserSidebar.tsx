@@ -45,7 +45,7 @@ const UserSidebar = ({
     {
       name: "Investment Opportunities",
       icon: <ShoppingBag size={20} />,
-      path: "/user/investments", // Changed from /user/new-deals to match App.tsx routes
+      path: "/user/investments",
     },
     {
       name: "Pending Deals",
@@ -55,12 +55,12 @@ const UserSidebar = ({
     {
       name: "My Investments",
       icon: <Building size={20} />,
-      path: "/user/my-investments", // Changed from /user/my-investments to match App.tsx routes
+      path: "/user/my-investments",
     },
     {
       name: "Financial Statements",
       icon: <FileText size={20} />,
-      path: "/user/statements", // Changed to match future route
+      path: "/user/statements",
     },
     {
       name: "Wallet",
@@ -70,7 +70,7 @@ const UserSidebar = ({
     {
       name: "Beneficiaries",
       icon: <Users size={20} />,
-      path: "/user/beneficiaries", // Changed to match future route
+      path: "/user/beneficiaries",
     },
     {
       name: "Profile",
