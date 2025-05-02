@@ -26,6 +26,7 @@ import MyHealthFund from "@/pages/funds/MyHealthFund";
 import MySchoolFund from "@/pages/funds/MySchoolFund";
 import MyTelcoFund from "@/pages/funds/MyTelcoFund";
 import WelcomeLetter from "@/pages/WelcomeLetter";
+import AdminDashboard from "@/pages/admin/AdminDashboard";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(
@@ -56,7 +57,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <AuthProvider>
       <Routes>
         {/* Public routes */}
         <Route path="/" element={<Index />} />
@@ -82,10 +83,21 @@ function App() {
         <Route path="/funds/myschool" element={<MySchoolFund />} />
         <Route path="/funds/mytelco" element={<MyTelcoFund />} />
         <Route path="/mca-direct" element={<ImpactFunds />} />
+        
+        {/* Admin routes */}
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        
+        {/* User routes - Redirect to ImpactFunds page temporarily */}
+        <Route path="/user/dashboard" element={<ImpactFunds />} />
+        <Route path="/user/investments" element={<ImpactFunds />} />
+        <Route path="/user/wallet" element={<ImpactFunds />} />
+        <Route path="/user/profile" element={<ImpactFunds />} />
+        
+        {/* 404 catch-all */}
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Toaster position="top-center" />
-    </>
+    </AuthProvider>
   );
 }
 

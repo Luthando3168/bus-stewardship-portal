@@ -133,23 +133,25 @@ const WelcomeLetter = () => {
         </div>
       </div>
       
-      {/* Print Styles */}
-      <style jsx global>{`
-        @media print {
-          body * {
-            visibility: hidden;
+      {/* Proper standard style tag without JSX properties */}
+      <style type="text/css">
+        {`
+          @media print {
+            body * {
+              visibility: hidden;
+            }
+            .container, .container * {
+              visibility: visible;
+            }
+            .print\\:hidden {
+              display: none;
+            }
+            header, footer {
+              display: none;
+            }
           }
-          .container, .container * {
-            visibility: visible;
-          }
-          .print\\:hidden {
-            display: none;
-          }
-          header, footer {
-            display: none;
-          }
-        }
-      `}</style>
+        `}
+      </style>
     </Layout>
   );
 };
