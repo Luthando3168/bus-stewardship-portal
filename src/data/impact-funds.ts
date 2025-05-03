@@ -1,10 +1,9 @@
-
 export const impactFunds = [
   { id: "myfarm", name: "MyFarm", color: "bg-maduna-navy/10", textColor: "text-maduna-navy" },
   { id: "myproperty", name: "MyProperty", color: "bg-maduna-navy/10", textColor: "text-maduna-navy" },
   { id: "myfoodretail", name: "MyFoodRetail", color: "bg-maduna-navy/10", textColor: "text-maduna-navy" },
   { id: "myenergy", name: "MyEnergy", color: "bg-maduna-navy/10", textColor: "text-maduna-navy" },
-  { id: "myenterprise", name: "MyEnterprise", color: "bg-maduna-navy/10", textColor: "text-maduna-navy" },
+  { id: "myfranchise", name: "MyFranchise", color: "bg-maduna-navy/10", textColor: "text-maduna-navy" },
   { id: "mytelco", name: "MyTelco", color: "bg-maduna-navy/10", textColor: "text-maduna-navy" },
 ];
 
@@ -14,7 +13,7 @@ export const fundImages = {
   myproperty: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=1280&h=720",
   myfoodretail: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=1280&h=720",
   myenergy: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=1280&h=720",
-  myenterprise: "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=1280&h=720",
+  myfranchise: "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=1280&h=720",
   mytelco: "https://images.unsplash.com/photo-1535303311164-664fc9ec6532?auto=format&fit=crop&q=80&w=1280&h=720",
 };
 
@@ -85,7 +84,7 @@ export const opportunities: Opportunity[] = [
   },
   {
     id: "opp7",
-    fundId: "myenterprise",
+    fundId: "myfranchise",
     title: "Tech Startup Incubator",
     summary: "Funding for early-stage tech businesses in Gauteng",
     minInvestment: "R 5,000",
