@@ -17,6 +17,7 @@ import {
   BarChart3,
   HelpCircle,
   CircleDollarSign,
+  Calendar,
 } from "lucide-react";
 
 interface UserSidebarProps {
@@ -62,6 +63,11 @@ const UserSidebar = ({
       name: "Loans",
       icon: <CircleDollarSign size={20} />,
       path: "/user/loans",
+    },
+    {
+      name: "Accommodation",
+      icon: <Calendar size={20} />,
+      path: "/accommodation",
     },
     {
       name: "Beneficiaries",

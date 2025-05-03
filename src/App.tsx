@@ -34,6 +34,7 @@ import UserWallet from "@/pages/user/UserWallet";
 import UserProfile from "@/pages/user/UserProfile";
 import UserHowWeWork from "@/pages/user/UserHowWeWork";
 import UserLoans from "@/pages/user/UserLoans";
+import Accommodation from "@/pages/Accommodation";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(
@@ -81,6 +82,7 @@ function App() {
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/welcome-letter" element={<WelcomeLetter />} />
+        <Route path="/accommodation" element={<Accommodation />} />
         <Route path="/funds/myfarm" element={<MyFarmFund />} />
         <Route path="/funds/myproperty" element={<MyPropertyFund />} />
         <Route path="/funds/myfranchise" element={<MyFranchiseFund />} />
