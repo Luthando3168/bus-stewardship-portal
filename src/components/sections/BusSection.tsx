@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import SectionTitle from "../ui/SectionTitle";
 import { Card } from "../ui/card";
@@ -19,7 +20,7 @@ const BusSection = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <SectionTitle title="How It Works (Easy as 1-2-3)" subtitle="Our BUS Program helps you own businesses without the headache of running them" />
+            <SectionTitle title="How It Works (Easy as 1-2-3)" subtitle="Our BUS Program helps you own multiple businesses without the headache of running them" />
 
             <Card className="bg-gradient-to-br from-amber-50 to-amber-100 rounded-lg p-6 mb-8 border-l-4 border-gold">
               <p className="text-lg text-navyblue text-center italic mb-2">"I'm a taxi owner and now I am part of owners for a franchise, a shop and a farm. LMCA handles everything and reports to me while I focus on my taxi business!"</p>
