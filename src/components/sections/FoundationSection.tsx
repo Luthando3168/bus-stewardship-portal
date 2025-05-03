@@ -1,7 +1,10 @@
+
 import React from "react";
 import SectionTitle from "../ui/SectionTitle";
 import { Link } from "react-router-dom";
-import { Heart, Users, GraduationCap, Building, ArrowRight } from "lucide-react";
+import { Heart, Users, GraduationCap, Building, ArrowRight, Globe, HandHeart } from "lucide-react";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+
 const FoundationSection = () => {
   return <section className="py-20 bg-gradient-to-br from-navyblue to-navyblue/90">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -73,6 +76,47 @@ const FoundationSection = () => {
                   Leave a lasting good legacy
                 </li>
               </ul>
+            </div>
+          </div>
+          
+          {/* Flagship Projects Preview */}
+          <div className="mb-8">
+            <h3 className="font-semibold text-xl text-white mb-4 text-center">Our Flagship Projects</h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-white/5 rounded-lg overflow-hidden border border-white/10">
+                <AspectRatio ratio={16/9}>
+                  <img 
+                    src="/lovable-uploads/4288eeba-c60b-42f1-a156-13a7ef6df992.png" 
+                    alt="#ChangeAlexNow Project" 
+                    className="object-cover w-full h-full"
+                  />
+                </AspectRatio>
+                <div className="p-4">
+                  <h4 className="font-semibold text-gold flex items-center gap-2">
+                    <Building className="w-4 h-4" />
+                    #ChangeAlexNow
+                  </h4>
+                  <p className="text-sm text-white/80">Transforming Alexandra township into a model of inclusive urban development</p>
+                </div>
+              </div>
+              
+              <div className="bg-white/5 rounded-lg overflow-hidden border border-white/10">
+                <AspectRatio ratio={16/9}>
+                  <img 
+                    src="/lovable-uploads/b37923d0-335b-46bc-9852-7d271458f2a9.png" 
+                    alt="100 Inclusive Cities" 
+                    className="object-cover w-full h-full"
+                  />
+                </AspectRatio>
+                <div className="p-4">
+                  <h4 className="font-semibold text-gold flex items-center gap-2">
+                    <Globe className="w-4 h-4" />
+                    100 Inclusive Cities
+                  </h4>
+                  <p className="text-sm text-white/80">Building inclusive cities where everyone shares in the wealth</p>
+                </div>
+              </div>
             </div>
           </div>
           

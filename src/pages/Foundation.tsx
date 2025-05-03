@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Layout from "@/components/layout/Layout";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -5,10 +6,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Globe, Building, Users, HandHeart, MapPin, Landmark } from "lucide-react";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const Foundation = () => {
   const isMobile = useIsMobile();
   const [activeTab, setActiveTab] = useState("youth");
+  const [activeProjectTab, setActiveProjectTab] = useState("alex");
   
   const programs = [
     {
@@ -73,7 +77,37 @@ const Foundation = () => {
     }
   ];
 
+  const flagshipProjects = [
+    {
+      id: "alex",
+      title: "#ChangeAlexNow",
+      description: "A transformative urban renewal initiative focused on Alexandra township, aiming to create a model of inclusive urban development that can be replicated across Africa.",
+      image: "/lovable-uploads/4288eeba-c60b-42f1-a156-13a7ef6df992.png",
+      keyPoints: [
+        "Infrastructure development and housing improvements",
+        "Local business investment and entrepreneurship support",
+        "Community ownership of local services and businesses",
+        "Public space revitalization and green areas development",
+        "Skills development and job creation within the community"
+      ]
+    },
+    {
+      id: "inclusive-cities",
+      title: "100 Inclusive Cities",
+      description: "A continent-wide initiative to develop urban centers where economic opportunity and quality of life are accessible to all residents, regardless of socioeconomic background.",
+      image: "/lovable-uploads/b37923d0-335b-46bc-9852-7d271458f2a9.png", 
+      keyPoints: [
+        "Scaled urban development model based on #ChangeAlexNow successes",
+        "Focus on community ownership of local businesses and services",
+        "Integration of sustainable urban planning practices",
+        "Partnership with local governments and community organizations",
+        "Investment in infrastructure that supports economic inclusion"
+      ]
+    }
+  ];
+
   const currentProgram = programs.find(p => p.id === activeTab) || programs[0];
+  const currentProject = flagshipProjects.find(p => p.id === activeProjectTab) || flagshipProjects[0];
 
   const handleTabChange = (value: string) => {
     setActiveTab(value);
@@ -81,6 +115,14 @@ const Foundation = () => {
 
   const handleSelectChange = (value: string) => {
     setActiveTab(value);
+  };
+
+  const handleProjectTabChange = (value: string) => {
+    setActiveProjectTab(value);
+  };
+
+  const handleProjectSelectChange = (value: string) => {
+    setActiveProjectTab(value);
   };
 
   return (
@@ -93,7 +135,7 @@ const Foundation = () => {
             centered
           />
 
-          <div className="max-w-4xl mx-auto mt-12 space-y-10">
+          <div className="max-w-4xl mx-auto mt-12 space-y-12">
             <div className="text-charcoal space-y-6">
               <p className="text-lg">
                 The Luthando Maduna Foundation is the philanthropic arm of our organization, dedicated to 
@@ -106,6 +148,161 @@ const Foundation = () => {
                 returns into community development initiatives that align with our impact objectives. This 
                 creates a virtuous cycle where financial success directly contributes to greater social good.
               </p>
+            </div>
+
+            {/* Flagship Projects Section */}
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold text-navyblue mb-6 text-center">Our Flagship Projects</h2>
+              <div className="bg-lightgray rounded-lg p-6 md:p-8 mb-8">
+                <p className="text-lg mb-6">
+                  Our vision is to transform urban development across Africa, starting with the ambitious 
+                  #ChangeAlexNow project in Alexandra township, South Africa. By working with parents of learners, taxi commuters, 
+                  social security beneficiaries, and soccer fans across the continent, we're building an inclusive model 
+                  where previously disadvantaged communities own the businesses that supply their daily needs.
+                </p>
+                <p className="text-lg mb-2 font-semibold text-navyblue">
+                  This approach serves a dual purpose:
+                </p>
+                <ul className="list-disc pl-5 mb-6 space-y-2">
+                  <li>Increasing business ownership among historically disadvantaged communities</li>
+                  <li>Generating funds to build inclusive cities where everyone shares in the wealth</li>
+                </ul>
+                <p className="text-lg">
+                  Projects like Alexandra in South Africa symbolize the end of inequality as more people 
+                  share in the African economy, creating a model for the 100 Inclusive Cities initiative.
+                </p>
+              </div>
+
+              {isMobile ? (
+                <div className="mb-10">
+                  <p className="text-sm text-muted-foreground mb-4 text-center">
+                    (Select a project to learn more)
+                  </p>
+                  <Select value={activeProjectTab} onValueChange={handleProjectSelectChange}>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select Flagship Project" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {flagshipProjects.map(project => (
+                        <SelectItem key={project.id} value={project.id}>
+                          {project.title}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  
+                  <div className="mt-6">
+                    <Card>
+                      <CardContent className="pt-6 space-y-6">
+                        <AspectRatio ratio={16/9} className="bg-gray-100 rounded-md overflow-hidden mb-4">
+                          <img 
+                            src={currentProject.image} 
+                            alt={currentProject.title}
+                            className="object-cover w-full h-full"
+                          />
+                        </AspectRatio>
+                        <div>
+                          <h4 className="text-xl font-bold text-navyblue flex items-center gap-2">
+                            {currentProject.id === 'alex' ? <Building className="h-5 w-5 text-gold" /> : <Globe className="h-5 w-5 text-gold" />}
+                            {currentProject.title}
+                          </h4>
+                          <p className="mt-2">{currentProject.description}</p>
+                        </div>
+                        
+                        <div>
+                          <h5 className="font-semibold text-navyblue mb-3">Key Initiatives:</h5>
+                          <ul className="list-disc pl-5 space-y-2">
+                            {currentProject.keyPoints.map((point, i) => (
+                              <li key={i}>{point}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
+              ) : (
+                <Tabs value={activeProjectTab} onValueChange={handleProjectTabChange} className="space-y-6 mb-10">
+                  <TabsList className="grid w-full grid-cols-2">
+                    {flagshipProjects.map(project => (
+                      <TabsTrigger key={project.id} value={project.id} className="flex items-center gap-2">
+                        {project.id === 'alex' ? <Building className="h-4 w-4" /> : <Globe className="h-4 w-4" />}
+                        {project.title}
+                      </TabsTrigger>
+                    ))}
+                  </TabsList>
+
+                  {flagshipProjects.map(project => (
+                    <TabsContent key={project.id} value={project.id}>
+                      <Card>
+                        <CardContent className="pt-6 space-y-6">
+                          <AspectRatio ratio={16/9} className="bg-gray-100 rounded-md overflow-hidden mb-4">
+                            <img 
+                              src={project.image} 
+                              alt={project.title}
+                              className="object-cover w-full h-full"
+                            />
+                          </AspectRatio>
+                          <div>
+                            <h4 className="text-xl font-bold text-navyblue">{project.title}</h4>
+                            <p className="mt-2">{project.description}</p>
+                          </div>
+                          
+                          <div>
+                            <h5 className="font-semibold text-navyblue mb-3">Key Initiatives:</h5>
+                            <ul className="list-disc pl-5 space-y-2">
+                              {project.keyPoints.map((point, i) => (
+                                <li key={i}>{point}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </TabsContent>
+                  ))}
+                </Tabs>
+              )}
+            </div>
+
+            {/* Community Partners Section */}
+            <div className="mb-10">
+              <h3 className="text-2xl font-bold text-navyblue mb-6">Working With Communities</h3>
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <AspectRatio ratio={4/3} className="bg-gray-100 rounded-md overflow-hidden mb-4">
+                        <img 
+                          src="/lovable-uploads/cefab7d3-58a2-43a5-a136-7cac22b5c286.png" 
+                          alt="Community Engagement" 
+                          className="object-cover w-full h-full"
+                        />
+                      </AspectRatio>
+                    </div>
+                    <div className="space-y-4">
+                      <h4 className="text-xl font-semibold text-navyblue">Our Community Partners</h4>
+                      <div className="space-y-3">
+                        <div className="flex items-start gap-3">
+                          <Users className="h-5 w-5 text-gold flex-shrink-0 mt-1" />
+                          <p><span className="font-medium">Parents of Learners:</span> Supporting education and creating sustainable school businesses</p>
+                        </div>
+                        <div className="flex items-start gap-3">
+                          <MapPin className="h-5 w-5 text-gold flex-shrink-0 mt-1" />
+                          <p><span className="font-medium">Taxi Commuters:</span> Transforming transport hubs into economic centers</p>
+                        </div>
+                        <div className="flex items-start gap-3">
+                          <Landmark className="h-5 w-5 text-gold flex-shrink-0 mt-1" />
+                          <p><span className="font-medium">Social Security Beneficiaries:</span> Creating business ownership opportunities for greater financial security</p>
+                        </div>
+                        <div className="flex items-start gap-3">
+                          <HandHeart className="h-5 w-5 text-gold flex-shrink-0 mt-1" />
+                          <p><span className="font-medium">Soccer Fans:</span> Leveraging the passion for sports to build community businesses</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
 
             <div>
