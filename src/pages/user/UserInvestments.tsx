@@ -1,21 +1,11 @@
+
 import React, { useState, useEffect } from 'react';
 import UserLayout from "@/components/layout/UserLayout";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
-  TableRow 
-} from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { BadgeCheck, Download } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { toast } from "sonner";
-import { impactFunds, opportunities, fundImages } from "@/data/impact-funds";
-import FundOpportunities from "@/components/user/FundOpportunities";
+import { impactFunds } from "@/data/impact-funds";
+import PortfolioTab from "@/components/user/investments/PortfolioTab";
+import OpportunitiesTab from "@/components/user/investments/OpportunitiesTab";
+import InvestmentDetailsDialog from "@/components/user/investments/InvestmentDetailsDialog";
 
 const UserInvestments = () => {
   const [selectedInvestment, setSelectedInvestment] = useState<any | null>(null);
@@ -119,11 +109,6 @@ const UserInvestments = () => {
     }
   ];
 
-  const handleDownloadStatement = (type: string) => {
-    toast.success(`Downloading ${type} statement for ${selectedInvestment?.name}`);
-    // In a real app, this would trigger a document download
-  };
-
   return (
     <UserLayout>
       <div className="space-y-6">
@@ -136,303 +121,24 @@ const UserInvestments = () => {
           </TabsList>
           
           <TabsContent value="portfolio">
-            <Card>
-              <CardHeader>
-                <CardTitle>Investment Portfolio Summary</CardTitle>
-                <CardDescription>
-                  Current status of your investments across all impact funds
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                  <div className="p-4 bg-lightgray rounded-lg">
-                    <h4 className="text-sm text-muted-foreground">Total Invested</h4>
-                    <p className="text-2xl font-bold">R 245,000.00</p>
-                  </div>
-                  <div className="p-4 bg-lightgray rounded-lg">
-                    <h4 className="text-sm text-muted-foreground">Current Value</h4>
-                    <p className="text-2xl font-bold">R 266,670.00</p>
-                  </div>
-                  <div className="p-4 bg-lightgray rounded-lg">
-                    <h4 className="text-sm text-muted-foreground">Total Return</h4>
-                    <p className="text-2xl font-bold text-green-600">+8.8%</p>
-                  </div>
-                </div>
-                
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Investment</TableHead>
-                      <TableHead>Fund</TableHead>
-                      <TableHead>Amount</TableHead>
-                      <TableHead className="hidden md:table-cell">Date</TableHead>
-                      <TableHead className="text-right">Return</TableHead>
-                      <TableHead className="text-right">Status</TableHead>
-                      <TableHead className="text-right">Actions</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {investmentData.map((investment) => (
-                      <TableRow key={investment.id}>
-                        <TableCell className="font-medium">{investment.name}</TableCell>
-                        <TableCell>{investment.fund}</TableCell>
-                        <TableCell>{investment.amount}</TableCell>
-                        <TableCell className="hidden md:table-cell">{new Date(investment.investmentDate).toLocaleDateString()}</TableCell>
-                        <TableCell className="text-right text-green-600">{investment.returnToDate}</TableCell>
-                        <TableCell className="text-right">
-                          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                            <BadgeCheck className="mr-1 h-3 w-3" />
-                            {investment.status}
-                          </span>
-                        </TableCell>
-                        <TableCell className="text-right">
-                          <Button 
-                            variant="outline" 
-                            size="sm"
-                            onClick={() => setSelectedInvestment(investment)}
-                          >
-                            View Details
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
+            <PortfolioTab 
+              investments={investmentData} 
+              onSelectInvestment={setSelectedInvestment} 
+            />
           </TabsContent>
           
           <TabsContent value="opportunities">
-            <Card>
-              <CardHeader>
-                <CardTitle>Investment Opportunities</CardTitle>
-                <CardDescription>
-                  Explore new investment opportunities across our impact funds
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="mb-6">
-                  <h4 className="text-lg font-medium mb-3">Select an Impact Fund</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {impactFunds.map((fund) => (
-                      <Button
-                        key={fund.id}
-                        onClick={() => setActiveFundId(fund.id)}
-                        variant={activeFundId === fund.id ? "default" : "outline"}
-                        className={`${activeFundId === fund.id ? 'bg-navyblue text-white' : ''}`}
-                      >
-                        {fund.name}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-                
-                {activeFundId && (
-                  <div>
-                    <div className="mb-5">
-                      <div 
-                        className="h-40 w-full rounded-lg bg-cover bg-center mb-4"
-                        style={{
-                          backgroundImage: `url(${fundImages[activeFundId as keyof typeof fundImages]})`,
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center'
-                        }}
-                      />
-                      <h3 className="text-xl font-semibold text-navyblue mb-2">
-                        {impactFunds.find(fund => fund.id === activeFundId)?.name} Impact Fund
-                      </h3>
-                      <p className="text-muted-foreground">
-                        Explore current investment opportunities in the {impactFunds.find(fund => fund.id === activeFundId)?.name} sector.
-                      </p>
-                    </div>
-                    
-                    <FundOpportunities fundId={activeFundId} />
-                  </div>
-                )}
-              </CardContent>
-            </Card>
+            <OpportunitiesTab 
+              activeFundId={activeFundId} 
+              setActiveFundId={setActiveFundId} 
+            />
           </TabsContent>
         </Tabs>
         
-        {/* Investment Details Dialog */}
-        <Dialog open={!!selectedInvestment} onOpenChange={(open) => !open && setSelectedInvestment(null)}>
-          <DialogContent className="max-w-3xl">
-            {selectedInvestment && (
-              <>
-                <DialogHeader>
-                  <DialogTitle>{selectedInvestment.name}</DialogTitle>
-                  <DialogDescription>{selectedInvestment.fund}</DialogDescription>
-                </DialogHeader>
-                
-                <Tabs defaultValue="overview">
-                  <TabsList>
-                    <TabsTrigger value="overview">Overview</TabsTrigger>
-                    <TabsTrigger value="distributions">Distributions</TabsTrigger>
-                    <TabsTrigger value="documents">Documents</TabsTrigger>
-                  </TabsList>
-                  
-                  <TabsContent value="overview" className="space-y-6">
-                    <div>
-                      <h4 className="font-semibold mb-2">Investment Details</h4>
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                        <div className="p-3 bg-lightgray rounded-lg">
-                          <p className="text-xs text-muted-foreground">Amount Invested</p>
-                          <p className="font-medium">{selectedInvestment.amount}</p>
-                        </div>
-                        <div className="p-3 bg-lightgray rounded-lg">
-                          <p className="text-xs text-muted-foreground">Current Value</p>
-                          <p className="font-medium">{selectedInvestment.currentValue}</p>
-                        </div>
-                        <div className="p-3 bg-lightgray rounded-lg">
-                          <p className="text-xs text-muted-foreground">Return to Date</p>
-                          <p className="font-medium text-green-600">{selectedInvestment.returnToDate}</p>
-                        </div>
-                        <div className="p-3 bg-lightgray rounded-lg">
-                          <p className="text-xs text-muted-foreground">Investment Date</p>
-                          <p className="font-medium">{new Date(selectedInvestment.investmentDate).toLocaleDateString()}</p>
-                        </div>
-                        <div className="p-3 bg-lightgray rounded-lg">
-                          <p className="text-xs text-muted-foreground">Term</p>
-                          <p className="font-medium">{selectedInvestment.term}</p>
-                        </div>
-                        <div className="p-3 bg-lightgray rounded-lg">
-                          <p className="text-xs text-muted-foreground">Status</p>
-                          <p className="font-medium inline-flex items-center text-green-600">
-                            <BadgeCheck className="mr-1 h-3 w-3" />
-                            {selectedInvestment.status}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <h4 className="font-semibold mb-2">About this Investment</h4>
-                      <p className="mb-4">{selectedInvestment.details.description}</p>
-                      
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                        <div>
-                          <p className="text-sm text-muted-foreground">Location</p>
-                          <p>{selectedInvestment.details.location}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm text-muted-foreground">Project Manager</p>
-                          <p>{selectedInvestment.details.projectManager}</p>
-                        </div>
-                      </div>
-                      
-                      <h4 className="font-semibold mb-2">Recent Highlights</h4>
-                      <ul className="list-disc pl-5 space-y-1">
-                        {selectedInvestment.details.highlights.map((highlight: string, i: number) => (
-                          <li key={i}>{highlight}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </TabsContent>
-                  
-                  <TabsContent value="distributions">
-                    <div className="space-y-4">
-                      <h4 className="font-semibold">Distribution History</h4>
-                      <Table>
-                        <TableHeader>
-                          <TableRow>
-                            <TableHead>Date</TableHead>
-                            <TableHead>Amount</TableHead>
-                            <TableHead className="text-right">Type</TableHead>
-                          </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                          {selectedInvestment.distributions.map((dist: any, i: number) => (
-                            <TableRow key={i}>
-                              <TableCell>{new Date(dist.date).toLocaleDateString()}</TableCell>
-                              <TableCell className="text-green-600">{dist.amount}</TableCell>
-                              <TableCell className="text-right">Quarterly Distribution</TableCell>
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                      
-                      <div className="p-4 bg-lightgray rounded-lg">
-                        <h5 className="font-semibold mb-2">Next Distribution</h5>
-                        <div className="flex justify-between">
-                          <div>
-                            <p className="text-sm text-muted-foreground">Estimated Date</p>
-                            <p>May 15, 2024</p>
-                          </div>
-                          <div>
-                            <p className="text-sm text-muted-foreground">Estimated Amount</p>
-                            <p className="text-green-600">R 2,400.00</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </TabsContent>
-                  
-                  <TabsContent value="documents">
-                    <div className="space-y-4">
-                      <h4 className="font-semibold">Investment Documents</h4>
-                      <div className="rounded-md border divide-y">
-                        <div className="p-4 flex justify-between items-center">
-                          <div>
-                            <p className="font-medium">Investment Certificate</p>
-                            <p className="text-sm text-muted-foreground">Issued on investment date</p>
-                          </div>
-                          <Button 
-                            variant="outline" 
-                            size="sm"
-                            onClick={() => handleDownloadStatement('Investment Certificate')}
-                            className="flex items-center gap-1"
-                          >
-                            <Download className="h-4 w-4" />
-                            <span>Download</span>
-                          </Button>
-                        </div>
-                        <div className="p-4 flex justify-between items-center">
-                          <div>
-                            <p className="font-medium">Latest Quarterly Report</p>
-                            <p className="text-sm text-muted-foreground">January-March 2024</p>
-                          </div>
-                          <Button 
-                            variant="outline" 
-                            size="sm"
-                            onClick={() => handleDownloadStatement('Quarterly Report')}
-                            className="flex items-center gap-1"
-                          >
-                            <Download className="h-4 w-4" />
-                            <span>Download</span>
-                          </Button>
-                        </div>
-                        <div className="p-4 flex justify-between items-center">
-                          <div>
-                            <p className="font-medium">Tax Statement</p>
-                            <p className="text-sm text-muted-foreground">2023 Tax Year</p>
-                          </div>
-                          <Button 
-                            variant="outline" 
-                            size="sm"
-                            onClick={() => handleDownloadStatement('Tax Statement')}
-                            className="flex items-center gap-1"
-                          >
-                            <Download className="h-4 w-4" />
-                            <span>Download</span>
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
-                  </TabsContent>
-                </Tabs>
-                
-                <div className="flex justify-end pt-4 border-t">
-                  <Button 
-                    variant="outline"
-                    onClick={() => setSelectedInvestment(null)}
-                  >
-                    Close
-                  </Button>
-                </div>
-              </>
-            )}
-          </DialogContent>
-        </Dialog>
+        <InvestmentDetailsDialog 
+          selectedInvestment={selectedInvestment} 
+          setSelectedInvestment={setSelectedInvestment} 
+        />
       </div>
     </UserLayout>
   );
