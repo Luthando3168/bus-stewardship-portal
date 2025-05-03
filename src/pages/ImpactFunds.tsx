@@ -1,3 +1,4 @@
+
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import { Link } from "react-router-dom";
@@ -93,6 +94,16 @@ const ImpactFunds = () => {
             <div className="bg-gradient-to-br from-navyblue to-blue-900 rounded-2xl p-8 text-white shadow-xl">
               <h2 className="text-2xl font-bold mb-6">Your Gateway to Business Ownership</h2>
               <div className="space-y-6">
+                <div className="bg-white/10 p-6 rounded-xl mb-8">
+                  <h3 className="text-xl font-bold text-gold mb-3">What is an Impact Fund?</h3>
+                  <p className="text-lg leading-relaxed">
+                    An Impact Fund is an investment vehicle that aims to generate not only financial returns but also 
+                    positive, measurable social and environmental outcomes. Unlike traditional investments that focus 
+                    solely on profit, impact funds deliberately target businesses and projects that address specific 
+                    community challenges while still providing returns to investors.
+                  </p>
+                </div>
+                
                 <p className="text-lg leading-relaxed">
                   Our Impact Investment Funds offer you the opportunity to own shares in 
                   real, professionally managed businesses across different sectors. Each fund 
