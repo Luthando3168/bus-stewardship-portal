@@ -17,15 +17,6 @@ const Hero = () => (
           business owners through our unique co-ownership model. We professionally 
           manage the businesses while you earn monthly dividends without the hassle of day-to-day operations.
         </p>
-        <div className="space-y-4 bg-white/10 p-4 rounded-lg">
-          <h2 className="text-gold text-lg font-semibold">How It Works:</h2>
-          <ul className="list-disc pl-5 text-white space-y-2">
-            <li>You invest from R500 monthly in real operational businesses</li>
-            <li>We handle all management, staffing, and operations</li>
-            <li>You receive regular dividends based on business performance</li>
-            <li>Choose from food shops, farms, clinics, and other established ventures</li>
-          </ul>
-        </div>
         <div className="flex flex-col sm:flex-row gap-4">
           <Link
             to="/register"
