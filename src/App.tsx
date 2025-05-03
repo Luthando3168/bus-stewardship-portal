@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "sonner";
 import { AuthProvider } from "@/contexts/AuthContext";
@@ -35,6 +35,9 @@ import UserProfile from "@/pages/user/UserProfile";
 import UserHowWeWork from "@/pages/user/UserHowWeWork";
 import UserLoans from "@/pages/user/UserLoans";
 import Accommodation from "@/pages/Accommodation";
+
+// Lazy load the UserConcierge component
+const UserConcierge = lazy(() => import("@/pages/user/UserConcierge"));
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(
@@ -154,6 +157,17 @@ function App() {
           element={
             <ProtectedRoute>
               <UserLoans />
+            </ProtectedRoute>
+          } 
+        />
+        
+        <Route 
+          path="/user/concierge" 
+          element={
+            <ProtectedRoute>
+              <Suspense fallback={<div>Loading...</div>}>
+                <UserConcierge />
+              </Suspense>
             </ProtectedRoute>
           } 
         />
