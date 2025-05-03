@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { Mail, MessageCircle } from "lucide-react";
 
@@ -12,10 +13,19 @@ const Hero = () => (
           Own Real Businesses.
         </h1>
         <p className="font-lato text-white/95 text-xl md:text-2xl max-w-2xl">
-          Empowering entrepreneurs across South Africa: Taxi drivers, teachers, 
-          workers, and small business owners can now own professional, 
-          managed businesses starting at just R500 monthly.
+          Luthando Maduna Chartered Accountants transforms ordinary South Africans into 
+          business owners through our unique co-ownership model. We professionally 
+          manage the businesses while you earn monthly dividends without the hassle of day-to-day operations.
         </p>
+        <div className="space-y-4 bg-white/10 p-4 rounded-lg">
+          <h2 className="text-gold text-lg font-semibold">How It Works:</h2>
+          <ul className="list-disc pl-5 text-white space-y-2">
+            <li>You invest from R500 monthly in real operational businesses</li>
+            <li>We handle all management, staffing, and operations</li>
+            <li>You receive regular dividends based on business performance</li>
+            <li>Choose from food shops, farms, clinics, and other established ventures</li>
+          </ul>
+        </div>
         <div className="flex flex-col sm:flex-row gap-4">
           <Link
             to="/register"
