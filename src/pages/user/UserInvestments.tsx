@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import UserLayout from "@/components/layout/UserLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { 
@@ -15,9 +14,25 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { BadgeCheck, Download } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
+import { impactFunds, opportunities, fundImages } from "@/data/impact-funds";
+import FundOpportunities from "@/components/user/FundOpportunities";
 
 const UserInvestments = () => {
   const [selectedInvestment, setSelectedInvestment] = useState<any | null>(null);
+  const [activeTab, setActiveTab] = useState<string>("portfolio");
+  const [activeFundId, setActiveFundId] = useState<string>(impactFunds[0]?.id || "");
+  
+  // Scroll to the selected fund if the URL has a hash
+  useEffect(() => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+      const fundExists = impactFunds.find(fund => fund.id === hash);
+      if (fundExists) {
+        setActiveFundId(hash);
+        setActiveTab("opportunities");
+      }
+    }
+  }, []);
   
   const investmentData = [
     {
@@ -114,70 +129,130 @@ const UserInvestments = () => {
       <div className="space-y-6">
         <h2 className="text-2xl font-bold text-navyblue">My Investments</h2>
         
-        <Card>
-          <CardHeader>
-            <CardTitle>Investment Portfolio Summary</CardTitle>
-            <CardDescription>
-              Current status of your investments across all impact funds
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="p-4 bg-lightgray rounded-lg">
-                <h4 className="text-sm text-muted-foreground">Total Invested</h4>
-                <p className="text-2xl font-bold">R 245,000.00</p>
-              </div>
-              <div className="p-4 bg-lightgray rounded-lg">
-                <h4 className="text-sm text-muted-foreground">Current Value</h4>
-                <p className="text-2xl font-bold">R 266,670.00</p>
-              </div>
-              <div className="p-4 bg-lightgray rounded-lg">
-                <h4 className="text-sm text-muted-foreground">Total Return</h4>
-                <p className="text-2xl font-bold text-green-600">+8.8%</p>
-              </div>
-            </div>
-            
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Investment</TableHead>
-                  <TableHead>Fund</TableHead>
-                  <TableHead>Amount</TableHead>
-                  <TableHead className="hidden md:table-cell">Date</TableHead>
-                  <TableHead className="text-right">Return</TableHead>
-                  <TableHead className="text-right">Status</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {investmentData.map((investment) => (
-                  <TableRow key={investment.id}>
-                    <TableCell className="font-medium">{investment.name}</TableCell>
-                    <TableCell>{investment.fund}</TableCell>
-                    <TableCell>{investment.amount}</TableCell>
-                    <TableCell className="hidden md:table-cell">{new Date(investment.investmentDate).toLocaleDateString()}</TableCell>
-                    <TableCell className="text-right text-green-600">{investment.returnToDate}</TableCell>
-                    <TableCell className="text-right">
-                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                        <BadgeCheck className="mr-1 h-3 w-3" />
-                        {investment.status}
-                      </span>
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <Button 
-                        variant="outline" 
-                        size="sm"
-                        onClick={() => setSelectedInvestment(investment)}
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <TabsList className="mb-6">
+            <TabsTrigger value="portfolio">My Portfolio</TabsTrigger>
+            <TabsTrigger value="opportunities">Investment Opportunities</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="portfolio">
+            <Card>
+              <CardHeader>
+                <CardTitle>Investment Portfolio Summary</CardTitle>
+                <CardDescription>
+                  Current status of your investments across all impact funds
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                  <div className="p-4 bg-lightgray rounded-lg">
+                    <h4 className="text-sm text-muted-foreground">Total Invested</h4>
+                    <p className="text-2xl font-bold">R 245,000.00</p>
+                  </div>
+                  <div className="p-4 bg-lightgray rounded-lg">
+                    <h4 className="text-sm text-muted-foreground">Current Value</h4>
+                    <p className="text-2xl font-bold">R 266,670.00</p>
+                  </div>
+                  <div className="p-4 bg-lightgray rounded-lg">
+                    <h4 className="text-sm text-muted-foreground">Total Return</h4>
+                    <p className="text-2xl font-bold text-green-600">+8.8%</p>
+                  </div>
+                </div>
+                
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Investment</TableHead>
+                      <TableHead>Fund</TableHead>
+                      <TableHead>Amount</TableHead>
+                      <TableHead className="hidden md:table-cell">Date</TableHead>
+                      <TableHead className="text-right">Return</TableHead>
+                      <TableHead className="text-right">Status</TableHead>
+                      <TableHead className="text-right">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {investmentData.map((investment) => (
+                      <TableRow key={investment.id}>
+                        <TableCell className="font-medium">{investment.name}</TableCell>
+                        <TableCell>{investment.fund}</TableCell>
+                        <TableCell>{investment.amount}</TableCell>
+                        <TableCell className="hidden md:table-cell">{new Date(investment.investmentDate).toLocaleDateString()}</TableCell>
+                        <TableCell className="text-right text-green-600">{investment.returnToDate}</TableCell>
+                        <TableCell className="text-right">
+                          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                            <BadgeCheck className="mr-1 h-3 w-3" />
+                            {investment.status}
+                          </span>
+                        </TableCell>
+                        <TableCell className="text-right">
+                          <Button 
+                            variant="outline" 
+                            size="sm"
+                            onClick={() => setSelectedInvestment(investment)}
+                          >
+                            View Details
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+          </TabsContent>
+          
+          <TabsContent value="opportunities">
+            <Card>
+              <CardHeader>
+                <CardTitle>Investment Opportunities</CardTitle>
+                <CardDescription>
+                  Explore new investment opportunities across our impact funds
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="mb-6">
+                  <h4 className="text-lg font-medium mb-3">Select an Impact Fund</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {impactFunds.map((fund) => (
+                      <Button
+                        key={fund.id}
+                        onClick={() => setActiveFundId(fund.id)}
+                        variant={activeFundId === fund.id ? "default" : "outline"}
+                        className={`${activeFundId === fund.id ? 'bg-navyblue text-white' : ''}`}
                       >
-                        View Details
+                        {fund.name}
                       </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
+                    ))}
+                  </div>
+                </div>
+                
+                {activeFundId && (
+                  <div>
+                    <div className="mb-5">
+                      <div 
+                        className="h-40 w-full rounded-lg bg-cover bg-center mb-4"
+                        style={{
+                          backgroundImage: `url(${fundImages[activeFundId as keyof typeof fundImages]})`,
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center'
+                        }}
+                      />
+                      <h3 className="text-xl font-semibold text-navyblue mb-2">
+                        {impactFunds.find(fund => fund.id === activeFundId)?.name} Impact Fund
+                      </h3>
+                      <p className="text-muted-foreground">
+                        Explore current investment opportunities in the {impactFunds.find(fund => fund.id === activeFundId)?.name} sector.
+                      </p>
+                    </div>
+                    
+                    <FundOpportunities fundId={activeFundId} />
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
         
         {/* Investment Details Dialog */}
         <Dialog open={!!selectedInvestment} onOpenChange={(open) => !open && setSelectedInvestment(null)}>
