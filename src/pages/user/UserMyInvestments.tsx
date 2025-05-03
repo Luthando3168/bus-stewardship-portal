@@ -1,4 +1,3 @@
-
 import React, { useRef } from 'react';
 import UserLayout from "@/components/layout/UserLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
@@ -311,7 +310,6 @@ const UserMyInvestments = () => {
                     className="flex gap-1"
                     onClick={() => handleDownloadStatement(investment.id)}
                   >
-                    {/* No Download icon (not allowed), just text */}
                     Financial Statement
                   </Button>
                 </CardFooter>
@@ -372,4 +370,3 @@ const UserMyInvestments = () => {
 };
 
 export default UserMyInvestments;
-

@@ -64,7 +64,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({ investments, onSelectInvest
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Investment Portfolio Summary</CardTitle>
+        <CardTitle>Investment Summary</CardTitle>
         <CardDescription>
           Current status of your investments across all impact funds
         </CardDescription>
