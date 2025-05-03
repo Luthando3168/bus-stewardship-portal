@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
@@ -424,14 +425,74 @@ const impactFunds = [
     name: "MyHealth Impact Fund",
     return: "11% p.a.",
     minInvestment: 2500,
-    businesses: []
+    description: "Investing in accessible healthcare solutions and medical facilities to improve community health outcomes. Our MyHealth Impact Fund allows you to co-own healthcare facilities that serve local communities while generating sustainable returns.",
+    businesses: [
+      {
+        id: "community-clinic-soweto",
+        title: "Community Clinic - Soweto",
+        region: "Soweto, Gauteng",
+        description: "A primary healthcare facility providing essential medical services to the Soweto community, including preventative care, basic treatments, and health education.",
+        minInvestment: 2500,
+      },
+      {
+        id: "medical-center-cape-town",
+        title: "Medical Center - Cape Town",
+        region: "Cape Town, Western Cape",
+        description: "A comprehensive medical center offering diagnostic services, specialist consultations, and outpatient treatments to serve the Cape Town metropolitan area.",
+        minInvestment: 5000,
+      },
+      {
+        id: "mobile-health-unit",
+        title: "Mobile Health Unit - Rural Eastern Cape",
+        region: "Eastern Cape",
+        description: "A mobile healthcare solution bringing essential medical services to underserved rural communities in the Eastern Cape province.",
+        minInvestment: 3000,
+      },
+      {
+        id: "maternal-care-clinic",
+        title: "Maternal Care Clinic - Durban",
+        region: "Durban, KwaZulu-Natal",
+        description: "Specialized healthcare facility focused on maternal and child health services, providing pre and post-natal care to communities in Durban.",
+        minInvestment: 4000,
+      }
+    ]
   },
   {
-    id: "myeducation",
-    name: "MySchool",
+    id: "myschool",
+    name: "MySchool Impact Fund",
     return: "10% p.a.",
     minInvestment: 1500,
-    businesses: []
+    description: "Investing in quality education infrastructure and learning institutions to enhance community development through education. Our MySchool Impact Fund allows you to co-own educational facilities that empower communities through knowledge and skills development.",
+    businesses: [
+      {
+        id: "primary-school-alexandra",
+        title: "Primary School - Alexandra",
+        region: "Alexandra, Gauteng",
+        description: "A primary education facility providing quality foundation phase learning to children in the Alexandra township community.",
+        minInvestment: 1500,
+      },
+      {
+        id: "skills-center-tembisa",
+        title: "Skills Development Center - Tembisa",
+        region: "Tembisa, Gauteng",
+        description: "A vocational training center offering practical skills development in trades, technology, and entrepreneurship to youth in Tembisa.",
+        minInvestment: 2000,
+      },
+      {
+        id: "digital-learning-hub",
+        title: "Digital Learning Hub - Khayelitsha",
+        region: "Khayelitsha, Western Cape",
+        description: "A technology-focused learning center providing digital literacy training, computer skills, and online education access to residents of Khayelitsha.",
+        minInvestment: 2500,
+      },
+      {
+        id: "early-childhood-center",
+        title: "Early Childhood Development Center - Polokwane",
+        region: "Polokwane, Limpopo",
+        description: "A specialized early childhood development facility providing quality pre-school education and care for children in Polokwane.",
+        minInvestment: 1800,
+      }
+    ]
   },
   {
     id: "mytelco",

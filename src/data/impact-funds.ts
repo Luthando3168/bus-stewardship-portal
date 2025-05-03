@@ -1,9 +1,12 @@
+
 export const impactFunds = [
   { id: "myfarm", name: "MyFarm", color: "bg-maduna-navy/10", textColor: "text-maduna-navy" },
   { id: "myproperty", name: "MyProperty", color: "bg-maduna-navy/10", textColor: "text-maduna-navy" },
   { id: "myfoodretail", name: "MyFoodRetail", color: "bg-maduna-navy/10", textColor: "text-maduna-navy" },
   { id: "myenergy", name: "MyEnergy", color: "bg-maduna-navy/10", textColor: "text-maduna-navy" },
   { id: "myfranchise", name: "MyFranchise", color: "bg-maduna-navy/10", textColor: "text-maduna-navy" },
+  { id: "myhealth", name: "MyHealth", color: "bg-maduna-navy/10", textColor: "text-maduna-navy" },
+  { id: "myschool", name: "MySchool", color: "bg-maduna-navy/10", textColor: "text-maduna-navy" },
   { id: "mytelco", name: "MyTelco", color: "bg-maduna-navy/10", textColor: "text-maduna-navy" },
 ];
 
@@ -14,6 +17,8 @@ export const fundImages = {
   myfoodretail: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=1280&h=720",
   myenergy: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=1280&h=720",
   myfranchise: "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=1280&h=720",
+  myhealth: "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&q=80&w=1280&h=720",
+  myschool: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&q=80&w=1280&h=720",
   mytelco: "https://images.unsplash.com/photo-1535303311164-664fc9ec6532?auto=format&fit=crop&q=80&w=1280&h=720",
 };
 
