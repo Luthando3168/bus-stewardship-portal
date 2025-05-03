@@ -1,3 +1,4 @@
+
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import { Link } from "react-router-dom";
@@ -92,36 +93,49 @@ const ImpactFunds = () => {
           <div className="max-w-4xl mx-auto mb-16">
             <div className="bg-gradient-to-br from-navyblue to-blue-900 rounded-2xl p-8 text-white shadow-xl">
               <h2 className="text-2xl font-bold mb-6">Your Gateway to Business Ownership</h2>
-              <div className="space-y-6">
-                <div className="bg-white/10 p-6 rounded-xl mb-8">
-                  <h3 className="text-xl font-bold text-gold mb-3">What is an Impact Fund?</h3>
-                  <p className="text-lg leading-relaxed">
-                    Think of an Impact Fund like this: It's your money working for both your pocket AND your community. 
-                    Unlike regular investments that only care about making money, these funds put your money into businesses 
-                    that help solve problems in your community while still giving you returns.
-                  </p>
-                </div>
-                
-                <p className="text-lg leading-relaxed">
-                  With our funds, you can own parts of real businesses that professionals run for you. 
-                  You pick what kind of business you want to own, we handle all the work, and you get 
-                  a share of the profits while helping make South African communities better.
-                </p>
-                <div className="grid md:grid-cols-3 gap-6 mt-8">
-                  <div className="bg-white/10 p-6 rounded-xl">
-                    <div className="text-gold text-2xl font-bold mb-2">R500</div>
-                    <p className="text-sm">Monthly minimum investment to start building your portfolio</p>
+              
+              <div className="bg-white/10 p-6 rounded-xl mb-8">
+                <div className="flex flex-col md:flex-row items-start gap-6">
+                  <div className="md:w-1/3 flex-shrink-0">
+                    <div className="bg-gold/20 p-4 rounded-lg">
+                      <h3 className="text-xl font-bold text-gold mb-2">What is an Impact Fund?</h3>
+                      <HandCoins className="h-16 w-16 text-gold mx-auto my-3" />
+                    </div>
                   </div>
-                  <div className="bg-white/10 p-6 rounded-xl">
-                    <div className="text-gold text-2xl font-bold mb-2">7+</div>
-                    <p className="text-sm">Different business sectors to choose from</p>
-                  </div>
-                  <div className="bg-white/10 p-6 rounded-xl">
-                    <div className="text-gold text-2xl font-bold mb-2">100%</div>
-                    <p className="text-sm">Professional management of your investments</p>
+                  <div className="md:w-2/3">
+                    <p className="text-lg leading-relaxed mb-6">
+                      Think of an Impact Fund like this: It's your money working for both your pocket AND your community. 
+                      Unlike regular investments that only care about making money, these funds put your money into businesses 
+                      that help solve problems in your community while still giving you returns.
+                    </p>
+                    
+                    <p className="text-lg leading-relaxed">
+                      With our funds, you can own parts of real businesses that professionals run for you. 
+                      You pick what kind of business you want to own, we handle all the work, and you get 
+                      a share of the profits while helping make South African communities better.
+                    </p>
                   </div>
                 </div>
               </div>
+              
+              <div className="grid md:grid-cols-3 gap-6 mt-12">
+                <div className="bg-white/10 p-6 rounded-xl text-center transform transition-transform hover:scale-105">
+                  <CircleDollarSign className="h-10 w-10 mx-auto mb-4 text-gold" />
+                  <div className="text-gold text-2xl font-bold mb-2">R500</div>
+                  <p className="text-white/90">Monthly minimum investment to start building your portfolio</p>
+                </div>
+                <div className="bg-white/10 p-6 rounded-xl text-center transform transition-transform hover:scale-105">
+                  <ShieldCheck className="h-10 w-10 mx-auto mb-4 text-gold" />
+                  <div className="text-gold text-2xl font-bold mb-2">7+</div>
+                  <p className="text-white/90">Different business sectors to choose from</p>
+                </div>
+                <div className="bg-white/10 p-6 rounded-xl text-center transform transition-transform hover:scale-105">
+                  <Shield className="h-10 w-10 mx-auto mb-4 text-gold" />
+                  <div className="text-gold text-2xl font-bold mb-2">100%</div>
+                  <p className="text-white/90">Professional management of your investments</p>
+                </div>
+              </div>
+              
             </div>
           </div>
 
