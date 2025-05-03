@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "sonner";
@@ -31,7 +32,7 @@ import UserDashboard from "@/pages/user/UserDashboard";
 import UserInvestments from "@/pages/user/UserInvestments";
 import UserWallet from "@/pages/user/UserWallet";
 import UserProfile from "@/pages/user/UserProfile";
-import UserPendingDeals from "@/pages/user/UserPendingDeals";
+import UserHowWeWork from "@/pages/user/UserHowWeWork";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(
@@ -134,6 +135,14 @@ function App() {
           element={
             <ProtectedRoute>
               <UserProfile />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/user/how-we-work" 
+          element={
+            <ProtectedRoute>
+              <UserHowWeWork />
             </ProtectedRoute>
           } 
         />

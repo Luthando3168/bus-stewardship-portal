@@ -1,3 +1,4 @@
+
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
@@ -14,6 +15,7 @@ import {
   ChevronLeft,
   ChevronRight,
   BarChart3,
+  HelpCircle,
 } from "lucide-react";
 
 interface UserSidebarProps {
@@ -59,6 +61,11 @@ const UserSidebar = ({
       name: "Beneficiaries",
       icon: <Users size={20} />,
       path: "/user/beneficiaries",
+    },
+    {
+      name: "How We Work",
+      icon: <HelpCircle size={20} />,
+      path: "/user/how-we-work",
     },
     {
       name: "Profile",
