@@ -13,9 +13,8 @@ const Hero = () => (
           Own Real Businesses.
         </h1>
         <p className="font-lato text-white/95 text-xl md:text-2xl max-w-2xl">
-          Luthando Maduna Chartered Accountants transforms ordinary South Africans into 
-          business owners through our unique co-ownership model. We professionally 
-          manage the businesses while you earn monthly dividends without the hassle of day-to-day operations.
+          We turn everyday South Africans into business owners. We manage the 
+          operations, you collect monthly dividends.
         </p>
         <div className="flex flex-col sm:flex-row gap-4">
           <Link
