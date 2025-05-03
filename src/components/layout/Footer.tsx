@@ -5,24 +5,33 @@ import { Separator } from "@/components/ui/separator";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Logo from "@/components/ui/Logo";
-
 const Footer = () => {
   const location = useLocation();
   const currentYear = new Date().getFullYear();
-
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }, [location.pathname]);
-
-  const socialLinks = [
-    { icon: Facebook, href: "https://facebook.com/Lifestylefarmsclub", label: "Facebook" },
-    { icon: Instagram, href: "https://instagram.com/LMCA_ZA", label: "Instagram" },
-    { icon: Linkedin, href: "https://linkedin.com/in/luthando-isaac-maduna-87267257?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_content=profile&utm_medium=android_app", label: "LinkedIn" },
-    { icon: Youtube, href: "https://youtube.com/@LMCA_SA", label: "Youtube" }
-  ];
-
-  return (
-    <footer className="bg-navyblue text-white">
+  const socialLinks = [{
+    icon: Facebook,
+    href: "https://facebook.com/Lifestylefarmsclub",
+    label: "Facebook"
+  }, {
+    icon: Instagram,
+    href: "https://instagram.com/LMCA_ZA",
+    label: "Instagram"
+  }, {
+    icon: Linkedin,
+    href: "https://linkedin.com/in/luthando-isaac-maduna-87267257?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_content=profile&utm_medium=android_app",
+    label: "LinkedIn"
+  }, {
+    icon: Youtube,
+    href: "https://youtube.com/@LMCA_SA",
+    label: "Youtube"
+  }];
+  return <footer className="bg-navyblue text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
           <div className="col-span-1">
@@ -31,9 +40,7 @@ const Footer = () => {
               We help everyday people own businesses and grow their money. 
               Our team manages everything, so you can sit back and watch your investment grow.
             </p>
-            <p className="font-lato text-sm mt-4 text-gray-300 opacity-75">
-              Professional Number: 20055210
-            </p>
+            <p className="font-lato text-sm mt-4 text-gray-300 opacity-75">SAICA Number: 20055210</p>
             <p className="font-lato text-sm text-gray-300 opacity-75">
               Business Reg: 2019/621826/07
             </p>
@@ -109,18 +116,9 @@ const Footer = () => {
           <div className="col-span-1">
             <h4 className="font-montserrat font-semibold text-md mb-4">Connect With Us</h4>
             <div className="flex items-center space-x-4 mb-6">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-gold transition-colors"
-                  aria-label={social.label}
-                >
+              {socialLinks.map(social => <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gold transition-colors" aria-label={social.label}>
                   <social.icon className="h-6 w-6" />
-                </a>
-              ))}
+                </a>)}
             </div>
 
             <div className="pt-4 border-t border-gray-700">
@@ -202,23 +200,13 @@ const Footer = () => {
                 </Link>
               </div>
               <div className="flex items-center space-x-4 mt-4 md:mt-0">
-                <img 
-                  src="/lovable-uploads/98d6869e-a552-4731-9f0c-6dce07a2db48.png" 
-                  alt="CAW Network Member" 
-                  className="h-20 w-auto"
-                />
-                <img 
-                  src="/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png" 
-                  alt="SAICA Member" 
-                  className="h-20 w-auto"
-                />
+                <img src="/lovable-uploads/98d6869e-a552-4731-9f0c-6dce07a2db48.png" alt="CAW Network Member" className="h-20 w-auto" />
+                <img src="/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png" alt="SAICA Member" className="h-20 w-auto" />
               </div>
             </div>
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;

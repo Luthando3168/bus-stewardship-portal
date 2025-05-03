@@ -1,19 +1,12 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SectionTitle from '@/components/ui/SectionTitle';
 import { Card } from '@/components/ui/card';
 import { Store, Home, ShoppingBag, ArrowRight, HandCoins, Users } from 'lucide-react';
-
 const IntroSection = () => {
-  return (
-    <section className="py-16 bg-white">
+  return <section className="py-16 bg-white">
       <div className="container max-w-[1400px] mx-auto px-4">
-        <SectionTitle
-          title="Own Real Businesses with Just R500"
-          subtitle="No big money needed - we help regular South Africans become business owners"
-          centered
-        />
+        <SectionTitle title="Own Real Businesses with Just R500" subtitle="No big money needed - we help regular South Africans become business owners" centered />
         
         <div className="max-w-4xl mx-auto space-y-8">
           <div className="bg-gradient-to-br from-navyblue to-blue-900 text-white rounded-xl p-6 md:p-8 shadow-xl">
@@ -35,9 +28,7 @@ const IntroSection = () => {
                 
                 <div>
                   <h3 className="text-xl font-semibold mb-3 text-gold">Your Money Stays Safe</h3>
-                  <p className="text-white/90">
-                    Your R500 stays in your bank until you're ready. No rushing, no pressure.
-                  </p>
+                  <p className="text-white/90">Your R500 stays in your dedicated bank account until you're ready. No rushing, no pressure.</p>
                 </div>
               </div>
             </div>
@@ -87,10 +78,7 @@ const IntroSection = () => {
                     <p className="text-charcoal/80 mb-4">
                       Your R500 stays safe in your account. We help with all the money stuff - no headaches for you.
                     </p>
-                    <Link 
-                      to="/how-we-work" 
-                      className="inline-flex items-center text-gold hover:text-navyblue transition-colors font-semibold"
-                    >
+                    <Link to="/how-we-work" className="inline-flex items-center text-gold hover:text-navyblue transition-colors font-semibold">
                       See How It Works <ArrowRight className="w-4 h-4 ml-1" />
                     </Link>
                   </div>
@@ -107,10 +95,7 @@ const IntroSection = () => {
                     <p className="text-charcoal/80 mb-4">
                       Got questions? We explain everything in your language, simple and clear. No big words, just straight talk.
                     </p>
-                    <Link 
-                      to="/services" 
-                      className="inline-flex items-center text-gold hover:text-navyblue transition-colors font-semibold"
-                    >
+                    <Link to="/services" className="inline-flex items-center text-gold hover:text-navyblue transition-colors font-semibold">
                       Talk to Us <ArrowRight className="w-4 h-4 ml-1" />
                     </Link>
                   </div>
@@ -119,18 +104,13 @@ const IntroSection = () => {
             </div>
 
             <div className="text-center mt-8">
-              <Link 
-                to="/how-we-work" 
-                className="inline-flex items-center gap-2 px-6 py-3 bg-navyblue text-white rounded-lg hover:bg-blue-800 transition-colors"
-              >
+              <Link to="/how-we-work" className="inline-flex items-center gap-2 px-6 py-3 bg-navyblue text-white rounded-lg hover:bg-blue-800 transition-colors">
                 Start Your Journey Today <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default IntroSection;
