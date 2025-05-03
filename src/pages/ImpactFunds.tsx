@@ -1,4 +1,3 @@
-
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import { Link } from "react-router-dom";
@@ -97,18 +96,16 @@ const ImpactFunds = () => {
                 <div className="bg-white/10 p-6 rounded-xl mb-8">
                   <h3 className="text-xl font-bold text-gold mb-3">What is an Impact Fund?</h3>
                   <p className="text-lg leading-relaxed">
-                    An Impact Fund is an investment vehicle that aims to generate not only financial returns but also 
-                    positive, measurable social and environmental outcomes. Unlike traditional investments that focus 
-                    solely on profit, impact funds deliberately target businesses and projects that address specific 
-                    community challenges while still providing returns to investors.
+                    Think of an Impact Fund like this: It's your money working for both your pocket AND your community. 
+                    Unlike regular investments that only care about making money, these funds put your money into businesses 
+                    that help solve problems in your community while still giving you returns.
                   </p>
                 </div>
                 
                 <p className="text-lg leading-relaxed">
-                  Our Impact Investment Funds offer you the opportunity to own shares in 
-                  real, professionally managed businesses across different sectors. Each fund 
-                  is carefully designed to generate returns while creating positive change in 
-                  South African communities.
+                  With our funds, you can own parts of real businesses that professionals run for you. 
+                  You pick what kind of business you want to own, we handle all the work, and you get 
+                  a share of the profits while helping make South African communities better.
                 </p>
                 <div className="grid md:grid-cols-3 gap-6 mt-8">
                   <div className="bg-white/10 p-6 rounded-xl">
