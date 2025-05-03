@@ -33,6 +33,7 @@ import UserInvestments from "@/pages/user/UserInvestments";
 import UserWallet from "@/pages/user/UserWallet";
 import UserProfile from "@/pages/user/UserProfile";
 import UserHowWeWork from "@/pages/user/UserHowWeWork";
+import UserLoans from "@/pages/user/UserLoans";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(
@@ -143,6 +144,14 @@ function App() {
           element={
             <ProtectedRoute>
               <UserHowWeWork />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/user/loans" 
+          element={
+            <ProtectedRoute>
+              <UserLoans />
             </ProtectedRoute>
           } 
         />

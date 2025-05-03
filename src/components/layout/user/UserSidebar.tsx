@@ -16,6 +16,7 @@ import {
   ChevronRight,
   BarChart3,
   HelpCircle,
+  CircleDollarSign,
 } from "lucide-react";
 
 interface UserSidebarProps {
@@ -56,6 +57,11 @@ const UserSidebar = ({
       name: "Wallet",
       icon: <Wallet size={20} />,
       path: "/user/wallet",
+    },
+    {
+      name: "Loans",
+      icon: <CircleDollarSign size={20} />,
+      path: "/user/loans",
     },
     {
       name: "Beneficiaries",
