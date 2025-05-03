@@ -1,13 +1,12 @@
-
 export const impactFunds = [
-  { id: "myfarm", name: "MyFarm", color: "bg-maduna-navy/10", textColor: "text-maduna-navy" },
-  { id: "myproperty", name: "MyProperty", color: "bg-maduna-navy/10", textColor: "text-maduna-navy" },
-  { id: "myfoodretail", name: "MyFoodRetail", color: "bg-maduna-navy/10", textColor: "text-maduna-navy" },
-  { id: "myenergy", name: "MyEnergy", color: "bg-maduna-navy/10", textColor: "text-maduna-navy" },
-  { id: "myfranchise", name: "MyFranchise", color: "bg-maduna-navy/10", textColor: "text-maduna-navy" },
-  { id: "myhealth", name: "MyHealth", color: "bg-maduna-navy/10", textColor: "text-maduna-navy" },
-  { id: "myschool", name: "MySchool", color: "bg-maduna-navy/10", textColor: "text-maduna-navy" },
-  { id: "mytelco", name: "MyTelco", color: "bg-maduna-navy/10", textColor: "text-maduna-navy" },
+  { id: "myfarm", name: "MyFarm", color: "bg-emerald-50", textColor: "text-emerald-700" },
+  { id: "myproperty", name: "MyProperty", color: "bg-blue-50", textColor: "text-blue-700" },
+  { id: "myfoodretail", name: "MyFoodRetail", color: "bg-amber-50", textColor: "text-amber-700" },
+  { id: "myenergy", name: "MyEnergy", color: "bg-orange-50", textColor: "text-orange-700" },
+  { id: "myfranchise", name: "MyFranchise", color: "bg-purple-50", textColor: "text-purple-700" },
+  { id: "myhealth", name: "MyHealth", color: "bg-rose-50", textColor: "text-rose-700" },
+  { id: "myschool", name: "MySchool", color: "bg-cyan-50", textColor: "text-cyan-700" },
+  { id: "mytelco", name: "MyTelco", color: "bg-indigo-50", textColor: "text-indigo-700" },
 ];
 
 // Fund images mapping

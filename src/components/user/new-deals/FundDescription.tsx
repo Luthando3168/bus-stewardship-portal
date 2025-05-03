@@ -9,8 +9,8 @@ const FundDescription = ({ description }: FundDescriptionProps) => {
   if (!description) return null;
   
   return (
-    <div className="bg-blue-50 rounded-lg p-4 mb-4">
-      <p className="text-muted-foreground text-sm">{description}</p>
+    <div className="bg-gradient-to-r from-blue-50 to-blue-100/50 rounded-lg p-5 mb-6 border border-blue-200/50 shadow-sm">
+      <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
     </div>
   );
 };
