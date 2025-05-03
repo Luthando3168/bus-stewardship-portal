@@ -8,7 +8,7 @@ const BusSection = () => {
     description: "Choose from food shops, properties, franchises, or other businesses you'd like to own. No business experience needed."
   }, {
     title: "2. Join with R500/month",
-    description: "Your money goes into a secure business account at a big bank. No loans needed, start small and grow with us. Earn interest whilst you wait a good deal."
+    description: "Your money goes into a secure business account and earns interest at a big bank. No loans needed, start small and grow with us."
   }, {
     title: "3. We Run Everything For You",
     description: "Our team of professionals manages the day-to-day work. You get regular updates on your phone or computer."
