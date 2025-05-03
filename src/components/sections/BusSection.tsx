@@ -1,11 +1,10 @@
-
 import { Link } from "react-router-dom";
 import SectionTitle from "../ui/SectionTitle";
 import { Card } from "../ui/card";
 const BusSection = () => {
   const steps = [{
     title: "1. Pick Your Business Type",
-    description: "Choose from food shops, farms, clinics, or other businesses you'd like to own. No business experience needed."
+    description: "Choose from food shops, properties, franchises, or other businesses you'd like to own. No business experience needed."
   }, {
     title: "2. Join with R500/month",
     description: "Your money goes into a secure business account at a big bank. No loans needed, start small and grow with us."
