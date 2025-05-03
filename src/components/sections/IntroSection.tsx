@@ -36,7 +36,8 @@ const IntroSection = () => {
 
           <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
             <h2 className="text-2xl font-bold text-navyblue text-center mb-4">Business Types You Can Own</h2>
-            <p className="text-gray-700 text-center max-w-3xl mx-auto mb-8">Pick businesses you understand from our product categories. Whether it's a shop like your uncle's or a farm like your grandmother had - choose what you know and love.</p>
+            <p className="text-gray-700 text-center max-w-3xl mx-auto mb-8">Pick multiple businesses you understand from our product categories. 
+Whether it's a shop like your uncle's or a farm like your grandmother had - choose what you know and love. Choose from our product categories according to your budget.</p>
             
             <div className="grid gap-4 md:gap-6 md:grid-cols-3 mb-8">
               <Card className="p-6 transition-all duration-300 hover:shadow-lg bg-gradient-to-br from-navyblue/5 to-navyblue/10 border-t-4 border-gold">
