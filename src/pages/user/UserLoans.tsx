@@ -2,7 +2,7 @@
 import React from "react";
 import UserLayout from "@/components/layout/UserLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { CircleDollarSign, Award, ShieldCheck, ArrowRight, Calendar, Bank } from "lucide-react";
+import { CircleDollarSign, Award, ShieldCheck, ArrowRight, Calendar, Building } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -140,7 +140,7 @@ const ApplicationProcess = () => {
       description: "Receive a decision within 24-48 hours"
     },
     {
-      icon: Bank,
+      icon: Building,
       title: "Disbursement",
       description: "Funds deposited directly to your account"
     }
