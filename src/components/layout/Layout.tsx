@@ -3,6 +3,7 @@ import { ReactNode, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Header from "./Header";
 import Footer from "./Footer";
+import PreFooter from "./PreFooter";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useLocation } from "react-router-dom";
 
@@ -44,6 +45,7 @@ const Layout = ({
       <main className="flex-grow pt-16 md:pt-20">
         {children}
       </main>
+      <PreFooter />
       <Footer />
     </div>
   );
