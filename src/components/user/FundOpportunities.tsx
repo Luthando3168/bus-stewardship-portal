@@ -2,24 +2,13 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-
-// TypeScript types for clarity
-export type Opportunity = {
-  id: string;
-  fundId: string;
-  title: string;
-  summary: string;
-  minInvestment: string;
-  projectedReturn: string;
-  status: "Open" | "Closed";
-};
+import { opportunities, Opportunity } from "@/data/impact-funds";
 
 interface FundOpportunitiesProps {
   fundId: string; // selected fund ID
-  opportunities: Opportunity[];
 }
 
-const FundOpportunities: React.FC<FundOpportunitiesProps> = ({ fundId, opportunities }) => {
+const FundOpportunities: React.FC<FundOpportunitiesProps> = ({ fundId }) => {
   // Filter opportunities that match exactly the selected fundId
   const fundOpportunities = opportunities.filter(
     (op) => op.fundId === fundId
