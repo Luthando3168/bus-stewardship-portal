@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "sonner";
@@ -92,6 +91,8 @@ function App() {
         
         {/* Add redirect for the problematic route */}
         <Route path="/user/new-deals" element={<Navigate to="/user/investments" replace />} />
+        <Route path="/user/pending-deals" element={<Navigate to="/user/investments?tab=pending" replace />} />
+        <Route path="/user/my-investments" element={<Navigate to="/user/investments?tab=portfolio" replace />} />
         
         {/* Admin routes */}
         <Route 
@@ -136,24 +137,8 @@ function App() {
             </ProtectedRoute>
           } 
         />
-        <Route 
-          path="/user/pending-deals" 
-          element={
-            <ProtectedRoute>
-              <UserPendingDeals />
-            </ProtectedRoute>
-          } 
-        />
         
-        {/* Add route for user investments/beneficiaries/statements */}
-        <Route 
-          path="/user/my-investments" 
-          element={
-            <ProtectedRoute>
-              <UserInvestments />
-            </ProtectedRoute>
-          } 
-        />
+        {/* Add route for user beneficiaries/statements */}
         <Route 
           path="/user/beneficiaries" 
           element={

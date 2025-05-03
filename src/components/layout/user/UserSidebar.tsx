@@ -1,4 +1,3 @@
-
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
@@ -14,7 +13,6 @@ import {
   Building,
   ChevronLeft,
   ChevronRight,
-  ShoppingBag,
   BarChart3,
 } from "lucide-react";
 
@@ -43,19 +41,9 @@ const UserSidebar = ({
       path: "/user/dashboard",
     },
     {
-      name: "Investment Opportunities",
-      icon: <ShoppingBag size={20} />,
-      path: "/user/investments",
-    },
-    {
-      name: "Pending Deals",
-      icon: <BarChart3 size={20} />,
-      path: "/user/pending-deals",
-    },
-    {
-      name: "My Investments",
+      name: "Investments",
       icon: <Building size={20} />,
-      path: "/user/my-investments",
+      path: "/user/investments",
     },
     {
       name: "Financial Statements",

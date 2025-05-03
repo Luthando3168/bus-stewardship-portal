@@ -1,16 +1,27 @@
 
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import UserLayout from "@/components/layout/UserLayout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { impactFunds } from "@/data/impact-funds";
 import PortfolioTab from "@/components/user/investments/PortfolioTab";
 import OpportunitiesTab from "@/components/user/investments/OpportunitiesTab";
 import InvestmentDetailsDialog from "@/components/user/investments/InvestmentDetailsDialog";
+import PendingDealsTab from "@/components/user/investments/PendingDealsTab";
 
 const UserInvestments = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialTab = searchParams.get("tab") || "portfolio";
+  
   const [selectedInvestment, setSelectedInvestment] = useState<any | null>(null);
-  const [activeTab, setActiveTab] = useState<string>("portfolio");
+  const [activeTab, setActiveTab] = useState<string>(initialTab);
   const [activeFundId, setActiveFundId] = useState<string>(impactFunds[0]?.id || "");
+  
+  // Update URL when tab changes
+  useEffect(() => {
+    searchParams.set("tab", activeTab);
+    setSearchParams(searchParams);
+  }, [activeTab, searchParams, setSearchParams]);
   
   // Scroll to the selected fund if the URL has a hash
   useEffect(() => {
@@ -114,10 +125,26 @@ const UserInvestments = () => {
       <div className="space-y-6">
         <h2 className="text-2xl font-bold text-navyblue">My Investments</h2>
         
-        <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="mb-6">
-            <TabsTrigger value="portfolio">My Portfolio</TabsTrigger>
-            <TabsTrigger value="opportunities">Investment Opportunities</TabsTrigger>
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <TabsList className="mb-6 bg-gradient-to-r from-slate-50 to-blue-50 p-1 rounded-lg">
+            <TabsTrigger 
+              value="portfolio" 
+              className="data-[state=active]:bg-navyblue data-[state=active]:text-white"
+            >
+              My Portfolio
+            </TabsTrigger>
+            <TabsTrigger 
+              value="pending" 
+              className="data-[state=active]:bg-navyblue data-[state=active]:text-white"
+            >
+              Pending Deals
+            </TabsTrigger>
+            <TabsTrigger 
+              value="opportunities" 
+              className="data-[state=active]:bg-navyblue data-[state=active]:text-white"
+            >
+              Investment Opportunities
+            </TabsTrigger>
           </TabsList>
           
           <TabsContent value="portfolio">
@@ -125,6 +152,10 @@ const UserInvestments = () => {
               investments={investmentData} 
               onSelectInvestment={setSelectedInvestment} 
             />
+          </TabsContent>
+          
+          <TabsContent value="pending">
+            <PendingDealsTab />
           </TabsContent>
           
           <TabsContent value="opportunities">
