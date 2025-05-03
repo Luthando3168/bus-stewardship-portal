@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SectionTitle from '@/components/ui/SectionTitle';
@@ -14,7 +15,7 @@ const IntroSection = () => {
               <p className="text-xl leading-relaxed mb-6">
                 Whether you're a taxi driver, spaza owner, or gogo - this is for you! 
                 Start with just R500 monthly and own real businesses like food shops, 
-                farms, or clinics. We handle everything while you focus on your life.
+                farms, or clinics. At Luthando Maduna Chartered Accountants, we handle everything working with banks while you focus on your life.
               </p>
               
               <div className="grid md:grid-cols-2 gap-6 md:gap-8">
