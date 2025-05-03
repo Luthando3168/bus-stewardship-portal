@@ -1,22 +1,23 @@
+
 export const impactFunds = [
   {
     id: "myfarm",
     name: "MyFarm",
-    color: "bg-gradient-to-br from-green-700 to-green-900",
+    color: "bg-gradient-to-br from-gold/90 to-gold/70",
     minInvestment: "R 5,000",
     count: 3,
   },
   {
     id: "myproperty",
     name: "MyProperty",
-    color: "bg-gradient-to-br from-blue-700 to-blue-900",
+    color: "bg-gradient-to-br from-navyblue to-navyblue/80",
     minInvestment: "R 10,000",
     count: 3,
   },
   {
     id: "myfranchise",
     name: "MyFranchise",
-    color: "bg-gradient-to-br from-red-600 to-red-800",
+    color: "bg-gradient-to-br from-gold/80 to-gold/60",
     minInvestment: "R 5,000",
     count: 3,
     image: "https://images.unsplash.com/photo-1552566626-52f8b828add9",
@@ -24,35 +25,35 @@ export const impactFunds = [
   {
     id: "myfoodretail",
     name: "MyFoodRetail",
-    color: "bg-gradient-to-br from-yellow-600 to-yellow-800",
+    color: "bg-gradient-to-br from-navyblue/90 to-navyblue/70",
     minInvestment: "R 5,000",
     count: 2,
   },
   {
     id: "myenergy",
     name: "MyEnergy",
-    color: "bg-gradient-to-br from-orange-600 to-amber-900",
+    color: "bg-gradient-to-br from-gold/80 to-gold/60",
     minInvestment: "R 3,000",
     count: 2,
   },
   {
     id: "myhealth",
     name: "MyHealth",
-    color: "bg-gradient-to-br from-pink-600 to-pink-900",
+    color: "bg-gradient-to-br from-navyblue/90 to-navyblue/70",
     minInvestment: "R 2,500",
     count: 2,
   },
   {
     id: "myeducation",
     name: "MySchool",
-    color: "bg-gradient-to-br from-indigo-700 to-indigo-900",
+    color: "bg-gradient-to-br from-gold/80 to-gold/60",
     minInvestment: "R 1,500",
     count: 2,
   },
   {
     id: "mytelco",
     name: "MyTelco",
-    color: "bg-gradient-to-br from-blue-500 to-blue-800",
+    color: "bg-gradient-to-br from-navyblue to-navyblue/80",
     minInvestment: "R 2,500",
     count: 2,
   }

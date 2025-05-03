@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SectionTitle from '@/components/ui/SectionTitle';
@@ -50,24 +51,24 @@ const IntroSection = () => {
             </p>
             
             <div className="grid gap-4 md:gap-6 md:grid-cols-3 mb-8">
-              <Card className="p-6 transition-all duration-300 hover:shadow-lg bg-gradient-to-br from-amber-50 to-amber-100">
-                <Store className="w-8 h-8 text-amber-600 mb-4" />
+              <Card className="p-6 transition-all duration-300 hover:shadow-lg bg-gradient-to-br from-navyblue/5 to-navyblue/10 border-t-4 border-gold">
+                <Store className="w-8 h-8 text-gold mb-4" />
                 <h3 className="text-xl font-bold text-navyblue mb-2">MyFoodRetail</h3>
                 <p className="text-gray-600 mb-4">
                   Baba, own shops in your area. Feed your community, build your legacy. Start with R5,000.
                 </p>
               </Card>
 
-              <Card className="p-6 transition-all duration-300 hover:shadow-lg bg-gradient-to-br from-blue-50 to-blue-100">
-                <Home className="w-8 h-8 text-blue-600 mb-4" />
+              <Card className="p-6 transition-all duration-300 hover:shadow-lg bg-gradient-to-br from-navyblue/5 to-navyblue/10 border-t-4 border-gold">
+                <Home className="w-8 h-8 text-gold mb-4" />
                 <h3 className="text-xl font-bold text-navyblue mb-2">MyProperty</h3>
                 <p className="text-gray-600 mb-4">
                   Mama, own flats that bring you money every month. Just like collecting rent, but better. Start with R2,000.
                 </p>
               </Card>
 
-              <Card className="p-6 transition-all duration-300 hover:shadow-lg bg-gradient-to-br from-red-50 to-red-100">
-                <ShoppingBag className="w-8 h-8 text-red-600 mb-4" />
+              <Card className="p-6 transition-all duration-300 hover:shadow-lg bg-gradient-to-br from-navyblue/5 to-navyblue/10 border-t-4 border-gold">
+                <ShoppingBag className="w-8 h-8 text-gold mb-4" />
                 <h3 className="text-xl font-bold text-navyblue mb-2">MyFranchise</h3>
                 <p className="text-gray-600 mb-4">
                   Own parts of big names like Steers or Debonairs. Yes, those ones you love! Start with R1,500.
@@ -79,7 +80,7 @@ const IntroSection = () => {
               <div className="bg-gradient-to-br from-white to-gray-50 rounded-xl p-8 shadow-lg border-l-4 border-gold">
                 <div className="flex items-start gap-4">
                   <div className="p-3 bg-navyblue/5 rounded-lg">
-                    <HandCoins className="w-8 h-8 text-navyblue" />
+                    <HandCoins className="w-8 h-8 text-gold" />
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-navyblue mb-3">No Stress About Money</h3>
@@ -99,7 +100,7 @@ const IntroSection = () => {
               <div className="bg-gradient-to-br from-white to-gray-50 rounded-xl p-8 shadow-lg border-l-4 border-gold">
                 <div className="flex items-start gap-4">
                   <div className="p-3 bg-navyblue/5 rounded-lg">
-                    <Users className="w-8 h-8 text-navyblue" />
+                    <Users className="w-8 h-8 text-gold" />
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-navyblue mb-3">We're Here to Help</h3>

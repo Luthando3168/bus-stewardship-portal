@@ -47,7 +47,7 @@ const InvestmentOpportunities = () => {
           <Card key={fund.id} className="overflow-hidden">
             <div className="h-32 bg-gray-200 relative">
               {/* In a real implementation, you would use actual images */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/80 to-navyblue/80 flex items-center justify-center">
+              <div className="absolute inset-0 bg-gradient-to-r from-navyblue/90 to-navyblue/70 flex items-center justify-center">
                 <span className="text-white font-semibold text-lg">{fund.name}</span>
               </div>
               {fund.badge && (
@@ -77,7 +77,7 @@ const InvestmentOpportunities = () => {
                 </div>
               </div>
               
-              <Button asChild className="w-full mt-4 bg-gold hover:bg-gold/80 text-black">
+              <Button asChild className="w-full mt-4 bg-gold hover:bg-gold/80 text-navyblue">
                 <Link to={`/user/investments#${fund.id}`}>
                   View Opportunities
                 </Link>
