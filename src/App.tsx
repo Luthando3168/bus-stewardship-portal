@@ -1,12 +1,11 @@
 
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes } from "react-router-dom";
 import { Toaster } from "sonner";
 import { AuthProvider } from "@/contexts/AuthContext";
 import PublicRoutes from "./routes/PublicRoutes";
 import UserRoutes from "./routes/UserRoutes";
 import AdminRoutes from "./routes/AdminRoutes";
-import NotFound from "@/pages/NotFound";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(
@@ -42,9 +41,6 @@ function App() {
         <PublicRoutes />
         <UserRoutes />
         <AdminRoutes />
-        
-        {/* 404 catch-all */}
-        <Route path="*" element={<NotFound />} />
       </Routes>
       <Toaster position="top-center" />
     </AuthProvider>
