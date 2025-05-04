@@ -17,7 +17,6 @@ import ForgotPassword from "@/pages/ForgotPassword";
 import Terms from "@/pages/Terms";
 import Privacy from "@/pages/Privacy";
 import WelcomeLetter from "@/pages/WelcomeLetter";
-import Accommodation from "@/pages/Accommodation";
 
 // Import fund pages
 import MyFarmFund from "@/pages/funds/MyFarmFund";
@@ -46,7 +45,6 @@ export const publicRoutes = [
   <Route key="terms" path="/terms" element={<Terms />} />,
   <Route key="privacy" path="/privacy" element={<Privacy />} />,
   <Route key="welcome-letter" path="/welcome-letter" element={<WelcomeLetter />} />,
-  <Route key="accommodation" path="/accommodation" element={<Accommodation />} />,
   
   // Fund routes
   <Route key="funds-myfarm" path="/funds/myfarm" element={<MyFarmFund />} />,

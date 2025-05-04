@@ -1,4 +1,3 @@
-
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
@@ -69,11 +68,6 @@ const UserSidebar = ({
       name: "Concierge",
       icon: <Coffee size={20} />,
       path: "/user/concierge",
-    },
-    {
-      name: "Accommodation",
-      icon: <Calendar size={20} />,
-      path: "/accommodation",
     },
     {
       name: "Beneficiaries",

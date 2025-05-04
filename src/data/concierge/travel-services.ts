@@ -1,5 +1,5 @@
 
-import { PlaneTakeoff, Building, Car } from "lucide-react";
+import { PlaneTakeoff, Building, Car, Bed } from "lucide-react";
 import { ConciergeService } from './types';
 
 export const conciergeTravelServices: ConciergeService[] = [
@@ -17,10 +17,10 @@ export const conciergeTravelServices: ConciergeService[] = [
   {
     title: "Accommodation",
     description: "Find and book hotels, guesthouses and vacation rentals across the country",
-    icon: Building,
+    icon: Bed,
     color: "text-white",
     bgColor: "bg-navyblue",
-    link: "/accommodation",
+    link: "/concierge/accommodation",
     ownershipNote: null,
     isFavorite: true,
     recentlyUsed: true

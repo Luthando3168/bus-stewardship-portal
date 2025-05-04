@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Route } from "react-router-dom";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
@@ -9,6 +10,7 @@ import PropertyService from "@/pages/concierge/PropertyService";
 import DomesticService from "@/pages/concierge/DomesticService";
 import FlightsService from "@/pages/concierge/FlightsService";
 import HealthcareService from "@/pages/concierge/HealthcareService";
+import Accommodation from "@/pages/Accommodation";
 
 // Export routes as an array of JSX elements
 export const conciergeRoutes = [
@@ -64,6 +66,15 @@ export const conciergeRoutes = [
     element={
       <ProtectedRoute>
         <HealthcareService />
+      </ProtectedRoute>
+    } 
+  />,
+  <Route 
+    key="concierge-accommodation"
+    path="/concierge/accommodation" 
+    element={
+      <ProtectedRoute>
+        <Accommodation />
       </ProtectedRoute>
     } 
   />
