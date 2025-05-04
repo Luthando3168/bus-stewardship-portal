@@ -36,6 +36,11 @@ import UserHowWeWork from "@/pages/user/UserHowWeWork";
 import UserLoans from "@/pages/user/UserLoans";
 import UserConcierge from "@/pages/user/UserConcierge";
 import GroceryService from "@/pages/concierge/GroceryService";
+import AutoRepairsService from "@/pages/concierge/AutoRepairsService";
+import PropertyService from "@/pages/concierge/PropertyService";
+import DomesticService from "@/pages/concierge/DomesticService";
+import FlightsService from "@/pages/concierge/FlightsService";
+import HealthcareService from "@/pages/concierge/HealthcareService";
 import AdminDashboard from "@/pages/admin/AdminDashboard";
 import NotFound from "@/pages/NotFound";
 
@@ -158,6 +163,8 @@ function App() {
             </ProtectedRoute>
           } 
         />
+        
+        {/* Concierge service subpages */}
         <Route 
           path="/concierge/grocery" 
           element={
@@ -166,6 +173,47 @@ function App() {
             </ProtectedRoute>
           } 
         />
+        <Route 
+          path="/concierge/auto-repairs" 
+          element={
+            <ProtectedRoute>
+              <AutoRepairsService />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/concierge/property" 
+          element={
+            <ProtectedRoute>
+              <PropertyService />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/concierge/domestic" 
+          element={
+            <ProtectedRoute>
+              <DomesticService />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/concierge/flights" 
+          element={
+            <ProtectedRoute>
+              <FlightsService />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/concierge/healthcare" 
+          element={
+            <ProtectedRoute>
+              <HealthcareService />
+            </ProtectedRoute>
+          } 
+        />
+        
         <Route 
           path="/user/beneficiaries" 
           element={
