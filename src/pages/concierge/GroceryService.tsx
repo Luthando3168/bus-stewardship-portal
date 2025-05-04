@@ -21,7 +21,7 @@ const groceryStores = [
   }
 ];
 
-// Product categories from Makro adapted for Food Corner
+// Product categories styled after Checkers
 const productCategories = [
   { 
     id: 1, 
