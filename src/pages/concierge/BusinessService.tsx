@@ -1,94 +1,44 @@
+import React from 'react';
 
-import React, { useState } from "react";
-import ServicePageTemplate from "@/components/concierge/ServicePageTemplate";
-import { TabsList, TabsTrigger, Tabs, TabsContent } from "@/components/ui/tabs";
-import { Users } from "lucide-react";
-import BusinessServicesTab from "@/components/concierge/business/BusinessServicesTab";
-import BusinessProfessionalsTab from "@/components/concierge/business/BusinessProfessionalsTab";
-import BusinessSearchBar from "@/components/concierge/business/BusinessSearchBar";
-import BusinessBenefits from "@/components/concierge/business/BusinessBenefits";
-import { businessCategories } from "@/data/concierge/business/businessCategories";
-import PurchaseDisclaimer from "@/components/concierge/PurchaseDisclaimer";
-
-// Import the getProfessionalsByCategoryId function instead of directly importing professionals
-import { businessProfessionals, getProfessionalsByCategoryId } from "@/data/concierge/business/professionals";
-
-const BusinessService = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  
-  // Simple search filter for categories and professionals
-  const filteredCategories = searchQuery
-    ? businessCategories.filter(cat => 
-        cat.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-        cat.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        cat.services.some(service => 
-          service.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          service.description.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-      )
-    : businessCategories;
-  
-  const filteredProfessionals = searchQuery
-    ? businessProfessionals.filter(pro => 
-        pro.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-        pro.expertise.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        pro.serviceCategory.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    : businessProfessionals;
-
-  const handleRequestService = (serviceTitle: string) => {
-    console.log("Requesting service:", serviceTitle);
-    // Add more functionality as needed
+interface BusinessServiceProps {
+  professional: {
+    name: string;
+    title: string;
+    company: string;
+    description: string;
+    services: string[];
+    category: string;
+    image: string;
   };
+}
 
-  const handleViewProfessionals = () => {
-    console.log("Viewing professionals");
-    // Add navigation or tab switch logic here
-  };
-
-  const clearSearch = () => {
-    setSearchQuery("");
-  };
-
+const BusinessService: React.FC<BusinessServiceProps> = ({ professional }) => {
   return (
-    <ServicePageTemplate
-      title="Business Services"
-      description="Connect with expert business professionals across South Africa"
-      icon={Users}
-      color="text-blue-700"
-    >
-      <PurchaseDisclaimer serviceName="business services" />
-      
-      <BusinessSearchBar 
-        searchQuery={searchQuery} 
-        setSearchQuery={setSearchQuery} 
-      />
-      
-      <Tabs defaultValue="services" className="w-full">
-        <TabsList className="mb-6 grid grid-cols-2 w-full max-w-sm">
-          <TabsTrigger value="services">Services</TabsTrigger>
-          <TabsTrigger value="professionals">Professionals</TabsTrigger>
-        </TabsList>
-        
-        <TabsContent value="services">
-          <BusinessServicesTab 
-            filteredCategories={filteredCategories}
-            onRequestService={handleRequestService}
-            onViewProfessionals={handleViewProfessionals}
-            clearSearch={clearSearch}
-          />
-        </TabsContent>
-        
-        <TabsContent value="professionals">
-          <BusinessProfessionalsTab 
-            businessCategories={filteredCategories}
-            searchQuery={searchQuery}
-          />
-        </TabsContent>
-      </Tabs>
-      
-      <BusinessBenefits />
-    </ServicePageTemplate>
+    <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="flex items-center mb-4">
+        <img
+          src={professional.image}
+          alt={professional.name}
+          className="w-16 h-16 rounded-full object-cover mr-4"
+        />
+        <div>
+          <h3 className="text-xl font-semibold text-gray-800">{professional.name}</h3>
+          <p className="text-gray-600">{professional.title}, {professional.company}</p>
+        </div>
+      </div>
+      <p className="text-gray-700 mb-4">{professional.description}</p>
+      <div>
+        <h4 className="text-lg font-semibold text-gray-800 mb-2">Services</h4>
+        <ul className="list-disc list-inside text-gray-700">
+          {professional.services?.map((service, index) => (
+            <li key={index}>{service}</li>
+          ))}
+        </ul>
+      </div>
+      <div className="mt-4">
+        <p className="text-sm text-gray-500">Category: {professional.category}</p>
+      </div>
+    </div>
   );
 };
 
