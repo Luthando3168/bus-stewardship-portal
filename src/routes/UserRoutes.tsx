@@ -15,6 +15,7 @@ import UserLoans from "@/pages/user/UserLoans";
 import UserMyInvestments from "@/pages/user/UserMyInvestments";
 import BalwinDevelopments from "@/pages/funds/property/BalwinDevelopments";
 import BalwinPropertyDetail from "@/pages/funds/property/BalwinPropertyDetail";
+import MyFranchiseFund from "@/pages/funds/MyFranchiseFund";
 
 // Export the component routes array for use in App.tsx
 export const userRoutes = [
@@ -33,7 +34,10 @@ export const userRoutes = [
   
   // Balwin Properties Routes
   <Route key="balwin-developments" path="/user/funds/property/balwin" element={<BalwinDevelopments />} />,
-  <Route key="balwin-property-detail" path="/user/funds/property/balwin/:propertyId" element={<BalwinPropertyDetail />} />
+  <Route key="balwin-property-detail" path="/user/funds/property/balwin/:propertyId" element={<BalwinPropertyDetail />} />,
+  
+  // Franchise Fund Route
+  <Route key="franchise-fund" path="/funds/myfranchise" element={<MyFranchiseFund />} />
 ];
 
 // The UserRoutes component itself will still be available for older code
@@ -56,6 +60,9 @@ const UserRoutes = () => {
       {/* Balwin Properties Routes */}
       <Route path="funds/property/balwin" element={<BalwinDevelopments />} />
       <Route path="funds/property/balwin/:propertyId" element={<BalwinPropertyDetail />} />
+      
+      {/* Franchise Fund Route */}
+      <Route path="funds/myfranchise" element={<MyFranchiseFund />} />
     </Routes>
   );
 };

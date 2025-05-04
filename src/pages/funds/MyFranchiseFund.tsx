@@ -1,6 +1,7 @@
 
 import React from "react";
 import FundEducationalPage from "@/components/funds/FundEducationalPage";
+import FranchiseSection from "@/components/funds/franchise/FranchiseSection";
 
 const MyFranchiseFund = () => {
   return (
@@ -82,7 +83,9 @@ const MyFranchiseFund = () => {
           "Plans to grow bigger"
         ]
       }}
-    />
+    >
+      <FranchiseSection />
+    </FundEducationalPage>
   );
 };
 
