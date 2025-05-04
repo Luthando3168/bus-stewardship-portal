@@ -31,7 +31,7 @@ export const userRoutes = [
   <Route key="user-beneficiaries" path="/user/beneficiaries" element={<UserBeneficiaries />} />,
   <Route key="user-loans" path="/user/loans" element={<UserLoans />} />,
   
-  {/* Balwin Properties Routes */}
+  // Balwin Properties Routes
   <Route key="balwin-developments" path="/user/funds/property/balwin" element={<BalwinDevelopments />} />,
   <Route key="balwin-property-detail" path="/user/funds/property/balwin/:propertyId" element={<BalwinPropertyDetail />} />
 ];
