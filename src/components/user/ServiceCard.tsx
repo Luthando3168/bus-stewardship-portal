@@ -37,8 +37,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
               </Badge>
             )}
           </div>
-          <h3 className="mt-3 font-medium text-lg text-navyblue">{title}</h3>
-          <p className="text-gray-600 text-sm mt-1">{description}</p>
+          <h3 className="mt-3 font-medium text-lg text-white">{title}</h3>
+          <p className="text-white/80 text-sm mt-1">{description}</p>
         </div>
         <CardContent className="p-4 bg-white">
           <div className="text-sm font-medium text-navyblue flex items-center justify-end">
