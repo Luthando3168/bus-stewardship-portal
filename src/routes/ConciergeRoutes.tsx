@@ -1,8 +1,10 @@
+
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import ConciergeDashboard from "@/pages/concierge/ConciergeDashboard";
 import BusinessService from "@/pages/concierge/BusinessService";
 import { conciergeProfessionals } from "@/data/concierge-professionals";
+import PropertyService from "@/pages/concierge/PropertyService";
 
 // Export the component routes array for use in App.tsx
 export const conciergeRoutes = [
@@ -24,6 +26,7 @@ export const conciergeRoutes = [
       />
     } 
   />,
+  <Route key="concierge-property" path="/concierge/property" element={<PropertyService />} />,
 ];
 
 const ConciergeRoutes = () => {
@@ -34,6 +37,7 @@ const ConciergeRoutes = () => {
         path="business/:id"
         element={<BusinessService professional={conciergeProfessionals[0]} />}
       />
+      <Route path="property" element={<PropertyService />} />
     </Routes>
   );
 };
