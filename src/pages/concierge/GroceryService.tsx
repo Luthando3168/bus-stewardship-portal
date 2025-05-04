@@ -23,16 +23,86 @@ const groceryStores = [
 
 // Product categories from Makro adapted for Food Corner
 const productCategories = [
-  { id: 1, name: "Fresh Produce", icon: "🥕", count: 124, color: "#F2FCE2", textColor: "#4CAF50" },
-  { id: 2, name: "Meat & Poultry", icon: "🥩", count: 87, color: "#FEE4E2", textColor: "#E53935" },
-  { id: 3, name: "Dairy & Eggs", icon: "🥛", count: 56, color: "#EFF6FF", textColor: "#1E88E5" },
-  { id: 4, name: "Bakery", icon: "🍞", count: 42, color: "#FEF7CD", textColor: "#FFA000" },
-  { id: 5, name: "Beverages", icon: "🥤", count: 98, color: "#E8F5E9", textColor: "#2E7D32" },
-  { id: 6, name: "Frozen Foods", icon: "❄️", count: 64, color: "#E3F2FD", textColor: "#0277BD" },
-  { id: 7, name: "Pantry Items", icon: "🥫", count: 175, color: "#FEC6A1", textColor: "#E64A19" },
-  { id: 8, name: "Snacks & Sweets", icon: "🍪", count: 113, color: "#FCE4EC", textColor: "#D81B60" },
-  { id: 9, name: "Household", icon: "🧹", count: 79, color: "#F3E5F5", textColor: "#8E24AA" },
-  { id: 10, name: "Health & Beauty", icon: "💄", count: 92, color: "#E1F5FE", textColor: "#0288D1" },
+  { 
+    id: 1, 
+    name: "Fresh Produce", 
+    image: "/lovable-uploads/0bf3e14d-cb74-4a37-b156-c269331b7a57.png", 
+    count: 124, 
+    color: "#F2FCE2", 
+    textColor: "#4CAF50" 
+  },
+  { 
+    id: 2, 
+    name: "Meat & Poultry", 
+    image: "/lovable-uploads/36f1e3ec-1682-4086-8e11-d7c4e572618b.png", 
+    count: 87, 
+    color: "#FEE4E2", 
+    textColor: "#E53935" 
+  },
+  { 
+    id: 3, 
+    name: "Dairy & Eggs", 
+    image: "/lovable-uploads/3bf955d5-5ab4-48d1-be77-4c951cf953ca.png", 
+    count: 56, 
+    color: "#EFF6FF", 
+    textColor: "#1E88E5" 
+  },
+  { 
+    id: 4, 
+    name: "Bakery", 
+    image: "/lovable-uploads/402c56a2-5e59-41c1-8652-099f61ae559b.png", 
+    count: 42, 
+    color: "#FEF7CD", 
+    textColor: "#FFA000" 
+  },
+  { 
+    id: 5, 
+    name: "Beverages", 
+    image: "/lovable-uploads/4288eeba-c60b-42f1-a156-13a7ef6df992.png", 
+    count: 98, 
+    color: "#E8F5E9", 
+    textColor: "#2E7D32" 
+  },
+  { 
+    id: 6, 
+    name: "Frozen Foods", 
+    image: "/lovable-uploads/4f2d889e-ba23-463a-9efe-bc8453a5e5b2.png", 
+    count: 64, 
+    color: "#E3F2FD", 
+    textColor: "#0277BD" 
+  },
+  { 
+    id: 7, 
+    name: "Pantry Items", 
+    image: "/lovable-uploads/697f3367-6bf9-47c7-8610-d21869a0d029.png", 
+    count: 175, 
+    color: "#FEC6A1", 
+    textColor: "#E64A19" 
+  },
+  { 
+    id: 8, 
+    name: "Snacks & Sweets", 
+    image: "/lovable-uploads/98d6869e-a552-4731-9f0c-6dce07a2db48.png", 
+    count: 113, 
+    color: "#FCE4EC", 
+    textColor: "#D81B60" 
+  },
+  { 
+    id: 9, 
+    name: "Household", 
+    image: "/lovable-uploads/9c21e28f-36c0-493e-af52-6ae0e38e3712.png", 
+    count: 79, 
+    color: "#F3E5F5", 
+    textColor: "#8E24AA" 
+  },
+  { 
+    id: 10, 
+    name: "Health & Beauty", 
+    image: "/lovable-uploads/aa792d14-7473-4673-89cf-c3f6e1d15711.png", 
+    count: 92, 
+    color: "#E1F5FE", 
+    textColor: "#0288D1" 
+  },
 ];
 
 const GroceryService = () => {
@@ -105,19 +175,27 @@ const GroceryService = () => {
             {filteredCategories.map((category) => (
               <Card 
                 key={category.id} 
-                className="cursor-pointer transition-all hover:shadow-md hover:border-red-200"
+                className="cursor-pointer transition-all hover:shadow-md hover:border-red-200 overflow-hidden"
                 onClick={() => toast.success(`Browsing ${category.name}`)}
                 style={{ backgroundColor: category.color }}
               >
-                <CardContent className="p-4 text-center">
-                  <div className="text-3xl mb-2">{category.icon}</div>
-                  <h3 
-                    className="font-medium text-sm mb-1" 
-                    style={{ color: category.textColor }}
-                  >
-                    {category.name}
-                  </h3>
-                  <p className="text-xs text-gray-500">{category.count} items</p>
+                <CardContent className="p-0">
+                  <div className="aspect-video w-full overflow-hidden">
+                    <img 
+                      src={category.image} 
+                      alt={category.name}
+                      className="w-full h-full object-cover transition-transform hover:scale-105"
+                    />
+                  </div>
+                  <div className="p-3 text-center">
+                    <h3 
+                      className="font-medium text-sm mb-1" 
+                      style={{ color: category.textColor }}
+                    >
+                      {category.name}
+                    </h3>
+                    <p className="text-xs text-gray-500">{category.count} items</p>
+                  </div>
                 </CardContent>
               </Card>
             ))}
