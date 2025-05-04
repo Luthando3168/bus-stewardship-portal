@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { mockAvailabilityData } from '@/utils/availabilityUtils';
+import { mockAvailabilityData, AvailabilityEntry } from '@/utils/availabilityUtils';
 import AvailabilityViewToggle from './AvailabilityViewToggle';
 import AvailabilityListView from './AvailabilityListView';
 import AvailabilityCalendarView from './AvailabilityCalendarView';
@@ -15,6 +15,13 @@ const ProviderAvailabilityTable = ({ providerId }: ProviderAvailabilityTableProp
   // Get provider availability data
   const providerAvailability = mockAvailabilityData[providerId as keyof typeof mockAvailabilityData] || [];
 
+  // Ensure the data conforms to the AvailabilityEntry type
+  const typedAvailability: AvailabilityEntry[] = providerAvailability.map(item => ({
+    date: item.date,
+    availability: item.availability as 'full' | 'am' | 'pm',
+    note: item.note
+  }));
+
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
@@ -26,9 +33,9 @@ const ProviderAvailabilityTable = ({ providerId }: ProviderAvailabilityTableProp
       </div>
       
       {viewMode === 'list' ? (
-        <AvailabilityListView providerAvailability={providerAvailability} />
+        <AvailabilityListView providerAvailability={typedAvailability} />
       ) : (
-        <AvailabilityCalendarView providerAvailability={providerAvailability} />
+        <AvailabilityCalendarView providerAvailability={typedAvailability} />
       )}
     </div>
   );

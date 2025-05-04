@@ -3,7 +3,7 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 
 interface AvailabilityBadgeProps {
-  availability: string;
+  availability: 'full' | 'am' | 'pm' | string;
 }
 
 const AvailabilityBadge = ({ availability }: AvailabilityBadgeProps) => {

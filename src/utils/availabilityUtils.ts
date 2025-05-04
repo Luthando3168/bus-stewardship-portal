@@ -18,6 +18,12 @@ export const formatDateForComparison = (date: Date) => {
   return date.toISOString().split('T')[0];
 };
 
+export interface AvailabilityEntry {
+  date: string;
+  availability: 'full' | 'am' | 'pm';
+  note: string;
+}
+
 // Mock data for provider availability
 // In a real application, this would come from an API
 export const mockAvailabilityData = {
@@ -71,11 +77,5 @@ export const mockAvailabilityData = {
     { date: '2025-05-21', availability: 'full', note: '' },
   ],
 };
-
-export interface AvailabilityEntry {
-  date: string;
-  availability: 'full' | 'am' | 'pm';
-  note: string;
-}
 
 export type ProviderAvailability = Record<string, AvailabilityEntry[]>;
