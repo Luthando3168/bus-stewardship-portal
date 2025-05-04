@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import ServicePageTemplate from "@/components/concierge/ServicePageTemplate";
-import { Building, MapPin, Home, ArrowUpDown, BedDouble, Bath, Calendar, Check } from "lucide-react";
+import { Building, MapPin, Home, ArrowUpDown, BedDouble, Bath, Calendar, Check, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -89,6 +89,13 @@ const PropertyService = () => {
     setViewingDate("");
   };
 
+  const handleExternalLink = () => {
+    window.open("https://www.privateproperty.co.za/", "_blank");
+    toast.success("Redirecting to Private Property", {
+      description: "You're being redirected to our property partner's website."
+    });
+  };
+
   const filteredProperties = properties.filter(property => {
     if (activeTab === "buy") return property.type === "sale";
     if (activeTab === "rent") return property.type === "rental";
@@ -103,6 +110,18 @@ const PropertyService = () => {
       color="text-navyblue"
       ownershipNote="You own shares in 1 property development"
     >
+      <div className="mb-6 flex justify-between items-center">
+        <h2 className="text-lg font-medium text-navyblue">Featured Properties</h2>
+        <Button 
+          onClick={handleExternalLink}
+          variant="outline" 
+          className="border-gold text-gold hover:bg-gold hover:text-white flex items-center gap-2"
+        >
+          Browse All Listings on Private Property
+          <ExternalLink className="h-4 w-4" />
+        </Button>
+      </div>
+      
       <Tabs defaultValue="buy" value={activeTab} onValueChange={setActiveTab}>
         <TabsList className="mb-6">
           <TabsTrigger value="buy">
@@ -201,8 +220,26 @@ const PropertyService = () => {
           )}
         </TabsContent>
       </Tabs>
+      
+      <div className="mt-8 pt-6 border-t">
+        <div className="flex items-center gap-2 mb-4">
+          <ExternalLink className="h-5 w-5 text-gold" />
+          <h3 className="font-medium text-navyblue">In partnership with Private Property</h3>
+        </div>
+        <p className="text-sm text-gray-600 mb-4">
+          Explore thousands more property listings across South Africa through our partnership with Private Property, 
+          South Africa's leading property portal.
+        </p>
+        <Button 
+          onClick={handleExternalLink}
+          className="bg-gold hover:bg-gold/90 text-white"
+        >
+          Continue to Private Property
+        </Button>
+      </div>
     </ServicePageTemplate>
   );
 };
 
 export default PropertyService;
+

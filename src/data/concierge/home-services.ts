@@ -16,7 +16,7 @@ export const conciergeHomeServices: ConciergeService[] = [
   },
   {
     title: "Property Listings",
-    description: "Exclusive property listings for sale and rental across South Africa",
+    description: "Exclusive property listings in partnership with Private Property",
     icon: Building,
     color: "text-white",
     bgColor: "bg-navyblue",
