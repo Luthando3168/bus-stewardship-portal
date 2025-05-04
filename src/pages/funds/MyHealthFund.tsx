@@ -60,6 +60,27 @@ const MyHealthFund = () => {
             }
           ]
         }}
+        businessManagement={{
+          title: "Business Management Services",
+          description: "Our specialized team runs all aspects of your healthcare business:",
+          services: [
+            {
+              title: "Medical Staff Management",
+              description: "Recruiting, scheduling and managing qualified healthcare professionals",
+              icon: "users"
+            },
+            {
+              title: "Compliance & Licensing",
+              description: "Ensuring all facilities meet regulatory requirements and standards",
+              icon: "fileText"
+            },
+            {
+              title: "Medical Supply Chain",
+              description: "Management of all equipment, medications and supplies for your facilities",
+              icon: "briefcase"
+            }
+          ]
+        }}
         reporting={{
           frequency: "Every 3 months",
           reports: [
@@ -75,4 +96,3 @@ const MyHealthFund = () => {
 };
 
 export default MyHealthFund;
-

@@ -52,6 +52,27 @@ const MyFranchiseFund = () => {
           }
         ]
       }}
+      businessManagement={{
+        title: "Business Management Services",
+        description: "Our franchise experts handle all operational aspects:",
+        services: [
+          {
+            title: "Brand Compliance",
+            description: "Ensuring all stores meet franchise standards and requirements",
+            icon: "fileText"
+          },
+          {
+            title: "Staff Training & Management",
+            description: "Recruiting, training and managing all store personnel",
+            icon: "users"
+          },
+          {
+            title: "Inventory & Supply Chain",
+            description: "Managing stock levels and relationships with suppliers",
+            icon: "briefcase"
+          }
+        ]
+      }}
       reporting={{
         frequency: "Every 6 months",
         reports: [
@@ -66,4 +87,3 @@ const MyFranchiseFund = () => {
 };
 
 export default MyFranchiseFund;
-

@@ -60,6 +60,27 @@ const MyTelcoFund = () => {
             }
           ]
         }}
+        businessManagement={{
+          title: "Business Management Services",
+          description: "Our expert team manages your telecom business operations:",
+          services: [
+            {
+              title: "Network Operations",
+              description: "24/7 monitoring and maintenance of all network infrastructure",
+              icon: "chartBar"
+            },
+            {
+              title: "Customer Service",
+              description: "Professional call center and customer support teams handle all client interactions",
+              icon: "users"
+            },
+            {
+              title: "Technology Updates",
+              description: "Regular upgrades to your network equipment and software systems",
+              icon: "briefcase"
+            }
+          ]
+        }}
         reporting={{
           frequency: "Monthly",
           reports: [
@@ -75,4 +96,3 @@ const MyTelcoFund = () => {
 };
 
 export default MyTelcoFund;
-

@@ -52,6 +52,27 @@ const MyFoodRetailFund = () => {
           }
         ]
       }}
+      businessManagement={{
+        title: "Business Management Services",
+        description: "Our retail specialists handle day-to-day operations:",
+        services: [
+          {
+            title: "Store Operations",
+            description: "Complete management of each retail location including staffing and sales",
+            icon: "briefcase"
+          },
+          {
+            title: "Inventory Management",
+            description: "Monitoring stock levels, ordering and maintaining fresh products",
+            icon: "chartBar"
+          },
+          {
+            title: "Customer Experience",
+            description: "Creating positive shopping environments and handling customer service",
+            icon: "users"
+          }
+        ]
+      }}
       reporting={{
         frequency: "Every 6 months",
         reports: [

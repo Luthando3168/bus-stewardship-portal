@@ -60,6 +60,27 @@ const MySchoolFund = () => {
             }
           ]
         }}
+        businessManagement={{
+          title: "Business Management Services",
+          description: "Our team manages all aspects of your educational business:",
+          services: [
+            {
+              title: "Curriculum Development",
+              description: "Education experts create and update learning materials and programs",
+              icon: "fileText"
+            },
+            {
+              title: "Staff Recruitment & Training",
+              description: "We hire and develop qualified teachers and support staff",
+              icon: "users"
+            },
+            {
+              title: "Facility Management",
+              description: "Complete maintenance and optimization of all school buildings and grounds",
+              icon: "briefcase"
+            }
+          ]
+        }}
         reporting={{
           frequency: "Every 3 months",
           reports: [
@@ -75,4 +96,3 @@ const MySchoolFund = () => {
 };
 
 export default MySchoolFund;
-

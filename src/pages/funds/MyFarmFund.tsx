@@ -52,6 +52,27 @@ const MyFarmFund = () => {
           }
         ]
       }}
+      businessManagement={{
+        title: "Business Management Services",
+        description: "Our agricultural experts manage all farm operations:",
+        services: [
+          {
+            title: "Farming Operations",
+            description: "Skilled farm managers handle planting, harvesting and livestock management",
+            icon: "briefcase"
+          },
+          {
+            title: "Equipment Maintenance",
+            description: "Regular servicing and upgrading of all farming equipment and vehicles",
+            icon: "chartBar"
+          },
+          {
+            title: "Distribution & Sales",
+            description: "Managing relationships with buyers and ensuring efficient delivery to market",
+            icon: "users"
+          }
+        ]
+      }}
       reporting={{
         frequency: "Every 6 months",
         reports: [
@@ -66,4 +87,3 @@ const MyFarmFund = () => {
 };
 
 export default MyFarmFund;
-

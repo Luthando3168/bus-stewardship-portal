@@ -43,6 +43,15 @@ interface FundEducationalPageProps {
   businessModel: BusinessModel;
   professionalSupport: ProfessionalSupport;
   reporting: ReportingInfo;
+  businessManagement?: {
+    title: string;
+    description: string;
+    services: {
+      title: string;
+      description: string;
+      icon: string;
+    }[];
+  };
 }
 
 const IconComponent = ({ name }: { name: string }) => {
@@ -94,7 +103,8 @@ const FundEducationalPage = ({
   minInvestment,
   businessModel,
   professionalSupport,
-  reporting
+  reporting,
+  businessManagement
 }: FundEducationalPageProps) => {
   return (
     <Layout>
@@ -159,6 +169,26 @@ const FundEducationalPage = ({
                   ))}
                 </div>
               </div>
+
+              {businessManagement && (
+                <div className="bg-white rounded-lg p-8 shadow-md">
+                  <h3 className="text-2xl font-bold text-navyblue mb-6">{businessManagement.title}</h3>
+                  <p className="text-gray-700 mb-6">{businessManagement.description}</p>
+                  <div className="space-y-6">
+                    {businessManagement.services.map((service, index) => (
+                      <div key={index} className="flex items-start space-x-4">
+                        <div className="flex-shrink-0 p-3 bg-gray-100 rounded-lg">
+                          <IconComponent name={service.icon} />
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-lg text-gray-900">{service.title}</h4>
+                          <p className="text-gray-700">{service.description}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               <div className="bg-white rounded-lg p-8 shadow-md">
                 <h3 className="text-2xl font-bold text-navyblue mb-6">Regular Business Reports</h3>

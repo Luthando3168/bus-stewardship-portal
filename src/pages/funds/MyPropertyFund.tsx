@@ -52,6 +52,27 @@ const MyPropertyFund = () => {
           }
         ]
       }}
+      businessManagement={{
+        title: "Business Management Services",
+        description: "Our expert team handles all property operations:",
+        services: [
+          {
+            title: "Tenant Management",
+            description: "We handle all tenant selection, contracts, payments and relationship management",
+            icon: "users"
+          },
+          {
+            title: "Maintenance & Repairs",
+            description: "Regular upkeep and immediate response to any property issues",
+            icon: "briefcase"
+          },
+          {
+            title: "Property Development",
+            description: "Strategic improvements and expansions to maximize your property value",
+            icon: "chartBar"
+          }
+        ]
+      }}
       reporting={{
         frequency: "Every 6 months",
         reports: [
@@ -66,4 +87,3 @@ const MyPropertyFund = () => {
 };
 
 export default MyPropertyFund;
-

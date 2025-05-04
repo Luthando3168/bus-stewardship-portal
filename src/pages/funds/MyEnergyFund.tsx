@@ -60,6 +60,27 @@ const MyEnergyFund = () => {
             }
           ]
         }}
+        businessManagement={{
+          title: "Business Management Services",
+          description: "Our energy specialists manage all operations:",
+          services: [
+            {
+              title: "System Installation & Maintenance",
+              description: "Expert technicians install and maintain all energy equipment",
+              icon: "briefcase"
+            },
+            {
+              title: "Energy Distribution",
+              description: "Management of power delivery systems and grid connections",
+              icon: "chartBar"
+            },
+            {
+              title: "Customer Contracts",
+              description: "Handling all customer accounts, billing and service agreements",
+              icon: "users"
+            }
+          ]
+        }}
         reporting={{
           frequency: "Every 3 months",
           reports: [
@@ -75,4 +96,3 @@ const MyEnergyFund = () => {
 };
 
 export default MyEnergyFund;
-
