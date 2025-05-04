@@ -1,5 +1,4 @@
-
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import { Route } from "react-router-dom";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import UserDashboard from "@/pages/user/UserDashboard";
@@ -8,105 +7,96 @@ import UserWallet from "@/pages/user/UserWallet";
 import UserProfile from "@/pages/user/UserProfile";
 import UserHowWeWork from "@/pages/user/UserHowWeWork";
 import UserLoans from "@/pages/user/UserLoans";
+import UserConcierge from "@/pages/user/UserConcierge";
 
-// Lazy loaded components
-const UserConcierge = lazy(() => import("@/pages/user/UserConcierge"));
-const GroceryService = lazy(() => import("@/pages/concierge/GroceryService"));
+// Export routes as an array of JSX elements
+export const userRoutes = [
+  // User routes
+  <Route 
+    key="user-dashboard" 
+    path="/user/dashboard" 
+    element={
+      <ProtectedRoute>
+        <UserDashboard />
+      </ProtectedRoute>
+    } 
+  />,
+  <Route 
+    key="user-investments" 
+    path="/user/investments" 
+    element={
+      <ProtectedRoute>
+        <UserInvestments />
+      </ProtectedRoute>
+    } 
+  />,
+  <Route 
+    key="user-wallet" 
+    path="/user/wallet" 
+    element={
+      <ProtectedRoute>
+        <UserWallet />
+      </ProtectedRoute>
+    } 
+  />,
+  <Route 
+    key="user-profile" 
+    path="/user/profile" 
+    element={
+      <ProtectedRoute>
+        <UserProfile />
+      </ProtectedRoute>
+    } 
+  />,
+  <Route 
+    key="user-how-we-work" 
+    path="/user/how-we-work" 
+    element={
+      <ProtectedRoute>
+        <UserHowWeWork />
+      </ProtectedRoute>
+    } 
+  />,
+  <Route 
+    key="user-loans" 
+    path="/user/loans" 
+    element={
+      <ProtectedRoute>
+        <UserLoans />
+      </ProtectedRoute>
+    } 
+  />,
+  <Route 
+    key="user-concierge" 
+    path="/user/concierge" 
+    element={
+      <ProtectedRoute>
+        <UserConcierge />
+      </ProtectedRoute>
+    } 
+  />,
+  
+  // Additional user routes
+  <Route 
+    key="user-beneficiaries" 
+    path="/user/beneficiaries" 
+    element={
+      <ProtectedRoute>
+        <UserDashboard />
+      </ProtectedRoute>
+    } 
+  />,
+  <Route 
+    key="user-statements" 
+    path="/user/statements" 
+    element={
+      <ProtectedRoute>
+        <UserDashboard />
+      </ProtectedRoute>
+    } 
+  />
+];
 
-const UserRoutes = () => {
-  return (
-    <>
-      {/* User routes */}
-      <Route 
-        path="/user/dashboard" 
-        element={
-          <ProtectedRoute>
-            <UserDashboard />
-          </ProtectedRoute>
-        } 
-      />
-      <Route 
-        path="/user/investments" 
-        element={
-          <ProtectedRoute>
-            <UserInvestments />
-          </ProtectedRoute>
-        } 
-      />
-      <Route 
-        path="/user/wallet" 
-        element={
-          <ProtectedRoute>
-            <UserWallet />
-          </ProtectedRoute>
-        } 
-      />
-      <Route 
-        path="/user/profile" 
-        element={
-          <ProtectedRoute>
-            <UserProfile />
-          </ProtectedRoute>
-        } 
-      />
-      <Route 
-        path="/user/how-we-work" 
-        element={
-          <ProtectedRoute>
-            <UserHowWeWork />
-          </ProtectedRoute>
-        } 
-      />
-      <Route 
-        path="/user/loans" 
-        element={
-          <ProtectedRoute>
-            <UserLoans />
-          </ProtectedRoute>
-        } 
-      />
-      <Route 
-        path="/user/concierge" 
-        element={
-          <ProtectedRoute>
-            <Suspense fallback={<div>Loading...</div>}>
-              <UserConcierge />
-            </Suspense>
-          </ProtectedRoute>
-        } 
-      />
-      
-      {/* Concierge service subpages */}
-      <Route 
-        path="/concierge/grocery" 
-        element={
-          <ProtectedRoute>
-            <Suspense fallback={<div>Loading...</div>}>
-              <GroceryService />
-            </Suspense>
-          </ProtectedRoute>
-        } 
-      />
-      
-      {/* Additional user routes */}
-      <Route 
-        path="/user/beneficiaries" 
-        element={
-          <ProtectedRoute>
-            <UserDashboard />
-          </ProtectedRoute>
-        } 
-      />
-      <Route 
-        path="/user/statements" 
-        element={
-          <ProtectedRoute>
-            <UserDashboard />
-          </ProtectedRoute>
-        } 
-      />
-    </>
-  );
-};
-
+// Keep the component for backwards compatibility
+const UserRoutes = () => <>{userRoutes}</>;
 export default UserRoutes;
