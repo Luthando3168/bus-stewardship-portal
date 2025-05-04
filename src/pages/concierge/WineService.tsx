@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Check } from 'lucide-react';
+import { Check, Wine } from 'lucide-react';
 import ServicePageTemplate from '@/components/concierge/ServicePageTemplate';
 
 const WineService = () => {
@@ -22,9 +22,9 @@ const WineService = () => {
   return (
     <ServicePageTemplate 
       title="Wine & Spirits Delivery"
-      companyName="Food Corner Bev. Co."
       description="Enjoy premium alcoholic beverages delivered directly to your door. Food Corner Bev. Co. offers an extensive selection of wine, spirits, and craft beverages."
-      imagePath="/lovable-uploads/e5869f22-682c-4c5c-bd33-5a19766a95cf.png"
+      icon={Wine}
+      color="text-red-500"
     >
       <div className="grid gap-6 lg:grid-cols-2">
         <div>
