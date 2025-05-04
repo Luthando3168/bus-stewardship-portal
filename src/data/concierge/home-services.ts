@@ -1,5 +1,5 @@
 
-import { Wrench, Users } from "lucide-react";
+import { Wrench, Users, Building } from "lucide-react";
 import { ConciergeService } from './types';
 
 export const conciergeHomeServices: ConciergeService[] = [
