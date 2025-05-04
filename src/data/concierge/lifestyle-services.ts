@@ -30,7 +30,7 @@ export const conciergeLifestyleServices: ConciergeService[] = [
     description: "Order from a selection of fine dining and casual restaurants",
     icon: Utensils,
     color: "text-white",
-    bgColor: "bg-navyblue",
+    bgColor: "bg-amber-600",
     link: "/concierge/restaurants",
     ownershipNote: null,
     isFavorite: true,
