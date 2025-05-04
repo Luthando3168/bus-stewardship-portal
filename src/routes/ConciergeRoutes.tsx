@@ -105,6 +105,16 @@ export const conciergeRoutes = [
       </ProtectedRoute>
     } 
   />,
+  // Add doctors route that points to the HealthcareService component
+  <Route 
+    key="concierge-doctors"
+    path="/concierge/doctors" 
+    element={
+      <ProtectedRoute>
+        <HealthcareService />
+      </ProtectedRoute>
+    } 
+  />,
   <Route 
     key="concierge-accommodation"
     path="/concierge/accommodation" 
