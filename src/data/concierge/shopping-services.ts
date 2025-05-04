@@ -4,13 +4,13 @@ import { ConciergeService } from './types';
 
 export const conciergeShoppingServices: ConciergeService[] = [
   {
-    title: "Grocery Shopping",
-    description: "Order fresh groceries from our partnered stores with delivery right to your door",
+    title: "Food Corner Grocery",
+    description: "Order fresh groceries from Food Corner with delivery right to your door",
     icon: ShoppingCart,
     color: "text-white",
-    bgColor: "bg-navyblue",
+    bgColor: "bg-red-600",
     link: "/concierge/grocery",
-    ownershipNote: "You own shares in 3 of these stores",
+    ownershipNote: "You own shares in this store",
     isFavorite: true,
     recentlyUsed: true
   },
