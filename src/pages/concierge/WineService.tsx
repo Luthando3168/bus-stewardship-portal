@@ -21,7 +21,7 @@ const WineService = () => {
 
   return (
     <ServicePageTemplate 
-      title="Wine & Spirits Delivery"
+      title="Food Corner Bev. Co."
       description="Enjoy premium alcoholic beverages delivered directly to your door. Food Corner Bev. Co. offers an extensive selection of wine, spirits, and craft beverages."
       icon={Wine}
       color="text-red-500"
