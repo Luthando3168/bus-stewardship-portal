@@ -1,6 +1,7 @@
 
 import React from "react";
 import FundEducationalPage from "@/components/funds/FundEducationalPage";
+import { fundImages } from "@/data/impact-funds";
 
 const MyFarmFund = () => {
   return (
