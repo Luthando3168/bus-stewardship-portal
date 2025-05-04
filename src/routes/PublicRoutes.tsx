@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Route } from "react-router-dom";
 import { Navigate } from "react-router-dom";
@@ -17,6 +18,7 @@ import ForgotPassword from "@/pages/ForgotPassword";
 import Terms from "@/pages/Terms";
 import Privacy from "@/pages/Privacy";
 import WelcomeLetter from "@/pages/WelcomeLetter";
+import CitiesProject from "@/pages/CitiesProject"; // Add import for new page
 
 // Import fund pages
 import MyFarmFund from "@/pages/funds/MyFarmFund";
@@ -38,6 +40,7 @@ export const publicRoutes = [
   <Route key="bus" path="/bus" element={<Bus />} />,
   <Route key="foundation" path="/foundation" element={<Foundation />} />,
   <Route key="impact-funds" path="/impact-funds" element={<ImpactFunds />} />,
+  <Route key="cities-project" path="/cities-project" element={<CitiesProject />} />, // Add route for 100 Cities Project
   <Route key="contact" path="/contact" element={<Contact />} />,
   <Route key="login" path="/login" element={<Login />} />,
   <Route key="register" path="/register" element={<Register />} />,
