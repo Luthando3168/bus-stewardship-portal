@@ -1,12 +1,15 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Check, Wine } from 'lucide-react';
+import { Check, Wine, Search } from 'lucide-react';
 import ServicePageTemplate from '@/components/concierge/ServicePageTemplate';
 import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 
 const WineService = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
   
   const categories = [
     "Wine", "Spirits", "Beer & Cider", "Ready To Drink", "Non-Alcoholic"
@@ -68,10 +71,23 @@ const WineService = () => {
     setSelectedCategory(category === selectedCategory ? null : category);
   };
 
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
+
   const handleOrderClick = () => {
     console.log("Order button clicked");
     // Additional order processing logic would go here
   };
+
+  // Filter products based on search query
+  const filteredProducts = selectedCategory && searchQuery 
+    ? products[selectedCategory as keyof typeof products].filter(
+        product => product.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : selectedCategory 
+      ? products[selectedCategory as keyof typeof products]
+      : [];
 
   return (
     <ServicePageTemplate 
@@ -80,80 +96,132 @@ const WineService = () => {
       icon={Wine}
       color="text-red-500"
     >
-      <div className="grid gap-6 lg:grid-cols-2">
-        <div>
-          <h2 className="text-xl font-semibold mb-4">Our Selection</h2>
-          <p className="text-gray-600 mb-6">
-            Food Corner Bev. Co. provides a curated selection of premium beverages from Tops at Spar and Makro Liquor. 
-            Whether you're looking for a fine wine for a special dinner, craft spirits for your 
-            home bar, non-alcoholic alternatives, or simply want to try something new, we have options to suit every taste and budget.
-          </p>
-          
-          <div className="bg-navyblue/5 rounded-lg p-4 mb-6">
-            <h3 className="font-medium mb-2">Available across South Africa</h3>
-            <p className="text-sm text-gray-600">
-              We deliver to all major cities and towns across South Africa.
-              Orders placed before 2PM are eligible for same-day delivery in select areas.
-            </p>
+      <div className="space-y-8">
+        {/* Hero Banner */}
+        <div className="relative rounded-xl overflow-hidden h-64 bg-gradient-to-r from-red-700 to-red-900">
+          <div className="absolute inset-0 flex flex-col justify-center p-8 text-white">
+            <h1 className="text-3xl font-bold mb-2">Food Corner Bev. Co.</h1>
+            <p className="text-lg mb-4 max-w-md">Premium beverages delivered to your door, anywhere in South Africa.</p>
+            <Badge variant="secondary" className="bg-white text-red-700 hover:bg-white/90 w-fit">
+              Tops at Spar & Makro Liquor Partner
+            </Badge>
           </div>
-          
-          <h3 className="font-semibold mb-3">What we offer:</h3>
-          <ul className="space-y-2 mb-6">
-            {features.map((feature, index) => (
-              <li key={index} className="flex items-center">
-                <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" />
-                <span>{feature}</span>
-              </li>
-            ))}
-          </ul>
         </div>
-        
-        <div className="bg-white p-6 rounded-lg shadow-sm border">
-          <h2 className="text-xl font-semibold mb-4">Browse Our Products</h2>
-          <p className="text-gray-600 mb-4">
-            Explore our selection and have your favorite beverages delivered directly to your door.
-          </p>
-          
-          <div className="flex flex-wrap gap-2 mb-6">
+
+        {/* Search Bar */}
+        <div className="relative">
+          <Search className="absolute left-3 top-3 h-4 w-4 text-gray-500" />
+          <Input
+            type="search"
+            placeholder="Search products..."
+            className="pl-10"
+            value={searchQuery}
+            onChange={handleSearch}
+          />
+        </div>
+
+        {/* Category Cards */}
+        <div>
+          <h2 className="text-xl font-semibold mb-4">Browse By Category</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {categories.map((category) => (
-              <Badge 
+              <Card 
                 key={category}
-                variant={selectedCategory === category ? "default" : "outline"} 
-                className={`cursor-pointer py-1.5 px-3 ${
-                  selectedCategory === category ? 'bg-navyblue' : 'hover:bg-navyblue/10'
+                className={`cursor-pointer transition-all ${
+                  selectedCategory === category 
+                    ? 'ring-2 ring-red-500 shadow-md' 
+                    : 'hover:shadow-md'
                 }`}
                 onClick={() => handleCategoryClick(category)}
               >
-                {category}
-              </Badge>
+                <CardContent className="p-6 flex flex-col items-center text-center">
+                  <Wine 
+                    className={`h-12 w-12 mb-3 ${
+                      selectedCategory === category ? 'text-red-500' : 'text-gray-400'
+                    }`} 
+                  />
+                  <h3 className="font-semibold">{category}</h3>
+                  <p className="text-xs text-gray-500 mt-1">
+                    {products[category as keyof typeof products].length} products
+                  </p>
+                </CardContent>
+              </Card>
             ))}
           </div>
+        </div>
+
+        {/* Product Listings */}
+        <div>
+          <h2 className="text-xl font-semibold mb-4">
+            {selectedCategory ? `${selectedCategory} Products` : 'All Products'}
+            {searchQuery && ` - Search results for "${searchQuery}"`}
+          </h2>
           
-          <div className="space-y-4 mb-6 max-h-[400px] overflow-y-auto">
-            {selectedCategory ? (
-              products[selectedCategory as keyof typeof products].map((product, idx) => (
-                <div key={idx} className="p-3 bg-navyblue/5 rounded-lg flex justify-between items-center">
-                  <div>
-                    <h3 className="font-medium">{product.name}</h3>
-                    <p className="text-sm text-gray-600">{product.type}</p>
-                  </div>
-                  <div className="text-right">
-                    <span className="font-medium">{product.price}</span>
-                  </div>
+          {selectedCategory ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {filteredProducts.length > 0 ? (
+                filteredProducts.map((product, idx) => (
+                  <Card key={idx} className="overflow-hidden hover:shadow-md transition-shadow">
+                    <CardContent className="p-6">
+                      <div className="flex justify-between items-start mb-4">
+                        <h3 className="font-medium">{product.name}</h3>
+                        <Badge>{product.type}</Badge>
+                      </div>
+                      <div className="flex justify-between items-end">
+                        <span className="font-bold text-lg text-red-500">{product.price}</span>
+                        <Button 
+                          onClick={handleOrderClick}
+                          className="bg-red-500 hover:bg-red-600"
+                        >
+                          Add to Cart
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))
+              ) : (
+                <div className="col-span-3 p-8 text-center bg-gray-50 rounded-lg">
+                  <p className="text-gray-500">No products found matching your search.</p>
                 </div>
-              ))
-            ) : (
-              <div className="p-4 bg-navyblue/5 rounded-lg text-center">
-                <p className="text-gray-600">Select a category to see products</p>
-              </div>
-            )}
+              )}
+            </div>
+          ) : (
+            <div className="p-8 text-center bg-gray-50 rounded-lg">
+              <p className="text-gray-500">Please select a category to browse products.</p>
+            </div>
+          )}
+        </div>
+
+        {/* Features Section */}
+        <div className="bg-red-50 rounded-lg p-6">
+          <h2 className="text-xl font-semibold mb-4">Why Choose Food Corner Bev. Co.?</h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            <ul className="space-y-3">
+              {features.slice(0, 3).map((feature, index) => (
+                <li key={index} className="flex items-start">
+                  <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+            <ul className="space-y-3">
+              {features.slice(3).map((feature, index) => (
+                <li key={index} className="flex items-start">
+                  <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-          
+        </div>
+
+        {/* Call to Action */}
+        <div className="text-center">
           <Button 
             onClick={handleOrderClick}
-            className="w-full bg-navyblue hover:bg-navyblue/90"
+            className="bg-red-500 hover:bg-red-600 py-6 px-8 text-lg"
           >
-            Place an Order
+            Place Your Order Now
           </Button>
         </div>
       </div>
