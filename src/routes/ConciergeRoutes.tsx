@@ -8,6 +8,9 @@ import GroceryService from "@/pages/concierge/GroceryService";
 import AutoRepairsService from "@/pages/concierge/AutoRepairsService";
 import PropertyService from "@/pages/concierge/PropertyService";
 import DomesticService from "@/pages/concierge/DomesticService";
+import DomesticServiceProviders from "@/pages/concierge/DomesticServiceProviders";
+import DomesticProviderDetails from "@/pages/concierge/DomesticProviderDetails";
+import DomesticServiceRequests from "@/pages/concierge/DomesticServiceRequests";
 import FlightsService from "@/pages/concierge/FlightsService";
 import HealthcareService from "@/pages/concierge/HealthcareService";
 import Accommodation from "@/pages/Accommodation";
@@ -53,6 +56,34 @@ export const conciergeRoutes = [
     element={
       <ProtectedRoute>
         <DomesticService />
+      </ProtectedRoute>
+    } 
+  />,
+  // New domestic service routes
+  <Route 
+    key="concierge-domestic-service-type"
+    path="/concierge/domestic/:serviceType" 
+    element={
+      <ProtectedRoute>
+        <DomesticServiceProviders />
+      </ProtectedRoute>
+    } 
+  />,
+  <Route 
+    key="concierge-domestic-provider-details"
+    path="/concierge/domestic/:serviceType/provider/:providerId" 
+    element={
+      <ProtectedRoute>
+        <DomesticProviderDetails />
+      </ProtectedRoute>
+    } 
+  />,
+  <Route 
+    key="concierge-domestic-requests"
+    path="/concierge/domestic/requests" 
+    element={
+      <ProtectedRoute>
+        <DomesticServiceRequests />
       </ProtectedRoute>
     } 
   />,

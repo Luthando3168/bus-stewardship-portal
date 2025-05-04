@@ -1,16 +1,12 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ServicePageTemplate from "@/components/concierge/ServicePageTemplate";
-import { Users, Check } from "lucide-react";
+import { Users, Check, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { serviceProviders } from "@/data/concierge/domestic/serviceProviders";
-import ServiceProviderProfile from "@/components/concierge/domestic/ServiceProviderProfile";
+import { useNavigate } from "react-router-dom";
 
 const serviceTypes = [
   {
@@ -18,66 +14,36 @@ const serviceTypes = [
     title: "Housekeeping",
     description: "Professional home cleaning and organization services",
     features: ["Regular cleaning", "Deep cleaning", "Organizing", "Laundry assistance"],
-    rates: "From R250 per session"
+    rates: "From R220 per session"
   },
   {
     id: "gardening",
     title: "Garden Services",
     description: "Lawn maintenance and garden care",
     features: ["Lawn mowing", "Garden maintenance", "Plant care", "Outdoor cleaning"],
-    rates: "From R200 per session"
+    rates: "From R180 per session"
   },
   {
     id: "childcare",
     title: "Childcare",
     description: "Professional and vetted childcare professionals",
     features: ["Babysitting", "After-school care", "Educational support", "Child development"],
-    rates: "From R180 per hour"
+    rates: "From R230 per hour"
   }
 ];
 
 const DomesticService = () => {
   const [selectedService, setSelectedService] = useState<string | null>(null);
-  const [selectedProvider, setSelectedProvider] = useState<string | null>(null);
-  const [formData, setFormData] = useState({
-    frequency: "",
-    startDate: "",
-    requirements: ""
-  });
-
-  // Filter providers based on selected service
-  const filteredProviders = selectedService 
-    ? serviceProviders.filter(provider => provider.service === selectedService)
-    : [];
+  const navigate = useNavigate();
 
   const handleServiceSelect = (serviceId: string) => {
     setSelectedService(serviceId);
-    setSelectedProvider(null); // Reset provider selection when service changes
     toast.success("Service selected", {
-      description: "Now you can choose a service provider."
+      description: "Now you can browse service providers."
     });
-  };
-
-  const handleProviderSelect = (providerId: string) => {
-    setSelectedProvider(providerId);
-    toast.success("Provider selected", {
-      description: "You can now specify your requirements."
-    });
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.success("Service request submitted", {
-      description: "We'll confirm your booking soon."
-    });
+    
+    // Navigate to the service providers page
+    navigate(`/concierge/domestic/${serviceId}`);
   };
 
   return (
@@ -87,13 +53,22 @@ const DomesticService = () => {
       icon={Users}
       color="text-lime-600"
     >
-      <h2 className="text-lg font-medium mb-4 text-navyblue">Select a Service</h2>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-lg font-medium text-navyblue">Select a Service</h2>
+        <Button 
+          variant="outline" 
+          className="text-navyblue"
+          onClick={() => navigate('/concierge/domestic/requests')}
+        >
+          My Service Requests
+        </Button>
+      </div>
       
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-8">
         {serviceTypes.map((service) => (
           <Card 
             key={service.id} 
-            className={`cursor-pointer transition-all hover:shadow-md ${selectedService === service.id ? 'ring-2 ring-lime-600' : ''}`}
+            className="cursor-pointer transition-all hover:shadow-md"
             onClick={() => handleServiceSelect(service.id)}
           >
             <CardContent className="p-6">
@@ -109,94 +84,96 @@ const DomesticService = () => {
                 ))}
               </ul>
               
-              <p className="text-sm font-medium text-navyblue">{service.rates}</p>
-              
-              {selectedService === service.id && (
-                <div className="mt-4 flex justify-end">
-                  <Badge className="bg-lime-600 text-white">
-                    <Check className="h-3 w-3 mr-1" /> Selected
-                  </Badge>
-                </div>
-              )}
+              <div className="flex justify-between items-center mt-4">
+                <p className="text-sm font-medium text-navyblue">{service.rates}</p>
+                <Button 
+                  size="sm"
+                  variant="ghost"
+                  className="text-lime-700 hover:text-lime-800 hover:bg-lime-50"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleServiceSelect(service.id);
+                  }}
+                >
+                  View Providers
+                  <ChevronRight className="h-4 w-4 ml-1" />
+                </Button>
+              </div>
             </CardContent>
           </Card>
         ))}
       </div>
-
-      {selectedService && (
-        <>
-          <div className="border-t pt-6 mb-6">
-            <h2 className="text-lg font-medium mb-4 text-navyblue">Select a Service Provider</h2>
-            <div className="grid gap-6 mb-8">
-              {filteredProviders.map(provider => (
-                <ServiceProviderProfile
-                  key={provider.id}
-                  provider={provider}
-                  isSelected={selectedProvider === provider.id}
-                  onSelect={handleProviderSelect}
-                />
-              ))}
+      
+      <div className="border-t pt-6">
+        <div className="bg-gray-50 p-6 rounded-lg">
+          <h3 className="text-lg font-medium mb-4">How It Works</h3>
+          <div className="grid gap-6 md:grid-cols-3">
+            <div className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 rounded-full bg-lime-100 text-lime-700 flex items-center justify-center mb-4">
+                <span className="font-medium">1</span>
+              </div>
+              <h4 className="font-medium mb-2">Select a Service</h4>
+              <p className="text-sm text-gray-600">Choose from our range of domestic services.</p>
+            </div>
+            <div className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 rounded-full bg-lime-100 text-lime-700 flex items-center justify-center mb-4">
+                <span className="font-medium">2</span>
+              </div>
+              <h4 className="font-medium mb-2">Choose a Provider</h4>
+              <p className="text-sm text-gray-600">Browse profiles and select your preferred professional.</p>
+            </div>
+            <div className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 rounded-full bg-lime-100 text-lime-700 flex items-center justify-center mb-4">
+                <span className="font-medium">3</span>
+              </div>
+              <h4 className="font-medium mb-2">Secure Payment</h4>
+              <p className="text-sm text-gray-600">Pay through our secure escrow system - money is only released once you're satisfied.</p>
             </div>
           </div>
-        </>
-      )}
-
-      {selectedProvider && (
-        <form onSubmit={handleSubmit} className="space-y-4 border-t pt-6">
-          <div>
-            <Label htmlFor="frequency">Service Frequency</Label>
-            <select 
-              id="frequency" 
-              name="frequency"
-              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-              value={formData.frequency}
-              onChange={handleInputChange}
-              required
-            >
-              <option value="">Select frequency</option>
-              <option value="once">One-time service</option>
-              <option value="weekly">Weekly</option>
-              <option value="biweekly">Bi-weekly</option>
-              <option value="monthly">Monthly</option>
-            </select>
+        </div>
+      </div>
+      
+      <div className="border-t border-b py-6 my-6">
+        <h3 className="text-lg font-medium mb-4">Our Guarantee</h3>
+        <div className="grid gap-4 md:grid-cols-2">
+          <div className="flex items-start gap-3">
+            <div className="h-6 w-6 rounded-full bg-lime-100 text-lime-700 flex items-center justify-center flex-shrink-0">
+              <Check className="h-3.5 w-3.5" />
+            </div>
+            <div>
+              <h4 className="font-medium text-sm">Verified Professionals</h4>
+              <p className="text-sm text-gray-600">All service providers undergo rigorous background checks.</p>
+            </div>
           </div>
-          
-          <div>
-            <Label htmlFor="startDate">Start Date</Label>
-            <Input 
-              id="startDate"
-              name="startDate"
-              type="date"
-              value={formData.startDate}
-              onChange={handleInputChange}
-              min={new Date().toISOString().split('T')[0]}
-              required
-            />
+          <div className="flex items-start gap-3">
+            <div className="h-6 w-6 rounded-full bg-lime-100 text-lime-700 flex items-center justify-center flex-shrink-0">
+              <Check className="h-3.5 w-3.5" />
+            </div>
+            <div>
+              <h4 className="font-medium text-sm">Secure Payments</h4>
+              <p className="text-sm text-gray-600">Our escrow system ensures you only pay for satisfactory service.</p>
+            </div>
           </div>
-          
-          <div>
-            <Label htmlFor="requirements">Specific Requirements</Label>
-            <Textarea 
-              id="requirements"
-              name="requirements"
-              placeholder="Describe your specific needs and preferences"
-              value={formData.requirements}
-              onChange={handleInputChange}
-              className="resize-none"
-              rows={4}
-            />
+          <div className="flex items-start gap-3">
+            <div className="h-6 w-6 rounded-full bg-lime-100 text-lime-700 flex items-center justify-center flex-shrink-0">
+              <Check className="h-3.5 w-3.5" />
+            </div>
+            <div>
+              <h4 className="font-medium text-sm">Dispute Resolution</h4>
+              <p className="text-sm text-gray-600">Our support team helps resolve any issues that may arise.</p>
+            </div>
           </div>
-          
-          <div className="flex justify-end pt-4">
-            <Button 
-              type="submit" 
-              className="bg-lime-600 hover:bg-lime-700 text-white"
-            >
-              Request Domestic Staff
-            </Button>
+          <div className="flex items-start gap-3">
+            <div className="h-6 w-6 rounded-full bg-lime-100 text-lime-700 flex items-center justify-center flex-shrink-0">
+              <Check className="h-3.5 w-3.5" />
+            </div>
+            <div>
+              <h4 className="font-medium text-sm">Easy Rescheduling</h4>
+              <p className="text-sm text-gray-600">Flexibility to change appointments with 24-hour notice.</p>
+            </div>
           </div>
-        </form>
-      )}
+        </div>
+      </div>
     </ServicePageTemplate>
   );
 };
