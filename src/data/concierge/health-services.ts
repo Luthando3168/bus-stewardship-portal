@@ -1,5 +1,5 @@
 
-import { HeartPulse } from "lucide-react";
+import { HeartPulse, ShieldCheck } from "lucide-react";
 import { ConciergeService } from './types';
 
 export const conciergeHealthServices: ConciergeService[] = [
@@ -23,6 +23,17 @@ export const conciergeHealthServices: ConciergeService[] = [
     link: "/concierge/healthcare",
     ownershipNote: null,
     isFavorite: false,
+    recentlyUsed: false
+  },
+  {
+    title: "MCA Health Shield",
+    description: "Premium medical aid with exclusive benefits for MCA members",
+    icon: ShieldCheck,
+    color: "text-white",
+    bgColor: "bg-navyblue",
+    link: "/concierge/medical-aid",
+    ownershipNote: "Shareholder in 4 MCA Network Hospitals",
+    isFavorite: true,
     recentlyUsed: false
   }
 ];
