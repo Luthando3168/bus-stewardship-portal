@@ -36,7 +36,7 @@ const Accommodation = () => {
   };
 
   return (
-    <Layout>
+    <Layout showPreFooter={false}>
       <div className="space-y-10 py-4">
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold text-navyblue">Find your next stay</h1>

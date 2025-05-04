@@ -12,13 +12,15 @@ interface LayoutProps {
   title?: string;
   description?: string;
   schema?: Record<string, any>;
+  showPreFooter?: boolean;
 }
 
 const Layout = ({ 
   children, 
   title = "Luthando Maduna Chartered Accountants", 
   description = "Professional accounting, business management, and investment services by LMCA.",
-  schema
+  schema,
+  showPreFooter = true
 }: LayoutProps) => {
   const isMobile = useIsMobile();
   const location = useLocation();
@@ -45,7 +47,7 @@ const Layout = ({
       <main className="flex-grow pt-16 md:pt-20">
         {children}
       </main>
-      <PreFooter />
+      {showPreFooter && <PreFooter />}
       <Footer />
     </div>
   );
