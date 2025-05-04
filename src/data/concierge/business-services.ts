@@ -1,5 +1,5 @@
 
-import { Briefcase, HandCoins, Laptop, Calculator } from "lucide-react";
+import { Briefcase, HandCoins, Laptop } from "lucide-react";
 import { ConciergeService } from './types';
 
 export const conciergeBusinessServices: ConciergeService[] = [
@@ -11,7 +11,7 @@ export const conciergeBusinessServices: ConciergeService[] = [
     bgColor: "bg-navyblue",
     link: "/concierge/business",
     ownershipNote: null,
-    isFavorite: false,
+    isFavorite: true,
     recentlyUsed: false
   },
   {
