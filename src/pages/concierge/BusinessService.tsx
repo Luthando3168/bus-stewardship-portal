@@ -10,8 +10,8 @@ import BusinessBenefits from "@/components/concierge/business/BusinessBenefits";
 import { businessCategories } from "@/data/concierge/business/businessCategories";
 import PurchaseDisclaimer from "@/components/concierge/PurchaseDisclaimer";
 
-// Adding this import to fix the professional data error
-import { professionals as businessProfessionals } from "@/data/concierge/business/professionals";
+// Importing businessProfessionals directly from the file since there's no professionals export
+import { businessProfessionals } from "@/data/concierge/business/professionals";
 
 const BusinessService = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -36,6 +36,20 @@ const BusinessService = () => {
       )
     : businessProfessionals;
 
+  const handleRequestService = (serviceTitle: string) => {
+    console.log("Requesting service:", serviceTitle);
+    // Add more functionality as needed
+  };
+
+  const handleViewProfessionals = () => {
+    console.log("Viewing professionals");
+    // Add navigation or tab switch logic here
+  };
+
+  const clearSearch = () => {
+    setSearchQuery("");
+  };
+
   return (
     <ServicePageTemplate
       title="Business Services"
@@ -57,11 +71,19 @@ const BusinessService = () => {
         </TabsList>
         
         <TabsContent value="services">
-          <BusinessServicesTab categories={filteredCategories} />
+          <BusinessServicesTab 
+            filteredCategories={filteredCategories}
+            onRequestService={handleRequestService}
+            onViewProfessionals={handleViewProfessionals}
+            clearSearch={clearSearch}
+          />
         </TabsContent>
         
         <TabsContent value="professionals">
-          <BusinessProfessionalsTab professionals={filteredProfessionals} />
+          <BusinessProfessionalsTab 
+            businessCategories={filteredCategories}
+            searchQuery={searchQuery}
+          />
         </TabsContent>
       </Tabs>
       

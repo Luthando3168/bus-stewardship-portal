@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Farm as FarmIcon, Building2, Store, Landmark, Lightbulb, HeartPulse, GraduationCap, Phone } from "lucide-react";
+import { Tractor as FarmIcon, Building2, Store, Landmark, Lightbulb, HeartPulse, GraduationCap, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface ImpactFundType {
