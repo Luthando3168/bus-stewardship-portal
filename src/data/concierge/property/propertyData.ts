@@ -10,6 +10,7 @@ export interface Property {
   size: string;
   image: string;
   featured?: boolean;
+  isFavorite?: boolean;
 }
 
 export const properties: Property[] = [
@@ -23,7 +24,8 @@ export const properties: Property[] = [
     bathrooms: 2,
     size: "115m²",
     image: "https://placehold.co/600x400/e2e8f0/1e293b?text=Luxury+Apartment",
-    featured: true
+    featured: true,
+    isFavorite: false
   },
   {
     id: 2,
@@ -34,7 +36,8 @@ export const properties: Property[] = [
     bedrooms: 4,
     bathrooms: 3,
     size: "280m²",
-    image: "https://placehold.co/600x400/e2e8f0/1e293b?text=Family+Home"
+    image: "https://placehold.co/600x400/e2e8f0/1e293b?text=Family+Home",
+    isFavorite: false
   },
   {
     id: 3,
@@ -46,7 +49,8 @@ export const properties: Property[] = [
     bathrooms: 2,
     size: "95m²",
     image: "https://placehold.co/600x400/e2e8f0/1e293b?text=Waterfront+Apartment",
-    featured: true
+    featured: true,
+    isFavorite: false
   },
   {
     id: 4,
@@ -57,6 +61,7 @@ export const properties: Property[] = [
     bedrooms: 1,
     bathrooms: 1,
     size: "65m²",
-    image: "https://placehold.co/600x400/e2e8f0/1e293b?text=Garden+Cottage"
+    image: "https://placehold.co/600x400/e2e8f0/1e293b?text=Garden+Cottage",
+    isFavorite: false
   }
 ];
