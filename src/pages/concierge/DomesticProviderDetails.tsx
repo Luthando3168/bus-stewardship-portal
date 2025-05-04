@@ -16,7 +16,9 @@ import { serviceProviders } from "@/data/concierge/domestic/serviceProviders";
 import { serviceRequests, ServiceRequest } from "@/data/concierge/domestic/serviceRequests";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
-import { v4 as uuidv4 } from "npm:uuid@8.3.2";
+import { v4 as uuidv4 } from "uuid";
+import ProviderAvailabilityTable from "@/components/concierge/domestic/ProviderAvailabilityTable";
+import ServiceItemsSelector from "@/components/concierge/domestic/ServiceItemsSelector";
 
 const DomesticProviderDetails = () => {
   const { serviceType, providerId } = useParams<{ serviceType: string; providerId: string }>();
@@ -30,7 +32,9 @@ const DomesticProviderDetails = () => {
       description: "",
       serviceDate: "",
       duration: "4",
-      startTime: "09:00"
+      startTime: "09:00",
+      bookingType: "full-day",
+      selectedItems: []
     }
   });
 
@@ -245,53 +249,85 @@ const DomesticProviderDetails = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                    
+                    {/* Provider Availability Calendar */}
+                    <div className="border rounded-md p-4 bg-gray-50">
+                      <h3 className="font-medium mb-3">Provider Availability</h3>
+                      <ProviderAvailabilityTable providerId={providerId!} />
+                    </div>
+                    
+                    {/* Service Date Selection */}
                     <div className="space-y-2">
-                      <Label htmlFor="description">Service Description</Label>
+                      <Label htmlFor="serviceDate">Service Date</Label>
+                      <Input
+                        id="serviceDate"
+                        type="date"
+                        min={new Date().toISOString().split('T')[0]}
+                        {...form.register("serviceDate")}
+                        required
+                      />
+                    </div>
+                    
+                    {/* Booking Type Selection */}
+                    <div className="space-y-2">
+                      <Label>Booking Type</Label>
+                      <div className="flex gap-4">
+                        <div className="flex items-center">
+                          <input 
+                            type="radio" 
+                            id="full-day" 
+                            value="full-day"
+                            className="mr-2" 
+                            {...form.register("bookingType")}
+                            defaultChecked 
+                          />
+                          <Label htmlFor="full-day">Full Day (8 hours)</Label>
+                        </div>
+                        <div className="flex items-center">
+                          <input 
+                            type="radio" 
+                            id="half-day" 
+                            value="half-day" 
+                            className="mr-2"
+                            {...form.register("bookingType")}
+                          />
+                          <Label htmlFor="half-day">Half Day (4 hours)</Label>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Start Time */}
+                    <div className="space-y-2">
+                      <Label htmlFor="startTime">Start Time</Label>
+                      <Input
+                        id="startTime"
+                        type="time"
+                        {...form.register("startTime")}
+                        required
+                      />
+                    </div>
+                    
+                    {/* Service items selection based on service type */}
+                    <div className="space-y-2">
+                      <Label>Service Items</Label>
+                      <ServiceItemsSelector serviceType={serviceType!} form={form} />
+                    </div>
+                    
+                    {/* Service Description */}
+                    <div className="space-y-2">
+                      <Label htmlFor="description">Additional Details</Label>
                       <Textarea
                         id="description"
-                        placeholder="Describe what you need done..."
+                        placeholder="Please provide any additional details about your request..."
                         rows={4}
                         {...form.register("description")}
                         required
                       />
                     </div>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="serviceDate">Service Date</Label>
-                        <Input
-                          id="serviceDate"
-                          type="date"
-                          min={new Date().toISOString().split('T')[0]}
-                          {...form.register("serviceDate")}
-                          required
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="startTime">Start Time</Label>
-                        <Input
-                          id="startTime"
-                          type="time"
-                          {...form.register("startTime")}
-                          required
-                        />
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <Label htmlFor="duration">Duration (hours)</Label>
-                      <Input
-                        id="duration"
-                        type="number"
-                        min="1"
-                        max="12"
-                        {...form.register("duration")}
-                        required
-                      />
-                    </div>
-                    
-                    <div className="mt-4 bg-gray-50 p-4 rounded-md">
+                    {/* Price Calculation */}
+                    <div className="bg-gray-50 p-4 rounded-md">
                       <h4 className="font-medium mb-2">Price Estimate</h4>
                       <div className="flex justify-between">
                         <span>Rate</span>
@@ -299,12 +335,15 @@ const DomesticProviderDetails = () => {
                       </div>
                       <div className="flex justify-between">
                         <span>Duration</span>
-                        <span>{form.watch("duration") || 0} hours</span>
+                        <span>
+                          {form.watch("bookingType") === "full-day" ? "8" : "4"} hours
+                        </span>
                       </div>
                       <div className="border-t mt-2 pt-2 flex justify-between font-medium">
                         <span>Total</span>
                         <span>R{
-                          parseInt(provider.hourlyRate.replace(/\D/g, '')) * parseInt(form.watch("duration") || 0)
+                          parseInt(provider.hourlyRate.replace(/\D/g, '')) * 
+                          (form.watch("bookingType") === "full-day" ? 8 : 4)
                         }</span>
                       </div>
                     </div>
