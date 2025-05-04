@@ -1,4 +1,3 @@
-
 import { ReactNode } from "react";
 import { 
   Users, 
@@ -30,12 +29,23 @@ export interface BusinessServiceItem {
   regions?: string[]; // Specific regions where this service is available
 }
 
+// Create icon generator functions
+const createUsersIcon = () => <Users className="h-10 w-10 text-navyblue" />;
+const createBuildingIcon = () => <Building className="h-10 w-10 text-navyblue" />;
+const createFileTextIcon = () => <FileText className="h-10 w-10 text-navyblue" />;
+const createCodeIcon = () => <Code className="h-10 w-10 text-navyblue" />;
+const createBriefcaseIcon = () => <Briefcase className="h-10 w-10 text-navyblue" />;
+const createGraduationCapIcon = () => <GraduationCap className="h-10 w-10 text-navyblue" />;
+const createGlobeIcon = () => <Globe className="h-10 w-10 text-navyblue" />;
+const createTruckIcon = () => <Truck className="h-10 w-10 text-navyblue" />;
+const createHandshakeIcon = () => <Handshake className="h-10 w-10 text-navyblue" />;
+
 export const businessCategories: BusinessServiceCategory[] = [
   {
     id: "consulting",
     title: "Business Consulting",
     description: "Professional consulting services for your business needs",
-    icon: <Users className="h-10 w-10 text-navyblue" />,
+    icon: createUsersIcon(),
     regions: ["Gauteng", "Western Cape", "KwaZulu-Natal", "Eastern Cape"],
     services: [
       {
@@ -76,7 +86,7 @@ export const businessCategories: BusinessServiceCategory[] = [
     id: "legal",
     title: "Legal & Compliance",
     description: "Essential legal services for business compliance and protection",
-    icon: <Building className="h-10 w-10 text-navyblue" />,
+    icon: createBuildingIcon(),
     regions: ["Nationwide", "Remote Services Available"],
     services: [
       {
@@ -116,7 +126,7 @@ export const businessCategories: BusinessServiceCategory[] = [
     id: "accounting",
     title: "Accounting & Finance",
     description: "Professional financial services to keep your business thriving",
-    icon: <FileText className="h-10 w-10 text-navyblue" />,
+    icon: createFileTextIcon(),
     regions: ["Nationwide", "All Major Cities"],
     services: [
       {
@@ -156,7 +166,7 @@ export const businessCategories: BusinessServiceCategory[] = [
     id: "technology",
     title: "Technology Services",
     description: "IT solutions and digital transformation for modern businesses",
-    icon: <Code className="h-10 w-10 text-navyblue" />,
+    icon: createCodeIcon(),
     regions: ["Nationwide", "Remote Services Available"],
     services: [
       {
@@ -196,7 +206,7 @@ export const businessCategories: BusinessServiceCategory[] = [
     id: "hr",
     title: "Human Resources",
     description: "Workforce management and development solutions",
-    icon: <Briefcase className="h-10 w-10 text-navyblue" />,
+    icon: createBriefcaseIcon(),
     regions: ["Gauteng", "Western Cape", "KwaZulu-Natal", "Free State"],
     services: [
       {
@@ -236,7 +246,7 @@ export const businessCategories: BusinessServiceCategory[] = [
     id: "training",
     title: "Professional Training",
     description: "Skills development and certification programs",
-    icon: <GraduationCap className="h-10 w-10 text-navyblue" />,
+    icon: createGraduationCapIcon(),
     regions: ["Major Metropolitan Areas", "Online Programs Available"],
     services: [
       {
@@ -276,7 +286,7 @@ export const businessCategories: BusinessServiceCategory[] = [
     id: "international",
     title: "International Business",
     description: "Global expansion and cross-border operations support",
-    icon: <Globe className="h-10 w-10 text-navyblue" />,
+    icon: createGlobeIcon(),
     regions: ["Johannesburg", "Cape Town", "Durban"],
     services: [
       {
@@ -316,7 +326,7 @@ export const businessCategories: BusinessServiceCategory[] = [
     id: "logistics",
     title: "Logistics & Supply Chain",
     description: "Optimize business operations and product movement",
-    icon: <Truck className="h-10 w-10 text-navyblue" />,
+    icon: createTruckIcon(),
     regions: ["Nationwide", "Major Trade Routes"],
     services: [
       {
@@ -356,7 +366,7 @@ export const businessCategories: BusinessServiceCategory[] = [
     id: "bizdev",
     title: "Business Development",
     description: "Strategic growth and partnership initiatives",
-    icon: <Handshake className="h-10 w-10 text-navyblue" />,
+    icon: createHandshakeIcon(),
     regions: ["All Major Business Centers", "Remote Services Available"],
     services: [
       {
