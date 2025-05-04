@@ -11,7 +11,7 @@ const funds = [{
   name: "MyFarm",
   description: "Supporting sustainable agriculture and farming businesses across South Africa.",
   bgGradient: "from-green-700 to-green-900",
-  image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
+  image: "https://images.unsplash.com/photo-1593113646773-028c64a8f1b8",
   focus: ["Sustainable farming operations", "Food security projects", "Mixed-crop ventures"],
   minInvestment: "R 1,000",
   route: "/funds/myfarm"
@@ -31,7 +31,7 @@ const funds = [{
   bgGradient: "from-red-600 to-red-800",
   image: "/lovable-uploads/e5869f22-682c-4c5c-bd33-5a19766a95cf.png",
   focus: ["Food franchise outlets", "Retail and service franchises", "Entrepreneurship development"],
-  minInvestment: "R 5,000",
+  minInvestment: "R 1,500",
   route: "/funds/myfranchise"
 }, {
   id: "myfoodretail",
