@@ -34,7 +34,7 @@ const UserHowWeWork = () => {
             How We Work at <span className="text-gold">Luthando Maduna</span> Chartered Accountants
           </h1>
           <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
-            We help our clients build wealth by owning shares in the businesses they use every day.
+            Using the MCA Direct, we help our clients build wealth by owning shares in the businesses they use every day.
           </p>
         </section>
         
