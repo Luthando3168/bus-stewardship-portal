@@ -98,10 +98,6 @@ const DomesticProviderDetails = () => {
     // Navigate to booking confirmation or service requests page
     navigate("/concierge/domestic/requests");
   };
-
-  const handleBackClick = () => {
-    navigate(`/concierge/domestic/${serviceType}`);
-  };
   
   if (!provider) {
     return <div>Loading...</div>;
@@ -152,7 +148,7 @@ const DomesticProviderDetails = () => {
         </div>
         
         <div className="lg:col-span-1">
-          <ContactSidebar provider={provider} onBackClick={handleBackClick} />
+          <ContactSidebar provider={provider} />
         </div>
       </div>
     </ServicePageTemplate>

@@ -1,5 +1,6 @@
 
 import React from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -8,10 +9,22 @@ import { Send, MessageSquare } from "lucide-react";
 
 interface ContactSidebarProps {
   provider: any;
-  onBackClick: () => void;
 }
 
-const ContactSidebar = ({ provider, onBackClick }: ContactSidebarProps) => {
+const ContactSidebar = ({ provider }: ContactSidebarProps) => {
+  const navigate = useNavigate();
+  const { serviceType } = useParams<{ serviceType: string }>();
+  
+  const handleBackClick = () => {
+    // Navigate back to the service providers list for this service type
+    if (serviceType) {
+      navigate(`/concierge/domestic/${serviceType}`);
+    } else {
+      // Fallback to domestic main page if service type is not available
+      navigate('/concierge/domestic');
+    }
+  };
+  
   return (
     <div>
       <Card>
@@ -60,7 +73,7 @@ const ContactSidebar = ({ provider, onBackClick }: ContactSidebarProps) => {
         <Button 
           variant="outline" 
           className="w-full"
-          onClick={onBackClick}
+          onClick={handleBackClick}
         >
           Back to Provider List
         </Button>
