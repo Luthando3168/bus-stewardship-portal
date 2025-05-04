@@ -65,7 +65,7 @@ const FlagshipCityHighlight: React.FC<FlagshipCityHighlightProps> = ({
             <span>Development Progress</span>
             <span className="font-medium">{city.progress}%</span>
           </div>
-          <Progress value={city.progress} className="h-2 bg-white/20" indicatorClassName="bg-gold" />
+          <Progress value={city.progress} className="h-2 bg-white/20" />
         </div>
         
         <div className="mt-auto space-y-3">
