@@ -1,95 +1,69 @@
 
 import React, { useState } from "react";
 import ServicePageTemplate from "@/components/concierge/ServicePageTemplate";
-import { Briefcase, UserSearch } from "lucide-react";
-import { toast } from "sonner";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
-import BusinessHero from "@/components/concierge/business/BusinessHero";
-import BusinessSearchBar from "@/components/concierge/business/BusinessSearchBar";
+import { TabsList, TabsTrigger, Tabs, TabsContent } from "@/components/ui/tabs";
+import { Users } from "lucide-react";
 import BusinessServicesTab from "@/components/concierge/business/BusinessServicesTab";
 import BusinessProfessionalsTab from "@/components/concierge/business/BusinessProfessionalsTab";
+import BusinessSearchBar from "@/components/concierge/business/BusinessSearchBar";
 import BusinessBenefits from "@/components/concierge/business/BusinessBenefits";
 import { businessCategories } from "@/data/concierge/business/businessCategories";
+import { professionals } from "@/data/concierge/business/professionals";
+import PurchaseDisclaimer from "@/components/concierge/PurchaseDisclaimer";
 
 const BusinessService = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeTab, setActiveTab] = useState("services");
-
-  const handleServiceRequest = (serviceTitle: string) => {
-    toast.success(`Service request submitted`, {
-      description: `Your request for ${serviceTitle} has been received. We will contact you shortly.`
-    });
-  };
-
-  const clearSearch = () => {
-    setSearchQuery("");
-  };
-
-  const filteredCategories = businessCategories.map(category => {
-    const filteredServices = category.services.filter(
-      service => 
-        service.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        service.description.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    return {
-      ...category,
-      services: filteredServices
-    };
-  }).filter(category => category.services.length > 0);
+  
+  // Simple search filter for categories and professionals
+  const filteredCategories = searchQuery
+    ? businessCategories.filter(cat => 
+        cat.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+        cat.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        cat.services.some(service => 
+          service.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          service.description.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      )
+    : businessCategories;
+  
+  const filteredProfessionals = searchQuery
+    ? professionals.filter(pro => 
+        pro.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+        pro.specialization.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        pro.company.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : professionals;
 
   return (
     <ServicePageTemplate
       title="Business Services"
-      description="Accounting, legal, consulting and professional services nationwide"
-      icon={Briefcase}
-      color="text-navyblue"
+      description="Connect with expert business professionals across South Africa"
+      icon={Users}
+      color="text-blue-700"
     >
-      <div className="space-y-8">
-        {/* Hero section */}
-        <BusinessHero />
-
-        {/* Search bar */}
-        <BusinessSearchBar 
-          searchQuery={searchQuery} 
-          setSearchQuery={setSearchQuery} 
-        />
-
-        {/* Tabs for services and professionals */}
-        <Tabs defaultValue="services" value={activeTab} onValueChange={setActiveTab} className="mb-6">
-          <TabsList className="mb-4">
-            <TabsTrigger value="services" className="px-6">
-              <Briefcase className="h-4 w-4 mr-2" />
-              Services
-            </TabsTrigger>
-            <TabsTrigger value="professionals" className="px-6">
-              <UserSearch className="h-4 w-4 mr-2" />
-              Professionals
-            </TabsTrigger>
-          </TabsList>
-
-          {/* Services Tab Content */}
-          <TabsContent value="services">
-            <BusinessServicesTab 
-              filteredCategories={filteredCategories}
-              onRequestService={handleServiceRequest}
-              onViewProfessionals={() => setActiveTab("professionals")}
-              clearSearch={clearSearch}
-            />
-          </TabsContent>
-
-          {/* Professionals Tab Content */}
-          <TabsContent value="professionals">
-            <BusinessProfessionalsTab 
-              businessCategories={businessCategories}
-              searchQuery={searchQuery}
-            />
-          </TabsContent>
-        </Tabs>
-
-        {/* Additional information */}
-        <BusinessBenefits />
-      </div>
+      <PurchaseDisclaimer serviceName="business services" />
+      
+      <BusinessSearchBar 
+        searchQuery={searchQuery} 
+        setSearchQuery={setSearchQuery} 
+      />
+      
+      <Tabs defaultValue="services" className="w-full">
+        <TabsList className="mb-6 grid grid-cols-2 w-full max-w-sm">
+          <TabsTrigger value="services">Services</TabsTrigger>
+          <TabsTrigger value="professionals">Professionals</TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value="services">
+          <BusinessServicesTab categories={filteredCategories} />
+        </TabsContent>
+        
+        <TabsContent value="professionals">
+          <BusinessProfessionalsTab professionals={filteredProfessionals} />
+        </TabsContent>
+      </Tabs>
+      
+      <BusinessBenefits />
     </ServicePageTemplate>
   );
 };

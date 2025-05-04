@@ -1,107 +1,125 @@
 
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { impactFunds, fundImages } from "@/data/impact-funds";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { ArrowRight, Farm, Building, ShoppingBag, ShoppingCart, Zap, Stethoscope, GraduationCap, Smartphone } from "lucide-react";
 
-const InvestmentOpportunities = () => {
-  // Using the first 3 funds for the featured section
-  const featuredFunds = [
+interface InvestmentOpportunitiesProps {
+  isGuest?: boolean;
+}
+
+const InvestmentOpportunities = ({ isGuest = false }: InvestmentOpportunitiesProps) => {
+  const funds = [
     {
       id: "myfarm",
-      name: "MyFarm Impact Fund",
-      description: "Agricultural investments with high impact potential",
-      deals: 5,
-      minInvestment: 2000,
-      returns: "12-15%",
-      badge: "Popular"
+      name: "My Farm Fund",
+      icon: <Farm className="h-8 w-8 text-green-600" />,
+      color: "bg-green-100 border-green-300",
+      description: "Agricultural projects across South Africa",
+      link: "/funds/myfarm"
     },
     {
       id: "myproperty",
-      name: "MyProperty Impact Fund",
-      description: "Commercial and residential property investments",
-      deals: 3,
-      minInvestment: 10000,
-      returns: "8-14%",
-      image: "property.jpg"
+      name: "My Property Fund",
+      icon: <Building className="h-8 w-8 text-blue-600" />,
+      color: "bg-blue-50 border-blue-300",
+      description: "Real estate development and property investment",
+      link: "/funds/myproperty"
+    },
+    {
+      id: "myfranchise",
+      name: "My Franchise Fund",
+      icon: <ShoppingBag className="h-8 w-8 text-purple-600" />,
+      color: "bg-purple-50 border-purple-300",
+      description: "Franchise business opportunities",
+      link: "/funds/myfranchise"
+    },
+    {
+      id: "myfoodretail",
+      name: "My Food Retail Fund",
+      icon: <ShoppingCart className="h-8 w-8 text-red-600" />,
+      color: "bg-red-50 border-red-300",
+      description: "Food retail and distribution chains",
+      link: "/funds/myfoodretail"
     },
     {
       id: "myenergy",
-      name: "MyEnergy Impact Fund",
-      description: "Renewable energy projects and infrastructure",
-      deals: 2,
-      minInvestment: 3000,
-      returns: "10-13%",
-      badge: "New"
+      name: "My Energy Fund",
+      icon: <Zap className="h-8 w-8 text-yellow-600" />,
+      color: "bg-yellow-50 border-yellow-300",
+      description: "Renewable energy and sustainable solutions",
+      link: "/funds/myenergy"
     },
+    {
+      id: "myhealth",
+      name: "My Health Fund",
+      icon: <Stethoscope className="h-8 w-8 text-teal-600" />,
+      color: "bg-teal-50 border-teal-300",
+      description: "Healthcare facilities and services",
+      link: "/funds/myhealth"
+    },
+    {
+      id: "myschool",
+      name: "My School Fund",
+      icon: <GraduationCap className="h-8 w-8 text-indigo-600" />,
+      color: "bg-indigo-50 border-indigo-300",
+      description: "Educational institutions and initiatives",
+      link: "/funds/myschool"
+    },
+    {
+      id: "mytelco",
+      name: "My Telco Fund",
+      icon: <Smartphone className="h-8 w-8 text-orange-600" />,
+      color: "bg-orange-50 border-orange-300",
+      description: "Telecommunications infrastructure and services",
+      link: "/funds/mytelco"
+    }
   ];
 
   return (
     <div className="space-y-4">
-      <h3 className="font-semibold text-lg">Featured Impact Funds</h3>
+      <div className="flex justify-between items-center">
+        <h3 className="text-lg font-medium text-navyblue">Impact Funds</h3>
+        <Link to="/user/investments" className="text-sm text-blue-600 hover:text-blue-800 flex items-center">
+          View all opportunities <ArrowRight className="h-3.5 w-3.5 ml-1" />
+        </Link>
+      </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {featuredFunds.map((fund) => (
-          <Card key={fund.id} className="overflow-hidden">
-            <div className="h-32 bg-gray-200 relative">
-              {/* Use the image from fundImages if available */}
-              <div 
-                className="absolute inset-0 bg-gradient-to-r from-navyblue/90 to-navyblue/70 flex items-center justify-center"
-                style={{
-                  backgroundImage: fundImages[fund.id as keyof typeof fundImages] ? 
-                    `url(${fundImages[fund.id as keyof typeof fundImages]})` : 
-                    undefined,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                }}
-              >
-                <span className="text-white font-semibold text-lg">{fund.name}</span>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {funds.map((fund) => (
+          <Card 
+            key={fund.id} 
+            className={`border hover:shadow-md transition-shadow ${fund.color}`}
+          >
+            <CardContent className="flex flex-col items-center p-4 text-center">
+              <div className="mb-2">
+                {fund.icon}
               </div>
-              {fund.badge && (
-                <div className="absolute top-2 right-2">
-                  <Badge className="bg-gold">{fund.badge}</Badge>
-                </div>
+              <h4 className="font-semibold text-sm mb-1 text-gray-900">{fund.name}</h4>
+              <p className="text-xs text-gray-500 mb-3">{fund.description}</p>
+              {isGuest ? (
+                <Button 
+                  asChild 
+                  variant="outline" 
+                  size="sm" 
+                  className="mt-auto w-full text-xs"
+                >
+                  <Link to={fund.link}>View Details</Link>
+                </Button>
+              ) : (
+                <Button 
+                  asChild 
+                  variant="default" 
+                  size="sm" 
+                  className="mt-auto w-full text-xs"
+                >
+                  <Link to={fund.link}>Invest</Link>
+                </Button>
               )}
-            </div>
-            <CardHeader>
-              <CardTitle className="text-base">{fund.name}</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-sm text-muted-foreground">{fund.description}</p>
-              
-              <div className="grid grid-cols-2 gap-2 text-sm">
-                <div>
-                  <p className="text-muted-foreground text-xs">Min Investment</p>
-                  <p className="font-medium">R{fund.minInvestment.toLocaleString()}</p>
-                </div>
-                <div>
-                  <p className="text-muted-foreground text-xs">Expected Returns</p>
-                  <p className="font-medium text-green-600">{fund.returns}</p>
-                </div>
-                <div>
-                  <p className="text-muted-foreground text-xs">Available Deals</p>
-                  <p className="font-medium">{fund.deals}</p>
-                </div>
-              </div>
-              
-              <Button asChild className="w-full mt-4 bg-gold hover:bg-gold/80 text-navyblue">
-                <Link to={`/user/investments#${fund.id}`}>
-                  View Opportunities
-                </Link>
-              </Button>
             </CardContent>
           </Card>
         ))}
-      </div>
-      
-      <div className="text-center pt-2">
-        <Button variant="outline" asChild>
-          <Link to="/user/investments">
-            View All Impact Funds
-          </Link>
-        </Button>
       </div>
     </div>
   );

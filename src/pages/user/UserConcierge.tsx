@@ -1,13 +1,18 @@
+
 import React, { useState } from "react";
 import UserLayout from "@/components/layout/UserLayout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Heart, Clock, Star, Building } from "lucide-react";
+import { Heart, Clock, Star, Building, ShoppingCart, AlertCircle } from "lucide-react";
 import ServiceCard from "@/components/user/ServiceCard";
 import { Badge } from "@/components/ui/badge";
 import { conciergeServices } from "@/data/concierge";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Link } from "react-router-dom";
+import { useAuthState } from "@/hooks/useAuthState";
 
 const UserConcierge = () => {
   const [activeTab, setActiveTab] = useState("all");
+  const { user } = useAuthState();
 
   // Filter services based on active tab
   const filteredServices = conciergeServices.filter(service => {
@@ -30,9 +35,21 @@ const UserConcierge = () => {
           </div>
           <Badge variant="outline" className="bg-navyblue/5 text-navyblue border-navyblue/20 py-1.5 px-3 self-start">
             <Star className="h-3.5 w-3.5 mr-1 text-gold" />
-            Premium Member Access
+            {user ? "Premium Member Access" : "Preview Access"}
           </Badge>
         </div>
+
+        {!user && (
+          <Alert className="bg-blue-50 border-blue-200">
+            <ShoppingCart className="h-4 w-4 text-blue-500" />
+            <AlertTitle className="text-blue-800">Purchase Disclaimer</AlertTitle>
+            <AlertDescription className="text-blue-700">
+              You can browse and purchase products from our concierge services as a guest. 
+              Payments are processed directly by our partners and are not held in escrow by MCA Direct. 
+              <Link to="/register" className="ml-1 font-medium text-blue-900 underline">Register for an account</Link> for a more personalized experience and to track your orders.
+            </AlertDescription>
+          </Alert>
+        )}
 
         <Tabs defaultValue="all" className="w-full" value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="grid grid-cols-4 mb-6">

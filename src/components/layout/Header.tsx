@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Home, Info, HelpCircle, Briefcase, Bus, Building, DollarSign, PhoneCall, Mail, Phone, Facebook, Instagram, Linkedin } from "lucide-react";
@@ -35,12 +34,8 @@ const Header = () => {
 
   const handleMcaDirectClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    // If user is logged in, go to user dashboard, otherwise go to registration page
-    if (user) {
-      navigate('/user/dashboard');
-    } else {
-      navigate('/register');
-    }
+    // Now always navigate to user dashboard, regardless of auth status
+    navigate('/user/dashboard');
   };
 
   if (isMobile) {

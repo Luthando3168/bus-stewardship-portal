@@ -11,30 +11,29 @@ import UserConcierge from "@/pages/user/UserConcierge";
 
 // Export routes as an array of JSX elements
 export const userRoutes = [
-  // User routes
+  // User routes - now available to all users but with limited functionality for guests
   <Route 
     key="user-dashboard" 
     path="/user/dashboard" 
-    element={
-      <ProtectedRoute>
-        <UserDashboard />
-      </ProtectedRoute>
-    } 
+    element={<UserDashboard />} 
   />,
   <Route 
     key="user-investments" 
     path="/user/investments" 
-    element={
-      <ProtectedRoute>
-        <UserInvestments />
-      </ProtectedRoute>
-    } 
+    element={<UserInvestments />} 
   />,
+  <Route 
+    key="user-concierge" 
+    path="/user/concierge" 
+    element={<UserConcierge />} 
+  />,
+  
+  // Routes that still require authentication
   <Route 
     key="user-wallet" 
     path="/user/wallet" 
     element={
-      <ProtectedRoute>
+      <ProtectedRoute requireAuth={true}>
         <UserWallet />
       </ProtectedRoute>
     } 
@@ -43,7 +42,7 @@ export const userRoutes = [
     key="user-profile" 
     path="/user/profile" 
     element={
-      <ProtectedRoute>
+      <ProtectedRoute requireAuth={true}>
         <UserProfile />
       </ProtectedRoute>
     } 
@@ -61,17 +60,8 @@ export const userRoutes = [
     key="user-loans" 
     path="/user/loans" 
     element={
-      <ProtectedRoute>
+      <ProtectedRoute requireAuth={true}>
         <UserLoans />
-      </ProtectedRoute>
-    } 
-  />,
-  <Route 
-    key="user-concierge" 
-    path="/user/concierge" 
-    element={
-      <ProtectedRoute>
-        <UserConcierge />
       </ProtectedRoute>
     } 
   />,
@@ -81,7 +71,7 @@ export const userRoutes = [
     key="user-beneficiaries" 
     path="/user/beneficiaries" 
     element={
-      <ProtectedRoute>
+      <ProtectedRoute requireAuth={true}>
         <UserDashboard />
       </ProtectedRoute>
     } 
@@ -90,7 +80,7 @@ export const userRoutes = [
     key="user-statements" 
     path="/user/statements" 
     element={
-      <ProtectedRoute>
+      <ProtectedRoute requireAuth={true}>
         <UserDashboard />
       </ProtectedRoute>
     } 
