@@ -1,5 +1,7 @@
 
 import React from "react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import FundEducationalPage from "@/components/funds/FundEducationalPage";
 
 const MyPropertyFund = () => {
@@ -82,7 +84,39 @@ const MyPropertyFund = () => {
           "What your properties are worth"
         ]
       }}
-    />
+    >
+      <div className="mt-12 bg-gray-50 p-8 rounded-xl">
+        <div className="max-w-4xl mx-auto text-center mb-8">
+          <h2 className="text-2xl font-bold text-navyblue mb-3">Featured Investment Opportunity</h2>
+          <h3 className="text-xl text-blue-700 mb-4">Balwin Properties Development Portfolio</h3>
+          <p className="text-gray-600 mb-6">
+            Invest in South Africa's premier residential developments by Balwin Properties. 
+            These high-quality developments feature modern amenities, excellent locations,
+            and strong rental demand - perfect for steady returns.
+          </p>
+          <Link to="/funds/property/balwin">
+            <Button size="lg" className="bg-navyblue hover:bg-blue-800">
+              View Balwin Developments
+            </Button>
+          </Link>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white p-5 rounded-lg shadow-sm text-center">
+            <div className="text-blue-600 font-bold text-xl mb-1">R2,000</div>
+            <p className="text-gray-600">Minimum investment</p>
+          </div>
+          <div className="bg-white p-5 rounded-lg shadow-sm text-center">
+            <div className="text-blue-600 font-bold text-xl mb-1">13-15%</div>
+            <p className="text-gray-600">Projected annual returns</p>
+          </div>
+          <div className="bg-white p-5 rounded-lg shadow-sm text-center">
+            <div className="text-blue-600 font-bold text-xl mb-1">7+ Locations</div>
+            <p className="text-gray-600">Premium developments across SA</p>
+          </div>
+        </div>
+      </div>
+    </FundEducationalPage>
   );
 };
 
