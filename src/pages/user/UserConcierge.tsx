@@ -1,11 +1,10 @@
-
 import React, { useState } from "react";
 import UserLayout from "@/components/layout/UserLayout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calendar, ShoppingCart, PlaneTakeoff, Building, Heart, Clock, Star } from "lucide-react";
+import { Heart, Clock, Star, Building } from "lucide-react";
 import ServiceCard from "@/components/user/ServiceCard";
 import { Badge } from "@/components/ui/badge";
-import { conciergeServices } from "@/data/concierge-services";
+import { conciergeServices } from "@/data/concierge";
 
 const UserConcierge = () => {
   const [activeTab, setActiveTab] = useState("all");
