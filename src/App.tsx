@@ -38,7 +38,9 @@ import { userRoutes } from "@/routes/UserRoutes";
 import { adminRoutes } from "@/routes/AdminRoutes";
 import { conciergeRoutes } from "@/routes/ConciergeRoutes";
 
+// Fixed: Moved useState hooks inside the component function
 function App() {
+  // Initialize state inside the component function
   const [isLoggedIn, setIsLoggedIn] = React.useState(
     localStorage.getItem("isLoggedIn") === "true"
   );

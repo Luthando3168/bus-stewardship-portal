@@ -1,5 +1,6 @@
 
-import { Avatar } from "lucide-react";
+// Remove incorrect Avatar import from lucide-react
+// Avatar should only be used as a UI component, not imported here
 
 export interface ServiceProvider {
   id: string;
