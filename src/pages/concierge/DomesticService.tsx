@@ -1,15 +1,16 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ServicePageTemplate from "@/components/concierge/ServicePageTemplate";
 import { Users, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { serviceProviders } from "@/data/concierge/domestic/serviceProviders";
+import ServiceProviderProfile from "@/components/concierge/domestic/ServiceProviderProfile";
 
 const serviceTypes = [
   {
@@ -37,15 +38,29 @@ const serviceTypes = [
 
 const DomesticService = () => {
   const [selectedService, setSelectedService] = useState<string | null>(null);
+  const [selectedProvider, setSelectedProvider] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     frequency: "",
     startDate: "",
     requirements: ""
   });
 
+  // Filter providers based on selected service
+  const filteredProviders = selectedService 
+    ? serviceProviders.filter(provider => provider.service === selectedService)
+    : [];
+
   const handleServiceSelect = (serviceId: string) => {
     setSelectedService(serviceId);
+    setSelectedProvider(null); // Reset provider selection when service changes
     toast.success("Service selected", {
+      description: "Now you can choose a service provider."
+    });
+  };
+
+  const handleProviderSelect = (providerId: string) => {
+    setSelectedProvider(providerId);
+    toast.success("Provider selected", {
       description: "You can now specify your requirements."
     });
   };
@@ -61,7 +76,7 @@ const DomesticService = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast.success("Service request submitted", {
-      description: "We'll match you with the right professional soon."
+      description: "We'll confirm your booking soon."
     });
   };
 
@@ -109,6 +124,24 @@ const DomesticService = () => {
       </div>
 
       {selectedService && (
+        <>
+          <div className="border-t pt-6 mb-6">
+            <h2 className="text-lg font-medium mb-4 text-navyblue">Select a Service Provider</h2>
+            <div className="grid gap-6 mb-8">
+              {filteredProviders.map(provider => (
+                <ServiceProviderProfile
+                  key={provider.id}
+                  provider={provider}
+                  isSelected={selectedProvider === provider.id}
+                  onSelect={handleProviderSelect}
+                />
+              ))}
+            </div>
+          </div>
+        </>
+      )}
+
+      {selectedProvider && (
         <form onSubmit={handleSubmit} className="space-y-4 border-t pt-6">
           <div>
             <Label htmlFor="frequency">Service Frequency</Label>
