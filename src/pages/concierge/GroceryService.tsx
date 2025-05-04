@@ -21,18 +21,18 @@ const groceryStores = [
   }
 ];
 
-// Product categories from Makro but adapted for Food Corner
+// Product categories from Makro adapted for Food Corner
 const productCategories = [
-  { id: 1, name: "Fresh Produce", icon: "🥕", count: 124 },
-  { id: 2, name: "Meat & Poultry", icon: "🥩", count: 87 },
-  { id: 3, name: "Dairy & Eggs", icon: "🥛", count: 56 },
-  { id: 4, name: "Bakery", icon: "🍞", count: 42 },
-  { id: 5, name: "Beverages", icon: "🥤", count: 98 },
-  { id: 6, name: "Frozen Foods", icon: "❄️", count: 64 },
-  { id: 7, name: "Pantry Items", icon: "🥫", count: 175 },
-  { id: 8, name: "Snacks & Sweets", icon: "🍪", count: 113 },
-  { id: 9, name: "Household", icon: "🧹", count: 79 },
-  { id: 10, name: "Health & Beauty", icon: "💄", count: 92 },
+  { id: 1, name: "Fresh Produce", icon: "🥕", count: 124, color: "#F2FCE2", textColor: "#4CAF50" },
+  { id: 2, name: "Meat & Poultry", icon: "🥩", count: 87, color: "#FEE4E2", textColor: "#E53935" },
+  { id: 3, name: "Dairy & Eggs", icon: "🥛", count: 56, color: "#EFF6FF", textColor: "#1E88E5" },
+  { id: 4, name: "Bakery", icon: "🍞", count: 42, color: "#FEF7CD", textColor: "#FFA000" },
+  { id: 5, name: "Beverages", icon: "🥤", count: 98, color: "#E8F5E9", textColor: "#2E7D32" },
+  { id: 6, name: "Frozen Foods", icon: "❄️", count: 64, color: "#E3F2FD", textColor: "#0277BD" },
+  { id: 7, name: "Pantry Items", icon: "🥫", count: 175, color: "#FEC6A1", textColor: "#E64A19" },
+  { id: 8, name: "Snacks & Sweets", icon: "🍪", count: 113, color: "#FCE4EC", textColor: "#D81B60" },
+  { id: 9, name: "Household", icon: "🧹", count: 79, color: "#F3E5F5", textColor: "#8E24AA" },
+  { id: 10, name: "Health & Beauty", icon: "💄", count: 92, color: "#E1F5FE", textColor: "#0288D1" },
 ];
 
 const GroceryService = () => {
@@ -107,10 +107,16 @@ const GroceryService = () => {
                 key={category.id} 
                 className="cursor-pointer transition-all hover:shadow-md hover:border-red-200"
                 onClick={() => toast.success(`Browsing ${category.name}`)}
+                style={{ backgroundColor: category.color }}
               >
                 <CardContent className="p-4 text-center">
                   <div className="text-3xl mb-2">{category.icon}</div>
-                  <h3 className="font-medium text-sm mb-1 text-red-700">{category.name}</h3>
+                  <h3 
+                    className="font-medium text-sm mb-1" 
+                    style={{ color: category.textColor }}
+                  >
+                    {category.name}
+                  </h3>
                   <p className="text-xs text-gray-500">{category.count} items</p>
                 </CardContent>
               </Card>
