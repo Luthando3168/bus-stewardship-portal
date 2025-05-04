@@ -22,6 +22,10 @@ const BusinessService = () => {
     });
   };
 
+  const clearSearch = () => {
+    setSearchQuery("");
+  };
+
   const filteredCategories = businessCategories.map(category => {
     const filteredServices = category.services.filter(
       service => 
@@ -37,7 +41,7 @@ const BusinessService = () => {
   return (
     <ServicePageTemplate
       title="Business Services"
-      description="Accounting, legal and consulting services for your business needs"
+      description="Accounting, legal, consulting and professional services nationwide"
       icon={Briefcase}
       color="text-navyblue"
     >
@@ -70,6 +74,7 @@ const BusinessService = () => {
               filteredCategories={filteredCategories}
               onRequestService={handleServiceRequest}
               onViewProfessionals={() => setActiveTab("professionals")}
+              clearSearch={clearSearch}
             />
           </TabsContent>
 

@@ -9,6 +9,7 @@ export interface BusinessServiceCategory {
   description: string;
   icon: React.ReactNode;
   services: BusinessServiceItem[];
+  regions?: string[];
 }
 
 export interface BusinessServiceItem {
@@ -17,18 +18,21 @@ export interface BusinessServiceItem {
   description: string;
   price: string;
   featured?: boolean;
+  regions?: string[];
 }
 
 interface BusinessServicesTabProps {
   filteredCategories: BusinessServiceCategory[];
   onRequestService: (serviceTitle: string) => void;
   onViewProfessionals: () => void;
+  clearSearch?: () => void;
 }
 
 const BusinessServicesTab = ({ 
   filteredCategories,
   onRequestService,
-  onViewProfessionals
+  onViewProfessionals,
+  clearSearch
 }: BusinessServicesTabProps) => {
   return (
     <>
@@ -41,13 +45,14 @@ const BusinessServicesTab = ({
               title={category.title}
               description={category.description}
               services={category.services}
+              regions={category.regions}
               onRequestService={onRequestService}
               onViewProfessionals={onViewProfessionals}
             />
           ))}
         </div>
       ) : (
-        <EmptyServicesState />
+        <EmptyServicesState onViewAll={clearSearch} />
       )}
     </>
   );

@@ -2,7 +2,8 @@
 import React from "react";
 import { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, MapPin } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import BusinessServiceCard, { BusinessServiceItem } from "./BusinessServiceCard";
 
 interface BusinessCategoryProps {
@@ -10,6 +11,7 @@ interface BusinessCategoryProps {
   title: string;
   description: string;
   services: BusinessServiceItem[];
+  regions?: string[];
   onRequestService: (serviceTitle: string) => void;
   onViewProfessionals: () => void;
 }
@@ -19,6 +21,7 @@ const BusinessCategory = ({
   title,
   description,
   services,
+  regions,
   onRequestService,
   onViewProfessionals
 }: BusinessCategoryProps) => {
@@ -28,9 +31,16 @@ const BusinessCategory = ({
         <div className="p-3 rounded-full bg-blue-50">
           {icon}
         </div>
-        <div>
+        <div className="flex-1">
           <h3 className="text-xl font-bold text-navyblue">{title}</h3>
           <p className="text-gray-600">{description}</p>
+          
+          {regions && regions.length > 0 && (
+            <div className="flex items-center text-gray-500 text-sm mt-1">
+              <MapPin className="h-4 w-4 mr-1" />
+              <span>Available in: {regions.join(", ")}</span>
+            </div>
+          )}
         </div>
       </div>
       
