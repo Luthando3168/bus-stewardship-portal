@@ -8,8 +8,10 @@ import BusinessProfessionalsTab from "@/components/concierge/business/BusinessPr
 import BusinessSearchBar from "@/components/concierge/business/BusinessSearchBar";
 import BusinessBenefits from "@/components/concierge/business/BusinessBenefits";
 import { businessCategories } from "@/data/concierge/business/businessCategories";
-import { professionals } from "@/data/concierge/business/professionals";
 import PurchaseDisclaimer from "@/components/concierge/PurchaseDisclaimer";
+
+// Adding this import to fix the professional data error
+import { professionals as businessProfessionals } from "@/data/concierge/business/professionals";
 
 const BusinessService = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -27,12 +29,12 @@ const BusinessService = () => {
     : businessCategories;
   
   const filteredProfessionals = searchQuery
-    ? professionals.filter(pro => 
+    ? businessProfessionals.filter(pro => 
         pro.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
         pro.specialization.toLowerCase().includes(searchQuery.toLowerCase()) ||
         pro.company.toLowerCase().includes(searchQuery.toLowerCase())
       )
-    : professionals;
+    : businessProfessionals;
 
   return (
     <ServicePageTemplate
