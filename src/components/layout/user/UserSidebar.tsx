@@ -1,24 +1,14 @@
+
 import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import {
-  Home,
-  User,
-  Wallet,
-  Users,
-  FileText,
-  Settings,
-  LogOut,
-  Building,
-  ChevronLeft,
-  ChevronRight,
-  BarChart3,
-  HelpCircle,
-  CircleDollarSign,
-  Calendar,
-  Coffee
-} from "lucide-react";
+
+// Import the new sidebar components
+import SidebarLinks from "./sidebar/SidebarLinks";
+import SidebarHeader from "./sidebar/SidebarHeader";
+import SidebarProfile from "./sidebar/SidebarProfile";
+import SidebarLogout from "./sidebar/SidebarLogout";
+import SidebarToggle from "./sidebar/SidebarToggle";
 
 interface UserSidebarProps {
   isSidebarOpen: boolean;
@@ -35,57 +25,6 @@ const UserSidebar = ({
 }: UserSidebarProps) => {
   const location = useLocation();
 
-  // Read the client number from localStorage
-  const clientNumber = localStorage.getItem("clientNumber") || "N/A";
-
-  const sidebarLinks = [
-    {
-      name: "Dashboard",
-      icon: <Home size={20} />,
-      path: "/user/dashboard",
-    },
-    {
-      name: "Investments",
-      icon: <Building size={20} />,
-      path: "/user/investments",
-    },
-    {
-      name: "Financial Statements",
-      icon: <FileText size={20} />,
-      path: "/user/statements",
-    },
-    {
-      name: "Wallet",
-      icon: <Wallet size={20} />,
-      path: "/user/wallet",
-    },
-    {
-      name: "Loans",
-      icon: <CircleDollarSign size={20} />,
-      path: "/user/loans",
-    },
-    {
-      name: "Concierge",
-      icon: <Coffee size={20} />,
-      path: "/user/concierge",
-    },
-    {
-      name: "Beneficiaries",
-      icon: <Users size={20} />,
-      path: "/user/beneficiaries",
-    },
-    {
-      name: "How We Work",
-      icon: <HelpCircle size={20} />,
-      path: "/user/how-we-work",
-    },
-    {
-      name: "Profile",
-      icon: <User size={20} />,
-      path: "/user/profile",
-    },
-  ];
-
   return (
     <aside
       className={cn(
@@ -93,101 +32,15 @@ const UserSidebar = ({
         isSidebarOpen ? "w-64" : "w-20"
       )}
     >
-      <button
-        className="absolute -right-3 top-10 bg-gold text-navyblue rounded-full p-1 z-10 hidden md:block"
-        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-      >
-        {isSidebarOpen ? (
-          <ChevronLeft className="h-4 w-4" />
-        ) : (
-          <ChevronRight className="h-4 w-4" />
-        )}
-      </button>
+      <SidebarToggle 
+        isSidebarOpen={isSidebarOpen} 
+        setIsSidebarOpen={setIsSidebarOpen}
+      />
 
-      <div className="p-4 border-b border-navyblue/20">
-        <div
-          className={cn(
-            "font-bold text-xl transition-all",
-            isSidebarOpen ? "opacity-100" : "opacity-0"
-          )}
-        >
-          MCA Direct
-        </div>
-        {/* Show client number under MCA Direct only when expanded */}
-        {isSidebarOpen && (
-          <div className="text-xs mt-1 text-gray-200 font-mono">
-            Client Number: <span className="font-semibold">{clientNumber}</span>
-          </div>
-        )}
-        {!isSidebarOpen && <div className="text-xl font-bold text-center">MCA</div>}
-      </div>
-
-      <div className="p-4 border-b border-navyblue/20">
-        <div
-          className={cn(
-            "transition-all",
-            isSidebarOpen ? "block" : "hidden"
-          )}
-        >
-          <p className="text-sm text-gray-300">Welcome,</p>
-          <p className="font-semibold truncate">{userName}</p>
-        </div>
-        {!isSidebarOpen && (
-          <div className="flex justify-center">
-            <div className="h-8 w-8 rounded-full bg-gold text-navyblue flex items-center justify-center font-bold">
-              {userName.charAt(0)}
-            </div>
-          </div>
-        )}
-      </div>
-
-      <nav className="flex-1 p-4 space-y-1.5">
-        {sidebarLinks.map((link) => (
-          <NavLink
-            key={link.path}
-            to={link.path}
-            className={({ isActive }) =>
-              cn(
-                "flex items-center gap-3 p-2.5 rounded-md transition-all",
-                isActive
-                  ? "bg-white/10 text-white"
-                  : "hover:bg-white/5 text-gray-300"
-              )
-            }
-          >
-            <span>{link.icon}</span>
-            <span
-              className={cn(
-                "transition-all whitespace-nowrap",
-                isSidebarOpen ? "opacity-100" : "opacity-0 w-0 hidden"
-              )}
-            >
-              {link.name}
-            </span>
-            {!isSidebarOpen && (
-              <span className="sr-only">{link.name}</span>
-            )}
-          </NavLink>
-        ))}
-      </nav>
-
-      <div className="p-4 border-t border-navyblue/20">
-        <Button
-          variant="ghost"
-          className="w-full justify-start text-gray-300 hover:text-white hover:bg-white/5"
-          onClick={onLogout}
-        >
-          <LogOut size={20} />
-          <span
-            className={cn(
-              "ml-2",
-              isSidebarOpen ? "inline" : "sr-only"
-            )}
-          >
-            Logout
-          </span>
-        </Button>
-      </div>
+      <SidebarHeader isSidebarOpen={isSidebarOpen} />
+      <SidebarProfile userName={userName} isSidebarOpen={isSidebarOpen} />
+      <SidebarLinks isSidebarOpen={isSidebarOpen} />
+      <SidebarLogout onLogout={onLogout} isSidebarOpen={isSidebarOpen} />
     </aside>
   );
 };
