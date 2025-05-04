@@ -35,11 +35,11 @@ const Header = () => {
 
   const handleMcaDirectClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    // If user is logged in, go to user dashboard, otherwise go to impact funds
+    // If user is logged in, go to user dashboard, otherwise go to registration page
     if (user) {
       navigate('/user/dashboard');
     } else {
-      navigate('/impact-funds');
+      navigate('/register');
     }
   };
 

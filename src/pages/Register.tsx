@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "@/components/ui/card";
 import RegisterForm from "@/components/auth/registration/RegisterForm";
 import Logo from "@/components/ui/Logo";
-import { FileText } from "lucide-react";
+import { FileText, CheckCircle } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 
 const Register = () => {
@@ -33,15 +33,35 @@ const Register = () => {
                 </ul>
               </div>
               
-              <div className="flex items-start space-x-3 mb-6 bg-amber-50 p-4 rounded-lg">
-                <FileText className="text-amber-600 mt-1" size={20} />
-                <div>
-                  <p className="text-amber-900 text-sm">
-                    After completing this initial registration, our team will guide you through 
-                    the document submission process and account verification.
-                  </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div className="bg-emerald-50 p-4 rounded-lg">
+                  <h4 className="font-semibold text-emerald-800 flex items-center gap-1 mb-2">
+                    <CheckCircle size={16} className="text-emerald-600" /> Benefits
+                  </h4>
+                  <ul className="space-y-2 text-sm text-emerald-800">
+                    <li className="flex items-start gap-1">
+                      <span className="font-medium">• Access to exclusive services</span>
+                    </li>
+                    <li className="flex items-start gap-1">
+                      <span className="font-medium">• Business ownership opportunities</span>
+                    </li>
+                    <li className="flex items-start gap-1">
+                      <span className="font-medium">• Professional business network</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div className="flex items-start space-x-3 bg-amber-50 p-4 rounded-lg">
+                  <FileText className="text-amber-600 mt-1" size={20} />
+                  <div>
+                    <p className="text-amber-900 text-sm">
+                      After completing this initial registration, our team will guide you through 
+                      the document submission process and account verification.
+                    </p>
+                  </div>
                 </div>
               </div>
+              
               <RegisterForm />
             </CardContent>
             <CardFooter className="flex flex-col space-y-4">
