@@ -5,6 +5,7 @@ import { conciergeHomeServices } from './home-services';
 import { conciergeTravelServices } from './travel-services';
 import { conciergeBusinessServices } from './business-services';
 import { conciergeShoppingServices } from './shopping-services';
+import { conciergeFinancialServices } from './financial-services';
 
 // Re-export all services combined
 export const conciergeServices = [
@@ -13,7 +14,8 @@ export const conciergeServices = [
   ...conciergeHomeServices,
   ...conciergeHealthServices,
   ...conciergeBusinessServices,
-  ...conciergeLifestyleServices
+  ...conciergeLifestyleServices,
+  ...conciergeFinancialServices
 ];
 
 // Export individual categories for direct access
@@ -23,5 +25,6 @@ export {
   conciergeHomeServices,
   conciergeTravelServices,
   conciergeBusinessServices,
-  conciergeShoppingServices
+  conciergeShoppingServices,
+  conciergeFinancialServices
 };

@@ -14,6 +14,7 @@ import Accommodation from "@/pages/Accommodation";
 import WineService from "@/pages/concierge/WineService";
 import GiftService from "@/pages/concierge/GiftService";
 import MedicalAidService from "@/pages/concierge/MedicalAidService";
+import FinancialService from "@/pages/concierge/FinancialService";
 
 // Export routes as an array of JSX elements
 export const conciergeRoutes = [
@@ -105,6 +106,15 @@ export const conciergeRoutes = [
     element={
       <ProtectedRoute>
         <MedicalAidService />
+      </ProtectedRoute>
+    } 
+  />,
+  <Route 
+    key="concierge-financial"
+    path="/concierge/financial" 
+    element={
+      <ProtectedRoute>
+        <FinancialService />
       </ProtectedRoute>
     } 
   />
