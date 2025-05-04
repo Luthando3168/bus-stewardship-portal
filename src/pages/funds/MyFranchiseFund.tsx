@@ -14,7 +14,7 @@ const MyFranchiseFund = () => {
         "Retail store franchises",
         "Job creation"
       ]}
-      minInvestment="R 5,000"
+      minInvestment="R 1,500"
       businessModel={{
         title: "How Your Franchise Makes Money",
         description: "Your franchise investment works in proven ways:",
