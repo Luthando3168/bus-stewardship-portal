@@ -38,6 +38,7 @@ import Accommodation from "@/pages/Accommodation";
 
 // Lazy load the UserConcierge component
 const UserConcierge = lazy(() => import("@/pages/user/UserConcierge"));
+const GroceryService = lazy(() => import("@/pages/concierge/GroceryService"));
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(
@@ -167,6 +168,18 @@ function App() {
             <ProtectedRoute>
               <Suspense fallback={<div>Loading...</div>}>
                 <UserConcierge />
+              </Suspense>
+            </ProtectedRoute>
+          } 
+        />
+        
+        {/* Concierge service subpages */}
+        <Route 
+          path="/concierge/grocery" 
+          element={
+            <ProtectedRoute>
+              <Suspense fallback={<div>Loading...</div>}>
+                <GroceryService />
               </Suspense>
             </ProtectedRoute>
           } 

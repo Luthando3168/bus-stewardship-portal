@@ -27,22 +27,22 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
 }) => {
   return (
     <Link to={link}>
-      <Card className="overflow-hidden transition-all hover:shadow-md">
+      <Card className="overflow-hidden transition-all hover:shadow-md hover:scale-[1.02] duration-300">
         <div className={cn("p-6", bgColor)}>
           <div className="flex justify-between items-start">
             <Icon className={cn("h-8 w-8", color)} />
             {ownershipNote && (
-              <Badge variant="secondary" className="ml-2 bg-navyblue/10 text-navyblue">
+              <Badge variant="secondary" className="ml-2 bg-gold/10 text-gold border-gold/20">
                 {ownershipNote}
               </Badge>
             )}
           </div>
-          <h3 className="mt-3 font-medium text-lg">{title}</h3>
+          <h3 className="mt-3 font-medium text-lg text-navyblue">{title}</h3>
           <p className="text-gray-600 text-sm mt-1">{description}</p>
         </div>
         <CardContent className="p-4 bg-white">
-          <div className="text-sm font-medium text-navyblue">
-            View details →
+          <div className="text-sm font-medium text-navyblue flex items-center justify-end">
+            View details <span className="ml-1">→</span>
           </div>
         </CardContent>
       </Card>
