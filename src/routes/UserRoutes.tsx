@@ -32,9 +32,9 @@ export const userRoutes = [
   <Route key="user-beneficiaries" path="/user/beneficiaries" element={<UserBeneficiaries />} />,
   <Route key="user-loans" path="/user/loans" element={<UserLoans />} />,
   
-  // Balwin Properties Routes
-  <Route key="balwin-developments" path="/user/funds/property/balwin" element={<BalwinDevelopments />} />,
-  <Route key="balwin-property-detail" path="/user/funds/property/balwin/:propertyId" element={<BalwinPropertyDetail />} />,
+  // Balwin Properties Routes - fix the paths
+  <Route key="balwin-developments" path="/funds/property/balwin" element={<BalwinDevelopments />} />,
+  <Route key="balwin-property-detail" path="/funds/property/balwin/:propertyId" element={<BalwinPropertyDetail />} />,
   
   // Franchise Fund Route
   <Route key="franchise-fund" path="/funds/myfranchise" element={<MyFranchiseFund />} />
@@ -57,7 +57,7 @@ const UserRoutes = () => {
       <Route path="beneficiaries" element={<UserBeneficiaries />} />
       <Route path="loans" element={<UserLoans />} />
       
-      {/* Balwin Properties Routes */}
+      {/* Balwin Properties Routes - fix the paths here as well */}
       <Route path="funds/property/balwin" element={<BalwinDevelopments />} />
       <Route path="funds/property/balwin/:propertyId" element={<BalwinPropertyDetail />} />
       

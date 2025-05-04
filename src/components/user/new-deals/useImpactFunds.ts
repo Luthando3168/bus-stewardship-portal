@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { ImpactFund } from './types/fundTypes';
 import { impactFunds } from './data/impactFundsData';
 
-export { ImpactFund } from './types/fundTypes';
+export type { ImpactFund } from './types/fundTypes';
 export { impactFunds } from './data/impactFundsData';
 
 export function useImpactFunds() {

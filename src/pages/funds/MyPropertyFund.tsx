@@ -94,6 +94,7 @@ const MyPropertyFund = () => {
             These high-quality developments feature modern amenities, excellent locations,
             and strong rental demand - perfect for steady returns.
           </p>
+          {/* Fix the route path */}
           <Link to="/funds/property/balwin">
             <Button size="lg" className="bg-navyblue hover:bg-blue-800">
               View Balwin Developments

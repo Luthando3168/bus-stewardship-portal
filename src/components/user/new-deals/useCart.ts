@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { toast } from "sonner";
-import { Business } from './useImpactFunds';
+import { Business } from './types/fundTypes';
 
 export interface CartItem {
   id: string;
