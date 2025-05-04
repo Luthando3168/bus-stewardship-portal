@@ -10,8 +10,8 @@ import BusinessBenefits from "@/components/concierge/business/BusinessBenefits";
 import { businessCategories } from "@/data/concierge/business/businessCategories";
 import PurchaseDisclaimer from "@/components/concierge/PurchaseDisclaimer";
 
-// Importing businessProfessionals directly from the file since there's no professionals export
-import { businessProfessionals } from "@/data/concierge/business/professionals";
+// Import the getProfessionalsByCategoryId function instead of directly importing professionals
+import { businessProfessionals, getProfessionalsByCategoryId } from "@/data/concierge/business/professionals";
 
 const BusinessService = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -31,8 +31,8 @@ const BusinessService = () => {
   const filteredProfessionals = searchQuery
     ? businessProfessionals.filter(pro => 
         pro.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-        pro.specialization.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        pro.company.toLowerCase().includes(searchQuery.toLowerCase())
+        pro.expertise.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        pro.serviceCategory.toLowerCase().includes(searchQuery.toLowerCase())
       )
     : businessProfessionals;
 

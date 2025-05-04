@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
-import { InfoCircle, CheckCircle2 } from "lucide-react";
+import { Info, CheckCircle2 } from "lucide-react";
 import { BalwinProperty } from "@/data/property/balwin-properties";
 import SafeNoteModal from "./SafeNoteModal";
 
@@ -135,7 +135,7 @@ const InvestmentModal: React.FC<InvestmentModalProps> = ({
 
               <div className="bg-blue-50 p-4 rounded-md">
                 <div className="flex items-start space-x-2">
-                  <InfoCircle size={18} className="text-blue-600 mt-0.5" />
+                  <Info size={18} className="text-blue-600 mt-0.5" />
                   <div className="text-sm text-blue-700">
                     <p className="font-semibold">Investment Information</p>
                     <p className="mt-1">Your investment will be part of a collective purchase of this property unit.</p>

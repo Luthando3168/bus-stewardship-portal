@@ -16,6 +16,27 @@ import UserMyInvestments from "@/pages/user/UserMyInvestments";
 import BalwinDevelopments from "@/pages/funds/property/BalwinDevelopments";
 import BalwinPropertyDetail from "@/pages/funds/property/BalwinPropertyDetail";
 
+// Export the component routes array for use in App.tsx
+export const userRoutes = [
+  <Route key="user-dashboard" path="/user/dashboard" element={<UserDashboard />} />,
+  <Route key="user-investments" path="/user/investments" element={<UserInvestments />} />,
+  <Route key="user-my-investments" path="/user/my-investments" element={<UserMyInvestments />} />,
+  <Route key="user-deals" path="/user/deals" element={<UserNewDeals />} />,
+  <Route key="user-wallet" path="/user/wallet" element={<UserWallet />} />,
+  <Route key="user-pending-deals" path="/user/pending-deals" element={<UserPendingDeals />} />,
+  <Route key="user-statements" path="/user/statements" element={<UserStatements />} />,
+  <Route key="user-profile" path="/user/profile" element={<UserProfile />} />,
+  <Route key="user-concierge" path="/user/concierge" element={<UserConcierge />} />,
+  <Route key="user-how-we-work" path="/user/how-we-work" element={<UserHowWeWork />} />,
+  <Route key="user-beneficiaries" path="/user/beneficiaries" element={<UserBeneficiaries />} />,
+  <Route key="user-loans" path="/user/loans" element={<UserLoans />} />,
+  
+  {/* Balwin Properties Routes */}
+  <Route key="balwin-developments" path="/user/funds/property/balwin" element={<BalwinDevelopments />} />,
+  <Route key="balwin-property-detail" path="/user/funds/property/balwin/:propertyId" element={<BalwinPropertyDetail />} />
+];
+
+// The UserRoutes component itself will still be available for older code
 const UserRoutes = () => {
   return (
     <Routes>

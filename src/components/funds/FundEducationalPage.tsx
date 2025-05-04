@@ -56,6 +56,7 @@ interface FundEducationalPageProps {
       icon: string;
     }[];
   };
+  children?: React.ReactNode; // Added children prop
 }
 
 const FundEducationalPage = ({
@@ -68,6 +69,7 @@ const FundEducationalPage = ({
   professionalSupport,
   businessManagement,
   reporting,
+  children, // Added children to the props destructuring
 }: FundEducationalPageProps) => {
   return (
     <Layout>
@@ -107,6 +109,8 @@ const FundEducationalPage = ({
               />
 
               <InvestmentDetails minInvestment={minInvestment} />
+              
+              {children} {/* Render children if provided */}
             </div>
           </div>
         </div>
