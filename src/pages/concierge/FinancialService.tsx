@@ -1,7 +1,7 @@
 
 import React from "react";
 import ServicePageTemplate from "@/components/concierge/ServicePageTemplate";
-import { Wallet, CreditCard, Coins, BriefCase, Shield, Users } from "lucide-react";
+import { Wallet, CreditCard, Coins, Briefcase, Shield, Users } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import SectionTitle from "@/components/ui/SectionTitle";
