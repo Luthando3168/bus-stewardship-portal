@@ -2,6 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import { fundImages } from "@/data/impact-funds";
 
 interface PageHeaderProps {
   image: string;

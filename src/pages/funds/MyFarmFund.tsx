@@ -8,7 +8,7 @@ const MyFarmFund = () => {
       fundName="MyFarm"
       description="Own farms that feed our communities and make you money - all professionally managed."
       bgGradient="from-green-700 to-green-900"
-      image="https://images.unsplash.com/photo-1593113646773-028c64a8f1b8"
+      image={fundImages.myfarm}
       focus={[
         "Smart farming operations",
         "Growing food for communities",

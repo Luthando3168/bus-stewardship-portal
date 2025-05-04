@@ -6,6 +6,7 @@ import BusinessModelSection from "./components/BusinessModelSection";
 import SupportSection from "./components/SupportSection";
 import ReportingSection from "./components/ReportingSection";
 import InvestmentDetails from "./components/InvestmentDetails";
+import { fundImages } from "@/data/impact-funds";
 
 interface BusinessStep {
   title: string;
