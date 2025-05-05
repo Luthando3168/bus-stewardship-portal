@@ -11,7 +11,7 @@ const IntroSection = () => {
         <div className="max-w-4xl mx-auto space-y-8">
           <div className="bg-gradient-to-br from-navyblue to-blue-900 text-white rounded-xl p-6 md:p-8 shadow-xl">
             <div className="prose prose-lg prose-invert max-w-none">
-              <p className="text-xl leading-relaxed mb-6">At LMCA, whether you're a taxi driver, spaza owner, or gogo - this is for you! Start with just R500 monthly and own real businesses like food shops, farms, or franchises. </p>
+              <p className="text-xl leading-relaxed mb-6">Whether you're a taxi driver, spaza owner, or gogo - this is for you! Start with just R500 monthly and own real businesses like food shops, farms, or franchises. </p>
               
               <div className="grid md:grid-cols-2 gap-6 md:gap-8">
                 <div>
