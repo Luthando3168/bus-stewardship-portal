@@ -3,7 +3,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import ConciergeDashboard from "@/pages/concierge/ConciergeDashboard";
 import BusinessService from "@/pages/concierge/BusinessService";
-import { conciergeProfessionals } from "@/data/concierge-professionals";
+import { conciergeProfessionals, mappedProfessionals } from "@/data/concierge-professionals";
 import PropertyService from "@/pages/concierge/PropertyService";
 
 // Export the component routes array for use in App.tsx
@@ -38,13 +38,13 @@ const ConciergeRoutes = () => {
         element={
           <BusinessService
             professional={{
-              name: conciergeProfessionals[0]?.name || "Default Professional",
-              title: conciergeProfessionals[0]?.title || "Professional Title",
-              company: conciergeProfessionals[0]?.company || "Company Name",
-              description: conciergeProfessionals[0]?.description || "Professional description",
-              services: conciergeProfessionals[0]?.specialties?.map(s => s) || ["Service 1", "Service 2"],
-              category: conciergeProfessionals[0]?.serviceCategory || "Default Category",
-              image: conciergeProfessionals[0]?.image || "/placeholder.svg"
+              name: mappedProfessionals[0]?.name || "Default Professional",
+              title: mappedProfessionals[0]?.title || "Professional Title",
+              company: mappedProfessionals[0]?.company || "Company Name",
+              description: mappedProfessionals[0]?.description || "Professional description",
+              services: mappedProfessionals[0]?.services || ["Service 1", "Service 2"],
+              category: mappedProfessionals[0]?.serviceCategory || "Default Category",
+              image: mappedProfessionals[0]?.image || "/placeholder.svg"
             }}
           />
         }
