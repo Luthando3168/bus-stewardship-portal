@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Layout } from "@/components/layout/Layout";
+import Layout from "@/components/layout/Layout";
 import { Card } from "@/components/ui/card";
 import { Calendar, Users, Building, Gift, Car, Wine, Coffee, ShoppingBag, Heart } from "lucide-react";
 import { Link } from "react-router-dom";

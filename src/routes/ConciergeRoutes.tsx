@@ -35,7 +35,19 @@ const ConciergeRoutes = () => {
       <Route path="dashboard" element={<ConciergeDashboard />} />
       <Route
         path="business/:id"
-        element={<BusinessService professional={conciergeProfessionals[0]} />}
+        element={
+          <BusinessService
+            professional={{
+              name: conciergeProfessionals[0]?.name || "Default Professional",
+              title: conciergeProfessionals[0]?.title || "Professional Title",
+              company: conciergeProfessionals[0]?.company || "Company Name",
+              description: conciergeProfessionals[0]?.description || "Professional description",
+              services: conciergeProfessionals[0]?.specialties?.map(s => s) || ["Service 1", "Service 2"],
+              category: conciergeProfessionals[0]?.serviceCategory || "Default Category",
+              image: conciergeProfessionals[0]?.image || "/placeholder.svg"
+            }}
+          />
+        }
       />
       <Route path="property" element={<PropertyService />} />
     </Routes>
