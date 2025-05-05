@@ -12,20 +12,20 @@ const BookingSection = () => {
               <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 sm:mb-4">
                 Not Sure? Let's Chat!
               </h2>
-              <p className="text-sm sm:text-base text-white/80 mb-4 sm:mb-6">Whether you're a call centre agent, taxi driver, teacher or a professional - we'll explain everything in simple terms</p>
+              <p className="text-xs sm:text-sm md:text-base text-white/80 mb-4 sm:mb-6">Whether you're a call centre agent, taxi driver, teacher or a professional - we'll explain everything in simple terms</p>
               
               <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
                 <a href="https://wa.me/27620193208" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 sm:gap-3 text-white hover:text-gold transition-colors">
                   <div className="bg-gold rounded-full p-1.5 sm:p-2">
-                    <MessageCircle size={16} className="sm:w-[18px] sm:h-[18px]" />
+                    <MessageCircle size={14} className="sm:w-4 sm:h-4" />
                   </div>
-                  <span className="text-sm sm:text-base">WhatsApp us: 062 019 3208</span>
+                  <span className="text-xs sm:text-sm">WhatsApp us: 062 019 3208</span>
                 </a>
               </div>
               
               <Link to="/contact">
-                <Button className="bg-gold hover:bg-lightgold text-navyblue font-bold px-6 sm:px-8 py-2.5 sm:py-3 md:py-3.5 text-sm sm:text-base md:text-lg w-full md:w-auto flex items-center justify-center gap-2" size="lg">
-                  <Calendar size={18} className="sm:w-5 sm:h-5" />
+                <Button className="bg-gold hover:bg-lightgold text-navyblue font-bold px-6 sm:px-8 py-2.5 sm:py-3 text-xs sm:text-sm md:text-base w-full md:w-auto flex items-center justify-center gap-2" size="lg">
+                  <Calendar size={16} className="sm:w-4 sm:h-4" />
                   Book a Free Chat
                 </Button>
               </Link>

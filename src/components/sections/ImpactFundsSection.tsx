@@ -15,8 +15,8 @@ const ImpactFundsSection = () => {
 
         <div className="max-w-3xl mx-auto mb-8">
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-bold text-navyblue mb-4">How It Works (Simple!)</h3>
-            <div className="space-y-4 text-lg">
+            <h3 className="text-lg sm:text-xl font-bold text-navyblue mb-4">How It Works (Simple!)</h3>
+            <div className="space-y-4 text-xs sm:text-sm md:text-base">
               <p className="flex items-center gap-2">
                 <span className="text-gold">1.</span> Save R500 monthly in your account
               </p>
@@ -33,7 +33,7 @@ const ImpactFundsSection = () => {
         <div className="text-center mt-10">
           <Link 
             to="/impact-funds" 
-            className="inline-block px-8 py-4 bg-navyblue text-white font-semibold rounded-lg hover:bg-blue-900 transition-colors text-lg"
+            className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-navyblue text-white font-semibold rounded-lg hover:bg-blue-900 transition-colors text-xs sm:text-sm md:text-base"
           >
             See All Business Types You Can Own
           </Link>

@@ -6,22 +6,22 @@ const Hero = () => <section className="w-full min-h-[85vh] flex items-center bg-
       {/* Text Content */}
       <div className="w-full md:w-1/2 text-left space-y-6 md:space-y-8 order-2 md:order-1">
         <h1 className="font-montserrat font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-tight text-white leading-[1.1]">Register And Start Owning Real Businesses - From R500</h1>
-        <p className="font-lato text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 max-w-2xl">We turn everyday South Africans into business owners. We manage the operations, you share in profits.</p>
+        <p className="font-lato text-sm sm:text-base md:text-lg lg:text-xl text-white/95 max-w-2xl">We turn everyday South Africans into business owners. We manage the operations, you share in profits.</p>
         <div className="flex flex-col sm:flex-row gap-4">
-          <Link to="/register" className="px-6 sm:px-8 py-3 sm:py-4 font-montserrat font-semibold text-base sm:text-lg rounded-lg bg-gold text-navyblue shadow-lg hover:bg-lightgold transition-all duration-300 hover:scale-105 text-center">
+          <Link to="/register" className="px-6 sm:px-8 py-3 sm:py-4 font-montserrat font-semibold text-sm sm:text-base rounded-lg bg-gold text-navyblue shadow-lg hover:bg-lightgold transition-all duration-300 hover:scale-105 text-center">
             Register Now
           </Link>
-          <Link to="/contact" className="px-6 sm:px-8 py-3 sm:py-4 font-montserrat font-semibold text-base sm:text-lg rounded-lg bg-white/10 text-white hover:bg-white/20 transition-all duration-300 text-center">
+          <Link to="/contact" className="px-6 sm:px-8 py-3 sm:py-4 font-montserrat font-semibold text-sm sm:text-base rounded-lg bg-white/10 text-white hover:bg-white/20 transition-all duration-300 text-center">
             Book Consultation
           </Link>
         </div>
         <div className="space-y-4 pt-4">
-          <div className="flex items-center gap-3 text-white/90 text-sm sm:text-base md:text-lg">
-            <MessageCircle size={20} className="sm:w-6 sm:h-6" />
+          <div className="flex items-center gap-3 text-white/90 text-xs sm:text-sm md:text-base">
+            <MessageCircle size={18} className="sm:w-5 sm:h-5" />
             <span>WhatsApp us: 062 019 3208</span>
           </div>
-          <div className="flex items-center gap-3 text-white/90 text-sm sm:text-base md:text-lg">
-            <Mail size={20} className="sm:w-6 sm:h-6" />
+          <div className="flex items-center gap-3 text-white/90 text-xs sm:text-sm md:text-base">
+            <Mail size={18} className="sm:w-5 sm:h-5" />
             <span>Email: info@madunacas.com</span>
           </div>
         </div>
