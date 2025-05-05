@@ -1,13 +1,10 @@
-
 import { Link } from "react-router-dom";
 import { Mail, MessageCircle } from "lucide-react";
 const Hero = () => <section className="w-full min-h-[85vh] flex items-center bg-navyblue px-4 py-12 md:py-16 relative overflow-hidden">
     <div className="container max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 relative z-10">
       {/* Text Content */}
       <div className="w-full md:w-1/2 text-left space-y-6 md:space-y-8 order-2 md:order-1">
-        <h1 className="font-montserrat font-bold text-4xl md:text-5xl lg:text-6xl tracking-tight text-white leading-[1.1]">
-          Register And Start Owning Real Businesses - From R500
-        </h1>
+        <h1 className="font-montserrat font-bold text-4xl md:text-5xl lg:text-6xl tracking-tight text-white leading-[1.1]">Register And Start Owning Real Businesses - From R500</h1>
         <p className="font-lato text-white/95 text-xl md:text-2xl max-w-2xl">We turn everyday South Africans into business owners. We manage the operations, you share in profits.</p>
         <div className="flex flex-col sm:flex-row gap-4">
           <Link to="/register" className="px-8 py-4 font-montserrat font-semibold text-lg rounded-lg bg-gold text-navyblue shadow-lg hover:bg-lightgold transition-all duration-300 hover:scale-105 text-center">
