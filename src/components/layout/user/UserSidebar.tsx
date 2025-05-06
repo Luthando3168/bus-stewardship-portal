@@ -39,7 +39,11 @@ const UserSidebar = ({
 
       <SidebarHeader isSidebarOpen={isSidebarOpen} />
       <SidebarProfile userName={userName} isSidebarOpen={isSidebarOpen} />
-      <SidebarLinks isSidebarOpen={isSidebarOpen} />
+      
+      <div className="flex-1">
+        <SidebarLinks isSidebarOpen={isSidebarOpen} />
+      </div>
+      
       <SidebarLogout onLogout={onLogout} isSidebarOpen={isSidebarOpen} />
     </aside>
   );

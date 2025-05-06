@@ -7,6 +7,7 @@ import UserSidebar from "./user/UserSidebar";
 import UserHeader from "./user/UserHeader";
 import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
+import { useAuthState } from "@/hooks/useAuthState";
 
 interface UserLayoutProps {
   children: ReactNode;
@@ -18,6 +19,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
   const isMobile = useIsMobile();
   const [isSidebarOpen, setIsSidebarOpen] = useState(!isMobile);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { handleLogout } = useAuthState();
   const [notifications] = useState([
     {
       id: 1,
@@ -38,16 +40,6 @@ const UserLayout = ({ children }: UserLayoutProps) => {
   const userSurname = localStorage.getItem("userSurname") || "";
   const fullName = `${userName} ${userSurname}`.trim();
 
-  // Define a simple logout function that just navigates to login
-  const handleLogout = () => {
-    localStorage.removeItem("userRole");
-    localStorage.removeItem("userName");
-    localStorage.removeItem("userSurname");
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("clientNumber");
-    navigate("/login");
-  };
-
   return (
     <div className="flex min-h-screen bg-lightgray">
       {isMobile ? (
@@ -64,19 +56,6 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                     setMobileMenuOpen(false);
                   }}
                 />
-                <div className="mt-auto p-4 border-t border-navyblue/20">
-                  <Button
-                    variant="ghost"
-                    className="w-full justify-start text-gray-300 hover:text-white hover:bg-white/5"
-                    onClick={() => {
-                      handleLogout();
-                      setMobileMenuOpen(false);
-                    }}
-                  >
-                    <LogOut size={20} />
-                    <span className="ml-2">Logout</span>
-                  </Button>
-                </div>
               </div>
             </SheetContent>
           </Sheet>
